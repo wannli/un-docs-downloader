@@ -1,28 +1,21 @@
-name: Build and Deploy Site
+name: Fetch Documents
 
 on:
+  schedule:
+    # Run daily at 6 AM UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
     # Allow manual trigger
-  push:
-    branches:
-      - main
-    paths:
-      - 'data/**'
-      - 'config/**'
-      - 'src/**'
-      - '.github/workflows/build-site.yml'
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: "data-fetch"
   cancel-in-progress: false
 
 jobs:
-  build:
+  fetch:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,32 +50,14 @@ jobs:
           fi
           echo "::endgroup::"
 
-      - name: Generate static site
+      - name: Discover new documents
         run: |
-          python -m mandate_pipeline.cli generate --verbose --config ./config --data ./data --output ./docs
-
-      - name: Show generation stats
-        run: |
-          echo "::group::Generated Files Summary"
-          echo "Document pages: $(ls ./docs/documents/*.html 2>/dev/null | wc -l || echo 0)"
-          echo "Signal pages: $(ls ./docs/signals/*.html 2>/dev/null | wc -l || echo 0)"
-          echo ""
-          echo "Stats from data.json:"
-          python3 -c "
-          import json
-          d = json.load(open('./docs/data.json'))
-          print(f\"Total documents: {d['stats']['total_documents']}\")
-          print(f\"With signals: {d['stats']['documents_with_signals']}\")
-          print('Signal counts:')
-          for sig, count in d['stats']['signal_counts'].items():
-              print(f'  {sig}: {count}')
-          "
-          echo "::endgroup::"
+          python -m mandate_pipeline.cli discover --verbose --config ./config --data ./data
 
       - name: Check for changes
         id: changes
         run: |
-          git add docs/
+          git add data/
           echo "::group::Changes Summary"
           git diff --staged --stat || echo "No changes"
           echo "::endgroup::"
@@ -104,22 +79,3 @@ jobs:
           # Pull any changes that happened during the build, then push
           git pull --rebase origin main || true
           git push
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./docs
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
