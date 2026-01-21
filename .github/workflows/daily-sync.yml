@@ -1,0 +1,58 @@
+name: Daily Sync
+
+on:
+  schedule:
+    # Run daily at 06:00 UTC (during UN business hours in NY)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  sync-and-generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Download PDFs from cache
+        uses: actions/cache@v4
+        with:
+          path: data/pdfs
+          key: pdfs-${{ hashFiles('data/state.json') }}
+          restore-keys: |
+            pdfs-
+
+      - name: Sync documents
+        run: |
+          PYTHONPATH=src python -m mandate_pipeline.cli sync --config ./config --data ./data
+        env:
+          # Respect UN servers
+          SYNC_DELAY: 2
+
+      - name: Generate static site
+        run: |
+          PYTHONPATH=src python -m mandate_pipeline.cli generate --config ./config --data ./data --output ./docs
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add data/state.json docs/
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update documents $(date -u +%Y-%m-%d)"
+            git push
+          fi
