@@ -66,21 +66,36 @@ def filename_to_symbol(filename: str) -> str:
 
 
 def classify_doc_type(symbol: str, text: str) -> str:
-    """Classify the document type based on symbol and first-page cues."""
-    # Heuristic trade-offs:
-    # - Symbol prefix is authoritative for resolutions, but amendments are only
-    #   inferred from front-matter text that can vary by language/layout.
-    # - We bias toward "proposal" when the signal is ambiguous to avoid
-    #   over-labeling non-amendments.
-    if symbol.startswith("A/RES/"):
+    """Classify document type for linking metadata."""
+    if is_resolution(symbol):
         return "resolution"
+    if is_proposal(symbol):
+        front_matter = "\n".join(text.splitlines()[:50])
+        if "/Rev." in symbol or re.search(r"\bamendment\b", front_matter, re.IGNORECASE):
+            return "amendment"
+        return "proposal"
+    return "other"
 
-    first_page = text.split("\f", 1)[0]
-    title_window = first_page[:2000]
-    if re.search(r"\bAmendment\b", title_window, re.IGNORECASE):
-        return "amendment"
 
-    return "proposal"
+def infer_base_proposal_symbol(symbol: str, doc_type: str, text: str) -> str | None:
+    """Infer the base proposal symbol for proposals or amendments."""
+    # Heuristic trade-offs:
+    # - We scan a short front-matter window to keep it fast, but
+    #   amendments can reference targets later in the document.
+    # - The regex is conservative, so unknown formats fall back to None.
+    # - We now capture optional /Rev.X suffixes found in draft symbols.
+    if doc_type == "proposal":
+        return symbol
+    if doc_type == "amendment":
+        front_matter = text.split("\f", 2)[0:2]
+        front_matter_text = "\f".join(front_matter)[:4000]
+        symbol_match = re.search(
+            r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
+            front_matter_text,
+        )
+        if symbol_match:
+            return symbol_match.group(0)
+    return None
 
 
 def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
@@ -117,37 +132,7 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
             agenda_items = extract_agenda_items(text)
             symbol_references = find_symbol_references(text)
             doc_type = classify_doc_type(symbol, text)
-            base_proposal_symbol = None
-            if doc_type == "proposal":
-                base_proposal_symbol = symbol
-            elif doc_type == "amendment":
-                front_matter = text.split("\f", 2)[0:2]
-                front_matter_text = "\f".join(front_matter)[:4000]
-                symbol_match = re.search(
-                    r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
-                    front_matter_text
-                )
-                if symbol_match:
-                    base_proposal_symbol = symbol_match.group(0)
-
-            doc_type = classify_doc_type(symbol, text)
-            # Heuristic trade-offs:
-            # - We scan a short front-matter window to keep it fast, but
-            #   amendments can reference targets later in the document.
-            # - The regex is conservative, so unknown formats fall back to None.
-            # - We now capture optional /Rev.X suffixes found in draft symbols.
-            base_proposal_symbol = None
-            if doc_type == "proposal":
-                base_proposal_symbol = symbol
-            elif doc_type == "amendment":
-                front_matter = text.split("\f", 2)[0:2]
-                front_matter_text = "\f".join(front_matter)[:4000]
-                symbol_match = re.search(
-                    r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
-                    front_matter_text
-                )
-                if symbol_match:
-                    base_proposal_symbol = symbol_match.group(0)
+            base_proposal_symbol = infer_base_proposal_symbol(symbol, doc_type, text)
 
             # Run checks
             signals = run_checks(paragraphs, checks) if checks else {}
@@ -203,18 +188,6 @@ def is_resolution(symbol: str) -> bool:
 def is_proposal(symbol: str) -> bool:
     """Return True if symbol looks like a draft/proposal (L. symbol)."""
     return "/L." in symbol
-
-
-def classify_doc_type(symbol: str, text: str) -> str:
-    """Classify document type for linking metadata."""
-    if is_resolution(symbol):
-        return "resolution"
-    if is_proposal(symbol):
-        front_matter = "\n".join(text.splitlines()[:50])
-        if "/Rev." in symbol or re.search(r"\bamendment\b", front_matter, re.IGNORECASE):
-            return "amendment"
-        return "proposal"
-    return "other"
 
 
 def link_documents(documents: list[dict]) -> None:
@@ -1023,23 +996,7 @@ def generate_site_verbose(
                 agenda_items = extract_agenda_items(text)
                 symbol_references = find_symbol_references(text)
                 doc_type = classify_doc_type(symbol, text)
-                # Heuristic trade-offs:
-                # - We scan a short front-matter window to keep it fast, but
-                #   amendments can reference targets later in the document.
-                # - The regex is conservative, so unknown formats fall back to None.
-                # - We now capture optional /Rev.X suffixes found in draft symbols.
-                base_proposal_symbol = None
-                if doc_type == "proposal":
-                    base_proposal_symbol = symbol
-                elif doc_type == "amendment":
-                    front_matter = text.split("\f", 2)[0:2]
-                    front_matter_text = "\f".join(front_matter)[:4000]
-                    symbol_match = re.search(
-                        r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
-                        front_matter_text
-                    )
-                    if symbol_match:
-                        base_proposal_symbol = symbol_match.group(0)
+                base_proposal_symbol = infer_base_proposal_symbol(symbol, doc_type, text)
                 signals = run_checks(paragraphs, checks) if checks else {}
 
                 # Build signal summary
