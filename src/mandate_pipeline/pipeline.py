@@ -8,7 +8,7 @@ from typing import Iterator
 import requests
 import yaml
 
-from .downloader import download_document
+from .downloader import download_document, file_exists_for_symbol
 
 
 def load_patterns(config_path: Path) -> list[dict]:
@@ -186,6 +186,9 @@ def sync_simple_pattern(
     """
     Sync documents for a simple pattern (no list variables).
 
+    Skips documents that already exist locally - only checks remote
+    for documents we don't have yet.
+
     Args:
         pattern: Pattern definition (must not have list variables)
         state: Current sync state
@@ -207,9 +210,17 @@ def sync_simple_pattern(
     current_number = start_number
 
     for symbol in generate_symbols(pattern, start_override=start_number):
+        # Skip if we already have this file locally
+        if file_exists_for_symbol(symbol, output_dir):
+            consecutive_misses = 0
+            highest_found = current_number
+            current_number += 1
+            continue
+
+        # Check if document exists remotely
         if document_exists(symbol):
             consecutive_misses = 0
-            download_document(symbol, output_dir=output_dir)
+            download_document(symbol, output_dir=output_dir, skip_existing=False)
             new_docs.append(symbol)
             highest_found = current_number
         else:
@@ -330,8 +341,8 @@ def sync_all_patterns_verbose(
     for pattern in patterns:
         pattern_name = pattern["name"]
         
-        # Create output directory
-        output_dir = data_dir / "pdfs" / pattern_name.replace(" ", "_")
+        # Create output directory (flat structure)
+        output_dir = data_dir / "pdfs"
         output_dir.mkdir(parents=True, exist_ok=True)
         
         start_number = get_start_number(pattern, state)
@@ -341,6 +352,7 @@ def sync_all_patterns_verbose(
             on_pattern_start(pattern_name, start_number)
 
         new_docs = []
+        skipped_docs = 0
         highest_found = state.get("patterns", {}).get(pattern_name, {}).get(
             "highest_found", pattern.get("start", 1) - 1
         )
@@ -348,6 +360,17 @@ def sync_all_patterns_verbose(
         current_number = start_number
 
         for symbol in generate_symbols(pattern, start_override=start_number):
+            # Skip if we already have this file locally
+            if file_exists_for_symbol(symbol, output_dir):
+                consecutive_misses = 0
+                highest_found = current_number
+                skipped_docs += 1
+                if on_check:
+                    on_check(symbol, True, 0)  # Report as exists (locally)
+                current_number += 1
+                continue
+
+            # Check if document exists remotely
             exists = document_exists(symbol)
 
             if exists:
@@ -359,7 +382,7 @@ def sync_all_patterns_verbose(
                 # Download the document
                 try:
                     download_start = time.time()
-                    pdf_path = download_document(symbol, output_dir=output_dir)
+                    pdf_path = download_document(symbol, output_dir=output_dir, skip_existing=False)
                     download_duration = time.time() - download_start
                     file_size = pdf_path.stat().st_size
 
