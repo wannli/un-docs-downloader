@@ -86,6 +86,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -135,12 +139,18 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 22 without</span>
+        <span class="text-sm text-muted">1 with signals, 21 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('processes')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            processes
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -171,9 +181,9 @@
     </div>
     
     <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["processes"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -182,6 +192,15 @@
             </div>
             <div class="flex-1">
                 <p class="text-gray-700 leading-relaxed text-sm">Welcomes the convening of the High-level International Conference for the Peaceful Settlement of the Question of Palestine and the Implementation of the Two-State _______________ 7 A/66/371-S/2011/592, annex I. 8 See S/PV.9609. 9 A/67/738. 10 A/56/1026-S/2002/932, annex II, resolution 14/221. Peaceful settlement of the question of Palestine A/RES/80/72 5/7 25-19847 Solution, held at the ministerial level in July 2025 and at the summit level in September 2025, and the endorsement by the General Assembly, in its decision 80/506 of 12 September 2025, of the New York Declaration on the Peaceful Settlement of the Question of Palestine and the Implementation of the Two-State Solution,11 and mandates the Co-Chairs of the Conference, in consultation with the Co-Chairs of the working groups, to follow up on the objectives of the Conference and the commitments made therein, including, if necessary, by reconvening the Conference, in New York or elsewhere, or by convening follow-up meetings, or through the Global Alliance for the Implementation of the Two-State Solution;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        processes
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
