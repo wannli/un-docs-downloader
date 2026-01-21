@@ -64,26 +64,9 @@
             <!-- Document Header -->
             <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html"
-                       class="font-semibold {% if doc.status == 'superseded' %}text-gray-400{% else %}text-gray-900 hover:text-un-blue{% endif %} transition-colors">
+                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" class="font-semibold text-gray-900 hover:text-un-blue transition-colors">
                         {{ doc.symbol }}
                     </a>
-                    {% if doc.status == 'adopted' %}
-                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">
-                        <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        Adopted
-                    </span>
-                    {% elif doc.status == 'draft' %}
-                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-700">
-                        Draft
-                    </span>
-                    {% elif doc.status == 'superseded' %}
-                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-500">
-                        → {{ doc.linked_resolution_symbol }}
-                    </span>
-                    {% endif %}
                     <span class="text-sm text-muted">{{ doc.num_paragraphs }} paragraphs</span>
                     {% for check in checks %}
                     {% set count = doc.signal_summary.get(check.signal, 0) %}

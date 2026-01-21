@@ -7,7 +7,7 @@
 
 {% block content %}
 <!-- Breadcrumb -->
-<nav class="mb-6">
+<nav class="mb-8">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -15,150 +15,21 @@
     </ol>
 </nav>
 
-{% if doc.status == 'superseded' %}
-<!-- Superseded Banner -->
-<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span class="text-amber-800 font-medium">This proposal was adopted as {{ doc.linked_resolution_symbol }}</span>
-        </div>
-        <a href="./{{ doc.linked_resolution_symbol|replace('/', '_') }}.html"
-           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
-            View resolution
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </a>
-    </div>
-</div>
-{% endif %}
-
 <!-- Header -->
-<div class="mb-6">
+<div class="mb-8">
     <div class="flex items-center justify-between">
-        <div class="flex items-center gap-4">
-            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">{{ symbol }}</h1>
-            {% if doc.status == 'adopted' %}
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Adopted
-            </span>
-            {% elif doc.status == 'draft' %}
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-amber-50 text-amber-700">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                </svg>
-                Draft
-            </span>
-            {% elif doc.status == 'superseded' %}
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
-                Superseded
-            </span>
-            {% endif %}
-        </div>
+        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">{{ symbol }}</h1>
         <a href="{{ un_url }}" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF
+            View PDF on UN ODS
         </a>
     </div>
-    {% if doc.title %}
-    <p class="mt-2 text-lg text-gray-600">{{ doc.title }}</p>
-    {% endif %}
-    <p class="mt-1 text-muted">{{ paragraphs|length }} operative paragraphs{% if doc.agenda_items %} · {{ doc.agenda_items|join(', ') }}{% endif %}</p>
+    <p class="mt-2 text-muted">{{ paragraphs|length }} operative paragraphs</p>
 </div>
 
-{% if doc.status == 'adopted' and doc.comparison %}
-<!-- Lineage Panel -->
-<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
-    <button onclick="toggleComparison()" id="lineage-toggle"
-            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
-        <div class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            <span class="font-medium text-gray-900">Original: {{ doc.comparison.original_symbol }}</span>
-        </div>
-        <div class="flex items-center gap-3">
-            {% if doc.comparison.differing_count > 0 %}
-            <span class="text-sm text-muted">{{ doc.comparison.differing_count }} of {{ doc.comparison.total_paragraphs }} paragraphs differ</span>
-            {% else %}
-            <span class="text-sm text-green-600">Identical</span>
-            {% endif %}
-            <span id="lineage-chevron" class="text-gray-400 transition-transform">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </span>
-        </div>
-    </button>
-
-    <div id="comparison-panel" class="hidden border-t border-gray-200">
-        {% if doc.comparison.differing_count > 0 %}
-        <div class="p-4 space-y-6">
-            {% for diff in doc.comparison.differing_paragraphs %}
-            <div>
-                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph {{ diff.number }}</div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">{{ doc.comparison.original_symbol }}</div>
-                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
-                            {{ diff.original or '(not present)' }}
-                        </div>
-                    </div>
-                    <div>
-                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">{{ symbol }}</div>
-                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
-                            {{ diff.final or '(not present)' }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
-            <a href="./{{ doc.comparison.original_symbol|replace('/', '_') }}.html"
-               class="text-sm text-un-blue hover:underline">
-                View full original →
-            </a>
-        </div>
-        {% else %}
-        <div class="p-6 text-center text-muted">
-            <p>The resolution text is identical to the original proposal.</p>
-            <a href="./{{ doc.comparison.original_symbol|replace('/', '_') }}.html"
-               class="inline-block mt-2 text-sm text-un-blue hover:underline">
-                View original →
-            </a>
-        </div>
-        {% endif %}
-    </div>
-</div>
-{% elif doc.status == 'adopted' and doc.linked_proposal_symbols %}
-<!-- Lineage Panel (no comparison data available) -->
-<div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            <span class="font-medium text-gray-900">Original: {{ doc.linked_proposal_symbols[0] }}</span>
-        </div>
-        <a href="./{{ doc.linked_proposal_symbols[0]|replace('/', '_') }}.html"
-           class="text-sm text-un-blue hover:underline">
-            View original →
-        </a>
-    </div>
-</div>
-{% endif %}
-
-{% if doc.status != 'superseded' %}
 <!-- Compute signal data -->
 {% set all_signals = [] %}
 {% for para in paragraphs %}
@@ -179,12 +50,12 @@
         <span class="text-sm text-muted">{{ paras_with_signals }} with signals, {{ paras_without_signals }} without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()"
+        <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         {% for sig in all_signals %}
-        <button onclick="filterSignal('{{ sig }}')"
+        <button onclick="filterSignal('{{ sig }}')" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 {% if 'agenda' in sig|lower %}bg-blue-50 text-blue-700 hover:bg-blue-100
                 {% elif 'pga' in sig|lower %}bg-purple-50 text-purple-700 hover:bg-purple-100
@@ -192,19 +63,18 @@
             {{ sig }}
         </button>
         {% endfor %}
-        <button id="btn-show-all" onclick="toggleShowAll()"
+        <button id="btn-show-all" onclick="toggleShowAll()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
-{% endif %}
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     {% for para in paragraphs %}
-    <div id="para-{{ para.number }}"
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all {% if doc.status != 'superseded' and not para.signals %}no-signals hidden{% endif %}"
+    <div id="para-{{ para.number }}" 
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all {% if not para.signals %}no-signals hidden{% endif %}"
          data-signals='{{ para.signals|tojson }}'
          data-has-signals="{{ 'true' if para.signals else 'false' }}">
         <div class="flex items-start gap-4">
@@ -234,34 +104,21 @@
 </div>
 
 <script>
-let showingAll = {% if doc.status == 'superseded' %}true{% else %}false{% endif %};
-
-function toggleComparison() {
-    const panel = document.getElementById('comparison-panel');
-    const chevron = document.getElementById('lineage-chevron');
-
-    if (panel.classList.contains('hidden')) {
-        panel.classList.remove('hidden');
-        chevron.classList.add('rotate-180');
-    } else {
-        panel.classList.add('hidden');
-        chevron.classList.remove('rotate-180');
-    }
-}
+let showingAll = false;
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-
+    
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-
+    
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-
+        
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -276,14 +133,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-
+    
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-
+    
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -299,12 +156,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-
+    
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-
+    
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -323,19 +180,12 @@ function toggleShowAll() {
     }
 }
 
-// Initialize
+// Initialize: show only paragraphs with signals
 document.addEventListener('DOMContentLoaded', function() {
-    {% if doc.status == 'superseded' %}
-    // For superseded docs, show all paragraphs
-    document.querySelectorAll('.para-row').forEach(row => {
-        row.classList.remove('hidden');
-    });
-    {% else %}
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
-    {% endif %}
 });
 
 // Handle anchor links

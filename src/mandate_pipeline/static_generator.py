@@ -282,113 +282,6 @@ def link_documents(documents: list[dict]) -> None:
                 best_match["link_confidence"] = best_confidence
 
 
-def compute_document_status(documents: list[dict]) -> None:
-    """
-    Compute status and is_primary fields for all documents.
-
-    Status values:
-    - 'adopted': Resolutions
-    - 'draft': Proposals without a linked resolution
-    - 'superseded': Proposals with a linked resolution
-
-    Also clears signals from superseded documents since signals
-    should only be shown on the final version.
-    """
-    for doc in documents:
-        doc_type = doc.get("doc_type", "other")
-        linked_resolution = doc.get("linked_resolution_symbol")
-
-        if doc_type == "resolution":
-            doc["status"] = "adopted"
-            doc["is_primary"] = True
-        elif doc_type == "proposal":
-            if linked_resolution:
-                doc["status"] = "superseded"
-                doc["is_primary"] = False
-                # Clear signals - they belong on the resolution
-                doc["signals"] = {}
-                doc["signal_summary"] = {}
-            else:
-                doc["status"] = "draft"
-                doc["is_primary"] = True
-        elif doc_type == "amendment":
-            doc["status"] = "amendment"
-            doc["is_primary"] = False
-            # Clear signals from amendments too
-            doc["signals"] = {}
-            doc["signal_summary"] = {}
-        else:
-            doc["status"] = "other"
-            doc["is_primary"] = True
-
-
-def compute_paragraph_comparison(documents: list[dict]) -> None:
-    """
-    Compute paragraph-level comparison between resolutions and their linked proposals.
-
-    For each resolution with linked proposals, compares paragraph text and stores
-    only the differing paragraphs in a 'comparison' field.
-    """
-    # Build lookup for proposals by symbol
-    proposals_by_symbol = {
-        doc["symbol"]: doc
-        for doc in documents
-        if doc.get("doc_type") == "proposal"
-    }
-
-    for doc in documents:
-        if doc.get("doc_type") != "resolution":
-            continue
-
-        linked_proposals = doc.get("linked_proposal_symbols", [])
-        if not linked_proposals:
-            doc["comparison"] = None
-            continue
-
-        # Use the first linked proposal (primary)
-        original_symbol = linked_proposals[0]
-        original_doc = proposals_by_symbol.get(original_symbol)
-
-        if not original_doc:
-            doc["comparison"] = None
-            continue
-
-        resolution_paras = doc.get("paragraphs", {})
-        original_paras = original_doc.get("paragraphs", {})
-
-        # Find differing paragraphs
-        differing = []
-        all_para_nums = set(resolution_paras.keys()) | set(original_paras.keys())
-
-        def para_sort_key(x):
-            """Sort paragraph numbers, handling both string and int keys."""
-            if isinstance(x, int):
-                return x
-            return int(x) if str(x).isdigit() else 0
-
-        for para_num in sorted(all_para_nums, key=para_sort_key):
-            original_text = original_paras.get(para_num, "")
-            final_text = resolution_paras.get(para_num, "")
-
-            # Normalize whitespace for comparison
-            original_normalized = " ".join(original_text.split())
-            final_normalized = " ".join(final_text.split())
-
-            if original_normalized != final_normalized:
-                differing.append({
-                    "number": para_num,
-                    "original": original_text,
-                    "final": final_text,
-                })
-
-        doc["comparison"] = {
-            "original_symbol": original_symbol,
-            "total_paragraphs": len(resolution_paras),
-            "differing_count": len(differing),
-            "differing_paragraphs": differing,
-        }
-
-
 def generate_data_json(documents: list, checks: list, output_dir: Path) -> None:
     """
     Generate data.json with all document metadata.
@@ -1016,8 +909,6 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     # Load all documents
     documents = load_all_documents(data_dir, checks)
     link_documents(documents)
-    compute_document_status(documents)
-    compute_paragraph_comparison(documents)
 
     # Create output directories
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1154,8 +1045,6 @@ def generate_site_verbose(
     documents.sort(key=sort_key)
 
     link_documents(documents)
-    compute_document_status(documents)
-    compute_paragraph_comparison(documents)
 
     load_duration = time.time() - load_start_time
     if on_load_end:
