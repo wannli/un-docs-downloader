@@ -29,7 +29,6 @@
                         </a>
                     </th>
                     {% endfor %}
-                    <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50 rounded-tr-lg">Total</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
@@ -58,23 +57,9 @@
                         {% endif %}
                     </td>
                     {% endfor %}
-                    <td class="text-center py-4 px-4">
-                        <span class="text-sm font-semibold text-gray-900">{{ pattern_doc_counts.get(pattern.name, 0) }}</span>
-                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
-            <tfoot>
-                <tr class="bg-gray-50">
-                    <td class="py-3 px-4 text-sm font-semibold text-gray-700 rounded-bl-lg">Total</td>
-                    {% for check in checks %}
-                    <td class="text-center py-3 px-4">
-                        <span class="text-sm font-semibold text-gray-700">{{ total_signal_counts.get(check.signal, 0) }}</span>
-                    </td>
-                    {% endfor %}
-                    <td class="text-center py-3 px-4 text-sm font-bold text-gray-900 rounded-br-lg">{{ total_docs }}</td>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>

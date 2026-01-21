@@ -64,6 +64,24 @@ def filename_to_symbol(filename: str) -> str:
     return symbol
 
 
+def classify_doc_type(symbol: str, text: str) -> str:
+    """Classify the document type based on symbol and first-page cues."""
+    # Heuristic trade-offs:
+    # - Symbol prefix is authoritative for resolutions, but amendments are only
+    #   inferred from front-matter text that can vary by language/layout.
+    # - We bias toward "proposal" when the signal is ambiguous to avoid
+    #   over-labeling non-amendments.
+    if symbol.startswith("A/RES/"):
+        return "resolution"
+
+    first_page = text.split("\f", 1)[0]
+    title_window = first_page[:2000]
+    if re.search(r"\bAmendment\b", title_window, re.IGNORECASE):
+        return "amendment"
+
+    return "proposal"
+
+
 def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     """
     Load all documents from the data directory.
@@ -108,6 +126,25 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
                 if symbol_match:
                     base_proposal_symbol = symbol_match.group(0)
 
+            doc_type = classify_doc_type(symbol, text)
+            # Heuristic trade-offs:
+            # - We scan a short front-matter window to keep it fast, but
+            #   amendments can reference targets later in the document.
+            # - The regex is conservative, so unknown formats fall back to None.
+            # - We now capture optional /Rev.X suffixes found in draft symbols.
+            base_proposal_symbol = None
+            if doc_type == "proposal":
+                base_proposal_symbol = symbol
+            elif doc_type == "amendment":
+                front_matter = text.split("\f", 2)[0:2]
+                front_matter_text = "\f".join(front_matter)[:4000]
+                symbol_match = re.search(
+                    r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
+                    front_matter_text
+                )
+                if symbol_match:
+                    base_proposal_symbol = symbol_match.group(0)
+
             # Run checks
             signals = run_checks(paragraphs, checks) if checks else {}
 
@@ -120,6 +157,8 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
             documents.append({
                 "symbol": symbol,
                 "filename": pdf_file.name,
+                "doc_type": doc_type,
+                "base_proposal_symbol": base_proposal_symbol,
                 "paragraphs": paragraphs,
                 "title": title,
                 "agenda_items": agenda_items,
@@ -977,6 +1016,11 @@ def generate_site_verbose(
                 agenda_items = extract_agenda_items(text)
                 symbol_references = find_symbol_references(text)
                 doc_type = classify_doc_type(symbol, text)
+                # Heuristic trade-offs:
+                # - We scan a short front-matter window to keep it fast, but
+                #   amendments can reference targets later in the document.
+                # - The regex is conservative, so unknown formats fall back to None.
+                # - We now capture optional /Rev.X suffixes found in draft symbols.
                 base_proposal_symbol = None
                 if doc_type == "proposal":
                     base_proposal_symbol = symbol
@@ -1000,6 +1044,8 @@ def generate_site_verbose(
                 doc = {
                     "symbol": symbol,
                     "filename": pdf_file.name,
+                    "doc_type": doc_type,
+                    "base_proposal_symbol": base_proposal_symbol,
                     "paragraphs": paragraphs,
                     "title": title,
                     "agenda_items": agenda_items,
