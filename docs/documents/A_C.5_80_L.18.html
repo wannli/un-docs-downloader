@@ -120,6 +120,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -135,12 +139,18 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 22 without</span>
+        <span class="text-sm text-muted">1 with signals, 21 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('process')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            process
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -460,9 +470,9 @@
     </div>
     
     <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -470,7 +480,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Further notes that there are accepted recommendations that are beyond their targeted date for implementation, also notes that administrative bureaucracy should not slow progress in this regard, and encourages the Office to continue to make recommendations more actionable and to work with the Organization, where appropriate, to ensure the long-term effectiveness and unselective and full implementation of the accepted recommendations;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Further notes that there are accepted recommendations that are beyond their targeted date for implementation, also notes that administrative <mark class="bg-yellow-200 px-0.5 rounded">bureau</mark>cracy should not slow progress in this regard, and encourages the Office to continue to make recommendations more actionable and to work with the Organization, where appropriate, to ensure the long-term effectiveness and unselective and full implementation of the accepted recommendations;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

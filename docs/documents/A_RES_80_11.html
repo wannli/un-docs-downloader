@@ -86,6 +86,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -151,12 +155,18 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 30 without</span>
+        <span class="text-sm text-muted">1 with signals, 29 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('process')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            process
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -187,9 +197,9 @@
     </div>
     
     <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -197,7 +207,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the importance of further enhancing the advisory role of the Peacebuilding Commission, and in this regard: (a) Decides, where appropriate and through its relevant agenda items, and with a view to further strengthening its engagement with the Peacebuilding Commission, to consider seeking strategic and context-specific advice from the Peacebuilding Commission, including, where relevant, through the convening of joint debates and the provision by the Commission of advice and remarks to the General Assembly, and through more regular, demand-driven interactions between the Commission and the Special Committee on Peacekeeping Operations; (b) May consider, when seeking the advice of the Peacebuilding Commission, diverse formats of engagement, as appropriate, including briefings, written submissions, informal interactive dialogues and other informal consultations; (c) Requests the Peacebuilding Commission to utilize its convening role to gather contributions from a broad range of stakeholders that may be used in the preparation of its advice, so as to provide recommendations and information to improve their coordination, to develop and share good practices in peacebuilding, and in this regard further requests the United Nations leadership in countries considered by the Commission to regularly brief the Commission, as appropriate, on the peacebuilding components of relevant mandates and activities; (d) Takes note of the intention of the Security Council to encourage stronger cooperation with the Peacebuilding Commission, including through more specific requests, early consultations and the provision of timely advice, including with the longer-term perspective required for peacebuilding and sustaining peace being reflected in the formation, review and drawdown of peace operations mandates, as well as planning and early coordination preceding transition processes;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the importance of further enhancing the advisory role of the Peacebuilding Commission, and in this regard: (a) Decides, where appropriate and through its relevant agenda items, and with a view to further strengthening its engagement with the Peacebuilding Commission, to consider seeking strategic and context-specific advice from the Peacebuilding Commission, including, where relevant, through the convening of joint debates and the provision by the Commission of advice and remarks to the General Assembly, and through more regular, demand-driven interactions between the Commission and the Special Committee on Peacekeeping Operations; (b) May consider, when seeking the advice of the Peacebuilding Commission, diverse formats of engagement, as appropriate, including briefings, written submissions, informal interactive dialogues and other <mark class="bg-yellow-200 px-0.5 rounded">informal consultations</mark>; (c) Requests the Peacebuilding Commission to utilize its convening role to gather contributions from a broad range of stakeholders that may be used in the preparation of its advice, so as to provide recommendations and information to improve their coordination, to develop and share good practices in peacebuilding, and in this regard further requests the United Nations leadership in countries considered by the Commission to regularly brief the Commission, as appropriate, on the peacebuilding components of relevant mandates and activities; (d) Takes note of the intention of the Security Council to encourage stronger cooperation with the Peacebuilding Commission, including through more specific requests, early consultations and the provision of timely advice, including with the longer-term perspective required for peacebuilding and sustaining peace being reflected in the formation, review and drawdown of peace operations mandates, as well as planning and early coordination preceding transition processes;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

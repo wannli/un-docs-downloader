@@ -86,13 +86,21 @@
     
 
     
-
+        
+            
+        
     
 
     
 
     
 
+    
+
+    
+        
+            
+        
     
 
     
@@ -105,12 +113,24 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 7 without</span>
+        <span class="text-sm text-muted">2 with signals, 5 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('process')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            process
+        </button>
+        
+        <button onclick="filterSignal('report')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            report
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -141,9 +161,9 @@
     </div>
     
     <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -151,7 +171,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Urges the States Parties to the United Nations human rights instruments, including the bureau members, to include this matter in the agenda of each meeting and/or conference of States Parties to those instruments in order to initiate a debate on ways and means to ensure equitable geographical distribution in the membership of the human rights treaty bodies, based on previous recommendations of the former Commission on Human Rights and the Economic and Social Council and the provisions of the present resolution; _______________ 1 A/CONF.157/24 (Part I), chap. III. 2 A/80/299. Promotion of equitable geographical distribution in the membership of the human rights treaty bodies A/RES/80/206 3/3 25-20960</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Urges the States Parties to the United Nations human rights instruments, including the <mark class="bg-yellow-200 px-0.5 rounded">bureau</mark> members, to include this matter in the agenda of each meeting and/or conference of States Parties to those instruments in order to initiate a debate on ways and means to ensure equitable geographical distribution in the membership of the human rights treaty bodies, based on previous recommendations of the former Commission on Human Rights and the Economic and Social Council and the provisions of the present resolution; _______________ 1 A/CONF.157/24 (Part I), chap. III. 2 A/80/299. Promotion of equitable geographical distribution in the membership of the human rights treaty bodies A/RES/80/206 3/3 25-20960</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -209,9 +238,9 @@
     </div>
     
     <div id="para-6" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["report"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -219,7 +248,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General, in consultation with the Office of the United Nations High Commissioner for Human Rights, to submit to the General Assembly at its eighty-second session a comprehensive updated report in this regard, including information on any steps taken by States Parties at meetings or conferences of States Parties to address the matter of equitable geographical distribution in the membership of the human rights treaty bodies, as well as concrete recommendations on the implementation of the present resolution;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General, in consultation with the Office of the United Nations High Commissioner for Human Rights, to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-second session a comprehensive updated report in this regard, including information on any steps taken by States Parties at meetings or conferences of States Parties to address the matter of equitable geographical distribution in the membership of the human rights treaty bodies, as well as concrete recommendations on the implementation of the present resolution;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        report
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

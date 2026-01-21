@@ -84,7 +84,13 @@
 
 
     
+        
+            
+        
+    
 
+    
+        
     
         
             
@@ -131,12 +137,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 14 without</span>
+        <span class="text-sm text-muted">3 with signals, 13 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -163,9 +176,9 @@
 <div class="space-y-4" id="paragraphs">
     
     <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -173,7 +186,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Decides to convene the United Nations Conference of Plenipotentiaries on Protection of Persons in the Event of Disasters, to meet for three weeks from 25 January to 12 February 2027 in Manila, and, if necessary, for a further two weeks in August 2027, to elaborate and conclude a legally binding instrument on the protection of persons in the event of disasters, without prejudice to the legal effects of any particular provisions contained therein;</p>
+                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to convene</mark> the United Nations Conference of Plenipotentiaries on Protection of Persons in the Event of Disasters, to meet for three weeks from 25 January to 12 February 2027 in Manila, and, if necessary, for a further two weeks in August 2027, to elaborate and conclude a legally binding instrument on the protection of persons in the event of disasters, without prejudice to the legal effects of any particular provisions contained therein;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -181,7 +204,7 @@
     
     <div id="para-2" 
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["report"]'
+         data-signals='["PGA", "report"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -190,9 +213,15 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also decides to convene a preparatory committee for the Conference, to meet from 31 August to 4 September 2026, to refer the consolidated text including the draft articles and the proposals submitted by Governments, prepared at the resumed session of the Sixth Committee held in accordance with resolution 79/128, to the Conference, to decide on the participation of stakeholders other than those referred to in paragraph 9 below, including on the modalities for such decision and participation, on the basis of a list of relevant non-governmental organizations, civil society organizations, academic institutions and the private sector to be prepared by the Secretariat, and to discuss the organization and methods of work of the Conference, including the rules of procedure, with a view to making recommendations thereon to the Conference, taking into account the importance of promoting consensus in the Preparatory Committee and on the final results of the work of the Conference, requests the Secretary-General to prepare proposals for the consideration of the Preparatory Committee, and decides that, upon completion of its mandate, the Preparatory Committee <mark class="bg-yellow-200 px-0.5 rounded">shall report</mark> directly to the Conference;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also <mark class="bg-yellow-200 px-0.5 rounded">decides to convene</mark> a preparatory committee for the Conference, to meet from 31 August to 4 September 2026, to refer the consolidated text including the draft articles and the proposals submitted by Governments, prepared at the resumed session of the Sixth Committee held in accordance with resolution 79/128, to the Conference, to decide on the participation of stakeholders other than those referred to in paragraph 9 below, including on the modalities for such decision and participation, on the basis of a list of relevant non-governmental organizations, civil society organizations, academic institutions and the private sector to be prepared by the Secretariat, and to discuss the organization and methods of work of the Conference, including the rules of procedure, with a view to making recommendations thereon to the Conference, taking into account the importance of promoting consensus in the Preparatory Committee and on the final results of the work of the Conference, requests the Secretary-General to prepare proposals for the consideration of the Preparatory Committee, and decides that, upon completion of its mandate, the Preparatory Committee <mark class="bg-yellow-200 px-0.5 rounded">shall report</mark> directly to the Conference;</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
                     
                     <span class="px-1.5 py-0.5 rounded text-xs font-medium
                         bg-gray-100 text-gray-700">

@@ -96,7 +96,19 @@
     
 
     
+        
+            
+        
+    
 
+    
+
+    
+
+    
+
+    
+        
     
 
     
@@ -110,13 +122,11 @@
     
 
     
-
+        
     
 
     
-
-    
-
+        
     
 
     
@@ -139,12 +149,18 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 24 without</span>
+        <span class="text-sm text-muted">4 with signals, 20 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('process')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            process
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -260,9 +276,9 @@
     </div>
     
     <div id="para-7" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -270,7 +286,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">The Bureau of the Committee has considered the provisional programme of work as contained in decision 79/524 and has taken into account the allocation of additional items (requests for observer status in the General Assembly) to the Committee by the General Assembly, as well as the reduction of the length of the report of the International Law Commission on the work of its seventy-sixth session (as a consequence of the reduction of the length of the Commission’s session) and the anticipated workload at the present session. The programme has been prepared accordingly. Approximate dates of consideration Sixth Committee (organization of work) 6 October Revitalization of the work of the General Assembly [121] 6 October Measures to eliminate international terrorism [109] 6 and 7 October Programme planning [137] 8 October The rule of law at the national and international levels [84] 8 and 9 October Criminal accountability of United Nations officials and experts on mission [77] 9 and 10 October Responsibility of States for internationally wrongful acts [76] 10 and 13 October Crimes against humanity [81] 13 and 14 October Protection of persons in the event of disasters [86] 14 October Observer status for the International Centre for Integrated Mountain Development in the General Assembly [171] 15 October Observer status for the Islamic Organization for Food Security in the General Assembly [172] 15 October Observer status for the African Export-Import Bank in the General Assembly [173] 15 October Observer status for the International Tropical Timber Organization in the General Assembly [174] 15 October Observer status for the Brazilian-Argentine Agency for Accounting and Control of Nuclear Materials in the General Assembly [175] 15 October A/C.6/80/L.1 7/10 25-14774 Approximate dates of consideration Observer status for the Climate Vulnerable Forum in the General Assembly [176] 15 October Strengthening and promoting the international treaty framework [87] 15 October Report of the Special Committee on the Charter of the United Nations and on the Strengthening of the Role of the Organization [83] 16 October Report of the United Nations Commission on International Trade Law on the work of its fifty-eighth session [78] 20 and 21 October Administration of justice at the United Nations [146] 21 October The scope and application of the principle of universal jurisdiction [85] 21 and 22 October Diplomatic protection [82] 23 October United Nations Programme of Assistance in the Teaching, Study, Dissemination and Wider Appreciation of International Law [79] 23 October Report of the International Law Commission on the work of its seventy- sixth session [80] 27 to 31 October Report of the Committee on Relations with the Host Country [160] 7 November Observer status for the Cooperation Council of Turkic-speaking States in the General Assembly [161] 14 November Observer status for the Eurasian Economic Union in the General Assembly [162] 14 November Observer status for the Community of Democracies in the General Assembly [163] 14 November Observer status for the Ramsar Convention on Wetlands Secretariat in the General Assembly [164] 14 November Observer status for the Global Environment Facility in the General Assembly [165] 14 November Observer status for the International Organization of Employers in the General Assembly [166] 14 November Observer status for the International Trade Union Confederation in the General Assembly [167] 14 November Observer status for the Boao Forum for Asia in the General Assembly [168] 14 November Observer status for the International Parliamentarians’ Congress in the General Assembly [169] 14 November Observer status for the Regional Anti-Corruption Initiative in the General Assembly [170] 14 November A/C.6/80/L.1 25-14774 8/10 Approximate dates of consideration Revitalization of the work of the General Assembly (continued) [121] 14 November Election of the officers of the Main Committees [5] 21 November In reserve 24 October and 3 November Establishment of working groups and holding of consultations</p>
+                <p class="text-gray-700 leading-relaxed text-sm">The <mark class="bg-yellow-200 px-0.5 rounded">Bureau</mark> of the Committee has considered the provisional programme of work as contained in decision 79/524 and has taken into account the allocation of additional items (requests for observer status in the General Assembly) to the Committee by the General Assembly, as well as the reduction of the length of the report of the International Law Commission on the work of its seventy-sixth session (as a consequence of the reduction of the length of the Commission’s session) and the anticipated workload at the present session. The programme has been prepared accordingly. Approximate dates of consideration Sixth Committee (organization of work) 6 October Revitalization of the work of the General Assembly [121] 6 October Measures to eliminate international terrorism [109] 6 and 7 October Programme planning [137] 8 October The rule of law at the national and international levels [84] 8 and 9 October Criminal accountability of United Nations officials and experts on mission [77] 9 and 10 October Responsibility of States for internationally wrongful acts [76] 10 and 13 October Crimes against humanity [81] 13 and 14 October Protection of persons in the event of disasters [86] 14 October Observer status for the International Centre for Integrated Mountain Development in the General Assembly [171] 15 October Observer status for the Islamic Organization for Food Security in the General Assembly [172] 15 October Observer status for the African Export-Import Bank in the General Assembly [173] 15 October Observer status for the International Tropical Timber Organization in the General Assembly [174] 15 October Observer status for the Brazilian-Argentine Agency for Accounting and Control of Nuclear Materials in the General Assembly [175] 15 October A/C.6/80/L.1 7/10 25-14774 Approximate dates of consideration Observer status for the Climate Vulnerable Forum in the General Assembly [176] 15 October Strengthening and promoting the international treaty framework [87] 15 October Report of the Special Committee on the Charter of the United Nations and on the Strengthening of the Role of the Organization [83] 16 October Report of the United Nations Commission on International Trade Law on the work of its fifty-eighth session [78] 20 and 21 October Administration of justice at the United Nations [146] 21 October The scope and application of the principle of universal jurisdiction [85] 21 and 22 October Diplomatic protection [82] 23 October United Nations Programme of Assistance in the Teaching, Study, Dissemination and Wider Appreciation of International Law [79] 23 October Report of the International Law Commission on the work of its seventy- sixth session [80] 27 to 31 October Report of the Committee on Relations with the Host Country [160] 7 November Observer status for the Cooperation Council of Turkic-speaking States in the General Assembly [161] 14 November Observer status for the Eurasian Economic Union in the General Assembly [162] 14 November Observer status for the Community of Democracies in the General Assembly [163] 14 November Observer status for the Ramsar Convention on Wetlands Secretariat in the General Assembly [164] 14 November Observer status for the Global Environment Facility in the General Assembly [165] 14 November Observer status for the International Organization of Employers in the General Assembly [166] 14 November Observer status for the International Trade Union Confederation in the General Assembly [167] 14 November Observer status for the Boao Forum for Asia in the General Assembly [168] 14 November Observer status for the International Parliamentarians’ Congress in the General Assembly [169] 14 November Observer status for the Regional Anti-Corruption Initiative in the General Assembly [170] 14 November A/C.6/80/L.1 25-14774 8/10 Approximate dates of consideration Revitalization of the work of the General Assembly (continued) [121] 14 November Election of the officers of the Main Committees [5] 21 November In reserve 24 October and 3 November Establishment of working groups and holding of consultations</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -328,9 +353,9 @@
     </div>
     
     <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -338,7 +363,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">In view of the limited conference services available to the Sixth Committee (see para. 22), any meetings for the working groups or for informal consultations are accommodated within the overall meetings allocated to the Committee.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">In view of the limited conference services available to the Sixth Committee (see para. 22), any meetings for the working groups or for <mark class="bg-yellow-200 px-0.5 rounded">informal consultations</mark> are accommodated within the overall meetings allocated to the Committee.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -430,9 +464,9 @@
     </div>
     
     <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -440,16 +474,25 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Unless otherwise agreed, coordinators or main sponsors, as applicable, of proposals for draft resolutions are encouraged to hold at least one informal consultation per proposal. The Secretariat will provide assistance where necessary. Informal consultations should be announced sufficiently in advance, including in the Journal of the United Nations, so as to allow participation by representatives of all Member States. Once consultations have concluded, it is the practice of the Sixth Committee to place proposals for draft resolutions under a silence procedure, prior to their submission for processing and issuance in all official languages as limited (“L”) documents.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Unless otherwise agreed, coordinators or main sponsors, as applicable, of proposals for draft resolutions are encouraged to hold at least one informal consultation per proposal. The Secretariat will provide assistance where necessary. <mark class="bg-yellow-200 px-0.5 rounded">Informal consultations</mark> should be announced sufficiently in advance, including in the Journal of the United Nations, so as to allow participation by representatives of all Member States. Once consultations have concluded, it is the practice of the Sixth Committee to place proposals for draft resolutions under a silence procedure, prior to their submission for processing and issuance in all official languages as limited (“L”) documents.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-18" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -457,7 +500,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">All delegations wishing to sponsor a proposal for a draft resolution, where applicable, are encouraged to do so electronically through the eSponsorship module, rather than during the formal proceedings of the Committee. This is without prejudice to the possibility of delegations sponsoring a proposal for a draft resolution at the time of the Committee’s action on the latter during a plenary meeting. Sponsorship should take place at the level of the Sixth Committee, given that, once the Committee has adopted a proposal for a draft resolution and recommended its adoption by the General Assembly, its sponsorship can no longer be altered by Member States. Proposals for draft resolutions submitted on behalf of the Bureau are not subject to sponsorship.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">All delegations wishing to sponsor a proposal for a draft resolution, where applicable, are encouraged to do so electronically through the eSponsorship module, rather than during the formal proceedings of the Committee. This is without prejudice to the possibility of delegations sponsoring a proposal for a draft resolution at the time of the Committee’s action on the latter during a plenary meeting. Sponsorship should take place at the level of the Sixth Committee, given that, once the Committee has adopted a proposal for a draft resolution and recommended its adoption by the General Assembly, its sponsorship can no longer be altered by Member States. Proposals for draft resolutions submitted on behalf of the <mark class="bg-yellow-200 px-0.5 rounded">Bureau</mark> are not subject to sponsorship.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

@@ -120,6 +120,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -133,7 +137,7 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 18 without</span>
+        <span class="text-sm text-muted">2 with signals, 17 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
@@ -145,6 +149,12 @@
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
+        </button>
+        
+        <button onclick="filterSignal('process')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-gray-100 text-gray-700 hover:bg-gray-200">
+            process
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -439,9 +449,9 @@
     </div>
     
     <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["process"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -449,7 +459,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General, President pro tempore of the Special Committee, to meet informally at least once a year with the Chair and the Bureau of the Committee during the intersessional period, in order to explore innovative ways of using his good offices to help to advance the decolonization agenda on a case-by- case basis;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General, President pro tempore of the Special Committee, to meet informally at least once a year with the Chair and the <mark class="bg-yellow-200 px-0.5 rounded">Bureau</mark> of the Committee during the intersessional period, in order to explore innovative ways of using his good offices to help to advance the decolonization agenda on a case-by- case basis;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-gray-100 text-gray-700">
+                        process
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
