@@ -10,6 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from .checks import load_checks, run_checks
 from .extractor import extract_text, extract_operative_paragraphs
 from .pipeline import load_patterns
+from .lineage import load_lineage_cache
 
 
 def get_un_document_url(symbol: str) -> str:
@@ -75,6 +76,9 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     if not pdfs_dir.exists():
         return documents
 
+    lineage_cache = load_lineage_cache(data_dir / "lineage.json")
+    lineage_documents = lineage_cache.get("documents", {})
+
     for pdf_file in pdfs_dir.glob("*.pdf"):
         # Extract symbol from filename
         symbol = filename_to_symbol(pdf_file.stem)
@@ -99,6 +103,7 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
                 "paragraphs": paragraphs,
                 "signals": signals,
                 "signal_summary": signal_summary,
+                "lineage": lineage_documents.get(symbol, {}),
                 "num_paragraphs": len(paragraphs),
                 "un_url": get_un_document_url(symbol),
             })
@@ -821,6 +826,8 @@ def generate_site_verbose(
     load_start_time = time.time()
     documents = []
     pdfs_dir = data_dir / "pdfs"
+    lineage_cache = load_lineage_cache(data_dir / "lineage.json")
+    lineage_documents = lineage_cache.get("documents", {})
 
     if pdfs_dir.exists():
         for pdf_file in pdfs_dir.glob("*.pdf"):
@@ -844,6 +851,7 @@ def generate_site_verbose(
                     "paragraphs": paragraphs,
                     "signals": signals,
                     "signal_summary": signal_summary,
+                    "lineage": lineage_documents.get(symbol, {}),
                     "num_paragraphs": len(paragraphs),
                     "un_url": get_un_document_url(symbol),
                 }
