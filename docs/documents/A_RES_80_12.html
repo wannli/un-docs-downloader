@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,129 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/12</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/12</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/12?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">10 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/12. Objective information on military matters, including transparency of military expenditures</p>
+    
+    <p class="mt-1 text-muted">10 operative paragraphs · Item 90</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.1/80/L.28</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">3 of 10 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, with a view to achieving the broadest possible participation, to provide the Secretary-General, by 30 April annually, with a report on their military expenditures for the latest fiscal year for which data are available, using, preferably and to the extent possible, one of the online reporting forms, including, if appropriate, a nil report or the “single figure” report on military expenditures or any __________________ 1 A/54/298. 2 A/66/89, A/66/89/Corr.1, A/66/89/Corr.2 and A/66/89/Corr.3. 3 See https://milex-reporting.unoda.org/en/states. 4 See https://milex-reporting.unoda.org/en/reporting-tool. A/C.1/80/L.28 3/4 25-16550 other format developed in the context of similar reporting on military expenditures to other international or regional organizations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/12</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, with a view to achieving the broadest possible participation, to provide the Secretary-General, by 30 April annually, with a report on their military expenditures for the latest fiscal year for which data are available, using, preferably and to the extent possible, one of the online reporting forms, including, if appropriate, a nil report or the “single figure” report on military expenditures or any _______________ 1 A/54/298. 2 A/66/89, A/66/89/Corr.1, A/66/89/Corr.2 and A/66/89/Corr.3. 3 See https://milex-reporting.unoda.org/en/states. 4 See https://milex-reporting.unoda.org/en/reporting-tool. Objective information on military matters, including transparency of military expenditures A/RES/80/12 3/4 25-19970 other format developed in the context of similar reporting on military expenditures to other international or regional organizations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, within available resources: (a) To continue the practice of sending an annual note verbale to Member States requesting the submission of their report on military expenditures; (b) To circulate annually a note verbale to Member States detailing which reports on military expenditures were submitted and are available online; (c) To continue consultations with relevant international bodies, with a view to ascertaining requirements for adjusting the present instrument in order to encourage wider participation, and to make recommendations, based on the outcome of those consultations and taking into account the views of Member States, on necessary changes to the content and structure of the standardized reporting system; (d) To encourage relevant international bodies and organizations to promote transparency of military expenditures and to consult with those bodies and organizations with emphasis on examining possibilities for enhancing complementarities among international and regional reporting systems and for exchanging related information between those bodies and the United Nations; (e) To continue to foster further cooperation with relevant regional organizations, with a view to raising awareness of the United Nations Report on Military Expenditures and its role as a confidence-building measure; (f) To encourage the United Nations regional centres for peace and disarmament in Africa, in Asia and the Pacific and in Latin America and the Caribbean to assist Member States in their regions in enhancing their knowledge of the standardized reporting system; (g) To promote international and regional or subregional symposiums and training seminars and to support the development of an online training course by the Secretariat, with the financial and technical support of interested States, with a view to explaining the purpose of the standardized reporting system and facilitating the secure online filing of the reports; __________________ 5 A/80/225. A/C.1/80/L.28 25-16550 4/4 (h) To report on experiences gained during such symposiums and training seminars; (i) To provide, upon request, technical assistance to Member States lacking the capacity to report data and to encourage Member States to voluntarily provide bilateral assistance to other Member States;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/12</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, within available resources: (a) To continue the practice of sending an annual note verbale to Member States requesting the submission of their report on military expenditures; (b) To circulate annually a note verbale to Member States detailing which reports on military expenditures were submitted and are available online; (c) To continue consultations with relevant international bodies, with a view to ascertaining requirements for adjusting the present instrument in order to encourage wider participation, and to make recommendations, based on the outcome of those consultations and taking into account the views of Member States, on necessary changes to the content and structure of the standardized reporting system; (d) To encourage relevant international bodies and organizations to promote transparency of military expenditures and to consult with those bodies and organizations with emphasis on examining possibilities for enhancing complementarities among international and regional reporting systems and for exchanging related information between those bodies and the United Nations; (e) To continue to foster further cooperation with relevant regional organizations, with a view to raising awareness of the United Nations Report on Military Expenditures and its role as a confidence-building measure; (f) To encourage the United Nations regional centres for peace and disarmament in Africa, in Asia and the Pacific and in Latin America and the Caribbean to assist Member States in their regions in enhancing their knowledge of the standardized reporting system; (g) To promote international and regional or subregional symposiums and training seminars and to support the development of an online training course by the Secretariat, with the financial and technical support of interested States, with a view to explaining the purpose of the standardized reporting system and facilitating the secure online filing of the reports; _______________ 5 A/80/225. A/RES/80/12 Objective information on military matters, including transparency of military expenditures 25-19970 4/4 (h) To report on experiences gained during such symposiums and training seminars; (i) To provide, upon request, technical assistance to Member States lacking the capacity to report data and to encourage Member States to voluntarily provide bilateral assistance to other Member States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also decides to include in the provisional agenda of its eighty-third session, under the item entitled “Reduction of military budgets”, the sub-item entitled “Objective information on military matters, including transparency of military expenditures”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/12</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also decides to include in the provisional agenda of its eighty-third session, under the item entitled “Reduction of military budgets”, the sub-item entitled “Objective information on military matters, including transparency of military expenditures”. 52nd plenary meeting 1 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.1_80_L.28.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -118,29 +227,30 @@
         <span class="text-sm text-muted">1 with signals, 9 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -157,7 +267,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -174,7 +284,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -191,7 +301,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -208,7 +318,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -225,7 +335,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -242,7 +352,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -259,7 +369,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -276,7 +386,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -293,7 +403,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -325,19 +435,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -352,14 +475,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -375,12 +498,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -399,12 +522,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

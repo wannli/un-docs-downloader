@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,363 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/228</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/228</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/228?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">38 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/228. Improving the coordination of efforts against trafficking in persons</p>
+    
+    <p class="mt-1 text-muted">38 operative paragraphs · Item 107</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.4</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">16 of 38 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States and other stakeholders mentioned in the United Nations Global Plan of Action to Combat Trafficking in Persons, 35 and invites the Conference of the Parties to the United Nations Convention against Transnational Organized Crime and relevant international, regional and subregional organizations, within their respective mandates, to continue to contribute to the full and effective implementation of the Global Plan of Action, including by means of strengthening cooperation and improving coordination among themselves in achieving that goal;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States and other stakeholders mentioned in the United Nations Global Plan of Action to Combat Trafficking in Persons,35 and invites the Conference of the Parties to the United Nations Convention against Transnational Organized Crime and relevant international, regional and subregional organizations, within their respective mandates, to continue to contribute to the full and effective implementation of the Global Plan of Action, including by means of strengthening cooperation and improving coordination among themselves in achieving that goal;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls its decision, in its resolution 68/192, to appraise, from within existing resources, on a four-year basis starting at its seventy-second session, the progress achieved in the implementation of the Global Plan of Action in order to assess achievements, gaps and challenges, including in the implementation of the relevant legal instruments, and therefore decides to convene a high-level meeting of the General Assembly on the progress achieved in the implementation of the Global __________________ 33 See CTOC/COP/2020/10, sect. I.A. 34 See CTOC/COP/2022/9, sect. I.A. 35 Resolution 64/293. A/C.3/80/L.4 25-16618 10/14 Plan of Action at its eighty-fourth session, after the general debate, but no later than December 2029;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls its decision, in its resolution 68/192, to appraise, from within existing resources, on a four-year basis starting at its seventy-second session, the _______________ 33 See CTOC/COP/2020/10, sect. I.A. 34 See CTOC/COP/2022/9, sect. I.A. 35 Resolution 64/293. A/RES/80/228 Improving the coordination of efforts against trafficking in persons 25-20946 10/14 progress achieved in the implementation of the Global Plan of Action in order to assess achievements, gaps and challenges, including in the implementation of the relevant legal instruments, and therefore decides to convene a high-level meeting of the General Assembly on the progress achieved in the implementation of the Global Plan of Action at its eighty-fourth session, after the general debate, but no later than December 2029;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses solidarity with and compassion for victims and survivors of trafficking in persons, and calls for the full respect of their human rights and the provision of appropriate victim-centred, trauma-informed, gender-responsive and age-sensitive care and assistance, where applicable, including interpretation and sign language, where appropriate, to victims of trafficking, and services for their rehabilitation or recovery, as appropriate, in cooperation with civil society and other relevant partners;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses solidarity with and compassion for victims and survivors of trafficking in persons, and calls for the full respect for their human rights and the provision of appropriate victim-centred, trauma-informed, gender-responsive and age-sensitive care and assistance, where applicable, including interpretation and sign language, where appropriate, to victims of trafficking, and services for their rehabilitation or recovery, as appropriate, in cooperation with civil society and other relevant partners;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to ensure that victims are treated with respect and dignity and are not inappropriately penalized or adversely affected by any actions taken by government authorities and communities, including criminal, civil, administrative and immigration penalties, for acts that they commit as a direct consequence of their trafficking situation, through the implementation of the principles of both non-prosecution and non-punishment of victims of trafficking subject to national laws, rules and regulations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to ensure that victims are treated with respect and dignity and are not inappropriately penalized or adversely affected by any actions taken by government authorities and communities, including criminal, civil, administrative and immigration penalties, for acts that they commit as a direct consequence of their trafficking situation, through the implementation of the principles of both non‑prosecution and non‑punishment of victims of trafficking subject to national laws, rules and regulations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the Inter-Agency Coordination Group Plan of Action, endorsed on 15 December 2020, as well as of the first regional consultation on trafficking in persons in Eastern Africa, held in virtual format on 7 and 8 February 2022, and takes note of the regional consultation with civil society and international organizations on trafficking in persons in the Americas, held in Panama City on 8 May 2025;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the Inter-Agency Coordination Group Plan of Action, endorsed on 15 December 2020, as well as of the first regional consultation on trafficking in persons in Eastern Africa, held in virtual format on 7 and 8 February 2022, and takes note of the regional consultation with civil society and international organizations on trafficking in persons in the Americas, held in Panama City on 8 May 2025; Improving the coordination of efforts against trafficking in persons A/RES/80/228 11/14 25-20946
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the sixth and seventh meetings of the Inter-Agency Coordination Group at the level of principals, held in virtual format on 13 December 2024 and on 29 October 2025, which reinforced the vital role of inter-agency partnership in tackling trafficking in persons, and requests the United Nations Office on Drugs and Crime, as coordinator of the Coordination Group, to continue to A/C.3/80/L.4 11/14 25-16618 convene such meetings of the Coordination Group at the level of principals on a regular basis, and in this context takes note of the engagement of the European Union Anti-Trafficking Coordinator with the Coordination Group, and encourages the Coordination Group to engage with relevant regional and international organizations from other regions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the sixth and seventh meetings of the Inter-Agency Coordination Group at the level of principals, held in virtual format on 13 December 2024 and on 29 October 2025, which reinforced the vital role of inter-agency partnership in tackling trafficking in persons, and requests the United Nations Office on Drugs and Crime, as coordinator of the Coordination Group, to continue to convene such meetings of the Coordination Group at the level of principals on a regular basis, and in this context takes note of the engagement of the European Union Anti-Trafficking Coordinator with the Coordination Group, and encourages the Coordination Group to engage with relevant regional and international organizations from other regions;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages Member States to take, consistent with domestic law, legislative or other measures, where appropriate, to facilitate the detection, by Internet service and access providers or other relevant entities, of child sexual exploitation and child abuse materials related to offences involving trafficking in children, as required by domestic frameworks and to ensure, in compliance with domestic law, the reporting of such materials to the relevant authorities and their removal by Internet service and access providers or other relevant entities, including in conjunction with law enforcement in the investigation and prosecution;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages Member States to take, consistent with domestic law, legislative or other measures, where appropriate, to facilitate the detection, by Internet service and access providers or other relevant entities, of child sexual exploitation and child abuse materials related to offences involving trafficking in children, as required by domestic frameworks and to ensure, in compliance with domestic law, the reporting of such materials to the relevant authorities and their removal by Internet A/RES/80/228 Improving the coordination of efforts against trafficking in persons 25-20946 12/14 service and access providers or other relevant entities, including in conjunction with law enforcement in the investigation and prosecution;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further encourages Member States to scale up their efforts to combat emerging forms of technology-facilitated and cyber-enabled trafficking in persons, in particular online scams and online fraud for purposes of trafficking in persons, A/C.3/80/L.4 25-16618 12/14 including by developing digital literacy programmes for at-risk populations, most notably for children and adolescents, and addressing the gender-related risks and challenges emerging from the use of technologies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further encourages Member States to scale up their efforts to combat emerging forms of technology-facilitated and cyber-enabled trafficking in persons, in particular forced criminality for the purposes of online scams and online fraud, develop digital literacy programmes for at-risk populations, most notably for children and youth, and address the gender-related risks and challenges emerging from the use of technologies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms Member States’ commitment to address the social, economic, cultural, political and other factors that make people vulnerable to trafficking in persons, such as poverty, underdevelopment, unemployment, inequality, humanitarian emergencies, armed conflicts and natural disasters, sexual violence, gender discrimination, racial discrimination, social and financial exclusion and marginalization, as well as negative social norms, and a culture of tolerance towards violence against women, youth and children;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms Member States’ commitment to address the social, economic, cultural, political and other factors that make people vulnerable to trafficking in persons, such as poverty, underdevelopment, unemployment, inequality, humanitarian emergencies, armed conflicts and natural disasters, sexual violence, gender discrimination, racial discrimination and social and financial exclusion, as well as negative social norms, which promote a culture of tolerance towards violence against women, youth and children;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that in armed conflicts trafficking in persons can be prevalent, and in this regard calls upon Member States to ensure the comprehensive application of international humanitarian law, international criminal law, international human rights law and international refugee law, in accordance with respective obligations, to trafficking in persons in conflict situations for all purposes of exploitation, and to both internal and cross-border trafficking in persons, in order to ensure accountability, prevent impunity and provide effective access to justice for trafficked persons;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that in armed conflicts, trafficking in persons can be prevalent, and in this regard calls upon Member States to ensure the comprehensive application of international humanitarian law, international criminal law, international human rights law and international refugee law, in accordance with respective obligations, to trafficking in persons in conflict situations for all purposes of exploitation, and to both internal and cross-border trafficking in persons, in order to ensure accountability, prevent impunity and provide effective access to justice for trafficked persons;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses deep concern about the increasing links between armed groups, including terrorist groups, and trafficking in persons, involving the coercion of victims, in particular women, into forced marriages, girls into child, early and forced marriages, forced religious conversions, sexual slavery, forced pregnancy, forced labour, domestic servitude and sexual exploitation, and subjecting men and boys to forced labour or act as combatants;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses deep concern about the increasing links between armed groups, including terrorist groups, and trafficking in persons, involving the coercion of victims, in particular women and girls, into child, early and forced marriages, sexual slavery, forced pregnancy, forced labour, domestic servitude and sexual exploitation, and subjecting men and boys to forced labour or to act as combatants;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to seek to address trafficking in persons in global supply chains, including by considering the development of common public procurement standards, compliance requirements or codes of conduct and by harmonizing frameworks, in line with domestic legislation, including those guiding anti-trafficking efforts and sustainable procurement;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to seek to address trafficking in persons in global supply chains, including by considering the development of common public procurement standards, compliance requirements or codes of conduct and by harmonizing frameworks, in line with domestic legislation, including those guiding anti‑trafficking efforts and sustainable procurement;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to intensify the efforts to prevent irregular migration and create and strengthen pathways for safe, orderly and regular migration to reduce the exposure of people on the move who are vulnerable to trafficking in persons, and in this regard encourages Member States to take legislative or other measures to prevent, combat and eradicate trafficking in persons in the context of international migration by strengthening capacities and international cooperation to investigate, prosecute and penalize trafficking in persons, discouraging demand that fosters exploitation leading to trafficking, and ending impunity of trafficking networks; A/C.3/80/L.4 13/14 25-16618
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to intensify the efforts to prevent irregular migration and create and strengthen pathways for safe, orderly and regular migration to reduce the exposure of people on the move who are vulnerable to trafficking in persons, and in this regard encourages Member States to take legislative or other measures to prevent, Improving the coordination of efforts against trafficking in persons A/RES/80/228 13/14 25-20946 combat and eradicate trafficking in persons in the context of international migration by strengthening capacities and international cooperation to investigate, prosecute and penalize trafficking in persons, discouraging demand that fosters exploitation leading to trafficking, and ending impunity of trafficking networks;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the United Nations Office on Drugs and Crime, in its capacity as fund manager of the United Nations voluntary trust fund for victims of trafficking in persons, especially women and children, to continue to encourage contributions by States and all other relevant stakeholders to the trust fund;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the United Nations Office on Drugs and Crime, in its capacity as fund manager of the United Nations voluntary trust fund for victims of trafficking in persons, especially women and children, to continue to encourage contributions by States and all other relevant stakeholders to the trust fund; A/RES/80/228 Improving the coordination of efforts against trafficking in persons 25-20946 14/14
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 36</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the biennial publication of the Global Report on Trafficking in Persons, prepared by the United Nations Office on Drugs and Crime, looks forward to the next such report, to be produced by the Office in 2026, pursuant to the Global Plan of Action, supports the United Nations Office on Drugs and Crime trafficking in A/C.3/80/L.4 25-16618 14/14 persons data capacity-building programme, and strongly encourages Member States to provide to the Office evidence-based internationally standardized data on patterns, flows and forms of trafficking in persons, including for the purpose of the removal of organs and in the context of sport, based on the International Classification of Crime for Statistical Purposes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the biennial publication of the Global Report on Trafficking in Persons, prepared by the United Nations Office on Drugs and Crime, looks forward to the next such report, to be produced by the Office in 2026, pursuant to the Global Plan of Action, supports the United Nations Office on Drugs and Crime trafficking in persons data capacity-building programme, and strongly encourages Member States to provide to the Office evidence-based internationally standardized data on patterns, flows and forms of trafficking in persons, including for the purpose of the removal of organs and in the context of sport, based on the International Classification of Crime for Statistical Purposes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 38</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit a report on the implementation of the present resolution to the General Assembly at its eighty-second session, including recommendations on measures to bring greater urgency to and improve the coordination of efforts against trafficking in persons.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/228</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit a report on the implementation of the present resolution to the General Assembly at its eighty-second session, including recommendations on measures to bring greater urgency to and improve the coordination of efforts against trafficking in persons. 69th plenary meeting 18 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.4.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -184,35 +527,36 @@
         <span class="text-sm text-muted">5 with signals, 33 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -229,7 +573,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -256,7 +600,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -273,7 +617,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -300,7 +644,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -327,7 +671,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -354,7 +698,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -371,7 +715,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -388,7 +732,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -405,7 +749,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -422,7 +766,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -439,7 +783,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -456,7 +800,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -473,7 +817,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -490,7 +834,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -507,7 +851,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -524,7 +868,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -541,7 +885,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -558,7 +902,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -575,7 +919,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -592,7 +936,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -609,7 +953,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -626,7 +970,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -643,7 +987,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -660,7 +1004,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -677,7 +1021,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -694,7 +1038,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -711,7 +1055,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -728,7 +1072,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -745,7 +1089,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -762,7 +1106,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -779,7 +1123,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -796,7 +1140,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -813,7 +1157,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -830,7 +1174,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -847,7 +1191,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -864,7 +1208,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -881,7 +1225,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -912,19 +1256,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -939,14 +1296,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -962,12 +1319,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -986,12 +1343,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

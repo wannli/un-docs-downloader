@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,249 +65,63 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/80/L.34</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/117</span>
+        </div>
+        <a href="./A_RES_80_117.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/80/L.34</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/80/l.34?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">82 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being</p>
+    
+    <p class="mt-1 text-muted">82 operative paragraphs · Item 127</p>
 </div>
 
-<!-- Compute signal data -->
 
 
-    
-        
-            
-        
-    
 
-    
-
-    
-        
-    
-
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-        
-    
-        
-            
-        
-    
-
-    
-
-
-
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">6 with signals, 76 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button onclick="filterSignal('report')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-gray-100 text-gray-700 hover:bg-gray-200">
-            report
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -315,24 +129,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Strongly reaffirm our commitment to reduce by one third premature mortality from noncommunicable diseases by 2030 through the prevention and control of noncommunicable diseases, and the promotion of mental health and well- being, by accelerating the implementation of the political declarations and outcome document approved by the previous <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly on A/80/L.34 25-20155 2/13 the prevention and control of noncommunicable diseases held in 2011, 1 20142 and 2018;3</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Strongly reaffirm our commitment to reduce by one third premature mortality from noncommunicable diseases by 2030 through the prevention and control of noncommunicable diseases, and the promotion of mental health and well- being, by accelerating the implementation of the political declarations and outcome document approved by the previous high-level meetings of the General Assembly on A/80/L.34 25-20155 2/13 the prevention and control of noncommunicable diseases held in 2011, 1 20142 and 2018;3</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-2"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -348,10 +152,10 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -359,24 +163,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirm General Assembly resolution 69/313 of 27 July 2015 on the Addis Ababa Action Agenda of the Third International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, which reaffirmed a strong political commitment to address the challenge of financing and creating an enabling environment at all levels for sustainable development in the spirit of global partnership and solidarity, as well as General Assembly resolution 79/323 of 25 August 2025 on the Sevilla Commitment of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirm General Assembly resolution 69/313 of 27 July 2015 on the Addis Ababa Action Agenda of the Third International Conference on Financing for Development, which reaffirmed a strong political commitment to address the challenge of financing and creating an enabling environment at all levels for sustainable development in the spirit of global partnership and solidarity, as well as General Assembly resolution 79/323 of 25 August 2025 on the Sevilla Commitment of the Fourth International Conference on Financing for Development;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-4" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-4"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -392,10 +186,10 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -403,26 +197,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recall the political declarations of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly on universal health coverage held in 2019 4 and 2023, 5 on pandemic prevention, preparedness and response in 2023,6 on the fight against tuberculosis in 20237 and on antimicrobial resistance in 2024,8 as appropriate;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Recall the political declarations of the high-level meetings of the General Assembly on universal health coverage held in 2019 4 and 2023, 5 on pandemic prevention, preparedness and response in 2023,6 on the fight against tuberculosis in 20237 and on antimicrobial resistance in 2024,8 as appropriate;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -430,24 +214,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Further recall the preparatory meetings, including global and regional <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and other technical meetings on noncommunicable diseases and mental health, convened in preparation for the present and prior <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Further recall the preparatory meetings, including global and regional conferences and other technical meetings on noncommunicable diseases and mental health, convened in preparation for the present and prior high-level meetings;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-7" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-7"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -463,8 +237,8 @@
         </div>
     </div>
     
-    <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-8"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -480,8 +254,8 @@
         </div>
     </div>
     
-    <div id="para-9" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-9"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -497,8 +271,8 @@
         </div>
     </div>
     
-    <div id="para-10" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-10"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -514,8 +288,8 @@
         </div>
     </div>
     
-    <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-11"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -531,8 +305,8 @@
         </div>
     </div>
     
-    <div id="para-12" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-12"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -548,8 +322,8 @@
         </div>
     </div>
     
-    <div id="para-13" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-13"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -565,8 +339,8 @@
         </div>
     </div>
     
-    <div id="para-14" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-14"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -582,8 +356,8 @@
         </div>
     </div>
     
-    <div id="para-15" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-15"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -599,8 +373,8 @@
         </div>
     </div>
     
-    <div id="para-16" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-16"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -616,8 +390,8 @@
         </div>
     </div>
     
-    <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-17"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -633,8 +407,8 @@
         </div>
     </div>
     
-    <div id="para-18" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-18"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -650,8 +424,8 @@
         </div>
     </div>
     
-    <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-19"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -667,8 +441,8 @@
         </div>
     </div>
     
-    <div id="para-20" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-20"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -684,8 +458,8 @@
         </div>
     </div>
     
-    <div id="para-21" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-21"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -701,8 +475,8 @@
         </div>
     </div>
     
-    <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-22"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -718,8 +492,8 @@
         </div>
     </div>
     
-    <div id="para-23" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-23"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -735,8 +509,8 @@
         </div>
     </div>
     
-    <div id="para-24" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-24"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -752,8 +526,8 @@
         </div>
     </div>
     
-    <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-25"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -769,8 +543,8 @@
         </div>
     </div>
     
-    <div id="para-26" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-26"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -786,8 +560,8 @@
         </div>
     </div>
     
-    <div id="para-27" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-27"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -803,8 +577,8 @@
         </div>
     </div>
     
-    <div id="para-28" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-28"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -820,8 +594,8 @@
         </div>
     </div>
     
-    <div id="para-29" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-29"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -837,8 +611,8 @@
         </div>
     </div>
     
-    <div id="para-30" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-30"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -854,8 +628,8 @@
         </div>
     </div>
     
-    <div id="para-31" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-31"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -871,8 +645,8 @@
         </div>
     </div>
     
-    <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-32"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -888,8 +662,8 @@
         </div>
     </div>
     
-    <div id="para-33" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-33"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -905,8 +679,8 @@
         </div>
     </div>
     
-    <div id="para-34" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-34"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -922,8 +696,8 @@
         </div>
     </div>
     
-    <div id="para-35" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-35"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -939,8 +713,8 @@
         </div>
     </div>
     
-    <div id="para-36" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-36"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -956,8 +730,8 @@
         </div>
     </div>
     
-    <div id="para-37" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-37"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -973,8 +747,8 @@
         </div>
     </div>
     
-    <div id="para-38" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-38"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -990,8 +764,8 @@
         </div>
     </div>
     
-    <div id="para-39" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-39"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1007,8 +781,8 @@
         </div>
     </div>
     
-    <div id="para-40" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-40"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1024,8 +798,8 @@
         </div>
     </div>
     
-    <div id="para-41" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-41"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1041,8 +815,8 @@
         </div>
     </div>
     
-    <div id="para-42" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-42"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1058,8 +832,8 @@
         </div>
     </div>
     
-    <div id="para-43" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-43"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1075,8 +849,8 @@
         </div>
     </div>
     
-    <div id="para-44" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-44"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1092,8 +866,8 @@
         </div>
     </div>
     
-    <div id="para-45" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-45"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1109,8 +883,8 @@
         </div>
     </div>
     
-    <div id="para-46" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-46"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1126,8 +900,8 @@
         </div>
     </div>
     
-    <div id="para-47" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-47"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1143,8 +917,8 @@
         </div>
     </div>
     
-    <div id="para-48" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-48"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1160,8 +934,8 @@
         </div>
     </div>
     
-    <div id="para-49" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-49"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1177,8 +951,8 @@
         </div>
     </div>
     
-    <div id="para-50" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-50"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1194,8 +968,8 @@
         </div>
     </div>
     
-    <div id="para-51" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-51"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1211,8 +985,8 @@
         </div>
     </div>
     
-    <div id="para-52" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-52"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1228,8 +1002,8 @@
         </div>
     </div>
     
-    <div id="para-53" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-53"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1245,8 +1019,8 @@
         </div>
     </div>
     
-    <div id="para-54" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-54"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1262,8 +1036,8 @@
         </div>
     </div>
     
-    <div id="para-55" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-55"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1279,8 +1053,8 @@
         </div>
     </div>
     
-    <div id="para-56" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-56"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1296,8 +1070,8 @@
         </div>
     </div>
     
-    <div id="para-57" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-57"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1313,8 +1087,8 @@
         </div>
     </div>
     
-    <div id="para-58" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-58"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1330,8 +1104,8 @@
         </div>
     </div>
     
-    <div id="para-59" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-59"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1347,8 +1121,8 @@
         </div>
     </div>
     
-    <div id="para-60" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-60"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1364,8 +1138,8 @@
         </div>
     </div>
     
-    <div id="para-61" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-61"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1381,8 +1155,8 @@
         </div>
     </div>
     
-    <div id="para-62" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-62"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1398,8 +1172,8 @@
         </div>
     </div>
     
-    <div id="para-63" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-63"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1415,8 +1189,8 @@
         </div>
     </div>
     
-    <div id="para-64" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-64"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1432,8 +1206,8 @@
         </div>
     </div>
     
-    <div id="para-65" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-65"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1449,8 +1223,8 @@
         </div>
     </div>
     
-    <div id="para-66" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-66"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1466,8 +1240,8 @@
         </div>
     </div>
     
-    <div id="para-67" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-67"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1483,8 +1257,8 @@
         </div>
     </div>
     
-    <div id="para-68" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-68"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1500,8 +1274,8 @@
         </div>
     </div>
     
-    <div id="para-69" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-69"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1517,8 +1291,8 @@
         </div>
     </div>
     
-    <div id="para-70" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-70"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1534,8 +1308,8 @@
         </div>
     </div>
     
-    <div id="para-71" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-71"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1551,8 +1325,8 @@
         </div>
     </div>
     
-    <div id="para-72" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-72"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1568,8 +1342,8 @@
         </div>
     </div>
     
-    <div id="para-73" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-73"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1585,8 +1359,8 @@
         </div>
     </div>
     
-    <div id="para-74" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-74"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1602,8 +1376,8 @@
         </div>
     </div>
     
-    <div id="para-75" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-75"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1619,8 +1393,8 @@
         </div>
     </div>
     
-    <div id="para-76" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-76"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1636,8 +1410,8 @@
         </div>
     </div>
     
-    <div id="para-77" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-77"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1653,8 +1427,8 @@
         </div>
     </div>
     
-    <div id="para-78" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-78"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1670,8 +1444,8 @@
         </div>
     </div>
     
-    <div id="para-79" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-79"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1687,10 +1461,10 @@
         </div>
     </div>
     
-    <div id="para-80" 
+    <div id="para-80"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1698,26 +1472,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Call upon the private sector to strengthen its commitment and contribution to the prevention and control of noncommunicable diseases and the promotion of mental health and well-being through the implementation of the present political declaration and the outcomes of the previous <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly on the prevention and control of noncommunicable diseases held in 2011, 2014 and 2018, taking into account the need to prevent conflicts of interest;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Call upon the private sector to strengthen its commitment and contribution to the prevention and control of noncommunicable diseases and the promotion of mental health and well-being through the implementation of the present political declaration and the outcomes of the previous high-level meetings of the General Assembly on the prevention and control of noncommunicable diseases held in 2011, 2014 and 2018, taking into account the need to prevent conflicts of interest;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-81" 
+    <div id="para-81"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA", "report"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1725,29 +1489,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Request the Secretary-General, in consultation with Member States and in collaboration with the World Health Organization and relevant funds, programmes and specialized agencies of the United Nations system, to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> by the end of 2030 a progress report on the implementation of the present political declaration on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being, which will serve to inform the next <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>, to be convened in 2031.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-gray-100 text-gray-700">
-                        report
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Request the Secretary-General, in consultation with Member States and in collaboration with the World Health Organization and relevant funds, programmes and specialized agencies of the United Nations system, to submit to the General Assembly by the end of 2030 a progress report on the implementation of the present political declaration on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being, which will serve to inform the next high-level meeting, to be convened in 2031.</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-2030" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-2030"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1766,21 +1515,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1795,14 +1557,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1818,12 +1580,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1842,12 +1604,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

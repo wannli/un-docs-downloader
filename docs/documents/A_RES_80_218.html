@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,327 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/218</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/218</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/218?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">33 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/218. Protection of migrants</p>
+    
+    <p class="mt-1 text-muted">33 operative paragraphs · Item 71</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.52</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">14 of 33 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses its concern about the impacts of financial and economic crises, as well as natural disasters and the adverse effects of climate change, on international migration and migrants, and in that regard urges Governments to combat discriminatory treatment of migrants, in particular migrant workers and their families, and to facilitate fair and ethical recruitment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses its concern about the impacts of financial and economic crises, as well as natural disasters and the adverse effects of climate change, on international migration and migrants, and in that regard urges Governments to combat A/RES/80/218 Protection of migrants 25-20973 6/13 discriminatory treatment of migrants, in particular migrant workers and their families, and to facilitate fair and ethical recruitment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to develop coherent approaches to address the challenges of migration movements in the context of sudden-onset and slow-onset natural disasters and the adverse effects of climate change, including by taking into consideration relevant recommendations from State-led consultative processes, such A/C.3/80/L.52 25-17803 6/13 as the Agenda for the Protection of Cross-Border Displaced Persons in the Context of Disasters and Climate Change, and the Platform on Disaster Displacement;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to develop coherent approaches to address the challenges of migration movements in the context of sudden-onset and slow-onset natural disasters and the adverse effects of climate change, including by taking into consideration relevant recommendations from State-led consultative processes, such as the Agenda for the Protection of Cross-Border Displaced Persons in the Context of Disasters and Climate Change, and the Platform on Disaster Displacement;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the rights set forth in the Universal Declaration of Human Rights and the obligations of States under the International Covenants on Human Rights, and in this regard: (a) Strongly condemns acts, manifestations and expressions of racism, racial discrimination, xenophobia and related intolerance against migrants and the stereotypes often applied to them, including on the basis of religion or belief, and urges States to apply and, where needed, to reinforce existing laws and provide effective remedy to victims when such acts against migrants occur, including by establishing or strengthening mechanisms which allow migrants to report alleged cases of abuse by relevant authorities and employers without fear of reprisal, in order to eradicate impunity for perpetrators; (b) Expresses concern about legislation adopted by some States that results in measures and practices that may restrict the human rights and fundamental freedoms of migrants, and reaffirms that, when exercising their sovereign right to enact and implement migratory and border security measures, States have the duty to comply with their obligations under international law, including international human rights law, in order to ensure full respect for the human rights of migrants; (c) Encourages States to provide adequate documentation to enable access to pathways for safe and regular migration as a measure to preserve human dignity, ensure access to basic rights and prevent exploitation and trafficking; (d) Calls upon States to ensure that their laws and policies, in particular in the areas of counter-terrorism and combating transnational organized crime, such as trafficking in persons and smuggling of migrants, fully respect the human rights of migrants, and in this regard, the applicable international human rights law and international refugee law, including the principle of non-refoulement; (e) Calls upon States that have not done so to consider signing and ratifying or acceding to the International Convention on the Protection of the Rights of All Migrant Workers and Members of Their Families as a matter of priority, and requests the Secretary-General to continue his efforts to promote and raise awareness of the Convention;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the rights set forth in the Universal Declaration of Human Rights and the obligations of States under the International Covenants on Human Rights, and in this regard: (a) Strongly condemns acts, manifestations and expressions of racism, racial discrimination, xenophobia and related intolerance against migrants and the stereotypes often applied to them, including on the basis of religion or belief, and urges States to apply and, where needed, to reinforce existing laws and provide effective remedy to victims when such acts against migrants occur, including by establishing or strengthening mechanisms which allow migrants to report alleged cases of abuse by relevant authorities and employers without fear of reprisal, in order to eradicate impunity for perpetrators; (b) Expresses concern about legislation adopted by some States that results in measures and practices that may restrict the human rights and fundamental freedoms of migrants, and reaffirms that, when exercising their sovereign right to enact and implement migratory and border security measures, States have the duty to comply with their obligations under international law, including international human rights law, in order to ensure full respect for the human rights of migrants; (c) Encourages States to provide adequate documentation to enable access to pathways for safe and regular migration as a measure to preserve human dignity, ensure access to basic rights and prevent exploitation and trafficking; (d) Calls upon States to ensure that their laws and policies, in particular in the areas of counter-terrorism and combating transnational organized crime, such as trafficking in persons and smuggling of migrants, fully respect the human rights of migrants, and in this regard, the applicable international human rights law and international refugee law, including the principle of non‑refoulement; (e) Calls upon States that have not done so to consider signing and ratifying or acceding to the International Convention on the Protection of the Rights of All Migrant Workers and Members of Their Families as a matter of priority, and requests the Secretary-General to continue his efforts to promote and raise awareness of the Convention;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also reaffirms the duty of States to effectively promote and protect the human rights and fundamental freedoms of all migrants, including those of women and children, regardless of their migration status, in conformity with the Universal Declaration of Human Rights and the international instruments to which they are Party, and therefore: (a) Calls upon all States to respect the human rights and inherent dignity of migrants, to put an end to arbitrary arrest and detention and, bearing in mind the New York Declaration for Refugees and Migrants, to review policies that deny migrants the full enjoyment of their human rights and fundamental freedoms, to pursue alternatives to detention while assessments of migration status are under way and to take into account measures that have been successfully implemented by some States; (b) Encourages States to put in place, if they have not yet done so, appropriate systems and procedures in order to ensure that the best interests of the child are a primary consideration in all actions or decisions concerning migrant children, regardless of their migration status, and to work towards ending the detention of migrant children; A/C.3/80/L.52 7/13 25-17803 (c) Also encourages States to cooperate and to take appropriate measures, in full conformity with their obligations under international human rights law, to prevent, combat and address the smuggling and trafficking of migrants, including strengthening laws, policies, information-sharing and joint operational functions, enhancing capacities and supporting opportunities for migration in a well-managed, safe and dignified manner and strengthening legislative methods for criminalizing acts of smuggling migrants, particularly women and children, in line with the non-punishment principle; (d) Urges all States to adopt effective measures to prevent and punish any form of illegal deprivation of liberty of migrants by individuals or groups; (e) Requests States to adopt concrete measures to prevent the violation of the human rights of migrants while in transit, including in ports and airports and at borders and migration checkpoints, and to regularly train public officials who work in those facilities and in border areas to treat migrants respectfully and in accordance with their obligations under international human rights law; (f) Encourages States to formulate, implement and refine training programmes for their law enforcement officials, immigration officers and border officials, diplomatic and consular officials, judiciary, prosecutors, public sector medical staff and other service providers, with a view to sensitizing these public sector workers to the issue of violence against migrants and imparting to them the necessary skills to ensure the delivery of proper, professional and gender-responsive interventions, including for those in detention facilities; (g) Underlines the right of migrants to return to their country of citizenship, and recalls that States must ensure that their returning nationals are duly received; (h) Calls upon States to analyse and implement, where appropriate, mechanisms for the safe and orderly administration of returning migrants, with particular attention to the human rights of migrants, in accordance with their obligations under international law; (i) Also calls upon States to prosecute, in conformity with applicable law, acts of violation of the human rights of migrants and their families, such as arbitrary detention, torture and violations of the right to life, including extrajudicial executions, during their transit from the country of origin to the country of destination and vice versa, including transit across national borders; (j) Further calls upon States to protect the human rights of migrant children, including those in the most vulnerable situations, regardless of their migration status, particularly unaccompanied migrant children, ensuring that the best interests of the child are a primary consideration in their legislation, policies and practices, including on integration, return and family reunification, and encourages States to foster their successful integration into the educational system of host countries and countries of origin; (k) Reaffirms emphatically the duty of States Parties to ensure full respect for and observance of the Vienna Convention on Consular Relations, in particular with regard to the right of all foreign nationals, regardless of their migration status, to communicate with a consular official of the sending State in case of arrest, imprisonment, custody or detention, and the obligation of the receiving State to inform the foreign national without delay of his or her rights under the Convention; A/C.3/80/L.52 25-17803 8/13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also reaffirms the duty of States to effectively promote and protect the human rights and fundamental freedoms of all migrants, including those of women and children, regardless of their migration status, in conformity with the Universal Declaration of Human Rights and the international instruments to which they are Party, and therefore: (a) Calls upon all States to respect the human rights and inherent dignity of migrants, to put an end to arbitrary arrest and detention and, bearing in mind the New York Declaration for Refugees and Migrants, to review policies that deny migrants the full enjoyment of their human rights and fundamental freedoms, to pursue alternatives to detention while assessments of migration status are under way and to take into account measures that have been successfully implemented by some States; Protection of migrants A/RES/80/218 7/13 25-20973 (b) Encourages States to put in place, if they have not yet done so, appropriate systems and procedures in order to ensure that the best interests of the child are a primary consideration in all actions or decisions concerning migrant children, regardless of their migration status, and to work towards ending the detention of migrant children; (c) Also encourages States to cooperate and to take appropriate measures, in full conformity with their obligations under international human rights law, to prevent, combat and address the smuggling and trafficking of migrants, including strengthening laws, policies, information-sharing and joint operational functions, enhancing capacities and supporting opportunities for migration in a well-managed, safe and dignified manner and strengthening legislative methods for criminalizing acts of smuggling migrants, particularly women and children, in line with the non‑punishment principle; (d) Urges all States to adopt effective measures to prevent and punish any form of illegal deprivation of liberty of migrants by individuals or groups; (e) Requests States to adopt concrete measures to prevent the violation of the human rights of migrants while in transit, including in ports and airports and at borders and migration checkpoints, and to regularly train public officials who work in those facilities and in border areas to treat migrants respectfully and in accordance with their obligations under international human rights law; (f) Encourages States to formulate, implement and refine training programmes for their law enforcement officials, immigration officers and border officials, diplomatic and consular officials, judiciary, prosecutors, public sector medical staff and other service providers, with a view to sensitizing these public sector workers to the issue of violence against migrants and imparting to them the necessary skills to ensure the delivery of proper, professional and gender-responsive interventions, including for those in detention facilities; (g) Underlines the right of migrants to return to their country of citizenship, and recalls that States must ensure that their returning nationals are duly received; (h) Calls upon States to analyse and implement, where appropriate, mechanisms for the safe and orderly administration of returning migrants, with particular attention to the human rights of migrants, in accordance with their obligations under international law; (i) Also calls upon States to prosecute, in conformity with applicable law, acts of violation of the human rights of migrants and their families, such as arbitrary detention, torture and violations of the right to life, including extrajudicial executions, during their transit from the country of origin to the country of destination and vice versa, including transit across national borders; (j) Further calls upon States to protect the human rights of migrant children, including those in the most vulnerable situations, regardless of their migration status, particularly unaccompanied migrant children, ensuring that the best interests of the child are a primary consideration in their legislation, policies and practices, including on integration, return and family reunification, and encourages States to foster their successful integration into the educational system of host countries and countries of origin; (k) Reaffirms emphatically the duty of States Parties to ensure full respect for and observance of the Vienna Convention on Consular Relations, in particular with regard to the right of all foreign nationals, regardless of their migration status, to communicate with a consular official of the sending State in case of arrest, A/RES/80/218 Protection of migrants 25-20973 8/13 imprisonment, custody or detention, and the obligation of the receiving State to inform the foreign national without delay of his or her rights under the Convention;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of protecting persons in vulnerable situations, and in this regard: (a) Expresses its deep concern about the increase in the activities and profits of transnational and national organized crime entities and others who profit from crimes against migrants, especially migrant women and children, as well as persons with disabilities, without regard for dangerous and inhumane conditions, and in flagrant violation of national laws and international law and contrary to international standards; (b) Calls upon States to cooperate internationally to save lives and prevent migrant deaths and injuries through individual or joint search and rescue operations, and standardized collection and exchange of relevant information, as well as to identify those who have died or gone missing, and to facilitate communication with affected families; (c) Urges States to adopt measures to prevent deaths, disappearances, acts of torture, sexual and gender-based violence and all other forms of violence, including violence based on religion or belief and violence based on race, excessive use of force against migrants, and refoulement, and to ensure that all human rights violations and abuses are subject to independent and transparent investigations and that perpetrators are held accountable; (d) Expresses its concern about the high level of impunity enjoyed by traffickers and their accomplices, as well as other members of organized crime entities and, in this context, the denial of rights and justice to migrants who have suffered from trafficking, exploitation and abuse; (e) Encourages Member States to invest in innovative solutions that facilitate mutual recognition of skills, qualifications and competences of migrant workers at all skill levels, as well as to ensure decent work in labour migration; (f) Requests all States, in conformity with national legislation and applicable international legal instruments to which they are Party, to enforce labour law effectively, including by addressing violations of such law, with regard to migrant workers’ labour relations and working conditions, inter alia, those related to their remuneration and conditions of health, safety at work and the right to freedom of association; (g) Invites Member States to consider ratifying relevant conventions of the International Labour Organization, including the Domestic Workers Convention, 2011 (No. 189), on decent work for domestic workers,19 as well as the Abolition of Forced Labour Convention 1957 (No. 105);20 (h) Encourages Member States to take actions to further promote faster, safer and cheaper remittances, with the aim of reducing the average transaction cost to less than 3 per cent of the amount transferred by 2030, by further developing existing conducive policy and regulatory environments that enable competition, regulation and innovation on the remittance market and by providing gender-responsive programmes and instruments that enhance the financial inclusion of migrants and their families; (i) Recalls that the Universal Declaration of Human Rights recognizes that everyone has the right to an effective remedy by the competent national tribunals for acts violating the fundamental rights granted to him or her; __________________ 19 United Nations, Treaty Series, vol. 2955, No. 51379. 20 Ibid., vol. 320, No. 4648. A/C.3/80/L.52 9/13 25-17803 (j) Urges Member States to show greater solidarity, especially during times of emergency, to strengthen international cooperation to enhance the protection, well- being, safe return and effective reintegration into labour markets of migrant workers, and to ensure that no one is left behind; (k) Encourages Member States, to the extent possible, to adopt immigration programmes that allow migrants to integrate fully into the countries of destination, facilitate family reunification and promote a harmonious, tolerant and respectful environment; (l) Calls upon States that have not already done so to provide for the protection of the human rights of women migrant workers, to promote fair labour conditions and to ensure that all women, including domestic and care workers, are legally protected against violence and exploitation; (m) Encourages all States to develop national and international gender- responsive migration policies and programmes for women migrant workers, to provide safe and regular channels that recognize their skills and education and, as appropriate, to facilitate their productive employment, decent work and integration into the labour force, including in the fields of education and science and technology, and also encourages the adoption of measures necessary to better protect women and girls against dangers and human rights violations and abuses during migration; (n) Reminds all States that all persons, including migrants, should have access to lifelong learning opportunities that help them to acquire the knowledge and skills needed to take advantage of opportunities and to participate fully in society; (o) Urges States to ensure that repatriation mechanisms allow for the identification and special protection of persons in vulnerable situations, including unaccompanied children and persons with disabilities, and take into account, in conformity with their international obligations and commitments, the principle of the best interests of the child in both the development and implementation of legislation and policies, as well as clarity of reception and care arrangements and family reunification;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of protecting persons in vulnerable situations, and in this regard: (a) Expresses its deep concern about the increase in the activities and profits of transnational and national organized crime entities and others who profit from crimes against migrants, especially migrant women and children, as well as persons with disabilities, without regard for dangerous and inhumane conditions, and in flagrant violation of national laws and international law and contrary to international standards; (b) Calls upon States to cooperate internationally to save lives and prevent migrant deaths and injuries through individual or joint search and rescue operations, and standardized collection and exchange of relevant information, as well as to identify those who have died or gone missing, and to facilitate communication with affected families; (c) Urges States to adopt measures to prevent deaths, disappearances, acts of torture, sexual and gender-based violence and all other forms of violence, including violence based on religion or belief and violence based on race, excessive use of force against migrants, and refoulement, and to ensure that all human rights violations and abuses are subject to independent and transparent investigations and that perpetrators are held accountable; (d) Expresses its concern about the high level of impunity enjoyed by traffickers and their accomplices, as well as other members of organized crime entities and, in this context, the denial of rights and justice to migrants who have suffered from trafficking, exploitation and abuse; (e) Encourages Member States to invest in innovative solutions that facilitate mutual recognition of skills, qualifications and competences of migrant workers at all skill levels, as well as to ensure decent work in labour migration; (f) Requests all States, in conformity with national legislation and applicable international legal instruments to which they are Party, to enforce labour law effectively, including by addressing violations of such law, with regard to migrant workers’ labour relations and working conditions, inter alia, those related to their remuneration and conditions of health, safety at work and the right to freedom of association; (g) Invites Member States to consider ratifying relevant conventions of the International Labour Organization, including the Domestic Workers Convention, 2011 (No. 189), on decent work for domestic workers,19 as well as the Abolition of Forced Labour Convention 1957 (No. 105);20 (h) Encourages Member States to take actions to further promote faster, safer and cheaper remittances, with the aim of reducing the average transaction cost to less than 3 per cent of the amount transferred by 2030, by further developing existing conducive policy and regulatory environments that enable competition, regulation and innovation on the remittance market and by providing gender-responsive programmes and instruments that enhance the financial inclusion of migrants and their families; _______________ 19 United Nations, Treaty Series, vol. 2955, No. 51379. 20 Ibid., vol. 320, No. 4648. Protection of migrants A/RES/80/218 9/13 25-20973 (i) Recalls that the Universal Declaration of Human Rights recognizes that everyone has the right to an effective remedy by the competent national tribunals for acts violating the fundamental rights granted to him or her; (j) Urges Member States to show greater solidarity, especially during times of emergency, to strengthen international cooperation to enhance the protection, well- being, safe return and effective reintegration into labour markets of migrant workers, and to ensure that no one is left behind; (k) Encourages Member States, to the extent possible, to adopt immigration programmes that allow migrants to integrate fully into the countries of destination, facilitate family reunification and promote a harmonious, tolerant and respectful environment; (l) Calls upon States that have not already done so to provide for the protection of the human rights of women migrant workers, to promote fair labour conditions and to ensure that all women, including domestic and care workers, are legally protected against violence and exploitation; (m) Encourages all States to develop national and international gender- responsive migration policies and programmes for women migrant workers, to provide safe and regular channels that recognize their skills and education and, as appropriate, to facilitate their productive employment, decent work and integration into the labour force, including in the fields of education and science and technology, and also encourages the adoption of measures necessary to better protect women and girls against dangers and human rights violations and abuses during migration; (n) Reminds all States that all persons, including migrants, should have access to lifelong learning opportunities that help them to acquire the knowledge and skills needed to take advantage of opportunities and to participate fully in society; (o) Urges States to ensure that repatriation mechanisms allow for the identification and special protection of persons in vulnerable situations, including unaccompanied children and persons with disabilities, and take into account, in conformity with their international obligations and commitments, the principle of the best interests of the child in both the development and implementation of legislation and policies, as well as clarity of reception and care arrangements and family reunification;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to protect migrants from becoming victims of national and transnational organized crime, including kidnapping, trafficking in persons and, in some instances, illicit smuggling of migrants, including through the implementation of trauma-informed programmes and policies that prevent victimization and provide effective guarantees and protections, as well as access to medical, psychosocial and legal assistance, where appropriate; __________________ 21 A/HRC/15/29. A/C.3/80/L.52 25-17803 10/13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to protect migrants from becoming victims of national and transnational organized crime, including kidnapping, trafficking in persons and, in some instances, illicit smuggling of migrants, including through the implementation _______________ 21 A/HRC/15/29. A/RES/80/218 Protection of migrants 25-20973 10/13 of trauma-informed programmes and policies that prevent victimization and provide effective guarantees and protections, as well as access to medical, psychosocial and legal assistance, where appropriate;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to expand international cooperation and partnerships to implement the vision of the Global Compact for Safe, Orderly and Regular Migration, 22 including through financial and technical assistance to developing countries, including to African countries, the least developed countries, landlocked developing countries, small island developing States and middle-income countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to expand international cooperation and partnerships to implement the vision of the Global Compact for Safe, Orderly and Regular Migration,22 including through financial and technical assistance to developing countries, including to African countries, the least developed countries, landlocked developing countries, small island developing States and middle-income countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to accelerate efforts, at all levels, to integrate public health considerations into migration policies and incorporating the health needs of migrants in national and local health-care services policies and plans, in ways which are transparent, equitable, non-discriminatory, people-centred, gender-responsive, child-sensitive and disability-responsive, and which leave no one behind;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to accelerate efforts, at all levels, to integrate public health considerations into migration policies and incorporating the health needs of migrants in national and local health-care services policies and plans, in ways which are transparent, equitable, non‑discriminatory, people-centred, gender-responsive, child-sensitive and disability-responsive, and which leave no one behind;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the importance of international, regional and bilateral cooperation in the protection of the human rights of migrants, through, inter alia, the Global Compact for Safe, Orderly and Regular Migration, and therefore: (a) Requests all States, international organizations and relevant stakeholders to take into account in their policies and initiatives on migration issues the global character of the migratory phenomenon and to give due consideration to international, regional and bilateral cooperation in this field, including by undertaking dialogues on migration that include countries of origin, transit and destination, as well as civil society, including migrants, with a view to addressing, in a comprehensive manner, inter alia, its causes and consequences and the challenge of undocumented or irregular migration, granting priority to the protection of the human rights of migrants; (b) Encourages States to promote the effective implementation of the 2030 Agenda for Sustainable Development, including its target 10.7 on the facilitation of orderly, safe, regular and responsible migration and mobility of people, including through the implementation of planned and well-managed migration policies; (c) Also encourages States to take the measures necessary to achieve policy coherence on migration at the local, national, regional and international levels, including by ensuring coordinated child protection policies and systems across borders that are in full compliance with international human rights law; __________________ 22 Resolution 73/195, annex. A/C.3/80/L.52 11/13 25-17803 (d) Further encourages States to cooperate effectively in protecting witnesses in cases of smuggling of migrants and victims in cases of trafficking in persons, regardless of their migration status; (e) Calls upon the United Nations system and other relevant international organizations and multilateral institutions to enhance their cooperation in the development of methodologies for the collection and processing of statistical data on international migration and the situation of migrants in countries of origin, transit and destination and to assist Member States in their capacity-building efforts in this regard; (f) Encourages Governments, as appropriate, to strengthen joint analysis and sharing of information to better map, understand, predict and address migration movements, such as those that may result from sudden-onset and slow-onset natural disasters, the adverse effects of climate change and environmental degradation, as well as other precarious situations, while ensuring effective respect for and the protection and fulfilment of the human rights of all migrants; (g) Urges all States, in line with relevant obligations under international human rights law, to combat all forms of discrimination, such as expressions, acts and manifestations of racism, racial discrimination, violence, xenophobia and related intolerance against all migrants, as well as disinformation, while at the same time acknowledging the need to promote an open and evidence-based public discourse on migration and migrants, in partnership with all parts of society, that generates a more realistic, humane and constructive perception in this regard, and to protect freedom of expression in accordance with international law, recognizing that an open and free debate contributes to a comprehensive understanding of all aspects of migration; (h) Encourages States to include, as appropriate, information on the implementation of their international obligations related to the human rights of migrants in their national reports to the Working Group on the Universal Periodic Review of the Human Rights Council and to the treaty bodies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the importance of international, regional and bilateral cooperation in the protection of the human rights of migrants, through, inter alia, the Global Compact for Safe, Orderly and Regular Migration, and therefore: (a) Requests all States, international organizations and relevant stakeholders to take into account in their policies and initiatives on migration issues the global character of the migratory phenomenon and to give due consideration to international, regional and bilateral cooperation in this field, including by undertaking dialogues on migration that include countries of origin, transit and destination, as well as civil society, including migrants, with a view to addressing, in a comprehensive manner, inter alia, its causes and consequences and the challenge of undocumented or irregular migration, granting priority to the protection of the human rights of migrants; (b) Encourages States to promote the effective implementation of the 2030 Agenda for Sustainable Development, including its target 10.7 on the facilitation of orderly, safe, regular and responsible migration and mobility of people, including through the implementation of planned and well-managed migration policies; (c) Also encourages States to take the measures necessary to achieve policy coherence on migration at the local, national, regional and international levels, _______________ 22 Resolution 73/195, annex. Protection of migrants A/RES/80/218 11/13 25-20973 including by ensuring coordinated child protection policies and systems across borders that are in full compliance with international human rights law; (d) Further encourages States to cooperate effectively in protecting witnesses in cases of smuggling of migrants and victims in cases of trafficking in persons, regardless of their migration status; (e) Calls upon the United Nations system and other relevant international organizations and multilateral institutions to enhance their cooperation in the development of methodologies for the collection and processing of statistical data on international migration and the situation of migrants in countries of origin, transit and destination and to assist Member States in their capacity-building efforts in this regard; (f) Encourages Governments, as appropriate, to strengthen joint analysis and sharing of information to better map, understand, predict and address migration movements, such as those that may result from sudden-onset and slow-onset natural disasters, the adverse effects of climate change and environmental degradation, as well as other precarious situations, while ensuring effective respect for and the protection and fulfilment of the human rights of all migrants; (g) Urges all States, in line with relevant obligations under international human rights law, to combat all forms of discrimination, such as expressions, acts and manifestations of racism, racial discrimination, violence, xenophobia and related intolerance against all migrants, as well as disinformation, while at the same time acknowledging the need to promote an open and evidence-based public discourse on migration and migrants, in partnership with all parts of society, that generates a more realistic, humane and constructive perception in this regard, and to protect freedom of expression in accordance with international law, recognizing that an open and free debate contributes to a comprehensive understanding of all aspects of migration; (h) Encourages States to include, as appropriate, information on the implementation of their international obligations related to the human rights of migrants in their national reports to the Working Group on the Universal Periodic Review of the Human Rights Council and to the treaty bodies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to commit to develop national gender- responsive, disability-inclusive and child-sensitive migration policies and legislation in line with relevant obligations under international law to respect, protect and fulfil the human rights of all migrant women and children, regardless of their migration status, and further stresses the importance of ensuring the full, equal and meaningful participation of women in the formulation and implementation of migration policies, while recognizing their independence, agency and leadership; A/C.3/80/L.52 25-17803 12/13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to commit to develop national gender- responsive, disability-inclusive and child-sensitive migration policies and legislation in line with relevant obligations under international law to respect, protect and fulfil the human rights of all migrant women and children, regardless of their migration status, and further stresses the importance of ensuring the full, equal and meaningful A/RES/80/218 Protection of migrants 25-20973 12/13 participation of women in the formulation and implementation of migration policies, while recognizing their independence, agency and leadership;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to review how agreements that regulate the arrival of migrants, transfer asylum processing beyond their borders or allow readmissions or expulsions to third countries could lead to human rights violations or are inconsistent with States’ obligations under international law, and further consider how these arrangements could include binding safeguards to ensure that migration governance is fully aligned with international law, including human rights law, based on good faith and shared responsibility among States, periodic human rights impact assessments and accessible complaint and redress mechanisms to strengthen transparency;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to ensure that agreements that regulate the arrival of migrants, transfer asylum processing beyond their borders or allow readmissions or expulsions to third countries are fully aligned with States’ obligations under international law, including human rights law, and that such agreements include binding safeguards, are based on good faith and shared responsibility among States, and are subject to periodic human rights impact assessments as well as accessible complaint and redress mechanisms to strengthen transparency;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States, relevant international organizations, civil society, including non-governmental organizations, and the private sector to continue and to enhance their dialogue in relevant international meetings with a view to strengthening and making more inclusive public policies aimed at promoting and respecting human rights, including those of migrants;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States, relevant international organizations, civil society, including non‑governmental organizations, and the private sector to continue and to enhance their dialogue in relevant international meetings with a view to strengthening and making more inclusive public policies aimed at promoting and respecting human rights, including those of migrants;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the recommendations on strengthening cooperation on missing migrants and providing humanitarian assistance to migrants in distress, set out in the A/C.3/80/L.52 13/13 25-17803 report of the Secretary-General,23 pursuant to the Progress Declaration of the first International Migration Review Forum;24
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the recommendations on strengthening cooperation on missing migrants and providing humanitarian assistance to migrants in distress, set out in the Protection of migrants A/RES/80/218 13/13 25-20973 report of the Secretary-General,23 pursuant to the Progress Declaration of the first International Migration Review Forum;24
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.52</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to remain seized of the matter. __________________ 23 A/79/590, annex. 24 Resolution 76/266, annex. 25 See A/80/398. 26 A/79/213 and A/80/302.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/218</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to remain seized of the matter. 69th plenary meeting 18 December 2025 _______________ 23 A/79/590, annex. 24 Resolution 76/266, annex. 25 See A/80/398. 26 A/79/213 and A/80/302.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.52.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -172,35 +479,36 @@
         <span class="text-sm text-muted">3 with signals, 30 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -217,7 +525,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -234,7 +542,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -251,7 +559,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -268,7 +576,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -285,7 +593,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -302,7 +610,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -319,7 +627,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -336,7 +644,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -353,7 +661,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -370,7 +678,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -387,7 +695,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -404,7 +712,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -421,7 +729,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -438,7 +746,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -455,7 +763,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -472,7 +780,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -489,7 +797,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -506,7 +814,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -523,7 +831,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -540,7 +848,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -557,7 +865,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -574,7 +882,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -591,7 +899,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -608,7 +916,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -625,7 +933,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -642,7 +950,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -659,7 +967,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -686,7 +994,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA", "report"]'
          data-has-signals="true">
@@ -718,7 +1026,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -735,7 +1043,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -752,7 +1060,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -778,7 +1086,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -800,19 +1108,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -827,14 +1148,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -850,12 +1171,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -874,12 +1195,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

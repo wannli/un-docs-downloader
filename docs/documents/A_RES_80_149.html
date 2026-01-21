@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,507 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/149</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/149</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/149?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">34 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/149. Development cooperation with middle-income countries</p>
+    
+    <p class="mt-1 text-muted">34 operative paragraphs · Item 20</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.14</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">24 of 34 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General;7
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General;10
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also underlines the need for sustained efforts towards achieving debt sustainability in middle-income countries in order to avoid a debt crisis, and the importance of debt restructurings being timely, orderly, effective, fair and negotiated in good faith;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also underlines the need for sustained efforts towards achieving debt sustainability in middle-income countries in order to avoid a debt crisis, and the importance of debt restructurings being timely, orderly, effective, fair and negotiated in good faith; _______________ 8 Resolution 79/323, annex. 9 Resolution 78/3, annex, resolution 78/4, annex, and resolution 78/5, annex. 10 A/80/418. Development cooperation with middle-income countries A/RES/80/149 7/10 25-20771
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for improved international debt mechanisms to support debt review, debt payment suspensions and debt restructuring, as appropriate, with an expansion of support and eligibility to vulnerable countries in need, commits to continuing to assist developing countries in avoiding a build-up of unsustainable debt and in implementing resilience measures so as to reduce the risk of relapsing into another debt crisis, recognizes the importance of new and emerging challenges and vulnerabilities in regard to developing country external and domestic debt sustainability, and calls for strengthened multilateral actions and coordination by all creditors to address the deteriorating debt situation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for improved international debt mechanisms to support debt review, debt payment suspensions and debt restructuring, as appropriate, with an expansion of support and eligibility to vulnerable countries in need, commits to continuing to assist developing countries in avoiding a build-up of unsustainable debt and in implementing resilience measures so as to reduce the risk of relapsing into another debt crisis, recognizes the importance of new and emerging challenges and vulnerabilities in regard to developing country external and domestic debt sustainability, and calls for strengthened multilateral actions and coordination by all creditors to address the deteriorating debt situation, noting that, while there has been some progress in reforming the sovereign debt architecture, there is significant room for improvements;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the solidarity of middle-income countries with other developing countries, in particular the financial, technical, technology transfer on mutually agreed terms and capacity-building support being provided by middle-income __________________ 6 Resolution 78/3, annex, resolution 78/4, annex, and resolution 78/5, annex. 7 A/80/418. A/C.2/80/L.14 7/10 25-16592 countries, particularly to the least developed countries, including through South- South and triangular cooperation, while stressing that South-South cooperation is a complement to, and not a substitute for, North-South cooperation, and in this regard calls upon the United Nations development system to continue its ongoing efforts to mainstream support to South-South cooperation and triangular cooperation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the solidarity of middle-income countries with other developing countries, in particular the financial, technical, technology transfer on mutually agreed terms and capacity-building support being provided by middle-income countries, particularly to the least developed countries, including through South- South and triangular cooperation, while stressing that South-South cooperation is a complement to, and not a substitute for, North-South cooperation, and in this regard calls upon the United Nations development system to continue its ongoing efforts to mainstream support to South-South cooperation and triangular cooperation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also welcomes the outcome document of the second High-level United Nations Conference on South-South Cooperation, held in Buenos Aires from 20 to 22 March 2019, 8 and notes decisions 22/1 and 22/2 adopted by the High-level Committee on South-South Cooperation at its twenty-second session, held from 27 to 30 May 2025;9
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also welcomes the outcome document of the second High-level United Nations Conference on South-South Cooperation, held in Buenos Aires from 20 to 22 March 2019, 11 and notes decisions 22/1 and 22/2 adopted by the High-level Committee on South-South Cooperation at its twenty-second session, held from 27 to 30 May 2025;12
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the political commitment to fully and timely implement the commitments contained in resolution 79/1 to establish measures of progress on sustainable development that complement or go beyond gross domestic product to have a more inclusive approach to international cooperation and inform access to development finance, welcomes the establishment of an independent high-level expert group to develop recommendations for a limited number of country-owned and universally applicable indicators of sustainable development that complement and go beyond gross domestic product, and looks forward to a subsequent United Nations- led intergovernmental process;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the political commitment to fully and timely implement the commitments contained in resolution 79/1 to establish measures of progress on sustainable development that complement or go beyond gross domestic product to have a more inclusive approach to international cooperation, including in the consideration of informing access to development finance and technical cooperation, welcomes the establishment of an independent high-level expert group to develop recommendations for a limited number of country-owned and universally applicable indicators of sustainable development that complement and go beyond gross domestic _______________ 11 Resolution 73/291, annex. 12 Official Records of the General Assembly, Eightieth Session, Supplement No. 39 (A/80/39), chap. I. A/RES/80/149 Development cooperation with middle-income countries 25-20771 8/10 product, and looks forward to a subsequent United Nations-led intergovernmental process;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the United Nations development system, in line with its resolutions 71/243 and 75/233 of 21 December 2020, to continue to support developing countries in their efforts to achieve the internationally agreed development goals and their development objectives, requests the development system to address, within existing resources and mandates, the special challenges facing the most vulnerable countries, as well as the specific challenges facing middle- income countries, in line with the Addis Ababa Action Agenda of the Third International Conference on Financing for Development10 and the 2030 Agenda for Sustainable Development, 11 and in this regard takes note of the report of the Secretary-General, which presents a detailed overview of the current support available to middle-income countries, including relevant indices, indicators and tools;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the United Nations development system, in line with its resolutions 71/243 and 75/233 of 21 December 2020, to continue to support developing countries in their efforts to achieve the internationally agreed development goals and their development objectives, requests the development system to address, within existing resources and mandates, the special challenges facing the most vulnerable countries, as well as the specific challenges facing middle- income countries, in line with the Addis Ababa Action Agenda of the Third International Conference on Financing for Development 13 and the 2030 Agenda for Sustainable Development, 14 and in this regard takes note of the report of the Secretary-General, which presents a detailed overview of the current support available to middle-income countries, including relevant indices, indicators and tools;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the request to the United Nations development system to continue to develop its support to middle-income countries with respect to their __________________ 8 Resolution 73/291, annex. 9 Official Records of the General Assembly, Eightieth Session, Supplement No. 39 (A/80/39), chap. I. 10 Resolution 69/313, annex. 11 Resolution 70/1. A/C.2/80/L.14 25-16592 8/10 specific challenges and diverse needs, recognizes that a gradual shift from a traditional model of direct support and service provision towards a greater emphasis on integrated high-quality policy advice, strengthening institutions, capacity development and support for the leveraging of partnerships and financing is needed, including through additional support for integrated national financing frameworks at the country level, and invites the United Nations Sustainable Development Group, under the leadership of the Secretary-General, to develop a joint framework of collaboration with multilateral development banks to improve synergies at the regional and country levels, including specific attention to middle-income countries, as set out in the Secretary-General’s road map for financing the 2030 Agenda, 2019–2021;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the request to the United Nations development system to continue to develop its support to middle-income countries with respect to their specific challenges and diverse needs, recognizes that a gradual shift from a traditional model of direct support and service provision towards a greater emphasis on integrated high-quality policy advice, strengthening institutions, capacity development and support for the leveraging of partnerships and financing is needed, including through additional support for integrated national financing frameworks at the country level, and invites the United Nations Sustainable Development Group, under the leadership of the Secretary-General, to develop a joint framework of collaboration with multilateral development banks to improve synergies at the regional and country levels, including specific attention to middle-income countries, as set out in the Secretary-General’s road map for financing the 2030 Agenda, 2019– 2021;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the Chair of the United Nations Sustainable Development Group to consider filling leadership gaps on middle-income countries’ issues within existing resources, such as through the appointment of a focal point on middle-income countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the Chair of the United Nations Sustainable Development Group to consider filling leadership gaps on middle-income countries’ issues within existing resources, such as through the appointment of a focal point on middle-income countries;15
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that middle-income countries face specific challenges and require support to pursue their development trajectories, and, in this regard, requests the Secretary-General to conduct consultations with Member States, the United Nations development system and relevant stakeholders on advancing the work towards the development of a strategic plan of action for middle-income countries, the outcome of consultations and set of recommendations to be considered by the General Assembly at its eighty-first session;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that middle-income countries face specific challenges and require support to pursue their development trajectories, and, in this regard, requests the Secretary-General to conduct consultations with Member States, the United Nations development system and relevant stakeholders on advancing the work _______________ 13 Resolution 69/313, annex. 14 Resolution 70/1. 15 Resolution 79/226, para. 55. Development cooperation with middle-income countries A/RES/80/149 9/10 25-20771 towards the development of a strategic plan of action for middle-income countries, with a summary of those consultations and set of recommendations to be shared with Member States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to advance innovative pathways to achieve sustainable consumption and production, in line with United Nations Environment Assembly resolution 4/1 of 15 March 2019;12
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to advance innovative pathways to achieve sustainable consumption and production, in line with United Nations Environment Assembly resolution 4/1 of 15 March 2019;16
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the Technology Facilitation Mechanism, which includes the multi-stakeholder forum on science, technology and innovation for the Sustainable Development Goals, the inter-agency task team on science, technology and innovation for the Sustainable Development Goals and the operationalization of the online platform; __________________ 12 UNEP/EA.4/Res.1. A/C.2/80/L.14 9/10 25-16592
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the Technology Facilitation Mechanism, which includes the multi-stakeholder forum on science, technology and innovation for the Sustainable Development Goals, the inter-agency task team on science, technology and innovation for the Sustainable Development Goals and the operationalization of the online platform;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the adoption of the Global Digital Compact 13 to bridge the digital divides and to accelerate the achievement of the Sustainable Development Goals;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the great importance of providing trade-related capacity- building for developing countries, including African countries, the least developed countries, landlocked developing countries, small island developing States, countries in conflict and post-conflict situations and middle-income countries, including for the promotion of regional economic integration and interconnectivity;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the great importance of providing trade-related capacity- building for developing countries, including African countries, the least developed countries, landlocked developing countries, small island developing States, countries in conflict and post-conflict situations and middle-income countries, including for the promotion of regional economic integration and interconnectivity;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that good governance and the rule of law at the national and international levels are essential for achieving sustainable development in its three dimensions, including sustained and inclusive economic growth and the eradication of poverty and hunger;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that good governance and the rule of law at the national and international levels are essential for achieving sustainable development in its three dimensions, including sustained and inclusive economic growth and the eradication of poverty and hunger;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages shareholders in multilateral development banks to continue developing graduation policies that are sequenced, phased and gradual, and encourages multilateral development banks to explore ways to ensure that their assistance best addresses the opportunities and challenges presented by the diverse circumstances of middle-income countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages shareholders in multilateral development banks to develop graduation policies that are sequenced, phased and gradual, and encourages multilateral development banks to explore ways to ensure that their assistance best addresses the opportunities and challenges presented by the diverse circumstances of middle-income countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges multilateral development banks to bring forward actions to mobilize and provide additional financing within their mandates to support developing countries to achieve the Sustainable Development Goals, reiterates the call in the Pact for the Future for multilateral development banks to present options and recommendations on new approaches to improve access to concessional finance for developing countries, including projects with positive externalities in middle-income countries, in consultation with the Secretary-General, and requests the latter to update Member States on progress, with full respect for the independent mandate and authorities of the respective governing body of each multilateral development bank; _______________ 16 UNEP/EA.4/Res.1. A/RES/80/149 Development cooperation with middle-income countries 25-20771 10/10
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges multilateral development banks to bring forward actions to mobilize and provide additional financing within their mandates to support developing countries to achieve the Sustainable Development Goals, reiterates the call in the Pact for the Future for multilateral development banks to present options and recommendations on new approaches to improve access to concessional finance for developing countries, including projects with positive externalities in middle-income countries, in consultation with the Secretary-General, and requests the latter to update Member States on progress;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that Governments will have the primary responsibility for follow-up and review at the national, regional and global levels in relation to the progress made in implementing the Sustainable Development Goals and targets and that quality, accessible, timely and reliable disaggregated data, including through strengthened capacity in improving access to data at the national and local levels, will be needed to help with the measurement of progress and to ensure that no one is left behind, and in this regard reiterates the commitment to intensifying efforts to strengthen statistical capacities in developing countries, including middle-income countries, and encourages multi-stakeholder partnerships and the localization of the Sustainable Development Goals, in order to ensure that no one is left behind;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that Governments will have the primary responsibility for follow-up and review at the national, regional and global levels in relation to the progress made in implementing the Sustainable Development Goals and targets and that quality, accessible, timely and reliable disaggregated data, including through strengthened capacity in improving access to data at the national and local levels, will be needed to help with the measurement of progress and to ensure that no one is left behind, and in this regard reiterates the commitment to intensifying efforts to strengthen statistical capacities in developing countries, including middle-income countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes progress by middle-income countries in implementing the Sendai Framework for Disaster Risk Reduction 2015–2030 and in reporting through the Sendai Framework monitor, and encourages the United Nations system to continue to support middle-income countries to develop national and local disaster risk reduction strategies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes progress by middle-income countries in implementing the Sendai Framework for Disaster Risk Reduction 2015–2030 and in reporting through the Sendai Framework monitor, and encourages the United Nations system to continue to support middle-income countries to develop national and local disaster risk reduction strategies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment at the very heart of the 2030 Agenda to leave no one behind and commit to taking more tangible steps to support people in vulnerable situations and the most vulnerable countries and to reach the furthest behind first;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment at the very heart of the 2030 Agenda to leave no one behind and commit to taking more tangible steps to support people in vulnerable situations and the most vulnerable countries and to reach the furthest behind first; __________________ 13 Resolution 79/1, annex I. A/C.2/80/L.14 25-16592 10/10
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that more needs to be done for a sustainable recovery for middle-income countries from the impact of the COVID‑19 pandemic with regard to resource mobilization efforts from all sources, poverty eradication, tackling food insecurity and malnutrition, universal health coverage, strengthening health systems, pandemic response and preparedness, returning children to school, gender equality and the empowerment of all women and girls, the promotion of decent jobs and social protection, achieving debt sustainability, the reduction of inequalities, closing digital divides and enhancing North-South, South-South and triangular cooperation, and in this regard calls for support to middle-income countries in pursuing approaches to enable equitable, inclusive and just transition pathways for sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that more needs to be done for a sustainable recovery for middle-income countries from the impact of the COVID-19 pandemic with regard to resource mobilization efforts, poverty eradication, tackling food insecurity and malnutrition, universal health coverage, strengthening health systems, pandemic response and preparedness, returning children to school, gender equality and the empowerment of all women and girls, the promotion of decent jobs and social protection, achieving debt sustainability, the reduction of inequalities, closing digital divides and enhancing North-South, South-South and triangular cooperation, and in this regard calls for support to middle-income countries in pursuing approaches to enable equitable, inclusive and just transition pathways for sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Looks forward to the elaboration of a specific inter-agency, comprehensive, system-wide response plan, aimed at better addressing the multidimensional nature of sustainable development and facilitating sustainable development cooperation and coordinated and inclusive support to middle-income countries based on their specific challenges and diverse needs;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Looks forward to the elaboration of a specific inter-agency, comprehensive, system-wide response plan, aimed at better addressing the multidimensional nature of sustainable development and facilitating sustainable development cooperation and coordinated and inclusive support to middle-income countries based on their specific challenges and diverse needs, with the mandate given to the Department of Economic and Social Affairs to advance the work in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-second session, within existing resources, an action-oriented report on the implementation of the present resolution, taking into account the consultations relating to the consideration of the elaboration of a strategic plan of action for middle- income countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-second session, within existing resources, an action-oriented report on the implementation of the present resolution, with a particular focus on the advancement of the elaboration of a strategic plan of action for middle-income countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-second session, under the item entitled “Globalization and interdependence”, the sub-item entitled “Development cooperation with middle-income countries”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.14</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-second session, under the item entitled “Globalization and interdependence”, the sub-item entitled “Development cooperation with middle-income countries”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/149</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.14.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -178,42 +665,43 @@
         <span class="text-sm text-muted">5 with signals, 29 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -230,7 +718,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -247,7 +735,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -264,7 +752,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -281,7 +769,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -298,7 +786,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -315,7 +803,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -332,7 +820,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -349,7 +837,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -376,7 +864,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -393,7 +881,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -410,7 +898,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -427,7 +915,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -454,7 +942,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -471,7 +959,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -488,7 +976,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -505,7 +993,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -532,7 +1020,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -549,7 +1037,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -566,7 +1054,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -583,7 +1071,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -600,7 +1088,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -617,7 +1105,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -634,7 +1122,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -651,7 +1139,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -668,7 +1156,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -685,7 +1173,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -702,7 +1190,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -719,7 +1207,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -736,7 +1224,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -753,7 +1241,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -770,7 +1258,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -787,7 +1275,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -813,7 +1301,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -845,19 +1333,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -872,14 +1373,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -895,12 +1396,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -919,12 +1420,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

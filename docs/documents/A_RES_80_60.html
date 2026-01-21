@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,201 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/60</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/60</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/60?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">14 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/60. United Nations Regional Centre for Peace and Disarmament in Africa</p>
+    
+    <p class="mt-1 text-muted">14 operative paragraphs · Item 100</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.1/80/L.33</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">7 of 14 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Commends the United Nations Regional Centre for Peace and Disarmament in Africa for its sustained support to Member States in implementing disarmament, arms control and non-proliferation activities through seminars and conferences, capacity-building and training, policy and technical expertise, and information and advocacy at the regional and national levels;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Commends the United Nations Regional Centre for Peace and Disarmament in Africa for its sustained support to Member States in implementing disarmament, arms control and non‑proliferation activities through seminars and conferences, capacity-building and training, policy and technical expertise, and information and advocacy at the regional and national levels;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the undertaking by the Regional Centre to deepen its partnership with the African Union Commission in the context of the Joint United Nations-African Union Framework for Enhanced Partnership in Peace and Security, signed on 19 April 2017, as well as with African subregional organizations, and requests the Secretary- General to continue to facilitate close cooperation between the Regional Centre and the African Union, in particular in the areas of disarmament, peace and security;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the undertaking by the Regional Centre to deepen its partnership with the African Union Commission in the context of the Joint United Nations- African Union Framework for Enhanced Partnership in Peace and Security, signed on 19 April 2017, as well as with African subregional organizations, and requests the Secretary-General to continue to facilitate close cooperation between the Regional Centre and the African Union, in particular in the areas of disarmament, peace and security;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also welcomes efforts by the Regional Centre to promote the role and representation of women in disarmament, non-proliferation and arms control activities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also welcomes efforts by the Regional Centre to promote the role and representation of women in disarmament, non‑proliferation and arms control activities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the tangible achievements of the Regional Centre and the impact of the assistance that it provides to African States to control small arms and light weapons through capacity-building for national commissions on small __________________ 1 See resolution 70/1. 2 A/60/693, annex II, decision EX.CL/Dec.263 (VIII). 3 A/80/128. 4 A/50/426, annex. A/C.1/80/L.33 3/3 25-16603 arms and light weapons, defence and security forces, and United Nations peacekeeping mission personnel, as well as the support that the Centre provided to States in preventing the diversion of such weapons, in particular to non-State armed groups and terrorist groups,5 and also notes with appreciation the assistance provided by the Centre in the implementation of the Central African Convention for the Control of Small Arms and Light Weapons, Their Ammunition and All Parts and Components That Can Be Used for Their Manufacture, Repair and Assembly (Kinshasa Convention), 6 which entered into force on 8 March 2017, and its substantive support to the United Nations Standing Advisory Committee on Security Questions in Central Africa, in the implementation of the Economic Community of West African States Convention on Small Arms and Light Weapons, Their Ammunition and Other Related Materials and on security sector reform initiatives, and to East Africa on programmes to control brokering of small arms and light weapons, including the additional assistance provided by the Centre to African Member States in the implementation of Security Council resolution 1540 (2004) of 28 April 2004;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the tangible achievements of the Regional Centre and the impact of the assistance that it provides to African States to control small arms _______________ 1 See resolution 70/1. 2 A/60/693, annex II, decision EX.CL/Dec.263 (VIII). 3 A/80/128. 4 A/50/426, annex. United Nations Regional Centre for Peace and Disarmament in Africa A/RES/80/60 3/3 25-19992 and light weapons through capacity-building for national commissions on small arms and light weapons, defence and security forces, and United Nations peacekeeping mission personnel, as well as the support that the Centre provided to States in preventing the diversion of such weapons, in particular to non‑State armed groups and terrorist groups,5 and also notes with appreciation the assistance provided by the Centre in the implementation of the Central African Convention for the Control of Small Arms and Light Weapons, Their Ammunition and All Parts and Components That Can Be Used for Their Manufacture, Repair and Assembly (Kinshasa Convention),6 which entered into force on 8 March 2017, and its substantive support to the United Nations Standing Advisory Committee on Security Questions in Central Africa, in the implementation of the Economic Community of West African States Convention on Small Arms and Light Weapons, Their Ammunition and Other Related Materials and on security sector reform initiatives, and to East Africa on programmes to control brokering of small arms and light weapons, including the additional assistance provided by the Centre to African Member States in the implementation of Security Council resolution 1540 (2004) of 28 April 2004;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Commends the Regional Centre for the support and assistance that it provided to African States, upon request, on the Arms Trade Treaty,7 including through the organization of subregional and regional seminars and workshops;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Commends the Regional Centre for the support and assistance that it provided to African States, upon request, on the Arms Trade Treaty, 7 including through the organization of subregional and regional seminars and workshops;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States, as well as international governmental and non- governmental organizations and foundations, to make voluntary contributions to enable the Regional Centre to carry out its programmes and activities and meet the needs of African States;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States, as well as international governmental and non‑governmental organizations and foundations, to make voluntary contributions to enable the Regional Centre to carry out its programmes and activities and meet the needs of African States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Review and implementation of the Concluding Document of the Twelfth Special Session of the General Assembly”, the sub-item entitled “United Nations Regional Centre for Peace and Disarmament in Africa”. __________________ 5 Security Council resolution 2370 (2017). 6 See A/65/517-S/2010/534, annex. 7 United Nations, Treaty Series, vol. 3013, No. 52373.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/60</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Review and implementation of the Concluding Document of the Twelfth Special Session of the General Assembly”, the sub-item entitled “United Nations Regional Centre for Peace and Disarmament in Africa”. 52nd plenary meeting 1 December 2025 _______________ 5 Security Council resolution 2370 (2017). 6 See A/65/517-S/2010/534, annex. 7 United Nations, Treaty Series, vol. 3013, No. 52373.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.1_80_L.33.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -134,42 +315,43 @@
         <span class="text-sm text-muted">3 with signals, 11 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -186,7 +368,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -213,7 +395,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -230,7 +412,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -247,7 +429,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -264,7 +446,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -281,7 +463,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -298,7 +480,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -315,7 +497,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -332,7 +514,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -349,7 +531,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -366,7 +548,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -383,7 +565,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -409,7 +591,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -441,19 +623,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -468,14 +663,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -491,12 +686,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -515,12 +710,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

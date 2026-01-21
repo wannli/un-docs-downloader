@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,98 +65,61 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.1/80/L.21</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/22</span>
+        </div>
+        <a href="./A_RES_80_22.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.1/80/L.21</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/c.1/80/l.21?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">7 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">Role of science and technology in the context of international security and disarmament</p>
+    
+    <p class="mt-1 text-muted">7 operative paragraphs · Item 98</p>
 </div>
 
-<!-- Compute signal data -->
-
-
-    
-
-    
-
-    
-
-    
-        
-            
-        
-    
-
-    
-
-    
-        
-            
-        
-    
-
-    
-        
-            
-        
-    
 
 
 
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">3 with signals, 4 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('report')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-gray-100 text-gray-700 hover:bg-gray-200">
-            report
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button onclick="filterSignal('agenda')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-blue-50 text-blue-700 hover:bg-blue-100
-                ">
-            agenda
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-1"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -172,8 +135,8 @@
         </div>
     </div>
     
-    <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-2"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -189,8 +152,8 @@
         </div>
     </div>
     
-    <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-3"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -206,10 +169,10 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["report"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -217,23 +180,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-first session an updated report on the matter;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-gray-100 text-gray-700">
-                        report
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to submit to the General Assembly at its eighty-first session an updated report on the matter;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-5"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -249,10 +203,10 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -260,26 +214,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages Member States to organize events such as <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s, seminars, workshops and exhibitions, at the national, regional and international levels, on the role of science and technology in the context of international security and disarmament, in order to facilitate multilateral dialogue, as well as dialogue among relevant stakeholders, on current developments in science and technology and their potential impact on international security and disarmament efforts;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages Member States to organize events such as conferences, seminars, workshops and exhibitions, at the national, regional and international levels, on the role of science and technology in the context of international security and disarmament, in order to facilitate multilateral dialogue, as well as dialogue among relevant stakeholders, on current developments in science and technology and their potential impact on international security and disarmament efforts;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -287,17 +231,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to include</mark> in the provisional agenda of its eighty-first session the item entitled “Role of science and technology in the context of international security and disarmament”.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-blue-50 text-blue-700
-                        ">
-                        agenda
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Decides to include in the provisional agenda of its eighty-first session the item entitled “Role of science and technology in the context of international security and disarmament”.</p>
                 
             </div>
         </div>
@@ -306,21 +240,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -335,14 +282,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -358,12 +305,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -382,12 +329,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

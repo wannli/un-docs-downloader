@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,453 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/76</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/76</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/76?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">49 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/76. International cooperation in the peaceful uses of outer space</p>
+    
+    <p class="mt-1 text-muted">49 operative paragraphs · Item 48</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.4/80/L.8</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">21 of 49 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction that, at its sixty-fourth session, the Legal Subcommittee and its working groups continued their work,12 as mandated by the General Assembly in its resolution 79/87;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction that, at its sixty-fourth session, the Legal Subcommittee and its working groups continued their work, 12 as mandated by the General Assembly in its resolution 79/87;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Agrees that the Legal Subcommittee, at its sixty-fifth session, should consider the substantive items and reconvene the working groups recommended by the Committee,13 including holding intersessional consultations as necessary, taking into account the concerns of all countries, in particular those of developing countries; __________________ 4 Resolution 66/288, annex, para. 274. 5 Resolution 76/3. 6 The 2030 Agenda for Sustainable Development, the Sendai Framework for Disaster Risk Reduction 2015–2030 and the Paris Agreement. 7 Resolution 79/1, action 56. 8 Ibid. 9 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20). 10 Ibid., para. 324. 11 Ibid., para. 259; see also resolution 79/1, action 56. 12 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), chap. II, sect. C; see also A/AC.105/1362. 13 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 159–161. A/C.4/80/L.8 25-17043 4/9
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Agrees that the Legal Subcommittee, at its sixty-fifth session, should consider the substantive items and reconvene the working groups recommended by the Committee,13 including holding intersessional consultations as necessary, taking into account the concerns of all countries, in particular those of developing countries; _______________ 4 Resolution 66/288, annex, para. 274. 5 Resolution 76/3. 6 The 2030 Agenda for Sustainable Development, the Sendai Framework for Disaster Risk Reduction 2015–2030 and the Paris Agreement. 7 Resolution 79/1, action 56. 8 Ibid. 9 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20). 10 Ibid., para. 324. 11 Ibid., para. 259; see also resolution 79/1, action 56. 12 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), chap. II, sect. C; see also A/AC.105/1362. 13 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 159–161. A/RES/80/76 International cooperation in the peaceful uses of outer space 25-20091 4/10
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States that have not yet become Parties to the international treaties governing the uses of outer space14 to give consideration to ratifying or acceding to those treaties in accordance with their national law, as well as incorporating them into their national legislation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States that have not yet become Parties to the international treaties governing the uses of outer space 14 to give consideration to ratifying or acceding to those treaties in accordance with their national law, as well as incorporating them into their national legislation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes with satisfaction that, at its sixty-second session, the Scientific and Technical Subcommittee and its working groups continued their work,16 as mandated by the General Assembly in its resolution 79/87;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes with satisfaction that, at its sixty-second session, the Scientific and Technical Subcommittee and its working groups continued their work, 16 as mandated by the General Assembly in its resolution 79/87;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls with satisfaction the establishment of the Space and Global Health Platform, based in Geneva, welcomes the progress in the work of the Space and Global Health Network,18 and reiterates its request to the Office to strengthen capacity-building and networking in Africa, Asia and the Pacific and Latin America and the Caribbean, through regional technical cooperation projects, and to support field projects for strengthening collaboration between the space and global health sectors as an efficient strategy for making better use of space science and technology for access to global health for beneficiary States and taking better advantage of opportunities offered by bilateral or multilateral collaboration, as mandated by the General Assembly in its resolution 77/120;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls with satisfaction the establishment of the Space and Global Health Platform, based in Geneva, welcomes the progress in the work of the Space and Global Health Network, 18 and reiterates its request to the Office to strengthen capacity-building and networking in Africa, Asia and the Pacific and Latin America and the Caribbean, through regional technical cooperation projects, and to support field projects for strengthening collaboration between the space and global health sectors as an efficient strategy for making better use of space science and technology for access to global health for beneficiary States and taking better advantage of opportunities offered by bilateral or multilateral collaboration, as mandated by the General Assembly in its resolution 77/120;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the importance of information-sharing in discovering, monitoring and physically characterizing potentially hazardous near-Earth objects to __________________ 14 Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, including the Moon and Other Celestial Bodies (United Nations, Treaty Series, vol. 610, No. 8843); Agreement on the Rescue of Astronauts, the Return of Astronauts and the Return of Objects Launched into Outer Space (United Nations, Treaty Series, vol. 672, No. 9574); Convention on International Liability for Damage Caused by Space Objects (United Nations, Treaty Series, vol. 961, No. 13810); Convention on Registration of Objects Launched into Outer Space (United Nations, Treaty Series, vol. 1023, No. 15020); and Agreement Governing the Activities of States on the Moon and Other Celestial Bodies (United Nations, Treaty Series, vol. 1363, No. 23002). 15 Resolution 76/3, para. 10. 16 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), chap. II, sect. B; see also A/AC.105/1338. 17 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 125–127. 18 Ibid., para. 116. 19 Ibid., para. 115; see also A/AC.105/C.1/127. A/C.4/80/L.8 5/9 25-17043 ensure that all countries, in particular developing countries with limited capacity for predicting and mitigating a near-Earth object impact, are aware of potential threats, emphasizes the need for capacity-building for effective emergency response and disaster management in the event of a near-Earth object impact, and notes with satisfaction the work carried out by the International Asteroid Warning Network and the Space Mission Planning Advisory Group to strengthen international cooperation to mitigate the potential threat posed by near-Earth objects, with the support of the Office, serving as the permanent secretariat of the Advisory Group; 20
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the importance of information-sharing in discovering, monitoring and physically characterizing potentially hazardous near-Earth objects to _______________ 14 Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, including the Moon and Other Celestial Bodies (United Nations, Treaty Series, vol. 610, No. 8843); Agreement on the Rescue of Astronauts, the Return of Astronauts and the Return of Objects Launched into Outer Space (United Nations, Treaty Series, vol. 672, No. 9574); Convention on International Liability for Damage Caused by Space Objects (United Nations, Treaty Series, vol. 961, No. 13810); Convention on Registration of Objects Launched into Outer Space (United Nations, Treaty Series, vol. 1023, No. 15020); and Agreement Governing the Activities of States on the Moon and Other Celestial Bodies (United Nations, Treaty Series, vol. 1363, No. 23002). 15 Resolution 76/3, para. 10. 16 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), chap. II, sect. B; see also A/AC.105/1338. 17 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 125–127. 18 Ibid., para. 116. 19 Ibid., para. 115; see also A/AC.105/C.1/127. International cooperation in the peaceful uses of outer space A/RES/80/76 5/10 25-20091 ensure that all countries, in particular developing countries with limited capacity for predicting and mitigating a near-Earth object impact, are aware of potential threats, emphasizes the need for capacity-building for effective emergency response and disaster management in the event of a near-Earth object impact, and notes with satisfaction the work carried out by the International Asteroid Warning Network and the Space Mission Planning Advisory Group to strengthen international cooperation to mitigate the potential threat posed by near-Earth objects, with the support of the Office, serving as the permanent secretariat of the Advisory Group; 20
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction the establishment, by the Working Group on the Long-term Sustainability of Outer Space Activities of the Scientific and Technical Subcommittee, of the Expert Group on Space Situational Awareness;22
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction the establishment, by the Working Group on the Long-term Sustainability of Outer Space Activities of the Scientific and Technical Subcommittee, of the Expert Group on Space Situational Awareness; 22
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation that some Member States are already implementing space debris mitigation measures on a voluntary basis, through national mechanisms and consistent with the Space Debris Mitigation Guidelines of the Inter-Agency Space Debris Coordination Committee and with the Space Debris Mitigation Guidelines of the Committee on the Peaceful Uses of Outer Space, 23 endorsed by the General Assembly in its resolution 62/217, and invites other States to implement, through relevant national mechanisms, the Space Debris Mitigation Guidelines of the Committee on the Peaceful Uses of Outer Space;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation that some Member States are already implementing space debris mitigation measures on a voluntary basis, through national mechanisms and consistent with the Space Debris Mitigation Guidelines of the Inter‑Agency Space Debris Coordination Committee and with the Space Debris Mitigation Guidelines of the Committee on the Peaceful Uses of Outer Space, 23 endorsed by the General Assembly in its resolution 62/217, and invites other States to implement, through relevant national mechanisms, the Space Debris Mitigation Guidelines of the Committee on the Peaceful Uses of Outer Space;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Committee to continue to consider, as a matter of priority, ways and means of maintaining outer space for peaceful purposes and to report thereon to the General Assembly at its eighty-first session, and agrees that the Committee should continue to consider the broader perspective of space security and associated matters that would be instrumental in ensuring the safe and responsible conduct of space activities, including ways to promote international, regional and interregional cooperation to that end; __________________ 20 A/AC.105/1338, paras. 95, 96 (a), 98–100 and 104–106. 21 Official Records of the General Assembly, Seventy-fourth Session, Supplement No. 20 (A/74/20). 22 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 110–112. 23 Ibid., Sixty-second Session, Supplement No. 20 (A/62/20), paras. 117 and 118 and annex. A/C.4/80/L.8 25-17043 6/9
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Committee to continue to consider, as a matter of priority, ways and means of maintaining outer space for peaceful purposes and to report thereon to the General Assembly at its eighty-first session, and agrees that the Committee should continue to consider the broader perspective of space security and associated matters that would be instrumental in ensuring the safe and responsible _______________ 20 A/AC.105/1338, paras. 95, 96 (a), 98–100 and 104–106. 21 Official Records of the General Assembly, Seventy-fourth Session, Supplement No. 20 (A/74/20). 22 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 110–112. 23 Ibid., Sixty-second Session, Supplement No. 20 (A/62/20), paras. 117 and 118 and annex. A/RES/80/76 International cooperation in the peaceful uses of outer space 25-20091 6/10 conduct of space activities, including ways to promote international, regional and interregional cooperation to that end;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes with appreciation the capacity-building activities under the United Nations Programme on Space Applications, which provide unique benefits for Member States, in particular developing countries, participating in those activities, and calls upon the Office to further its support in this regard, particularly to developing countries;26
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes with appreciation the capacity-building activities under the United Nations Programme on Space Applications, which provide unique benefits for Member States, in particular developing countries, participating in those activities, and calls upon the Office to further its support in this regard, particularly to developing countries;26 _______________ 24 Resolution 76/3, para. 30. 25 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 253 and 257 and annex I. 26 See A/AC.105/1338, para. 41. International cooperation in the peaceful uses of outer space A/RES/80/76 7/10 25-20091
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction the activities carried out under the United Nations Platform for Space-based Information for Disaster Management and Emergency Response (UN-SPIDER), and recognizes the significant achievements made and the advisory support provided to Member States, in particular to developing countries, __________________ 24 Resolution 76/3, para. 30. 25 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 253 and 257 and annex I. 26 See A/AC.105/1338, para. 41. A/C.4/80/L.8 7/9 25-17043 within the framework of UN-SPIDER since its establishment in 200627 with the valuable contributions of its network of regional support offices, and encourages Member States, on a voluntary basis, to provide the programme with the additional resources necessary to address the increasing demand for support successfully and in a timely manner, while taking into consideration recent natural disaster events, including severe weather and sea-level rise due to climate change;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction the activities carried out under the United Nations Platform for Space-based Information for Disaster Management and Emergency Response (UN-SPIDER), and recognizes the significant achievements made and the advisory support provided to Member States, in particular to developing countries, within the framework of UN-SPIDER since its establishment in 2006 27 with the valuable contributions of its network of regional support offices, and encourages Member States, on a voluntary basis, to provide the programme with the additional resources necessary to address the increasing demand for support successfully and in a timely manner, while taking into consideration recent natural disaster events, including severe weather and sea-level rise due to climate change;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the importance of the Sendai Framework for Disaster Risk Reduction 2015–2030,28 in which the value of space-based technology and Earth observation for disaster management and emergency response is recognized, and, in that regard, notes with satisfaction the efforts of the Office and its UN-SPIDER programme towards promoting international cooperation as a way to enhance the use of space-based technologies and related services at the national and local levels in contributing to the implementation of the Sendai Framework and the 2030 Agenda for Sustainable Development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the importance of the Sendai Framework for Disaster Risk Reduction 2015–2030, 28 in which the value of space-based technology and Earth observation for disaster management and emergency response is recognized, and, in that regard, notes with satisfaction the efforts of the Office and its UN-SPIDER programme towards promoting international cooperation as a way to enhance the use of space-based technologies and related services at the national and local levels in contributing to the implementation of the Sendai Framework and the 2030 Agenda for Sustainable Development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction the continuous progress made by the International Committee on Global Navigation Satellite Systems with the support of the Office, in its capacity as executive secretariat of the International Committee, towards achieving compatibility and interoperability among global and regional space-based positioning, navigation and timing systems and in the promotion of the use of global navigation satellite systems and their integration into national infrastructure, particularly in developing countries, and notes with appreciation that the International Committee held its nineteenth meeting in Busan, Republic of Korea, from 19 to 24 October 2025;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with satisfaction the continuous progress made by the International Committee on Global Navigation Satellite Systems with the support of the Office, in its capacity as executive secretariat of the International Committee, towards achieving compatibility and interoperability among global and regional space-based positioning, navigation and timing systems and in the promotion of the use of global navigation satellite systems and their integration into national infrastructure, particularly in developing countries, and notes with appreciation that the International Committee held its nineteenth meeting in Busan, Republic of Korea, from 20 to 24 October 2025;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that regional and interregional cooperation in the field of space activities is essential to strengthen the peaceful uses of outer space, assist Member States in the development of their space capabilities and contribute to the implementation of the 2030 Agenda for Sustainable Development, to that end requests relevant regional organizations and their groups of experts to offer the assistance necessary so that countries can carry out the recommendations of regional conferences, and in that regard notes the importance of the equal participation of women in all fields of science and technology;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that regional and interregional cooperation in the field of space activities is essential to strengthen the peaceful uses of outer space, assist Member States in the development of their space capabilities and contribute to the implementation of the 2030 Agenda for Sustainable Development, to that end requests relevant regional organizations and their groups of experts to offer the assistance necessary so that countries can carry out the recommendations of regional conferences, and in that regard notes the importance of the equal participation of women in all fields of science and technology; _______________ 27 See resolution 61/110. 28 Resolution 69/283, annex II. A/RES/80/76 International cooperation in the peaceful uses of outer space 25-20091 8/10
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes, in that regard, the important role played by such organizations as the Asia-Pacific Space Cooperation Organization and the European Space Agency and by conferences and other mechanisms, such as the African Leadership Conference on Space Science and Technology for Sustainable Development, the Asia-Pacific Regional Space Agency Forum and the Space Conference of the Americas, in strengthening regional and international cooperation among States; __________________ 27 See resolution 61/110. 28 Resolution 69/283, annex II. A/C.4/80/L.8 25-17043 8/9
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes, in that regard, the important role played by such organizations as the Asia-Pacific Space Cooperation Organization and the European Space Agency and by conferences and other mechanisms, such as the African Leadership Conference on Space Science and Technology for Sustainable Development, the Asia-Pacific Regional Space Agency Forum and the Space Conference of the Americas, in strengthening regional and international cooperation among States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the Office to continue to conduct capacity-building and outreach activities associated with space security and transparency and confidence- building measures in outer space activities, as appropriate, and within the context of the long-term sustainability of outer space activities, in particular for developing countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the Office to continue to conduct capacity-building and outreach activities associated with space security and transparency and confidence- building measures in outer space activities, as appropriate, and within the context of the long-term sustainability of outer space activities, in particular for developing countries; International cooperation in the peaceful uses of outer space A/RES/80/76 9/10 25-20091
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Agrees that the Office should pursue greater engagement with industry and private sector entities to further their support for and contributions to the overall work of the Office;29 __________________ 29 Official Records of the General Assembly, Seventy-second Session, Supplement No. 20 (A/72/20), para. 326. A/C.4/80/L.8 9/9 25-17043
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Agrees that the Office should pursue greater engagement with industry and private sector entities to further their support for and contributions to the overall work of the Office;29
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Appeals to Governments, the relevant entities of the United Nations system, intergovernmental and non-governmental organizations, institutions, industry and private sector entities and individuals to urgently increase their voluntary contributions to the trust fund in support of the United Nations Programme on the Peaceful Uses of Outer Space in order to support the efforts of the Office to secure additional resources to facilitate the full implementation of its programme of work, including, where appropriate, the financing of special projects, and otherwise to assist the Office in carrying out technical cooperation and assistance activities, in particular for developing countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Appeals to Governments, the relevant entities of the United Nations system, intergovernmental and non‑governmental organizations, institutions, industry and private sector entities and individuals to urgently increase their voluntary contributions to the trust fund in support of the United Nations Programme on the Peaceful Uses of Outer Space in order to support the efforts of the Office to secure additional resources to facilitate the full implementation of its programme of work, including, where appropriate, the financing of special projects, and otherwise to assist the Office in carrying out technical cooperation and assistance activities, in particular for developing countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 45</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates, with regard to the composition of the bureaux of the Committee and its subcommittees for the period 2026–2027,32 that the Committee and its subcommittees should elect their officers at their respective sessions in 2026 in accordance with that composition;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates, with regard to the composition of the bureaux of the Committee and its subcommittees for the period 2026–2027, 32 that the Committee and its subcommittees should elect their officers at their respective sessions in 2026 in accordance with that composition;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also endorses the decision of the Committee to grant the status of observer to the International Council on Monuments and Sites, the Alliance for Collaboration in the Exploration of Space (ACES Worldwide), the Lunar Policy Platform Foundation, AeroAI Global Solutions, Inc., and Women in Aerospace Europe, in accordance with the procedures of the Committee;35
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also endorses the decision of the Committee to grant the status of observer to the International Council on Monuments and Sites, the Alliance for Collaboration _______________ 29 Official Records of the General Assembly, Seventy-second Session, Supplement No. 20 (A/72/20), para. 326. 30 Ibid., Seventy-ninth Session, Supplement No. 20 (A/79/20), paras. 380 and 381; and official communications from the Office for Outer Space Affairs to States members of the Committee, dated 18 and 25 October 2024. 31 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 301 and 302. 32 Ibid., Fifty-eighth Session, Supplement No. 20 (A/58/20), para. 12 and annex II. 33 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 303 and 304. 34 Ibid., paras. 308 and 309. A/RES/80/76 International cooperation in the peaceful uses of outer space 25-20091 10/10 in the Exploration of Space (ACES Worldwide), the Lunar Policy Platform Foundation, AeroAI Global Solutions, Inc., and Women in Aerospace Europe, in accordance with the procedures of the Committee;35
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 49</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.4/80/L.8</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the regional groups to promote active participation in the work of the Committee and its subsidiary bodies by the States members of the Committee that are also members of the respective regional groups. __________________ 30 Ibid., Seventy-ninth Session, Supplement No. 20 (A/79/20), paras. 380 and 381; and official communications from the Office for Outer Space Affairs to States members of the Committee, dated 18 and 25 October 2024. 31 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 301 and 302. 32 Ibid., Fifty-eighth Session, Supplement No. 20 (A/58/20), para. 12 and annex II. 33 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 303 and 304. 34 Ibid., paras. 308 and 309. 35 Ibid., paras. 310–320.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/76</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the regional groups to promote active participation in the work of the Committee and its subsidiary bodies by the States members of the Committee that are also members of the respective regional groups. 55th plenary meeting 5 December 2025 _______________ 35 Ibid., paras. 310–320.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.4_80_L.8.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -218,41 +651,42 @@
         <span class="text-sm text-muted">10 with signals, 39 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('process')" 
+        <button onclick="filterSignal('process')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             process
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -269,7 +703,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -286,7 +720,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -313,7 +747,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -330,7 +764,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -347,7 +781,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -364,7 +798,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -381,7 +815,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -398,7 +832,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -415,7 +849,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -432,7 +866,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -449,7 +883,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -466,7 +900,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -483,7 +917,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -500,7 +934,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -517,7 +951,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -534,7 +968,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -551,7 +985,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -568,7 +1002,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -594,7 +1028,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -621,7 +1055,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -638,7 +1072,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["process"]'
          data-has-signals="true">
@@ -664,7 +1098,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -681,7 +1115,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -698,7 +1132,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -715,7 +1149,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -732,7 +1166,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -749,7 +1183,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -766,7 +1200,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -783,7 +1217,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -800,7 +1234,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -817,7 +1251,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -844,7 +1278,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -871,7 +1305,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -888,7 +1322,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -905,7 +1339,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -932,7 +1366,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -959,7 +1393,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -986,7 +1420,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1003,7 +1437,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1020,7 +1454,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1037,7 +1471,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1054,7 +1488,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1071,7 +1505,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1088,7 +1522,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["process"]'
          data-has-signals="true">
@@ -1114,7 +1548,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1131,7 +1565,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1148,7 +1582,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1165,7 +1599,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1187,19 +1621,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1214,14 +1661,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1237,12 +1684,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1261,12 +1708,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

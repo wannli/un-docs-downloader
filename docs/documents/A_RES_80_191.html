@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,453 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/191</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/191</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/191?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">63 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/191. Rights of Indigenous Peoples</p>
+    
+    <p class="mt-1 text-muted">63 operative paragraphs · Item 68</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.17</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">21 of 63 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the United Nations High Commissioner for Human Rights on the rights of Indigenous Peoples, 28 the report of the Special Rapporteur on the rights of Indigenous Peoples, entitled “Identification, demarcation, registration and titling of Indigenous Peoples’ lands: practices and lessons”,29 and the report of the Expert Mechanism on the Rights of Indigenous Peoples, entitled “Right of Indigenous Peoples to data, including with regard to data collection and disaggregation”,30 and its annual report on the rights of Indigenous Peoples; 31
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the United Nations High Commissioner for Human Rights on the rights of Indigenous Peoples, 28 the report of the Special Rapporteur on the rights of Indigenous Peoples, entitled “Identification, demarcation, registration and titling of Indigenous Peoples’ lands: practices and lessons”, 29 and the report of the Expert Mechanism on the Rights of Indigenous Peoples, entitled “Right of Indigenous Peoples to data, including with regard to data collection and disaggregation”,30 and its annual report on the rights of Indigenous Peoples;31
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Governments and the United Nations system, in consultation and cooperation with Indigenous Peoples through their representatives and institutions, to continue to implement appropriate measures at the national level, including legislative measures, to achieve the ends of the United Nations Declaration on the Rights of Indigenous Peoples and to promote awareness of it among all sectors of society, including members of legislatures, the judiciary and the civil service, as well as among Indigenous Peoples, and invites international and regional organizations, within their respective mandates, national human rights institutions, where they exist, __________________ 27 A/79/160, A/HRC/57/47 and A/HRC/57/47/Add.1. 28 A/HRC/60/41. 29 A/80/181. 30 A/HRC/60/66. 31 A/HRC/60/65. A/C.3/80/L.17 25-16913 8/15 civil society, including non-governmental organizations, and other relevant actors to contribute to those efforts;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Governments and the United Nations system, in consultation and cooperation with Indigenous Peoples through their representatives and institutions, to _______________ 27 A/79/160, A/HRC/57/47 and A/HRC/57/47/Add.1. 28 A/HRC/60/41. 29 A/80/181. 30 A/HRC/60/66. 31 A/HRC/60/65. A/RES/80/191 Rights of Indigenous Peoples 25-20889 8/16 continue to implement appropriate measures at the national level, including legislative measures, to achieve the ends of the United Nations Declaration on the Rights of Indigenous Peoples and to promote awareness of it among all sectors of society, including members of legislatures, the judiciary and the civil service, as well as among Indigenous Peoples, and invites international and regional organizations, within their respective mandates, national human rights institutions, where they exist, civil society, including non‑governmental organizations, and other relevant actors to contribute to those efforts;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the leadership of the Secretary-General and of the Under-Secretary-General for Economic and Social Affairs, as the responsible senior official of the United Nations system, in overseeing the implementation of and in following up on the system-wide action plan to ensure a coherent approach to achieving the ends of the United Nations Declaration on the Rights of Indigenous Peoples, raising awareness of the rights of Indigenous Peoples and increasing the coherence of the activities of the system in this regard, and encourages the funds, programmes and specialized agencies of the United Nations system, resident coordinators and United Nations country teams to implement this plan in full alignment with national development needs and priorities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the leadership of the Secretary-General and of the Under‑Secretary-General for Economic and Social Affairs, as the responsible senior official of the United Nations system, in overseeing the implementation of and in following up on the system-wide action plan to ensure a coherent approach to achieving the ends of the United Nations Declaration on the Rights of Indigenous Peoples, raising awareness of the rights of Indigenous Peoples and increasing the coherence of the activities of the system in this regard, and encourages the funds, programmes and specialized agencies of the United Nations system, resident coordinators and United Nations country teams to implement this plan in full alignment with national development needs and priorities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the need for Member States to ensure protection for Indigenous Peoples affected by public health emergencies and protection from future health emergencies, and prevent all forms of discrimination, especially in the context of timely, universal, inclusive, equitable and non-discriminatory access to safe, quality, effective and affordable healthcare and services and medical supplies and equipment, including diagnostics, therapeutics, medicine and vaccines, and through the dissemination of accurate, clear and evidence- and science-based information, including in Indigenous languages, as appropriate, and to leave no one behind, with an endeavour to reach the furthest behind first, founded on the dignity of the human person and reflecting the principles of equality and non-discrimination, and calls upon Member States to put in place an inclusive response to and recovery from public health emergencies and engage with Indigenous Peoples and other relevant stakeholders to fully empower all in improving and protecting their own health; A/C.3/80/L.17 9/15 25-16913
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the need for Member States to ensure protection for Indigenous Peoples affected by public health emergencies and protection from future health emergencies, and prevent all forms of discrimination, especially in the context of timely, universal, inclusive, equitable and non‑discriminatory access to safe, quality, effective and affordable healthcare and services and medical supplies and equipment, including diagnostics, therapeutics, medicine and vaccines, and through the dissemination of accurate, clear and evidence- and science-based information, Rights of Indigenous Peoples A/RES/80/191 9/16 25-20889 including in Indigenous languages, as appropriate, and to leave no one behind, with an endeavour to reach the furthest behind first, founded on the dignity of the human person and reflecting the principles of equality and non‑discrimination, and calls upon Member States to put in place an inclusive response to and recovery from public health emergencies and engage with Indigenous Peoples and other relevant stakeholders to fully empower all in improving and protecting their own health;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the report of the Secretary-General on the status of the United Nations Voluntary Fund for Indigenous Peoples, 33 encourages Governments and intergovernmental and non-governmental organizations to continue to contribute to the trust fund on Indigenous issues and the United Nations Voluntary Fund for Indigenous Peoples and invites Indigenous organizations and private institutions and individuals to do likewise, and notes the importance of accessibility, accountability, transparency and balanced geographical distribution in the management of those funds;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the report of the Secretary-General on the status of the United Nations Voluntary Fund for Indigenous Peoples, 33 encourages Governments and intergovernmental and non‑governmental organizations to continue to contribute to the trust fund on Indigenous issues and the United Nations Voluntary Fund for Indigenous Peoples and invites Indigenous organizations and private institutions and individuals to do likewise, and notes the importance of accessibility, accountability, transparency and balanced geographical distribution in the management of those funds;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the disproportionate impact of climate change on Indigenous Peoples due to their direct reliance on ecosystems, including for meeting their basic needs and engaging in traditional and other economic activities, and further emphasizes that climate change poses a threat to the survival, dignity and well-being of Indigenous Peoples and exacerbates the existing inequities and challenges that they face;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the disproportionate impact of climate change on Indigenous Peoples due to their direct reliance on ecosystems, including for meeting their basic needs and engaging in traditional and other economic activities, and further emphasizes that climate change poses a threat to the survival, dignity and well-being _______________ 32 Resolution 61/295, annex, art. 24, para. 1. 33 A/79/262. 34 United Nations, Treaty Series, vol. 1037, No. 15511. 35 Ibid., vol. 1771, No. 30822. 36 See FCCC/CP/2015/10/Add.1, decision 1/CP.21, annex. A/RES/80/191 Rights of Indigenous Peoples 25-20889 10/16 of Indigenous Peoples and exacerbates the existing inequities and challenges that they face;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also stresses the urgent need to enhance adaptive capacity, strengthen resilience and reduce vulnerability of Indigenous Peoples to climate change and extreme weather events, and to support the leadership, knowledge, technologies, practices and efforts of Indigenous Peoples to address and respond to climate change, and encourages Member States to take measures that will ensure the full and effective participation of Indigenous Peoples in decision-making processes relating to climate __________________ 32 Resolution 61/295, annex, art. 24, para. 1. 33 A/79/262. 34 United Nations, Treaty Series, vol. 1037, No. 15511. 35 Ibid., vol. 1771, No. 30822. 36 See FCCC/CP/2015/10/Add.1, decision 1/CP.21, annex. A/C.3/80/L.17 25-16913 10/15 change on issues affecting them, including Indigenous women, youth, older persons and persons with disabilities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also stresses the urgent need to enhance adaptive capacity, strengthen resilience and reduce vulnerability of Indigenous Peoples to climate change and extreme weather events, and to support the leadership, knowledge, technologies, practices and efforts of Indigenous Peoples to address and respond to climate change, and encourages Member States to take measures that will ensure the full and effective participation of Indigenous Peoples in decision-making processes relating to climate change on issues affecting them, including Indigenous women, youth, older persons and persons with disabilities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and all organizations and bodies of the United Nations system and other international and regional organizations, the private sector and academia, as well as civil society, including non-governmental organizations, to observe the International Day of Indigenous Peoples in an appropriate manner, including through educational and public awareness-raising activities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and all organizations and bodies of the United Nations system and other international and regional organizations, the private sector and academia, as well as civil society, including non‑governmental organizations, to observe the International Day of Indigenous Peoples in an appropriate manner, including through educational and public awareness-raising activities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to continue to consider including in their voluntary national reviews for the high-level political forum on sustainable development and their national and global reports information related to Indigenous Peoples on the progress made and challenges in the implementation of the 2030 Agenda, bearing in mind paragraphs 78 and 79 of the 2030 Agenda, and also encourages States to compile disaggregated data to measure progress and to ensure that no one is left behind;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to continue to consider including in their voluntary national reviews for the high-level political forum on sustainable development and their national and global reports information related to Indigenous Peoples on the progress made and challenges in the implementation of the 2030 Agenda, bearing in mind paragraphs 78 and 79 of the 2030 Agenda, and also encourages States to compile disaggregated data to measure progress and to ensure that no one is left behind; _______________ 37 Adopted under the UNFCCC in FCCC/CP/2015/10/Add.1, decision 1/CP.21. 38 United Nations Environment Programme, document CBD/COP/15/17, decision 15/4, annex. 39 United Nations, Treaty Series, vol. 1760, No. 30619. 40 Ibid., vol. 1954, No. 33480. 41 Ibid., vol. 1037, No. 15511. Rights of Indigenous Peoples A/RES/80/191 11/16 25-20889
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages States, according to their relevant national context and characteristics, to collect and disseminate data disaggregated by ethnicity, income, gender, age, race, migratory status, disability, geographic location or other factors, as appropriate, in order to monitor and improve the impact of development policies, strategies and programmes aimed at improving the well-being of Indigenous Peoples and individuals, to combat and eliminate violence and multiple and intersecting forms of discrimination against them and to support work towards the achievement of the Sustainable Development Goals and the 2030 Agenda; __________________ 37 Adopted under the UNFCCC in FCCC/CP/2015/10/Add.1, decision 1/CP.21. 38 United Nations Environment Programme, document CBD/COP/15/17, decision 15/4, annex. 39 United Nations, Treaty Series, vol. 1760, No. 30619. 40 Ibid., vol. 1954, No. 33480. 41 Ibid., vol. 1037, No. 15511. A/C.3/80/L.17 11/15 25-16913
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages States, according to their relevant national context and characteristics, to collect and disseminate data disaggregated by ethnicity, income, gender, age, race, migratory status, disability, geographic location or other factors, as appropriate, in order to monitor and improve the impact of development policies, strategies and programmes aimed at improving the well-being of Indigenous Peoples and individuals, to combat and eliminate violence and multiple and intersecting forms of discrimination against them and to support work towards the achievement of the Sustainable Development Goals and the 2030 Agenda;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the importance of effective accountability with regard to violence against Indigenous women and girls, including all forms of sexual and gender-based violence, domestic violence, abuse, exploitation and sexual harassment, as well as with regard to taking adequate measures to prevent and eliminate such violence;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the importance of effective accountability with regard to violence against Indigenous women and girls, including all forms of sexual and gender-based violence, domestic violence, abuse, exploitation and sexual harassment, A/RES/80/191 Rights of Indigenous Peoples 25-20889 12/16 as well as with regard to taking adequate measures to prevent and eliminate such violence;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to consider including in their reports related to Indigenous Peoples and women information on the progress made and challenges in the implementation of Commission on the Status of Women resolutions 49/7 of 11 March 2005, entitled “Indigenous women: beyond the ten-year review of the Beijing Declaration and Platform for Action”,42 and 56/4 of 9 March 2012, entitled __________________ 42 See Official Records of the Economic and Social Council, 2005, Supplement No. 7 and A/C.3/80/L.17 25-16913 12/15 “Indigenous women: key actors in poverty and hunger eradication”, 43 as well as to consider general recommendation No. 39 (2022) on the rights of Indigenous women and girls of the Committee on the Elimination of Discrimination against Women;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to consider including in their reports related to Indigenous Peoples and women information on the progress made and challenges in the implementation of Commission on the Status of Women resolutions 49/7 of 11 March 2005, entitled “Indigenous women: beyond the ten-year review of the Beijing Declaration and Platform for Action”,42 and 56/4 of 9 March 2012, entitled “Indigenous women: key actors in poverty and hunger eradication”, 43 as well as to consider general recommendation No. 39 (2022) on the rights of Indigenous women and girls of the Committee on the Elimination of Discrimination against Women;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of Indigenous languages as a driver for the achievement of the Sustainable Development Goals, and calls upon Member States to integrate the preservation, promotion and revitalization of Indigenous languages into the wider efforts to implement the 2030 Agenda;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of Indigenous languages as a driver for the achievement of the Sustainable Development Goals, and calls upon Member States to integrate the preservation, promotion and revitalization of Indigenous languages into the wider efforts to implement the 2030 Agenda; _______________ 42 See Official Records of the Economic and Social Council, 2005, Supplement No. 7 and corrigendum (E/2005/27 and E/2005/27/Corr.1), chap. I, sect. D. 43 Ibid., 2012, Supplement No. 7 and corrigendum (E/2012/27 and E/2012/27/Corr.1), chap. I, sect. D. Rights of Indigenous Peoples A/RES/80/191 13/16 25-20889
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 41</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recognizes the importance of creating international, regional and national initiatives to promote the use of Indigenous languages, such as the Ibero-American Institute of Indigenous Languages, and in this regard encourages Member States to explore the creation of such initiatives;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recognizes the importance of creating international, regional and national initiatives to promote the use of Indigenous languages, such as the Ibero‑American Institute of Indigenous Languages, and in this regard encourages Member States to explore the creation of such initiatives;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to consider establishing national mechanisms with adequate funding for the successful implementation of the International Decade of Indigenous Languages, in partnership with Indigenous Peoples, and to support Indigenous Peoples, as custodians of their own languages, to initiate and develop __________________ corrigendum (E/2005/27 and E/2005/27/Corr.1), chap. I, sect. D. 43 Ibid., 2012, Supplement No. 7 and corrigendum (E/2012/27 and E/2012/27/Corr.1), chap. I, sect. D. A/C.3/80/L.17 13/15 25-16913 appropriate measures for the implementation of the International Decade, with the aim to preserve, revitalize and promote Indigenous languages;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to consider establishing national mechanisms with adequate funding for the successful implementation of the International Decade of Indigenous Languages, in partnership with Indigenous Peoples, and to support Indigenous Peoples, as custodians of their own languages, to initiate and develop appropriate measures for the implementation of the International Decade, with the aim to preserve, revitalize and promote Indigenous languages;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 44</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the right of Indigenous Peoples to establish their own media in their own languages and to have access to all forms of non-Indigenous media without discrimination, and calls upon States to promote and examine national policies, practices and funding programmes on Indigenous media, including on capacity- building and content production in Indigenous languages by Indigenous content producers and media professionals, especially Indigenous women, and to foster international cooperation, knowledge-sharing and cooperation among Indigenous media and other partners, including mainstream media and Governments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the right of Indigenous Peoples to establish their own media in their own languages and to have access to all forms of non‑Indigenous media without discrimination, and calls upon States to promote and examine national policies, practices and funding programmes on Indigenous media, including on capacity- building and content production in Indigenous languages by Indigenous content producers and media professionals, especially Indigenous women, and to foster international cooperation, knowledge-sharing and cooperation among Indigenous media and other partners, including mainstream media and Governments;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Governments to ensure that Indigenous Peoples shall not be forcibly removed from their lands or territories and that no relocation shall take place without the free, prior and informed consent of the Indigenous Peoples concerned, after agreement on just and fair compensation and, where possible, with the option of return, and to take effective measures to ensure that all Indigenous Peoples, regardless of their tenure status, have access to essential services, including access to safe and affordable water, sanitation, energy and health services;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Governments to ensure that Indigenous Peoples shall not be forcibly removed from their lands or territories and that no relocation shall take place without the free, prior and informed consent of the Indigenous Peoples concerned, after agreement on just and fair compensation and, where possible, with the option of return, and to take effective measures to ensure that all Indigenous Peoples, regardless of their tenure status, have access to essential services, including access to safe and affordable water, sanitation, energy and health services; A/RES/80/191 Rights of Indigenous Peoples 25-20889 14/16
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 50</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses concern over the misappropriation and misuse of Indigenous Peoples’ cultural heritage, reaffirms that Indigenous Peoples have the right to maintain, control, protect and develop their cultural heritage, traditional knowledge and traditional cultural expressions, and that they also have the right to maintain, control, protect and develop their intellectual property over such cultural heritage, A/C.3/80/L.17 25-16913 14/15 traditional knowledge and traditional cultural expressions, and recalls that States, in conjunction with Indigenous Peoples, shall take effective measures to recognize and protect the exercise of these rights, in accordance with the United Nations Declaration on the Rights of Indigenous Peoples, and as acknowledged in national law;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses concern over the misappropriation and misuse of Indigenous Peoples’ cultural heritage, reaffirms that Indigenous Peoples have the right to maintain, control, protect and develop their cultural heritage, traditional knowledge and traditional cultural expressions, and that they also have the right to maintain, control, protect and develop their intellectual property over such cultural heritage, traditional knowledge and traditional cultural expressions, and recalls that States, in conjunction with Indigenous Peoples, shall take effective measures to recognize and protect the exercise of these rights, in accordance with the United Nations Declaration on the Rights of Indigenous Peoples, and as acknowledged in national law;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 55</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the summary reports of the three informal interactive hearings on possible further measures necessary to enhance the participation of Indigenous Peoples’ representatives and institutions in relevant United Nations meetings on issues affecting them, held at United Nations Headquarters on 17 April 2018, 25 April 2019 and 20 April 2023, recalls General Assembly resolution 70/232, whereby the Assembly requested the President of the General Assembly to conduct timely, inclusive, representative and transparent consultations with Member States, Indigenous Peoples’ representatives and institutions from all regions of the world, and existing relevant mechanisms of the United Nations, on the possible measures necessary, including procedural and institutional steps and accreditation criteria, to enable the participation of Indigenous Peoples’ representatives and institutions in meetings of relevant United Nations bodies on issues affecting them, and also recalls Assembly resolutions 71/321 and 77/203, whereby the Assembly decided to continue the consideration of possible further measures necessary to enhance the participation of Indigenous Peoples’ __________________ 44 A/75/255. A/C.3/80/L.17 15/15 25-16913 representatives and institutions in relevant United Nations meetings on issues affecting them at the seventy-eighth session, as originally requested in resolution 71/321;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the summary reports of the three informal interactive hearings on possible further measures necessary to enhance the participation of Indigenous Peoples’ representatives and institutions in relevant United Nations meetings on issues affecting them, held at United Nations Headquarters on 17 April 2018, 25 April 2019 and 20 April 2023, recalls General Assembly resolution 70/232, whereby the Assembly requested the President of the _______________ 44 A/75/255. Rights of Indigenous Peoples A/RES/80/191 15/16 25-20889 General Assembly to conduct timely, inclusive, representative and transparent consultations with Member States, Indigenous Peoples’ representatives and institutions from all regions of the world, and existing relevant mechanisms of the United Nations, on the possible measures necessary, including procedural and institutional steps and accreditation criteria, to enable the participation of Indigenous Peoples’ representatives and institutions in meetings of relevant United Nations bodies on issues affecting them, and also recalls Assembly resolutions 71/321 and 77/203, whereby the Assembly decided to continue the consideration of possible further measures necessary to enhance the participation of Indigenous Peoples’ representatives and institutions in relevant United Nations meetings on issues affecting them at the seventy-eighth session, as originally requested in resolution 71/321;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 61</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations system to strengthen cooperation with the Fund for the Development of the Indigenous Peoples of Latin America and the Caribbean, considering its fundamental role in the Latin American and Caribbean region in processes of dialogue and consultation between States and Indigenous Peoples;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations system to strengthen cooperation with the Fund for the Development of the Indigenous Peoples of Latin America and the Caribbean, considering its fundamental role in the Latin American and Caribbean region in processes of dialogue and consultation between States and Indigenous Peoples; A/RES/80/191 Rights of Indigenous Peoples 25-20889 16/16
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 63</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.17</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to continue its consideration of the question at its eighty-first session, under the item entitled “Rights of Indigenous Peoples”, and to maintain in the provisional agenda the sub-item entitled “Follow-up to the outcome document of the high-level plenary meeting of the General Assembly known as the World Conference on Indigenous Peoples”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/191</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to continue its consideration of the question at its eighty-first session, under the item entitled “Rights of Indigenous Peoples”, and to maintain in the provisional agenda the sub-item entitled “Follow-up to the outcome document of the high-level plenary meeting of the General Assembly known as the World Conference on Indigenous Peoples”. 62nd plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.17.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -232,29 +665,30 @@
         <span class="text-sm text-muted">5 with signals, 58 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -271,7 +705,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -288,7 +722,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -305,7 +739,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -332,7 +766,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -349,7 +783,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -366,7 +800,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -383,7 +817,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -400,7 +834,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -417,7 +851,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -434,7 +868,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -451,7 +885,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -468,7 +902,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -495,7 +929,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -512,7 +946,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -529,7 +963,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -546,7 +980,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -563,7 +997,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -580,7 +1014,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -597,7 +1031,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -614,7 +1048,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -631,7 +1065,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -648,7 +1082,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -665,7 +1099,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -682,7 +1116,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -699,7 +1133,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -716,7 +1150,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -733,7 +1167,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -750,7 +1184,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -767,7 +1201,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -784,7 +1218,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -801,7 +1235,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -818,7 +1252,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -835,7 +1269,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -852,7 +1286,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -869,7 +1303,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -886,7 +1320,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -903,7 +1337,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -920,7 +1354,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -937,7 +1371,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -954,7 +1388,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -971,7 +1405,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -988,7 +1422,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1005,7 +1439,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1022,7 +1456,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1039,7 +1473,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1056,7 +1490,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1073,7 +1507,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1090,7 +1524,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1107,7 +1541,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1124,7 +1558,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1141,7 +1575,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1158,7 +1592,7 @@
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1175,7 +1609,7 @@
         </div>
     </div>
     
-    <div id="para-54" 
+    <div id="para-54"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1192,7 +1626,7 @@
         </div>
     </div>
     
-    <div id="para-55" 
+    <div id="para-55"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1209,7 +1643,7 @@
         </div>
     </div>
     
-    <div id="para-56" 
+    <div id="para-56"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1236,7 +1670,7 @@
         </div>
     </div>
     
-    <div id="para-57" 
+    <div id="para-57"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1253,7 +1687,7 @@
         </div>
     </div>
     
-    <div id="para-58" 
+    <div id="para-58"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1270,7 +1704,7 @@
         </div>
     </div>
     
-    <div id="para-59" 
+    <div id="para-59"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1287,7 +1721,7 @@
         </div>
     </div>
     
-    <div id="para-60" 
+    <div id="para-60"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1314,7 +1748,7 @@
         </div>
     </div>
     
-    <div id="para-61" 
+    <div id="para-61"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1331,7 +1765,7 @@
         </div>
     </div>
     
-    <div id="para-62" 
+    <div id="para-62"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1348,7 +1782,7 @@
         </div>
     </div>
     
-    <div id="para-63" 
+    <div id="para-63"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1380,19 +1814,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1407,14 +1854,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1430,12 +1877,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1454,12 +1901,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

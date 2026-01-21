@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,453 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/198</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/198</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/198?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">55 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/198. Torture and other cruel, inhuman or degrading treatment or punishment</p>
+    
+    <p class="mt-1 text-muted">55 operative paragraphs · Item 71</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.49</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">21 of 55 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Condemns all forms of torture and other cruel, inhuman or degrading treatment or punishment, including through intimidation, which are and shall remain prohibited at any time and in any place whatsoever and can thus never be justified, and calls upon all States to implement fully the absolute and non-derogable prohibition of torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Condemns all forms of torture and other cruel, inhuman or degrading treatment or punishment, including through intimidation, which are and shall remain prohibited at any time and in any place whatsoever and can thus never be justified, and calls upon all States to implement fully the absolute and non‑derogable prohibition of torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also emphasizes that States must take persistent, determined and effective measures to prevent and combat all acts of torture and other cruel, inhuman or __________________ 6 See resolution 70/1. A/C.3/80/L.49 25-17792 4/10 degrading treatment or punishment, stresses that all acts of torture must be made offences under national criminal law punishable by appropriate penalties that take into account their grave nature, and calls upon States to prohibit under national law acts constituting cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also emphasizes that States must take persistent, determined and effective measures to prevent and combat all acts of torture and other cruel, inhuman or degrading treatment or punishment, stresses that all acts of torture must be made offences under national criminal law punishable by appropriate penalties that take _______________ 6 See resolution 70/1. A/RES/80/198 Torture and other cruel, inhuman or degrading treatment or punishment 25-20949 4/11 into account their grave nature, and calls upon States to prohibit under national law acts constituting cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States not to expel, return (“refouler”), extradite or in any other way transfer a person to another State where there are substantial grounds for believing that the person would be in danger of being subjected to torture, stresses the importance of effective legal and procedural safeguards in this regard, and recognizes that diplomatic assurances, where given, do not release States from their obligations under international human rights, humanitarian and refugee law, in particular the principle of non-refoulement;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States not to expel, return (“refouler”), extradite or in any other way transfer a person to another State where there are substantial grounds for believing that the person would be in danger of being subjected to torture, stresses the importance of effective legal and procedural safeguards in this regard, and recognizes that diplomatic assurances, where given, do not release States from their obligations under international human rights, humanitarian and refugee law, in particular the principle of non‑refoulement;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon all States to take effective measures to ensure that the use of force by police and other law enforcement officials, including the use of less-lethal weapons, is in conformity with international obligations and the principles of legality, necessity, proportionality, accountability and non-discrimination, and that those using force account for each use of force, bearing in mind that lethal force may only be used as a last resort to protect against an imminent threat to life or grievous bodily harm, and recalls in this regard Human Rights Council resolution 46/15 of 23 March 2021;7
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon all States to take effective measures to ensure that the use of force by police and other law enforcement officials, including the use of less-lethal weapons, is in conformity with international obligations and the principles of legality, necessity, proportionality, accountability and non‑discrimination, and that those using force account for each use of force, bearing in mind that lethal force may only be used as a last resort to protect against an imminent threat to life or grievous bodily harm, and recalls in this regard Human Rights Council resolution 46/15 of 23 March 2021;7
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls its resolution 43/173 of 9 December 1988 on the Body of Principles for the Protection of All Persons under Any Form of Detention or Imprisonment, and in this context stresses that ensuring that any individual arrested __________________ 7 See Official Records of the General Assembly, Seventy-sixth Session, Supplement No. 53 (A/76/53), chap. V., sect. A. A/C.3/80/L.49 5/10 25-17792 or detained is promptly brought before a judge or other independent judicial officer in person, facilitating access to legal counsel without delay, and permitting prompt and regular medical care, including, where necessary, an age-, disability- and gender- responsive medical and psychological examination that respects the inherent dignity of the person and upholds their full human rights throughout all stages of detention, as well as regular contact with family members, including visits by family members and independent monitoring mechanisms, are effective measures for the prevention of torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls its resolution 43/173 of 9 December 1988 on the Body of Principles for the Protection of All Persons under Any Form of Detention or Imprisonment, and in _______________ 7 See Official Records of the General Assembly, Seventy-sixth Session, Supplement No. 53 (A/76/53), chap. V., sect. A. Torture and other cruel, inhuman or degrading treatment or punishment A/RES/80/198 5/11 25-20949 this context stresses that ensuring that any individual arrested or detained is promptly brought before a judge or other independent judicial officer in person, facilitating access to legal counsel without delay, and permitting prompt and regular medical care, including, where necessary, an age-, disability- and gender-responsive medical and psychological examination that respects the inherent dignity of the person and upholds their full human rights throughout all stages of detention, as well as regular contact with family members, including visits by family members and independent monitoring mechanisms, are effective measures for the prevention of torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the Principles on Effective Interviewing for Investigations and Information-Gathering (the Méndez Principles), and encourages States to use them as appropriate through the implementation of national measures, including non-coercive interviewing methods and procedural safeguards, thereby operationalizing the presumption of innocence, ensuring that no person is subjected to torture or other cruel, inhuman or degrading treatment or punishment during questioning, as well as improving effective policing, criminal justice investigations, prosecutions, convictions and other forms of information-gathering processes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the Principles on Effective Interviewing for Investigations and Information-Gathering (the Méndez Principles), and encourages States to use them as appropriate through the implementation of national measures, including non‑coercive interviewing methods and procedural safeguards, thereby operationalizing the presumption of innocence, ensuring that no person is subjected to torture or other cruel, inhuman or degrading treatment or punishment during questioning, as well as improving effective policing, criminal justice investigations, prosecutions, convictions and other forms of information-gathering processes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all States to take appropriate effective legislative, administrative, judicial and other measures to apply the United Nations Standard Minimum Rules for the Treatment of Prisoners (the Nelson Mandela Rules), 8 the United Nations Rules for the Treatment of Women Prisoners and Non-custodial Measures for Women Offenders (the Bangkok Rules),9 the United Nations Standard Minimum Rules for the Administration of Juvenile Justice (the Beijing Rules) 10 and the United Nations Rules for the Protection of Juveniles Deprived of their Liberty (the Havana Rules); 11
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all States to take appropriate effective legislative, administrative, judicial and other measures to apply the United Nations Standard Minimum Rules for the Treatment of Prisoners (the Nelson Mandela Rules), 8 the United Nations Rules for the Treatment of Women Prisoners and Non-custodial Measures for Women Offenders (the Bangkok Rules),9 the United Nations Standard Minimum Rules for the Administration of Juvenile Justice (the Beijing Rules) 10 and the United Nations Rules for the Protection of Juveniles Deprived of their Liberty (the Havana Rules);11 _______________ 8 Resolution 70/175, annex. 9 Resolution 65/229, annex. 10 Resolution 40/33, annex. 11 Resolution 45/113, annex. A/RES/80/198 Torture and other cruel, inhuman or degrading treatment or punishment 25-20949 6/11
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reminds all States that prolonged incommunicado detention or detention in secret places can facilitate the perpetration of torture and other cruel, inhuman or __________________ 8 Resolution 70/175, annex. 9 Resolution 65/229, annex. 10 Resolution 40/33, annex. 11 Resolution 45/113, annex. A/C.3/80/L.49 25-17792 6/10 degrading treatment or punishment and can in itself constitute a form of such treatment, and urges all States to respect the safeguards concerning the liberty, security and dignity of the person and to ensure that prolonged incommunicado detention and secret places of detention and interrogation are abolished;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reminds all States that prolonged incommunicado detention or detention in secret places can facilitate the perpetration of torture and other cruel, inhuman or degrading treatment or punishment and can in itself constitute a form of such treatment, and urges all States to respect the safeguards concerning the liberty, security and dignity of the person and to ensure that prolonged incommunicado detention and secret places of detention and interrogation are abolished;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls that the unlawful or excessive use of force by law enforcement officials committed against persons exercising their rights to freedom of peaceful assembly may constitute torture or other cruel, inhuman or degrading treatment or punishment, and encourages States to take into account the Model Protocol for Law Enforcement Officials to Promote and Protect Human Rights in the Context of Peaceful Protests;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls that the unlawful or excessive use of force by law enforcement officials committed against persons exercising their rights to freedom of peaceful assembly may constitute torture or other cruel, inhuman or degrading treatment or punishment, and notes in this regard the Model Protocol for Law Enforcement Officials to Promote and Protect Human Rights in the Context of Peaceful Protests;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the establishment of national preventive mechanisms to prevent torture and other cruel, inhuman or degrading treatment or punishment, urges States to consider establishing, appointing, maintaining or enhancing independent and effective mechanisms that have experts with the required capabilities and professional knowledge to undertake monitoring visits to places of detention and other places under State jurisdiction and control where persons are or may be deprived of their liberty, inter alia, with a view to preventing acts of torture or other cruel, inhuman or degrading treatment or punishment, and calls upon States Parties to the Optional Protocol to the Convention against Torture and Other Cruel, Inhuman or Degrading Treatment or Punishment 12 to fulfil their obligation to designate or establish national preventive mechanisms at the latest one year after the entry into force of the Protocol or of its ratification or accession, that are truly independent, composed of experts with the required capabilities and professional knowledge, and properly resourced and, further, to consider the recommendations of such mechanisms, to encourage public debate and to engage in constructive dialogue with such mechanisms on possible implementation measures;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the establishment of national preventive mechanisms to prevent torture and other cruel, inhuman or degrading treatment or punishment, urges States to consider establishing, appointing, maintaining or enhancing independent and effective mechanisms that have experts with the required capabilities and professional knowledge to undertake monitoring visits to places of detention and other places under State jurisdiction and control where persons are or may be deprived of their liberty, inter alia, with a view to preventing acts of torture or other cruel, inhuman or degrading treatment or punishment, and calls upon States Parties to the Optional Protocol to the Convention against Torture and Other Cruel, Inhuman or Degrading Treatment or Punishment12 to fulfil their obligation to designate or establish national preventive mechanisms at the latest one year after the entry into force of the Protocol or of its ratification or accession, that are truly independent, composed of experts with the required capabilities and professional knowledge, and properly resourced and, further, to consider the recommendations of such mechanisms, to encourage public debate and to engage in constructive dialogue with such mechanisms on possible implementation measures;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States, as an important element in preventing and combating torture and other cruel, inhuman or degrading treatment or punishment, to ensure that no authority or official orders, applies, permits or tolerates any sanction, reprisal, intimidation or other prejudice against any person, group or association, including persons deprived of their liberty, for contacting, seeking to contact or having been in contact with any national or international monitoring or preventive body or other relevant stakeholders active in the prevention and combating of torture and other cruel, inhuman or degrading treatment or punishment; __________________ 12 United Nations, Treaty Series, vol. 2375, No. 24841. A/C.3/80/L.49 7/10 25-17792
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States, as an important element in preventing and combating torture and other cruel, inhuman or degrading treatment or punishment, to ensure that no authority or official orders, applies, permits or tolerates any sanction, reprisal, intimidation or other prejudice against any person, group or association, including persons deprived of their liberty, for contacting, seeking to contact or having been in contact with any national or international monitoring or preventive body or other _______________ 12 United Nations, Treaty Series, vol. 2375, No. 24841. Torture and other cruel, inhuman or degrading treatment or punishment A/RES/80/198 7/11 25-20949 relevant stakeholders active in the prevention and combating of torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that it is important for law enforcement officials to be able to play their role in safeguarding the right not to be subjected to torture and other cruel, inhuman or degrading treatment or punishment, and for States to ensure the proper functioning of the criminal justice system, in particular by taking effective measures to combat corruption, establish proper legal aid programmes and to provide for the adequate selection, training and remuneration of law enforcement officials while fully respecting the principles of non-discrimination, and taking measures to improve the __________________ 13 Resolution 55/89, annex. 14 E/CN.4/2005/102/Add.1. A/C.3/80/L.49 25-17792 8/10 representation of women and persons belonging to minorities within law enforcement ranks whenever possible;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that it is important for law enforcement officials to be able to play their role in safeguarding the right not to be subjected to torture and other cruel, inhuman or degrading treatment or punishment, and for States to ensure the proper functioning of the criminal justice system, in particular by taking effective measures _______________ 13 Resolution 55/89, annex. 14 E/CN.4/2005/102/Add.1. A/RES/80/198 Torture and other cruel, inhuman or degrading treatment or punishment 25-20949 8/11 to combat corruption, establish proper legal aid programmes and to provide for the adequate selection, training and remuneration of law enforcement officials while fully respecting the principles of non‑discrimination, and taking measures to improve the representation of women and persons belonging to minorities within law enforcement ranks whenever possible;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 37</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to provide redress for victims of torture or other cruel, inhuman or degrading treatment or punishment, encompassing effective remedy and adequate, effective and prompt reparation, which should include restitution, fair and adequate compensation, rehabilitation, satisfaction and guarantees of non-repetition, taking into full account the specific needs of the victim;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to provide redress for victims of torture or other cruel, inhuman or degrading treatment or punishment, encompassing effective remedy and adequate, effective and prompt reparation, which should include restitution, fair and adequate compensation, rehabilitation, satisfaction and guarantees of non‑repetition, taking into full account the specific needs of the victim;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 39</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges States to establish, maintain, facilitate or support rehabilitation centres or facilities where victims and survivors can receive such treatment and where effective measures for ensuring the safety of their staff and patients are taken;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges States to establish, maintain, facilitate or support rehabilitation centres or facilities where victims and survivors can receive such treatment and where effective measures for ensuring the safety of their staff and patients are taken; _______________ 15 United Nations, Treaty Series, vol. 2515, No. 44910. Torture and other cruel, inhuman or degrading treatment or punishment A/RES/80/198 9/11 25-20949
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States that have not yet done so to become Parties to the Convention against Torture and the Optional Protocol thereto as a matter of priority, and calls upon States Parties to ensure their effective implementation; __________________ 15 United Nations, Treaty Series, vol. 2515, No. 44910. A/C.3/80/L.49 9/10 25-17792
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States that have not yet done so to become Parties to the Convention against Torture and the Optional Protocol thereto as a matter of priority, and calls upon States Parties to ensure their effective implementation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of the Committee and the Subcommittee having due regard to the principle of non-discrimination, paying particular attention to the rights of those who are marginalized or in vulnerable situations, including through a victim- and survivor-oriented and gender-responsive approach in the fight against torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of the Committee and the Subcommittee having due regard to the principle of non‑discrimination, paying particular attention to the rights of those who are marginalized or in vulnerable situations, including through a victim- and survivor-oriented and gender-responsive approach in the fight against torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 45</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of States ensuring proper follow-up to the recommendations and conclusions of the relevant treaty bodies and mechanisms, including the Committee, the Subcommittee, national preventive mechanisms and the Special Rapporteur, while recognizing the important role of the universal periodic review, national human rights institutions and other relevant national or regional bodies in preventing torture and other cruel, inhuman or degrading treatment or punishment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of States ensuring proper follow-up to the recommendations and conclusions of the relevant treaty bodies and mechanisms, including the Committee, the Subcommittee, national preventive mechanisms and the Special Rapporteur, while recognizing the important role of the universal periodic review, national human rights institutions and other relevant national or regional bodies in preventing torture and other cruel, inhuman or degrading treatment or punishment; A/RES/80/198 Torture and other cruel, inhuman or degrading treatment or punishment 25-20949 10/11
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 47</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to cooperate with and assist the Special Rapporteur in the performance of her tasks, to supply all necessary information requested by her, to fully and expeditiously respond to and follow up on her urgent appeals, to give serious consideration to responding favourably to requests by her to visit their __________________ 16 See, inter alia, A/HRC/52/30, A/78/324, A/HRC/55/52, A/79/181, A/HRC/58/55 and A/80/137. A/C.3/80/L.49 25-17792 10/10 countries and to enter into a constructive dialogue with her on requested visits to their countries as well as with respect to the follow-up to her recommendations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to cooperate with and assist the Special Rapporteur in the performance of her tasks, to supply all necessary information requested by her, to fully and expeditiously respond to and follow up on her urgent appeals, to give serious consideration to responding favourably to requests by her to visit their countries and to enter into a constructive dialogue with her on requested visits to their countries as well as with respect to the follow-up to her recommendations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need for the continued regular exchange of views among the Committee, the Subcommittee, the Special Rapporteur and other relevant United Nations mechanisms and bodies, as well as for the pursuit of cooperation with relevant United Nations programmes, notably the United Nations crime prevention and criminal justice programme, with regional organizations and mechanisms, as appropriate, and with civil society organizations, including non-governmental organizations, with a view to enhancing further their effectiveness and cooperation on issues relating to the prevention and eradication of torture by, inter alia, improving coordination;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need for the continued regular exchange of views among the Committee, the Subcommittee, the Special Rapporteur and other relevant United Nations mechanisms and bodies, as well as for the pursuit of cooperation with relevant United Nations programmes, notably the United Nations crime prevention and criminal justice programme, with regional organizations and mechanisms, as appropriate, and with civil society organizations, including non‑governmental organizations, with a view to enhancing further their effectiveness and cooperation on issues relating to the prevention and eradication of torture by, inter alia, improving coordination;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 53</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States, the Office of the United Nations High Commissioner for Human Rights and other United Nations bodies and agencies, as well as relevant intergovernmental and civil society organizations, including non-governmental organizations, to commemorate, on 26 June, the United Nations International Day in Support of Victims of Torture;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States, the Office of the United Nations High Commissioner for Human Rights and other United Nations bodies and agencies, as well as relevant _______________ 16 See, inter alia, A/HRC/52/30, A/78/324, A/HRC/55/52, A/79/181, A/HRC/58/55 and A/80/137. Torture and other cruel, inhuman or degrading treatment or punishment A/RES/80/198 11/11 25-20949 intergovernmental and civil society organizations, including non‑governmental organizations, to commemorate, on 26 June, the United Nations International Day in Support of Victims of Torture;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 55</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.49</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also decides to give its full consideration to the subject matter at its eighty- third session.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/198</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also decides to give its full consideration to the subject matter at its eighty- third session. 63rd plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.49.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -212,36 +645,37 @@
         <span class="text-sm text-muted">2 with signals, 53 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -258,7 +692,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -275,7 +709,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -292,7 +726,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -309,7 +743,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -326,7 +760,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -343,7 +777,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -360,7 +794,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -377,7 +811,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -394,7 +828,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -411,7 +845,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -428,7 +862,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -445,7 +879,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -462,7 +896,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -479,7 +913,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -496,7 +930,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -513,7 +947,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -530,7 +964,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -547,7 +981,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -564,7 +998,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -581,7 +1015,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -598,7 +1032,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -615,7 +1049,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -632,7 +1066,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -649,7 +1083,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -666,7 +1100,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -683,7 +1117,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -700,7 +1134,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -717,7 +1151,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -734,7 +1168,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -751,7 +1185,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -768,7 +1202,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -785,7 +1219,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -802,7 +1236,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -819,7 +1253,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -836,7 +1270,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -853,7 +1287,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -870,7 +1304,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -887,7 +1321,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -904,7 +1338,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -921,7 +1355,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -938,7 +1372,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -955,7 +1389,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -972,7 +1406,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -989,7 +1423,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1006,7 +1440,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1023,7 +1457,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1040,7 +1474,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1057,7 +1491,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1074,7 +1508,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1091,7 +1525,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1118,7 +1552,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1135,7 +1569,7 @@
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1152,7 +1586,7 @@
         </div>
     </div>
     
-    <div id="para-54" 
+    <div id="para-54"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -1179,7 +1613,7 @@
         </div>
     </div>
     
-    <div id="para-55" 
+    <div id="para-55"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1201,19 +1635,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1228,14 +1675,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1251,12 +1698,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1275,12 +1722,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

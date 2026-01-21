@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,399 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/113</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/113</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/113?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">108 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/113. International cooperation on humanitarian assistance in the field of natural disasters, from relief to development</p>
+    
+    <p class="mt-1 text-muted">108 operative paragraphs · Item 72</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/80/L.23</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">18 of 108 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses its deep concern at the increasing impact of natural disasters, resulting in massive losses of life and property worldwide, food insecurity, water and sanitation-related challenges, shelter and infrastructure losses, and, in some instances, displacement, in particular in vulnerable societies lacking adequate capacity to __________________ 9 A/80/390. A/80/L.23 25-19539 6/19 mitigate effectively the long-term negative social, economic and environmental consequences of natural disasters;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses its deep concern at the increasing impact of natural disasters, resulting in massive losses of life and property worldwide, food insecurity, water and _______________ 9 A/80/390. A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 6/19 sanitation-related challenges, shelter and infrastructure losses, and, in some instances, displacement, in particular in vulnerable societies lacking adequate capacity to mitigate effectively the long-term negative social, economic and environmental consequences of natural disasters;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to adopt, where required, and to continue to implement effectively, necessary legislative and other appropriate measures to mitigate the effects of natural disasters and integrate disaster risk reduction strategies into development planning, as well as to incorporate a gender perspective into policies, planning and funding, and in this regard requests the international community to continue to assist developing countries as well as countries with economies in transition, as appropriate; A/80/L.23 7/19 25-19539
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to adopt, where required, and to continue to implement effectively, necessary legislative and other appropriate measures to mitigate the effects of natural disasters and integrate disaster risk reduction strategies into development planning, as well as to incorporate a gender perspective into policies, planning and funding, and in this regard requests the international International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 7/19 25-20386 community to continue to assist developing countries as well as countries with economies in transition, as appropriate;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, the United Nations and humanitarian and development organizations to integrate the building of resilience and human mobility into relevant strategies, plans and legal frameworks, in particular regarding disaster risk management and climate change adaptation, as integral elements of sustainable development at the national and regional levels so as to help to prevent and mitigate displacement in the context of disasters and the adverse effects of climate change, including in urban settings where displaced persons have particular needs, __________________ 10 E/CN.4/1998/53/Add.2, annex. 11 A/HRC/13/21/Add.4. 12 A/HRC/4/18, annex I. A/80/L.23 25-19539 8/19 requirements and vulnerabilities, and to enhance cooperation and coordination, where appropriate, to comprehensively and coherently respond to such displacement, including by preventing, preparing for and addressing it;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, the United Nations and humanitarian and development organizations to integrate the building of resilience and human mobility into relevant strategies, plans and legal frameworks, in particular regarding disaster risk management and climate change adaptation, as integral elements of sustainable development at the national and regional levels so as to help to prevent and mitigate _______________ 10 E/CN.4/1998/53/Add.2, annex. 11 A/HRC/13/21/Add.4. 12 A/HRC/4/18, annex I. A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 8/19 displacement in the context of disasters and the adverse effects of climate change, including in urban settings where displaced persons have particular needs, requirements and vulnerabilities, and to enhance cooperation and coordination, where appropriate, to comprehensively and coherently respond to such displacement, including by preventing, preparing for and addressing it;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to strengthen operational and legal frameworks for international disaster relief and initial recovery, to adopt and implement national laws and regulations, as appropriate, to reduce the impact of the underlying drivers of disaster risk and vulnerability, and to adopt comprehensive rules and procedures for the facilitation and regulation of international disaster assistance, drawing, as appropriate, from the Guidelines for the Domestic Facilitation and Regulation of International Disaster Relief and Initial Recovery Assistance, and calls A/80/L.23 9/19 25-19539 upon the International Red Cross and Red Crescent Movement, relevant United Nations organizations and other partners for technical support in achieving these aims;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to strengthen operational and legal frameworks for international disaster relief and initial recovery, to adopt and implement national laws and regulations, as appropriate, to reduce the impact of the underlying drivers of disaster risk and vulnerability, and to adopt comprehensive rules and procedures for the facilitation and regulation of international disaster assistance, drawing, as appropriate, from the Guidelines for the Domestic Facilitation and International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 9/19 25-20386 Regulation of International Disaster Relief and Initial Recovery Assistance, and calls upon the International Red Cross and Red Crescent Movement, relevant United Nations organizations and other partners for technical support in achieving these aims;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to develop or enhance forecast-based preparedness and early action and rapid response systems, including through the establishment and networking of risk management centres, as well as the coordination A/80/L.23 25-19539 10/19 of existing networks, ensure that comprehensive procedures are in place and make resources available for actions in anticipation of natural disasters, and invites relevant bodies of the United Nations system and other stakeholders to engage in these efforts;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to develop or enhance forecast-based preparedness and early action and rapid response systems, including through the A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 10/19 establishment and networking of risk management centres, as well as the coordination of existing networks, ensure that comprehensive procedures are in place and make resources available for actions in anticipation of natural disasters, and invites relevant bodies of the United Nations system and other stakeholders to engage in these efforts;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 38</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that the recovery, rehabilitation and reconstruction phase, which needs to be prepared ahead of a disaster, is a critical opportunity to “build back better”;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that the recovery, rehabilitation and reconstruction phase, which needs to be prepared ahead of a disaster, is a critical opportunity to “build back better”; International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 11/19 25-20386
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 39</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States, the United Nations and other relevant stakeholders to continue to support the localization of disaster preparedness and A/80/L.23 11/19 25-19539 response and work to ensure that national and local actors are enabled to respond to community-level needs and priorities, and strengthen collaboration and partnerships between international, national, local and regional actors with a view to reinforcing national and local capacities, leadership and coordination mechanisms;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States, the United Nations and other relevant stakeholders to continue to support the localization of disaster preparedness and response and work to ensure that national and local actors are enabled to respond to community-level needs and priorities, and strengthen collaboration and partnerships between international, national, local and regional actors with a view to reinforcing national and local capacities, leadership and coordination mechanisms;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 49</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the leading role of the Office for the Coordination of Humanitarian Affairs of the Secretariat as the focal point within the overall United Nations system for the advocacy for and coordination of humanitarian assistance among United Nations humanitarian organizations and other humanitarian partners;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the leading role of the Office for the Coordination of Humanitarian Affairs of the Secretariat as the focal point within the overall United Nations system for the advocacy for and coordination of humanitarian assistance among United Nations humanitarian organizations and other humanitarian partners; A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 12/19
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 50</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of global and regional operational readiness and response services, networks and surge mechanisms in strengthening the A/80/L.23 25-19539 12/19 effectiveness of disaster prevention, preparedness and response, and encourages further efforts in this regard by, inter alia, strengthening partnerships with national disaster management agencies and regional organizations, within their respective mandates, and building, reinforcing and complementing their capacities, in close coordination with the United Nations and humanitarian organizations, including through improved data sharing and interoperability;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of global and regional operational readiness and response services, networks and surge mechanisms in strengthening the effectiveness of disaster prevention, preparedness and response, and encourages further efforts in this regard by, inter alia, strengthening partnerships with national disaster management agencies and regional organizations, within their respective mandates, and building, reinforcing and complementing their capacities, in close coordination with the United Nations and humanitarian organizations, including through improved data sharing and interoperability;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 58</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that information and telecommunications technology can play an important role in disaster response, encourages Member States to develop emergency response telecommunications capacities that are accessible to all, including persons with disabilities, encourages the international community to assist A/80/L.23 13/19 25-19539 the efforts of developing countries in this area, where needed, including in the recovery phase, and in this regard encourages Member States that have not acceded to or ratified the Tampere Convention on the Provision of Telecommunication Resources for Disaster Mitigation and Relief Operations13 to consider doing so;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that information and telecommunications technology can play an important role in disaster response, encourages Member States to develop International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 13/19 25-20386 emergency response telecommunications capacities that are accessible to all, including persons with disabilities, encourages the international community to assist the efforts of developing countries in this area, where needed, including in the recovery phase, and in this regard encourages Member States that have not acceded to or ratified the Tampere Convention on the Provision of Telecommunication Resources for Disaster Mitigation and Relief Operations13 to consider doing so;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 65</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon United Nations humanitarian organizations, in consultation with Member States, as appropriate, to strengthen the evidence base for effective humanitarian assistance by further developing common mechanisms to improve the quality, transparency and reliability of, and make further progress towards, common __________________ 13 United Nations, Treaty Series, vol. 2296, No. 40906. A/80/L.23 25-19539 14/19 humanitarian needs assessments, to assess their performance in assistance and to ensure the most effective use of humanitarian resources by these organizations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon United Nations humanitarian organizations, in consultation with Member States, as appropriate, to strengthen the evidence base for effective _______________ 13 United Nations, Treaty Series, vol. 2296, No. 40906. A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 14/19 humanitarian assistance by further developing common mechanisms to improve the quality, transparency and reliability of, and make further progress towards, common humanitarian needs assessments, to assess their performance in assistance and to ensure the most effective use of humanitarian resources by these organizations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 71</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments, local authorities, the United Nations system and regional organizations, and invites donors and other assisting countries, to address the vulnerabilities and capacities of women and girls through gender- responsive programming, including with regard to sexual and reproductive health needs and means to address sexual and gender-based violence and various forms of exploitation during emergencies and in post-disaster environments, and the allocation A/80/L.23 15/19 25-19539 of resources in their disaster risk reduction, response and recovery efforts in coordination with the Governments of affected countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments, local authorities, the United Nations system and regional organizations, and invites donors and other assisting countries, to address the vulnerabilities and capacities of women and girls through gender-responsive programming, including with regard to sexual and reproductive health needs and means to address sexual and gender-based violence and various forms of exploitation International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 15/19 25-20386 during emergencies and in post-disaster environments, and the allocation of resources in their disaster risk reduction, response and recovery efforts in coordination with the Governments of affected countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 80</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations and humanitarian and development organizations to support national, subnational and local governments and communities in their responsibility to develop long-term strategies, forecast-based financing and preparedness systems and multi-year operational plans for preparedness that are embedded within disaster risk reduction and resilience strategies in line with the Sendai Framework; A/80/L.23 25-19539 16/19
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations and humanitarian and development organizations to support national, subnational and local governments and communities in their responsibility to develop long-term strategies, forecast-based financing and preparedness systems and multi-year operational plans for preparedness that are embedded within disaster risk reduction and resilience strategies in line with the Sendai Framework; A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 16/19
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 88</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States, humanitarian and development organizations and other stakeholders to ensure a comprehensive and coherent approach at the global, regional, national and local levels to El Niño and La Niña phenomena and similar or related events, including by strengthening forecasting, early warning and early action, prevention, preparedness, resilience-building and timely response, supported by effective leadership and predictable, adequate and early funding, when feasible, in __________________ 14 Resolution 77/289, annex. A/80/L.23 17/19 25-19539 regions, countries and communities likely to be affected, and notes the work of the Special Envoys of the Secretary-General on El Niño and Climate and the blueprint for action prepared by them, and the standard operating procedures for El Niño/ Southern Oscillation events of the Inter-Agency Standing Committee;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States, humanitarian and development organizations and other stakeholders to ensure a comprehensive and coherent approach at the global, regional, national and local levels to El Niño and La Niña phenomena and similar or related events, including by strengthening forecasting, early warning and early action, prevention, preparedness, resilience-building and timely response, supported by effective leadership and predictable, adequate and early funding, when feasible, in _______________ 14 Resolution 77/289, annex. International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 17/19 25-20386 regions, countries and communities likely to be affected, and notes the work of the Special Envoys of the Secretary-General on El Niño and Climate and the blueprint for action prepared by them, and the standard operating procedures for El Niño/ Southern Oscillation events of the Inter-Agency Standing Committee;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 94</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, the United Nations and humanitarian organizations to provide emergency assistance in ways that are supportive of recovery and long-term development, in collaboration with development organizations, as appropriate, in accordance with their respective mandates, including by prioritizing humanitarian tools and approaches that strengthen resilience, including preparedness, A/80/L.23 25-19539 18/19 and support livelihoods, and to support further development and, where appropriate, the strengthening of anticipatory financing approaches, such as, but not limited to, cash transfers, vouchers, local procurement of food and services and social safety nets;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, the United Nations and humanitarian organizations to provide emergency assistance in ways that are supportive of recovery and long-term development, in collaboration with development organizations, as appropriate, in accordance with their respective mandates, including by prioritizing humanitarian tools and approaches that strengthen resilience, including preparedness, A/RES/80/113 International cooperation on humanitarian assistance in the field of natural disasters, from relief to development 25-20386 18/19 and support livelihoods, and to support further development and, where appropriate, the strengthening of anticipatory financing approaches, such as, but not limited to, cash transfers, vouchers, local procurement of food and services and social safety nets;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 101</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the important achievements of the Central Emergency Response Fund in ensuring a more timely and predictable response to humanitarian emergencies, stresses the importance of continuing to improve the functioning of the Fund, and in this regard encourages the United Nations funds and programmes and the specialized agencies to review and evaluate, where necessary, their partnership policies and practices in order to ensure the timely disbursement of funds from the Fund to implementing partners in order to ensure that resources are used in the most efficient, effective, accountable and transparent manner possible; A/80/L.23 19/19 25-19539
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the important achievements of the Central Emergency Response Fund in ensuring a more timely and predictable response to humanitarian emergencies, stresses the importance of continuing to improve the functioning of the Fund, and in this regard encourages the United Nations funds and programmes and the specialized agencies to review and evaluate, where necessary, their partnership policies and practices in order to ensure the timely disbursement of funds from the Fund to implementing partners in order to ensure that resources are used in the most efficient, effective, accountable and transparent manner possible; International cooperation on humanitarian assistance in the field of natural disasters, from relief to development A/RES/80/113 19/19 25-20386
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 105</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly encourages giving appropriate consideration to disaster risk reduction, including preparedness, and the building of resilience to disasters as integral elements of sustainable development and in the implementation of the 2030 Agenda for Sustainable Development, the Addis Ababa Action Agenda of the Third International Conference on Financing for Development15 and the Sevilla Commitment of the Fourth International Conference on Financing for Development 16 and promoting a complementary and coherent approach between those frameworks and the Sendai Framework;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly encourages giving appropriate consideration to disaster risk reduction, including preparedness, and the building of resilience to disasters as integral elements of sustainable development and in the implementation of the 2030 Agenda for Sustainable Development, the Addis Ababa Action Agenda of the Third International Conference on Financing for Development15 and the Sevilla Commitment of the Fourth International Conference on Financing for Development16 and promoting a complementary and coherent approach between those frameworks and the Sendai Framework;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 108</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to continue to improve the international response to natural disasters and to report thereon to the General Assembly at its eighty-first session and to include in his report recommendations on how to ensure that humanitarian assistance is provided in ways supportive of the transition from relief to development. __________________ 15 Resolution 69/313, annex. 16 Resolution 79/323, annex. 17 A/71/353.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/113</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to continue to improve the international response to natural disasters and to report thereon to the General Assembly at its eighty-first session and to include in his report recommendations on how to ensure that humanitarian assistance is provided in ways supportive of the transition from relief to development. 60th plenary meeting 10 December 2025 _______________ 15 Resolution 69/313, annex. 16 Resolution 79/323, annex. 17 A/71/353.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_80_L.23.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -318,35 +697,36 @@
         <span class="text-sm text-muted">2 with signals, 106 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -363,7 +743,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -380,7 +760,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -397,7 +777,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -414,7 +794,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -431,7 +811,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -448,7 +828,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -465,7 +845,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -482,7 +862,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -499,7 +879,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -516,7 +896,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -533,7 +913,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -550,7 +930,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -567,7 +947,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -584,7 +964,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -601,7 +981,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -618,7 +998,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -635,7 +1015,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -652,7 +1032,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -669,7 +1049,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -686,7 +1066,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -703,7 +1083,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -720,7 +1100,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -737,7 +1117,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -754,7 +1134,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -771,7 +1151,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -788,7 +1168,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -805,7 +1185,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -822,7 +1202,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -839,7 +1219,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -856,7 +1236,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -873,7 +1253,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -890,7 +1270,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -907,7 +1287,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -924,7 +1304,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -941,7 +1321,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -958,7 +1338,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -975,7 +1355,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -992,7 +1372,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1009,7 +1389,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1026,7 +1406,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1043,7 +1423,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1060,7 +1440,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1077,7 +1457,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1094,7 +1474,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1111,7 +1491,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1128,7 +1508,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1145,7 +1525,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1162,7 +1542,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1179,7 +1559,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1196,7 +1576,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1213,7 +1593,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1230,7 +1610,7 @@
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1247,7 +1627,7 @@
         </div>
     </div>
     
-    <div id="para-54" 
+    <div id="para-54"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1264,7 +1644,7 @@
         </div>
     </div>
     
-    <div id="para-55" 
+    <div id="para-55"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1281,7 +1661,7 @@
         </div>
     </div>
     
-    <div id="para-56" 
+    <div id="para-56"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1298,7 +1678,7 @@
         </div>
     </div>
     
-    <div id="para-57" 
+    <div id="para-57"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1315,7 +1695,7 @@
         </div>
     </div>
     
-    <div id="para-58" 
+    <div id="para-58"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1332,7 +1712,7 @@
         </div>
     </div>
     
-    <div id="para-59" 
+    <div id="para-59"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1349,7 +1729,7 @@
         </div>
     </div>
     
-    <div id="para-60" 
+    <div id="para-60"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1366,7 +1746,7 @@
         </div>
     </div>
     
-    <div id="para-61" 
+    <div id="para-61"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1383,7 +1763,7 @@
         </div>
     </div>
     
-    <div id="para-62" 
+    <div id="para-62"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1400,7 +1780,7 @@
         </div>
     </div>
     
-    <div id="para-63" 
+    <div id="para-63"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1417,7 +1797,7 @@
         </div>
     </div>
     
-    <div id="para-64" 
+    <div id="para-64"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1434,7 +1814,7 @@
         </div>
     </div>
     
-    <div id="para-65" 
+    <div id="para-65"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1451,7 +1831,7 @@
         </div>
     </div>
     
-    <div id="para-66" 
+    <div id="para-66"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1468,7 +1848,7 @@
         </div>
     </div>
     
-    <div id="para-67" 
+    <div id="para-67"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1485,7 +1865,7 @@
         </div>
     </div>
     
-    <div id="para-68" 
+    <div id="para-68"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1502,7 +1882,7 @@
         </div>
     </div>
     
-    <div id="para-69" 
+    <div id="para-69"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1519,7 +1899,7 @@
         </div>
     </div>
     
-    <div id="para-70" 
+    <div id="para-70"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1536,7 +1916,7 @@
         </div>
     </div>
     
-    <div id="para-71" 
+    <div id="para-71"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1553,7 +1933,7 @@
         </div>
     </div>
     
-    <div id="para-72" 
+    <div id="para-72"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1570,7 +1950,7 @@
         </div>
     </div>
     
-    <div id="para-73" 
+    <div id="para-73"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1587,7 +1967,7 @@
         </div>
     </div>
     
-    <div id="para-74" 
+    <div id="para-74"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1604,7 +1984,7 @@
         </div>
     </div>
     
-    <div id="para-75" 
+    <div id="para-75"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1621,7 +2001,7 @@
         </div>
     </div>
     
-    <div id="para-76" 
+    <div id="para-76"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1638,7 +2018,7 @@
         </div>
     </div>
     
-    <div id="para-77" 
+    <div id="para-77"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1655,7 +2035,7 @@
         </div>
     </div>
     
-    <div id="para-78" 
+    <div id="para-78"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1672,7 +2052,7 @@
         </div>
     </div>
     
-    <div id="para-79" 
+    <div id="para-79"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1689,7 +2069,7 @@
         </div>
     </div>
     
-    <div id="para-80" 
+    <div id="para-80"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1706,7 +2086,7 @@
         </div>
     </div>
     
-    <div id="para-81" 
+    <div id="para-81"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1723,7 +2103,7 @@
         </div>
     </div>
     
-    <div id="para-82" 
+    <div id="para-82"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1740,7 +2120,7 @@
         </div>
     </div>
     
-    <div id="para-83" 
+    <div id="para-83"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1757,7 +2137,7 @@
         </div>
     </div>
     
-    <div id="para-84" 
+    <div id="para-84"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1774,7 +2154,7 @@
         </div>
     </div>
     
-    <div id="para-85" 
+    <div id="para-85"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1791,7 +2171,7 @@
         </div>
     </div>
     
-    <div id="para-86" 
+    <div id="para-86"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1808,7 +2188,7 @@
         </div>
     </div>
     
-    <div id="para-87" 
+    <div id="para-87"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1825,7 +2205,7 @@
         </div>
     </div>
     
-    <div id="para-88" 
+    <div id="para-88"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1842,7 +2222,7 @@
         </div>
     </div>
     
-    <div id="para-89" 
+    <div id="para-89"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1859,7 +2239,7 @@
         </div>
     </div>
     
-    <div id="para-90" 
+    <div id="para-90"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1876,7 +2256,7 @@
         </div>
     </div>
     
-    <div id="para-91" 
+    <div id="para-91"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1893,7 +2273,7 @@
         </div>
     </div>
     
-    <div id="para-92" 
+    <div id="para-92"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1910,7 +2290,7 @@
         </div>
     </div>
     
-    <div id="para-93" 
+    <div id="para-93"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1927,7 +2307,7 @@
         </div>
     </div>
     
-    <div id="para-94" 
+    <div id="para-94"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1944,7 +2324,7 @@
         </div>
     </div>
     
-    <div id="para-95" 
+    <div id="para-95"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1961,7 +2341,7 @@
         </div>
     </div>
     
-    <div id="para-96" 
+    <div id="para-96"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1978,7 +2358,7 @@
         </div>
     </div>
     
-    <div id="para-97" 
+    <div id="para-97"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1995,7 +2375,7 @@
         </div>
     </div>
     
-    <div id="para-98" 
+    <div id="para-98"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2012,7 +2392,7 @@
         </div>
     </div>
     
-    <div id="para-99" 
+    <div id="para-99"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2029,7 +2409,7 @@
         </div>
     </div>
     
-    <div id="para-100" 
+    <div id="para-100"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2046,7 +2426,7 @@
         </div>
     </div>
     
-    <div id="para-101" 
+    <div id="para-101"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2063,7 +2443,7 @@
         </div>
     </div>
     
-    <div id="para-102" 
+    <div id="para-102"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2080,7 +2460,7 @@
         </div>
     </div>
     
-    <div id="para-103" 
+    <div id="para-103"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2097,7 +2477,7 @@
         </div>
     </div>
     
-    <div id="para-104" 
+    <div id="para-104"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2114,7 +2494,7 @@
         </div>
     </div>
     
-    <div id="para-105" 
+    <div id="para-105"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -2141,7 +2521,7 @@
         </div>
     </div>
     
-    <div id="para-106" 
+    <div id="para-106"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2158,7 +2538,7 @@
         </div>
     </div>
     
-    <div id="para-107" 
+    <div id="para-107"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -2175,7 +2555,7 @@
         </div>
     </div>
     
-    <div id="para-108" 
+    <div id="para-108"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -2206,19 +2586,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -2233,14 +2626,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -2256,12 +2649,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -2280,12 +2673,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

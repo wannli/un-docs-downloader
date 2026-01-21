@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,291 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/164</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/164</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/164?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">49 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/164. Report of the International Law Commission on the work of its seventy-sixth session</p>
+    
+    <p class="mt-1 text-muted">49 operative paragraphs · Item 80</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.6/80/L.21</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">12 of 49 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that the International Law Commission continue its work on the topics in its current programme of work, taking into account the comments and observations of Governments, whether submitted in writing or expressed orally in debates in the Sixth Committee, and further recognizes the important role of comments and observations from Governments in the work of the Commission; A/C.6/80/L.21 3/7 25-18470
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that the International Law Commission continue its work on the topics in its current programme of work, taking into account the comments and observations of Governments, whether submitted in writing or expressed orally in Report of the International Law Commission on the work of its seventy-sixth session A/RES/80/164 3/7 25-20858 debates in the Sixth Committee, and further recognizes the important role of comments and observations from Governments in the work of the Commission;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Draws the attention of Governments to the importance for the International Law Commission of having their views on the various aspects of the topics on the agenda of the Commission, in particular on all the specific issues identified in chapter III of its report, including: (a) Settlement of disputes to which international organizations are parties; (b) Non-legally binding international agreements; (c) Prevention and repression of piracy and armed robbery at sea;3
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Draws the attention of Governments to the importance for the International Law Commission of having their views on the various aspects of the topics on the agenda of the Commission, in particular on all the specific issues identified in chapter III of its report, including: (a) Settlement of disputes to which international organizations are parties; (b) Non-legally binding international agreements; (c) Prevention and repression of piracy and armed robbery at sea; 3
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the decision of the International Law Commission to include the topics “Compensation for the damage caused by internationally wrongful acts” and “Due diligence in international law” in its programme of work,4 and encourages the Commission to continue the examination of the topics that are in its long-term programme of work;5
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the decision of the International Law Commission to include the topics “Compensation for the damage caused by internationally wrongful acts” and “Due diligence in international law” in its programme of work, 4 and encourages the Commission to continue the examination of the topics that are in its long-term programme of work;5
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraphs 445 to 449 of the report of the International Law Commission, and notes, in particular, the inclusion of the topics “The principle of non-intervention in international law”, “Identification and legal consequences of obligations erga omnes in international law” and “Legal aspects of accountability for crimes committed against United Nations personnel serving in peacekeeping operations” in the long-term programme of work of the Commission, 6 and in this regard calls upon the Commission to take into consideration the comments, concerns and observations expressed by Governments during the debate in the Sixth Committee;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraphs 445 to 449 of the report of the International Law Commission, and notes, in particular, the inclusion of the topics “The principle of non‑intervention in international law”, “Identification and legal consequences of obligations erga omnes in international law” and “Legal aspects of accountability for crimes committed against United Nations personnel serving in peacekeeping operations” in the long-term programme of work of the Commission,6 and in this regard calls upon the Commission to take into consideration the comments, concerns and observations expressed by Governments during the debate in the Sixth Committee;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also takes note of paragraph 464 of the report of the International Law Commission, and requests the Secretary-General to continue his efforts to identify concrete options for support for the work of special rapporteurs, additional to those provided under General Assembly resolution 56/272 of 27 March 2002;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also takes note of paragraph 464 of the report of the International Law Commission, and requests the Secretary-General to continue his efforts to identify concrete options for support for the work of special rapporteurs, additional to those provided under General Assembly resolution 56/272 of 27 March 2002; _______________ 3 Official Records of the General Assembly, Eightieth Session, Supplement No. 10 (A/80/10), paras. 27–29. 4 Ibid., para. 437. 5 The following topics are currently in the long-term programme of work of the International Law Commission: “Ownership and protection of wrecks beyond the limits of national maritime jurisdiction”, “Jurisdictional immunity of international organizations”, “Protection of personal data in transborder flow of information”, “Extraterritorial jurisdiction”, “The fair and equitable treatment standard in international investment law”, “Evidence before international courts and tribunals”, “Universal criminal jurisdiction”, “Reparation to individuals for gross violations of international human rights law and serious violations of international humanitarian law”, “The principle of non-intervention in international law”, “Identification and legal consequences of obligations erga omnes in international law” and “Legal aspects of accountability for crimes committed against United Nations personnel serving in peacekeeping operations”. 6 Official Records of the General Assembly, Eightieth Session, Supplement No. 10 (A/80/10), para. 446. A/RES/80/164 Report of the International Law Commission on the work of its seventy-sixth session 25-20858 4/7
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the efforts of the International Law Commission to improve its methods of work, and encourages the Commission to continue this practice; __________________ 3 Official Records of the General Assembly, Eightieth Session, Supplement No. 10 (A/80/10), paras. 27–29. 4 Ibid., para. 437. 5 The following topics are currently in the long-term programme of work of the International Law Commission: “Ownership and protection of wrecks beyond the limits of national maritime jurisdiction”, “Jurisdictional immunity of international organizations”, “Protection of personal data in transborder flow of information”, “Extraterritorial jurisdiction”, “The fair and equitable treatment standard in international investment law”, “Evidence before international courts and tribunals”, “Universal criminal jurisdiction”, “Reparation to individuals for gross violations of international human rights law and serious violations of international humanitarian law”, “The principle of non-intervention in international law”, “Identification and legal consequences of obligations erga omnes in international law” and “Legal aspects of accountability for crimes committed against United Nations personnel serving in peacekeeping operations”. 6 Official Records of the General Assembly, Eightieth Session, Supplement No. 10 (A/80/10), para. 446. A/C.6/80/L.21 25-18470 4/7
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the efforts of the International Law Commission to improve its methods of work, and encourages the Commission to continue this practice;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides, without prejudice to the budgetary prerogatives of the Fifth Committee and to the authority of the Secretary-General, that no exceptional measures affecting the duration of the seventy-seventh session of the International Law Commission shall be taken by the Secretariat without consultation with the Bureau of the Sixth Committee, which shall inform the Sixth Committee;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides, without prejudice to the budgetary prerogatives of the Fifth Committee and to the authority of the Secretary-General, that no exceptional measures affecting the duration of the seventy-seventh session of the International Law Commission shall be taken by the Secretariat without consultation with the Bureau of the Sixth Committee, which shall inform the Sixth Committee; Report of the International Law Commission on the work of its seventy-sixth session A/RES/80/164 5/7 25-20858
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the desirability of further enhancing the dialogue between the International Law Commission, in particular the special rapporteurs, and the Sixth Committee, and in this context encourages, inter alia, the continued practice of A/C.6/80/L.21 5/7 25-18470 informal consultations in the form of discussions between the members of the Sixth Committee and the members of the Commission throughout the year;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the desirability of further enhancing the dialogue between the International Law Commission, in particular the special rapporteurs, and the Sixth Committee, and in this context encourages, inter alia, the continued practice of informal consultations in the form of discussions between the members of the Sixth Committee and the members of the Commission throughout the year;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraph 469 of the report of the International Law Commission, stresses the need to expedite the preparation of the summary records of the International Law Commission, welcomes the continuation of the measures taken to streamline the processing of summary records during the sixty-fifth session of the __________________ 7 See resolutions 32/151, para. 10, and 37/111, para. 5, and all subsequent resolutions on the annual reports of the International Law Commission to the General Assembly; see also Yearbook of the International Law Commission 1982, vol. II (Part Two), paras. 267–269 and 271, as well as all subsequent annual reports of the International Law Commission. A/C.6/80/L.21 25-18470 6/7 Commission,8 which have led to a more rational use of resources, and expresses its satisfaction that the summary records of the Commission, constituting travaux préparatoires in the progressive development and codification of international law, will not be subject to arbitrary length restrictions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraph 469 of the report of the International Law Commission, stresses the need to expedite the preparation of the summary records of the International Law Commission, welcomes the continuation of the measures taken _______________ 7 See resolutions 32/151, para. 10, and 37/111, para. 5, and all subsequent resolutions on the annual reports of the International Law Commission to the General Assembly; see also Yearbook of the International Law Commission 1982, vol. II (Part Two), paras. 267–269 and 271, as well as all subsequent annual reports of the International Law Commission. A/RES/80/164 Report of the International Law Commission on the work of its seventy-sixth session 25-20858 6/7 to streamline the processing of summary records during the sixty-fifth session of the Commission,8 which have led to a more rational use of resources, and expresses its satisfaction that the summary records of the Commission, constituting travaux préparatoires in the progressive development and codification of international law, will not be subject to arbitrary length restrictions;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 36</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraph 468 of the report of the International Law Commission, underlines the importance of the publications of the Codification Division to the work of the Commission, and reiterates its request that the Secretary-General continue to publish The Work of the International Law Commission in all six official languages at the beginning of each quinquennium, the Reports of International Arbitral Awards in English or French and the Summaries of the Judgments, Advisory Opinions and Orders of the International Court of Justice in all six official languages every five years;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraph 468 of the report of the International Law Commission, underlines the importance of the publications of the Codification Division to the work of the Commission, and reiterates its request that the Secretary- General continue to publish The Work of the International Law Commission in all six official languages at the beginning of each quinquennium, the Reports of International Arbitral Awards in English or French and the Summaries of the Judgments, Advisory Opinions and Orders of the International Court of Justice in all six official languages every five years;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraph 478 of the report of the International Law Commission and expresses its appreciation for contributions made to date to the trust __________________ 8 Official Records of the General Assembly, Sixty-eighth Session, Supplement No. 10 (A/68/10), para. 183. A/C.6/80/L.21 7/7 25-18470 fund to receive voluntary contributions for assistance to Special Rapporteurs of the International Law Commission or Chairs of its Study Groups and matters ancillary thereto, and invites further contributions to the trust fund, in accordance with the terms of the trust fund, including the need for the financial contributions not to be earmarked for any specific activity of the International Law Commission, its Special Rapporteurs or Chairs of its Study Groups;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of paragraph 478 of the report of the International Law Commission and expresses its appreciation for contributions made to date to the trust _______________ 8 Official Records of the General Assembly, Sixty-eighth Session, Supplement No. 10 (A/68/10), para. 183. Report of the International Law Commission on the work of its seventy-sixth session A/RES/80/164 7/7 25-20858 fund to receive voluntary contributions for assistance to Special Rapporteurs of the International Law Commission or Chairs of its Study Groups and matters ancillary thereto, and invites further contributions to the trust fund, in accordance with the terms of the trust fund, including the need for the financial contributions not to be earmarked for any specific activity of the International Law Commission, its Special Rapporteurs or Chairs of its Study Groups;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 49</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.21</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that the debate on the report of the International Law Commission at the eighty-first session of the General Assembly commence on 26 October 2026.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/164</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that the debate on the report of the International Law Commission at the eighty-first session of the General Assembly commence on 26 October 2026. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.6_80_L.21.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -202,35 +473,36 @@
         <span class="text-sm text-muted">3 with signals, 46 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('process')" 
+        <button onclick="filterSignal('process')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             process
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -247,7 +519,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -264,7 +536,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -281,7 +553,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -298,7 +570,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -315,7 +587,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -332,7 +604,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -349,7 +621,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -366,7 +638,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -383,7 +655,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -400,7 +672,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -417,7 +689,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -434,7 +706,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -451,7 +723,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -468,7 +740,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -485,7 +757,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -502,7 +774,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -519,7 +791,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -536,7 +808,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -553,7 +825,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -570,7 +842,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -587,7 +859,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["process"]'
          data-has-signals="true">
@@ -613,7 +885,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["process"]'
          data-has-signals="true">
@@ -639,7 +911,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -656,7 +928,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -673,7 +945,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -690,7 +962,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -707,7 +979,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -724,7 +996,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -741,7 +1013,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -758,7 +1030,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -775,7 +1047,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -792,7 +1064,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -809,7 +1081,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -826,7 +1098,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -843,7 +1115,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -860,7 +1132,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -877,7 +1149,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -894,7 +1166,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -911,7 +1183,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -938,7 +1210,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -955,7 +1227,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -972,7 +1244,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -989,7 +1261,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1006,7 +1278,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1023,7 +1295,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1040,7 +1312,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1057,7 +1329,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1074,7 +1346,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1096,19 +1368,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1123,14 +1408,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1146,12 +1431,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1170,12 +1455,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

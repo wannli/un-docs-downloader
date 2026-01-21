@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,363 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/39</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/39</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/39?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">32 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/39. Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments</p>
+    
+    <p class="mt-1 text-muted">32 operative paragraphs · Item 99</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.1/80/L.55</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">16 of 32 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Condemns unequivocally all nuclear threats, whether explicit or implicit, and irrespective of the circumstances, and calls upon all States, in particular the nuclear- weapon States, to reject any normalization of nuclear rhetoric and, in particular, the threat of use of nuclear weapons, which only serves to undermine the disarmament and non-proliferation regime and is against the Charter of the United Nations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Condemns unequivocally all nuclear threats, whether explicit or implicit, and irrespective of the circumstances, and calls upon all States, in particular the nuclear-weapon States, to reject any normalization of nuclear rhetoric and, in particular, the threat of use of nuclear weapons, which only serves to undermine the disarmament and non‑proliferation regime and is against the Charter of the United Nations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the fundamental role of the Treaty on the Non-Proliferation of Nuclear Weapons in achieving nuclear disarmament and nuclear non-proliferation, and looks forward to achieving substantive progress during the 2026 Review Conference, in order to strengthen the Treaty and its review process, overcoming the obstacles that prevented a substantive outcome in the two previous Review Conferences held in 2015 and 2022;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the fundamental role of the Treaty on the Non-Proliferation of Nuclear Weapons in achieving nuclear disarmament and nuclear non‑proliferation, and looks forward to achieving substantive progress during the 2026 Review Conference, in order to strengthen the Treaty and its review process, overcoming the obstacles that prevented a substantive outcome in the two previous Review Conferences held in 2015 and 2022;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the continued validity of the decisions, resolutions and commitments as agreed to at the 1995, 2000 and 2010 Review Conferences of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons, and calls upon all States Parties, and in particular the nuclear-weapon States, to reaffirm and implement those decisions, resolutions and commitments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the continued validity of the decisions, resolutions and commitments as agreed to at the 1995, 2000 and 2010 Review Conferences of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons, and calls upon all States Parties, and in particular the nuclear-weapon States, to reaffirm and implement those decisions, resolutions and commitments; _______________ 11 See TPNW/MSP/2022/6. 12 See TPNW/MSP/2023/14 and TPNW/MSP/2025/11/Rev.1. A/RES/80/39 Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments 25-19831 6/9
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the need for an institutional mechanism to monitor the implementation of nuclear disarmament obligations; A/C.1/80/L.55 25-16789 6/8
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the need for an institutional mechanism to monitor the implementation of nuclear disarmament obligations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to give due prominence to the humanitarian imperatives that underpin nuclear disarmament and to the urgency of achieving it, including new evidence presented at the Conferences on the Humanitarian Impact of Nuclear Weapons, and those imperatives should inform all deliberations, decisions and actions relating to nuclear disarmament and nuclear non-proliferation, including within the Review Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to give due prominence to the humanitarian imperatives that underpin nuclear disarmament and to the urgency of achieving it, including new evidence presented at the Conferences on the Humanitarian Impact of Nuclear Weapons, and those imperatives should inform all deliberations, decisions and actions relating to nuclear disarmament and nuclear non‑proliferation, including within the Review Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon other States Parties to the Treaty that maintain a role for nuclear weapons in their military and security concepts, doctrines and policies to provide standardized information at regular intervals on, inter alia, measures taken to reduce the role and significance of nuclear weapons in military and security concepts, doctrines and policies, the number, type (strategic or non-strategic) and status (deployed or non-deployed, and alert status) of nuclear warheads within their territories, where applicable, and the number and type of delivery vehicles within their territories, where applicable;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon other States Parties to the Treaty that maintain a role for nuclear weapons in their military and security concepts, doctrines and policies to provide standardized information at regular intervals on, inter alia, measures taken to reduce the role and significance of nuclear weapons in military and security concepts, doctrines and policies, the number, type (strategic or non‑strategic) and status (deployed or non‑deployed, and alert status) of nuclear warheads within their territories, where applicable, and the number and type of delivery vehicles within their territories, where applicable;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages nuclear-weapon States to apply the agreed interrelated principles of transparency, verifiability and irreversibility in the implementation of their obligations and undertakings, including those agreed by the States Parties to the Treaty on the Non-Proliferation of Nuclear Weapons at its 1995, 2000 and 2010 Review Conferences, taking into account that they are strongly interrelated and are not an end in themselves and are not a prerequisite to commence nuclear disarmament;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages nuclear-weapon States to apply the agreed interrelated principles of transparency, verifiability and irreversibility in the implementation of their obligations and undertakings, including those agreed by the States Parties to the Treaty on the Non-Proliferation of Nuclear Weapons at its 1995, 2000 and 2010 Review Conferences, taking into account that they are strongly interrelated and are not an end in themselves and are not a prerequisite to commence nuclear disarmament; Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments A/RES/80/39 7/9 25-19831
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the necessity for enhanced transparency by the nuclear-weapon States with regard to their nuclear weapons capabilities and the implementation of their article VI obligations and nuclear disarmament-related commitments, and urges nuclear- weapon States to implement their nuclear disarmament obligations and commitments, both qualitative and quantitative, in a manner that strengthens accountability and enables all States Parties to regularly monitor progress, including through a standard detailed reporting format, thereby enhancing transparency and increasing mutual confidence, and facilitating the evidence-based evaluation of progress towards the full implementation of article VI and nuclear disarmament commitments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the necessity for enhanced transparency by the nuclear-weapon States with regard to their nuclear weapons capabilities and the implementation of their article VI obligations and nuclear disarmament-related commitments, and urges nuclear-weapon States to implement their nuclear disarmament obligations and commitments, both qualitative and quantitative, in a manner that strengthens accountability and enables all States Parties to regularly monitor progress, including through a standard detailed reporting format, thereby enhancing transparency and increasing mutual confidence, and facilitating the evidence-based evaluation of progress towards the full implementation of article VI and nuclear disarmament commitments;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges the nuclear-weapon States to voluntarily present, jointly or individually, implementation plans for the commitments and undertakings agreed to under the Treaty on the Non-Proliferation of Nuclear Weapons, including time frames and benchmarks for progress; A/C.1/80/L.55 7/8 25-16789
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges the nuclear-weapon States to voluntarily present, jointly or individually, implementation plans for the commitments and undertakings agreed to under the Treaty on the Non-Proliferation of Nuclear Weapons, including time frames and benchmarks for progress;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further steps by all nuclear-weapon States to ensure the irreversible removal of all fissile material designated by each nuclear-weapon State as no longer required for military purposes, and calls upon all States to support, within the context of the International Atomic Energy Agency, the development of appropriate nuclear disarmament verification capabilities and legally binding verification arrangements, thereby ensuring that such material remains permanently outside military programmes in a verifiable and irreversible manner;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further steps by all nuclear-weapon States to ensure the irreversible removal of all fissile material designated by each nuclear-weapon State as no longer required for military purposes, and calls upon all States to support, within the context of the International Atomic Energy Agency, the development of appropriate nuclear disarmament verification capabilities and legally binding verification arrangements, thereby ensuring that such material remains permanently outside military programmes in a verifiable and irreversible manner; A/RES/80/39 Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments 25-19831 8/9
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges the co-sponsors of the 1995 resolution on the Middle East to exert their utmost efforts with a view to ensuring the early establishment of a Middle East zone free of nuclear weapons and all other weapons of mass destruction as contained in the 1995 resolution on the Middle East, including through support for the convening of the conference on the establishment of such a zone; __________________ 13 See 1995 Review and Extension Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons, Final Document, Part I (NPT/CONF.1995/32 (Part I) and NPT/CONF.1995/32 (Part I)/Corr.2), annex. A/C.1/80/L.55 25-16789 8/8
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges the co-sponsors of the 1995 resolution on the Middle East to exert their utmost efforts with a view to ensuring the early establishment of a Middle East zone free of nuclear weapons and all other weapons of mass destruction as contained in the 1995 resolution on the Middle East, including through support for the convening of the conference on the establishment of such a zone;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States Parties to spare no effort to achieve the universality of the Treaty on the Non-Proliferation of Nuclear Weapons, and in this regard urges India, Israel and Pakistan to accede to the Treaty as non-nuclear-weapon States promptly and without conditions, and to place all their nuclear facilities under International Atomic Energy Agency safeguards, and further calls upon South Sudan to join the Treaty at the earliest opportunity;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States Parties to spare no effort to achieve the universality of the Treaty on the Non-Proliferation of Nuclear Weapons, and in this regard urges India, Israel and Pakistan to accede to the Treaty as non‑nuclear-weapon States promptly and without conditions, and to place all their nuclear facilities under International Atomic Energy Agency safeguards, and further calls upon South Sudan to join the Treaty at the earliest opportunity;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon both Parties to the Treaty on Measures for the Further Reduction and Limitations of Strategic Offensive Arms (New START Treaty) to urgently extend the Treaty, to ensure that current limits are not abandoned, to re-engage in dialogue and to ensure its full and effective implementation, and thereafter to urgently resume negotiations on a successor agreement;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon both Parties to the Treaty on Measures for the Further Reduction and Limitations of Strategic Offensive Arms (New START Treaty) to urgently extend the Treaty, to ensure that current limits are not abandoned, to re‑engage in dialogue and to ensure its full and effective implementation, and thereafter to urgently resume negotiations on a successor agreement;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to continue to support efforts to identify, elaborate, negotiate and implement further effective legally binding measures for nuclear disarmament, inter alia, the Treaty on the Prohibition of Nuclear Weapons, 15 and welcomes the outcomes of the Meetings of States Parties to the Treaty, including the action plan of 2022, its political declaration and decisions; 16
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to continue to support efforts to identify, elaborate, negotiate and implement further effective legally binding measures for nuclear disarmament, inter alia, the Treaty on the Prohibition of Nuclear Weapons, 15 and welcomes the outcomes of the Meetings of States Parties to the Treaty, including the action plan of 2022, its political declaration and decisions; 16 _______________ 13 See 1995 Review and Extension Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons, Final Document, Part I (NPT/CONF.1995/32 (Part I) and NPT/CONF.1995/32 (Part I)/Corr.2), annex. 14 United Nations, Treaty Series, vol. 1677, No. 28986. 15 A/CONF.229/2017/8. 16 See TPNW/MSP/2022/6 and TPNW/MSP/2023/14. Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments A/RES/80/39 9/9 25-19831
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that additional measures be taken to advance nuclear disarmament and non-proliferation education, in particular to increase awareness of the risks and catastrophic impacts and humanitarian consequences of any nuclear detonation, recognizing the important contributions made by academia, civil society and victims of nuclear weapons to this end;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that additional measures be taken to advance nuclear disarmament and non‑proliferation education, in particular to increase awareness of the risks and catastrophic impacts and humanitarian consequences of any nuclear detonation, recognizing the important contributions made by academia, civil society and victims of nuclear weapons to this end;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “General and complete disarmament”, the sub-item entitled “Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments” and to review the implementation of the present resolution at that session. __________________ 14 United Nations, Treaty Series, vol. 1677, No. 28986. 15 A/CONF.229/2017/8. 16 See TPNW/MSP/2022/6 and TPNW/MSP/2023/14.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/39</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “General and complete disarmament”, the sub-item entitled “Towards a nuclear-weapon-free world: accelerating the implementation of nuclear disarmament commitments” and to review the implementation of the present resolution at that session. 52nd plenary meeting 1 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.1_80_L.55.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -188,36 +531,37 @@
         <span class="text-sm text-muted">13 with signals, 19 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -234,7 +578,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -261,7 +605,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -278,7 +622,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -305,7 +649,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -332,7 +676,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -349,7 +693,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -366,7 +710,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -393,7 +737,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -420,7 +764,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -437,7 +781,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -454,7 +798,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -471,7 +815,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -488,7 +832,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -515,7 +859,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -532,7 +876,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -549,7 +893,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -566,7 +910,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -593,7 +937,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -620,7 +964,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -637,7 +981,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -654,7 +998,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -681,7 +1025,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -708,7 +1052,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -735,7 +1079,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -752,7 +1096,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -769,7 +1113,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -786,7 +1130,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -803,7 +1147,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -830,7 +1174,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -847,7 +1191,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -864,7 +1208,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -896,19 +1240,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -923,14 +1280,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -946,12 +1303,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -970,12 +1327,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

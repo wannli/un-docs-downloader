@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,165 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/68</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/68</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/68?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">15 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/68. Convention on Prohibitions or Restrictions on the Use of Certain Conventional Weapons Which May Be Deemed to Be Excessively Injurious or to Have Indiscriminate Effects</p>
+    
+    <p class="mt-1 text-muted">15 operative paragraphs · Item 103</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.1/80/L.29</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">5 of 15 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.29</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all High Contracting Parties to the Convention that have not yet done so to express their consent to be bound by the Protocols to the Convention and the amendment extending the scope of the Convention and the Protocols thereto to include armed conflicts of a non-international character;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/68</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all High Contracting Parties to the Convention that have not yet done so to express their consent to be bound by the Protocols to the Convention and the amendment extending the scope of the Convention and the Protocols thereto to include armed conflicts of a non‑international character;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.29</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the High Contracting Parties and States not Parties to the Convention participating in the meetings of the High Contracting Parties to the Convention and its annexed Protocols to ensure full compliance with all financial obligations under the Convention and its annexed Protocols, and calls upon the High Contracting Parties to explore measures that could reduce costs and improve the efficiency and financial stability of such meetings without prejudice to the rules of procedure and to their quality, and their commitment to address issues arising from outstanding contributions in a timely manner; A/C.1/80/L.29 3/4 25-16552
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/68</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the High Contracting Parties and States not Parties to the Convention participating in the meetings of the High Contracting Parties to the _______________ 9 CCW/CONF.VI/11. 10 CCW/MSP/2024/7. Convention on Prohibitions or Restrictions on the Use of Certain Conventional Weapons Which May Be Deemed to Be Excessively Injurious or to Have Indiscriminate Effects A/RES/80/68 3/4 25-20001 Convention and its annexed Protocols to ensure full compliance with all financial obligations under the Convention and its annexed Protocols, and calls upon the High Contracting Parties to explore measures that could reduce costs and improve the efficiency and financial stability of such meetings without prejudice to the rules of procedure and to their quality, and their commitment to address issues arising from outstanding contributions in a timely manner;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.29</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the following decisions by the Sixth Review Conference and the conclusions and recommendations of the Meeting of the High Contracting Parties to the Convention, held in Geneva from 13 to 15 November 2024: (a) To continue the work of the open-ended Group of Governmental Experts on Emerging Technologies in the Area of Lethal Autonomous Weapons Systems, established in decision 1 of the Fifth Review Conference of the High Contracting Parties to the Convention,11 adhering to the agreed recommendations contained in document CCW/CONF.V/2 in line with decision 1 of the Sixth Review Conference,12 to strengthen the Convention; (b) To adopt the consolidated financial measures contained in annex III to document CCW/CONF.VI/11, which may be reviewed by the meetings of the High Contracting Parties during the review cycle of 2022–2026; (c) To continue the Sponsorship Programme; (d) To organize in 2025, in an in-person format, in accordance with the regular practice under the Convention, and subject to available resources, the following Convention-related activities: (i) The Meeting of Experts of the High Contracting Parties to Protocol V, on 8 September 2025, in accordance with the relevant decisions taken by the Eighteenth Annual Conference of the High Contracting Parties to Protocol V; (ii) The Meeting of the Group of Experts of the High Contracting Parties to Amended Protocol II, on 9 and 10 September 2025, in accordance with the relevant decisions taken by the Twenty-sixth Annual Conference of the High Contracting Parties to Amended Protocol II; (iii) The open-ended Group of Governmental Experts on Emerging Technologies in the Area of Lethal Autonomous Weapons Systems, for a duration of 10 days, from 3 to 7 March and from 1 to 5 September 2025, and to adopt its estimated costs;13 (iv) The Nineteenth Annual Conference of the High Contracting Parties to Protocol V, on 10 November 2025, in accordance with the relevant decisions taken by the Eighteenth Annual Conference of the High Contracting Parties to Protocol V;14 (v) The Twenty-seventh Annual Conference of the High Contracting Parties to Amended Protocol II, on 11 November 2025, in accordance with the relevant decisions taken by the Twenty-sixth Annual Conference of the High Contracting Parties to Amended Protocol II;15 (vi) The Meeting of the High Contracting Parties to the Convention, from 12 to 14 November 2025, and to adopt its estimated costs;16
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/68</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the following decisions by the Sixth Review Conference and the conclusions and recommendations of the Meeting of the High Contracting Parties to the Convention, held in Geneva from 13 to 15 November 2024: (a) To continue the work of the open-ended Group of Governmental Experts on Emerging Technologies in the Area of Lethal Autonomous Weapons Systems, established in decision 1 of the Fifth Review Conference of the High Contracting Parties to the Convention,11 adhering to the agreed recommendations contained in document CCW/CONF.V/2 in line with decision 1 of the Sixth Review Conference, 12 to strengthen the Convention; (b) To adopt the consolidated financial measures contained in annex III to document CCW/CONF.VI/11, which may be reviewed by the meetings of the High Contracting Parties during the review cycle of 2022–2026; (c) To continue the Sponsorship Programme; (d) To organize in 2025, in an in-person format, in accordance with the regular practice under the Convention, and subject to available resources, the following Convention-related activities: (i) The Meeting of Experts of the High Contracting Parties to Protocol V, on 8 September 2025, in accordance with the relevant decisions taken by the Eighteenth Annual Conference of the High Contracting Parties to Protocol V; (ii) The Meeting of the Group of Experts of the High Contracting Parties to Amended Protocol II, on 9 and 10 September 2025, in accordance with the relevant decisions taken by the Twenty-sixth Annual Conference of the High Contracting Parties to Amended Protocol II; (iii) The open-ended Group of Governmental Experts on Emerging Technologies in the Area of Lethal Autonomous Weapons Systems, for a duration of 10 days, from 3 to 7 March and from 1 to 5 September 2025, and to adopt its estimated costs;13 (iv) The Nineteenth Annual Conference of the High Contracting Parties to Protocol V, on 10 November 2025, in accordance with the relevant decisions taken by the Eighteenth Annual Conference of the High Contracting Parties to Protocol V;14 (v) The Twenty-seventh Annual Conference of the High Contracting Parties to Amended Protocol II, on 11 November 2025, in accordance with the relevant decisions taken by the Twenty-sixth Annual Conference of the High Contracting Parties to Amended Protocol II;15 _______________ 11 See CCW/CONF.V/10. 12 See CCW/CONF.VI/11. 13 CCW/MSP/2024/5. 14 CCW/P.V/CONF/2024/5. 15 CCW/AP.II/CONF.26/5. A/RES/80/68 Convention on Prohibitions or Restrictions on the Use of Certain Conventional Weapons Which May Be Deemed to Be Excessively Injurious or to Have Indiscriminate Effects 25-20001 4/4 (vi) The Meeting of the High Contracting Parties to the Convention, from 12 to 14 November 2025, and to adopt its estimated costs;16
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.29</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the commitment by the High Contracting Parties to continue to contribute to the further development of international humanitarian law, and, in this context, to keep under review both the development of new weapons and uses of weapons, which may have indiscriminate effects or cause unnecessary suffering; __________________ 11 See CCW/CONF.V/10. 12 See CCW/CONF.VI/11. 13 CCW/MSP/2024/5. 14 CCW/P.V/CONF/2024/5. 15 CCW/AP.II/CONF.26/5. 16 CCW/MSP/2024/6. A/C.1/80/L.29 25-16552 4/4
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/68</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the commitment by the High Contracting Parties to continue to contribute to the further development of international humanitarian law, and, in this context, to keep under review both the development of new weapons and uses of weapons, which may have indiscriminate effects or cause unnecessary suffering;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.29</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session the item entitled “Convention on Prohibitions or Restrictions on the Use of Certain Conventional Weapons Which May Be Deemed to Be Excessively Injurious or to Have Indiscriminate Effects”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/68</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session the item entitled “Convention on Prohibitions or Restrictions on the Use of Certain Conventional Weapons Which May Be Deemed to Be Excessively Injurious or to Have Indiscriminate Effects”. 52nd plenary meeting 1 December 2025 _______________ 16 CCW/MSP/2024/6.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.1_80_L.29.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -144,42 +289,43 @@
         <span class="text-sm text-muted">7 with signals, 8 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -196,7 +342,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -213,7 +359,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -230,7 +376,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -247,7 +393,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -274,7 +420,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -291,7 +437,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -308,7 +454,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -335,7 +481,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -352,7 +498,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -379,7 +525,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -406,7 +552,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -423,7 +569,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -450,7 +596,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -476,7 +622,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -508,19 +654,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -535,14 +694,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -558,12 +717,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -582,12 +741,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

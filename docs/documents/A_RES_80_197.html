@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,435 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/197</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/197</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/197?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">44 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/197. Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts</p>
+    
+    <p class="mt-1 text-muted">44 operative paragraphs · Item 71</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.44</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">20 of 44 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests United Nations agencies and organizations, and invites intergovernmental and non-governmental organizations, to continue to strengthen efforts undertaken to disseminate accessible and easy-to-understand information on the Convention and the Optional Protocol thereto, including to children and young people to promote their understanding, and to assist States Parties in implementing their obligations under those instruments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests United Nations agencies and organizations, and invites intergovernmental and non‑governmental organizations, to continue to strengthen efforts undertaken to disseminate accessible and easy-to-understand information on the Convention and the Optional Protocol thereto, including to children and young people to promote their understanding, and to assist States Parties in implementing their obligations under those instruments;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General entitled “Status of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: diverse contexts that amplify the barriers faced by persons with disabilities”,12 and also takes note of reports from special procedure mandate holders of the Human Rights Council, such as the report of the Special Rapporteur on the __________________ 12 A/80/423. A/C.3/80/L.44 25-17780 8/14 rights of persons with disabilities entitled “Care and support for children with disabilities within the family environment and its gendered dimensions”;13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General entitled “Status of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: diverse contexts that amplify the barriers faced by persons with A/RES/80/197 Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts 25-20944 8/14 disabilities”,12 and also takes note of reports from special procedure mandate holders of the Human Rights Council, such as the report of the Special Rapporteur on the rights of persons with disabilities entitled “Care and support for children with disabilities within the family environment and its gendered dimensions”;13
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon those States that have not yet done so to consider signing and ratifying the Marrakesh Treaty to Facilitate Access to Published Works for Persons Who Are Blind, Visually Impaired, or Otherwise Print Disabled; 14
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon those States that have not yet done so to consider signing and ratifying the Marrakesh Treaty to Facilitate Access to Published Works for Persons Who Are Blind, Visually Impaired, or Otherwise Print Disabled;14
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to take effective and appropriate measures to remove all barriers preventing persons with disabilities from having effective access to justice on an equal basis with others, and to ensure the full enjoyment of equality and non-discrimination by persons with disabilities in the fields of equality and non-discrimination and access to justice, including by training professionals in the justice system for such purposes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to take effective and appropriate measures to remove all barriers preventing persons with disabilities from having effective access to justice on an equal basis with others, and to ensure the full enjoyment of equality and non‑discrimination by persons with disabilities in the fields of equality and non‑discrimination and access to justice, including by training professionals in the justice system for such purposes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges States to ensure that persons with disabilities in different contexts and conditions are provided with adequate support in order to participate fully in the labour market, including by prohibiting discrimination on the basis of disability with regard to all matters concerning all forms of employment, recognizing the right of persons with disabilities to work on an equal basis with others;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges States to ensure that persons with disabilities in different contexts and conditions are provided with adequate support in order to participate fully in the labour market, including by prohibiting discrimination on the basis of disability with regard to all matters concerning all forms of employment, recognizing the right of persons with disabilities to work on an equal basis with others; _______________ 12 A/80/423. 13 See A/80/170. 14 United Nations, Treaty Series, vol. 3162, No. 54134. Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts A/RES/80/197 9/14 25-20944
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further urges States to take all appropriate measures to eliminate violence and discrimination against persons with disabilities, and to ensure that victims and survivors with disabilities of all forms of violence, including sexual and gender-based violence, have prompt and universal access to quality social and healthcare services, __________________ 13 See A/80/170. 14 United Nations, Treaty Series, vol. 3162, No. 54134. A/C.3/80/L.44 9/14 25-17780 such as psychological and counselling services, as well as access to justice, including legal services, to end impunity;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further urges States to take all appropriate measures to eliminate violence and discrimination against persons with disabilities, and to ensure that victims and survivors with disabilities of all forms of violence, including sexual and gender-based violence, have prompt and universal access to quality social and healthcare services, such as psychological and counselling services, as well as access to justice, including legal services, to end impunity;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States to ensure that all schools are safe and free from violence, such as bullying, including cyberbullying, and sexual harassment, including peer-to- peer sexual harassment, online and offline, and that they address all forms of violence against children with disabilities, including with particular attention to girls with disabilities and in vulnerable situations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States to ensure that all schools are safe and free from violence, such as bullying, including cyberbullying, and sexual harassment, including peer-to-peer sexual harassment, online and offline, and that they address all forms of violence against children with disabilities, including with particular attention to girls with disabilities and in vulnerable situations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to promote a paradigm shift in mental health, inter alia, in the fields of clinical practice, policy, research, medical education and investment, through the promotion of disability-inclusive, community- and evidence- based and people-centred services and by respecting, protecting and fulfilling human rights, individual autonomy of persons using or seeking to use mental health services, including by relying on peer support, as appropriate, and by providing a range of voluntary supported decision-making mechanisms, such as safeguards against abuse, coercion and undue influence within support arrangements, over a model based on the dominance of biomedical interventions, medicalization and institutionalization; A/C.3/80/L.44 25-17780 10/14
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to promote a paradigm shift in mental health, inter alia, in the fields of clinical practice, policy, research, medical education and investment, through the promotion of disability-inclusive, community- and evidence- based and people-centred services and by respecting, protecting and fulfilling human rights, individual autonomy of persons using or seeking to use mental health services, including by relying on peer support, as appropriate, and by providing a range of A/RES/80/197 Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts 25-20944 10/14 voluntary supported decision-making mechanisms, such as safeguards against abuse, coercion and undue influence within support arrangements, over a model based on the dominance of biomedical interventions, medicalization and institutionalization;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to adopt inclusive strategies that address the barriers to the participation of persons with disabilities and their representative organizations at all levels of decision-making processes, and to adopt a framework for equality, non-discrimination and the full and effective participation of persons with disabilities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to adopt inclusive strategies that address the barriers to the participation of persons with disabilities and their representative organizations at all levels of decision-making processes, and to adopt a framework for equality, non‑discrimination and the full and effective participation of persons with disabilities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon States to promote and facilitate access to and sharing of accessible and assistive technologies, especially new and emerging ones, including information and communications systems, mobility aids, assistive devices and other assistive technologies, by persons with disabilities, and to promote research and development in this regard, so that these technologies and systems become accessible at minimal cost and at an early stage; A/C.3/80/L.44 11/14 25-17780
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon States to promote and facilitate access to and sharing of accessible and assistive technologies, especially new and emerging ones, including information and communications systems, mobility aids, assistive devices and other assistive technologies, by persons with disabilities, and to promote research and Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts A/RES/80/197 11/14 25-20944 development in this regard, so that these technologies and systems become accessible at minimal cost and at an early stage;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges States to consider investment in care and support and promote legal systems or frameworks in care and support policies and infrastructure, and promote national legislation and capacity-building to ensure universal access to affordable and quality services for all, including childcare, in the health and support sector for persons with disabilities and older persons, which is necessary to address care needs for persons throughout their life course, and to promote universal access to social protection, including paid maternity, paternity and parental leave and social protection for all workers, including for both informal workers and those in non-standard forms of employment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges States to consider investment in care and support and promote legal systems or frameworks in care and support policies and infrastructure, and promote national legislation and capacity-building to ensure universal access to affordable and quality services for all, including childcare, in the health and support sector for persons with disabilities and older persons, which is necessary to address care needs for persons throughout their life course, and to promote universal access to social protection, including paid maternity, paternity and parental leave and social protection for all workers, including for both informal workers and those in non‑standard forms of employment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States, in collaboration with the organizations of the United Nations system and civil society, to promote the rights of persons with disabilities in rural areas, including women with disabilities, and girls with disabilities as appropriate, by ensuring access on an equal basis to productive employment and decent work, economic and financial resources and disability- inclusive infrastructure and services, in particular in relation to health and education, as well as by ensuring that their priorities and needs are fully incorporated into policies and programmes, through, inter alia, their participation in decision-making processes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States, in collaboration with the organizations of the United Nations system and civil society, to promote the rights of persons with disabilities in rural areas, including women with disabilities, and girls with disabilities as appropriate, by ensuring access on an equal basis to productive employment and decent work, economic and financial resources and disability-inclusive infrastructure and services, in particular in relation to health and education, as well as by ensuring that their priorities and needs are fully incorporated into policies and programmes, through, inter alia, their participation in decision-making processes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the challenges faced by migrants with disabilities and the specific needs they may have, and invites Member States to accelerate efforts, at all levels, to integrate public health considerations into migration policies and to incorporate the health needs of migrants with disabilities into national and local healthcare services policies and plans, in ways which are transparent, equitable, non-discriminatory, people-centred, gender-responsive, child-sensitive and disability-inclusive and which leave no one behind;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the challenges faced by migrants with disabilities and the specific needs they may have, and invites Member States to accelerate efforts, at all levels, to integrate public health considerations into migration policies and to incorporate the health needs of migrants with disabilities into national and local healthcare services policies and plans, in ways which are transparent, equitable, non‑discriminatory, people-centred, gender-responsive, child-sensitive and disability- inclusive and which leave no one behind;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to collect and analyse data disaggregated by income, sex, race, age, ethnicity, migratory status, disability, geographical location and other characteristics relevant to national contexts to assist, inter alia, with the identification A/C.3/80/L.44 25-17780 12/14 and eradication of barriers and all forms of discrimination, including multiple and intersecting forms of discrimination, that prevent persons with disabilities from enjoying all the rights stipulated in the Convention, to guide inclusive policy planning and to be used on an ongoing basis to assess and advance participation, and also calls upon States to improve data-collection systems for adequate monitoring and evaluation frameworks on the implementation of the Convention and the Sustainable Development Goals for all persons with disabilities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to collect and analyse data disaggregated by income, sex, race, age, ethnicity, migratory status, disability, geographical location and other A/RES/80/197 Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts 25-20944 12/14 characteristics relevant to national contexts to assist, inter alia, with the identification and eradication of barriers and all forms of discrimination, including multiple and intersecting forms of discrimination, that prevent persons with disabilities from enjoying all the rights stipulated in the Convention, to guide inclusive policy planning and to be used on an ongoing basis to assess and advance participation, and also calls upon States to improve data-collection systems for adequate monitoring and evaluation frameworks on the implementation of the Convention and the Sustainable Development Goals for all persons with disabilities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States, United Nations entities and relevant international organizations, in partnership with persons with disabilities, including through their representative organizations, inter alia: (a) To ensure that international cooperation is gender-responsive and disability-inclusive, including through the implementation of disability markers to monitor the implementation of programmes and the collection of data and statistics on persons with disabilities in the implementation of the 2030 Agenda for Sustainable Development and the Sustainable Development Goals, targets and indicators, as well as other international frameworks; (b) To support, promote and strengthen international cooperation and assistance, and enhance partnerships and coordination, including South-South cooperation, among themselves and with the active participation of persons with disabilities, through their representative organizations, as well as other relevant civil society organizations and stakeholders, in strengthening the means of implementation of the Convention and the 2030 Agenda for Sustainable Development, including through the mobilization of financial resources, technical cooperation and facilitation of access to and sharing of accessible and assistive technologies on mutually agreed terms; (c) To take effective and appropriate steps to facilitate the protection and safety of persons with disabilities in situations of risk, including situations of armed conflict, humanitarian emergencies and the occurrence of disasters caused by natural or man-made hazards, including by building capacity and sensitivity for disability inclusion among personnel involved in responding to such contexts, and to include persons with disabilities in disaster risk reduction and their preparedness efforts, planning, response and recovery actions, as well as in post-emergency reconstruction and rebuilding, to identify and eliminate obstacles and barriers to ensuring their safety and accessibility; (d) To enhance the collection, dissemination and use of data on the diverse contexts that may amplify the barriers faced by persons with disabilities in situations of risk and humanitarian emergencies, disaggregated by disability, age, income, sex, race, ethnicity, migration status, geographical location and other characteristics relevant to national contexts, using data collection methodologies such as the __________________ 15 Resolution 48/134, annex. A/C.3/80/L.44 13/14 25-17780 Washington Group short set of questions on disability, as appropriate, in consultation with persons with disabilities, including through their representative organizations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States, United Nations entities and relevant international organizations, in partnership with persons with disabilities, including through their representative organizations, inter alia: (a) To ensure that international cooperation is gender-responsive and disability-inclusive, including through the implementation of disability markers to monitor the implementation of programmes and the collection of data and statistics on persons with disabilities in the implementation of the 2030 Agenda for Sustainable Development and the Sustainable Development Goals, targets and indicators, as well as other international frameworks; (b) To support, promote and strengthen international cooperation and assistance, and enhance partnerships and coordination, including South-South cooperation, among themselves and with the active participation of persons with disabilities, through their representative organizations, as well as other relevant civil society organizations and stakeholders, in strengthening the means of implementation of the Convention and the 2030 Agenda for Sustainable Development, including through the mobilization of financial resources, technical cooperation and facilitation of access to and sharing of accessible and assistive technologies on mutually agreed terms; (c) To take effective and appropriate steps to facilitate the protection and safety of persons with disabilities in situations of risk, including situations of armed conflict, humanitarian emergencies and the occurrence of disasters caused by natural or man-made hazards, including by building capacity and sensitivity for disability inclusion among personnel involved in responding to such contexts, and to include persons with disabilities in disaster risk reduction and their preparedness efforts, planning, response and recovery actions, as well as in post-emergency reconstruction and rebuilding, to identify and eliminate obstacles and barriers to ensuring their safety and accessibility; (d) To enhance the collection, dissemination and use of data on the diverse contexts that may amplify the barriers faced by persons with disabilities in situations of risk and humanitarian emergencies, disaggregated by disability, age, income, sex, race, ethnicity, migration status, geographical location and other characteristics _______________ 15 Resolution 48/134, annex. Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts A/RES/80/197 13/14 25-20944 relevant to national contexts, using data collection methodologies such as the Washington Group short set of questions on disability, as appropriate, in consultation with persons with disabilities, including through their representative organizations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations system, international financial and development institutions, and other international and regional organizations: (a) To increase assistance to support Member States, upon their request, in substantially enhancing the participation of persons with disabilities, including through their organizations, in decision-making, including through building capacity, training and supporting persons with disabilities in participating in public life, and sharing experiences and best practices; (b) To provide sustained, long-term support to national partners, including organizations of persons with disabilities, and civil society organizations, in their efforts to become more disability-inclusive and promote the participation of persons with disabilities; (c) To ensure non-discrimination for all persons with disabilities, and ensure opportunities for persons with disabilities to participate on an equal basis with others;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations system, international financial and development institutions, and other international and regional organizations: (a) To increase assistance to support Member States, upon their request, in substantially enhancing the participation of persons with disabilities, including through their organizations, in decision-making, including through building capacity, training and supporting persons with disabilities in participating in public life, and sharing experiences and best practices; (b) To provide sustained, long-term support to national partners, including organizations of persons with disabilities, and civil society organizations, in their efforts to become more disability-inclusive and promote the participation of persons with disabilities; (c) To ensure non‑discrimination for all persons with disabilities, and ensure opportunities for persons with disabilities to participate on an equal basis with others;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 38</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the reports of the Secretary-General on the system-wide implementation of the United Nations Disability Inclusion Strategy, 16 as well as the progress made in this regard, and calls upon the United Nations system, including its agencies, funds and programmes, within their respective mandates, to continue to work collaboratively to accelerate the full and effective mainstreaming of disability inclusion into the United Nations system, including by implementing and reporting on the United Nations Disability Inclusion Strategy across its programmes and operations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the reports of the Secretary-General on the system-wide implementation of the United Nations Disability Inclusion Strategy,16 as well as the progress made in this regard, and calls upon the United Nations system, including its agencies, funds and programmes, within their respective mandates, to continue to work collaboratively to accelerate the full and effective mainstreaming of disability inclusion into the United Nations system, including by implementing and reporting on the United Nations Disability Inclusion Strategy across its programmes and operations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a progress report on steps taken by the United Nations system towards mainstreaming disability inclusion, including implementation of the United Nations Disability Inclusion Strategy, within existing resources;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a progress report on steps taken by the United Nations system towards mainstreaming disability inclusion, including implementation of the United Nations Disability Inclusion Strategy, within existing resources; _______________ 16 A/79/233 and A/80/361. 17 A/80/361. A/RES/80/197 Implementation of the Convention on the Rights of Persons with Disabilities and the Optional Protocol thereto: amplified barriers in diverse contexts 25-20944 14/14
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 41</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, the United Nations and other relevant stakeholders to take part in implementing the recommendations endorsed by the Steering Committee on Accessibility in June 2019; __________________ 16 A/79/233 and A/80/361. 17 A/80/361. A/C.3/80/L.44 25-17780 14/14
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, the United Nations and other relevant stakeholders to take part in implementing the recommendations endorsed by the Steering Committee on Accessibility in June 2019;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 44</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.44</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further requests the Secretary-General to continue to maintain the levels of resources required by the relevant offices in the United Nations system for the fulfilment of their tasks with respect to their work on the rights of and inclusive development for persons with disabilities.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/197</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further requests the Secretary-General to continue to maintain the levels of resources required by the relevant offices in the United Nations system for the fulfilment of their tasks with respect to their work on the rights of and inclusive development for persons with disabilities. 67th plenary meeting 17 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.44.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -192,35 +607,36 @@
         <span class="text-sm text-muted">3 with signals, 41 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -237,7 +653,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -254,7 +670,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -271,7 +687,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -288,7 +704,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -305,7 +721,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -322,7 +738,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -339,7 +755,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -356,7 +772,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -373,7 +789,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -390,7 +806,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -407,7 +823,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -424,7 +840,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -441,7 +857,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -458,7 +874,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -475,7 +891,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -492,7 +908,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -509,7 +925,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -526,7 +942,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -543,7 +959,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -560,7 +976,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -577,7 +993,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -594,7 +1010,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -611,7 +1027,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -628,7 +1044,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -645,7 +1061,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -662,7 +1078,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -679,7 +1095,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -696,7 +1112,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -713,7 +1129,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -730,7 +1146,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -747,7 +1163,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -764,7 +1180,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -781,7 +1197,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -798,7 +1214,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -815,7 +1231,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -832,7 +1248,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -859,7 +1275,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -876,7 +1292,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -893,7 +1309,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -919,7 +1335,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -936,7 +1352,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -953,7 +1369,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -979,7 +1395,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1001,19 +1417,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1028,14 +1457,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1051,12 +1480,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1075,12 +1504,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

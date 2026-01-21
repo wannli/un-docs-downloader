@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,489 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/141</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/141</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/141?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">24 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/141. Education for sustainable development in the framework of the 2030 Agenda for Sustainable Development</p>
+    
+    <p class="mt-1 text-muted">24 operative paragraphs · Item 18</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.33</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">23 of 24 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Director General of the United Nations Educational, Scientific and Cultural Organization on education for sustainable development, 3 which provided a review of the implementation of education for sustainable development in the framework of the 2030 Agenda for Sustainable Development;4
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Director General of the United Nations Educational, Scientific and Cultural Organization on education for sustainable development, 5 which provided a review of the implementation of education for sustainable development in the framework of the 2030 Agenda for Sustainable Development;6
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms education for sustainable development as a vital means of implementation for sustainable development, as outlined in the Aichi-Nagoya Declaration on Education for Sustainable Development 5 and the Berlin Declaration on Education for Sustainable Development, 6 and as an integral element of the Sustainable Development Goal on quality education and a key enabler of all the other Goals, and welcomes the increased international recognition of education for sustainable development in quality education and lifelong learning;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms education for sustainable development as a vital means of implementation for sustainable development, as outlined in the Aichi-Nagoya Declaration on Education for Sustainable Development7 and the Berlin Declaration on Education for Sustainable Development, 8 and as an integral element of the Sustainable Development Goal on quality education and a key enabler of all the other Goals, and welcomes the increased international recognition of education for sustainable development in quality education and lifelong learning;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the 2024 Global Education Meeting, held on 31 October and 1 November 2024 in Fortaleza, Brazil, and its Fortaleza Declaration, as well as of the World Summit on Teachers, held on 28 and 29 August 2025 in Santiago, and its Santiago Consensus;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the 2024 Global Education Meeting, held on 31 October and 1 November 2024 in Fortaleza, Brazil, as well as the World Summit on Teachers, held on 28 and 29 August 2025 in Santiago, and its Santiago Consensus;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the international community to provide inclusive and equitable quality education at all levels – early childhood, primary, secondary, tertiary and distance education, including technical and vocational training – so that all people, irrespective of sex, age, race or ethnicity, and persons with disabilities, migrants, Indigenous people, children and youth, especially those in vulnerable situations, may have access to lifelong learning opportunities that help them to acquire the knowledge and skills needed to exploit opportunities to participate fully in society and contribute to sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the international community to provide inclusive and equitable quality education at all levels – early childhood, primary, secondary, tertiary and _______________ 5 A/80/236. 6 Resolution 70/1. 7 A/70/228, annex. 8 A/76/228, annex. A/RES/80/141 Education for sustainable development in the framework of the 2030 Agenda for Sustainable Development 25-20772 6/8 distance education, including technical and vocational training – so that all people, irrespective of sex, age, race, or ethnicity, and persons with disabilities, migrants, Indigenous people, children and youth, especially those in vulnerable situations, may have access to lifelong learning opportunities that help them to acquire the knowledge and skills needed to exploit opportunities to participate fully in society and contribute to sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for the scaling up of efforts by relevant stakeholders to better collaborate to strengthen implementation of the framework entitled “Education for Sustainable Development: towards achieving the Sustainable Development Goals” (ESD for 2030) at the global, regional and national levels, as well as to promote education responses to sustainable development challenges in all three pillars;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that there are different approaches and tools available to each country, in accordance with its national circumstances and priorities, for building up national education systems, and encourages international, regional, national and local efforts to promote education for sustainable development and to integrate sustainability into teacher education and training, curricula, teaching and learning practices;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments and other relevant stakeholders to commit to building resilient, inclusive, quality education systems by (a) providing increased support to teachers and educational personnel, including through targeted professional development for digital and pedagogical skills, while harnessing the benefits of artificial intelligence and being mindful of its challenges; (b) investing in skills development, including social and emotional learning and well-being, and psychosocial support, and mental health for inclusive recovery, sustainable development, decent work and enhanced employability, and full and productive employment; (c) eradicating poverty, combating inequality and bridging the digital divide through __________________ 3 A/80/236. 4 Resolution 70/1. 5 A/70/228, annex. 6 A/76/228, annex. A/C.2/80/L.33 25-16897 6/7 open education resources and equitable, affordable and inclusive technology- supported learning, based on critical thinking and sustainability principles with a proper assessment of risks and benefits and by ensuring that the access, development and use of technologies are responsive, safe, equitable and inclusive; (d) building emergency preparedness and response capacity of education systems; and (e) building more inclusive education by ensuring gender equality and non-discrimination in access to knowledge and skills;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for the scaling up of efforts by relevant stakeholders to better collaborate to strengthen implementation of the framework entitled “Education for Sustainable Development: towards achieving the Sustainable Development Goals” (ESD for 2030) at the global, regional and national levels, as well as to promote education responses to sustainable development challenges in all three pillars;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments and other stakeholders concerned to scale up education for sustainable development action through the implementation of the “Education for Sustainable Development: towards achieving the Sustainable Development Goals” (ESD for 2030) framework and its road map;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments and other relevant stakeholders to commit to building resilient, inclusive, quality education systems by (a) providing increased support to teachers and educational personnel, including through targeted professional development for digital and pedagogical skills, while harnessing the benefits of artificial intelligence and being mindful of its challenges; (b) investing in skills development, including social and emotional learning and well-being, and mental health and psychosocial support, for inclusive recovery, sustainable development, decent work and enhanced employability, and full and productive employment; (c) eradicating poverty, combating inequality and bridging the digital divide through open education resources and equitable, affordable and inclusive technology-supported learning, based on critical thinking and sustainability principles with a proper assessment of risks and benefits and by ensuring that the access, development and use of technologies are responsive, safe, equitable and inclusive; (d) building emergency preparedness and response capacity of education systems; and (e) building more inclusive education by ensuring gender equality and non‑discrimination in access to knowledge and skills;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments to increase efforts to systemically integrate and institutionalize education for sustainable development in the education sector and other relevant sectors, as appropriate, including through, inter alia, the provision of financial resources, the inclusion of education for sustainable development in relevant policies and the development of the capacities of policymakers, institutional leaders and educators, as well as through the strengthening of research and innovation, and monitoring and evaluation on education for sustainable development in order to support the scaling up of good practices;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that the use of new and emerging digital technologies including artificial intelligence for education purposes should be safe, secure and trustworthy, while increasing awareness about digital addiction and the challenges in the digital sphere, such as misinformation and disinformation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment to continue to increase investment in inclusive and equitable quality education and lifelong learning opportunities for all, including early childhood education, youth and adult literacy programmes and initiatives, digital education, cultural education, education for sustainable development, digital technologies, artificial intelligence tools for education, skills enhancement, affordable higher education and vocational training, including to enhance the availability of scholarships and exchange programmes for students from developing countries to enrol in higher education, education in emergencies and teachers’ continuous professional development, recognizes that early childhood education and care can generate substantial benefits for children, and reaffirms the commitment to address barriers to girls’ education, gender and disability gaps and to promote gender equality and the empowerment of women and girls in and through education and safe, healthy and stimulating learning environments that enable all learners to achieve their full potential and physical, mental and emotional well-being;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments and other stakeholders concerned to scale up education for sustainable development action through the implementation of the “Education for Sustainable Development: towards achieving the Sustainable Development Goals” (ESD for 2030) framework and its road map;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, intergovernmental bodies, organizations of the United Nations system, relevant non-governmental organizations and all other relevant stakeholders to enhance international cooperation in supporting the efforts of developing countries towards the realization of the full potential of education for sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Governments to increase efforts to systemically integrate and institutionalize education for sustainable development in the education sector and other relevant sectors, as appropriate, including through, inter alia, the provision of financial resources, the inclusion of education for sustainable development in relevant policies and the development of the capacities of policymakers, institutional leaders and educators, as well as through the strengthening of research and innovation, and Education for sustainable development in the framework of the 2030 Agenda for Sustainable Development A/RES/80/141 7/8 25-20772 monitoring and evaluation on education for sustainable development in order to support the scaling up of good practices;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of further developing and implementing educational and public awareness programmes, training scientific, technical and managerial personnel, fostering access to information and promoting public participation in addressing climate change challenges;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment to continue to increase investment in inclusive and equitable quality education and lifelong learning opportunities for all, in particular early childhood education, youth and adult literacy programmes and initiatives, digital education, cultural education, education for sustainable development, digital technologies, including artificial intelligence tools for education, based on an open, transparent, inclusive and trustworthy approach, skills enhancement, affordable higher education and vocational training, including to enhance the availability of scholarships, for students from developing countries to enrol in higher education, education in emergencies and teachers’ continuous professional development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to continue to give consideration, as appropriate, to the contribution of education for sustainable development in the follow-up and review framework of the 2030 Agenda;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that early childhood education and care can generate substantial benefits for children, and reaffirms the commitment to address barriers to girls’ education, gender and disability gaps and to promote gender equality and the empowerment of women and girls in and through education and safe, healthy and stimulating learning environments that enable all learners to achieve their full potential and physical, mental and emotional well-being;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes Member States’ engagement throughout the Transforming Education Summit process, including through national consultations, and invites the United Nations Educational, Scientific and Cultural Organization and relevant stakeholders, including the Sustainable Development Goal 4-Education 2030 High- level Steering Committee, to support Member States, upon their request, in the country-level implementation of their national commitments made during the A/C.2/80/L.33 7/7 25-16897 Transforming Education Summit process, as well as other relevant national strategies for transforming education, and accelerate national efforts towards Goal 4;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment to support efforts to provide opportunities for quality and inclusive science, technology, engineering and mathematics education and research and promote women and girls’ participation in all roles and at all levels;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the mandated role of the United Nations Educational, Scientific and Cultural Organization, as the specialized United Nations agency for education, to lead and coordinate the Education 2030 agenda, including through the strengthened Sustainable Development Goal 4-Education 2030 High-level Steering Committee, and encourages the High-level Steering Committee to take all steps necessary to achieve maximum cooperation and coordination in order to make effective progress towards Goal 4;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, intergovernmental bodies, organizations of the United Nations system, relevant non‑governmental organizations and all other relevant stakeholders to enhance international cooperation in supporting the efforts of developing countries towards the realization of the full potential of education for sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the United Nations Educational, Scientific and Cultural Organization, as the lead agency for education for sustainable development, to continue to coordinate the implementation of the framework entitled “Education for Sustainable Development: towards achieving the Sustainable Development Goals” (ESD for 2030) through its road map, in cooperation with Governments, United Nations organizations, funds and programmes, non-governmental organizations and other stakeholders, and to continue to advocate the importance of ensuring adequate resources for education for sustainable development, and calls upon the United Nations system to increase efforts to mainstream a gender perspective into the implementation of the framework;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that education for sustainable development, as part of Sustainable Development Goal 4 on quality education from early childhood to lifelong learning, provides the knowledge and skills required for a changing world and plays an essential role in powering the shift at scale to more sustainable, equitable, just and climate-resilient societies,
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the organizations of the United Nations system, in particular the United Nations Educational, Scientific and Cultural Organization, to continue to provide support and assist States, upon their request, in developing their national capacities to promote education for sustainable development, including through knowledge-sharing and standard-setting, youth empowerment and mobilization, the exchange of best practices, data collection, research and study;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance of further developing and implementing educational and public awareness programmes, training scientific, technical and managerial personnel, fostering access to information and promoting public participation in addressing climate change challenges;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the United Nations Educational, Scientific and Cultural Organization and other relevant United Nations bodies to continue to assess, in consultation with Member States, progress towards the achievement of education for sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to continue to give consideration, as appropriate, to the contribution of education for sustainable development in the follow-up and review framework of the 2030 Agenda;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, relevant intergovernmental bodies, organizations of the United Nations system, relevant non-governmental organizations and all other relevant stakeholders to give due consideration to the contribution of education to the achievement of sustainable development in the formulation of national, regional and international development policies and international cooperation instruments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes Member States’ engagement throughout the Transforming Education Summit process, including through national consultations, and invites the United Nations Educational, Scientific and Cultural Organization and relevant stakeholders, including the Sustainable Development Goal 4-Education 2030 High-level Steering Committee, to support Member States, upon their request, in the country-level implementation of their national commitments made during the Transforming Education Summit process, as well as other relevant national strategies for transforming education, and accelerate national efforts towards Goal 4;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-second session an action-oriented report on the implementation of the present resolution, and decides to include in the provisional agenda of its eighty-second session, under the item entitled “Sustainable development”, the sub-item entitled “Education for sustainable development”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the mandated role of the United Nations Educational, Scientific and Cultural Organization, as the specialized United Nations agency for education, to lead and coordinate the Education 2030 agenda, including through the strengthened Sustainable Development Goal 4-Education 2030 High-level Steering Committee, A/RES/80/141 Education for sustainable development in the framework of the 2030 Agenda for Sustainable Development 25-20772 8/8 and encourages the High-level Steering Committee to take all steps necessary to achieve maximum cooperation and coordination in order to make effective progress towards Goal 4;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the United Nations Educational, Scientific and Cultural Organization, as the lead agency for education for sustainable development, to continue to coordinate the implementation of the framework entitled “Education for Sustainable Development: towards achieving the Sustainable Development Goals” (ESD for 2030) through its road map, in cooperation with Governments, United Nations organizations, funds and programmes, non‑governmental organizations and other stakeholders, and to continue to advocate the importance of ensuring adequate resources for education for sustainable development, and calls upon the United Nations system to increase efforts to mainstream a gender perspective into the implementation of the framework;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the United Nations system, particularly the United Nations Educational, Scientific and Cultural Organization, to continue supporting and assisting States, upon their request, in strengthening national capacities to advance education for sustainable development, including on knowledge-sharing, standard- setting, youth empowerment and mobilization, best practice exchange, data collection, research and study, and to continue assessing progress towards achieving education for sustainable development, in consultation with Member States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, relevant intergovernmental bodies, organizations of the United Nations system, relevant non‑governmental organizations and all other relevant stakeholders to give due consideration to the contribution of education to the achievement of sustainable development in the formulation of national, regional and international development policies and international cooperation instruments;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.33</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/141</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-second session an action-oriented report on the implementation of the present resolution, and decides to include in the provisional agenda of its eighty-second session, under the item entitled “Sustainable development”, the sub-item entitled “Education for sustainable development”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.33.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -150,35 +619,36 @@
         <span class="text-sm text-muted">1 with signals, 23 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -195,7 +665,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -212,7 +682,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -229,7 +699,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -246,7 +716,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -263,7 +733,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -280,7 +750,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -297,7 +767,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -314,7 +784,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -331,7 +801,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -348,7 +818,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -365,7 +835,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -382,7 +852,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -399,7 +869,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -416,7 +886,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -433,7 +903,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -450,7 +920,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -467,7 +937,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -484,7 +954,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -501,7 +971,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -518,7 +988,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -535,7 +1005,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -552,7 +1022,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -569,7 +1039,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda", "report"]'
          data-has-signals="true">
@@ -606,19 +1076,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -633,14 +1116,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -656,12 +1139,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -680,12 +1163,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

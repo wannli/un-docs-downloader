@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,204 +65,63 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.2/80/L.18</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/147</span>
+        </div>
+        <a href="./A_RES_80_147.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.2/80/L.18</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/c.2/80/l.18?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">52 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">Science, technology and innovation for sustainable development</p>
+    
+    <p class="mt-1 text-muted">52 operative paragraphs · Item 20</p>
 </div>
 
-<!-- Compute signal data -->
-
-
-    
-        
-            
-        
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-        
-            
-        
-    
-        
-            
-        
-    
 
 
 
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">9 with signals, 43 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button onclick="filterSignal('agenda')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-blue-50 text-blue-700 hover:bg-blue-100
-                ">
-            agenda
-        </button>
-        
-        <button onclick="filterSignal('report')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-gray-100 text-gray-700 hover:bg-gray-200">
-            report
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -270,24 +129,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the outcome document of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, the Sevilla Commitment,13 and calls for its timely and __________________ 13 Resolution 79/323, annex. A/C.2/80/L.18 25-16624 8/14 effective implementation with regard to, inter alia, science, technology and innovation, as an important action area for sustainable development;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment,13 and calls for its timely and __________________ 13 Resolution 79/323, annex. A/C.2/80/L.18 25-16624 8/14 effective implementation with regard to, inter alia, science, technology and innovation, as an important action area for sustainable development;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-2"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -303,8 +152,8 @@
         </div>
     </div>
     
-    <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-3"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -320,10 +169,10 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -331,24 +180,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms its commitment to the actions agreed upon by the least developed countries and development partners on science, technology and innovation, as outlined in the Doha Programme of Action for the Least Developed Countries,14 and takes note of the Doha Political Declaration, adopted during the second part of the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries, held in Doha from 5 to 9 March 2023,15 as well as the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity16 and the Awaza Programme of Action for Landlocked Developing Countries for the Decade 2024–2034;17</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms its commitment to the actions agreed upon by the least developed countries and development partners on science, technology and innovation, as outlined in the Doha Programme of Action for the Least Developed Countries,14 and takes note of the Doha Political Declaration, adopted during the second part of the Fifth United Nations Conference on the Least Developed Countries, held in Doha from 5 to 9 March 2023,15 as well as the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity16 and the Awaza Programme of Action for Landlocked Developing Countries for the Decade 2024–2034;17</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-5"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -364,8 +203,8 @@
         </div>
     </div>
     
-    <div id="para-6" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-6"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -381,10 +220,10 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -392,24 +231,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Acknowledges the contribution of science, technology and innovation to industrial development in developing countries and as a critical source of economic growth, economic diversification and value addition, and therefore calls for policy and institutional frameworks that foster collaboration and integration between research and academic institutes and industrial sectors; __________________ 14 Resolution 76/258, annex. 15 Report of the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries, New York, 17 March 2022, and Doha, 5–9 March 2023 (A/CONF.219/2023/3), chap. I, resolution 2. 16 Resolution 78/317, annex. 17 Resolution 79/233, annex; see also resolution 79/279. 18 Resolution 70/1. A/C.2/80/L.18 9/14 25-16624</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Acknowledges the contribution of science, technology and innovation to industrial development in developing countries and as a critical source of economic growth, economic diversification and value addition, and therefore calls for policy and institutional frameworks that foster collaboration and integration between research and academic institutes and industrial sectors; __________________ 14 Resolution 76/258, annex. 15 Report of the Fifth United Nations Conference on the Least Developed Countries, New York, 17 March 2022, and Doha, 5–9 March 2023 (A/CONF.219/2023/3), chap. I, resolution 2. 16 Resolution 78/317, annex. 17 Resolution 79/233, annex; see also resolution 79/279. 18 Resolution 70/1. A/C.2/80/L.18 9/14 25-16624</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-8"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -425,8 +254,8 @@
         </div>
     </div>
     
-    <div id="para-9" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-9"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -442,8 +271,8 @@
         </div>
     </div>
     
-    <div id="para-10" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-10"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -459,8 +288,8 @@
         </div>
     </div>
     
-    <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-11"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -476,8 +305,8 @@
         </div>
     </div>
     
-    <div id="para-12" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-12"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -493,8 +322,8 @@
         </div>
     </div>
     
-    <div id="para-13" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-13"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -510,8 +339,8 @@
         </div>
     </div>
     
-    <div id="para-14" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-14"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -527,10 +356,10 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -538,24 +367,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the establishment, within the United Nations, of the multidisciplinary Independent International Scientific Panel on Artificial Intelligence with balanced geographic representation to promote scientific understanding through evidence-based impact, risk and opportunity assessments, drawing on existing national, regional and international initiatives and research networks, and of the Global Dialogue on Artificial Intelligence Governance, involving Governments and all relevant stakeholders, which will take place on the margins of existing relevant United Nations <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and meetings, as a platform to discuss international cooperation, to share best practices and lessons learned and to facilitate open, transparent and inclusive discussions on artificial intelligence governance with a view to enabling artificial intelligence to contribute to the implementation of the Sustainable Development Goals and to closing the digital divides between and within countries; A/C.2/80/L.18 25-16624 10/14</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the establishment, within the United Nations, of the multidisciplinary Independent International Scientific Panel on Artificial Intelligence with balanced geographic representation to promote scientific understanding through evidence-based impact, risk and opportunity assessments, drawing on existing national, regional and international initiatives and research networks, and of the Global Dialogue on Artificial Intelligence Governance, involving Governments and all relevant stakeholders, which will take place on the margins of existing relevant United Nations conferences and meetings, as a platform to discuss international cooperation, to share best practices and lessons learned and to facilitate open, transparent and inclusive discussions on artificial intelligence governance with a view to enabling artificial intelligence to contribute to the implementation of the Sustainable Development Goals and to closing the digital divides between and within countries; A/C.2/80/L.18 25-16624 10/14</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-16" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-16"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -571,8 +390,8 @@
         </div>
     </div>
     
-    <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-17"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -588,8 +407,8 @@
         </div>
     </div>
     
-    <div id="para-18" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-18"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -605,8 +424,8 @@
         </div>
     </div>
     
-    <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-19"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -622,8 +441,8 @@
         </div>
     </div>
     
-    <div id="para-20" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-20"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -639,8 +458,8 @@
         </div>
     </div>
     
-    <div id="para-21" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-21"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -656,8 +475,8 @@
         </div>
     </div>
     
-    <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-22"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -673,8 +492,8 @@
         </div>
     </div>
     
-    <div id="para-23" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-23"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -690,8 +509,8 @@
         </div>
     </div>
     
-    <div id="para-24" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-24"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -707,8 +526,8 @@
         </div>
     </div>
     
-    <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-25"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -724,10 +543,10 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -735,24 +554,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages efforts to increase the availability of data to support the measurement of national innovation systems (such as the existing Global Innovation Index and the frontier technology readiness index of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development) and empirical research on innovation and development to assist policymakers in designing and implementing innovation strategies in order to measure the impact of digital technologies for sustainable development;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages efforts to increase the availability of data to support the measurement of national innovation systems (such as the existing Global Innovation Index and the frontier technology readiness index of the United Nations Conference on Trade and Development) and empirical research on innovation and development to assist policymakers in designing and implementing innovation strategies in order to measure the impact of digital technologies for sustainable development;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-27" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-27"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -768,8 +577,8 @@
         </div>
     </div>
     
-    <div id="para-28" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-28"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -785,8 +594,8 @@
         </div>
     </div>
     
-    <div id="para-29" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-29"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -802,8 +611,8 @@
         </div>
     </div>
     
-    <div id="para-30" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-30"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -819,8 +628,8 @@
         </div>
     </div>
     
-    <div id="para-31" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-31"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -836,8 +645,8 @@
         </div>
     </div>
     
-    <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-32"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -853,8 +662,8 @@
         </div>
     </div>
     
-    <div id="para-33" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-33"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -870,8 +679,8 @@
         </div>
     </div>
     
-    <div id="para-34" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-34"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -887,10 +696,10 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -898,26 +707,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, in collaboration with relevant partners, such as the World Intellectual Property Organization, the International Telecommunication Union, the United Nations Educational, Scientific and Cultural Organization and the United Nations University, to continue to undertake science, technology and innovation policy reviews, with a view to assisting developing countries, upon request, in identifying the measures needed to integrate science, technology and innovation policies into their national development strategies and ensuring that they are supportive of national development agendas, as appropriate, and in this regard takes note of the new science, technology and innovation policy review framework developed by the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages the United Nations Conference on Trade and Development, in collaboration with relevant partners, such as the World Intellectual Property Organization, the International Telecommunication Union, the United Nations Educational, Scientific and Cultural Organization and the United Nations University, to continue to undertake science, technology and innovation policy reviews, with a view to assisting developing countries, upon request, in identifying the measures needed to integrate science, technology and innovation policies into their national development strategies and ensuring that they are supportive of national development agendas, as appropriate, and in this regard takes note of the new science, technology and innovation policy review framework developed by the United Nations Conference on Trade and Development;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -925,24 +724,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls for voluntary contributions to support the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development in its technical cooperation work in support of national innovation systems in developing countries;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls for voluntary contributions to support the United Nations Conference on Trade and Development in its technical cooperation work in support of national innovation systems in developing countries;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-37" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-37"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -958,8 +747,8 @@
         </div>
     </div>
     
-    <div id="para-38" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-38"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -975,8 +764,8 @@
         </div>
     </div>
     
-    <div id="para-39" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-39"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -992,8 +781,8 @@
         </div>
     </div>
     
-    <div id="para-40" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-40"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1009,8 +798,8 @@
         </div>
     </div>
     
-    <div id="para-41" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-41"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1026,8 +815,8 @@
         </div>
     </div>
     
-    <div id="para-42" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-42"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1043,8 +832,8 @@
         </div>
     </div>
     
-    <div id="para-43" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-43"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1060,8 +849,8 @@
         </div>
     </div>
     
-    <div id="para-44" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-44"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1077,8 +866,8 @@
         </div>
     </div>
     
-    <div id="para-45" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-45"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1094,8 +883,8 @@
         </div>
     </div>
     
-    <div id="para-46" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-46"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1111,8 +900,8 @@
         </div>
     </div>
     
-    <div id="para-47" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-47"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1128,8 +917,8 @@
         </div>
     </div>
     
-    <div id="para-48" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-48"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1145,8 +934,8 @@
         </div>
     </div>
     
-    <div id="para-49" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-49"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1162,8 +951,8 @@
         </div>
     </div>
     
-    <div id="para-50" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-50"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1179,10 +968,10 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1190,26 +979,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to convene, during the eightieth session of the Assembly, a meeting on science, technology and innovation for development with a special focus on actions to address the needs of developing countries in those fields, and requests the Secretary-General to consider these discussions in the drafting of his report on the implementation of the present resolution;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the President of the General Assembly to convene, during the eightieth session of the Assembly, a meeting on science, technology and innovation for development with a special focus on actions to address the needs of developing countries in those fields, and requests the Secretary-General to consider these discussions in the drafting of his report on the implementation of the present resolution;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda", "report"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1217,22 +996,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-second session a report on the implementation of the present resolution and recommendations for future follow-up, including lessons learned in integrating science, technology and innovation policies into national development strategies, as well as concrete recommendations in supporting the implementation of the 2030 Agenda, and <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> in the provisional agenda of its eighty-second session, under the item entitled “Globalization and interdependence”, the sub-item entitled “Science, technology and innovation for sustainable development”.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-blue-50 text-blue-700
-                        ">
-                        agenda
-                    </span>
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-gray-100 text-gray-700">
-                        report
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to submit to the General Assembly at its eighty-second session a report on the implementation of the present resolution and recommendations for future follow-up, including lessons learned in integrating science, technology and innovation policies into national development strategies, as well as concrete recommendations in supporting the implementation of the 2030 Agenda, and decides to include in the provisional agenda of its eighty-second session, under the item entitled “Globalization and interdependence”, the sub-item entitled “Science, technology and innovation for sustainable development”.</p>
                 
             </div>
         </div>
@@ -1241,21 +1005,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1270,14 +1047,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1293,12 +1070,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1317,12 +1094,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

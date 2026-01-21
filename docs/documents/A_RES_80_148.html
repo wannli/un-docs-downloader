@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,417 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/148</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/148</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/148?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">26 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/148. Culture and sustainable development</p>
+    
+    <p class="mt-1 text-muted">26 operative paragraphs · Item 20</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.19</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">19 of 26 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the note by the Secretary-General transmitting the report of the United Nations Educational, Scientific and Cultural Organization; 15
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the note by the Secretary-General transmitting the report of the United Nations Educational, Scientific and Cultural Organization; 17
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the role of culture as a driver of sustainable development while providing innovative and effective solutions to cross-cutting issues, such as education, health, gender equality and women’s empowerment, technology and the environment, and stresses in this regard that policies responsive to cultural contexts can yield better, sustainable, inclusive and equitable development outcomes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the role of culture as a driver and enabler of sustainable development while providing innovative and effective solutions to cross-cutting issues, such as education, health, gender equality and women’s empowerment, technology and the environment, and stresses in this regard that policies responsive to cultural contexts can yield better, sustainable, inclusive and equitable development outcomes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the power of culture as a driver of sustainable development, which contributes to fostering social inclusion and developing a strong and viable economic sector by generating income, creating decent jobs for all, and addressing both the economic and social dimensions of poverty through cultural heritage, including its protection and preservation, and cultural and creative sectors, while providing innovative and effective solutions to cross-cutting issues, such as __________________ 13 Report of the Fourth World Conference on Women, Beijing, 4–15 September 1995 (United Nations publication, Sales No. E.96.IV.13), chap. I, resolution 1, annexes I and II. 14 See resolution 71/285. 15 A/80/235. A/C.2/80/L.19 25-16631 6/10 education, health, gender equality and women’s empowerment, technology and the environment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the power of culture as a driver of sustainable development, which contributes to fostering social inclusion and developing a strong and viable economic sector by generating income, creating decent jobs for all, and addressing both the economic and social dimensions of poverty through cultural heritage, including its protection and preservation, and cultural and creative sectors, while providing innovative and effective solutions to cross-cutting issues, such as education, health, gender equality and women’s empowerment, technology and the environment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for enhanced support, including additional financial resources and investments, for the cultural and creative sectors, to protect artists and cultural professionals, foster knowledge, innovation and intercultural dialogue, adapt them to the digital transformation, including artificial intelligence, with full respect for linguistic and cultural diversity, ensuring recognition and appropriate protection of artists, creators, bearers, communities and cultural professionals in this context, while also safeguarding cultural diversity, intellectual property rights, including copyright and related rights, strengthen linkages between culture and education, safeguard cultural heritage and traditional and ancestral knowledge, including of Indigenous Peoples and local communities, promote peaceful and inclusive societies, engage all segments of society through culture, including by noting the challenges faced by women and young people, to reinforce interlinkages between culture and nature, and harness the potential and transformative impact of culture for sustainable development, recognizing its multidimensional impact on the resilience, well-being and prosperity of people and their communities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for enhanced support, including additional financial resources and investments, for the cultural and creative sectors, to protect artists and cultural professionals, foster knowledge, innovation and intercultural dialogue, adapt them to the digital transformation, including artificial intelligence, with full respect for linguistic and cultural diversity, ensuring recognition, in accordance with legal frameworks, and appropriate protection of artists, creators, bearers, communities and cultural professionals in this context, while also safeguarding cultural diversity and protecting intellectual property rights, including copyright and related rights, strengthen linkages between culture and education, safeguard cultural heritage and traditional and ancestral knowledge, including of Indigenous Peoples and local communities, promote peaceful and inclusive societies, and engage all segments of society through culture, including by noting the challenges faced by women and youth, to reinforce interlinkages between culture and nature, and harness the potential and transformative impact of culture for sustainable development, recognizing its multidimensional impact on the resilience, well-being and prosperity of people and their communities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the important contribution of culture to the three dimensions of sustainable development and to the achievement of national development objectives, the 2030 Agenda for Sustainable Development 16 and its Sustainable Development Goals, as well as other internationally agreed development goals, and in this regard acknowledges: (a) That culture contributes to inclusive economic development, as cultural heritage preservation, cultural and creative sectors, sustainable cultural tourism and cultural infrastructure, including urban regeneration, are sources of income generation, job creation and decent work for all, including at the community level, thus improving living conditions and fostering community-based economic growth, and contribute to the empowerment of individuals; (b) That culture contributes to inclusive social development for all, including local communities, and Indigenous Peoples, with respect for cultural diversity, safeguarding of the cultural and natural heritage, fostering of cultural institutions and strengthening of cultural and creative sectors, in urban and rural contexts; (c) That culture contributes to environmental sustainability, since the protection of cultural and biological diversity and natural heritage is important for sustainable development, and that support for traditional systems of environmental protection, and resource management, can contribute to the increased sustainability of fragile ecosystems and the conservation, protection and sustainable use of biodiversity and to avoiding land degradation and addressing climate change;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the important contribution of culture to the three dimensions of sustainable development and to the achievement of national development objectives, the 2030 Agenda for Sustainable Development 18 and its Sustainable Development Goals, as well as other internationally agreed development goals, and in this regard acknowledges: (a) That culture contributes to inclusive economic development, as cultural heritage preservation, cultural and creative sectors, sustainable cultural tourism and cultural infrastructure, including urban regeneration, are sources of income generation, job creation and decent work for all, including at the community level, thus improving living conditions and fostering community-based economic growth, and contribute to the empowerment of individuals; (b) That culture contributes to inclusive social development for all, including local communities, and Indigenous Peoples, with respect for cultural diversity, _______________ 17 A/80/235. 18 Resolution 70/1. Culture and sustainable development A/RES/80/148 7/11 25-20767 safeguarding of the cultural and natural heritage, fostering of cultural institutions and strengthening of cultural and creative sectors, in urban and rural contexts; (c) That culture contributes to environmental sustainability, since the protection of cultural and biological diversity and natural heritage is important for sustainable development, and that support for traditional systems of environmental protection, and resource management, can contribute to the increased sustainability of fragile ecosystems and the conservation, protection and sustainable use of biodiversity and to avoiding land degradation and addressing climate change;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms its commitment to embracing diversity in cities and human settlements, to strengthening social cohesion, intercultural dialogue and understanding, tolerance, mutual respect, gender equality and women’s empowerment, innovation, entrepreneurship, inclusion, identity and safety, and the __________________ 16 Resolution 70/1. A/C.2/80/L.19 7/10 25-16631 dignity of all people, including people in vulnerable situations, as well as to fostering liveability and a vibrant urban economy and to taking steps to ensure that local institutions promote pluralism and peaceful coexistence within increasingly heterogeneous and multicultural societies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms its commitment to embracing diversity in cities and human settlements, to strengthening social cohesion, intercultural dialogue and understanding, tolerance, mutual respect, gender equality and women’s empowerment, innovation, entrepreneurship, inclusion, identity and safety, and the dignity of all people, including people in vulnerable situations, as well as to fostering liveability and a vibrant urban economy and to taking steps to ensure that local institutions promote pluralism and peaceful coexistence within increasingly heterogeneous and multicultural societies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that quality education, non-formal education and lifelong learning are enriched by culture, through the transmission of shared values, knowledge and skills, and also acknowledges that culture and arts education contribute directly to the realization of sustainable development and peace, in accordance with present and future United Nations efforts, including the 2030 Agenda and its 17 Sustainable Development Goals, in particular Goal 4, to ensure inclusive and equitable quality education and promote lifelong learning opportunities for all, and Goal 8, to promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that quality education, non‑formal education and lifelong learning are enriched by culture, through the transmission of shared values, knowledge and skills, and also acknowledges that culture and arts education contribute directly to the realization of sustainable development and peace, in accordance with present and future United Nations efforts, including the 2030 Agenda and its 17 Sustainable Development Goals, in particular Goal 4 to ensure inclusive and equitable quality education and promote lifelong learning opportunities for all, and Goal 8 to promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for the integration of digital technologies and information literacy, supporting the ethical and responsible use of technology, including artificial intelligence, in education, and also calls for the development of learners’ potential for creativity and innovation, their capacity to enjoy and to express themselves through the arts and their awareness of history and the diversity of cultures, as well as the promotion of education for the protection of cultural and natural heritage and places of memory whose existence is necessary for the safeguarding of cultural expressions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for the development of learners’ potential for creativity and innovation, their capacity to enjoy and to express themselves through the arts, and their awareness of history and the diversity of cultures, as well as the promotion of education for the protection of cultural and natural heritage and places of memory whose existence is necessary for the safeguarding of cultural expressions;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the inclusion in the 2030 Agenda of several targets reflecting the contribution of culture to sustainable development, also recalls that the Sustainable Development Goals and their targets are integrated and indivisible and balance the three dimensions of sustainable development, and in this regard looks forward to their achievement, building on the power of culture as an enabler and driver of progress towards the Goals;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the inclusion in the 2030 Agenda of several targets reflecting the contribution of culture to sustainable development, also recalls that the Sustainable Development Goals and their targets are integrated and indivisible and balance the three dimensions of sustainable development, and in this regard looks forward to their achievement, building on the power of culture as a driver and enabler of progress towards the Goals;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the efforts and initiatives of the United Nations Educational, Scientific and Cultural Organization, as the mandated United Nations agency on culture, to strengthen and measure the transformational impact of culture on the realization of the 2030 Agenda, building on information and data provided by the Member States in the framework of the periodic reports of the complete set of United Nations Educational, Scientific and Cultural Organization instruments in the field of culture and other related indicator frameworks, including the Culture 2030 Indicators;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the efforts and initiatives of the United Nations Educational, Scientific and Cultural Organization, as the mandated United Nations agency on culture, to strengthen and measure the transformational impact of culture on the A/RES/80/148 Culture and sustainable development 25-20767 8/11 realization of the 2030 Agenda, building on information and data provided by the Member States in the framework of the periodic reports of the complete set of United Nations Educational, Scientific and Cultural Organization instruments in the field of culture and other related indicator frameworks, including the Culture 2030 Indicators;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to give consideration, as appropriate, to the contribution of culture to sustainable development in the follow-up and review framework of the 2030 Agenda, including pursuant to the review of Sustainable Development Goal 11, which would generate an important boost for the achievement of Goal 11 between now and 2030;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to give consideration, as appropriate, to the contribution of culture to sustainable development in the follow-up and review framework of the 2030 Agenda, including pursuant to the review of Sustainable Development Goal 11, which would generate an important boost for the implementation of Goal 11 between now and 2030;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the convening of the World Conference on Cultural Policies and Sustainable Development, also known as “Mondiacult 2025”, hosted by the Government of Spain from 29 September to 1 October 2025, and looks forward to the next World Conference, to be convened by Saudi Arabia in 2029;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the convening of the World Conference on Cultural Policies and Sustainable Development, also known as “Mondiacult 2025”, hosted by the Government of Spain from 29 September to 1 October 2025, and looks forward to the next Mondiacult, to be held in Saudi Arabia in 2029;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all countries, as well as intergovernmental bodies and organizations of the United Nations system, within their respective mandates and resources, relevant non-governmental organizations and all other relevant stakeholders: A/C.2/80/L.19 25-16631 8/10 (a) To raise public awareness of the importance of cultural diversity for sustainable development, promoting its positive value through education and media tools, while also pursuing multilingualism as a mean of promoting, protecting and preserving diversity of languages and cultures globally; (b) To ensure a more visible and effective integration and mainstreaming of culture into economic, social and environmental development policies and strategies at all levels; (c) To ensure that women and men can equally access, participate in and contribute to cultural life and decision-making, and to further commit themselves to the development of cultural policies and programmes with a gender perspective at the local, national and international levels in order to achieve gender equality and the empowerment of all women and girls; (d) To undertake relevant intercultural dialogue and cooperation and cultural diversity programmes for young people to engage in a multicultural society, participate in the implementation of the 2030 Agenda, achieve better educational results and acquire a broader and more diverse range of skills and competences; (e) To promote capacity-building, where appropriate, at all levels for the development of dynamic cultural and creative sectors, in particular by encouraging creativity, innovation and entrepreneurship, including for women and young people, supporting the development of cultural institutions and cultural and creative sectors, providing technical and vocational training for culture professionals and increasing employment opportunities in the cultural and creative sectors for sustained, inclusive and equitable economic growth and development; (f) To actively support the emergence of local markets for cultural goods and services and to facilitate the effective, equitable and licit access of such goods and services to international markets, including in the digital environment, taking into account the expanding range of cultural production and consumption and, for States Parties thereto, the provisions of the Convention on the Protection and Promotion of the Diversity of Cultural Expressions, adopted in 2005; (g) To promote cultural and linguistic diversity and equal access to cultural expressions in the digital environment, and to reinforce more balanced global flows of cultural goods and services, by guaranteeing the social and economic rights of artists and cultural professionals, and better regulating digital platforms; (h) To preserve and maintain local and Indigenous traditional knowledge and community practices of environmental management, which are valuable examples of culture as a vehicle for sustainable development, and to foster synergies between modern science and technology and local and Indigenous knowledge, practices and innovation; (i) To accelerate efforts to protect cultural and natural heritage from extreme weather events, sea level rise, desertification and other threats exacerbated by climate change, which jeopardize its integrity and preservation for present and future generations, including by considering becoming Party to the Convention on the Protection of the Underwater Cultural Heritage;17 (j) To promote global awareness of the linkages between cultural and biological diversity, including through the protection and preservation and encouragement of the customary use of biological resources, in accordance with traditional cultural practices, as an important element of a comprehensive approach to sustainable development; __________________ 17 United Nations, Treaty Series, vol. 2562, No. 45694. A/C.2/80/L.19 9/10 25-16631 (k) To support national legal frameworks and policies for the protection and preservation of cultural heritage and cultural property, encouraging initiatives and cooperation among States, including through the promotion of bilateral and multilateral cooperation, as relevant, to fight against illicit trafficking in cultural property, and for the return or restitution of cultural property, in accordance with national legislation and applicable international legal frameworks; (l) To support national legal frameworks and policies to enable intellectual property rights to sustain those involved in cultural creativity, including by promoting international cooperation to prevent the misappropriation of creative works; (m) To promote access to and/or the repatriation of ceremonial objects and human remains in their possession through fair, transparent and effective mechanisms developed in conjunction with Indigenous Peoples concerned; (n) To note that, in achieving these objectives, innovative mechanisms of financing, public and private, can make a positive contribution in assisting developing countries in mobilizing additional resources for development on a stable, predictable and voluntary basis, and to reiterate that such voluntary mechanisms should be effective, should aim to mobilize resources that are stable and predictable, should supplement and not be a substitute for traditional sources of financing, should be disbursed in accordance with the priorities of developing countries and should not unduly burden such countries; (o) To mobilize culture as a vehicle to foster tolerance, mutual understanding, peace and reconciliation in the context of conflict-prevention, conflict-resolution and peacebuilding processes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all countries, as well as intergovernmental bodies and organizations of the United Nations system, within their respective mandates and resources, relevant non‑governmental organizations and all other relevant stakeholders: (a) To raise public awareness of the importance of cultural diversity for sustainable development, promoting its positive value through education and media tools, while also pursuing multilingualism as a mean of promoting, protecting and preserving diversity of languages and cultures globally; (b) To ensure a more visible and effective integration and mainstreaming of culture into economic, social and environmental development policies and strategies at all levels; (c) To ensure that women and men can equally access, participate in and contribute to cultural life and decision-making, and to further commit themselves to the development of cultural policies and programmes with a gender perspective at the local, national and international levels in order to achieve gender equality and the empowerment of all women and girls; (d) To undertake relevant intercultural dialogue and cooperation and cultural diversity programmes for youth to engage in a multicultural society, participate in the achievement of the 2030 Agenda, achieve better educational results and acquire a broader and more diverse range of skills and competences; (e) To promote capacity-building, where appropriate, at all levels for the development of dynamic cultural and creative sectors, in particular by encouraging creativity, innovation and entrepreneurship, including for women and youth, supporting the development of cultural institutions and cultural and creative sectors, providing technical and vocational training for culture professionals and increasing employment opportunities in the cultural and creative sectors for sustained, inclusive and equitable economic growth and development; (f) To actively support the emergence of local markets for cultural goods and services and to facilitate the effective, equitable and licit access of such goods and services to international markets, including in the digital environment, taking into account the expanding range of cultural production and consumption and, for States Parties thereto, the provisions of the Convention on the Protection and Promotion of the Diversity of Cultural Expressions, adopted in 2005; (g) To promote cultural and linguistic diversity and equal access to cultural expressions in the digital environment, and to reinforce more balanced global flows of cultural goods and services, by guaranteeing the social and economic rights of artists and cultural professionals, and better regulating digital platforms; Culture and sustainable development A/RES/80/148 9/11 25-20767 (h) To preserve and maintain local and Indigenous traditional knowledge and community practices of environmental management, which are valuable examples of culture as a vehicle for sustainable development, and to foster synergies between modern science and technology and local and Indigenous knowledge, practices and innovation; (i) To accelerate efforts to protect cultural and natural heritage from extreme weather events, sea level rise, desertification and other threats exacerbated by climate change, which jeopardize its integrity and preservation for present and future generations; (j) To promote global awareness of the linkages between cultural and biological diversity, including through the protection and preservation and encouragement of the customary use of biological resources, in accordance with traditional cultural practices, as an important element of a comprehensive approach to sustainable development; (k) To support national legal frameworks and policies for the protection and preservation of cultural heritage and cultural property, encouraging initiatives and cooperation among States, including through the promotion of bilateral and multilateral cooperation, as relevant, to fight against illicit trafficking in cultural property, and for the return or restitution of cultural property, in accordance with national legislation and applicable international legal frameworks; (l) To support national legal frameworks and policies to enable intellectual property rights to sustain those involved in cultural creativity, including by promoting international cooperation to prevent the misappropriation of creative works; (m) To promote access to and/or the repatriation of ceremonial objects and human remains in their possession through fair, transparent and effective mechanisms developed in conjunction with Indigenous Peoples concerned; (n) To note that, in achieving these objectives, innovative mechanisms of financing, public and private, can make a positive contribution in assisting developing countries in mobilizing additional resources for development on a stable, predictable and voluntary basis, and to reiterate that such voluntary mechanisms should be effective, should aim to mobilize resources that are stable and predictable, should supplement and not be a substitute for traditional sources of financing, should be disbursed in accordance with the priorities of developing countries and should not unduly burden such countries; (o) To mobilize culture as a vehicle to foster tolerance, mutual understanding, peace and reconciliation in the context of conflict-prevention, conflict-resolution and peacebuilding processes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, intergovernmental bodies, organizations of the United Nations system, as appropriate, within their existing mandates, relevant non-governmental organizations and all other relevant stakeholders to enhance international cooperation in supporting the efforts of developing countries towards the development and strengthening of cultural and creative sectors, cultural tourism and culture-related microenterprises and to assist those countries in developing the necessary infrastructure and skills, as well as in mastering information and communications technologies and in gaining access to new technologies on mutually agreed terms;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, intergovernmental bodies, organizations of the United Nations system, as appropriate, within their existing mandates, relevant non‑governmental organizations and all other relevant stakeholders to enhance international cooperation in supporting the efforts of developing countries towards the development and strengthening of cultural and creative sectors, cultural tourism and culture-related microenterprises and to assist those countries in developing the necessary infrastructure and skills, as well as in mastering information and communications technologies and in gaining access to new technologies on mutually agreed terms; A/RES/80/148 Culture and sustainable development 25-20767 10/11
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages programmes that facilitate social benefits and economic rights for artists and cultural professionals, including those working in the digital environment, thus promoting opportunities for decent work, fair remuneration and equal pay for work of equal value, as well as training in the light of technological advancement and digitalization, while harnessing artificial intelligence benefits and mitigating risks in full respect of international law and taking into account other relevant frameworks such as the Recommendation on the Ethics of Artificial Intelligence of the United Nations Educational, Scientific and Cultural Organization;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages programmes that facilitate social benefits and economic rights for artists and cultural professionals, including those working in the digital environment, thus promoting opportunities for decent work, fair remuneration and equal pay for work of equal value, as well as training in the light of technological advancement and digitalization, while harnessing artificial intelligence benefits and mitigating risks;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the organizations of the United Nations system, in particular the United Nations Educational, Scientific and Cultural Organization, to continue to provide support, to facilitate financing and to assist countries, upon their request, in A/C.2/80/L.19 25-16631 10/10 developing their national capacities to optimize the contribution of culture to sustainable development, including through policy advice, information-sharing, the exchange of best practices, data collection, research and study and the use of appropriate evaluation indicators, as well as to implement applicable international cultural conventions, taking into account the relevant resolutions of the General Assembly;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the organizations of the United Nations system, in particular the United Nations Educational, Scientific and Cultural Organization, to continue to provide support, to facilitate financing and to assist countries, upon their request, in developing their national capacities to optimize the contribution of culture to sustainable development, including through policy advice, information-sharing, the exchange of best practices, data collection, research and study and the use of appropriate evaluation indicators, as well as to implement applicable international cultural conventions, taking into account the relevant resolutions of the General Assembly;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the publication by the United Nations Educational, Scientific and Cultural Organization, on 29 September 2025, of the inaugural Global Report on Cultural Policies, and invites the United Nations Educational, Scientific and Cultural Organization and other relevant United Nations bodies to continue to assess, in consultation with countries, the contribution of culture to the achievement of sustainable development through the compilation of quantitative and qualitative data, including indicators and statistics, with a view to informing development policies, and to continue to act as a platform for exchange among countries on the linkages between culture and sustainable development, including through the World Conference on Cultural Policies and Sustainable Development, to be held every four years from 2025 onwards;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the publication by the United Nations Educational, Scientific and Cultural Organization, on 29 September 2025, of the first-ever Global Report on Cultural Policies, and invites the United Nations Educational, Scientific and Cultural Organization and other relevant United Nations bodies to continue to assess, in consultation with countries, the contribution of culture to the achievement of sustainable development through the compilation of quantitative and qualitative data, including indicators and statistics, with a view to informing development policies, and to continue to act as a platform for exchange among countries on the linkages between culture and sustainable development, including through the United Nations Educational, Scientific and Cultural Organization World Conference on Cultural Policies and Sustainable Development, to be held every four years, from 2025 onwards;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, intergovernmental bodies, organizations of the United Nations system, relevant non-governmental organizations and all other relevant stakeholders to give due consideration to the contribution of culture to the achievement of sustainable development in the formulation of national, regional and international development policies and international cooperation instruments, and in this regard, building upon the discussion at the previous high-level event on culture and sustainable development, invites the President of the General Assembly to host a one-day high-level interactive dialogue on this subject, within existing resources, during the eighty-first session of the Assembly, and to invite the United Nations Educational, Scientific and Cultural Organization to support the President of the Assembly, within its existing mandates;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all countries, intergovernmental bodies, organizations of the United Nations system, relevant non‑governmental organizations and all other relevant stakeholders to give due consideration to the contribution of culture to the achievement of sustainable development in the formulation of national, regional and international development policies and international cooperation instruments, and in this regard, building upon the discussion at the previous high-level event on culture and sustainable development, invites the President of the General Assembly to host a one-day high-level interactive dialogue on this subject, within existing resources, during the eighty-first session of the Assembly, and to invite the United Nations Educational, Scientific and Cultural Organization to support the President of the Assembly, within its existing mandates; Culture and sustainable development A/RES/80/148 11/11 25-20767
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.19</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-second session a report on the implementation of the present resolution, and decides to include in the provisional agenda of its eighty-second session, under the item entitled “Globalization and interdependence”, the sub-item entitled “Culture and sustainable development”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/148</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-second session a report on the implementation of the present resolution and decides to include in the provisional agenda of its eighty-second session, under the item entitled “Globalization and interdependence”, the sub-item entitled “Culture and sustainable development”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.19.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -162,42 +559,43 @@
         <span class="text-sm text-muted">4 with signals, 22 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -214,7 +612,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -231,7 +629,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -248,7 +646,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -265,7 +663,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -282,7 +680,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -299,7 +697,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -316,7 +714,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -333,7 +731,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -350,7 +748,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -367,7 +765,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -384,7 +782,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -401,7 +799,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -418,7 +816,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -445,7 +843,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -462,7 +860,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -479,7 +877,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -496,7 +894,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -513,7 +911,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -530,7 +928,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -547,7 +945,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -574,7 +972,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -591,7 +989,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -608,7 +1006,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -635,7 +1033,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -652,7 +1050,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda", "report"]'
          data-has-signals="true">
@@ -689,19 +1087,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -716,14 +1127,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -739,12 +1150,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -763,12 +1174,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,128 +65,63 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.1/80/L.58</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/65</span>
+        </div>
+        <a href="./A_RES_80_65.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.1/80/L.58</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/c.1/80/l.58?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">11 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">Report of the Conference on Disarmament</p>
+    
+    <p class="mt-1 text-muted">11 operative paragraphs · Item 101, Item 1, Item 5</p>
 </div>
 
-<!-- Compute signal data -->
-
-
-    
-        
-            
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-        
-            
-        
-    
-
-    
-        
-            
-        
-    
-        
-    
 
 
 
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">11 with signals, 0 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button onclick="filterSignal('report')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-gray-100 text-gray-700 hover:bg-gray-200">
-            report
-        </button>
-        
-        <button onclick="filterSignal('agenda')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-blue-50 text-blue-700 hover:bg-blue-100
-                ">
-            agenda
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -194,26 +129,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the role of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament as the single multilateral disarmament negotiating forum of the international community;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the role of the Conference on Disarmament as the single multilateral disarmament negotiating forum of the international community;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -221,26 +146,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Appreciates the strong support expressed for the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament at its 2025 session by Ministers for Foreign Affairs and other high-level officials, while also acknowledging their concern about its ongoing impasse of more than two decades, and takes into account their calls for greater flexibility with respect to commencing the substantive work of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> without further delay;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Appreciates the strong support expressed for the Conference on Disarmament at its 2025 session by Ministers for Foreign Affairs and other high-level officials, while also acknowledging their concern about its ongoing impasse of more than two decades, and takes into account their calls for greater flexibility with respect to commencing the substantive work of the Conference without further delay;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -248,26 +163,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament to further intensify consultations and to explore possibilities for overcoming its ongoing deadlock by adopting and implementing a balanced and comprehensive programme of work at the earliest possible date during its 2026 session, bearing in mind the decision on the programme of work adopted by the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on 29 May 2009, 4 as well as other relevant decisions and proposals;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the Conference on Disarmament to further intensify consultations and to explore possibilities for overcoming its ongoing deadlock by adopting and implementing a balanced and comprehensive programme of work at the earliest possible date during its 2026 session, bearing in mind the decision on the programme of work adopted by the Conference on 29 May 2009, 4 as well as other relevant decisions and proposals;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -275,26 +180,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Notes with appreciation the decisions of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament on the re-establishment, in accordance with its rules of procedure, of subsidiary bodies on agenda items 1 to 4 and one on agenda items 5, 6 and 7, 5 for the 2025 session;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Notes with appreciation the decisions of the Conference on Disarmament on the re-establishment, in accordance with its rules of procedure, of subsidiary bodies on agenda items 1 to 4 and one on agenda items 5, 6 and 7, 5 for the 2025 session;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -302,26 +197,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages the current President and the incoming President of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament, bearing in mind the role of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament as the single multilateral disarmament negotiating forum, as well as building on the decisions on the work of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament for 20246 __________________ 2 CD/8/Rev.10, paras. 18 and 32–36. 3 Official Records of the General Assembly, Eightieth Session, Supplement No. 27 (A/80/27), paras. 9 and 10, noting that the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> received 32 requests for participation in its work and that the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> invited a number of non-member States to participate in its work but that did not reach agreement on the other requests to participate in the work of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark>. 4 Official Records of the General Assembly, Sixty-fourth Session, Supplement No. 27 (A/64/27), para. 18. 5 Ibid., Eightieth Session, Supplement No. 27 (A/80/27), para. 13. 6 Ibid., Seventy-ninth Session, Supplement No. 27 (A/79/27), paras. 13 and 14. A/C.1/80/L.58 3/3 25-16812 and 20257 and with a view to the early resumption of substantive work during its 2026 session, in accordance with its rules of procedure, to conduct consultations on the activities of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> in fulfilling its mandate during the intersessional period and, if possible, to make recommendations, taking into account all relevant proposals, past, present and future, including those submitted as documents of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark>, views presented and discussions held, and to endeavour to keep the membership of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> informed, as appropriate, of their consultations;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages the current President and the incoming President of the Conference on Disarmament, bearing in mind the role of the Conference on Disarmament as the single multilateral disarmament negotiating forum, as well as building on the decisions on the work of the Conference on Disarmament for 20246 __________________ 2 CD/8/Rev.10, paras. 18 and 32–36. 3 Official Records of the General Assembly, Eightieth Session, Supplement No. 27 (A/80/27), paras. 9 and 10, noting that the Conference received 32 requests for participation in its work and that the Conference invited a number of non-member States to participate in its work but that did not reach agreement on the other requests to participate in the work of the Conference. 4 Official Records of the General Assembly, Sixty-fourth Session, Supplement No. 27 (A/64/27), para. 18. 5 Ibid., Eightieth Session, Supplement No. 27 (A/80/27), para. 13. 6 Ibid., Seventy-ninth Session, Supplement No. 27 (A/79/27), paras. 13 and 14. A/C.1/80/L.58 3/3 25-16812 and 20257 and with a view to the early resumption of substantive work during its 2026 session, in accordance with its rules of procedure, to conduct consultations on the activities of the Conference in fulfilling its mandate during the intersessional period and, if possible, to make recommendations, taking into account all relevant proposals, past, present and future, including those submitted as documents of the Conference, views presented and discussions held, and to endeavour to keep the membership of the Conference informed, as appropriate, of their consultations;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -329,26 +214,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the current President and successive Presidents of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament to cooperate with the States members of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> in the effort to guide the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> to the early resumption of its substantive work, including negotiations, at its 2026 session;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the current President and successive Presidents of the Conference on Disarmament to cooperate with the States members of the Conference in the effort to guide the Conference to the early resumption of its substantive work, including negotiations, at its 2026 session;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -356,26 +231,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the importance of continuing consultations in 2026 on the question of the expansion of the membership of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the importance of continuing consultations in 2026 on the question of the expansion of the membership of the Conference on Disarmament;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -383,26 +248,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament to undertake in its work further substantive efforts to ensure multilateralism and inclusivity through participation of States not members of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> at its sessions, in accordance with its rules of procedure;8</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the Conference on Disarmament to undertake in its work further substantive efforts to ensure multilateralism and inclusivity through participation of States not members of the Conference at its sessions, in accordance with its rules of procedure;8</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -410,26 +265,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to continue to ensure and to strengthen, if needed, the provision to the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament of all necessary administrative, substantive and <mark class="bg-yellow-200 px-0.5 rounded">conference</mark> support services;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to continue to ensure and to strengthen, if needed, the provision to the Conference on Disarmament of all necessary administrative, substantive and conference support services;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA", "report"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -437,31 +282,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-first session a report on its work;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-gray-100 text-gray-700">
-                        report
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Conference on Disarmament to submit to the General Assembly at its eighty-first session a report on its work;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda", "PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -469,23 +299,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to include</mark> in the provisional agenda of its eighty-first session, under the item entitled “Review of the implementation of the recommendations and decisions adopted by the General Assembly at its tenth special session”, the sub-item entitled “Report of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Disarmament”. __________________ 7 Ibid., Eightieth Session, Supplement No. 27 (A/80/27), para. 13. 8 CD/8/Rev.10, paras. 18 and 32–36.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-blue-50 text-blue-700
-                        ">
-                        agenda
-                    </span>
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Review of the implementation of the recommendations and decisions adopted by the General Assembly at its tenth special session”, the sub-item entitled “Report of the Conference on Disarmament”. __________________ 7 Ibid., Eightieth Session, Supplement No. 27 (A/80/27), para. 13. 8 CD/8/Rev.10, paras. 18 and 32–36.</p>
                 
             </div>
         </div>
@@ -494,21 +308,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -523,14 +350,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -546,12 +373,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -570,12 +397,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

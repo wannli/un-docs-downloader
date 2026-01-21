@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,291 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/112</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/112</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/112?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">52 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/112. Safety and security of humanitarian personnel and protection of United Nations personnel</p>
+    
+    <p class="mt-1 text-muted">52 operative paragraphs · Item 72</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/80/L.18</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">12 of 52 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges, with immense regret, that the two consecutive years, 2023 and 2024, were the worst years on record for deaths of humanitarian personnel, and furthermore condemns, in the strongest terms, the increasing attacks against __________________ 16 Resolution 78/290. 17 A/80/292. A/80/L.18 25-19372 8/14 humanitarian and United Nations and associated personnel, including national and locally recruited personnel;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges, with immense regret, that the two consecutive years, 2023 and 2024, were the worst years on record for deaths of humanitarian personnel, and furthermore condemns, in the strongest terms, the increasing attacks against _______________ 16 Resolution 78/290. 17 A/80/292. A/RES/80/112 Safety and security of humanitarian personnel and protection of United Nations personnel 25-20385 8/15 humanitarian and United Nations and associated personnel, including national and locally recruited personnel;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the contribution of female humanitarian personnel and United Nations and associated personnel, including national and locally recruited personnel, in humanitarian and United Nations operations, expresses concern that these personnel may be more exposed to certain forms of violence, including sexual violence; sexual exploitation and abuse; crime; and acts of intimidation and harassment, strongly urges the United Nations system and Member States to analyse the different forms of violence, including sexual violence; sexual exploitation and abuse; crime; acts of intimidation and harassment to which women and men are differently exposed, and also strongly urges the United Nations system and Member States to choose appropriate and gender-sensitive approaches for their safety and security while allowing them to fulfil their duties, and to ensure that female humanitarian personnel and United Nations and associated personnel are A/80/L.18 9/14 25-19372 meaningfully included in decisions related to their safety and security, and that all reports of sexual violence against humanitarian workers are thoroughly investigated, and the alleged perpetrators brought to justice, in accordance with applicable laws;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the contribution of female humanitarian personnel and United Nations and associated personnel, including national and locally recruited personnel, in humanitarian and United Nations operations, expresses concern that these personnel may be more exposed to certain forms of violence, including sexual violence; sexual exploitation and abuse; crime; and acts of intimidation and harassment, strongly urges the United Nations system and Member States to analyse the different forms of violence, including sexual violence; sexual exploitation and abuse; crime; acts of intimidation and harassment to which women and men are differently exposed, and also strongly urges the United Nations system and Member States to choose appropriate and gender-sensitive approaches for their safety and security while allowing them to fulfil their duties, and to ensure that female Safety and security of humanitarian personnel and protection of United Nations personnel A/RES/80/112 9/15 25-20385 humanitarian personnel and United Nations and associated personnel are meaningfully included in decisions related to their safety and security, and that all reports of sexual violence against humanitarian workers are thoroughly investigated, and the alleged perpetrators brought to justice, in accordance with applicable laws;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the obligation, in accordance with international humanitarian law and national laws and regulations, as applicable, to respect and protect medical personnel, as well as humanitarian personnel exclusively engaged in medical duties, their means of transport and equipment, as well as hospitals and other medical facilities, in all circumstances, in this regard notes the role of domestic legal frameworks and other appropriate measures in promoting the safety and protection of such personnel, urges States and all parties to armed conflict to develop and integrate effective measures to prevent and address violence against such personnel, their means of transport and equipment, as well as hospitals and other medical facilities, and strongly urges States to conduct full, prompt, impartial and effective __________________ 18 United Nations, Treaty Series, vol. 75, No. 973. A/80/L.18 25-19372 10/14 investigations within their jurisdiction of violations of international humanitarian law related to the protection of the wounded and sick, medical personnel and humanitarian personnel exclusively engaged in medical duties, their means of transport and equipment, as well as hospitals and other medical facilities in armed conflict, and, where appropriate, to take action against those responsible in accordance with domestic and international law, with a view to reinforcing preventive measures, ensuring accountability and addressing the grievances of victims;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the obligation, in accordance with international humanitarian law and national laws and regulations, as applicable, to respect and protect medical personnel, as well as humanitarian personnel exclusively engaged in medical duties, their means of transport and equipment, as well as hospitals and other medical facilities, in all circumstances, in this regard notes the role of domestic legal frameworks and other appropriate measures in promoting the safety and protection of such personnel, urges States and all parties to armed conflict to develop and integrate effective measures to prevent and address violence against such personnel, their means of transport and equipment, as well as hospitals and other medical facilities, _______________ 18 United Nations, Treaty Series, vol. 75, No. 973. A/RES/80/112 Safety and security of humanitarian personnel and protection of United Nations personnel 25-20385 10/15 and strongly urges States to conduct full, prompt, impartial and effective investigations within their jurisdiction of violations of international humanitarian law related to the protection of the wounded and sick, medical personnel and humanitarian personnel exclusively engaged in medical duties, their means of transport and equipment, as well as hospitals and other medical facilities in armed conflict, and, where appropriate, to take action against those responsible in accordance with domestic and international law, with a view to reinforcing preventive measures, ensuring accountability and addressing the grievances of victims;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to take the measures necessary to promote full respect for the human rights, privileges and immunities of United Nations and associated personnel, and also requests the Secretary-General to seek the inclusion, in negotiations of headquarters and other mission agreements concerning United Nations and associated personnel, of the applicable conditions contained in the Convention on the Privileges and Immunities of the United Nations, 19 the Convention on the Privileges and Immunities of the Specialized Agencies 20 and the Convention on the Safety of United Nations and Associated Personnel; __________________ 19 Resolution 22 A (I). 20 Resolution 179 (II). A/80/L.18 11/14 25-19372
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to take the measures necessary to promote full respect for the human rights, privileges and immunities of United Nations and associated personnel, and also requests the Secretary-General to seek the inclusion, in negotiations of headquarters and other mission agreements concerning United Nations and associated personnel, of the applicable conditions contained in the Convention on the Privileges and Immunities of the United Nations,19 the Convention _______________ 19 Resolution 22 A (I). Safety and security of humanitarian personnel and protection of United Nations personnel A/RES/80/112 11/15 25-20385 on the Privileges and Immunities of the Specialized Agencies20 and the Convention on the Safety of United Nations and Associated Personnel;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to continue to take the measures necessary to ensure that United Nations and other personnel carrying out activities in fulfilment of the mandate of a United Nations operation are properly informed about and operate in conformity with mandatory security risk management measures and relevant codes of conduct and are properly informed about the conditions under which they are called upon to operate and the standards that they are required to meet, including those contained in relevant national laws and international law, and that adequate training in security, human rights law and international humanitarian law is provided so as to enhance their security and effectiveness in accomplishing their functions, and reaffirms the necessity for all other humanitarian organizations to provide their personnel with similar support; A/80/L.18 25-19372 12/14
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to continue to take the measures necessary to ensure that United Nations and other personnel carrying out activities in fulfilment of the mandate of a United Nations operation are properly informed about and operate in conformity with mandatory security risk management measures and relevant codes of conduct and are properly informed about the conditions under which they are called upon to operate and the standards that they are required to meet, including those _______________ 20 Resolution 179 (II). A/RES/80/112 Safety and security of humanitarian personnel and protection of United Nations personnel 25-20385 12/15 contained in relevant national laws and international law, and that adequate training in security, human rights law and international humanitarian law is provided so as to enhance their security and effectiveness in accomplishing their functions, and reaffirms the necessity for all other humanitarian organizations to provide their personnel with similar support;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 39</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages the Secretary-General to continue to develop enabling procedures that facilitate the deployment of suitably qualified United Nations security personnel with the appropriate knowledge, skills and experience, with the aim of improving the safety and security measures of the United Nations, in order to strengthen the ability of the United Nations to deliver on its programmes, mandates and activities, including humanitarian programmes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages the Secretary-General to continue to develop enabling procedures that facilitate the deployment of suitably qualified United Nations security personnel with the appropriate knowledge, skills and experience, with the aim of improving the safety and security measures of the United Nations, in order to Safety and security of humanitarian personnel and protection of United Nations personnel A/RES/80/112 13/15 25-20385 strengthen the ability of the United Nations to deliver on its programmes, mandates and activities, including humanitarian programmes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, inter alia, through the Inter-Agency Security Management Network, to continue the increased cooperation and collaboration among United Nations departments, organizations, funds and programmes and affiliated international organizations, including between their headquarters and field offices, in the planning and implementation of measures aimed A/80/L.18 13/14 25-19372 at improving staff security, training and awareness, including field crisis management and gender inclusion in security management, calls upon all relevant United Nations departments, organizations, funds and programmes and affiliated international organizations to support those efforts, and notes the approval by the Inter-Agency Security Management Network of a system-wide policy on the security of locally recruited personnel;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, inter alia, through the Inter-Agency Security Management Network, to continue the increased cooperation and collaboration among United Nations departments, organizations, funds and programmes and affiliated international organizations, including between their headquarters and field offices, in the planning and implementation of measures aimed at improving staff security, training and awareness, including field crisis management and gender inclusion in security management, calls upon all relevant United Nations departments, organizations, funds and programmes and affiliated international organizations to support those efforts, and notes the approval by the Inter-Agency Security Management Network of a system-wide policy on the security of locally recruited personnel;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 45</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States and relevant actors to enhance existing data- sharing mechanisms as appropriate, and to facilitate field-driven support services to humanitarian actors, including training and orientation sessions and sharing comparative, predictive and thematic analyses that take into account disaggregated data;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States and relevant actors to enhance existing data- sharing mechanisms as appropriate, and to facilitate field-driven support services to humanitarian actors, including training and orientation sessions and sharing A/RES/80/112 Safety and security of humanitarian personnel and protection of United Nations personnel 25-20385 14/15 comparative, predictive and thematic analyses that take into account disaggregated data;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 47</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that the effective functioning at the country level of security operations requires a unified and robust capacity for policy, standards, coordination, A/80/L.18 25-19372 14/14 communication, compliance and threat and risk assessment and operational and deployment flexibility to ensure that the security workforce reflects the changing dynamics of the security environment, and notes the benefits thereof to United Nations and associated personnel, including those achieved by the Department of Safety and Security since its establishment;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that the effective functioning at the country level of security operations requires a unified and robust capacity for policy, standards, coordination, communication, compliance and threat and risk assessment and operational and deployment flexibility to ensure that the security workforce reflects the changing dynamics of the security environment, and notes the benefits thereof to United Nations and associated personnel, including those achieved by the Department of Safety and Security since its establishment;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the steps taken by the Secretary-General thus far to strengthen partnerships, and encourages further efforts to enhance coordination, cooperation and information- and data-sharing, as appropriate, at both the headquarters and field levels, between the United Nations, regional organizations and other humanitarian and non-governmental organizations on matters relating to the safety and security of humanitarian personnel and United Nations and associated personnel, with a view to addressing mutual security concerns in the field, based on the Saving Lives Together framework as well as other relevant national and local initiatives in this regard, and requests the Secretary-General in this respect to enhance further collaborative initiatives to address the security needs of implementing partners, including through enhanced information- and data-sharing, as appropriate, assistance in emergency situations, when feasible, and, where appropriate, security training, invites Member States to consider increasing support to those initiatives, and requests the Secretary- General to report on steps taken in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the steps taken by the Secretary-General thus far to strengthen partnerships, and encourages further efforts to enhance coordination, cooperation and information- and data-sharing, as appropriate, at both the headquarters and field levels, between the United Nations, regional organizations and other humanitarian and non‑governmental organizations on matters relating to the safety and security of humanitarian personnel and United Nations and associated personnel, with a view to addressing mutual security concerns in the field, based on the Saving Lives Together framework as well as other relevant national and local initiatives in this regard, and requests the Secretary-General in this respect to enhance further collaborative initiatives to address the security needs of implementing partners, including through enhanced information- and data-sharing, as appropriate, assistance in emergency situations, when feasible, and, where appropriate, security training, invites Member States to consider increasing support to those initiatives, and requests the Secretary- General to report on steps taken in this regard;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 51</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to consider acceding to or ratifying the Tampere Convention on the Provision of Telecommunication Resources for Disaster Mitigation and Relief Operations of 18 June 1998,21 which entered into force on 8 January 2005, and urges them to facilitate and expedite, consistent with their national laws and international obligations applicable to them, the use of communications equipment in those and other relief operations, inter alia, by limiting and, whenever possible, expeditiously lifting the restrictions placed on the use of communications equipment by United Nations and associated personnel;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to consider acceding to or ratifying the Tampere Convention on the Provision of Telecommunication Resources for Disaster Mitigation and Relief Operations of 18 June 1998,21 which entered into force on 8 January 2005, and urges them to facilitate and expedite, consistent with their national laws and international obligations applicable to them, the use of communications equipment in those and other relief operations, inter alia, by limiting and, whenever possible, expeditiously lifting the restrictions placed on the use of communications equipment by United Nations and associated personnel; _______________ 21 United Nations, Treaty Series, vol. 2296, No. 40906. Safety and security of humanitarian personnel and protection of United Nations personnel A/RES/80/112 15/15 25-20385
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 52</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.18</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a comprehensive and updated report on the safety and security of humanitarian personnel and protection of United Nations personnel and on the implementation of the present resolution, including an assessment of the impact of safety and security risks on such personnel, and the development, implementation and outcomes of policies, strategies and initiatives of the United Nations system in the field of safety and security. __________________ 21 United Nations, Treaty Series, vol. 2296, No. 40906.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/112</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a comprehensive and updated report on the safety and security of humanitarian personnel and protection of United Nations personnel and on the implementation of the present resolution, including an assessment of the impact of safety and security risks on such personnel, and the development, implementation and outcomes of policies, strategies and initiatives of the United Nations system in the field of safety and security. 60th plenary meeting 10 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_80_L.18.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -202,28 +473,29 @@
         <span class="text-sm text-muted">1 with signals, 51 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -240,7 +512,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -257,7 +529,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -274,7 +546,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -291,7 +563,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -308,7 +580,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -325,7 +597,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -342,7 +614,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -359,7 +631,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -376,7 +648,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -393,7 +665,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -410,7 +682,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -427,7 +699,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -444,7 +716,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -461,7 +733,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -478,7 +750,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -495,7 +767,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -512,7 +784,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -529,7 +801,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -546,7 +818,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -563,7 +835,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -580,7 +852,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -597,7 +869,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -614,7 +886,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -631,7 +903,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -648,7 +920,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -665,7 +937,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -682,7 +954,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -699,7 +971,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -716,7 +988,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -733,7 +1005,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -750,7 +1022,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -767,7 +1039,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -784,7 +1056,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -801,7 +1073,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -818,7 +1090,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -835,7 +1107,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -852,7 +1124,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -869,7 +1141,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -886,7 +1158,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -903,7 +1175,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -920,7 +1192,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -937,7 +1209,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -954,7 +1226,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -971,7 +1243,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -988,7 +1260,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1005,7 +1277,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1022,7 +1294,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1039,7 +1311,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1056,7 +1328,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1073,7 +1345,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1090,7 +1362,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -1121,19 +1393,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1148,14 +1433,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1171,12 +1456,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1195,12 +1480,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

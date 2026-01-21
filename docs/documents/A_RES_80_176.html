@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,327 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/176</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/176</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/176?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">20 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/176. Addressing the challenges of persons living with a rare disease and their families</p>
+    
+    <p class="mt-1 text-muted">20 operative paragraphs · Item 25</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.11</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">14 of 20 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to strengthen health systems, and referral systems between primary healthcare and other levels of care, in order to provide universal access to a wide range of healthcare services that are safe, of quality, accessible, available and affordable, timely, clinically and financially integrated, and gender-responsive, with full respect for human rights, which will help to empower persons living with a rare disease, whether genetic or acquired, including those with rare infections and rare allergic conditions, as well as those with an undiagnosed rare disease, in addressing their physical and mental health needs to realize their human rights, including their right to the highest attainable standard of physical and mental health, to enhance health equity and equality, end discrimination and stigma, eliminate gaps in coverage and create a more inclusive society;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to strengthen health systems and referral systems between primary health care and other levels of care, in order to provide universal access to a wide range of healthcare services that are safe, of quality, accessible, available and affordable, timely, clinically and financially integrated, and gender-responsive, with full respect for human rights, which will help to empower persons living with a rare disease, whether genetic or acquired, including those with rare infections and rare allergic conditions, as well as those with an undiagnosed rare disease, in addressing their physical and mental health needs to realize their human rights, including their right to the highest attainable standard of physical and mental health, to enhance health equity and equality, end discrimination and stigma, eliminate gaps in coverage and create a more inclusive society;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to adopt gender-sensitive national strategies, action plans and legislation, to contribute to the well-being of persons living with a rare disease and their families, including on the protection and enjoyment of their human rights, consistent with their obligations under international law;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to adopt gender-sensitive national strategies, action plans and legislation to contribute to the well-being of persons living with a rare disease and their families, including on the protection and enjoyment of their human rights, consistent with their obligations under international law;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and relevant United Nations agencies to collect, analyse and disseminate disaggregated data on persons living with a rare disease, including by income, sex, age, race, ethnicity, migration status, disability, geographical location and other characteristics relevant in national contexts, where applicable, to identify discrimination and to assess progress towards the improvement of the status of persons living with a rare disease;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and relevant United Nations agencies to collect, analyse and disseminate disaggregated data on persons living with a rare Addressing the challenges of persons living with a rare disease and their families A/RES/80/176 5/7 25-20970 disease, including by income, sex, age, race, ethnicity, migration status, disability, geographical location and other characteristics relevant in national contexts, where applicable, to identify discrimination and to assess progress towards the improvement of the status of persons living with a rare disease;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages Member States: (a) To develop national sustainable programmes for undiagnosed diseases, aligned with national efforts to achieve universal health coverage, to enable rapid and equitable access to diagnosis and social support; A/C.3/80/L.11 5/7 25-16648 (b) To structure and coordinate, at the national and international levels, knowledge on the subject of rare diseases, and information-sharing to optimize the use of existing resources and facilitate access for all persons with an undiagnosed rare disease, while acknowledging the need to support developing countries in building expertise and in developing local and regional manufacturing capacities for health products and technologies; (c) To promote the participation of persons living with a rare disease and other relevant stakeholders in the governance of undiagnosed disease programmes and international networks to adequately address the priorities of persons living with an undiagnosed rare disease and contribute to improving the quality of healthcare; (d) To promote, through existing initiatives, ethical and responsible international data-sharing to support diagnosis, increase clinical collaboration, facilitate research and accelerate treatment of undiagnosed and rare conditions; (e) To facilitate collaboration among national authorities overseeing drug development cycles and clinical trials for treatments for persons living with a rare disease;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages Member States: (a) To develop national sustainable programmes for undiagnosed diseases, aligned with national efforts to achieve universal health coverage, to enable rapid and equitable access to diagnosis and social support; (b) To structure and coordinate, at the national and international levels, knowledge on the subject of rare diseases, and information-sharing to optimize the use of existing resources and facilitate access for all persons with an undiagnosed rare disease, while acknowledging the need to support developing countries in building expertise and in developing local and regional manufacturing capacities for health products and technologies; (c) To promote the participation of persons living with a rare disease and other relevant stakeholders in the governance of undiagnosed disease programmes and international networks to adequately address the priorities of persons living with an undiagnosed rare disease and contribute to improving the quality of healthcare; (d) To promote, through existing initiatives, ethical and responsible international data-sharing to support diagnosis in accordance with applicable national data protection legislation, increase clinical collaboration, facilitate research and accelerate treatment of undiagnosed and rare conditions; (e) To facilitate collaboration among national authorities overseeing drug development cycles and clinical trials for treatments for persons living with a rare disease; (f) To develop and implement, where appropriate, national mechanisms, which might include surveys, patient registries and participatory questionnaires, in consultation with persons living with a rare disease and their representative organizations, to systematically assess the medical, social and economic challenges faced by these persons and their families, in order to inform national policies, improve service delivery and guide the design of equitable health and social protection programmes, while ensuring full respect for privacy and data protection standards;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to implement, as appropriate, national policies and measures to ensure that persons living with a rare disease are not left behind, recognizing that persons living with a rare disease are often disproportionally affected by poverty, discrimination and lack of decent work and employment, and that they may require assistance in order to enjoy equal access to benefits and services, notably in the fields of education, employment and health, and to promote their full, equal and meaningful participation in society, and to commit to working towards the social integration and physical and mental well-being of persons living with a rare disease and their families and caregivers without any discrimination;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to implement, as appropriate, national policies and measures to ensure that persons living with a rare disease are not left behind, recognizing that persons living with a rare disease are often disproportionally affected by poverty, discrimination and a lack of education, decent work and employment, and that they may require assistance in order to enjoy equal access to benefits and services, notably in the fields of education, employment and health, and to promote their full, equal and meaningful participation in society, and to commit to working towards the social integration and physical and mental well-being of persons living with a rare disease and their families and caregivers without any discrimination;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States, United Nations agencies and other stakeholders, in consultation with persons living with a rare disease and their families, including through their representative organizations, to design and implement policies and programmes, to share experiences and best practices with the aim of fulfilling the rights of all persons living with a rare disease, and to ensure that the implementation of the 2030 Agenda for Sustainable Development9 is inclusive of and accessible to persons living with a rare disease;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States, United Nations agencies and other stakeholders, in consultation with persons living with a rare disease and their families and caregivers, A/RES/80/176 Addressing the challenges of persons living with a rare disease and their families 25-20970 6/7 including through their representative organizations, to design and implement policies and programmes, to share experiences and best practices with the aim of fulfilling the rights of all persons living with a rare disease, and to ensure that the implementation of the 2030 Agenda for Sustainable Development9 is inclusive of and accessible to persons living with a rare disease;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Affirms that all persons, including those living with a rare disease, and especially children, have the right to education and lifelong learning opportunities on the basis of equal opportunity and non-discrimination, and urges Member States to ensure full and equal access to education and lifelong learning opportunities for persons living with a rare disease on an equal basis with others;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Affirms that all persons, including those living with a rare disease, and especially children, have the right to education and lifelong learning opportunities on the basis of equal opportunity and non‑discrimination, and urges Member States to ensure full and equal access to education and lifelong learning opportunities for persons living with a rare disease on an equal basis with others;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to integrate rare disease content into the education and training of medical students, nurses and other health practitioners, including continuing professional development, in order to strengthen knowledge, improve early detection and care pathways and promote respectful and inclusive care for persons living with a rare disease;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States, in line with national policies, to include rare disease content in the education and training of medical students, nurses and other health practitioners, including in continuing professional development, in order to strengthen knowledge, improve early detection and care pathways and promote respectful, dignified and inclusive care for persons living with a rare disease, as well as collaboration with them and their families;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to accelerate efforts towards the achievement of universal health coverage by 2030 to ensure healthy lives and promote well-being __________________ 9 Resolution 70/1. A/C.3/80/L.11 25-16648 6/7 for all persons, including those persons living with a rare disease, as well as those with an undiagnosed rare disease, all throughout the life course, and in this regard re- emphasizes the resolve: (a) To progressively cover persons living with a rare disease, and those with an undiagnosed rare disease, with quality essential health products, health services, including adequate preventive measures such as newborn screening, and quality, safe, effective, affordable and essential medicines and therapies, diagnostics, with the particular aim of shortening and easing the pathway to a diagnosis and treatment for persons living with a rare disease, health technologies, and strengthened primary healthcare, referral pathways, multidisciplinary care coordination plans, increased registration efforts, and access to specialized care, with a view to completely covering all persons living with a rare disease by 2030; (b) To reverse the trend of catastrophic out-of-pocket health expenditure, which carries psychosocial and economic consequences for both persons living with a rare disease and their families, by providing measures to ensure financial risk protection and eliminate impoverishment due to health-related expenses by 2030, with special emphasis on persons living with a rare disease;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to accelerate efforts towards the achievement of universal health coverage by 2030 to ensure healthy lives and promote well-being for all persons, including those persons living with a rare disease, as well as those with an undiagnosed rare disease, all throughout the life course, and in this regard re-emphasizes the resolve: (a) To progressively cover persons living with a rare disease, and those with an undiagnosed rare disease, with quality essential health products, health services, including adequate preventive measures such as newborn screening, and quality, safe, effective, affordable and essential medicines and therapies, diagnostics, with the particular aim of shortening and easing the pathway to a diagnosis and treatment for persons living with a rare disease, health technologies, and strengthened primary healthcare, referral pathways, multidisciplinary care coordination plans, increased registration efforts, and access to specialized care, with a view to completely covering all persons living with a rare disease by 2030; (b) To reverse the trend of catastrophic out-of-pocket health expenditure, which carries psychosocial and economic consequences for both persons living with a rare disease and their families, by providing measures to ensure financial risk protection and eliminate impoverishment due to health-related expenses by 2030, with special emphasis on persons living with a rare disease;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to take appropriate steps to provide affordable, accessible and good-quality care facilities for children and other dependants living with a rare disease and measures promoting the equal sharing of household responsibilities between women and men, including all adult members of the household, recognizing, reducing and redistributing women’s and girls’ disproportionate share of unpaid care and domestic work when a member of the family lives with a rare disease, and fully engaging men and boys as agents and beneficiaries of change and as strategic partners and allies in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to take appropriate steps to provide affordable, accessible and good-quality care facilities for children and other dependants living with a rare disease and measures promoting the equal sharing of household responsibilities between women and men, including all adult members of the household, recognizing, reducing and redistributing women’s and girls’ disproportionate share of unpaid care and domestic work when a member of the family lives with a rare disease, and fully engaging men and boys as agents and beneficiaries of change and as strategic partners and allies in this regard; _______________ 9 Resolution 70/1. Addressing the challenges of persons living with a rare disease and their families A/RES/80/176 7/7 25-20970
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States, in collaboration with non-governmental organizations, civil society organizations and other relevant stakeholders, to raise awareness on the specific challenges and needs faced by persons living with a rare disease and their families, through national campaigns, educational programmes and information dissemination, with the goal of promoting greater understanding and global solidarity;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States, in collaboration with non‑governmental organizations, civil society organizations and other relevant stakeholders, to raise awareness of the specific challenges and needs faced by persons living with a rare disease and their families, through national campaigns, educational programmes and information dissemination, with the goal of promoting greater understanding and global solidarity;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, in close collaboration with the Director- General of the World Health Organization, to submit a report on the implementation of the present resolution to the General Assembly at its eighty-second session, all costs associated therewith to be covered by extrabudgetary resources; A/C.3/80/L.11 7/7 25-16648
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, in close collaboration with the Director General of the World Health Organization, to report on and assess the implementation of the present resolution to the General Assembly at its eighty-second session, through an oral update, to be followed by an interactive dialogue;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to consider, at its future sessions, options for the elaboration of an international convention or agreement, guidelines or other international instrument on the rights of persons living with rare diseases, their families and caregivers, with a view to ensuring a comprehensive framework that addresses the multidimensional challenges, including access to quality, safe, effective and affordable diagnostics and therapies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States to continue to consider, at future sessions of the General Assembly, addressing the multidimensional challenges faced by persons living with a rare disease, including with respect to access to quality, safe, effective and affordable diagnostics and therapies, as well as the challenges faced by their families and caregivers, while identifying possible implementation gaps in the protection of the human rights of persons living with a rare disease, including options for the elaboration of an agreement, guidelines, an international convention or other international standards;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.11</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also decides, given the multifaceted nature of the challenges faced by persons living with a rare disease, to continue its consideration of the issue of persons living with a rare disease at its eighty-second session, under the item entitled “Social development”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/176</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides, given the multifaceted nature of the challenges faced by persons living with a rare disease, to continue its consideration of the issue of persons living with a rare disease at its eighty-second session, under the item entitled “Social development”. 62nd plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.11.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -138,29 +445,30 @@
         <span class="text-sm text-muted">1 with signals, 19 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -177,7 +485,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -194,7 +502,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -211,7 +519,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -228,7 +536,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -245,7 +553,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -262,7 +570,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -279,7 +587,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -296,7 +604,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -313,7 +621,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -330,7 +638,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -347,7 +655,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -364,7 +672,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -381,7 +689,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -398,7 +706,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -415,7 +723,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -432,7 +740,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -449,7 +757,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -476,7 +784,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -493,7 +801,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -515,19 +823,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -542,14 +863,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -565,12 +886,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -589,12 +910,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

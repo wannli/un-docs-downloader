@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,222 +65,63 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.2/80/L.12</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/123</span>
+        </div>
+        <a href="./A_RES_80_123.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.2/80/L.12</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/c.2/80/l.12?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">54 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">External debt sustainability and development</p>
+    
+    <p class="mt-1 text-muted">54 operative paragraphs · Item 16</p>
 </div>
 
-<!-- Compute signal data -->
-
-
-    
-        
-            
-        
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-            
-        
-    
-        
-    
-        
-            
-        
-    
 
 
 
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">15 with signals, 39 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button onclick="filterSignal('agenda')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-blue-50 text-blue-700 hover:bg-blue-100
-                ">
-            agenda
-        </button>
-        
-        <button onclick="filterSignal('report')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-gray-100 text-gray-700 hover:bg-gray-200">
-            report
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -288,26 +129,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the report of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development;6</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the report of the United Nations Conference on Trade and Development;6</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -315,24 +146,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the outcome document of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, the Sevilla Commitment, 7 and calls for its timely and effective implementation;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment, 7 and calls for its timely and effective implementation;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-3"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -348,8 +169,8 @@
         </div>
     </div>
     
-    <div id="para-4" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-4"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -365,8 +186,8 @@
         </div>
     </div>
     
-    <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-5"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -382,8 +203,8 @@
         </div>
     </div>
     
-    <div id="para-6" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-6"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -399,8 +220,8 @@
         </div>
     </div>
     
-    <div id="para-7" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-7"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -416,8 +237,8 @@
         </div>
     </div>
     
-    <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-8"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -433,10 +254,10 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -444,24 +265,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reiterates that no single indicator should be used to make definitive judgments about a country’s debt sustainability, and, in view of the new challenges and vulnerabilities for developing countries’ external debt sustainability, substantiated by the work of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development and recent joint analyses of the International Monetary Fund and the World Bank, stresses the need for improved data collection and quality in areas that include domestic public debt and domestic and external private debt, as well as legal and regulatory features, such as ownership, currency denomination and jurisdiction according to national priorities, and in this regard supports the call for action contained in the Sevilla Commitment, and welcomes the final report of the High-level Panel on the Development of a Multidimensional Vulnerability Index for Small Island Developing States, and the adoption of General Assembly resolution 78/322 of 13 August 2024, entitled “Multidimensional vulnerability index”;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Reiterates that no single indicator should be used to make definitive judgments about a country’s debt sustainability, and, in view of the new challenges and vulnerabilities for developing countries’ external debt sustainability, substantiated by the work of the United Nations Conference on Trade and Development and recent joint analyses of the International Monetary Fund and the World Bank, stresses the need for improved data collection and quality in areas that include domestic public debt and domestic and external private debt, as well as legal and regulatory features, such as ownership, currency denomination and jurisdiction according to national priorities, and in this regard supports the call for action contained in the Sevilla Commitment, and welcomes the final report of the High-level Panel on the Development of a Multidimensional Vulnerability Index for Small Island Developing States, and the adoption of General Assembly resolution 78/322 of 13 August 2024, entitled “Multidimensional vulnerability index”;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-10" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-10"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -477,10 +288,10 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -488,24 +299,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages the United Nations system, the World Bank Group, the International Monetary Fund and other relevant stakeholders, including the Development Assistance Committee of the Organisation for Economic Co-operation and Development, to continue to conduct analytical activities and to provide policy advice and technical assistance to Governments, upon request, in the areas of __________________ 8 Resolution 70/1. A/C.2/80/L.12 7/13 25-16556 managing debt, and operating and maintaining databases, and in this regard recalls that the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development should continue its analytical and policy work and technical assistance on debt issues, including the Debt Management and Financial Analysis System Programme, so that this extends not only to improvements in the timeliness and accuracy of debt data recording, but also to the enhanced coverage of public sector and other relevant debt data, including, in particular, heretofore unrecorded or hidden debt instruments, contingent liabilities and more complex debt instruments;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages the United Nations system, the World Bank Group, the International Monetary Fund and other relevant stakeholders, including the Development Assistance Committee of the Organisation for Economic Co-operation and Development, to continue to conduct analytical activities and to provide policy advice and technical assistance to Governments, upon request, in the areas of __________________ 8 Resolution 70/1. A/C.2/80/L.12 7/13 25-16556 managing debt, and operating and maintaining databases, and in this regard recalls that the United Nations Conference on Trade and Development should continue its analytical and policy work and technical assistance on debt issues, including the Debt Management and Financial Analysis System Programme, so that this extends not only to improvements in the timeliness and accuracy of debt data recording, but also to the enhanced coverage of public sector and other relevant debt data, including, in particular, heretofore unrecorded or hidden debt instruments, contingent liabilities and more complex debt instruments;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-12" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-12"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -521,8 +322,8 @@
         </div>
     </div>
     
-    <div id="para-13" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-13"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -538,8 +339,8 @@
         </div>
     </div>
     
-    <div id="para-14" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-14"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -555,8 +356,8 @@
         </div>
     </div>
     
-    <div id="para-15" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-15"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -572,8 +373,8 @@
         </div>
     </div>
     
-    <div id="para-16" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-16"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -589,8 +390,8 @@
         </div>
     </div>
     
-    <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-17"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -606,8 +407,8 @@
         </div>
     </div>
     
-    <div id="para-18" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-18"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -623,8 +424,8 @@
         </div>
     </div>
     
-    <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-19"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -640,8 +441,8 @@
         </div>
     </div>
     
-    <div id="para-20" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-20"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -657,8 +458,8 @@
         </div>
     </div>
     
-    <div id="para-21" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-21"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -674,8 +475,8 @@
         </div>
     </div>
     
-    <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-22"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -691,8 +492,8 @@
         </div>
     </div>
     
-    <div id="para-23" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-23"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -708,8 +509,8 @@
         </div>
     </div>
     
-    <div id="para-24" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-24"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -725,8 +526,8 @@
         </div>
     </div>
     
-    <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-25"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -742,8 +543,8 @@
         </div>
     </div>
     
-    <div id="para-26" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-26"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -759,8 +560,8 @@
         </div>
     </div>
     
-    <div id="para-27" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-27"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -776,8 +577,8 @@
         </div>
     </div>
     
-    <div id="para-28" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-28"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -793,8 +594,8 @@
         </div>
     </div>
     
-    <div id="para-29" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-29"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -810,8 +611,8 @@
         </div>
     </div>
     
-    <div id="para-30" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-30"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -827,8 +628,8 @@
         </div>
     </div>
     
-    <div id="para-31" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-31"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -844,8 +645,8 @@
         </div>
     </div>
     
-    <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-32"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -861,10 +662,10 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -872,26 +673,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the important role of credit ratings in the capital market ecosystem, as they provide creditors and the public with assessments of a debtor’s relative risk of default, and acknowledges that downgraded ratings may negatively affect the opinion of lenders and bondholders and as a result raise the cost and reduce the availability of future debt funding, and that it is important that credit rating agencies ensure that their ratings are objective, independent and based on accurate information and sound analytical methods, including by considering development, social and environmental indicators and impacts of external shocks in their ratings, to the extent that these factors have an impact on debt risk, noting in this regard the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> on the role of credit rating agencies in the implementation of the 2030 Agenda;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the important role of credit ratings in the capital market ecosystem, as they provide creditors and the public with assessments of a debtor’s relative risk of default, and acknowledges that downgraded ratings may negatively affect the opinion of lenders and bondholders and as a result raise the cost and reduce the availability of future debt funding, and that it is important that credit rating agencies ensure that their ratings are objective, independent and based on accurate information and sound analytical methods, including by considering development, social and environmental indicators and impacts of external shocks in their ratings, to the extent that these factors have an impact on debt risk, noting in this regard the high-level meeting on the role of credit rating agencies in the implementation of the 2030 Agenda;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -899,24 +690,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reiterates that debtors and creditors must work together in a transparent manner to prevent and resolve unsustainable debt situations and that maintaining sustainable debt levels is the responsibility of the borrowing countries, acknowledges that lenders also have a responsibility to lend in a way that does not undermine a country’s debt sustainability, and in this regard takes note of the principles on responsible sovereign lending and borrowing of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, recognizes the applicable requirements of the debt limits policy of the International Monetary Fund and/or the non-concessional borrowing policy of the World Bank and the safeguards of the Development Assistance Committee of the Organisation for Economic Co-operation and Development in its statistical system to enhance the debt sustainability of recipient countries, and resolves to work towards a global consensus on guidelines for debtor and creditor responsibilities in borrowing by and lending to sovereigns, building on existing initiatives;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Reiterates that debtors and creditors must work together in a transparent manner to prevent and resolve unsustainable debt situations and that maintaining sustainable debt levels is the responsibility of the borrowing countries, acknowledges that lenders also have a responsibility to lend in a way that does not undermine a country’s debt sustainability, and in this regard takes note of the principles on responsible sovereign lending and borrowing of the United Nations Conference on Trade and Development, recognizes the applicable requirements of the debt limits policy of the International Monetary Fund and/or the non-concessional borrowing policy of the World Bank and the safeguards of the Development Assistance Committee of the Organisation for Economic Co-operation and Development in its statistical system to enhance the debt sustainability of recipient countries, and resolves to work towards a global consensus on guidelines for debtor and creditor responsibilities in borrowing by and lending to sovereigns, building on existing initiatives;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-35" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-35"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -932,8 +713,8 @@
         </div>
     </div>
     
-    <div id="para-36" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-36"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -949,10 +730,10 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -960,24 +741,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recalls the holding of the sixteenth session of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development in Geneva from 20 to 23 October 2025, and the Bridgetown Covenant,9 and encourages the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, in cooperation with the World Bank and the International Monetary Fund, to continue its analytical and policy work and technical assistance on debt issues, including to promote policies for responsible, sustainable and transparent sovereign borrowing and lending, as appropriate, and to enhance the efficiency of the __________________ 9 TD/541/Add.2. A/C.2/80/L.12 11/13 25-16556 global economic system and debt sustainability for the realization of the 2030 Agenda in developing countries;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls the holding of the sixteenth session of the United Nations Conference on Trade and Development in Geneva from 20 to 23 October 2025, and the Bridgetown Covenant,9 and encourages the United Nations Conference on Trade and Development, in cooperation with the World Bank and the International Monetary Fund, to continue its analytical and policy work and technical assistance on debt issues, including to promote policies for responsible, sustainable and transparent sovereign borrowing and lending, as appropriate, and to enhance the efficiency of the __________________ 9 TD/541/Add.2. A/C.2/80/L.12 11/13 25-16556 global economic system and debt sustainability for the realization of the 2030 Agenda in developing countries;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-38" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-38"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -993,8 +764,8 @@
         </div>
     </div>
     
-    <div id="para-39" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-39"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1010,8 +781,8 @@
         </div>
     </div>
     
-    <div id="para-40" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-40"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1027,10 +798,10 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1038,24 +809,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recalls that the United Nations, as a universal intergovernmental body, has provided a platform for both creditors and debtors to discuss ways to improve external debt sustainability, notes the convening of the ministerial fireside chat on lowering borrowing costs and advancing development-oriented debt solutions during the 2025 Economic and Social Council forum on financing for development follow- up, and in this regard invites continued ongoing cooperation among the international financial institutions, including the Bretton Woods institutions, in particular the International Monetary Fund, relevant United Nations system entities, including the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, and other relevant forums, in accordance with their respective mandates pursuant to the relevant resolutions on this matter;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls that the United Nations, as a universal intergovernmental body, has provided a platform for both creditors and debtors to discuss ways to improve external debt sustainability, notes the convening of the ministerial fireside chat on lowering borrowing costs and advancing development-oriented debt solutions during the 2025 Economic and Social Council forum on financing for development follow- up, and in this regard invites continued ongoing cooperation among the international financial institutions, including the Bretton Woods institutions, in particular the International Monetary Fund, relevant United Nations system entities, including the United Nations Conference on Trade and Development, and other relevant forums, in accordance with their respective mandates pursuant to the relevant resolutions on this matter;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-42" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-42"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1071,8 +832,8 @@
         </div>
     </div>
     
-    <div id="para-43" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-43"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1088,8 +849,8 @@
         </div>
     </div>
     
-    <div id="para-44" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-44"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1105,10 +866,10 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1116,26 +877,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also recalls the establishment of the Intergovernmental Group of Experts on Financing for Development of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, notes that its ninth session will be held in December 2025, and recalls the request that the work of the Intergovernmental Group of Experts on Financing for Development at the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development be presented as a regular input to the Economic and Social Council forum on financing for development follow-up, in accordance with the terms of reference of the Intergovernmental Group of Experts;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Also recalls the establishment of the Intergovernmental Group of Experts on Financing for Development of the United Nations Conference on Trade and Development, notes that its ninth session will be held in December 2025, and recalls the request that the work of the Intergovernmental Group of Experts on Financing for Development at the United Nations Conference on Trade and Development be presented as a regular input to the Economic and Social Council forum on financing for development follow-up, in accordance with the terms of reference of the Intergovernmental Group of Experts;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1143,24 +894,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reiterates the invitation to the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> and the Secretary-General to give appropriate consideration to the central role of maintaining and facilitating the financial and macroeconomic stability of developing countries, A/C.2/80/L.12 25-16556 12/13 including debt sustainability, and of supporting an appropriately enabling domestic and international economic, financial and regulatory environment for the means of implementation of the 2030 Agenda, and in this regard invites all major institutional stakeholders, including the International Monetary Fund, the World Bank and the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, to support these efforts, in accordance with their respective mandates;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Reiterates the invitation to the President of the General Assembly and the Secretary-General to give appropriate consideration to the central role of maintaining and facilitating the financial and macroeconomic stability of developing countries, A/C.2/80/L.12 25-16556 12/13 including debt sustainability, and of supporting an appropriately enabling domestic and international economic, financial and regulatory environment for the means of implementation of the 2030 Agenda, and in this regard invites all major institutional stakeholders, including the International Monetary Fund, the World Bank and the United Nations Conference on Trade and Development, to support these efforts, in accordance with their respective mandates;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-47" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-47"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1176,8 +917,8 @@
         </div>
     </div>
     
-    <div id="para-48" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-48"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1193,10 +934,10 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1204,24 +945,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls for the scaling up of debt swaps for the Sustainable Development Goals, including debt swaps for climate and nature and debt swaps for food security, as appropriate, while recognizing that debt swaps cannot replace broader debt treatments in unsustainable debt situations, to allow developing countries to use debt service payments for investments in sustainable development, and takes note of the policy recommendations of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development contained in report A/80/220 and A/80/220/Corr.1, on the use of debt swaps for development;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls for the scaling up of debt swaps for the Sustainable Development Goals, including debt swaps for climate and nature and debt swaps for food security, as appropriate, while recognizing that debt swaps cannot replace broader debt treatments in unsustainable debt situations, to allow developing countries to use debt service payments for investments in sustainable development, and takes note of the policy recommendations of the United Nations Conference on Trade and Development contained in report A/80/220 and A/80/220/Corr.1, on the use of debt swaps for development;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-50" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-50"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -1237,10 +968,10 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1248,26 +979,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, and invites the International Monetary Fund and the World Bank, in cooperation with the regional commissions, regional development banks and other relevant multilateral financial institutions and stakeholders, to intensify cooperation in respect of activities relating to capacity-building and to early warning monitoring systems in developing countries in the area of debt management and debt sustainability, with a view to contributing to the implementation of the 2030 Agenda;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the United Nations Conference on Trade and Development, and invites the International Monetary Fund and the World Bank, in cooperation with the regional commissions, regional development banks and other relevant multilateral financial institutions and stakeholders, to intensify cooperation in respect of activities relating to capacity-building and to early warning monitoring systems in developing countries in the area of debt management and debt sustainability, with a view to contributing to the implementation of the 2030 Agenda;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1275,26 +996,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Invites the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, in cooperation and inclusive dialogue with international financial institutions and relevant international stakeholders, to continue its analytical, policy, technical cooperation and statistical work on debt issues and to strengthen its contribution to enhancing long-term financial and debt sustainability in developing countries, taking into account also the impact of investment requirements arising from the COVID-19 pandemic and other global crises, in accordance with the Bridgetown Covenant;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Invites the United Nations Conference on Trade and Development, in cooperation and inclusive dialogue with international financial institutions and relevant international stakeholders, to continue its analytical, policy, technical cooperation and statistical work on debt issues and to strengthen its contribution to enhancing long-term financial and debt sustainability in developing countries, taking into account also the impact of investment requirements arising from the COVID-19 pandemic and other global crises, in accordance with the Bridgetown Covenant;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1302,26 +1013,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon all Member States and the United Nations system to take appropriate measures and actions for the implementation of the commitments, agreements and decisions of the major United Nations <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and summits, in A/C.2/80/L.12 13/13 25-16556 particular those related to the question of the external debt sustainability of developing countries;</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon all Member States and the United Nations system to take appropriate measures and actions for the implementation of the commitments, agreements and decisions of the major United Nations conferences and summits, in A/C.2/80/L.12 13/13 25-16556 particular those related to the question of the external debt sustainability of developing countries;</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-54" 
+    <div id="para-54"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda", "PGA", "report"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1329,28 +1030,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-first session an action-oriented report on the implementation of the present resolution and to <mark class="bg-yellow-200 px-0.5 rounded">include in his report</mark> progress made on international measures and concrete recommendations to accelerate the implementation of the Sevilla Commitment of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development and the 2030 Agenda with respect to matters of debt and debt sustainability and the related efforts to recover from the COVID-19 pandemic, as well as their implications for external debt sustainability and development, and <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “External debt sustainability and development”, unless otherwise agreed.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-blue-50 text-blue-700
-                        ">
-                        agenda
-                    </span>
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-gray-100 text-gray-700">
-                        report
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to submit to the General Assembly at its eighty-first session an action-oriented report on the implementation of the present resolution and to include in his report progress made on international measures and concrete recommendations to accelerate the implementation of the Sevilla Commitment of the Fourth International Conference on Financing for Development and the 2030 Agenda with respect to matters of debt and debt sustainability and the related efforts to recover from the COVID-19 pandemic, as well as their implications for external debt sustainability and development, and decides to include in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “External debt sustainability and development”, unless otherwise agreed.</p>
                 
             </div>
         </div>
@@ -1359,21 +1039,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1388,14 +1081,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1411,12 +1104,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1435,12 +1128,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,363 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/136</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/136</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/136?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">25 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/136. Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity</p>
+    
+    <p class="mt-1 text-muted">25 operative paragraphs · Item 18</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.25</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">16 of 25 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General;13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General;15
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the call to action on mobilization of resources for small island developing States14 and its call on leaders of international financial institutions, development banks, United Nations entities, the private sector and donor partners to take concerted and urgent action to enable small island developing States to finance implementation of the Antigua and Barbuda Agenda for Small Island Developing States;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the call to action on mobilization of resources for small island developing States16 and its call on leaders of international financial institutions, development banks, United Nations entities, the private sector and donor partners to take concerted and urgent action to enable small island developing States to finance implementation of the Antigua and Barbuda Agenda for Small Island Developing States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the international community to take urgent and concrete action to address the vulnerabilities of small island developing States and to continue to seek solutions to the major challenges facing them in a concerted manner, in line with their commitments to support the implementation of the Antigua and Barbuda Agenda for Small Island Developing States;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the international community to take urgent and concrete action to address the vulnerabilities of small island developing States and to continue to seek solutions to the major challenges facing them in a concerted manner, in line with their _______________ 15 A/80/411. 16 Launched by the Secretary-General of the United Nations and the Prime Minister of Antigua and Barbuda on 28 May 2024 in Antigua and Barbuda. A/RES/80/136 Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity 25-20752 4/7 commitments to support the implementation of the Antigua and Barbuda Agenda for Small Island Developing States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the international and regional financial institutions and other multilateral development partners to incorporate the priorities of small island development States, as outlined in the Antigua and Barbuda Agenda for Small Island Developing States and the Sevilla Commitment, into their relevant strategic and programmatic documents, in line with their respective mandates, and to ensure representation and participation of small island developing States, as well as other developing countries, in decision-making in their institutions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the international and regional financial institutions and other multilateral development partners to incorporate the priorities of small island developing States, as outlined in the Antigua and Barbuda Agenda for Small Island Developing States and the Sevilla Commitment, into their relevant strategic and programmatic documents, in line with their respective mandates, and to ensure representation and participation of small island developing States, as well as other developing countries, in decision-making in their institutions;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment, and calls for its timely and effective implementation; __________________ 13 A/80/411. 14 Launched by the Secretary-General of the United Nations and the Prime Minister of Antigua and Barbuda on 28 May 2024 in Antigua and Barbuda. A/C.2/80/L.25 25-16741 4/6
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment, and calls for its timely and effective implementation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the adoption of the political declaration at the 2025 United Nations Conference to Support the Implementation of Sustainable Development Goal 14: Conserve and sustainably use the oceans, seas and marine resources for sustainable development, held in Nice, France, from 9 to 13 June 2025;15
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the convening of the 2025 United Nations Conference to Support the Implementation of Sustainable Development Goal 14: Conserve and sustainably use the oceans, seas and marine resources for sustainable development, co-hosted by Costa Rica and France, held in Nice, France, from 9 to 13 June 2025, at which its political declaration17 was adopted;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the progress on the operationalization of the Centre of Excellence,16 and reiterates the call for the Centre to collaborate with universities, academic institutions, regional organizations and the private sector to avoid duplication and ensure coordinated and coherent support for small island developing States;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also welcomes the progress on the operationalization of the Centre of Excellence,18 and reiterates the call for the Centre to collaborate with universities, academic institutions, regional organizations and the private sector to avoid duplication and ensure coordinated and coherent support for small island developing States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the international community to support the operationalization of the Centre’s dedicated small island developing States debt sustainability support service to enable sound debt management and devise effective solutions for small island developing States in relation to debt vulnerability in the immediate term and debt sustainability in the long term, building on and avoiding duplication with relevant dedicated initiatives;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the international community to support the operationalization of the Centre’s dedicated small island developing States debt sustainability support service to enable sound debt management and devise effective solutions for small island developing States in relation to debt vulnerability in the immediate term and _______________ 17 Resolution 79/314, annex. 18 The Centre of Excellence includes a small island developing States data hub, a technology and innovation mechanism and an Island Investment Forum, and the global small island developing States debt sustainability support service. Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity A/RES/80/136 5/7 25-20752 debt sustainability in the long term, building on and avoiding duplication with relevant dedicated initiatives;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages small island developing States to utilize the monitoring and evaluation framework for reporting progress, on a voluntary basis, on the implementation of the Antigua and Barbuda Agenda for Small Island Developing States, and in this regard calls upon the Department of Economic and Social Affairs of the Secretariat and the Office of the High Representative for the Least Developed Countries, Landlocked Developing Countries and Small Island Developing States to conduct workshops to familiarize small island developing States with the application of the framework and build capacity to collect and submit their data; __________________ 15 Resolution 79/314, annex. 16 The Centre of Excellence includes a small island developing States data hub, a technology and innovation mechanism and an Island Investment Forum, and the global small island developing States debt sustainability support service. A/C.2/80/L.25 5/6 25-16741
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages small island developing States to utilize the monitoring and evaluation framework for reporting progress, on a voluntary basis, on the implementation of the Antigua and Barbuda Agenda for Small Island Developing States, and in this regard reiterates the call on the Department of Economic and Social Affairs of the Secretariat and the Office of the High Representative for the Least Developed Countries, Landlocked Developing Countries and Small Island Developing States to conduct workshops to familiarize small island developing States with the application of the framework and build capacity to collect and submit their data;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the partnership initiative between the Development Assistance Committee of the Organisation for Economic Co-operation and Development and the Alliance of Small Island States launched at the Fourth International Conference on Small Island Developing States aimed at delivering solutions to some priority areas for small island developing States, and encourages other new, innovative and bold approaches to partnership to support the implementation of the Antigua and Barbuda Agenda for Small Island Developing States;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also welcomes the upcoming entry into force on 17 January 2026 of the Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction,19 and in this regard recalls the commitment in the Antigua and Barbuda Agenda for Small Island Developing States to support small island _______________ 19 A/CONF.232/2023/4. A/RES/80/136 Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity 25-20752 6/7 developing States in building their capacity to ratify and implement the provisions of the Agreement;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the recommendations for the strengthening of the Small Island Developing States Partnership Framework and the inputs on strengthening the Small Island Developing States Global Business Network and its Forum, and in this regard: (a) Reaffirms the important role of the Small Island Developing States Partnership Framework and the Steering Committee on Partnerships for Small Island Developing States, in line with resolution 70/202 of 22 December 2025 and the Antigua and Barbuda Agenda for Small Island Developing States; (b) Encourages the Steering Committee to increase its stakeholder engagement and awareness of the Small Island Developing States Partnership Framework, as appropriate, including exploring the designation of Small Island Developing State Partnership champions to raise awareness of and advocacy for partnerships aligned with the Antigua and Barbuda Agenda for Small Island Developing States; A/C.2/80/L.25 25-16741 6/6 (c) Also encourages small island developing State-led national and regional multi-stakeholder dialogues to identify gaps, opportunities and challenges in building partnerships aligned with the Antigua and Barbuda Agenda for Small Island Developing States, promote best practices and foster knowledge exchange; (d) Invites the Steering Committee to consider measures to enhance the value and impact of the Global Multi-stakeholder Small Island Developing States Partnership Dialogue to better align with the priorities of the Antigua and Barbuda Agenda for Small Island Developing States and provide more targeted opportunities for engagement, sharing of experiences and catalysing new partnerships; (e) Requests the Secretary-General to strengthen Secretariat support for the implementation of the Small Island Developing States Partnership Framework, including through the allocation of sufficient resources; (f) Invites the Office of the High Representative for the Least Developed Countries, Landlocked Developing Countries and Small Island Developing States to further analyse the inputs on strengthening the Small Island Developing States Global Business Network and its Forum and to present concrete proposals for the consideration of the General Assembly;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the Partnership for Action on small island developing States between the Development Assistance Committee of the Organisation for Economic Co-operation and Development and the Alliance of Small Island States launched at the Fourth International Conference on Small Island Developing States aimed at delivering solutions to some priority areas for small island developing States, and encourages other new, innovative and bold approaches to partnership to support the implementation of the Antigua and Barbuda Agenda for Small Island Developing States;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the request to the Secretary-General, beginning from 2026, to submit an annual report to the Economic and Social Council, and to the subsequent session of the General Assembly, on the follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States, including on progress made and continuing challenges faced, for their further consideration;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the recommendations for the strengthening of the Small Island Developing States Partnership Framework and the inputs on strengthening the Small Island Developing States Global Business Network and its Forum, and in this regard: (a) Reaffirms the important role of the Small Island Developing States Partnership Framework and the Steering Committee on Partnerships for Small Island Developing States, in line with resolution 70/202 of 22 December 2015 and the Antigua and Barbuda Agenda for Small Island Developing States; (b) Encourages the Steering Committee to increase its stakeholder engagement and awareness of the Small Island Developing States Partnership Framework, as appropriate, including exploring the designation of Small Island Developing State Partnership champions to raise awareness of and advocacy for partnerships aligned with the Antigua and Barbuda Agenda for Small Island Developing States; (c) Also encourages small island developing State-led national and regional multi-stakeholder dialogues to identify gaps, opportunities and challenges in building partnerships aligned with the Antigua and Barbuda Agenda for Small Island Developing States, promote best practices and foster knowledge exchange; (d) Invites the Steering Committee to consider measures to enhance the value and impact of the Global Multi-stakeholder Small Island Developing States Partnership Dialogue to better align with the priorities of the Antigua and Barbuda Agenda for Small Island Developing States and provide more targeted opportunities for engagement, sharing of experiences and catalysing new partnerships; (e) Requests the Secretary-General to strengthen Secretariat support for the implementation of the Small Island Developing States Partnership Framework, including through the allocation of sufficient resources; (f) Invites the Office of the High Representative for the Least Developed Countries, Landlocked Developing Countries and Small Island Developing States to further analyse the inputs on strengthening the Small Island Developing States Global Business Network and its Forum and to present concrete proposals for the consideration of the General Assembly;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also reiterates the request to the Secretary-General, within his annual report to the Economic and Social Council and to the General Assembly at its eighty- first session on the implementation of the Antigua and Barbuda Agenda for Small Island Developing States, to present proposals to ensure a coordinated, coherent and effective United Nations system-wide capacity development approach to small island developing States and to enhance the implementation, monitoring and evaluation of the Antigua and Barbuda Agenda for Small Island Developing States, including a potential single entity dedicated to small island developing States in the Secretariat;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the request to the Secretary-General, beginning from 2026, to submit an annual report to the Economic and Social Council, and to the subsequent session of the General Assembly, on the follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States, including on progress made and continuing challenges faced, for their further consideration;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a report on the follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States, including on progress made and continuing challenges faced, and on the implementation of the present resolution;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also reiterates the request to the Secretary-General, within his annual report to the Economic and Social Council and to the General Assembly at its eighty- first session on the implementation of the Antigua and Barbuda Agenda for Small Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity A/RES/80/136 7/7 25-20752 Island Developing States, to present proposals to ensure a coordinated, coherent and effective United Nations system-wide capacity development approach to small island developing States and to enhance the implementation, monitoring and evaluation of the Antigua and Barbuda Agenda for Small Island Developing States, including a potential single entity dedicated to small island developing States in the Secretariat;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Sustainable development”, a sub-item entitled “Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a report on the follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States, including on progress made and continuing challenges faced, and on the implementation of the present resolution;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.25</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/136</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Sustainable development”, the sub-item entitled “Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.25.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -164,42 +507,43 @@
         <span class="text-sm text-muted">7 with signals, 18 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -216,7 +560,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -233,7 +577,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -250,7 +594,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -267,7 +611,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -284,7 +628,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -311,7 +655,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -328,7 +672,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -355,7 +699,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -382,7 +726,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -399,7 +743,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -416,7 +760,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -433,7 +777,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -450,7 +794,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -467,7 +811,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -494,7 +838,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -511,7 +855,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -528,7 +872,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -545,7 +889,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -562,7 +906,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -589,7 +933,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -606,7 +950,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -623,7 +967,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -640,7 +984,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -666,7 +1010,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -698,19 +1042,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -725,14 +1082,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -748,12 +1105,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -772,12 +1129,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,273 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/199</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/199</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/199?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">33 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/199. Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities</p>
+    
+    <p class="mt-1 text-muted">33 operative paragraphs · Item 71</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.22</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">11 of 33 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the obligation of States to ensure that persons belonging to national or ethnic, religious and linguistic minorities may exercise fully and effectively all human rights and fundamental freedoms without any discrimination and in full equality before the law, as proclaimed in the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities, 14 and draws attention to the relevant provisions of the Durban Declaration and Programme of Action,15 including the provisions on multiple or aggravated forms of discrimination;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the obligation of States to ensure that persons belonging to national or ethnic, religious and linguistic minorities may exercise fully and effectively all human rights and fundamental freedoms without any discrimination and in full equality before the law, as proclaimed in the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities, 14 and draws attention to the relevant provisions of the Durban Declaration and Programme of Action, 15 including the provisions on multiple or aggravated forms of discrimination;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to reinvigorate the protection of the rights of persons belonging to national or ethnic, religious and linguistic minorities and their inclusion on the basis of the Declaration, including in the work of the international community and at the regional and national levels, and to continuously advance the implementation of voluntary pledges made by States in the thirtieth anniversary year __________________ 14 Resolution 47/135, annex. 15 See A/CONF.189/12 and A/CONF.189/12/Corr.1, chap. I. A/C.3/80/L.22 5/9 25-17376 of the Declaration, and to share best practices with a view to making progress in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to reinvigorate the protection of the rights of persons belonging to national or ethnic, religious and linguistic minorities and their inclusion on the basis of the Declaration, including in the work of the international community _______________ 14 Resolution 47/135, annex. 15 See A/CONF.189/12 and A/CONF.189/12/Corr.1, chap. I. Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities A/RES/80/199 5/9 25-20951 and at the regional and national levels, and to continuously advance the implementation of voluntary pledges made by States in the thirtieth anniversary year of the Declaration, and to share best practices with a view to making progress in this regard;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses its appreciation for the successful completion, in December 2024, of the seventeenth session of the Forum on Minority Issues, on the theme “Minority representation and self-representation in public spaces and discourses”, which, as part of its outcome, produced recommendations to guide policy and practice at the local, national and international levels, contributing to the integration of minority issues into broader frameworks and efforts towards cohesive and equitable societies,16 and encourages States to recognize the importance of persons belonging to national or ethnic, religious and linguistic minorities in contributing to flourishing, inclusive and stable societies; __________________ 16 See A/HRC/58/69. A/C.3/80/L.22 25-17376 6/9
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses its appreciation for the successful completion, in December 2024, of the seventeenth session of the Forum on Minority Issues, on the theme “Minority representation and self-representation in public spaces and discourses”, which, as part of its outcome, produced recommendations to guide policy and practice at the local, national and international levels, contributing to the integration of minority issues into broader frameworks and efforts towards cohesive and equitable societies,16 and encourages States to recognize the importance of persons belonging _______________ 16 See A/HRC/58/69. A/RES/80/199 Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities 25-20951 6/9 to national or ethnic, religious and linguistic minorities in contributing to flourishing, inclusive and stable societies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States, while bearing in mind the theme of the seventeenth session of the Forum on Minority Issues, with a view to enhancing the implementation of the Declaration and ensuring the realization of the rights of persons belonging to national or ethnic, religious and linguistic minorities, to take appropriate measures by, inter alia: (a) Considering the ratification of, accession to and adherence to all relevant international instruments that protect and promote the rights of persons belonging to national or ethnic, religious and linguistic minorities with the aim of addressing and countering the spread of racism, xenophobia, misogyny, negative stereotyping and stigmatization; (b) Reviewing and, where necessary, considering the amendment of any legislation, including, as appropriate, constitutional provisions, and any policy or practice that has a discriminatory or disproportionately negative effect, both offline and in digital contexts, on persons belonging to national or ethnic, religious and linguistic minorities; (c) Adopting and implementing comprehensive anti-discrimination legislation and other measures, where required, to protect and promote the rights of persons belonging to national or ethnic, religious and linguistic minorities; (d) Strongly condemning and, where necessary, prohibiting by law any advocacy of national, ethnic, racial or religious hatred that constitutes incitement to discrimination, hostility or violence, including violence against women, and taking effective measures, both online and offline, consistent with their obligations under international law, including international humanitarian law and international human rights law, to address and combat such incidents; (e) Ensuring that persons belonging to national or ethnic, religious and linguistic minorities have equal access without any form of discrimination to justice and remedies for human rights violations, abuses and/or crimes, including crimes committed on the basis of national, ethnic, religious or linguistic hatred; (f) Strengthening international cooperation, including with international and regional organizations, and cooperation with the private sector, including technology companies, national human rights institutions and civil society in order to share expertise, knowledge and effective practices in addressing and countering hate speech and discrimination against persons belonging to national or ethnic, religious and linguistic minorities, online and offline, while respecting and promoting human rights, including in the development and use of digital technologies, such as artificial intelligence (AI); (g) Working with social media companies, as applicable, to protect persons belonging to minorities by taking active measures to counter hate speech and address its increasing spread, enable research into measures to reduce it and promote users’ access to effective reporting channels, in a manner consistent with international human rights law; (h) Considering the adoption of legislation, where necessary, to prohibit advocacy of hatred directed at persons belonging to national or ethnic, religious and linguistic minorities that constitutes incitement to discrimination, hostility or violence offline, as well as online, including on social media platforms, to prevent the amplification of discriminatory narratives; (i) Considering the implementation of inclusive urban planning policies that integrate culturally significant spaces for persons belonging to national or ethnic, religious and linguistic minorities, and encouraging persons belonging to national or ethnic, religious and linguistic minorities to meaningfully participate in the design, A/C.3/80/L.22 7/9 25-17376 governance and decision-making processes related to public spaces and public facilities; (j) Considering the incorporation of histories, languages, cultures and achievements of persons belonging to national or ethnic, religious and linguistic minorities in national curricula, with full respect for human rights and fundamental freedoms, and ensuring that their history and contribution to society as a whole are part of the education system, with a view to fostering respect, understanding and intercultural dialogue, while promoting an inclusive approach to societies; (k) Recognizing the important role that art can have in fostering intercultural and interfaith dialogue and mutual understanding, and promoting cultural institutions and the artistic contributions of persons belonging to national or ethnic, religious and linguistic minorities, including youth; (l) Stressing the importance of the full, equal and meaningful participation of persons belonging to national or ethnic, religious and linguistic minorities, including women, youth and persons with disabilities, at all relevant levels of decision-making and implementation of conflict prevention and resolution, mediation, post-conflict reconstruction, peacekeeping, peacemaking and peacebuilding issues that affect them;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States, while bearing in mind the theme of the seventeenth session of the Forum on Minority Issues, with a view to enhancing the implementation of the Declaration and ensuring the realization of the rights of persons belonging to national or ethnic, religious and linguistic minorities, to take appropriate measures by, inter alia: (a) Considering the ratification of, accession to and adherence to all relevant international instruments that protect and promote the rights of persons belonging to national or ethnic, religious and linguistic minorities with the aim of addressing and countering the spread of racism, xenophobia, misogyny, negative stereotyping and stigmatization; (b) Reviewing and, where necessary, considering the amendment of any legislation, including, as appropriate, constitutional provisions, and any policy or practice that has a discriminatory or disproportionately negative effect, both offline and in digital contexts, on persons belonging to national or ethnic, religious and linguistic minorities; (c) Adopting and implementing comprehensive anti‑discrimination legislation and other measures, where required, to protect and promote the rights of persons belonging to national or ethnic, religious and linguistic minorities; (d) Strongly condemning and, where necessary, prohibiting by law any advocacy of national, ethnic, racial or religious hatred that constitutes incitement to discrimination, hostility or violence, including violence against women, and taking effective measures, both online and offline, consistent with their obligations under international law, including international humanitarian law and international human rights law, to address and combat such incidents; (e) Ensuring that persons belonging to national or ethnic, religious and linguistic minorities have equal access without any form of discrimination to justice and remedies for human rights violations, abuses and/or crimes, including crimes committed on the basis of national, ethnic, religious or linguistic hatred; (f) Strengthening international cooperation, including with international and regional organizations, and cooperation with the private sector, including technology companies, national human rights institutions and civil society in order to share expertise, knowledge and effective practices in addressing and countering hate speech and discrimination against persons belonging to national or ethnic, religious and linguistic minorities, online and offline, while respecting and promoting human rights, including in the development and use of digital technologies, such as artificial intelligence (AI); (g) Working with social media companies, as applicable, to protect persons belonging to minorities by taking active measures to counter hate speech and address its increasing spread, enable research into measures to reduce it and promote users’ access to effective reporting channels, in a manner consistent with international human rights law; (h) Considering the adoption of legislation, where necessary, to prohibit advocacy of hatred directed at persons belonging to national or ethnic, religious and linguistic minorities that constitutes incitement to discrimination, hostility or violence offline, as well as online, including on social media platforms, to prevent the amplification of discriminatory narratives; Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities A/RES/80/199 7/9 25-20951 (i) Considering the implementation of inclusive urban planning policies that integrate culturally significant spaces for persons belonging to national or ethnic, religious and linguistic minorities, and encouraging persons belonging to national or ethnic, religious and linguistic minorities to meaningfully participate in the design, governance and decision-making processes related to public spaces and public facilities; (j) Considering the incorporation of histories, languages, cultures and achievements of persons belonging to national or ethnic, religious and linguistic minorities in national curricula, with full respect for human rights and fundamental freedoms, and ensuring that their history and contribution to society as a whole are part of the education system, with a view to fostering respect, understanding and intercultural dialogue, while promoting an inclusive approach to societies; (k) Recognizing the important role that art can have in fostering intercultural and interfaith dialogue and mutual understanding, and promoting cultural institutions and the artistic contributions of persons belonging to national or ethnic, religious and linguistic minorities, including youth; (l) Stressing the importance of the full, equal and meaningful participation of persons belonging to national or ethnic, religious and linguistic minorities, including women, youth and persons with disabilities, at all relevant levels of decision-making and implementation of conflict prevention and resolution, mediation, post-conflict reconstruction, peacekeeping, peacemaking and peacebuilding issues that affect them;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the specialized agencies, regional organizations, national human rights institutions and non-governmental organizations to develop regular dialogue and cooperation with the Special Rapporteur, as well as to continue to contribute to the promotion and protection of the rights of persons belonging to national or ethnic, religious and linguistic minorities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the specialized agencies, regional organizations, national human rights institutions and non‑governmental organizations to develop regular dialogue and cooperation with the Special Rapporteur, as well as to continue to contribute to the promotion and protection of the rights of persons belonging to national or ethnic, religious and linguistic minorities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the inter-agency cooperation among United Nations agencies, funds and programmes on minority issues, notes the activities of the United Nations network on racial discrimination and protection of minorities, and urges United Nations agencies, funds and programmes to further increase their coordination and cooperation by, inter alia, developing policies on the promotion and protection of the rights of persons belonging to minorities, drawing also on relevant outcomes of the Forum on Minority Issues and taking into account the work of relevant regional organizations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the inter-agency cooperation among United Nations agencies, funds and programmes on minority issues, notes the activities of the United Nations network on racial discrimination and protection of minorities, and urges United Nations agencies, funds and programmes to further increase their coordination and cooperation by, inter alia, developing policies on the promotion and protection of the rights of persons belonging to minorities, drawing also on relevant outcomes of the _______________ 17 A/80/288. 18 A/79/169 and A/80/186. A/RES/80/199 Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities 25-20951 8/9 Forum on Minority Issues and taking into account the work of relevant regional organizations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the Secretary-General to make available, at the request of Governments concerned, qualified expertise on minority issues, including in the __________________ 17 A/80/288. 18 A/79/169 and A/80/186. A/C.3/80/L.22 25-17376 8/9 context of efforts to address and counter hate speech while fully respecting the right to freedom of expression, and to assist in resolving existing or potential situations involving minorities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the Secretary-General to make available, at the request of Governments concerned, qualified expertise on minority issues, including in the context of efforts to address and counter hate speech while fully respecting the right to freedom of expression, and to assist in resolving existing or potential situations involving minorities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages civil society, including non-governmental organizations, to promote awareness of the Declaration and to review the extent to which it integrates the rights of persons belonging to national or ethnic, religious and linguistic minorities and the Declaration into its work, as well as to inform persons belonging to national or ethnic, religious and linguistic minorities about their rights, raise awareness among the general public and advocate for efforts to respect, protect and promote the rights of persons belonging to national or ethnic, religious and linguistic minorities and seek accountability for violations committed;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages civil society, including non‑governmental organizations, to promote awareness of the Declaration and to review the extent to which it integrates the rights of persons belonging to national or ethnic, religious and linguistic minorities and the Declaration into its work, as well as to inform persons belonging to national or ethnic, religious and linguistic minorities about their rights, raise awareness among the general public and advocate for efforts to respect, protect and promote the rights of persons belonging to national or ethnic, religious and linguistic minorities and seek accountability for violations committed;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the Minorities Fellowship Programme of the Office of the United Nations High Commissioner for Human Rights, and encourages an active role of the Special Rapporteur and past and present participants of the programme, with a view to promoting the rights of persons belonging to national or ethnic, religious and linguistic minorities and to seeking specific solutions to minority issues;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the Minorities Fellowship Programme of the Office of the United Nations High Commissioner for Human Rights, and encourages an active role of the Special Rapporteur and past and present participants of the programme, with a _______________ 19 Resolution 48/134, annex. Effective promotion of the Declaration on the Rights of Persons Belonging to National or Ethnic, Religious and Linguistic Minorities A/RES/80/199 9/9 25-20951 view to promoting the rights of persons belonging to national or ethnic, religious and linguistic minorities and to seeking specific solutions to minority issues;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the Office of the High Commissioner, United Nations entities and Member States to support and collaborate in the organization of regional forums on __________________ 19 Resolution 48/134, annex. A/C.3/80/L.22 9/9 25-17376 minority issues, and encourages their active participation in these forums, in order to engage with representatives of national or ethnic, religious and linguistic minorities and to complement and enrich the work and recommendations of the Forum on Minority Issues;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the Office of the High Commissioner, United Nations entities and Member States to support and collaborate in the organization of regional forums on minority issues, and encourages their active participation in these forums, in order to engage with representatives of national or ethnic, religious and linguistic minorities and to complement and enrich the work and recommendations of the Forum on Minority Issues;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.22</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to continue consideration of the question at its eighty-second session under the item entitled “Promotion and protection of human rights”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/199</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to continue consideration of the question at its eighty-second session under the item entitled “Promotion and protection of human rights”. 69th plenary meeting 18 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.22.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -164,28 +417,29 @@
         <span class="text-sm text-muted">1 with signals, 32 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -202,7 +456,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -219,7 +473,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -236,7 +490,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -253,7 +507,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -270,7 +524,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -287,7 +541,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -304,7 +558,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -321,7 +575,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -338,7 +592,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -355,7 +609,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -372,7 +626,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -389,7 +643,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -406,7 +660,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -423,7 +677,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -440,7 +694,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -457,7 +711,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -474,7 +728,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -491,7 +745,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -508,7 +762,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -525,7 +779,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -542,7 +796,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -559,7 +813,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -576,7 +830,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -593,7 +847,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -610,7 +864,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -627,7 +881,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -644,7 +898,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -661,7 +915,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -678,7 +932,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -695,7 +949,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -712,7 +966,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -738,7 +992,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -760,19 +1014,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -787,14 +1054,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -810,12 +1077,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -834,12 +1101,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

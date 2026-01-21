@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,453 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/5</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/5</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/5?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">44 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/5. Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development”</p>
+    
+    <p class="mt-1 text-muted">44 operative paragraphs · Item 25</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/80/L.5</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">21 of 44 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We, Heads of State and Government and high representatives, have gathered in Doha from 4 to 6 November 2025 at the Second World Summit for Social Development to build a more just, inclusive, equitable and sustainable world, by addressing gaps, assessing progress and recommitting to the Copenhagen Declaration on Social Development and Programme of Action of the World Summit for Social Development1 and their implementation, and give momentum towards the implementation of the 2030 Agenda for Sustainable Development.2
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We, Heads of State and Government and high representatives, have gathered in Doha from 4 to 6 November 2025 at the Second World Summit for Social Development to build a more just, inclusive, equitable and sustainable world, by addressing gaps, assessing progress and recommitting to the Copenhagen Declaration on Social Development and Programme of Action of the World Summit for Social Development 1 and their implementation, and give momentum towards the implementation of the 2030 Agenda for Sustainable Development.2
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We acknowledge the urgent need to address profound social challenges, especially poverty, unemployment and social exclusion, that affect every country. It is our task to address both their underlying and structural causes and their distressing consequences in accordance with international law, including human rights obligations, in order to reduce uncertainty, inequality and insecurity.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We acknowledge the urgent need to address profound social challenges, especially poverty, unemployment and social exclusion, that affect every country. It is our task to address both their underlying and structural causes and their distressing __________________ 1 Report of the World Summit for Social Development, Copenhagen, 6–12 March 1995 (United Nations publication, Sales No. E.96.IV.8), chap. I, resolution 1, annexes I and II. 2 Resolution 70/1. A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 2/18 consequences in accordance with international law, including human rights obligations, in order to reduce uncertainty, inequality and insecurity.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We recognize that the three core themes of social development, namely, poverty eradication, promotion of full and productive employment and decent work for all and social integration, are interrelated and mutually reinforcing, and that an enabling __________________ 1 Report of the World Summit for Social Development, Copenhagen, 6–12 March 1995 (United Nations publication, Sales No. E.96.IV.8), chap. I, resolution 1, annexes I and II. 2 Resolution 70/1. A/80/L.5 25-16021 2/18 environment therefore needs to be created so that all three objectives can be pursued simultaneously.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We recognize that the three core themes of social development, namely, poverty eradication, promotion of full and productive employment and decent work for all and social integration, are interrelated and mutually reinforcing, and that an enabling environment therefore needs to be created so that all three objectives can be pursued simultaneously.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We also reaffirm the intergovernmental commitments related to social development, including those in the political declarations of the Sustainable Development Goals Summits held in 2019 and 2023, 4 as well as the relevant commitments in the Pact for the Future and its annexes. 5
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We also reaffirm the intergovernmental commitments related to social development, including those in the political declarations of the Sustainable Development Goals Summits held in 2019 and 2023, 4 as well as the relevant commitments in the Pact for the Future and its annexes.5
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm that the pursuit and enjoyment of human rights and fundamental freedoms for all, encompassing civil, political, economic, social and cultural rights, which includes the right to development, must be respected, protected and promoted, without distinction or discrimination of any kind.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm that the pursuit and enjoyment of human rights and fundamental freedoms for all, encompassing civil, political, economic, social and cultural rights, which includes the right to development, must be respected, protected and promoted, without distinction or discrimination of any kind. __________________ 3 Resolution S-24/2, annex. 4 Resolution 74/4, annex, and resolution 78/1, annex. 5 Resolution 79/1. 6 Resolution 69/313, annex. 7 Resolution 79/323, annex. Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 3/18 25-17700
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We stress the need to take urgent and ambitious climate action in the implementation of the United Nations Framework Convention on Climate Change 8 __________________ 3 Resolution S-24/2, annex. 4 Resolution 74/4, annex, and resolution 78/1, annex. 5 Resolution 79/1. 6 Resolution 69/313, annex. 7 Resolution 79/323, annex. 8 United Nations, Treaty Series, vol. 1771, No. 30822. A/80/L.5 3/18 25-16021 and the Paris Agreement 9 in relation to climate mitigation, adaptation and the provision of the means of implementation, especially finance to developing countries.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We stress the need to take urgent and ambitious climate action in the implementation of the United Nations Framework Convention on Climate Change 8 and the Paris Agreement 9 in relation to climate mitigation, adaptation and the provision of the means of implementation, especially finance to developing countries.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Yet, 30 years after the convening of the World Summit for Social Development, progress remains slow and uneven, and major gaps and inequalities persist within and among countries. With only five years remaining until the 2030 deadline, progress towards achieving most of the Sustainable Development Goals has been far too slow, with some goals stalled or even regressing despite notable advances in a few areas: (a) Although great strides have been made in reducing poverty since 1995, in recent years progress has slowed, and millions of people still live in extreme poverty and over 1 billion people endure poverty in different forms and dimensions. Children, women, persons with disabilities, people living in rural areas and those in vulnerable situations experience higher poverty rates than the rest of the population. Hunger, food insecurity and malnutrition are still a reality, with global undernourishment rising in recent years. While access to education has expanded, still too many children are out of school; (b) In addition, while millions have been lifted out of poverty, billions of people live close to the poverty line and face a constant risk of falling into extreme poverty. Despite significant global progress in gradually expanding social protection coverage, including social protection floors, almost 4 billion people still lack access to any form of social protection, including nearly 2 billion children; (c) Millions of workers continue to live in poverty, earning wages and incomes that are not sufficient for an adequate standard of living or to sustain their families. Informal employment remains pervasive, with billions of people making their living in the informal economy. Women and young people are disproportionately __________________ 9 Adopted under the United Nations Framework Convention on Climate Change. See FCCC/CP/2015/10/Add.1, decision 1/CP.21, annex. 10 Report of the United Nations Conference on Environment and Development, Rio de Janeiro, 3–14 June 1992, vol. I, Resolutions Adopted by the Conference (United Nations publication, Sales No. E.93.I.8 and corrigendum), resolution 1, annex I. A/80/L.5 25-16021 4/18 engaged in informal and precarious employment. Furthermore, progress towards ending child labour is too slow; (d) Millions of youth do not have access to education, employment or training, the majority of whom are young women. In the labour market, young people, especially youth with disabilities, experience higher levels of unemployment, informal employment and working poverty. These decent work deficits can have long- lasting consequences on poverty eradication efforts and affect the well-being of current and future generations; (e) Today, inequality has reached staggering levels. Since 1995, income inequality has increased in many countries, developed and developing. Global wage gaps remain significant. Gender inequality is deeply entrenched. On average, women earn less than men and millions of women worldwide are outside the labour force; (f) Persons with disabilities continue to be more likely to live in poverty, are underemployed and unemployed, and face additional disability-related costs, including medical costs, as well as other significant and persistent social and economic barriers to inclusion in society; (g) Digital divides within and among countries persist, particularly in rural and remote areas. Billions of people currently do not have connectivity, access to the Internet and lack digital skills. Digital infrastructure, connectivity and access to the Internet in developing countries, particularly least developed countries, landlocked developing countries and small island developing States, remain challenging; (h) Multiple, persistent and new challenges are reversing social development gains, including geopolitical tensions, armed conflicts, economic crises, inequalities within and among countries, climate change, natural hazards and disasters, biodiversity loss, environmental degradation, water scarcity, desertification, pollution, conflict-induced famine and starvation, humanitarian emergencies and forced displacement of people, refugee crisis, pandemics and other health emergencies, gender inequality, racial discrimination, uneven technological advancements, unsustainable debt burdens and unequal access to technology and capital; (i) Complex and interrelated opportunities, challenges and risks related to demographic shifts remain, including rapid population growth, declining birth rates and population ageing. Between 2024 and 2030, the number of persons aged 60 years or over is globally projected to outnumber youth, and this increase will be the greatest and the most rapid in the developing world.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Yet, 30 years after the convening of the World Summit for Social Development, progress remains slow and uneven, and major gaps and inequalities persist within and among countries. With only five years remaining until the 2030 deadline, progress towards achieving most of the Sustainable Development Goals has been far too slow, with some goals stalled or even regressing despite notable advances in a few areas: (a) Although great strides have been made in reducing poverty since 1995, in recent years progress has slowed, and millions of people still live in extreme poverty and over 1 billion people endure poverty in different forms and dimensions. Children, women, persons with disabilities, people living in rural areas and those in vulnerable situations experience higher poverty rates than the rest of the population. Hunger, food insecurity and malnutrition are still a reality, with global undernourishment rising in recent years. While access to education has expanded, still too many children are out of school; (b) In addition, while millions have been lifted out of poverty, billions of people live close to the poverty line and face a constant risk of falling into extreme poverty. Despite significant global progress in gradually expanding social protection __________________ 8 United Nations, Treaty Series, vol. 1771, No. 30822. 9 Adopted under the United Nations Framework Convention on Climate Change. See FCCC/CP/2015/10/Add.1, decision 1/CP.21, annex. 10 Report of the United Nations Conference on Environment and Development, Rio de Janeiro, 3–14 June 1992, vol. I, Resolutions Adopted by the Conference (United Nations publication, Sales No. E.93.I.8 and corrigendum), resolution 1, annex I. A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 4/18 coverage, including social protection floors, almost 4 billion people still lack access to any form of social protection, including nearly 2 billion children; (c) Millions of workers continue to live in poverty, earning wages and incomes that are not sufficient for an adequate standard of living or to sustain their families. Informal employment remains pervasive, with billions of people making their living in the informal economy. Women and young people are disproportionately engaged in informal and precarious employment. Furthermore, progress towards ending child labour is too slow; (d) Millions of youth do not have access to education, employment or training, the majority of whom are young women. In the labour market, young people, especially youth with disabilities, experience higher levels of unemployment, informal employment and working poverty. These decent work deficits can have long- lasting consequences on poverty eradication efforts and affect the well-being of current and future generations; (e) Today, inequality has reached staggering levels. Since 1995, income inequality has increased in many countries, developed and developing. Global wage gaps remain significant. Gender inequality is deeply entrenched. On average, women earn less than men and millions of women worldwide are outside the labour force; (f) Persons with disabilities continue to be more likely to live in poverty, are underemployed and unemployed, and face additional disability-related costs, including medical costs, as well as other significant and persistent social and economic barriers to inclusion in society; (g) Digital divides within and among countries persist, particularly in rural and remote areas. Billions of people currently do not have connectivity, access to the Internet and lack digital skills. Digital infrastructure, connectivity and access to the Internet in developing countries, particularly least developed countries, landlocked developing countries and small island developing States, remain challenging; (h) Multiple, persistent and new challenges are reversing social development gains, including geopolitical tensions, armed conflicts, economic crises, inequalities within and among countries, climate change, natural hazards and disasters, biodiversity loss, environmental degradation, water scarcity, desertification, pollution, conflict-induced famine and starvation, humanitarian emergencies and forced displacement of people, refugee crisis, pandemics and other health emergencies, gender inequality, racial discrimination, uneven technological advancements, unsustainable debt burdens and unequal access to technology and capital; (i) Complex and interrelated opportunities, challenges and risks related to demographic shifts remain, including rapid population growth, declining birth rates and population ageing. Between 2024 and 2030, the number of persons aged 60 years or over is globally projected to outnumber youth, and this increase will be the greatest and the most rapid in the developing world.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We commit to support and implement the relevant development agendas, strategies and programmes of action for countries in special situations, including the Doha Programme of Action for the Least Developed Countries, 11 the Awaza Programme of Action for Landlocked Developing Countries for the Decade 2024–203412 and the Antigua and Barbuda Agenda for Small Island Developing States, 13 and reaffirm our support for the achievement of the African Union Agenda 2063. We look forward to __________________ 11 Resolution 76/258, annex. 12 Resolution 79/233, annex; see also resolution 79/279. 13 Resolution 78/317, annex. A/80/L.5 5/18 25-16021 the elaboration of a specific inter-agency, comprehensive, system-wide response plan for middle-income countries by the United Nations development system.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We commit to support and implement the relevant development agendas, strategies and programmes of action for countries in special situations, including the Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 5/18 25-17700 Doha Programme of Action for the Least Developed Countries, 11 the Awaza Programme of Action for Landlocked Developing Countries for the Decade 2024– 203412 and the Antigua and Barbuda Agenda for Small Island Developing States, 13 and reaffirm our support for the achievement of the African Union Agenda 2063. We look forward to the elaboration of a specific inter-agency, comprehensive, system- wide response plan for middle-income countries by the United Nations development system.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We strive for a future that is inclusive, resilient, sustainable and just. We envisage a world free of poverty, hunger, unemployment, preventable diseases, racism, discrimination and insecurity and a world of equality, equity, shared prosperity and peace, where the dignity of all people is respected, and where no one is left behind. A call to action
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We strive for a future that is inclusive, resilient, sustainable and just. We envisage a world free of poverty, hunger, unemployment, preventable diseases, racism, discrimination and insecurity and a world of equality, equity, shared __________________ 11 Resolution 76/258, annex. 12 Resolution 79/233, annex; see also resolution 79/279. 13 Resolution 78/317, annex. A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 6/18 prosperity and peace, where the dignity of all people is respected, and where no one is left behind. A call to action
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We will adopt a holistic approach towards the eradication of poverty in all its forms and dimensions, including through addressing the challenges of extreme poverty and multidimensional poverty, address their disproportionate impact on A/80/L.5 25-16021 6/18 countries in special situations and people in vulnerable situations and combat the feminization of poverty while ensuring that the focus is on building resilience to shocks and challenges, accelerating actions to eradicate poverty and avoiding relapsing back into it. In this regard we commit to: (a) Taking effective measures, including policies and programmes, to address the root causes of poverty and underlying causes of inequality, providing for the basic needs of all and increasing resilience for interconnected crises. These efforts should include the elimination of hunger and malnutrition; the provision of social protection, food security, education, livelihoods, employment, decent work for all, clean water and sanitation, adequate shelter and reliable health systems; and participation in social and cultural life, with special priority given to the needs and rights of women and children and persons in vulnerable situations, who often bear the greatest burden of poverty; (b) Reinforcing international development cooperation for developing countries’ capacities to achieve poverty eradication, as well as the necessary measures to close financing gaps for poverty eradication and invest in capacity-building, technical assistance and programmes; (c) Exploring opportunities to mobilize additional finance, both public and private, through official development assistance-funded activities that are responsive to country needs and focused on long-term development and poverty eradication, while ensuring that additional private finance mobilized is not a substitute for existing commitments; (d) Ensuring sustainable and equitable financing for social protection systems as one of the enablers for eradicating poverty, reducing inequality and fostering social inclusion, as well as investing in programmes for eradicating poverty, including the feminization of poverty, to address underlying causes of inequality by promoting a sustainable economy for the well-being of all; (e) Integrating quality education as a core component of poverty reduction strategies, with focused efforts on access, equity and inclusion within a lifelong learning approach; (f) Advancing the transition from the informal to the formal economy, including the formalization of micro-, small and medium-sized enterprises towards the eradication of poverty, creating decent jobs and catalysing social integration; (g) Strengthening social protection systems and reinforcing investment in measures, including social protection floors, and integrating financing of social protection systems and policies, including floors and policies in line with International Labour Organization recommendations and intergovernmental agreed standards, into country-led plans and strategies while providing support to developing countries that aim to increase social protection coverage, including those that aim to do so by at least two percentage points per year; (h) Promoting the integration of child-sensitive policies and programmes in national poverty eradication strategies, including social protection programmes that deliver an integrated package of essential services, including investments in nutrition, early childhood development and universal child benefits; (i) Developing and implementing multidimensional poverty measurements according to national plans, priorities and methodologies to better measure the various dimensions of poverty and the interactions among them, as well as to support the development of targeted national public policies, based on disaggregated data; A/80/L.5 7/18 25-16021 (j) Recognizing that persons with disabilities continue to be disproportionately affected by multidimensional poverty, and the need to enhance, inter alia, efforts to facilitate international trade in assistive technologies, in line with international trade agreements, to address inequalities experienced by persons with disabilities and to promote the local production of and capacity-building initiatives for assistive products, especially in developing countries, including through research and development, and to foster greater accessibility to, as well as affordability and efficacy of, assistive products in line with the goals of disability-inclusive development; (k) Reaffirming the commitment contained in the Pact for the Future to urgently develop a framework of measures of progress on sustainable development that complement or go beyond gross domestic product through the work of the independent high-level expert group to develop recommendations for a limited number of country-owned and universally applicable indicators of sustainable development that complement and go beyond gross domestic product and a subsequent United Nations-led intergovernmental process; (l) Fully and effectively implementing the mandate set out in General Assembly resolution 78/322 of 13 August 2024 on the multidimensional vulnerability index; (m) Strengthening investment in social development at national, as well as regional, and international levels, including through enhanced international cooperation, South-South and triangular cooperation, and ensuring predictable and sustainable resources, especially for supporting developing countries in implementing poverty eradication policies; (n) Recognizing that the social and solidarity economy can play a key role in eradicating poverty, promoting social inclusion and catalysing social transformation, thus helping to achieve the objective of leaving no one behind and to achieve the 2030 Agenda and its Sustainable Development Goals, while ensuring social development for all; (o) Strengthening an inclusive approach to international cooperation and promoting innovative solutions and initiatives for poverty eradication, such as, among others, the Global Alliance against Hunger and Poverty.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We will adopt a holistic approach towards the eradication of poverty in all its forms and dimensions, including through addressing the challenges of extreme poverty and multidimensional poverty, address their disproportionate impact on countries in special situations and people in vulnerable situations and combat the feminization of poverty while ensuring that the focus is on building resilience to shocks and challenges, accelerating actions to eradicate poverty and avoiding relapsing back into it. In this regard we commit to: (a) Taking effective measures, including policies and programmes, to address the root causes of poverty and underlying causes of inequality, providing for the basic needs of all and increasing resilience for interconnected crises. These efforts should include the elimination of hunger and malnutrition; the provision of social protection, food security, education, livelihoods, employment, decent work for all, clean water and sanitation, adequate shelter and reliable health systems; and participation in social and cultural life, with special priority given to the needs and rights of women and children and persons in vulnerable situations, who often bear the greatest burden of poverty; (b) Reinforcing international development cooperation for developing countries’ capacities to achieve poverty eradication, as well as the necessary measures to close financing gaps for poverty eradication and invest in capacity-building, technical assistance and programmes; (c) Exploring opportunities to mobilize additional finance, both public and private, through official development assistance-funded activities that are responsive to country needs and focused on long-term development and poverty eradication, while ensuring that additional private finance mobilized is not a substitute for existing commitments; (d) Ensuring sustainable and equitable financing for social protection systems as one of the enablers for eradicating poverty, reducing inequality and fostering social inclusion, as well as investing in programmes for eradicating poverty, including the feminization of poverty, to address underlying causes of inequality by promoting a sustainable economy for the well-being of all; (e) Integrating quality education as a core component of poverty reduction strategies, with focused efforts on access, equity and inclusion within a lifelong learning approach; (f) Advancing the transition from the informal to the formal economy, including the formalization of micro-, small and medium-sized enterprises towards the eradication of poverty, creating decent jobs and catalysing social integration; (g) Strengthening social protection systems and reinforcing investment in measures, including social protection floors, and integrating financing of social protection systems and policies, including floors and policies in line with International Labour Organization recommendations and intergovernmental agreed standards, into country-led plans and strategies while providing support to developing countries that aim to increase social protection coverage, including those that aim to do so by at least two percentage points per year; Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 7/18 25-17700 (h) Promoting the integration of child-sensitive policies and programmes in national poverty eradication strategies, including social protection programmes that deliver an integrated package of essential services, including investments in nutrition, early childhood development and universal child benefits; (i) Developing and implementing multidimensional poverty measurements according to national plans, priorities and methodologies to better measure the various dimensions of poverty and the interactions among them, as well as to support the development of targeted national public policies, based on disaggregated data; (j) Recognizing that persons with disabilities continue to be disproportionately affected by multidimensional poverty, and the need to enhance, inter alia, efforts to facilitate international trade in assistive technologies, in line with international trade agreements, to address inequalities experienced by persons with disabilities and to promote the local production of and capacity-building initiatives for assistive products, especially in developing countries, including through research and development, and to foster greater accessibility to, as well as affordability and efficacy of, assistive products in line with the goals of disability-inclusive development; (k) Reaffirming the commitment contained in the Pact for the Future to urgently develop a framework of measures of progress on sustainable development that complement or go beyond gross domestic product through the work of the independent high-level expert group to develop recommendations for a limited number of country-owned and universally applicable indicators of sustainable development that complement and go beyond gross domestic product and a subsequent United Nations-led intergovernmental process; (l) Fully and effectively implementing the mandate set out in General Assembly resolution 78/322 of 13 August 2024 on the multidimensional vulnerability index; (m) Strengthening investment in social development at national, as well as regional, and international levels, including through enhanced international cooperation, South-South and triangular cooperation, and ensuring predictable and sustainable resources, especially for supporting developing countries in implementing poverty eradication policies; (n) Recognizing that the social and solidarity economy can play a key role in eradicating poverty, promoting social inclusion and catalysing social transformation, thus helping to achieve the objective of leaving no one behind and to achieve the 2030 Agenda and its Sustainable Development Goals, while ensuring social development for all; (o) Strengthening an inclusive approach to international cooperation and promoting innovative solutions and initiatives for poverty eradication, such as, among others, the Global Alliance against Hunger and Poverty.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm our commitment to promote inclusive and sustainable economic growth, full and productive employment and decent work for all. To this end, we commit to: (a) Adopting macroeconomic policies that promote job creation and decent work and living wages, including policies for the transition from the informal economy to the formal economy, taking into account countries’ circumstances, fostering inclusive and sustainable economic growth, recognizing the important role of both the public and the private sector in generating decent employment opportunities for all, and engaging the private sector, employers and workers, and their respective organizations, as essential partners; (b) Supporting a favourable international economic environment for developing countries and enhancing technical and financial assistance for the implementation of programmes of macroeconomic policies, in support of sustained, sustainable and inclusive economic growth, sustainable development and full and productive employment and decent work for all; (c) Strengthening international cooperation to provide necessary financial assistance, technical support and capacity-building to developing countries for the creation of full and productive employment and decent work for all; A/80/L.5 25-16021 8/18 (d) Promoting equitable access of developing countries to global markets, investments and technologies and strengthening the role of the international community to support countries, including those with economies in transition, upon their request, to achieve higher levels of economic productivity, increasing investments in structural transformation and enhancing productive capacities through diversification, technological upgrading, industrial development, digital transformation and innovation, and underlining the need to enhance technical and financial assistance to developing countries for the implementation of programmes of macroeconomic policies in support of sustained, inclusive and sustainable economic growth and sustainable development; (e) Supporting entrepreneurship by creating an enabling environment, in particular for women, persons with disabilities, older persons and youth, and supporting innovative mechanisms, micro-, small and medium-sized enterprises, and cooperatives, as well as the social and solidarity economy; (f) Harnessing the positive contribution of the private sector to job creation, decent work and raising living standards, recognizing the importance of responsible business conduct in line with national legislation and calling for the respect of international law and relevant and agreed-upon international standards and frameworks; (g) Investing in inclusive, equitable, quality education at all levels, skills development, digital literacy education, vocational education and training and lifelong learning, in particular regarding skills needed for labour market transitions, and supporting capacity-building of developing countries in this regard; (h) Considering to support the implementation of the Global Accelerator on Jobs and Social Protection for Just Transitions and noting the work of the Global Coalition for Social Justice on full and productive employment and decent work for all; (i) Taking all necessary measures to tackle high rates of youth unemployment and address their integration in the labour market, including through creating decent work and opportunities for productive employment, promoting policies for ensuring equal access to inclusive quality education, skills and vocational training, lifelong learning, digital literacy, entrepreneurship, and ensure young people’s access to universal, adequate, comprehensive, sustainable and nationally owned social protection systems; (j) Encouraging education and training opportunities for older persons to enable them to participate actively in society and the labour market and promoting intergenerational knowledge transfer in the workplace; (k) Enforcing labour laws effectively with regard to labour relations and rights, salary, ethical recruitment and healthy, safe and secure working conditions and the right to freedom of association of all workers, in particular those in precarious employment and migrant workers, including women migrant workers, while acknowledging the important nexus between international migration and social development; (l) Strengthening labour market institutions and social dialogue, including through promoting respect for international labour standards and workers’ rights, as well as promoting, protecting and investing in mechanisms for social dialogue, freedom of association and collective bargaining; (m) Considering a renewed spirit to deliver social justice and social development through a proposed renewed global commitment and actions to be developed, as appropriate, in close consultation with employers’ and workers’ organizations, that ensures equal opportunities and cohesion of societies and foster inclusive social dialogue; A/80/L.5 9/18 25-16021 (n) Reinforcing investment in universal, inclusive and sustainable social protection systems, as a critical enabler of sustainable and inclusive growth; (o) Responding to the challenges and opportunities posed by the energy, technological and demographic transitions, through appropriate social and labour market policies, including through the development of skills, promoting the formalization of informal work and guaranteeing living wages, safe and healthy working conditions and full respect for workers’ rights; (p) Taking effective measures to eradicate forced labour and trafficking in persons and eliminate all forms and manifestations of child labour; (q) Upholding the fundamental principles and rights at work, namely, freedom of association and the effective recognition of the right to collective bargaining, the elimination of all forms of forced or compulsory labour, the effective abolition of child labour, the elimination of discrimination in respect of employment and occupation, and the right to a safe and healthy working environment, including through encouraging the ratification and implementation of the International Labour Organization fundamental conventions; (r) Considering the multiplier effects of care and support systems in terms of increasing labour participation, facilitating the transition from informal to formal work and decent working conditions in the care and support sector, ensuring access to social protection for caregivers and care receivers, throughout the life course, investing in social infrastructure and strengthening social protection, as well as the returns on investments in care and support policies and systems; (s) Implementing policies that ensure women’s economic empowerment by, inter alia, gender-responsive budgeting, enhancing women’s full access to decent work and equal opportunities in the labour market, promoting equal pay for work of equal value, ensuring equal opportunities and decent working conditions for women workers and entrepreneurs, including in rural areas, by eliminating violence and harassment in the world of work and discrimination in access to job markets, social protection, financial assets and services, productive resources, decision-making, and providing and increasing family benefits and social support, healthcare and affordable and quality childcare and promoting the work-life balance, taking into account national strategies; (t) Strengthening capacity-building for upskilling and reskilling existing workforce, including to equip them to handle the impact of artificial intelligence in various industry sectors and strengthening international cooperation in this regard.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm our commitment to promote inclusive and sustainable economic growth, full and productive employment and decent work for all. To this end, we commit to: (a) Adopting macroeconomic policies that promote job creation and decent work and living wages, including policies for the transition from the informal economy to the formal economy, taking into account countries’ circumstances, fostering inclusive and sustainable economic growth, recognizing the important role of both the public and the private sector in generating decent employment opportunities for all, and engaging the private sector, employers and workers, and their respective organizations, as essential partners; A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 8/18 (b) Supporting a favourable international economic environment for developing countries and enhancing technical and financial assistance for the implementation of programmes of macroeconomic policies, in support of sustained, sustainable and inclusive economic growth, sustainable development and full and productive employment and decent work for all; (c) Strengthening international cooperation to provide necessary financial assistance, technical support and capacity-building to developing countries for the creation of full and productive employment and decent work for all; (d) Promoting equitable access of developing countries to global markets, investments and technologies and strengthening the role of the international community to support countries, including those with economies in transition, upon their request, to achieve higher levels of economic productivity, increasing investments in structural transformation and enhancing productive capacities through diversification, technological upgrading, industrial development, digital transformation and innovation, and underlining the need to enhance technical and financial assistance to developing countries for the implementation of programmes of macroeconomic policies in support of sustained, inclusive and sustainable economic growth and sustainable development; (e) Supporting entrepreneurship by creating an enabling environment, in particular for women, persons with disabilities, older persons and youth, and supporting innovative mechanisms, micro-, small and medium-sized enterprises, and cooperatives, as well as the social and solidarity economy; (f) Harnessing the positive contribution of the private sector to job creation, decent work and raising living standards, recognizing the importance of responsible business conduct in line with national legislation and calling for the respect of international law and relevant and agreed-upon international standards and frameworks; (g) Investing in inclusive, equitable, quality education at all levels, skills development, digital literacy education, vocational education and training and lifelong learning, in particular regarding skills needed for labour market transitions, and supporting capacity-building of developing countries in this regard; (h) Considering to support the implementation of the Global Accelerator on Jobs and Social Protection for Just Transitions and noting the work of the Global Coalition for Social Justice on full and productive employment and decent work for all; (i) Taking all necessary measures to tackle high rates of youth unemployment and address their integration in the labour market, including through creating decent work and opportunities for productive employment, promoting policies for ensuring equal access to inclusive quality education, skills and vocational training, lifelong learning, digital literacy, entrepreneurship, and ensure young people’s access to universal, adequate, comprehensive, sustainable and nationally owned social protection systems; (j) Encouraging education and training opportunities for older persons to enable them to participate actively in society and the labour market and promoting intergenerational knowledge transfer in the workplace; (k) Enforcing labour laws effectively with regard to labour relations and rights, salary, ethical recruitment and healthy, safe and secure working conditions and the right to freedom of association of all workers, in particular those in precarious employment and migrant workers, including women migrant workers, while Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 9/18 25-17700 acknowledging the important nexus between international migration and social development; (l) Strengthening labour market institutions and social dialogue, including through promoting respect for international labour standards and workers’ rights, as well as promoting, protecting and investing in mechanisms for social dialogue, freedom of association and collective bargaining; (m) Considering a renewed spirit to deliver social justice and social development through a proposed renewed global commitment and actions to be developed, as appropriate, in close consultation with employers’ and workers’ organizations, that ensures equal opportunities and cohesion of societies and foster inclusive social dialogue; (n) Reinforcing investment in universal, inclusive and sustainable social protection systems, as a critical enabler of sustainable and inclusive growth; (o) Responding to the challenges and opportunities posed by the energy, technological and demographic transitions, through appropriate social and labour market policies, including through the development of skills, promoting the formalization of informal work and guaranteeing living wages, safe and healthy working conditions and full respect for workers’ rights; (p) Taking effective measures to eradicate forced labour and trafficking in persons and eliminate all forms and manifestations of child labour; (q) Upholding the fundamental principles and rights at work, namely, freedom of association and the effective recognition of the right to collective bargaining, the elimination of all forms of forced or compulsory labour, the effective abolition of child labour, the elimination of discrimination in respect of employment and occupation, and the right to a safe and healthy working environment, including through encouraging the ratification and implementation of the International Labour Organization fundamental conventions; (r) Considering the multiplier effects of care and support systems in terms of increasing labour participation, facilitating the transition from informal to formal work and decent working conditions in the care and support sector, ensuring access to social protection for caregivers and care receivers, throughout the life course, investing in social infrastructure and strengthening social protection, as well as the returns on investments in care and support policies and systems; (s) Implementing policies that ensure women’s economic empowerment by, inter alia, gender-responsive budgeting, enhancing women’s full access to decent work and equal opportunities in the labour market, promoting equal pay for work of equal value, ensuring equal opportunities and decent working conditions for women workers and entrepreneurs, including in rural areas, by eliminating violence and harassment in the world of work and discrimination in access to job markets, social protection, financial assets and services, productive resources, decision-making, and providing and increasing family benefits and social support, healthcare and affordable and quality childcare and promoting the work-life balance, taking into account national strategies; (t) Strengthening capacity-building for upskilling and reskilling existing workforce, including to equip them to handle the impact of artificial intelligence in various industry sectors and strengthening international cooperation in this regard.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm our collective commitment to promoting social integration by fostering sustainable, inclusive, just, stable, safe, equitable and cohesive societies based on the respect for human dignity, promotion and protection of human rights and principles of non-discrimination, equal opportunity, solidarity, tolerance and full and equal participation for all. In this regard, we commit to: (a) Promoting intergenerational solidarity, inclusive dialogue and social cohesion, including by creating an enabling environment to ensure a higher quality of life for all individuals throughout their life course and to achieve social development for all, leaving no one behind; (b) Creating inclusive societies that enable full, equal and meaningful participation, as well as leadership opportunities, for all, including but not limited to women, youth, older persons, persons with disabilities, persons living with rare diseases and people living with HIV/AIDS, Indigenous Peoples, people of African descent, people living in poverty and in rural and remote areas, as well as people in vulnerable situations, fostering social connection and reducing loneliness and A/80/L.5 25-16021 10/18 isolation, and integrating their needs and perspectives into social and economic policy frameworks; (c) Reducing inequalities within and among countries, promoting gender equality, combating systemic racism and pursuing policies that reinforce social justice, stemming the tide of rising inequalities and ensuring fair and equitable distribution of income and wealth of economic growth and universal access to basic services, including healthcare, education, access to safe and affordable drinking water and adequate and equitable sanitation and hygiene, adequate housing, electricity, digital infrastructure and connectivity, and social protection; (d) Responding to demographic shifts, including declining fertility rates, rapid population growth and population ageing, and their implications for social integration, including through social policies adapted to all people at all ages, particularly older persons and youth, through strengthened social protection systems, inclusion in decision-making processes, access to healthcare, lifelong learning, skills development, and digital inclusion and financial and digital literacy, access to inclusive and equitable quality education and promotion of employment opportunities and skills development, including in science, technology, engineering and mathematics, with special focus on people in rural and remote areas, persons with disabilities and women and girls; (e) Investing in integrated early childhood development by ensuring, inter alia, access to free, inclusive and equitable quality education, healthcare, food and nutrition, and the protection of children from violence, exploitation, child labour and abuse; (f) Ensuring the full and effective inclusion and participation of persons with disabilities, in accordance with the Convention on the Rights of Persons with Disabilities, 14 including through removing barriers and implementing inclusive, accessible and rights-based policies and services. These efforts must be carried out in collaboration with persons with disabilities and their representative organizations, in accordance with the general principles of the Convention on the Rights of Persons with Disabilities, to ensure their equal participation in all aspects of life and development; (g) Ensuring that social development policies and programmes integrate persons with disabilities as both development agents and beneficiaries in all aspects of development and equal access for persons with disabilities to social protection floors and safety nets, address additional disability-related costs in the design of social protection schemes and enhance responsive support and accessible services for persons with disabilities, which are critical to promoting inclusive development for all; (h) Creating an enabling environment for the equal, full, effective and meaningful participation of older persons in political, social, economic and cultural life, including by responding to population ageing and combating all forms of discrimination and inequality experienced by older persons; (i) Scaling up investment from all sources in essential services for young people and ensuring that their specific needs and priorities are integrated in national, regional and international social development strategies; (j) Advancing the role of culture, as well as sport, in contributing to social integration and social cohesion and more effective, inclusive, equitable and sustainable development, integrating culture and sport into economic, social and environmental __________________ 14 United Nations, Treaty Series, vol. 2515, No. 44910. A/80/L.5 11/18 25-16021 development policies and strategies and ensuring adequate public investment in the protection and promotion of culture, sport and intercultural dialogue; (k) Recognizing and supporting Indigenous Peoples in their pursuit of economic and social development, with full respect for their identity, traditions, forms of social organization and cultural values and the right to participate in decision- making in matters which would affect their rights, in accordance with their procedures; (l) Encouraging volunteerism at all levels – local, national and international – and recognizing that these efforts contribute to social cohesion by promoting civic engagement; (m) Strengthening institutions that enhance social integration and apply a holistic social development approach, which integrates the role of the family as a central enabler and contributor to social development, taking into account different cultural, political and social systems, and promoting social and economic policies that are designed to meet the needs of families and their individual members and acknowledging the role of families in social development in accordance with the principles, goals and commitments of the Copenhagen Declaration on Social Development; (n) Taking urgent national and international action to address homelessness as an obstacle to the enjoyment of human rights and the attainment of social development.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm our collective commitment to promoting social integration by fostering sustainable, inclusive, just, stable, safe, equitable and cohesive societies based on the respect for human dignity, promotion and protection of human rights and A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 10/18 principles of non‑discrimination, equal opportunity, solidarity, tolerance and full and equal participation for all. In this regard, we commit to: (a) Promoting intergenerational solidarity, inclusive dialogue and social cohesion, including by creating an enabling environment to ensure a higher quality of life for all individuals throughout their life course and to achieve social development for all, leaving no one behind; (b) Creating inclusive societies that enable full, equal and meaningful participation, as well as leadership opportunities, for all, including but not limited to women, youth, older persons, persons with disabilities, persons living with rare diseases and people living with HIV/AIDS, Indigenous Peoples, people of African descent, people living in poverty and in rural and remote areas, as well as people in vulnerable situations, fostering social connection and reducing loneliness and isolation, and integrating their needs and perspectives into social and economic policy frameworks; (c) Reducing inequalities within and among countries, promoting gender equality, combating systemic racism and pursuing policies that reinforce social justice, stemming the tide of rising inequalities and ensuring fair and equitable distribution of income and wealth of economic growth and universal access to basic services, including healthcare, education, access to safe and affordable drinking water and adequate and equitable sanitation and hygiene, adequate housing, electricity, digital infrastructure and connectivity, and social protection; (d) Responding to demographic shifts, including declining fertility rates, rapid population growth and population ageing, and their implications for social integration, including through social policies adapted to all people at all ages, particularly older persons and youth, through strengthened social protection systems, inclusion in decision-making processes, access to healthcare, lifelong learning, skills development, and digital inclusion and financial and digital literacy, access to inclusive and equitable quality education and promotion of employment opportunities and skills development, including in science, technology, engineering and mathematics, with special focus on people in rural and remote areas, persons with disabilities and women and girls; (e) Investing in integrated early childhood development by ensuring, inter alia, access to free, inclusive and equitable quality education, healthcare, food and nutrition, and the protection of children from violence, exploitation, child labour and abuse; (f) Ensuring the full and effective inclusion and participation of persons with disabilities, in accordance with the Convention on the Rights of Persons with Disabilities, 14 including through removing barriers and implementing inclusive, accessible and rights-based policies and services. These efforts must be carried out in collaboration with persons with disabilities and their representative organizations, in accordance with the general principles of the Convention on the Rights of Persons with Disabilities, to ensure their equal participation in all aspects of life and development; (g) Ensuring that social development policies and programmes integrate persons with disabilities as both development agents and beneficiaries in all aspects of development and equal access for persons with disabilities to social protection floors and safety nets, address additional disability-related costs in the design of social protection schemes and enhance responsive support and accessible services for __________________ 14 United Nations, Treaty Series, vol. 2515, No. 44910. Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 11/18 25-17700 persons with disabilities, which are critical to promoting inclusive development for all; (h) Creating an enabling environment for the equal, full, effective and meaningful participation of older persons in political, social, economic and cultural life, including by responding to population ageing and combating all forms of discrimination and inequality experienced by older persons; (i) Scaling up investment from all sources in essential services for young people and ensuring that their specific needs and priorities are integrated in national, regional and international social development strategies; (j) Advancing the role of culture, as well as sport, in contributing to social integration and social cohesion and more effective, inclusive, equitable and sustainable development, integrating culture and sport into economic, social and environmental development policies and strategies and ensuring adequate public investment in the protection and promotion of culture, sport and intercultural dialogue; (k) Recognizing and supporting Indigenous Peoples in their pursuit of economic and social development, with full respect for their identity, traditions, forms of social organization and cultural values and the right to participate in decision- making in matters which would affect their rights, in accordance with their procedures; (l) Encouraging volunteerism at all levels – local, national and international – and recognizing that these efforts contribute to social cohesion by promoting civic engagement; (m) Strengthening institutions that enhance social integration and apply a holistic social development approach, which integrates the role of the family as a central enabler and contributor to social development, taking into account different cultural, political and social systems, and promoting social and economic policies that are designed to meet the needs of families and their individual members and acknowledging the role of families in social development in accordance with the principles, goals and commitments of the Copenhagen Declaration on Social Development; (n) Taking urgent national and international action to address homelessness as an obstacle to the enjoyment of human rights and the attainment of social development.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We remain deeply concerned that one third of the world’s population remains food-insecure, mainly in developing countries, with children disproportionately impacted, and we reaffirm our commitment to end hunger, malnutrition and poverty and to ensure the right to food for all to achieve inclusive social development. In this regard, we commit to: (a) Accelerating actions to end hunger, poverty, food insecurity and all forms of malnutrition, through coordinated global action, including by investing in sustainable, resilient and inclusive agrifood systems, rural infrastructure, strengthening and expanding initiatives such as, among others, the Global Alliance against Hunger and Poverty and enhancing international cooperation and solidarity; (b) Reinforcing measures to build sustainable, inclusive and resilient agriculture and food systems, with the aim of ensuring food security and adequate nutrition for all, particularly during early childhood, including mother-and-child nutrition programmes and school meal programmes, including in conflict-affected contexts, recognizing their foundational importance to human development and lifelong well-being; (c) Investing in resilient, inclusive and sustainable food systems that ensure access to affordable, sufficient, safe and nutritious food for all and reducing food loss and waste; (d) Strengthening international cooperation to address the impact that excessively volatile food prices can pose to the fight against poverty and hunger and to the efforts of developing countries to attain food security and improved nutrition; (e) Supporting smallholders, family farmers and small-scale producers, including women farmers and producers, in adopting and scaling up sustainable agricultural practices that are resilient to climate change and improve productivity and livelihoods, supporting rural communities and sustainable agricultural practices to improve productivity and livelihoods; (f) Ensuring equitable access to land, water and other productive resources, particularly for women, recognizing their key role in empowering rural populations, A/80/L.5 25-16021 12/18 eradicating poverty, achieving food security and promoting inclusive rural development; (g) Strengthening international cooperation, capacity-building, access to technology and financial support for sustainable agricultural development as an important tool, in particular for developing countries, for achieving food security and nutrition for all and facilitating access to essential nutrition needs and agricultural markets; (h) Recognizing the positive role that trade can play in achieving food security.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We remain deeply concerned that one third of the world’s population remains food-insecure, mainly in developing countries, with children disproportionately impacted, and we reaffirm our commitment to end hunger, malnutrition and poverty and to ensure the right to food for all to achieve inclusive social development. In this regard, we commit to: (a) Accelerating actions to end hunger, poverty, food insecurity and all forms of malnutrition, through coordinated global action, including by investing in sustainable, resilient and inclusive agrifood systems, rural infrastructure, strengthening and expanding initiatives such as, among others, the Global Alliance against Hunger and Poverty and enhancing international cooperation and solidarity; (b) Reinforcing measures to build sustainable, inclusive and resilient agriculture and food systems, with the aim of ensuring food security and adequate nutrition for all, particularly during early childhood, including mother-and-child nutrition programmes and school meal programmes, including in conflict-affected A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 12/18 contexts, recognizing their foundational importance to human development and lifelong well-being; (c) Investing in resilient, inclusive and sustainable food systems that ensure access to affordable, sufficient, safe and nutritious food for all and reducing food loss and waste; (d) Strengthening international cooperation to address the impact that excessively volatile food prices can pose to the fight against poverty and hunger and to the efforts of developing countries to attain food security and improved nutrition; (e) Supporting smallholders, family farmers and small-scale producers, including women farmers and producers, in adopting and scaling up sustainable agricultural practices that are resilient to climate change and improve productivity and livelihoods, supporting rural communities and sustainable agricultural practices to improve productivity and livelihoods; (f) Ensuring equitable access to land, water and other productive resources, particularly for women, recognizing their key role in empowering rural populations, eradicating poverty, achieving food security and promoting inclusive rural development; (g) Strengthening international cooperation, capacity-building, access to technology and financial support for sustainable agricultural development as an important tool, in particular for developing countries, for achieving food security and nutrition for all and facilitating access to essential nutrition needs and agricultural markets; (h) Recognizing the positive role that trade can play in achieving food security.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the right to the enjoyment of the highest attainable standard of physical and mental health. In this regard, and recognizing the lessons learned from the coronavirus disease (COVID-19) pandemic and other health emergencies, we commit to: (a) Achieving universal health coverage and realizing universal, equitable and affordable access to the highest attainable standard of physical and mental health and well-being for all; (b) Leveraging digital health technologies that are safe, accessible, inclusive, equitable and affordable that enhance public health surveillance, enable personalized care, including through telemedicine, and contribute to equitable access to healthcare and health services; (c) Strengthening international cooperation in the transfer of technology on mutually agreed terms, while promoting cooperation on related know-how and strengthening resilient, inclusive and sustainable health systems and infrastructures and accelerating progress towards universal health coverage, particularly in developing countries, while recognizing that digital health interventions are not a substitute for functioning health systems and have significant limitations; (d) Strengthening the resilience of health systems and ensuring equitable access to safe, affordable, effective and quality medicines, vaccines, diagnostics and therapeutics and other health products and technologies to ensure healthy lives and promote well-being for present and future generations, and continuing to explore ways to integrate, as appropriate, safe and evidence-based traditional and complementary medicine services within national and local health systems; (e) Promoting health equity for persons with disabilities by ensuring availability of and access to health services for all persons with disabilities, including by providing quality standards of care; (f) Promoting and improving mental health services as an essential component of universal health coverage; (g) Mobilizing domestic and international innovative and sustainable sources of financing, including through public-private partnerships, to secure adequate levels of social expenditure necessary for expanding coverage towards universal access to health and supporting research and development and innovation in health programmes; (h) Strengthening integrated, resilient, inclusive, people-centred, affordable, equitable, accessible and universal health systems, based on a primary healthcare approach, that are affordable and adequately financed and supported by a competent health workforce and adequate health infrastructure; (i) Ensuring robust prevention, preparedness and response to future pandemics and health emergencies, including by strengthening local, national and regional production capacities, and adequate infrastructure and logistics for A/80/L.5 13/18 25-16021 medicines, vaccines, diagnostics and other health-related technologies while strengthening technology transfer on mutually agreed terms and equitable access, particularly in developing countries; (j) Ensuring appropriate and safe use of health data and proper legal and technical safeguards for patient privacy.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the right to the enjoyment of the highest attainable standard of physical and mental health. In this regard, and recognizing the lessons learned from the coronavirus disease (COVID‑19) pandemic and other health emergencies, we commit to: (a) Achieving universal health coverage and realizing universal, equitable and affordable access to the highest attainable standard of physical and mental health and well-being for all; (b) Leveraging digital health technologies that are safe, accessible, inclusive, equitable and affordable that enhance public health surveillance, enable personalized care, including through telemedicine, and contribute to equitable access to healthcare and health services; (c) Strengthening international cooperation in the transfer of technology on mutually agreed terms, while promoting cooperation on related know-how and strengthening resilient, inclusive and sustainable health systems and infrastructures and accelerating progress towards universal health coverage, particularly in developing countries, while recognizing that digital health interventions are not a substitute for functioning health systems and have significant limitations; (d) Strengthening the resilience of health systems and ensuring equitable access to safe, affordable, effective and quality medicines, vaccines, diagnostics and therapeutics and other health products and technologies to ensure healthy lives and promote well-being for present and future generations, and continuing to explore ways to integrate, as appropriate, safe and evidence-based traditional and complementary medicine services within national and local health systems; Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 13/18 25-17700 (e) Promoting health equity for persons with disabilities by ensuring availability of and access to health services for all persons with disabilities, including by providing quality standards of care; (f) Promoting and improving mental health services as an essential component of universal health coverage; (g) Mobilizing domestic and international innovative and sustainable sources of financing, including through public-private partnerships, to secure adequate levels of social expenditure necessary for expanding coverage towards universal access to health and supporting research and development and innovation in health programmes; (h) Strengthening integrated, resilient, inclusive, people-centred, affordable, equitable, accessible and universal health systems, based on a primary healthcare approach, that are affordable and adequately financed and supported by a competent health workforce and adequate health infrastructure; (i) Ensuring robust prevention, preparedness and response to future pandemics and health emergencies, including by strengthening local, national and regional production capacities, and adequate infrastructure and logistics for medicines, vaccines, diagnostics and other health-related technologies while strengthening technology transfer on mutually agreed terms and equitable access, particularly in developing countries; (j) Ensuring appropriate and safe use of health data and proper legal and technical safeguards for patient privacy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We recognize that digital transformation has the potential to contribute to social development. We recognize the urgent need to close persistent and widening digital and knowledge divides between and within countries to ensure that the benefits of digital technologies, including artificial intelligence, are harnessed, while also addressing the harms and risks from their use, and to promote social development for all. In this regard, we commit to: (a) Strengthening equitable, safe, reliable and affordable access to digital technologies, digital public goods and digital public infrastructure for developing countries and harnessing the benefits of scientific progress and its applications; (b) Leveraging digital and emerging technologies, including artificial intelligence, to support inclusive social development by improving public service delivery and strengthening digital public infrastructure for social inclusion while recognizing the specific needs and capacities of developing countries, and to enhance access to inclusive and equitable quality education for all, healthcare and decent work and employment opportunities while ensuring a science-based and age-appropriate use of digital tools and avoiding the one-size-fits-all approach, safeguarding workers’ rights and advancing context- and country-specific solutions; (c) Bridging digital divides between and within countries, including through enhancing international cooperation, in line with national priorities, for targeted capacity-building in science, technology and innovation in developing countries, including through North-South, South-South and triangular cooperation, with the aim of harnessing the benefits of artificial intelligence, minimizing its risks and accelerating innovation and progress towards the achievement of all 17 Sustainable Development Goals; (d) Addressing the spread of misinformation, disinformation, hate speech and content inciting harm in a way that protects democratic values, and upholding the right to freedom of expression and the right to privacy; (e) Preventing and addressing adverse impacts on the enjoyment of human rights, especially of people in vulnerable situations, arising from the use of digital and emerging technologies, including artificial intelligence.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We recognize that digital transformation has the potential to contribute to social development. We recognize the urgent need to close persistent and widening digital and knowledge divides between and within countries to ensure that the benefits of digital technologies, including artificial intelligence, are harnessed, while also addressing the harms and risks from their use, and to promote social development for all. In this regard, we commit to: (a) Strengthening equitable, safe, reliable and affordable access to digital technologies, digital public goods and digital public infrastructure for developing countries and harnessing the benefits of scientific progress and its applications; (b) Leveraging digital and emerging technologies, including artificial intelligence, to support inclusive social development by improving public service delivery and strengthening digital public infrastructure for social inclusion while recognizing the specific needs and capacities of developing countries, and to enhance access to inclusive and equitable quality education for all, healthcare and decent work and employment opportunities while ensuring a science-based and age-appropriate use of digital tools and avoiding the one-size-fits-all approach, safeguarding workers’ rights and advancing context- and country-specific solutions; (c) Bridging digital divides between and within countries, including through enhancing international cooperation, in line with national priorities, for targeted capacity-building in science, technology and innovation in developing countries, including through North-South, South-South and triangular cooperation, with the aim of harnessing the benefits of artificial intelligence, minimizing its risks and accelerating innovation and progress towards the achievement of all 17 Sustainable Development Goals; (d) Addressing the spread of misinformation, disinformation, hate speech and content inciting harm in a way that protects democratic values, and upholding the right to freedom of expression and the right to privacy; A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 14/18 (e) Preventing and addressing adverse impacts on the enjoyment of human rights, especially of people in vulnerable situations, arising from the use of digital and emerging technologies, including artificial intelligence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the right to education and that access to inclusive and equitable quality education constitutes a cornerstone for social development and social cohesion. In this regard we commit to: (a) Promoting universal, safe, inclusive, equitable, affordable and resilient quality education systems and lifelong learning opportunities for all. Education shall be free, at least in the elementary and fundamental stages; (b) Expanding inclusive access to technical and vocational education and training, including in science, technology, engineering and mathematics, physical education and sport, lifelong learning, financial and digital literacy and skills development for all; (c) Taking effective measures to ensure intercultural and multilingual education; A/80/L.5 25-16021 14/18 (d) Addressing negative social norms and gender stereotypes in education systems, as well as implementing inclusive policies and programmes to promote girls’ participation in science, technology, engineering and mathematics, including information and communications technologies, throughout their education; (e) Promoting the availability, accessibility and affordability of quality education in science, technology, engineering and mathematics at the primary, secondary and tertiary levels to create an inclusive social environment conducive to the advancement of science, technology and innovation and entrepreneurship; (f) Strengthening investment and cooperation in research and development, innovation and training in emerging technologies, including artificial intelligence, in particular by supporting developing countries, upon their request, in line with their priorities and contexts.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the right to education and that access to inclusive and equitable quality education constitutes a cornerstone for social development and social cohesion. In this regard we commit to: (a) Promoting universal, safe, inclusive, equitable, affordable and resilient quality education systems and lifelong learning opportunities for all. Education shall be free, at least in the elementary and fundamental stages; (b) Expanding inclusive access to technical and vocational education and training, including in science, technology, engineering and mathematics, physical education and sport, lifelong learning, financial and digital literacy and skills development for all; (c) Taking effective measures to ensure intercultural and multilingual education; (d) Addressing negative social norms and gender stereotypes in education systems, as well as implementing inclusive policies and programmes to promote girls’ participation in science, technology, engineering and mathematics, including information and communications technologies, throughout their education; (e) Promoting the availability, accessibility and affordability of quality education in science, technology, engineering and mathematics at the primary, secondary and tertiary levels to create an inclusive social environment conducive to the advancement of science, technology and innovation and entrepreneurship; (f) Strengthening investment and cooperation in research and development, innovation and training in emerging technologies, including artificial intelligence, in particular by supporting developing countries, upon their request, in line with their priorities and contexts.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 37</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We recognize that the impacts of disasters caused by human-made or natural hazards pose serious challenges to social development, particularly in developing countries. In this regard, we commit to: (a) Strengthening adaptive social protection systems, including by enhancing social safety nets and protection floors, improving access to essential services and developing targeted support programmes to safeguard those disproportionately affected by the adverse impact of climate change and disasters caused by human- made or natural hazards; (b) Promoting a risk-informed approach to social development that integrates accessible disaster risk reduction measures into policies, programmes and investments at all levels, and advancing inclusive early warning systems, early and anticipatory approaches, and preparedness initiatives by developing comprehensive risk management plans and investing in inclusive, sustainable and resilient infrastructure according to the Sendai Framework for Disaster Risk Reduction 2015–2030;15 (c) Ensuring that education and health systems and new and existing critical infrastructure, including water and sanitation, transportation and telecommunications infrastructure, educational facilities, hospitals and other health facilities, are resilient and adaptable to disasters.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We recognize that the impacts of disasters caused by human-made or natural hazards pose serious challenges to social development, particularly in developing countries. In this regard, we commit to: (a) Strengthening adaptive social protection systems, including by enhancing social safety nets and protection floors, improving access to essential services and developing targeted support programmes to safeguard those disproportionately affected by the adverse impact of climate change and disasters caused by human- made or natural hazards; (b) Promoting a risk-informed approach to social development that integrates accessible disaster risk reduction measures into policies, programmes and investments at all levels, and advancing inclusive early warning systems, early and anticipatory approaches, and preparedness initiatives by developing comprehensive risk management plans and investing in inclusive, sustainable and resilient infrastructure according to the Sendai Framework for Disaster Risk Reduction 2015– 2030;15 __________________ 15 Resolution 69/283, annex II. Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 15/18 25-17700 (c) Ensuring that education and health systems and new and existing critical infrastructure, including water and sanitation, transportation and telecommunications infrastructure, educational facilities, hospitals and other health facilities, are resilient and adaptable to disasters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 38</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the need to achieve gender equality and the empowerment of all women and girls and to ensure the full and equal enjoyment of all human rights and fundamental freedoms by all women and girls throughout their life course, and that all legal, social and economic barriers to their empowerment are removed. We commit to: (a) Taking comprehensive measures to achieve gender equality and the empowerment of all women and girls, highlighting their key role in the achievement of sustainable development; (b) Implementing policies that ensure women’s economic empowerment and equal opportunities in the labour market and taking measures to ensure fair wages for women, including equal pay for work of equal value, and equitable care work, and eliminate gender stereotypes and negative social norms; (c) Recognizing, reducing and redistributing women’s disproportionate share of unpaid care and domestic work, including through the provision of public services, __________________ 15 Resolution 69/283, annex II. A/80/L.5 15/18 25-16021 infrastructure and social protection policies and programmes and the promotion of shared responsibility within the household and the family, as nationally appropriate; (d) Promoting access to sexual and reproductive health and eliminating all forms of discrimination and violence against women and girls, including gender- based violence; (e) Enhancing women’s full, equal and meaningful participation and leadership in decision-making processes at all levels and in all sectors and in contributing in all spheres of society and encouraging women-led development initiatives that contribute to the achievement of gender equality and women’s empowerment; (f) Strengthening predictable, sustainable and sufficient development finance to developing countries to end poverty in all its forms and dimensions disproportionately affecting women and girls.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the need to achieve gender equality and the empowerment of all women and girls and to ensure the full and equal enjoyment of all human rights and fundamental freedoms by all women and girls throughout their life course, and that all legal, social and economic barriers to their empowerment are removed. We commit to: (a) Taking comprehensive measures to achieve gender equality and the empowerment of all women and girls, highlighting their key role in the achievement of sustainable development; (b) Implementing policies that ensure women’s economic empowerment and equal opportunities in the labour market and taking measures to ensure fair wages for women, including equal pay for work of equal value, and equitable care work, and eliminate gender stereotypes and negative social norms; (c) Recognizing, reducing and redistributing women’s disproportionate share of unpaid care and domestic work, including through the provision of public services, infrastructure and social protection policies and programmes and the promotion of shared responsibility within the household and the family, as nationally appropriate; (d) Promoting access to sexual and reproductive health and eliminating all forms of discrimination and violence against women and girls, including gender- based violence; (e) Enhancing women’s full, equal and meaningful participation and leadership in decision-making processes at all levels and in all sectors and in contributing in all spheres of society and encouraging women-led development initiatives that contribute to the achievement of gender equality and women’s empowerment; (f) Strengthening predictable, sustainable and sufficient development finance to developing countries to end poverty in all its forms and dimensions disproportionately affecting women and girls.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the right to an adequate standard of living, including adequate safe, accessible and affordable housing, safe and affordable drinking water, and adequate and equitable sanitation and hygiene. We recognize that sustainable and inclusive urbanization and transport are essential to reducing inequality and enabling social development. In this regard, we commit to: (a) Promoting an adequate standard of living, including by ensuring sustainable financing and the provision of and investment in accessible, safe, affordable, adequate housing, resilient infrastructure, transportation, clean water and sanitation; (b) Investing in resilient cross-border transport corridors, trade networks and digital connectivity to strengthen regional economic integration and inclusive growth; (c) Ensuring that housing policies in urban, peri-urban and rural areas address the needs of persons in low-income households, female-headed households, women, youth, older persons, persons with disabilities, those experiencing homelessness, those living in poverty, including extreme poverty, and those in vulnerable situations; (d) Strengthening international cooperation and capacity-building in developing countries in adequate safe, accessible and affordable housing, safe and affordable drinking water, adequate and equitable sanitation and hygiene, and related activities and programmes; (e) Reinforcing resilient and sustainable urbanization by implementing strategies to bridge the gaps between urban, rural and remote areas, enhance connectivity and access to electricity and address homelessness; (f) Ensuring universal access to affordable, reliable, sustainable and modern energy for all, including through enhanced international cooperation. A/80/L.5 25-16021 16/18
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reaffirm the right to an adequate standard of living, including adequate safe, accessible and affordable housing, safe and affordable drinking water, and adequate and equitable sanitation and hygiene. We recognize that sustainable and inclusive urbanization and transport are essential to reducing inequality and enabling social development. In this regard, we commit to: (a) Promoting an adequate standard of living, including by ensuring sustainable financing and the provision of and investment in accessible, safe, A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 16/18 affordable, adequate housing, resilient infrastructure, transportation, clean water and sanitation; (b) Investing in resilient cross-border transport corridors, trade networks and digital connectivity to strengthen regional economic integration and inclusive growth; (c) Ensuring that housing policies in urban, peri-urban and rural areas address the needs of persons in low-income households, female-headed households, women, youth, older persons, persons with disabilities, those experiencing homelessness, those living in poverty, including extreme poverty, and those in vulnerable situations; (d) Strengthening international cooperation and capacity-building in developing countries in adequate safe, accessible and affordable housing, safe and affordable drinking water, adequate and equitable sanitation and hygiene, and related activities and programmes; (e) Reinforcing resilient and sustainable urbanization by implementing strategies to bridge the gaps between urban, rural and remote areas, enhance connectivity and access to electricity and address homelessness; (f) Ensuring universal access to affordable, reliable, sustainable and modern energy for all, including through enhanced international cooperation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We welcome the ambitious package of reforms and actions under the Sevilla Commitment to close the financing gap with urgency and catalyse sustainable development investments at scale, in which we committed to take concrete actions to enhance fiscal space, address debt challenges of developing countries and lower the cost of capital and to provide and mobilize additional, innovative, adequate, affordable, predictable and accessible financing from all sources, recognizing the comparative advantages of public and private finance. In this regard, we commit to: (a) Continue reforming the international financial architecture, enhancing its resilience, coherence and effectiveness in responding to present and future challenges and crises and making global economic governance more inclusive, representative, equitable and effective, strengthening the roles of the United Nations, international financial institutions and other relevant international organizations while recognizing their respective mandates and governance bodies, and recognizing that the international community must work together to broaden and enhance the voice and representation of developing countries in international financial and economic institutions; (b) Increasing investment in social policies, including social protection systems, inclusive education, healthcare and housing; (c) Calling upon the multilateral development banks to pay greater attention to financing for social development; (d) Ensuring fair and timely solutions to address sovereign debt challenges and debt distress and their effect on social development; (e) Strengthening the inclusiveness and effectiveness of international tax cooperation at the United Nations, while taking into consideration the work of other relevant forums and institutions, and continuing to engage constructively in the negotiations on the United Nations framework convention on international tax cooperation and its protocols and encourage support for the process; (f) Reiterating that Member States are strongly urged to refrain from promulgating and applying any unilateral economic, financial or trade measures not in accordance with international law and the Charter of the United Nations that impede the full achievement of economic and social development, particularly in developing countries; (g) Reaffirming the importance of official development assistance as a key component of international development cooperation in helping developing countries achieve sustainable development and acknowledging the urgency of undertaking sustained efforts to reverse declining trends in official development assistance and urge developed countries to scale up and fulfil their respective official development assistance commitments, including the long-standing commitment by most developed countries to achieve the targets of 0.7 per cent of gross national income for official development assistance to developing countries, and between 0.15 and 0.2 per cent A/80/L.5 17/18 25-16021 of gross national income for official development assistance to the least developed countries; (h) Strengthening multilateral cooperation to enhance fiscal space for social spending and supporting developing countries in ensuring predictable, adequate and uninterrupted funding of social protection and other essential social spending during shocks and crises; (i) Promoting and scaling up North-South, South-South and triangular cooperation as critical modalities for mobilizing knowledge, technical cooperation and resources to address social challenges and foster innovation in social development policies while strengthening and respecting national ownership, and recognizing that South-South cooperation is a complement to, not a substitute for, North-South cooperation. Follow-up
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We welcome the ambitious package of reforms and actions under the Sevilla Commitment to close the financing gap with urgency and catalyse sustainable development investments at scale, in which we committed to take concrete actions to enhance fiscal space, address debt challenges of developing countries and lower the cost of capital and to provide and mobilize additional, innovative, adequate, affordable, predictable and accessible financing from all sources, recognizing the comparative advantages of public and private finance. In this regard, we commit to: (a) Continue reforming the international financial architecture, enhancing its resilience, coherence and effectiveness in responding to present and future challenges and crises and making global economic governance more inclusive, representative, equitable and effective, strengthening the roles of the United Nations, international financial institutions and other relevant international organizations while recognizing their respective mandates and governance bodies, and recognizing that the international community must work together to broaden and enhance the voice and representation of developing countries in international financial and economic institutions; (b) Increasing investment in social policies, including social protection systems, inclusive education, healthcare and housing; (c) Calling upon the multilateral development banks to pay greater attention to financing for social development; (d) Ensuring fair and timely solutions to address sovereign debt challenges and debt distress and their effect on social development; Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” A/RES/80/5 17/18 25-17700 (e) Strengthening the inclusiveness and effectiveness of international tax cooperation at the United Nations, while taking into consideration the work of other relevant forums and institutions, and continuing to engage constructively in the negotiations on the United Nations framework convention on international tax cooperation and its protocols and encourage support for the process; (f) Reiterating that Member States are strongly urged to refrain from promulgating and applying any unilateral economic, financial or trade measures not in accordance with international law and the Charter of the United Nations that impede the full achievement of economic and social development, particularly in developing countries; (g) Reaffirming the importance of official development assistance as a key component of international development cooperation in helping developing countries achieve sustainable development and acknowledging the urgency of undertaking sustained efforts to reverse declining trends in official development assistance and urge developed countries to scale up and fulfil their respective official development assistance commitments, including the long-standing commitment by most developed countries to achieve the targets of 0.7 per cent of gross national income for official development assistance to developing countries, and between 0.15 and 0.2 per cent of gross national income for official development assistance to the least developed countries; (h) Strengthening multilateral cooperation to enhance fiscal space for social spending and supporting developing countries in ensuring predictable, adequate and uninterrupted funding of social protection and other essential social spending during shocks and crises; (i) Promoting and scaling up North-South, South-South and triangular cooperation as critical modalities for mobilizing knowledge, technical cooperation and resources to address social challenges and foster innovation in social development policies while strengthening and respecting national ownership, and recognizing that South-South cooperation is a complement to, not a substitute for, North-South cooperation. Follow-up
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/80/L.5</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reiterate our commitment to the full implementation of the social development agenda, including through improving and strengthening its framework for international and regional cooperation, as established under the Copenhagen Declaration and Programme of Action and through following up on the Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development”. In this regard we decide to: (a) Proceed to a five-year follow-up process on the Doha Political Declaration and the Copenhagen Declaration and Programme of Action, starting in 2031, to assess progress, identify gaps and renew the commitments, and convene a high-level plenary meeting under the auspices of the General Assembly, the modalities and outcome of which shall be decided no later than the eighty-fifth session of the Assembly; (b) Request the Secretary-General, in consultation with Member States, to prepare a report, in preparation of the follow-up process of the Doha Political Declaration and the Copenhagen Declaration and Programme of Action and no later than the eighty-fifth session of the General Assembly, which assesses progress and identifies gaps in social development; (c) Reaffirm that the Commission for Social Development has the primary responsibility for the follow-up and the review of the World Summit for Social Development, the outcome of the twenty-fourth special session of the General Assembly, of the Doha Summit and intergovernmental social development commitments, and to proceed to the strengthening of its role, including in contribution to the follow-up process; (d) Invite the United Nations regional commissions, within their respective mandates, to convene preparatory meetings at the regional level in advance of the follow-up, with the aim of assessing progress made, gaps and opportunities for action towards the implementation of the Doha Political Declaration and the Copenhagen Declaration and Programme of Action. The regional commissions are invited to utilize existing mechanisms and platforms to conduct the regional preparatory meetings; (e) Invite the Economic and Social Council, the funds and programmes of the United Nations development system and the relevant organizations and specialized agencies, within their respective mandates, to further integrate into their work programmes relevant intergovernmental social development commitments and to be actively involved in the follow-up process; A/80/L.5 25-16021 18/18 (f) Strengthen effective multilateralism and international cooperation, as well as foster greater inter-agency cooperation and better policy coherence within the United Nations system; (g) Encourage stronger coordination, each within their respective mandates, between the United Nations and the international financial institutions through regular and substantive dialogues, including during the sessions of the Commission for Social Development, on enhancing financing mechanisms and assistance to advance social development, particularly in developing countries; (h) Strengthen multi-stakeholder engagement and partnerships, including with parliamentarians, civil society, employers’ and workers’ organizations, youth, organizations of persons with disabilities, academia, local and regional authorities, faith-based organizations and the private sector to implement the commitments; (i) Support developing countries, particularly African countries, least developed countries, small island developing States and landlocked developing countries, in, inter alia, strengthening the capacity of national statistical offices and data systems to ensure access to high-quality, timely, reliable and disaggregated social development data.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/5</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            We reiterate our commitment to the full implementation of the social development agenda, including through improving and strengthening its framework for international and regional cooperation, as established under the Copenhagen Declaration and Programme of Action and through following up on the Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development”. In this regard we decide to: (a) Proceed to a five-year follow-up process on the Doha Political Declaration and the Copenhagen Declaration and Programme of Action, starting in 2031, to assess progress, identify gaps and renew the commitments, and convene a high-level plenary meeting under the auspices of the General Assembly, the modalities and outcome of which shall be decided no later than the eighty-fifth session of the Assembly; (b) Request the Secretary-General, in consultation with Member States, to prepare a report, in preparation of the follow-up process of the Doha Political Declaration and the Copenhagen Declaration and Programme of Action and no later than the eighty-fifth session of the General Assembly, which assesses progress and identifies gaps in social development; (c) Reaffirm that the Commission for Social Development has the primary responsibility for the follow-up and the review of the World Summit for Social A/RES/80/5 Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development” 25-17700 18/18 Development, the outcome of the twenty-fourth special session of the General Assembly, of the Doha Summit and intergovernmental social development commitments, and to proceed to the strengthening of its role, including in contribution to the follow-up process; (d) Invite the United Nations regional commissions, within their respective mandates, to convene preparatory meetings at the regional level in advance of the follow-up, with the aim of assessing progress made, gaps and opportunities for action towards the implementation of the Doha Political Declaration and the Copenhagen Declaration and Programme of Action. The regional commissions are invited to utilize existing mechanisms and platforms to conduct the regional preparatory meetings; (e) Invite the Economic and Social Council, the funds and programmes of the United Nations development system and the relevant organizations and specialized agencies, within their respective mandates, to further integrate into their work programmes relevant intergovernmental social development commitments and to be actively involved in the follow-up process; (f) Strengthen effective multilateralism and international cooperation, as well as foster greater inter-agency cooperation and better policy coherence within the United Nations system; (g) Encourage stronger coordination, each within their respective mandates, between the United Nations and the international financial institutions through regular and substantive dialogues, including during the sessions of the Commission for Social Development, on enhancing financing mechanisms and assistance to advance social development, particularly in developing countries; (h) Strengthen multi-stakeholder engagement and partnerships, including with parliamentarians, civil society, employers’ and workers’ organizations, youth, organizations of persons with disabilities, academia, local and regional authorities, faith-based organizations and the private sector to implement the commitments; (i) Support developing countries, particularly African countries, least developed countries, small island developing States and landlocked developing countries, in, inter alia, strengthening the capacity of national statistical offices and data systems to ensure access to high-quality, timely, reliable and disaggregated social development data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_80_L.5.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -190,29 +623,30 @@
         <span class="text-sm text-muted">3 with signals, 41 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -229,7 +663,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -246,7 +680,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -263,7 +697,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -280,7 +714,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -297,7 +731,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -314,7 +748,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -331,7 +765,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -348,7 +782,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -375,7 +809,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -402,7 +836,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -419,7 +853,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -436,7 +870,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -453,7 +887,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -470,7 +904,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -487,7 +921,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -504,7 +938,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -521,7 +955,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -548,7 +982,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -565,7 +999,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -582,7 +1016,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -599,7 +1033,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -616,7 +1050,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -633,7 +1067,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -650,7 +1084,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -667,7 +1101,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -684,7 +1118,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -701,7 +1135,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -718,7 +1152,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -735,7 +1169,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -752,7 +1186,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -769,7 +1203,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -786,7 +1220,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -803,7 +1237,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -820,7 +1254,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -837,7 +1271,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -854,7 +1288,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -871,7 +1305,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -888,7 +1322,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -905,7 +1339,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -922,7 +1356,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -939,7 +1373,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -956,7 +1390,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -973,7 +1407,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -995,19 +1429,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1022,14 +1469,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1045,12 +1492,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1069,12 +1516,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

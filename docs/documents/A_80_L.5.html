@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,155 +65,61 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/80/L.5</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/5</span>
+        </div>
+        <a href="./A_RES_80_5.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/80/L.5</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/80/l.5?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">44 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">Doha Political Declaration of the “World Social Summit” under the title “the Second World Summit for Social Development”</p>
+    
+    <p class="mt-1 text-muted">44 operative paragraphs · Item 25</p>
 </div>
 
-<!-- Compute signal data -->
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-            
-        
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 
 
 
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">3 with signals, 41 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-1"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -229,8 +135,8 @@
         </div>
     </div>
     
-    <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-2"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -246,8 +152,8 @@
         </div>
     </div>
     
-    <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-3"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -263,8 +169,8 @@
         </div>
     </div>
     
-    <div id="para-4" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-4"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -280,8 +186,8 @@
         </div>
     </div>
     
-    <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-5"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -297,8 +203,8 @@
         </div>
     </div>
     
-    <div id="para-6" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-6"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -314,8 +220,8 @@
         </div>
     </div>
     
-    <div id="para-7" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-7"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -331,8 +237,8 @@
         </div>
     </div>
     
-    <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-8"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -348,10 +254,10 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -359,26 +265,16 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm the Addis Ababa Action Agenda of the Third International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development6 as an integral part of the 2030 Agenda. We are committed to its full implementation, which is critical for the realization of the Sustainable Development Goals and their targets.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm the Addis Ababa Action Agenda of the Third International Conference on Financing for Development6 as an integral part of the 2030 Agenda. We are committed to its full implementation, which is critical for the realization of the Sustainable Development Goals and their targets.</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -386,24 +282,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We welcome the outcome document of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, the Sevilla Commitment, 7 which renews the global financing for development framework, building on the Addis Ababa Action Agenda, and call for its timely and effective implementation.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">We welcome the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment, 7 which renews the global financing for development framework, building on the Addis Ababa Action Agenda, and call for its timely and effective implementation.</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-11"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -419,8 +305,8 @@
         </div>
     </div>
     
-    <div id="para-12" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-12"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -436,8 +322,8 @@
         </div>
     </div>
     
-    <div id="para-13" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-13"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -453,8 +339,8 @@
         </div>
     </div>
     
-    <div id="para-14" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-14"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -470,8 +356,8 @@
         </div>
     </div>
     
-    <div id="para-15" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-15"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -487,8 +373,8 @@
         </div>
     </div>
     
-    <div id="para-16" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-16"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -504,8 +390,8 @@
         </div>
     </div>
     
-    <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-17"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -521,10 +407,10 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -532,24 +418,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Yet, 30 years after the convening of the World Summit for Social Development, progress remains slow and uneven, and major gaps and inequalities persist within and among countries. With only five years remaining until the 2030 deadline, progress towards achieving most of the Sustainable Development Goals has been far too slow, with some goals stalled or even regressing despite notable advances in a few areas: (a) Although great strides have been made in reducing poverty since 1995, in recent years progress has slowed, and millions of people still live in extreme poverty and over 1 billion people endure poverty in different forms and dimensions. Children, women, persons with disabilities, people living in rural areas and those in vulnerable situations experience higher poverty rates than the rest of the population. Hunger, food insecurity and malnutrition are still a reality, with global undernourishment rising in recent years. While access to education has expanded, still too many children are out of school; (b) In addition, while millions have been lifted out of poverty, billions of people live close to the poverty line and face a constant risk of falling into extreme poverty. Despite significant global progress in gradually expanding social protection coverage, including social protection floors, almost 4 billion people still lack access to any form of social protection, including nearly 2 billion children; (c) Millions of workers continue to live in poverty, earning wages and incomes that are not sufficient for an adequate standard of living or to sustain their families. Informal employment remains pervasive, with billions of people making their living in the informal economy. Women and young people are disproportionately __________________ 9 Adopted under the United Nations Framework Convention on Climate Change. See FCCC/CP/2015/10/Add.1, decision 1/CP.21, annex. 10 Report of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Environment and Development, Rio de Janeiro, 3–14 June 1992, vol. I, Resolutions Adopted by the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> (United Nations publication, Sales No. E.93.I.8 and corrigendum), resolution 1, annex I. A/80/L.5 25-16021 4/18 engaged in informal and precarious employment. Furthermore, progress towards ending child labour is too slow; (d) Millions of youth do not have access to education, employment or training, the majority of whom are young women. In the labour market, young people, especially youth with disabilities, experience higher levels of unemployment, informal employment and working poverty. These decent work deficits can have long- lasting consequences on poverty eradication efforts and affect the well-being of current and future generations; (e) Today, inequality has reached staggering levels. Since 1995, income inequality has increased in many countries, developed and developing. Global wage gaps remain significant. Gender inequality is deeply entrenched. On average, women earn less than men and millions of women worldwide are outside the labour force; (f) Persons with disabilities continue to be more likely to live in poverty, are underemployed and unemployed, and face additional disability-related costs, including medical costs, as well as other significant and persistent social and economic barriers to inclusion in society; (g) Digital divides within and among countries persist, particularly in rural and remote areas. Billions of people currently do not have connectivity, access to the Internet and lack digital skills. Digital infrastructure, connectivity and access to the Internet in developing countries, particularly least developed countries, landlocked developing countries and small island developing States, remain challenging; (h) Multiple, persistent and new challenges are reversing social development gains, including geopolitical tensions, armed conflicts, economic crises, inequalities within and among countries, climate change, natural hazards and disasters, biodiversity loss, environmental degradation, water scarcity, desertification, pollution, conflict-induced famine and starvation, humanitarian emergencies and forced displacement of people, refugee crisis, pandemics and other health emergencies, gender inequality, racial discrimination, uneven technological advancements, unsustainable debt burdens and unequal access to technology and capital; (i) Complex and interrelated opportunities, challenges and risks related to demographic shifts remain, including rapid population growth, declining birth rates and population ageing. Between 2024 and 2030, the number of persons aged 60 years or over is globally projected to outnumber youth, and this increase will be the greatest and the most rapid in the developing world.</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Yet, 30 years after the convening of the World Summit for Social Development, progress remains slow and uneven, and major gaps and inequalities persist within and among countries. With only five years remaining until the 2030 deadline, progress towards achieving most of the Sustainable Development Goals has been far too slow, with some goals stalled or even regressing despite notable advances in a few areas: (a) Although great strides have been made in reducing poverty since 1995, in recent years progress has slowed, and millions of people still live in extreme poverty and over 1 billion people endure poverty in different forms and dimensions. Children, women, persons with disabilities, people living in rural areas and those in vulnerable situations experience higher poverty rates than the rest of the population. Hunger, food insecurity and malnutrition are still a reality, with global undernourishment rising in recent years. While access to education has expanded, still too many children are out of school; (b) In addition, while millions have been lifted out of poverty, billions of people live close to the poverty line and face a constant risk of falling into extreme poverty. Despite significant global progress in gradually expanding social protection coverage, including social protection floors, almost 4 billion people still lack access to any form of social protection, including nearly 2 billion children; (c) Millions of workers continue to live in poverty, earning wages and incomes that are not sufficient for an adequate standard of living or to sustain their families. Informal employment remains pervasive, with billions of people making their living in the informal economy. Women and young people are disproportionately __________________ 9 Adopted under the United Nations Framework Convention on Climate Change. See FCCC/CP/2015/10/Add.1, decision 1/CP.21, annex. 10 Report of the United Nations Conference on Environment and Development, Rio de Janeiro, 3–14 June 1992, vol. I, Resolutions Adopted by the Conference (United Nations publication, Sales No. E.93.I.8 and corrigendum), resolution 1, annex I. A/80/L.5 25-16021 4/18 engaged in informal and precarious employment. Furthermore, progress towards ending child labour is too slow; (d) Millions of youth do not have access to education, employment or training, the majority of whom are young women. In the labour market, young people, especially youth with disabilities, experience higher levels of unemployment, informal employment and working poverty. These decent work deficits can have long- lasting consequences on poverty eradication efforts and affect the well-being of current and future generations; (e) Today, inequality has reached staggering levels. Since 1995, income inequality has increased in many countries, developed and developing. Global wage gaps remain significant. Gender inequality is deeply entrenched. On average, women earn less than men and millions of women worldwide are outside the labour force; (f) Persons with disabilities continue to be more likely to live in poverty, are underemployed and unemployed, and face additional disability-related costs, including medical costs, as well as other significant and persistent social and economic barriers to inclusion in society; (g) Digital divides within and among countries persist, particularly in rural and remote areas. Billions of people currently do not have connectivity, access to the Internet and lack digital skills. Digital infrastructure, connectivity and access to the Internet in developing countries, particularly least developed countries, landlocked developing countries and small island developing States, remain challenging; (h) Multiple, persistent and new challenges are reversing social development gains, including geopolitical tensions, armed conflicts, economic crises, inequalities within and among countries, climate change, natural hazards and disasters, biodiversity loss, environmental degradation, water scarcity, desertification, pollution, conflict-induced famine and starvation, humanitarian emergencies and forced displacement of people, refugee crisis, pandemics and other health emergencies, gender inequality, racial discrimination, uneven technological advancements, unsustainable debt burdens and unequal access to technology and capital; (i) Complex and interrelated opportunities, challenges and risks related to demographic shifts remain, including rapid population growth, declining birth rates and population ageing. Between 2024 and 2030, the number of persons aged 60 years or over is globally projected to outnumber youth, and this increase will be the greatest and the most rapid in the developing world.</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-19"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -565,8 +441,8 @@
         </div>
     </div>
     
-    <div id="para-20" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-20"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -582,8 +458,8 @@
         </div>
     </div>
     
-    <div id="para-21" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-21"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -599,8 +475,8 @@
         </div>
     </div>
     
-    <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-22"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -616,8 +492,8 @@
         </div>
     </div>
     
-    <div id="para-23" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-23"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -633,8 +509,8 @@
         </div>
     </div>
     
-    <div id="para-24" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-24"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -650,8 +526,8 @@
         </div>
     </div>
     
-    <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-25"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -667,8 +543,8 @@
         </div>
     </div>
     
-    <div id="para-26" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-26"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -684,8 +560,8 @@
         </div>
     </div>
     
-    <div id="para-27" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-27"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -701,8 +577,8 @@
         </div>
     </div>
     
-    <div id="para-28" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-28"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -718,8 +594,8 @@
         </div>
     </div>
     
-    <div id="para-29" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-29"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -735,8 +611,8 @@
         </div>
     </div>
     
-    <div id="para-30" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-30"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -752,8 +628,8 @@
         </div>
     </div>
     
-    <div id="para-31" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-31"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -769,8 +645,8 @@
         </div>
     </div>
     
-    <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-32"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -786,8 +662,8 @@
         </div>
     </div>
     
-    <div id="para-33" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-33"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -803,8 +679,8 @@
         </div>
     </div>
     
-    <div id="para-34" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-34"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -820,8 +696,8 @@
         </div>
     </div>
     
-    <div id="para-35" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-35"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -837,8 +713,8 @@
         </div>
     </div>
     
-    <div id="para-36" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-36"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -854,8 +730,8 @@
         </div>
     </div>
     
-    <div id="para-37" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-37"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -871,8 +747,8 @@
         </div>
     </div>
     
-    <div id="para-38" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-38"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -888,8 +764,8 @@
         </div>
     </div>
     
-    <div id="para-39" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-39"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -905,8 +781,8 @@
         </div>
     </div>
     
-    <div id="para-40" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-40"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -922,8 +798,8 @@
         </div>
     </div>
     
-    <div id="para-41" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-41"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -939,8 +815,8 @@
         </div>
     </div>
     
-    <div id="para-42" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-42"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -956,8 +832,8 @@
         </div>
     </div>
     
-    <div id="para-43" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-43"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -973,8 +849,8 @@
         </div>
     </div>
     
-    <div id="para-44" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-44"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -993,21 +869,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1022,14 +911,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1045,12 +934,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1069,12 +958,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

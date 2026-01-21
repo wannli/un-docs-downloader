@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,201 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/172</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/172</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/172?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">17 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/172. Report of the Committee on Relations with the Host Country</p>
+    
+    <p class="mt-1 text-muted">17 operative paragraphs · Item 160</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.6/80/L.13</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">7 of 17 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls that, prior to the institution by the host country of any proceedings that require any person referred to in article IV, section 11, of the Agreement between the United Nations and the United States of America regarding the Headquarters of the United Nations, including representatives of a Member State, to leave the host country, article IV, section 13 (b) (1) of the Headquarters Agreement, inter alia, requires the host country to consult with the Member State, the Secretary- General or other principal executive officer, as appropriate, and considers that, given A/C.6/80/L.13 3/5 25-18460 the seriousness of any such measure being exercised by the host country, the consultation should be meaningful;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls that, prior to the institution by the host country of any proceedings that require any person referred to in article IV, section 11, of the Agreement between the United Nations and the United States of America regarding the Headquarters of the United Nations, including representatives of a Member State, to leave the host country, article IV, section 13 (b) (1) of the Headquarters Agreement, Report of the Committee on Relations with the Host Country A/RES/80/172 3/5 25-20873 inter alia, requires the host country to consult with the Member State, the Secretary- General or other principal executive officer, as appropriate, and considers that, given the seriousness of any such measure being exercised by the host country, the consultation should be meaningful;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the problems experienced by some permanent missions to the United Nations in connection with the implementation of the Parking Programme for Diplomatic Vehicles,5 and notes that the Committee shall remain seized of the matter, with a view to continuing to maintain the proper implementation of the Parking Programme in a manner that is fair, non-discriminatory, effective and therefore consistent with international law;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the problems experienced by some permanent missions to the United Nations in connection with the implementation of the Parking Programme for Diplomatic Vehicles,5 and notes that the Committee shall remain seized of the matter, with a view to continuing to maintain the proper implementation of the Parking Programme in a manner that is fair, non‑discriminatory, effective and therefore consistent with international law;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly urges the host country to remove all travel restrictions imposed by it against representatives of certain Member States, including restricting high-level officials of a Member State during the high-level week of the eightieth session of the General Assembly, and personnel of certain missions and staff members of the Secretariat of certain nationalities, and, recalling privileges and immunities enjoyed by the representatives of Member States and staff members of the Secretariat under applicable international law, notes some Member States’ serious concerns regarding recent confining restrictions, including the negative impact on participation in a meeting by a President and a Foreign Minister at a Member State’s Permanent Mission and other meetings, and also notes the easing in 2023 of travel restrictions on two Missions as well as the modification of restrictions for Secretariat staff by increasing authorized ports of entry and recalls the lifting in 2021 of the more stringent travel restrictions applicable to one Mission, while remaining concerned about the more stringent travel restrictions applied to a Mission in 2021 and additional restrictions applied to the same Mission in late 2022 and extremely narrow implementation thereof, and the statements of affected delegations that travel restrictions impede their ability to carry out their functions and negatively impact their staff and families, and notes the positions of affected States, as reflected in the report of the Secretary-General, of the host country and of the Legal Counsel, as set out in document A/AC.154/415, according to which, inter alia, “there is no room for the application of measures based on reciprocity in the treatment accorded to permanent missions accredited to the United Nations in New York”;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly urges the host country to remove all travel restrictions imposed by it against representatives of certain Member States, including restricting high-level officials of a Member State during the high-level week of the eightieth session of the General Assembly, and personnel of certain missions and staff members of the Secretariat of certain nationalities, and, recalling privileges and immunities enjoyed by the representatives of Member States and staff members of the Secretariat under applicable international law, notes some Member States’ serious concerns regarding recent confining restrictions, including the negative impact on participation in a meeting by a President and a Foreign Minister at a Member State’s Permanent Mission and other meetings, and also notes the easing in 2023 of travel restrictions on two Missions as well as the modification of restrictions for Secretariat staff by increasing authorized ports of entry and recalls the lifting in 2021 of the more stringent travel restrictions applicable to one Mission, while remaining concerned about the more stringent travel restrictions applied to a Mission in 2021 and additional restrictions applied to the same Mission in late 2022 and extremely narrow implementation thereof, and the statements of affected delegations that travel restrictions impede their ability to carry out their functions and negatively impact their staff and families, and notes the positions of affected States, as reflected in the report of the Secretary- General, of the host country and of the Legal Counsel, as set out in document A/AC.154/415, according to which, inter alia, “there is no room for the application of measures based on reciprocity in the treatment accorded to permanent missions accredited to the United Nations in New York”;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses serious concern regarding multiple cases of denial, non-issuance and late issuance of entry visas, including in particular to delegates participating in high-level events, including the non-issuance of a visa to a President and a number of high-ranking officials and other representatives for the general debate of the eightieth session of the General Assembly, in the work of the Main Committees at the seventy-ninth session of the General Assembly, including subsidiary bodies of the General Assembly and the Economic and Social Council, emphasizes the importance of the full participation of all delegations in the work of the United Nations, and takes note of the statements of the Legal Counsel at the 297th and 298th meetings of the Committee, reiterating his statement at the emergency, 295th, meeting of the Committee, set out in document A/AC.154/415, as well as the statement of the United Nations Legal Counsel at the 320th meeting of the Committee addressing the press statement issued by the State Department on 29 August 2025 in __________________ 5 A/AC.154/355, annex. A/C.6/80/L.13 25-18460 4/5 relation to the host country’s obligations under the Headquarters Agreement and confirming inter alia that the legal position regarding the host country’s obligations with respect to the issuance of visas to persons covered by the Headquarters Agreement remains unchanged from that which was provided by the then Legal Counsel to the Committee in 1988, set out in document A/C.6/43/7, according to which, inter alia, “the Headquarters Agreement makes it clear that there is an unrestricted right of persons mentioned in section 11 to enter the United States for the purpose of proceeding to the Headquarters district”, and in this regard, expects the decision announced on 29 August 2025 to be promptly addressed by the host country in a spirit of cooperation towards reversal, in accordance with the Headquarters Agreement;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses serious concern regarding multiple cases of denial, non‑issuance and late issuance of entry visas, including in particular to delegates participating in high-level events, including the non‑issuance of a visa to a President and a number of high-ranking officials and other representatives for the general debate of the eightieth session of the General Assembly, in the work of the Main Committees at the seventy-ninth session of the General Assembly, including subsidiary bodies of the General Assembly and the Economic and Social Council, emphasizes the importance of the full participation of all delegations in the work of the United Nations, and takes note of the statements of the Legal Counsel at the 297th and 298th meetings of the Committee, reiterating his statement at the emergency, 295th, meeting of the Committee, set out in document A/AC.154/415, as well as the statement of the _______________ 5 A/AC.154/355, annex. A/RES/80/172 Report of the Committee on Relations with the Host Country 25-20873 4/5 United Nations Legal Counsel at the 320th meeting of the Committee addressing the press statement issued by the State Department on 29 August 2025 in relation to the host country’s obligations under the Headquarters Agreement and confirming inter alia that the legal position regarding the host country’s obligations with respect to the issuance of visas to persons covered by the Headquarters Agreement remains unchanged from that which was provided by the then Legal Counsel to the Committee in 1988, set out in document A/C.6/43/7, according to which, inter alia, “the Headquarters Agreement makes it clear that there is an unrestricted right of persons mentioned in section 11 to enter the United States for the purpose of proceeding to the Headquarters district”, and in this regard, expects the decision announced on 29 August 2025 to be promptly addressed by the host country in a spirit of cooperation towards reversal, in accordance with the Headquarters Agreement;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Affirms the importance of the Committee being in a position to fulfil its mandate and meet on short notice to deal with urgent and important matters concerning the relations between the United Nations and the host country, and in that connection requests the Secretariat and the Committee on Conferences to accord priority to requests from the Committee on Relations with the Host Country for A/C.6/80/L.13 5/5 25-18460 conference-servicing facilities for meetings of that Committee that must be held while the General Assembly and its Main Committees are meeting, without prejudice to the requirements of those bodies and on an “as available” basis;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Affirms the importance of the Committee being in a position to fulfil its mandate and meet on short notice to deal with urgent and important matters concerning the relations between the United Nations and the host country, and in that connection requests the Secretariat and the Committee on Conferences to accord Report of the Committee on Relations with the Host Country A/RES/80/172 5/5 25-20873 priority to requests from the Committee on Relations with the Host Country for conference-servicing facilities for meetings of that Committee that must be held while the General Assembly and its Main Committees are meeting, without prejudice to the requirements of those bodies and on an “as available” basis;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to remain actively engaged in all aspects of the relations of the United Nations with the host country at various levels in order to resolve the issues raised in the report of the Committee on Relations with the Host Country, and to more actively engage in the work of the Committee with a view to ensuring the representation of the interests concerned, in accordance with General Assembly resolution 2819 (XXVI), and in this regard recalls the statements of the Legal Counsel at the emergency, 295th, meeting of the Committee, as set out in document A/AC.154/415, and also at its online informal meeting on 17 September 2020, recalls the position of the Committee as set out in paragraph 180 (q) of its previous report6 and that of the General Assembly as set out in paragraph 15 of its resolution 79/130 of 4 December 2024, notes the resourceful engagement of the Legal Counsel and the Secretary-General in discussions that have been formalized since the inclusion of subparagraph (p) in chapter IV of the report of the Committee in 20197 with the competent authorities of the host country regarding unresolved issues and the Legal Counsel’s reports on the outcome of these discussions, most recently at its 309th, 310th and 320th meetings, and further notes with concern that serious issues still persist without effective resolution, recalls in this regard, once more, that serious consideration should be given to taking steps under section 21 of the Headquarters Agreement if certain issues raised in the report of the Committee remained unresolved following a reasonable and finite period of time, and accordingly once again reiterates its request to the Secretary-General to now give the most serious consideration and take any appropriate steps under section 21 of the Headquarters Agreement and intensify efforts to expedite resolution of the issues;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to remain actively engaged in all aspects of the relations of the United Nations with the host country at various levels in order to resolve the issues raised in the report of the Committee on Relations with the Host Country, and to more actively engage in the work of the Committee with a view to ensuring the representation of the interests concerned, in accordance with General Assembly resolution 2819 (XXVI), and in this regard recalls the statements of the Legal Counsel at the emergency, 295th, meeting of the Committee, as set out in document A/AC.154/415, and also at its online informal meeting on 17 September 2020, recalls the position of the Committee as set out in paragraph 180 (q) of its previous report6 and that of the General Assembly as set out in paragraph 15 of its resolution 79/130 of 4 December 2024, notes the resourceful engagement of the Legal Counsel and the Secretary-General in discussions that have been formalized since the inclusion of subparagraph (p) in chapter IV of the report of the Committee in 2019 7 with the competent authorities of the host country regarding unresolved issues and the Legal Counsel’s reports on the outcome of these discussions, most recently at its 309th, 310th and 320th meetings, and further notes with concern that serious issues still persist without effective resolution, recalls in this regard, once more, that serious consideration should be given to taking steps under section 21 of the Headquarters Agreement if certain issues raised in the report of the Committee remained unresolved following a reasonable and finite period of time, and accordingly once again reiterates its request to the Secretary-General to now give the most serious consideration and take any appropriate steps under section 21 of the Headquarters Agreement and intensify efforts to expedite resolution of the issues;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.6/80/L.13</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session the item entitled “Report of the Committee on Relations with the Host Country”. __________________ 6 Official Records of the General Assembly, Seventy-ninth Session, Supplement No. 26 (A/79/26). 7 Ibid., Seventy-fourth Session, Supplement No. 26 (A/74/26).
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/172</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session the item entitled “Report of the Committee on Relations with the Host Country”. 64th plenary meeting 15 December 2025 _______________ 6 Official Records of the General Assembly, Seventy-ninth Session, Supplement No. 26 (A/79/26). 7 Ibid., Seventy-fourth Session, Supplement No. 26 (A/74/26).
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.6_80_L.13.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -140,42 +321,43 @@
         <span class="text-sm text-muted">3 with signals, 14 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -192,7 +374,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -209,7 +391,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -226,7 +408,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -243,7 +425,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -260,7 +442,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -277,7 +459,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -294,7 +476,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -311,7 +493,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -328,7 +510,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -345,7 +527,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -362,7 +544,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -379,7 +561,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -396,7 +578,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -423,7 +605,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -440,7 +622,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -466,7 +648,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -498,19 +680,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -525,14 +720,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -548,12 +743,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -572,12 +767,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

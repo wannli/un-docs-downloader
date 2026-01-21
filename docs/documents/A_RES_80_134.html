@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,669 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/134</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/134</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/134?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">35 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/134. Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic</p>
+    
+    <p class="mt-1 text-muted">35 operative paragraphs · Item 18</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.28</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">33 of 35 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General on sustainable tourism and sustainable development in Central America and the Dominican Republic; 14 __________________ 13 A/73/283. 14 A/80/267. A/C.2/80/L.28 25-16840 6/10
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General on sustainable tourism and sustainable development in Central America and the Dominican Republic; 13
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the major role that sustainable and resilient tourism plays in advancing towards the achievement of sustainable development of the States members of the Central American Integration System, as an instrument of social inclusion that generates decent jobs and entrepreneurship opportunities, contributing to inclusive economic growth and the improvement of the quality of life of the population, aimed at achieving poverty eradication in all its forms and dimensions, and that it contributes to the promotion of climate resilience, environmental sustainability and disaster risk management in tourist activities and destinations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the major role that sustainable and resilient tourism plays in advancing towards the achievement of sustainable development in Central America and the Dominican Republic, as an instrument of regional development and social inclusion, in cooperation with local stakeholders, as appropriate, that generates decent jobs and entrepreneurship opportunities, contributing to inclusive economic growth and the improvement of the quality of life of the population, aimed at achieving poverty eradication in all its forms and dimensions, and that it contributes to the promotion of climate resilience, environmental sustainability and disaster risk management in tourist activities and destinations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages strategic actions and accelerators to consolidate the sustainable recovery, transformation and growth of the tourism sector, through global and regional political action and coordination to mobilize financing, promote sustainable investment, advance innovation and reinforce institutional capacities and community engagement for a more resilient, diversified, inclusive and sustainable tourism sector;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages strategic actions and accelerators to address the impacts of the COVID‑19 pandemic and other global crises on sustainable development to ensure a _______________ 13 A/80/267. Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic A/RES/80/134 7/11 25-20749 sustainable recovery, transformation and growth of the tourism sector, through global and regional political action and coordination to mobilize financing, promote investments, advance innovation, reinforce institutional capacities and community engagement for a more resilient, diversified, inclusive and sustainable tourism sector;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the adoption of the principles of sustainable tourism, developed by the Central American Tourism Integration Secretariat and found in its strategic plan for sustainable tourism development, 2021–2025, which captures the region’s vision of itself as an integrated, sustainable, multi-location, cross-border destination of high quality and emphasizes its action plan for tourism and climate change as a component of the regional strategy on climate change;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that the tourism sector has been a catalyst for achieving sustainable development in its three dimensions in Central America and the Dominican Republic, including addressing environmental issues, in particular climate change, poverty eradication and economic development, highlighting the importance of strengthening appropriate policies and financial support within a broader framework of sustainable development policies and of adopting a comprehensive, multisectoral approach for the sustainable development of tourism;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that the tourism sector has been a catalyst for achieving sustainable development in its three dimensions in Central America and the Dominican Republic, including addressing environmental issues, in particular climate change, poverty eradication and economic development, highlighting the importance of strengthening appropriate policies and financial support within a broader framework of sustainable development policies and of adopting a comprehensive, multisectoral approach for the sustainable development of tourism;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages regional and national tourism organizations to promote destination models that seek the highest possible direct benefits for local and national economies, in order to contribute to improving quality of life and reducing poverty in local communities, taking into account the integration of sustainability policies in the tourism sector, and invites all stakeholders to identify, assess and mitigate the impacts of tourism on the three dimensions of sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages regional and national tourism organizations to promote destination models that seek the highest possible direct benefits for local and national economies, in order to contribute to improving quality of life and reducing poverty in A/C.2/80/L.28 7/10 25-16840 local communities, taking into account the integration of sustainability policies in the tourism sector, and invites all stakeholders to identify, assess and mitigate the impacts of tourism on the three dimensions of sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the importance of biocultural heritage, endogenous development, scientific research and replicable models to promote sustainable, community-based, rural and local tourism activities for the benefit of people and nature, in close collaboration with Indigenous Peoples and youth, as a priority for the Central American Integration System region, recognizes that some countries in the region are developing new and innovative models, such as the tourism, conservation and sustainable livelihoods model, and also recognizes the importance of strengthening efforts to protect and safeguard the world’s cultural and natural heritage, as well as promoting the participation of Indigenous Peoples and local communities in the protection of cultural and traditional knowledge and practices for the achievement of a more sustainable tourism sector;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the importance of biocultural heritage, endogenous development, scientific research and replicable models to promote sustainable, community-based, rural and local tourism activities for the benefit of people and nature, in close collaboration with Indigenous Peoples and youth, as a priority for the Central American Integration System region, recognizes that some countries in the region are developing new and innovative models, such as the tourism, conservation and sustainable livelihoods model, and also recognizes the importance of strengthening efforts to protect and safeguard the world’s cultural and natural heritage, as well as promoting the participation of Indigenous Peoples and local communities in the protection of cultural and traditional knowledge and practices for the achievement of a more sustainable tourism sector;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the valuable role of international cooperation with Member States and other relevant stakeholders, and encourages them to continue to support the implementation of various projects aimed at promoting sustainable tourism in the region by, inter alia, strengthening ecotourism, rural, cultural and heritage tourism, including colonial sites, preventing trafficking in cultural artefacts and ensuring respect for intangible cultural heritage and cultural and natural sites;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the valuable role of international cooperation with relevant partners, and encourages them to continue to support the implementation of various projects aimed at promoting sustainable tourism in the region by, inter alia, strengthening ecotourism, rural, cultural and heritage tourism, including colonial sites, preventing trafficking in cultural artefacts and ensuring respect for intangible cultural heritage and cultural and natural sites;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and relevant stakeholders to support cooperatives, community-based organizations and micro-, small and medium-sized enterprises with initiatives towards achieving a stronger business environment, technical assistance, institutional networking and capacity-building and by enhancing institutional coherence policy that supports funding mechanisms and initiatives for poverty eradication programmes and projects;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and relevant stakeholders to support cooperatives, community-based organizations and micro-, small and medium-sized enterprises with initiatives towards achieving a stronger business environment, technical assistance, institutional networking and capacity-building and by enhancing institutional coherence policy that supports funding mechanisms and initiatives for poverty eradication programmes and projects;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the progress made by the States members of the Central American Integration System in converging towards a regional tourism strategy based on preserving the region’s biodiversity and natural and cultural attractions and reducing poverty through employment and entrepreneurial tourism development that emphasizes micro-, small and medium-sized enterprises, while addressing the adverse effects of climate change, to improve the quality of life of the region’s inhabitants;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the progress made by the States members of the Central American Integration System in converging towards a regional tourism strategy based on preserving the region’s biodiversity and natural and cultural attractions and reducing poverty through employment and entrepreneurial tourism development that emphasizes micro-, small and medium-sized enterprises, while addressing the adverse effects of climate change, to improve the quality of life of the region’s inhabitants;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Appreciates the continued efforts of the States members of the Central American Integration System to support sustainable tourism development, including the adoption and implementation of new legislation and policies, and encourages them to use sustainable tourism as a tool to promote the eradication of poverty and enhance the protection of biodiversity, cultural heritage and community development; A/RES/80/134 Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic 25-20749 8/11
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Appreciates the continued efforts of the States members of the Central American Integration System to support sustainable tourism development, including the adoption and implementation of new legislation and policies, and encourages them to use sustainable tourism as a tool to promote the eradication of poverty and enhance the protection of biodiversity, cultural heritage and community development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages cooperation to promote the engagement of women, youth, Indigenous Peoples, and local communities, and initiatives that foster their socioeconomic empowerment through sustainable tourism that continues to promote equitable partnerships, the creation of jobs and entrepreneurial opportunities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages cooperation to promote the engagement of women, youth, Indigenous Peoples and local communities, and initiatives that foster their socioeconomic empowerment through sustainable tourism that continues to promote equitable partnerships, the creation of jobs and entrepreneurial opportunities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the important efforts made by the Central American Integration System region to include those in vulnerable situations in decision-making in the tourism sector, with a more decentralized and participatory approach, especially rural and local communities and Indigenous Peoples, aiming also to advance the empowerment of women and girls and provide opportunities for youth, and calls upon the international community to support local, rural and community- based tourism initiatives to ensure that tourism continues to support economic growth and sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the important efforts made by the Central American Integration System region to include those in vulnerable situations in decision- making in the tourism sector, with a more decentralized and participatory approach, especially rural and local communities and Indigenous Peoples, aiming also to advance the empowerment of women and girls and provide opportunities for youth, and calls upon the international community to support local, rural and community- based tourism initiatives to ensure that tourism continues to support economic growth and sustainable development; A/C.2/80/L.28 25-16840 8/10
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recognizes the continued need to support sustainable tourism activities and relevant capacity-building efforts that promote environmental awareness, conserve and protect the environment, respect wildlife, biodiversity, ecosystems and cultural diversity and improve the welfare and livelihoods of local communities by supporting their local economies and the human and natural environment as a whole;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recognizes the continued need to support sustainable tourism activities and relevant capacity-building efforts that promote environmental awareness, conserve and protect the environment, respect wildlife, biodiversity, ecosystems and cultural diversity and improve the welfare and livelihoods of local communities by supporting their local economies and the human and natural environment as a whole;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the importance of adequately measuring the sociocultural and environmental impact of tourism, and encourages efforts to fill the present data gap in this area by taking advantage of the emergence of non‑traditional solutions and sources of data, with an overarching goal of advancing the national sustainable development agenda beyond the tourism sector;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the importance of adequately measuring the sociocultural and environmental impact of tourism, and encourages efforts to fill the present data gap in this area by taking advantage of the emergence of non-traditional solutions and sources of data, with an overarching goal of advancing the national sustainable development agenda beyond the tourism sector;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that the implementation of sustainable consumption and production patterns in the tourism sector in Central America, and hence advancing the 2030 Agenda for Sustainable Development14 in the region, requires, inter alia, the identification and adoption of more resource-efficient tourism planning approaches by all relevant stakeholders;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that the implementation of sustainable consumption and production patterns in the tourism sector in Central America, and hence advancing the 2030 Agenda for Sustainable Development15 in the region, requires, inter alia, the identification and adoption of more resource-efficient tourism planning approaches by all relevant stakeholders;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to promote the further development of sustainable tourism, in particular through the consumption of sustainable tourism products and services, and to strengthen the development of ecotourism, maintaining, in particular, the culture and environmental integrity of Indigenous and local communities and enhancing the protection of ecologically sensitive areas and the natural heritage and Indigenous cultural and religious sites of those communities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to promote the further development of sustainable tourism, in particular through the consumption of sustainable tourism products and services, and to strengthen the development of ecotourism, maintaining, in particular, the culture and environmental integrity of Indigenous and local communities and enhancing the protection of ecologically sensitive areas and the natural heritage and Indigenous cultural and religious sites of those communities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Governments and other stakeholders to join the Sustainable Tourism Programme of the 10-Year Framework of Programmes on Sustainable Consumption and Production Patterns,15 which is aimed at promoting innovation and circular thinking to accelerate resource efficiency in the tourism value chain;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Governments and other stakeholders to join the Sustainable Tourism Programme of the 10-Year Framework of Programmes on Sustainable Consumption and Production Patterns,16 which is aimed at promoting innovation and circular thinking to accelerate resource efficiency in the tourism value chain;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the ongoing efforts of the countries of Central America and the Dominican Republic to advance sustainable and resilient tourism through initiatives aimed at strengthening data collection, analysis and the exchange of knowledge on sustainable tourism trends, including through the International Network of Sustainable Tourism Observatories of the World Tourism Organization and encourages continued cooperation among Governments, the private sector and other relevant stakeholders to support the practice of informed policymaking, which contributes to the promotion of economically, socially and environmentally sustainable tourism; _______________ 14 Resolution 70/1. 15 A/CONF.216/5, annex. Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic A/RES/80/134 9/11 25-20749
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the progress of the second phase of the Tourism Observatory of the Central American Integration System Region, and looks forward to its completion, and invites Governments and other stakeholders to consider joining the International Network of Sustainable Tourism Observatories of the World Tourism Organization, which contributes to the promotion of economically, socially and environmentally sustainable tourism, and to support the practice of informed policymaking around the world;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further collaboration among public and private actors to enhance the availability, quality and use of data on sustainable tourism, in accordance with national legislation and priorities, with a view to monitoring the development of tourism at the destination level and to strengthening policy formulation and informed decision-making at the national, regional and local levels, and encourages capacity- building initiatives to support developing countries in data collection and analysis;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further collaboration by public-private partnerships towards the enhancement of quality data collection, including disaggregated data, in accordance with national legislation, taking into account the concerted efforts by national authorities of the States members of the Central American Integration System, in conjunction with the private sector, through the establishment of observatories for sustainable tourism to monitor the development of tourism at the destination level in order to provide timely information for evidence-based policies and decision-making;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges the tourism sector in the States members of the Central American Integration System to be part of the coordination, knowledge-sharing and communication mechanisms for security and emergency management at the national and regional levels and to collectively promote an evidence-based approach in developing measures for safe, secure and seamless travel, which will enable government agencies to make relevant, informed and coordinated decisions, and in that sense welcomes the progress of the Secretary-General’s call to protect everyone on Earth through universal coverage of early warning systems, including through the Early Warning for All initiative;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges the tourism sector in the States members of the Central American Integration System to be part of the coordination, knowledge-sharing and communication mechanisms for security and emergency management at the national and regional levels and to collectively promote an evidence-based approach in developing measures for safe, secure and seamless travel, which will enable government agencies to make relevant, informed and coordinated decisions, and in that sense welcomes the progress of the Secretary-General’s call to protect everyone __________________ 15 Resolution 70/1. 16 A/CONF.216/5, annex. A/C.2/80/L.28 9/10 25-16840 on Earth through universal coverage of early warning systems, including through the Early Warning for All initiative;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the efforts of the World Tourism Organization, the United Nations Environment Programme, the United Nations Conference on Trade and Development, the United Nations Educational, Scientific and Cultural Organization, regional commissions and other regional organizations, as well as the Conference of the Parties to the United Nations Framework Convention on Climate Change and the Conference of the Parties to the Convention on Biological Diversity, to promote sustainable tourism worldwide;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the efforts of the World Tourism Organization, the United Nations Environment Programme, the United Nations Conference on Trade and Development, the United Nations Educational, Scientific and Cultural Organization, regional commissions and other regional organizations, as well as the Conference of the Parties to the United Nations Framework Convention on Climate Change and the Conference of the Parties to the Convention on Biological Diversity, to promote sustainable tourism worldwide;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States and other stakeholders and the World Tourism Organization to continue to support the activities undertaken by the States members of the Central American Integration System for the promotion of sustainable tourism in the region, including with regard to emergency preparedness for better disaster risk reduction, the vulnerabilities of the Central American Integration System region to disasters caused by natural hazards and their impacts on sustainable tourism, as well as for capacity-building, job creation and the promotion of local culture and products, and the achievement of the Sustainable Development Goals;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States and other stakeholders and the World Tourism Organization to continue to support the activities undertaken by the States members of the Central American Integration System for the promotion of sustainable tourism in the region, including with regard to emergency preparedness for better disaster risk reduction, the vulnerabilities of the Central American Integration System region to disasters caused by natural hazards and their impacts on sustainable tourism, as well as for capacity-building, job creation and the promotion of local culture and products, and the achievement of the Sustainable Development Goals;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States and relevant stakeholders to welcome the many opportunities that the new digital transformation of the tourism sector offers for creating and implementing innovative technologies, including artificial intelligence, to modernize the tourism industry in the States members of the Central American Integration System, by creating momentum for economic growth and expanding opportunities, including for women and young people, harnessing digital technology, fostering innovation and training and building human capacity, for the successful recovery and resilience of the tourism sector;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States and relevant stakeholders to welcome the many opportunities that the new digital transformation of the tourism sector offers for creating and implementing innovative technologies to modernize the tourism industry in the States members of the Central American Integration System, by creating momentum for economic growth and expanding opportunities, including for women and young people, harnessing digital technology, fostering innovation and training and building human capacity, for the successful recovery and resilience of the tourism sector;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the States members of the Central American Integration System, through the Central American Tourism Council and the Central American Tourism Integration Secretariat, to promote sustainable tourism by intensifying bilateral, regional and multilateral cooperation at the level of the tourism industry, and to continue to support sustainable tourism through policies that foster responsive and inclusive tourism, strengthen regional identity and protect their natural and cultural heritage, including their ecosystems and biodiversity, and notes that existing initiatives, such as the One Planet Sustainable Tourism Programme, among other international initiatives, can deliver direct and focused support to Governments;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the States members of the Central American Integration System, through the Central American Tourism Council and the Central American Tourism Integration Secretariat, to promote sustainable tourism by intensifying bilateral, regional and multilateral cooperation at the level of the tourism industry, and to continue to support sustainable tourism through policies that foster responsive and inclusive tourism, strengthen regional identity and protect their natural and cultural heritage, including their ecosystems and biodiversity, and notes that existing initiatives, such as the One Planet Sustainable Tourism Programme, among other international initiatives, can deliver direct and focused support to Governments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages the States members of the Central American Integration System to establish and strengthen quality, reliable, sustainable and resilient infrastructure, emphasizing the need to promote investments in infrastructure that are A/RES/80/134 Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic 25-20749 10/11 socially, economically and environmentally sustainable, so as to promote sustainable tourism in the region;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages the States members of the Central American Integration System to establish and strengthen quality, reliable, sustainable and resilient infrastructure, emphasizing the need to promote investments in infrastructure that are socially, economically and environmentally sustainable, so as to promote sustainable tourism in the region;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the commitment to the development of sustainable regional infrastructure projects that stimulate sustainable economic productivity, promoting equitable growth of regions across the urban-rural continuum, and encourages urban- rural interactions and connectivity by strengthening sustainable transport and mobility, and technology and communications networks and infrastructure, including connectivity between cities and their surroundings, peri-urban and rural areas, as well as greater land-sea connections, where appropriate, and encourages the development of tourism infrastructure and the promotion of tourism diversification, including through public-private partnerships, as a way to foster job creation for local communities, the preservation of their way of life, culture and heritage and the promotion of the three dimensions of sustainable development, while simultaneously inviting Member States to take measures to protect the environment and the sociocultural heritage of a destination;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the commitment to the development of sustainable regional infrastructure projects that stimulate sustainable economic productivity, promoting equitable growth of regions across the urban-rural continuum, and encourages urban- rural interactions and connectivity by strengthening sustainable transport and mobility, and technology and communications networks and infrastructure, including connectivity between cities and their surroundings, peri-urban and rural areas, as well as greater land-sea connections, where appropriate, and encourages the development of tourism infrastructure and the promotion of tourism diversification, including through public-private partnerships, as a way to foster job creation for local communities, the preservation of their way of life, culture and heritage and the promotion of the three dimensions of sustainable development, while simultaneously inviting Member States to take measures to protect the environment and the sociocultural heritage of a destination; A/C.2/80/L.28 25-16840 10/10
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that persons with disabilities have equal rights to access tourism services and opportunities, such as independent travel, accessible services, trained staff, reliable information and inclusive marketing, and that great efforts should be made to ensure that tourism policies and practices are inclusive of persons with disabilities, the majority of whom live in developing countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that persons with disabilities have equal rights to access tourism services and opportunities, such as independent travel, accessible services, trained staff, reliable information and inclusive marketing, and that great efforts should be made to ensure that tourism policies and practices are inclusive of persons with disabilities, the majority of whom live in developing countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States and the tourism sector to take effective measures, in the context of sustainable tourism, including ecotourism initiatives, to help to promote the equal participation of women and the balanced participation of youth, older persons, persons with disabilities, Indigenous Peoples, and local communities, at all levels and in decision-making processes in all areas, and to promote effective economic empowerment, mainly through decent job and income creation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States and the tourism sector to take effective measures, in the context of sustainable tourism, including ecotourism initiatives, to help to promote the equal participation of women and the balanced participation of youth, older persons, persons with disabilities, Indigenous Peoples and local communities, at all levels and in decision-making processes in all areas, and to promote effective economic empowerment, mainly through decent job and income creation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that addressing the need for improved monitoring of the development impacts of tourism requires rethinking and changing traditional practices in order to incorporate multiple data sources to provide public administrations and the tourism sector with the most updated intelligence on tourism, and notes the progress achieved through the International Network of Sustainable Tourism Observatories of the World Tourism Organization, which is focused on continuously monitoring the impacts of tourism, tackling the three dimensions of sustainability, strengthening evidence-based decision-making and creating a culture of continuous and timely monitoring and measurement, and encourages the international community to support capacity-building initiatives to support developing countries to strengthen their monitoring and data analysis capabilities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that addressing the need for improved monitoring of the development impacts of tourism requires rethinking and changing traditional practices in order to incorporate multiple data sources to provide public administrations and the tourism sector with the most updated intelligence on tourism, and notes the progress achieved through the International Network of Sustainable Tourism Observatories of the World Tourism Organization, which is focused on continuously monitoring the impacts of tourism, tackling the three dimensions of sustainability, strengthening evidence-based decision-making and creating a culture of continuous and timely monitoring and measurement;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the positive role that tourism can play in the conservation of biodiversity and in fighting climate change, which provides a further argument for enhancing the environmental components of tourism policies and better utilizing the potential of sustainable tourism as an enabling agent of change, and welcomes also the convening of the thirtieth session of the Conference of the Parties to the United Nations Framework Convention on Climate Change, in Belem, Brazil, from 10 to 21 November 2025, and looks forward to the seventeenth meeting of the Conference of the Parties to the Convention on Biological Diversity, to be held in Yerevan, Armenia from 19 to 30 October 2026;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the positive role that tourism can play in the conservation of biodiversity and in fighting climate change, which provides a further argument for enhancing the environmental components of tourism policies and better utilizing the potential of sustainable tourism as an enabling agent of change, and also welcomes the convening of the twenty-eighth session of the Conference of the Parties to the United Nations Framework Convention on Climate Change, in Dubai, United Arab Emirates, from 30 November to 12 December 2023, and the sixteenth meeting of the Conference of the Parties to the Convention on Biological Diversity, to be held in 2024;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates its call for the prevention of new and the reduction of existing disaster risk through the implementation of integrated and inclusive economic, structural, legal, social, health, cultural, educational, environmental, technological, political, financial and institutional measures that prevent and reduce hazard exposure Sustainable and resilient tourism and sustainable development in Central America and the Dominican Republic A/RES/80/134 11/11 25-20749 and vulnerability to disaster, increase preparedness for response and recovery and thus strengthen resilience, and reaffirms the need for the enhancement of the means of implementation and the capacity and capability of developing countries, including the mobilization of support through international cooperation, for the provision of means of implementation to augment domestic efforts in accordance with their national priorities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates its call for the prevention of new and the reduction of existing disaster risk through the implementation of integrated and inclusive economic, structural, legal, social, health, cultural, educational, environmental, technological, political, financial and institutional measures that prevent and reduce hazard exposure and vulnerability to disaster, increase preparedness for response and recovery and thus strengthen resilience, and reaffirms the need for the enhancement of the means of implementation and the capacity and capability of developing countries, including the mobilization of support through international cooperation, for the provision of means of implementation to augment domestic efforts in accordance with their national priorities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, in cooperation with the Secretary-General of the World Tourism Organization and with other relevant United Nations entities, to submit to the General Assembly at its eighty-second session an action-oriented report on the implementation of the present resolution, including concrete recommendations to accelerate the implementation of the 2030 Agenda in this regard, in the States members of the Central American Integration System, and decides to include in the provisional agenda of its eighty-second session the item entitled “Sustainable development”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 36</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.28</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, in cooperation with the Secretary-General of the World Tourism Organization and with other relevant United Nations entities, to submit to the General Assembly at its eighty-second session an action-oriented report on the implementation of the present resolution, including concrete recommendations to accelerate the implementation of the 2030 Agenda in this regard, in the States members of the Central American Integration System, and decides to include in the provisional agenda of its eighty-second session the item entitled “Sustainable development”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/134</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.28.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -178,42 +827,43 @@
         <span class="text-sm text-muted">3 with signals, 32 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -230,7 +880,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -247,7 +897,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -264,7 +914,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -281,7 +931,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -298,7 +948,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -315,7 +965,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -332,7 +982,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -349,7 +999,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -366,7 +1016,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -383,7 +1033,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -400,7 +1050,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -417,7 +1067,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -434,7 +1084,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -451,7 +1101,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -468,7 +1118,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -485,7 +1135,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -502,7 +1152,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -519,7 +1169,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -536,7 +1186,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -553,7 +1203,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -570,7 +1220,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -587,7 +1237,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -604,7 +1254,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -631,7 +1281,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -648,7 +1298,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -665,7 +1315,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -682,7 +1332,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -699,7 +1349,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -716,7 +1366,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -733,7 +1383,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -750,7 +1400,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -767,7 +1417,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -794,7 +1444,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -811,7 +1461,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda", "report"]'
          data-has-signals="true">
@@ -848,19 +1498,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -875,14 +1538,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -898,12 +1561,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -922,12 +1585,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

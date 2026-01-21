@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,777 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/193</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/193</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/193?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">66 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/193. A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action</p>
+    
+    <p class="mt-1 text-muted">66 operative paragraphs · Item 69</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.55</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">39 of 66 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States that have not yet done so, and consistent with paragraph 75 of the Durban Declaration and Programme of Action, to consider withdrawing their reservations to article 4 of the International Convention on the Elimination of All Forms of Racial Discrimination; __________________ 13 United Nations, Treaty Series, vol. 660, No. 9464. A/C.3/80/L.55 25-17958 6/13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States that have not yet done so, and consistent with paragraph 75 of the Durban Declaration and Programme of Action, to consider _______________ 13 United Nations, Treaty Series, vol. 660, No. 9464. A/RES/80/193 A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action 25-20895 6/13 withdrawing their reservations to article 4 of the International Convention on the Elimination of All Forms of Racial Discrimination;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the work undertaken by the Committee on the Elimination of Racial Discrimination to recommend legal and policy measures, through its general recommendations, to address racism and racial discrimination, in particular on the follow-up on the World Conference against Racism, Racial Discrimination, Xenophobia and Related Intolerance and, recently, on equality and freedom from racial discrimination in the enjoyment of the right to health;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the work undertaken by the Committee on the Elimination of Racial Discrimination to recommend legal and policy measures, through its general recommendations, to address racism and racial discrimination, in particular on the follow-up on the World Conference against Racism, Racial Discrimination, Xenophobia and Related Intolerance14 and, recently, on equality and freedom from racial discrimination in the enjoyment of the right to the highest attainable standard of physical and mental health;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States to prevent discrimination, protect individuals against harm and promote equality and dignity for all members of society by combating structural inequalities through comprehensive strategies that address the root causes of health inequities and promote social justice, equality and inclusion, and identifying and addressing broader structural inequalities and systemic barriers that perpetuate racial health disparities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States to prevent discrimination, protect individuals against harm and promote dignity and equality for all members of society by combating structural inequalities through comprehensive strategies that address the root causes of health inequities and promote social justice, equality and inclusion;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Underlines that the provisions of the Convention do not respond effectively to contemporary manifestations of racial discrimination, in particular in relation to xenophobia and related intolerance, which is recognized as the rationale behind the convening of the World Conference against Racism, Racial Discrimination, Xenophobia and Related Intolerance in 2001;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Underlines that certain provisions of the Convention do not respond effectively to contemporary manifestations of racial discrimination, in particular in relation to xenophobia and related intolerance, which is recognized as the rationale behind the convening of the World Conference against Racism, Racial Discrimination, Xenophobia and Related Intolerance in 2001;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the work of the Ad Hoc Committee on the Elaboration of Complementary Standards to the International Convention on the Elimination of All Forms of Racial Discrimination, which, at its fifteenth session, continued discussions on the elaboration of a draft additional protocol to the Convention to fill existing gaps through the development of new normative standards aimed at combating all forms of contemporary and resurgent scourges of racism, and takes note of the report on the fifteenth session of the Committee14 in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also takes note of the work of the Ad Hoc Committee on the Elaboration of Complementary Standards to the International Convention on the Elimination of All Forms of Racial Discrimination, which, at its fifteenth session, continued discussions on the elaboration of a draft additional protocol to the Convention to fill existing gaps through the development of new normative standards aimed at combating all forms of contemporary and resurgent scourges of racism, and further takes note of the report on the fifteenth session of the Committee15 in this regard;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Chair-Rapporteur of the Ad Hoc Committee to present in-person a progress report to the General Assembly at its eighty-first session and carry out consultations with New York-based delegations and stakeholders in order to continue progress in the elaboration of complementary standards to the International Convention on the Elimination of All Forms of Racial Discrimination; II Implementation of the Durban Declaration and Programme of Action
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Chair-Rapporteur of the Ad Hoc Committee to present a progress report to the General Assembly at its eighty-first session and carry out consultations with New York-based delegations and stakeholders in order to continue progress in the elaboration of complementary standards to the International Convention on the Elimination of All Forms of Racial Discrimination; II Implementation of the Durban Declaration and Programme of Action
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates that the Durban Declaration and Programme of Action and the International Convention on the Elimination of All Forms of Racial Discrimination provide a comprehensive United Nations framework and solid foundation for combating racism, racial discrimination, xenophobia and related intolerance;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates that the Durban Declaration and Programme of Action and the International Convention on the Elimination of All Forms of Racial Discrimination _______________ 14 General recommendation No. 28 (2002) on the follow-up to the World Conference against Racism, Racial Discrimination, Xenophobia and Related Intolerance (see Official Records of the General Assembly, Fifty-seventh Session, Supplement No. 18 (A/57/18), chap. XI, sect. E). 15 A/HRC/60/73. A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action A/RES/80/193 7/13 25-20895 provide a comprehensive United Nations framework and solid foundation for combating racism, racial discrimination, xenophobia and related intolerance;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to strengthen independent national human rights institutions, where they exist, and ensure that they are mandated to address racism, racial discrimination, xenophobia and related intolerance, have the capacity to __________________ 14 A/HRC/60/73. A/C.3/80/L.55 7/13 25-17958 address complaints and are provided with adequate financial, technical and human resources to enable the effective fulfilment of their mandate;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to strengthen independent national human rights institutions, where they exist, and ensure that they are mandated to address racism, racial discrimination, xenophobia and related intolerance, have the capacity to address complaints and are provided with adequate financial, technical and human resources to enable the effective fulfilment of their mandate;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to promote an integrated approach to eliminating all forms of racism, racial discrimination, xenophobia and related intolerance, inter alia, by adopting and enforcing comprehensive anti-discrimination legislation, adopting and implementing national action plans, ensuring access to justice and effective remedies, promoting education and awareness-raising, and combating racial stereotypes, combating hate speech and incitement to racial hatred, promoting international cooperation and implementing targeted special measures in line with the Durban Declaration and Programme of Action;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to promote an integrated approach to eliminating all forms of racism, racial discrimination, xenophobia and related intolerance, inter alia, by adopting and enforcing comprehensive anti‑discrimination legislation, adopting and implementing national action plans, ensuring access to justice and effective remedies, promoting education and awareness-raising, and combating racial stereotypes, combating hate speech and incitement to racial hatred, promoting international cooperation and implementing targeted special measures in line with the Durban Declaration and Programme of Action;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the collection and publication of data, disaggregated by race, national or ethnic origin, sex, age and other factors, to inform laws, policies and practices and to monitor their impact;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the collection of data disaggregated, in accordance with national legislation, by race, national or ethnic origin, sex, age and other characteristics relevant in national contexts, to inform laws, policies and practices and to monitor their impact;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States to ensure equal access to inclusive and quality education and develop materials and curricula that reflect the principles of equality, non-discrimination and respect for diversity, challenge biases and address contemporary manifestations of racism and appropriate responses;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges and profoundly regrets the untold suffering and evils inflicted on millions of men and women and children as a result of the historical injustices of slavery, the slave trade, the transatlantic slave trade, colonialism, apartheid, genocide and past tragedies, noting that some States have taken the initiative to apologize and have paid reparations, where appropriate, for grave and massive violations committed, further calls upon those that have not yet expressed remorse or presented apologies to find some way to contribute to the restoration of the dignity of victims, and calls upon all the relevant States that have not already done so to dispense reparatory justice, including finding ways to remedy historical racial injustices, contributing to the development and recognition of the dignity of the affected States and their people;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges and profoundly regrets the untold suffering and evils inflicted on millions of men and women and children as a result of slavery, the slave trade, the transatlantic slave trade, colonialism, apartheid, genocide and other historical injustices, noting that some States have taken the initiative to apologize and have paid reparations, where appropriate, for grave and massive violations committed, further calls upon those that have not yet expressed remorse or presented apologies to find some way to contribute to the restoration of the dignity of victims, and calls upon all the relevant States that have not already done so to dispense reparatory justice, including finding ways to remedy historical racial injustices, contributing to the development and recognition of the dignity of the affected States and their people;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to challenge biases and address contemporary manifestations of racism, and historical racial injustices, through quality education and the development of relevant educational materials at school to reinforce anti‑discrimination and anti‑racism components, based on the principles of non‑discrimination, mutual respect and tolerance;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to challenge biases and address contemporary manifestations of racism, and historical racial injustices, through quality education and the development of relevant educational materials at school to reinforce anti-discrimination and anti-racism components, based on the principles of non-discrimination, mutual respect and tolerance;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note that the African Union dedicated the year 2025 to the theme “Justice for Africans and people of African descent through reparations” and, building on this theme, proclaimed a decade for reparations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note that the African Union dedicated the year 2025 to the theme “Justice for Africans and people of African descent through reparations” and, building on this theme, proclaimed a decade for reparations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the initiatives taken by the Secretary- General, the United Nations High Commissioner for Human Rights and anti‑racism human rights mechanisms calling for effective remedies and reparatory justice for Africans and people of African descent;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States and regions to engage with and support the plans, strategies, programmes and initiatives of the African Union and of the Caribbean Community relating to reparatory justice for Africans and people of African descent, with a view to identifying and fulfilling their responsibilities concerning reparations for the historical injustices of slavery, the slave trade, the transatlantic slave trade, apartheid, colonialism and genocide and the related historical injustices in Africa and throughout the African diaspora, further welcomes the review of the Caribbean Community ten-point plan for reparatory justice, and looks forward to the updated version;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States and regional formations to engage with and support the plans, strategies, programmes and initiatives of the African Union and of the Caribbean Community relating to reparatory justice for Africans and people of African descent, with a view to identifying and fulfilling their responsibilities concerning reparations for the historical injustices of slavery, the slave trade, the transatlantic slave trade, apartheid, colonialism and genocide in Africa and throughout the African diaspora, further notes the review of the Caribbean Community Ten Point Plan for Reparatory Justice, and looks forward to the updated version; A/RES/80/193 A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action 25-20895 8/13
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to place victims, survivors, their descendants and communities of the historic and contemporary racial injustice associated with colonialism and slavery at the centre of processes designed to seek remedies and reparations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to place victims, survivors, their descendants and communities of the historic and contemporary racial injustice associated with colonialism and slavery at the centre of processes designed to seek remedies and to address historical injustices;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States and the international community to honour the memory of the victims of the past tragedies of slavery, the slave trade, including the A/C.3/80/L.55 25-17958 8/13 transatlantic slave trade, colonialism, apartheid, genocide and other historical injustices, by considering a structural and comprehensive approach to restore the dignity of the victims, and calls upon those States to take appropriate and effective measures to halt and reverse the lasting consequences of those practices, including the persistent structures and inequalities of racism, racial discrimination, xenophobia and related intolerance; III International Decade for People of African Descent
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States and the international community to honour the memory of the victims of the past tragedies of slavery, the slave trade, including the transatlantic slave trade, colonialism, apartheid and genocide, by considering a structural and comprehensive approach to restore the dignity of the victims, and calls upon those States to take appropriate and effective measures to halt and reverse the lasting consequences of those practices, including the persistent structures and inequalities of racism, racial discrimination, xenophobia and related intolerance; III International Decade for People of African Descent
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes Human Rights Council resolution 60/16 of 10 October 2024, in which the Council requested the Office of the United Nations High Commissioner for Human Rights to invite the submission of written contributions in order to propose recommendations on the modalities of the Permanent Forum, and to prepare a report thereon, and further complete an evaluation, and requested their submission to the General Assembly at its eighty-first session, in accordance with Assembly resolution 75/314, in which the Assembly decided that after four annual sessions of the Permanent Forum, an evaluation of the Forum’s modalities was to be carried out by the Assembly on the basis of an evaluation made by the Human Rights Council in the light of the experience gained;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the request made by the Human Rights Council in its resolution 60/16 of 7 October 2025 for the Office of the United Nations High Commissioner for Human Rights to invite the submission of written contributions in order to propose recommendations on the modalities of the Permanent Forum, and to prepare a report thereon, and further complete an evaluation, and requests their submission to the General Assembly at its eighty-first session, in accordance with Assembly resolution 75/314, in which the Assembly decided that after four annual sessions of the Permanent Forum, an evaluation of the Forum’s modalities was to be carried out by the Assembly on the basis of an evaluation made by the Human Rights Council in the light of the experience gained;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the ongoing work of the Intergovernmental Working Group on the Effective Implementation of the Durban Declaration and Programme of Action on the elaboration of the draft United Nations declaration on the respect, protection and fulfilment of the human rights of people of African descent, requests the Working Group to continue to devote at least half of its annual session to this process and to present a status report on the elaboration of the draft declaration to the General Assembly for its consideration at its eighty-first session, and invites the Permanent Forum on People of African Descent and the Working Group of Experts on People of African Descent, in accordance with their respective mandates, to contribute to the elaboration of the draft declaration;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the ongoing work of the Intergovernmental Working Group on the Effective Implementation of the Durban Declaration and Programme of Action on the elaboration of the draft United Nations declaration on the respect, protection and fulfilment of the human rights of people of African descent, requests the Working Group to continue to devote at least half of its annual session to this process and to present a status report on the elaboration of the draft declaration to the General Assembly for its consideration at its eighty-first session, and invites the Permanent Forum on People of African Descent and the Working Group of Experts on People of A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action A/RES/80/193 9/13 25-20895 African Descent, in accordance with their respective mandates, to contribute to the elaboration of the draft declaration;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the programme of activities for the International Decade for People of African Descent as an instructive framework in which all the initiatives aimed at improving the quality of life of people of African descent are anchored, also recalls that the Second International Decade presents a vital opportunity for States A/C.3/80/L.55 9/13 25-17958 and the international community to accelerate progress in the areas of recognition, justice and development for people of African descent, and reaffirms the extension of the programme of activities for the implementation of the International Decade for People of African Descent adopted by the Assembly in its resolution 69/16 of 18 November 2014, during the Second International Decade;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the programme of activities for the International Decade for People of African Descent as an instructive framework in which all the initiatives aimed at improving the quality of life of people of African descent are anchored, also recalls that the Second International Decade presents a vital opportunity for States and the international community to accelerate progress in the areas of recognition, justice and development for people of African descent, and reaffirms the extension of the programme of activities for the implementation of the International Decade for People of African Descent adopted by the Assembly in its resolution 69/16 of 18 November 2014, during the Second International Decade;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Working Group of Experts on People of African Descent, 15 invites the Human Rights Council, through the Chair of the Working Group, to continue to submit a report on the work of the Working Group to the General Assembly, and in this regard invites the Chair of the Working Group to engage in an interactive dialogue with the Assembly under the item entitled “Elimination of racism, racial discrimination, xenophobia and related intolerance” at its eighty-first session;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Working Group of Experts on People of African Descent, 16 invites the Human Rights Council, through the Chair of the Working Group, to continue to submit a report on the work of the Working Group to the General Assembly, and in this regard invites the Chair of the Working Group to engage in an interactive dialogue with the Assembly under the item entitled “Elimination of racism, racial discrimination, xenophobia and related intolerance” at its eighty-first session;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to examine the extent and impact of systemic racism and to adopt effective legal, policy and institutional measures that address racism beyond a summation of individualized acts, recommends that progress be measured according to indicators grounded in impact rather than intent, and further calls for the recognition of the impact of racial discrimination and inequality experienced by children and youth of African descent in all areas of life, including the administration of justice, law enforcement, education, health, family life and development;16
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States to examine the extent and impact of systemic racism and to adopt effective legal, policy and institutional measures that address racism beyond a summation of individualized acts, recommends that progress be measured according to indicators grounded in impact rather than intent, and further calls for the recognition of the impact of racial discrimination and inequality experienced by children and youth of African descent in all areas of life, including the administration of justice, law enforcement, education, health, family life and development; 17
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Office of the United Nations High Commissioner for Human Rights and the Department of Global Communications of the Secretariat to continue awareness-raising efforts and public information campaigns in support of racial justice and equality and the fight against racism, racial discrimination, xenophobia and related intolerance, notably with regard to the effective promotion of the Durban Declaration and Programme of Action, the International Convention on the Elimination of All Forms of Racial Discrimination, the Second International Decade for People of African Descent and other relevant instruments, processes and mechanisms through the use of social networks and digital media, including the wide distribution of user- friendly, concise and accessible versions of material in this regard, and further requests the Secretary-General to provide the necessary resources in this regard; IV Office of the United Nations High Commissioner for Human Rights
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Office of the United Nations High Commissioner for Human Rights and the Department of Global Communications of the Secretariat to continue awareness-raising efforts and public information campaigns in support of racial justice and equality and the fight against racism, racial discrimination, xenophobia and related intolerance, notably with regard to the effective promotion of the Durban Declaration and Programme of Action, the International Convention on the Elimination of All Forms of Racial Discrimination, the Second International Decade for People of African Descent and other relevant instruments, processes and mechanisms through the use of social networks and digital media, including the wide distribution of user-friendly, concise and accessible versions of material in this regard, and further requests the Secretary-General to provide the necessary resources in this regard; _______________ 16 A/80/231. 17 See A/77/294. A/RES/80/193 A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action 25-20895 10/13 IV Office of the United Nations High Commissioner for Human Rights
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 37</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges the role of the United Nations human rights mechanisms of the General Assembly and the Human Rights Council on actions to combat racism, racial discrimination, xenophobia and related intolerance, and reaffirms the __________________ 15 A/80/231. 16 See A/77/294. A/C.3/80/L.55 25-17958 10/13 interconnected value of the Intergovernmental Working Group on the Effective Implementation of the Durban Declaration and Programme of Action, the Committee on the Elimination of Racial Discrimination, the Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action, the Working Group of Experts on People of African Descent, the Ad Hoc Committee on the Elaboration of Complementary Standards, the International Independent Expert Mechanism to Advance Racial Justice and Equality in Law Enforcement and the Permanent Forum on People of African Descent in addressing the multiple forms of discrimination and systemic racism and racial discrimination;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges the role of the United Nations human rights mechanisms of the General Assembly and the Human Rights Council on actions to combat racism, racial discrimination, xenophobia and related intolerance, and reaffirms the interconnected value of the Intergovernmental Working Group on the Effective Implementation of the Durban Declaration and Programme of Action, the Committee on the Elimination of Racial Discrimination, the Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action, the Working Group of Experts on People of African Descent, the Ad Hoc Committee on the Elaboration of Complementary Standards, the International Independent Expert Mechanism to Advance Racial Justice and Equality in Law Enforcement and the Permanent Forum on People of African Descent in addressing the multiple forms of discrimination and systemic racism and racial discrimination;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the importance of consolidating all efforts aimed at combating racism under a single anti-racial discrimination unit, including on the issues of racial equality and justice; V Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the importance of consolidating all efforts aimed at combating racism under a single anti‑racial discrimination unit, including on the issues of racial equality and justice; V Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 41</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action on its eleventh session,17 held from 28 April to 1 May 2025;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action on its eleventh session,18 held from 28 April to 1 May 2025;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls its resolution 77/205 and the recommendations contained therein with regard to the Group of Independent Eminent Experts, and welcomes the appointment by the Secretary-General of the remaining Eminent Experts, noting that each region is represented, as requested by the Human Rights Council in its resolution 51/32 and by the General Assembly in its resolution 77/205, thereby ensuring that the Group can fulfil its mandate;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls its resolution 77/205 and the recommendations contained therein with regard to the Group of Independent Eminent Experts, and welcomes the appointment by the Secretary-General of the remaining Eminent Experts, noting that each region is represented, as requested by the Human Rights Council in its resolution 51/32 and by the General Assembly in its resolution 77/205, thereby ensuring that the Group can fulfil its mandate; _______________ 18 See A/80/229. A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action A/RES/80/193 11/13 25-20895
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the comprehensive study of the Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action;18
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the comprehensive study of the Group of Independent Eminent Experts on the Implementation of the Durban Declaration and Programme of Action;19
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 44</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Group of Independent Eminent Experts to prepare an annual input for the report of the Secretary-General on the implementation of the present resolution, on the implementation of the Durban Declaration and Programme of Action so as to provide thematic analysis and guidance in the global fight against racism, racial discrimination, xenophobia and related intolerance; __________________ 17 See A/80/229. 18 A/HRC/60/74. A/C.3/80/L.55 11/13 25-17958 VI Trust fund for the Programme for the Decade for Action to Combat Racism and Racial Discrimination
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Group of Independent Eminent Experts to prepare an annual input for the report of the Secretary-General on the implementation of the present resolution, on the implementation of the Durban Declaration and Programme of Action so as to provide thematic analysis and guidance in the global fight against racism, racial discrimination, xenophobia and related intolerance; VI Trust fund for the Programme for the Decade for Action to Combat Racism and Racial Discrimination
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 47</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly appeals to all Governments, intergovernmental and non- governmental organizations and individuals, as well as other donors in a position to do so, to contribute generously to the trust fund, and to that end requests the Secretary-General to continue to undertake appropriate contacts and initiatives to encourage contributions; VII Special Rapporteur on contemporary forms of racism, racial discrimination, xenophobia and related intolerance
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly appeals to all Governments, intergovernmental and non‑governmental organizations and individuals, as well as other donors in a position to do so, to contribute generously to the trust fund, and to that end requests the Secretary-General to continue to undertake appropriate contacts and initiatives to encourage contributions; VII Special Rapporteur on contemporary forms of racism, racial discrimination, xenophobia and related intolerance
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Special Rapporteur on contemporary forms of racism, racial discrimination, xenophobia and related intolerance, 19 and encourages the Special Rapporteur, within her mandate, to continue to focus on the issues of racism, racial discrimination, xenophobia and related intolerance and incitement to hatred, which impede peaceful coexistence and harmony within societies, and to submit reports in this regard to the Human Rights Council and the General Assembly;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Special Rapporteur on contemporary forms of racism, racial discrimination, xenophobia and related intolerance, 20 and encourages the Special Rapporteur, within her mandate, to continue to focus on the issues of racism, racial discrimination, xenophobia and related intolerance and incitement to hatred, which impede peaceful coexistence and harmony within societies, and to submit reports in this regard to the Human Rights Council and the General Assembly;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 49</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also takes note of the reports of the Special Rapporteur that address issues relating to the measurement and monitoring of racial equality, and encourages States to share information on the same for inclusion in forthcoming reports; VIII Commemoration of the adoption of the Durban Declaration and Programme of Action
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also takes note of the reports of the Special Rapporteur that address issues relating to the measurement and monitoring of racial equality, and encourages States to share information on the same for inclusion in forthcoming reports; _______________ 19 A/80/230. 20 A/80/319. A/RES/80/193 A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action 25-20895 12/13 VIII Commemoration of the adoption of the Durban Declaration and Programme of Action
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 50</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the critical importance of increasing public support for the Durban Declaration and Programme of Action and the participation of civil society and other relevant stakeholders in its realization, and requests the United Nations system to strengthen its awareness-raising campaigns to increase the visibility of the message of the Durban Declaration and Programme of Action, its follow-up mechanisms and the work of the United Nations in the fight against racism; 20 __________________ 19 A/80/319. 20 See Human Rights Council resolution 57/25; see also A/79/306. A/C.3/80/L.55 25-17958 12/13
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the critical importance of increasing public support for the Durban Declaration and Programme of Action and the participation of civil society and other relevant stakeholders in its realization, and requests the United Nations system to strengthen its awareness-raising campaigns to increase the visibility of the message of the Durban Declaration and Programme of Action, its follow-up mechanisms and the work of the United Nations in the fight against racism; 21
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 52</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States, United Nations entities, international and regional organizations, civil society, including non-governmental organizations, and other stakeholders to organize and support various high-visibility initiatives, aimed at effectively increasing awareness at all levels, to commemorate the adoption of the Durban Declaration and Programme of Action;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites Member States, United Nations entities, international and regional organizations, civil society, including non‑governmental organizations, and other stakeholders to organize and support various high-visibility initiatives, aimed at effectively increasing awareness at all levels, to commemorate the adoption of the Durban Declaration and Programme of Action;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 55</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that the President of the General Assembly appoint two co-facilitators to present options and modalities for the high-level meeting, as well as the political declaration;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommends that the President of the General Assembly appoint two co‑facilitators to present options and modalities for the high-level meeting, as well as the political declaration;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 56</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to establish a programme of outreach, with the involvement of Member States and United Nations funds and programmes, as well as civil society, including non-governmental organizations, to appropriately commemorate the adoption of the Durban Declaration and Programme of Action;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to establish a programme of outreach, with the involvement of Member States and United Nations funds and programmes, as well as civil society, including non‑governmental organizations, to appropriately commemorate the adoption of the Durban Declaration and Programme of Action;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 57</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States and the United Nations system to intensify efforts to widely distribute copies of the Durban Declaration and Programme of Action, and encourages efforts to ensure its translation and wide dissemination;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States and the United Nations system to intensify efforts to widely distribute copies of the Durban Declaration and Programme of Action, and encourages efforts to ensure its translation and wide dissemination; _______________ 21 See Human Rights Council resolution 60/16; see also A/80/324. A global call for concrete action for the elimination of racism, racial discrimination, xenophobia and related intolerance and the comprehensive implementation of and follow-up to the Durban Declaration and Programme of Action A/RES/80/193 13/13 25-20895
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 60</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Office of the United Nations High Commissioner for Human Rights to continue to provide the Human Rights Council with all the support necessary for it to achieve its objectives in this regard; A/C.3/80/L.55 13/13 25-17958
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Office of the United Nations High Commissioner for Human Rights to continue to provide the Human Rights Council with all the support necessary for it to achieve its objectives in this regard;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 66</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.55</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to remain seized of this priority matter at its eighty-first session under the item entitled “Elimination of racism, racial discrimination, xenophobia and related intolerance”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/193</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to remain seized of this priority matter at its eighty-first session under the item entitled “Elimination of racism, racial discrimination, xenophobia and related intolerance”. 62nd plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.55.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -258,35 +1015,36 @@
         <span class="text-sm text-muted">13 with signals, 53 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -303,7 +1061,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -320,7 +1078,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -337,7 +1095,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -354,7 +1112,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -371,7 +1129,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -398,7 +1156,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -415,7 +1173,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -442,7 +1200,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -459,7 +1217,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -476,7 +1234,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -493,7 +1251,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -519,7 +1277,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -546,7 +1304,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -563,7 +1321,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -580,7 +1338,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -597,7 +1355,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -614,7 +1372,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -631,7 +1389,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -648,7 +1406,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -665,7 +1423,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -682,7 +1440,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -699,7 +1457,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -716,7 +1474,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -733,7 +1491,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -750,7 +1508,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -767,7 +1525,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -784,7 +1542,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -810,7 +1568,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -827,7 +1585,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -844,7 +1602,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -861,7 +1619,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA", "report"]'
          data-has-signals="true">
@@ -893,7 +1651,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -910,7 +1668,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -927,7 +1685,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -944,7 +1702,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -961,7 +1719,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -978,7 +1736,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -995,7 +1753,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1012,7 +1770,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1029,7 +1787,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1046,7 +1804,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1063,7 +1821,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1080,7 +1838,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1097,7 +1855,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1114,7 +1872,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1141,7 +1899,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1158,7 +1916,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1175,7 +1933,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1192,7 +1950,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1209,7 +1967,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1226,7 +1984,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1243,7 +2001,7 @@
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1260,7 +2018,7 @@
         </div>
     </div>
     
-    <div id="para-54" 
+    <div id="para-54"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1287,7 +2045,7 @@
         </div>
     </div>
     
-    <div id="para-55" 
+    <div id="para-55"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1314,7 +2072,7 @@
         </div>
     </div>
     
-    <div id="para-56" 
+    <div id="para-56"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1331,7 +2089,7 @@
         </div>
     </div>
     
-    <div id="para-57" 
+    <div id="para-57"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1348,7 +2106,7 @@
         </div>
     </div>
     
-    <div id="para-58" 
+    <div id="para-58"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1375,7 +2133,7 @@
         </div>
     </div>
     
-    <div id="para-59" 
+    <div id="para-59"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1402,7 +2160,7 @@
         </div>
     </div>
     
-    <div id="para-60" 
+    <div id="para-60"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1419,7 +2177,7 @@
         </div>
     </div>
     
-    <div id="para-61" 
+    <div id="para-61"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1436,7 +2194,7 @@
         </div>
     </div>
     
-    <div id="para-62" 
+    <div id="para-62"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1453,7 +2211,7 @@
         </div>
     </div>
     
-    <div id="para-63" 
+    <div id="para-63"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1470,7 +2228,7 @@
         </div>
     </div>
     
-    <div id="para-64" 
+    <div id="para-64"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -1496,7 +2254,7 @@
         </div>
     </div>
     
-    <div id="para-65" 
+    <div id="para-65"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1523,7 +2281,7 @@
         </div>
     </div>
     
-    <div id="para-66" 
+    <div id="para-66"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1545,19 +2303,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1572,14 +2343,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1595,12 +2366,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1619,12 +2390,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

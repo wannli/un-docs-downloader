@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,121 +65,61 @@
     </ol>
 </nav>
 
-<!-- Header -->
-<div class="mb-8">
+
+<!-- Superseded Banner -->
+<div class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.6/80/L.10</h1>
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-amber-800 font-medium">This proposal was adopted as A/RES/80/161</span>
+        </div>
+        <a href="./A_RES_80_161.html"
+           class="inline-flex items-center px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors">
+            View resolution
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+
+
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.6/80/L.10</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-gray-100 text-gray-500">
+                Superseded
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/c.6/80/l.10?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">28 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">Report of the United Nations Commission on International Trade Law on the work of its fifty-eighth session</p>
+    
+    <p class="mt-1 text-muted">28 operative paragraphs · Item 78</p>
 </div>
 
-<!-- Compute signal data -->
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-            
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        
-    
 
 
 
-
-
-<!-- Filter Controls -->
-<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
-    <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 26 without</span>
-    </div>
-    <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
-            Signals Only
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
-        </button>
-        
-        <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
-            Show All
-        </button>
-    </div>
-</div>
 
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-1"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -195,8 +135,8 @@
         </div>
     </div>
     
-    <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-2"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -212,8 +152,8 @@
         </div>
     </div>
     
-    <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-3"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -229,8 +169,8 @@
         </div>
     </div>
     
-    <div id="para-4" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-4"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -246,8 +186,8 @@
         </div>
     </div>
     
-    <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-5"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -263,10 +203,10 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -274,24 +214,14 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the decision by the Commission to request its secretariat: (a) To conduct preparatory work to refine the scope of possible work on updating the Model Law on Public Procurement and related texts to reflect recent __________________ 1 Official Records of the General Assembly, Eightieth Session, Supplement No. 17 (A/80/17). 2 Ibid., chap. IV, sect. C, and annex I. 3 Ibid., chap. V, sect. B. 4 Ibid., chap. VI, sect. C. 5 Ibid., chap. VII. 6 Ibid., chap. VIII. 7 Ibid., chap. IX. 8 Ibid., chaps. X–XIV. 9 Ibid., chap. XIV. A/C.6/80/L.10 3/8 25-17986 developments, which would not include issues of climate change mitigation, adaption and resilience;10 (b) To continue to monitor developments related to secured transactions using new types of assets, and to define the scope and form of any future work; 11 (c) To organize colloquiums on possible future work in the area of insolvency law, including possible updates to the Guide to Enactment and Interpretation of the Model Law on Cross-Border Insolvency, in conjunction with Working Group V sessions; (d) In respect of topics related to digital trade: (i) To continue, within the modalities it has defined, its exploratory work on the project on dispute resolution in the digital economy concerning the use of artificial intelligence, platform-based dispute resolution, as well as remote hearings in arbitration and conduct of mediation;12 (ii) To continue its preparatory work on enabling end-to-end trade digitalization and paperless trade;13 (iii) To monitor developments on legal issues relating to the use of decentralized autonomous organizations in trade and to carry out further exploratory work on those issues;14 (iv) To conduct exploratory work on legal aspects of digital trade with a focus on digital platforms and private law;15 (v) To carry out exploratory work on the topic of digital payments, carefully considering any intersection of that work with existing regulatory frameworks; 16 (e) To facilitate intersessional consultations on possible cost-saving and efficiency-enhancing measures;17 (f) To hold colloquiums on topics mentioned in subparagraph (b) and subparagraph (d) (ii), (iv) and (v) above, utilizing the <mark class="bg-yellow-200 px-0.5 rounded">conference</mark> resources tentatively allocated to Working Group I in the second half of 2025 and the first half of 2026, as well as any <mark class="bg-yellow-200 px-0.5 rounded">conference</mark> resources of other working groups that may become available;18</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the decision by the Commission to request its secretariat: (a) To conduct preparatory work to refine the scope of possible work on updating the Model Law on Public Procurement and related texts to reflect recent __________________ 1 Official Records of the General Assembly, Eightieth Session, Supplement No. 17 (A/80/17). 2 Ibid., chap. IV, sect. C, and annex I. 3 Ibid., chap. V, sect. B. 4 Ibid., chap. VI, sect. C. 5 Ibid., chap. VII. 6 Ibid., chap. VIII. 7 Ibid., chap. IX. 8 Ibid., chaps. X–XIV. 9 Ibid., chap. XIV. A/C.6/80/L.10 3/8 25-17986 developments, which would not include issues of climate change mitigation, adaption and resilience;10 (b) To continue to monitor developments related to secured transactions using new types of assets, and to define the scope and form of any future work; 11 (c) To organize colloquiums on possible future work in the area of insolvency law, including possible updates to the Guide to Enactment and Interpretation of the Model Law on Cross-Border Insolvency, in conjunction with Working Group V sessions; (d) In respect of topics related to digital trade: (i) To continue, within the modalities it has defined, its exploratory work on the project on dispute resolution in the digital economy concerning the use of artificial intelligence, platform-based dispute resolution, as well as remote hearings in arbitration and conduct of mediation;12 (ii) To continue its preparatory work on enabling end-to-end trade digitalization and paperless trade;13 (iii) To monitor developments on legal issues relating to the use of decentralized autonomous organizations in trade and to carry out further exploratory work on those issues;14 (iv) To conduct exploratory work on legal aspects of digital trade with a focus on digital platforms and private law;15 (v) To carry out exploratory work on the topic of digital payments, carefully considering any intersection of that work with existing regulatory frameworks; 16 (e) To facilitate intersessional consultations on possible cost-saving and efficiency-enhancing measures;17 (f) To hold colloquiums on topics mentioned in subparagraph (b) and subparagraph (d) (ii), (iv) and (v) above, utilizing the conference resources tentatively allocated to Working Group I in the second half of 2025 and the first half of 2026, as well as any conference resources of other working groups that may become available;18</p>
                 
             </div>
         </div>
     </div>
     
-    <div id="para-7" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-7"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -307,8 +237,8 @@
         </div>
     </div>
     
-    <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-8"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -324,8 +254,8 @@
         </div>
     </div>
     
-    <div id="para-9" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-9"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -341,8 +271,8 @@
         </div>
     </div>
     
-    <div id="para-10" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-10"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -358,8 +288,8 @@
         </div>
     </div>
     
-    <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-11"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -375,8 +305,8 @@
         </div>
     </div>
     
-    <div id="para-12" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-12"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -392,8 +322,8 @@
         </div>
     </div>
     
-    <div id="para-13" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-13"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -409,8 +339,8 @@
         </div>
     </div>
     
-    <div id="para-14" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-14"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -426,8 +356,8 @@
         </div>
     </div>
     
-    <div id="para-15" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-15"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -443,8 +373,8 @@
         </div>
     </div>
     
-    <div id="para-16" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-16"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -460,8 +390,8 @@
         </div>
     </div>
     
-    <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-17"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -477,8 +407,8 @@
         </div>
     </div>
     
-    <div id="para-18" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-18"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -494,8 +424,8 @@
         </div>
     </div>
     
-    <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-19"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -511,8 +441,8 @@
         </div>
     </div>
     
-    <div id="para-20" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-20"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -528,8 +458,8 @@
         </div>
     </div>
     
-    <div id="para-21" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-21"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -545,8 +475,8 @@
         </div>
     </div>
     
-    <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-22"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -562,8 +492,8 @@
         </div>
     </div>
     
-    <div id="para-23" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-23"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -579,8 +509,8 @@
         </div>
     </div>
     
-    <div id="para-24" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-24"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -596,8 +526,8 @@
         </div>
     </div>
     
-    <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-25"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -613,8 +543,8 @@
         </div>
     </div>
     
-    <div id="para-26" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-26"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -630,8 +560,8 @@
         </div>
     </div>
     
-    <div id="para-27" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
+    <div id="para-27"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
@@ -647,10 +577,10 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["PGA"]'
-         data-has-signals="true">
+         data-signals='[]'
+         data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -658,17 +588,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also recalls with satisfaction that, in the Sevilla Commitment of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, 38 States expressed their resolve to support efforts to reform the mechanisms for investor-State dispute settlements in trade and investment agreements, including through a multilateral approach towards the establishment of an advisory centre on international investment dispute resolution, and building on the ongoing work of the Commission. __________________ 37 Resolution 67/1, para. 8, and resolution 69/313, annex, para. 89. 38 Resolution 79/323, annex, para. 43 (l).</p>
-                
-                <div class="mt-2 flex flex-wrap gap-1">
-                    
-                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        bg-purple-50 text-purple-700
-                        ">
-                        PGA
-                    </span>
-                    
-                </div>
+                <p class="text-gray-700 leading-relaxed text-sm">Also recalls with satisfaction that, in the Sevilla Commitment of the Fourth International Conference on Financing for Development, 38 States expressed their resolve to support efforts to reform the mechanisms for investor-State dispute settlements in trade and investment agreements, including through a multilateral approach towards the establishment of an advisory centre on international investment dispute resolution, and building on the ongoing work of the Commission. __________________ 37 Resolution 67/1, para. 8, and resolution 69/313, annex, para. 89. 38 Resolution 79/323, annex, para. 43 (l).</p>
                 
             </div>
         </div>
@@ -677,21 +597,34 @@
 </div>
 
 <script>
-let showingAll = false;
+let showingAll = true;
+
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
 
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -706,14 +639,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -729,12 +662,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -753,12 +686,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const signalsOnlyBtn = document.getElementById('btn-signals-only');
-    if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    }
+    
+    // For superseded docs, show all paragraphs
+    document.querySelectorAll('.para-row').forEach(row => {
+        row.classList.remove('hidden');
+    });
+    
 });
 
 // Handle anchor links

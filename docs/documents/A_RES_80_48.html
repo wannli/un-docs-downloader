@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,273 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/48</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/48</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/48?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">13 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/48. Steps to building a common roadmap towards a world without nuclear weapons</p>
+    
+    <p class="mt-1 text-muted">13 operative paragraphs · Item 99</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.1/80/L.4</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">11 of 13 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States, especially the nuclear-weapon States, to make every effort to ensure that nuclear weapons are never used again, pending the total elimination of nuclear weapons, and to refrain from any inflammatory rhetoric concerning the use of nuclear weapons, based on the recognition that all States have a shared interest in averting a nuclear war;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States, especially the nuclear-weapon States, to make every effort to ensure that nuclear weapons are never used again, pending the total elimination of nuclear weapons, and to refrain from any inflammatory rhetoric concerning the use of nuclear weapons, based on the recognition that all States have a shared interest in averting a nuclear war; Steps to building a common roadmap towards a world without nuclear weapons A/RES/80/48 5/7 25-19841
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the nuclear-weapon States, pending the total elimination of nuclear weapons, to honour and respect all existing negative security assurances undertaken by them, including in connection with the treaties and relevant protocols of nuclear-weapon-free zones, and not to use or threaten to use nuclear weapons against non-nuclear-weapon States Parties to the Treaty on the Non-Proliferation of Nuclear Weapons consistent with their respective obligations and commitments;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the nuclear-weapon States, pending the total elimination of nuclear weapons, to honour and respect all existing negative security assurances undertaken by them, including in connection with the treaties and relevant protocols of nuclear-weapon-free zones, and not to use or threaten to use nuclear weapons against non‑nuclear-weapon States Parties to the Treaty on the Non-Proliferation of Nuclear Weapons consistent with their respective obligations and commitments;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States, in particular the nuclear-weapon States, to apply the principles of irreversibility, verifiability and transparency in relation to the implementation of their obligations under the Treaty on the Non-Proliferation of Nuclear Weapons; to immediately pursue enhanced transparency measures by providing information in line with Action 21 of the 2010 Action Plan, related to concrete data on their nuclear arsenals and capabilities, without prejudice to their national security, as well as national measures related to nuclear disarmament including their nuclear policies, doctrines and nuclear risk reduction measures, including status of production of fissile material for use in nuclear weapons or other nuclear explosive devices; and to provide frequent and detailed reporting on the implementation of the Treaty and opportunities for discussion of all nuclear-weapon States’ reports, taking into account Actions 20 and 21 of the 2010 Action Plan and paragraph 187 (35) of NPT/CONF.2020/WP.77 as a useful reference, recognizing the efforts made by some nuclear-weapon States in this regard; and calls upon nuclear- weapon States, especially those that have yet to do so, to engage with non-nuclear- weapon States in a meaningful dialogue on transparency regarding their nuclear arsenals and avoiding an arms race, including through a regular process for an open explanation of national reports coupled with an interactive discussion with non-nuclear-weapon States and civil society participants at future meetings in the review process for the Treaty on the Non-Proliferation of Nuclear Weapons, stressing the importance for all nuclear-weapon States to continuously engage in such practices;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States, in particular the nuclear-weapon States, to apply the principles of irreversibility, verifiability and transparency in relation to the implementation of their obligations under the Treaty on the Non-Proliferation of Nuclear Weapons; to immediately pursue enhanced transparency measures by providing information in line with Action 21 of the 2010 Action Plan, related to concrete data on their nuclear arsenals and capabilities, without prejudice to their national security, as well as national measures related to nuclear disarmament including their nuclear policies, doctrines and nuclear risk reduction measures, including status of production of fissile material for use in nuclear weapons or other nuclear explosive devices; and to provide frequent and detailed reporting on the implementation of the Treaty and opportunities for discussion of all nuclear-weapon States’ reports, taking into account Actions 20 and 21 of the 2010 Action Plan and paragraph 187 (35) of NPT/CONF.2020/WP.77 as a useful reference, recognizing the efforts made by some nuclear-weapon States in this regard; and calls upon nuclear- weapon States, especially those that have yet to do so, to engage with non‑nuclear- weapon States in a meaningful dialogue on transparency regarding their nuclear arsenals and avoiding an arms race, including through a regular process for an open explanation of national reports coupled with an interactive discussion with non‑nuclear-weapon States and civil society participants at future meetings in the review process for the Treaty on the Non-Proliferation of Nuclear Weapons, stressing the importance for all nuclear-weapon States to continuously engage in such practices;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that avoiding a new nuclear arms race, the risk of which is increasing, accompanied by the rapid and non-transparent quantitative expansion and opaque qualitative improvement of nuclear forces by some nuclear-weapon States, is vital in getting closer to a world free of nuclear weapons, and urges all States, especially the nuclear-weapon States, to undertake further efforts to reduce and ultimately eliminate all types of nuclear weapons, deployed and non-deployed, regardless of their location, including through unilateral, bilateral, regional and multilateral measures;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that avoiding a new nuclear arms race, the risk of which is increasing, accompanied by the rapid and non‑transparent quantitative expansion and opaque qualitative improvement of nuclear forces by some nuclear-weapon States, is vital in getting closer to a world free of nuclear weapons, and urges all States, especially the nuclear-weapon States, to undertake further efforts to reduce and ultimately eliminate all types of nuclear weapons, deployed and non‑deployed, regardless of their location, including through unilateral, bilateral, regional and multilateral measures;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the Conference on Disarmament to immediately commence and bring to an early conclusion, negotiations on a non-discriminatory, multilateral and internationally and effectively verifiable treaty banning the production of fissile material for use in nuclear weapons or other nuclear explosive devices in accordance with CD/1299 and the mandate contained therein, and upon Conference members to engage in relevant activities of the Conference towards that goal, further calls upon the nuclear-weapon States to declare or maintain voluntary moratoriums on the production of fissile material for use in nuclear weapons and other nuclear explosive devices, as well as encourages all States that have not yet done so to initiate a process towards the dismantling or conversion for peaceful uses of facilities for the production of fissile material for use in nuclear weapons or other nuclear explosive devices in line with Action 18 of the 2010 Action Plan, and, consistent with Action 16 A/C.1/80/L.4 25-15707 6/7 of the 2010 Action Plan, encourages nuclear-weapon States to commit to declaring, as appropriate, to the International Atomic Energy Agency (IAEA) all fissile material designated by each of them as no longer required for military purposes and to place such material as soon as practicable under IAEA or other relevant international verification and arrangements for the disposition of such material for peaceful purposes, to ensure that such material remains permanently outside military programmes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the Conference on Disarmament to immediately commence and bring to an early conclusion, negotiations on a non‑discriminatory, multilateral and internationally and effectively verifiable treaty banning the production of fissile material for use in nuclear weapons or other nuclear explosive devices in accordance with CD/1299 and the mandate contained therein, and upon Conference members to engage in relevant activities of the Conference towards that goal, further calls upon the nuclear-weapon States to declare or maintain voluntary moratoriums on the production of fissile material for use in nuclear weapons and other nuclear explosive devices, as well as encourages all States that have not yet done so to initiate a process towards the dismantling or conversion for peaceful uses of facilities for the production of fissile material for use in nuclear weapons or other nuclear explosive devices in line with Action 18 of the 2010 Action Plan, and, consistent with Action 16 of the 2010 Action Plan, encourages nuclear-weapon States to commit to declaring, as appropriate, to the International Atomic Energy Agency (IAEA) all fissile material designated by each of them as no longer required for military purposes and to place such material as soon as practicable under IAEA or other relevant international verification and arrangements for the disposition of such material for peaceful A/RES/80/48 Steps to building a common roadmap towards a world without nuclear weapons 25-19841 6/7 purposes, to ensure that such material remains permanently outside military programmes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States, in particular the nuclear-weapon States, to commit to further identifying, exploring and implementing effective risk reduction measures necessary to mitigate risks relating to nuclear weapons use that arise from miscalculation, misperception, miscommunication or accident, inter alia, to intensify dialogue among and between the nuclear-weapon States and with the non-nuclear- weapon States, to develop and make every effort to implement effective crisis prevention and management arrangements, mechanisms and tools, to maintain the practice of not targeting each other or any other State with nuclear weapons and keep them at the lowest possible alert levels, while noting that risk reduction is neither a substitute nor a prerequisite for nuclear disarmament;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States, in particular the nuclear-weapon States, to commit to further identifying, exploring and implementing effective risk reduction measures necessary to mitigate risks relating to nuclear weapons use that arise from miscalculation, misperception, miscommunication or accident, inter alia, to intensify dialogue among and between the nuclear-weapon States and with the non‑nuclear- weapon States, to develop and make every effort to implement effective crisis prevention and management arrangements, mechanisms and tools, to maintain the practice of not targeting each other or any other State with nuclear weapons and keep them at the lowest possible alert levels, while noting that risk reduction is neither a substitute nor a prerequisite for nuclear disarmament;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon all States to continue their strong support for initiatives to develop multilateral disarmament verification and capacity-building in support of nuclear disarmament and as an effective step towards achieving the objectives of article VI of the Treaty on the Non-Proliferation of Nuclear Weapons, and to further conceptual and practical work on nuclear disarmament verification, taking into account the importance of partnerships between nuclear-weapon States and non-nuclear-weapon States on this matter and encouraging broad participation by all States in such initiatives, and welcomes that the Group of Governmental Experts to further consider nuclear disarmament verification issues adopted its final report by consensus in May 2023;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon all States to continue their strong support for initiatives to develop multilateral disarmament verification and capacity-building in support of nuclear disarmament and as an effective step towards achieving the objectives of article VI of the Treaty on the Non-Proliferation of Nuclear Weapons, and to further conceptual and practical work on nuclear disarmament verification, taking into account the importance of partnerships between nuclear-weapon States and non‑nuclear-weapon States on this matter and encouraging broad participation by all States in such initiatives, and welcomes that the Group of Governmental Experts to further consider nuclear disarmament verification issues adopted its final report by consensus in May 2023;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Underscores the importance of complying with the obligations under the Treaty on the Non-Proliferation of Nuclear Weapons and addressing all non-compliance matters in order to uphold the integrity of the Treaty and the authority of the safeguards system;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Underscores the importance of complying with the obligations under the Treaty on the Non-Proliferation of Nuclear Weapons and addressing all non‑compliance matters in order to uphold the integrity of the Treaty and the authority of the safeguards system;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment to achieving the complete, verifiable and irreversible dismantlement of all nuclear weapons and existing nuclear programmes, __________________ 13 See resolution 50/245 and A/50/1027. A/C.1/80/L.4 7/7 25-15707 as well as all other existing weapons of mass destruction and ballistic missile programmes, of the Democratic People’s Republic of Korea in accordance with relevant Security Council resolutions, and the obligation of all Member States to fully implement all relevant Security Council resolutions, notes with serious concern the announcement by the Democratic People’s Republic of Korea of 9 September 2022 of an updated law on nuclear policy lowering the threshold for the use of nuclear weapons, and supplementation in September 2023 of nuclear force-building policy in its Constitution as well as the revelation of images of nuclear-related facilities including uranium enrichment facilities in September 2024 and January 2025, urges the Democratic People’s Republic of Korea to return at an early date to, and fully comply with, the Treaty on the Non-Proliferation of Nuclear Weapons and IAEA safeguards, and confirms that the Democratic People’s Republic of Korea cannot and will never be recognized as a nuclear-weapon State, as stated in Security Council resolutions 1718 (2006) of 14 October 2006 and 1874 (2009) of 12 June 2009, and in the Final Document of the 2010 Review Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment to achieving the complete, verifiable and irreversible dismantlement of all nuclear weapons and existing nuclear programmes, as well as all other existing weapons of mass destruction and ballistic missile programmes, of the Democratic People’s Republic of Korea in accordance with relevant Security Council resolutions, and the obligation of all Member States to fully implement all relevant Security Council resolutions, notes with serious concern the _______________ 13 See resolution 50/245 and A/50/1027. Steps to building a common roadmap towards a world without nuclear weapons A/RES/80/48 7/7 25-19841 announcement by the Democratic People’s Republic of Korea of 9 September 2022 of an updated law on nuclear policy lowering the threshold for the use of nuclear weapons, and supplementation in September 2023 of nuclear force-building policy in its Constitution as well as the revelation of images of nuclear-related facilities including uranium enrichment facilities in September 2024 and January 2025, urges the Democratic People’s Republic of Korea to return at an early date to, and fully comply with, the Treaty on the Non-Proliferation of Nuclear Weapons and IAEA safeguards, and confirms that the Democratic People’s Republic of Korea cannot and will never be recognized as a nuclear-weapon State, as stated in Security Council resolutions 1718 (2006) of 14 October 2006 and 1874 (2009) of 12 June 2009, and in the Final Document of the 2010 Review Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to facilitate efforts on nuclear disarmament and non-proliferation education, which is a useful and effective means to advance the goals of the Treaty on the Non-Proliferation of Nuclear Weapons in support of achieving a world without nuclear weapons, inter alia, efforts in which the young generation can actively engage, including through dialogue platforms, mentoring, internships, fellowships, scholarships, model events and youth group activities, as well as to raise awareness of the realities of the use of nuclear weapons, including through, among others, visits by leaders, youth and others to and interactions with communities and people, including the hibakusha, those who have suffered the use of nuclear weapons irrespective of their nationalities and origins, and who pass on their experiences to the future generations through long-standing grass-roots efforts around the world, including those of Nihon Hidankyo, recognized with the Nobel Peace Prize 2024, and welcomes concrete measures in this regard, inter alia, the Young Professionals Network of P5 academics, the Youth4Disarmament Initiative, “Disarmament education: resources for learning” and the “Youth Leader Fund for a world without nuclear weapons”;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States to facilitate efforts on nuclear disarmament and non‑proliferation education, which is a useful and effective means to advance the goals of the Treaty on the Non-Proliferation of Nuclear Weapons in support of achieving a world without nuclear weapons, inter alia, efforts in which the young generation can actively engage, including through dialogue platforms, mentoring, internships, fellowships, scholarships, model events and youth group activities, as well as to raise awareness of the realities of the use of nuclear weapons, including through, among others, visits by leaders, youth and others to and interactions with communities and people, including the hibakusha, those who have suffered the use of nuclear weapons irrespective of their nationalities and origins, and who pass on their experiences to the future generations through long-standing grass-roots efforts around the world, including those of Nihon Hidankyo, recognized with the Nobel Peace Prize 2024, and welcomes concrete measures in this regard, inter alia, the Young Professionals Network of P5 academics, the Youth4Disarmament Initiative, “Disarmament education: resources for learning” and the “Youth Leader Fund for a world without nuclear weapons”;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.1/80/L.4</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “General and complete disarmament”, the sub-item entitled “Steps to building a common roadmap towards a world without nuclear weapons”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/48</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “General and complete disarmament”, the sub-item entitled “Steps to building a common roadmap towards a world without nuclear weapons”. 52nd plenary meeting 1 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.1_80_L.4.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -130,36 +383,37 @@
         <span class="text-sm text-muted">3 with signals, 10 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -176,7 +430,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -193,7 +447,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -210,7 +464,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -227,7 +481,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -254,7 +508,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -271,7 +525,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -288,7 +542,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -305,7 +559,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -322,7 +576,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -339,7 +593,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -366,7 +620,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -383,7 +637,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -415,19 +669,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -442,14 +709,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -465,12 +732,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -489,12 +756,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

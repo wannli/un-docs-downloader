@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,507 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/180</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/180</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/180?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">35 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/180. Policies and programmes involving youth</p>
+    
+    <p class="mt-1 text-muted">35 operative paragraphs · Item 25</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.6</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">24 of 35 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges Member States to protect, promote and fulfil the realization and full enjoyment by all young people of all human rights and fundamental freedoms, in accordance with the Universal Declaration of Human Rights and relevant international human rights instruments, in the implementation of the World Programme of Action for Youth, while ensuring that youth policies and programmes and their planning, design, implementation, monitoring and review include the views, perspectives and priorities of youth and are adequately resourced, transparent and accountable;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges Member States to protect, promote and fulfil the realization and full enjoyment by all young people of all human rights and fundamental freedoms, in _______________ 17 Resolution 50/81, annex, and resolution 62/126, annex. 18 E/CN.5/2013/8. Policies and programmes involving youth A/RES/80/180 7/11 25-20985 accordance with the Universal Declaration of Human Rights and relevant international human rights instruments, in the implementation of the World Programme of Action for Youth, while ensuring that youth policies and programmes and their planning, design, implementation, monitoring and review include the views, perspectives and priorities of youth and are adequately resourced, transparent and accountable;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates that the eradication of poverty, hunger and malnutrition, in particular in the light of their consequence on children and youth, is crucial for the implementation of the 2030 Agenda for Sustainable Development, 19 recalls the commitment to eradicate poverty in all its forms and dimensions and promote sustained economic growth and sustainable development, including the strengthening of international cooperation through the fulfilment of all official development assistance commitments and the transfer of appropriate technology and capacity- building with regard to youth;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates that the eradication of poverty, hunger and malnutrition, in particular in the light of their consequence on children and youth, is crucial for the implementation of the 2030 Agenda for Sustainable Development,19 recalls the commitment to eradicate poverty in all its forms and dimensions and promote sustained economic growth and sustainable development, including the strengthening of international cooperation through the fulfilment of all official development assistance commitments and the transfer of appropriate technology and capacity- building with regard to youth;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to provide all young people with opportunities for full, effective, meaningful, constructive and inclusive participation in society, in all spheres of political, civil, economic, social and cultural life, including engagement in policymaking and decision-making processes, including in designing and implementing policies, programmes and initiatives; __________________ 17 Resolution 50/81, annex, and resolution 62/126, annex. 18 E/CN.5/2013/8. 19 Resolution 70/1. A/C.3/80/L.6 7/10 25-16610
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to provide all young people with opportunities for full, effective, meaningful, constructive and inclusive participation in society, in all spheres of political, civil, economic, social and cultural life, including engagement in policymaking and decision-making processes, including in designing and implementing policies, programmes and initiatives;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to address the challenges faced by young women, including through combating gender stereotypes and negative social norms that perpetuate all forms of discrimination and violence against girls and young women, to engage, educate and support young men and boys to take responsibility for their behaviour in this regard, to support them to be positive role models for gender equality, and to take measures aimed at eliminating all forms of violence, including sexual and gender-based violence, and harmful practices, including but not limited to female genital mutilation and child, early and forced marriage;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to address the challenges faced by young women, including through combating gender stereotypes and negative social norms that perpetuate all forms of discrimination and violence against girls and young women, to engage, educate and support young men and boys to take responsibility for their behaviour in this regard, to support them to be positive role models for gender equality, and to take measures aimed at eliminating all forms of violence, including _______________ 19 Resolution 70/1. A/RES/80/180 Policies and programmes involving youth 25-20985 8/11 sexual and gender-based violence, and harmful practices, including but not limited to female genital mutilation and child, early and forced marriage;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States, the private sector, international, regional and subregional organizations, civil society, the media, academia and research institutions and technical communities and individuals to strengthen international cooperation on artificial intelligence capacity-building and take necessary and positive steps, as appropriate, to eliminate barriers faced by all people, women and girls, persons with disabilities, Indigenous Peoples, local communities, children and youth, those living in poverty and in rural and remote areas, and those in vulnerable situations, and to ensure the full enjoyment of artificial intelligence benefits for all, improve digital A/C.3/80/L.6 25-16610 8/10 inclusion and realize gender equality and the empowerment of women and girls, through investment, education, training, technological innovation, use and application;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States, the private sector, international, regional and subregional organizations, civil society, the media, academia and research institutions and technical communities and individuals to strengthen international cooperation on artificial intelligence capacity-building, including through investment in youth digital literacy and capacity-building for meaningful participation in digital governance, and take necessary and positive steps, as appropriate, to eliminate barriers faced by young people, including young women and girls, young persons with disabilities, Indigenous youth, youth in local communities, those living in poverty and in rural and remote areas, and those in vulnerable situations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that young people are actively shaping the development of artificial intelligence and calling for inclusive governance and that youth-led initiatives in climate monitoring, healthcare, disaster response, agriculture and civic engagement demonstrate the potential of artificial intelligence to accelerate progress on the Sustainable Development Goals;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages Member States to ensure that the benefits of artificial intelligence are available to all young people, to promote digital inclusion, safety and accessibility, to address digital divides, including the gender digital divide, with a view to achieving gender equality and the empowerment of women and girls, through investment, education, training, technological innovation, use and application, and to mitigate risks of bias, exclusion and discrimination in artificial intelligence for young people, in particular in education, employment and access to public services;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Governments to promote science, technology and innovation cooperation and collaboration with, as well as foreign direct investment in and trade with and among, developing countries, as well as international support, which are fundamental to enhancing developing countries’ ability to benefit from technological advances that could also benefit young people’s skills;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further encourages Member States to reduce structural asymmetries in access to digital resources, including affordable connectivity, computing capacity and skills, in particular for developing countries, through international cooperation, capacity-building and knowledge-sharing, and to promote the integration of digital tools and literacy into national education systems by updating curricula, supporting teacher training, and ensuring equitable access to digital resources and tools, including artificial intelligence, with particular attention to the needs of young women and girls;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 19</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance that all young persons enjoy their rights to work, to social security, to an adequate standard of living, to the highest attainable standard of physical and mental health, to education and to culture, without discrimination of any kind;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms that the same rights that people have offline must also be protected online, and recognizes that digital technologies can play an important role in empowering young people to exercise their human rights, while emphasizing the importance of addressing risks of violations or abuses of those rights, associated with the use of new technologies, including through the promotion of digital literacy and skills; Policies and programmes involving youth A/RES/80/180 9/11 25-20985
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to address the high rates of youth unemployment, underemployment, vulnerable employment, informal employment and young people not in employment, to invest in vocational training and skills development, particularly in developing countries, particularly digital skills, to scale up social protection interventions for young people, to eradicate poverty and end hunger and malnutrition, to tackle the lack of adequate and affordable housing for young people, to invest in both formal and non-formal education, and in the redistribution of unpaid care and domestic work, and to promote cultural diversity through youth-oriented policies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Governments to promote science, technology and innovation cooperation and collaboration with, as well as foreign direct investment in and trade with and among, developing countries, as well as international support, which are fundamental to enhancing developing countries’ ability to benefit from technological advances that could also benefit young people’s skills;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 21</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges Member States to promote health literacy, including by raising awareness of the benefits of sports, physical activity and proper nutrition, to increase access to youth-friendly healthcare services, including those related to sexual and reproductive healthcare services, menstrual health, to provide youth-friendly information services about HIV/AIDS free from stigma, and treatment from malaria, hepatitis, Ebola, cholera, waterborne diseases, neglected tropical diseases and other communicable diseases, and to ensure sustainable, affordable, fair, equitable, effective, efficient and timely access to medical countermeasures;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the importance that all young persons enjoy their rights to work, to social security, to an adequate standard of living, to the highest attainable standard of physical and mental health, to education and to culture, without discrimination of any kind;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the need to implement measures to promote and improve the mental health and well-being of young people, including by adopting and investing in mental health policies which respect the human rights of young people with mental health conditions and psychosocial disabilities, recognizing and addressing risk factors for mental health conditions, scaling up comprehensive and integrated services, both in person and in digital contexts, for the prevention of mental health conditions, including suicide prevention, as well as providing psychosocial support, including resilience training, while raising awareness of mental health issues, the impact of misuse of digital technology on young people’s mental health and well- being and tackling stigma, discrimination and social exclusion, promoting well-being, strengthening the prevention and treatment of substance abuse, addressing social determinants of health and fully respecting their human rights;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to address the high rates of youth unemployment, underemployment, vulnerable employment, informal employment and young people not in employment, to invest in vocational training and skills development, particularly in developing countries, particularly digital skills, to scale up social protection interventions for young people, to eradicate poverty and end hunger and malnutrition, to tackle the lack of adequate and affordable housing for young people, to invest in both formal and non‑formal education, and in the redistribution of unpaid care and domestic work, and to promote cultural diversity through youth-oriented policies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to accelerate efforts to scale up scientifically accurate age-appropriate comprehensive education, relevant to cultural contexts, that provides adolescent girls and boys and young women and men, in and out of school, consistent with their evolving capacities, with information on sexual and reproductive health, gender equality and the empowerment of women, human rights, physical, psychological and pubertal development, and power in relationships between women A/C.3/80/L.6 9/10 25-16610 and men, to enable them to build self-esteem and informed decision-making, communication and risk reduction skills and to develop respectful relationships, in full partnership with young persons, parents, legal guardians, caregivers, educators and healthcare providers;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also urges Member States to promote health literacy, including by raising awareness of the benefits of sports, physical activity and proper nutrition, to increase access to youth-friendly healthcare services, including those related to sexual and reproductive healthcare services, menstrual health, to provide youth-friendly information services about HIV/AIDS free from stigma, and treatment from malaria, hepatitis, Ebola, cholera, waterborne diseases, neglected tropical diseases and other communicable diseases, and to ensure sustainable, affordable, fair, equitable, effective, efficient and timely access to medical countermeasures;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to strengthen intergenerational partnerships, multigenerational dialogue and intergenerational knowledge transfer, including by fostering opportunities for voluntary and regular interactions between young people and older persons, to involve youth and youth organizations in climate and environmental policymaking, to recognize that young people, particularly in developing countries, including African countries and small island developing States, are disproportionately vulnerable to the adverse impacts of climate change, and to develop preventative programmes to equip young people with the tools and skills to contribute to the prevention of violence;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the need to implement measures to promote and improve the mental health and well-being of young people, including by adopting and investing in mental health policies which respect the human rights of young people with mental health conditions and psychosocial disabilities, recognizing and addressing risk factors for mental health conditions, scaling up comprehensive and integrated services, both in person and in digital contexts, for the prevention of mental health conditions, including suicide prevention, as well as providing psychosocial support, including resilience training, while raising awareness of mental health issues, the impact of misuse of digital technology on young people’s mental health and well- being and tackling stigma, discrimination and social exclusion, promoting well-being, strengthening the prevention and treatment of substance abuse, addressing social determinants of health and fully respecting their human rights;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and relevant United Nations organs and entities to take concrete measures to assist and protect young people in situations of armed conflict, and to increase the full, meaningful and effective participation of youth, especially young women, in conflict prevention and resolution, in peacebuilding and in humanitarian action, while ensuring that young people continue to enjoy their rights to education and health even in situations of conflict, and recognizing the importance of protecting schools, universities, hospitals and medical facilities from attacks and military use, in contravention of international humanitarian law;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to accelerate efforts to scale up scientifically accurate age-appropriate comprehensive education, relevant to cultural contexts, that provides adolescent girls and boys and young women and men, in and out of school, consistent with their evolving capacities, with information on sexual and reproductive health, gender equality and the empowerment of women, human rights, physical, psychological and pubertal development, and power in relationships between women and men, to enable them to build self-esteem and informed decision-making, communication and risk reduction skills and to develop respectful relationships, in full partnership with young persons, parents, legal guardians, caregivers, educators and healthcare providers;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to take concerted action, in conformity with international law, to remove obstacles to the full realization of the rights of young people living under foreign occupation, colonial rule and in other areas of conflict or post-conflict situations in order to promote the achievement of the goals of the 2030 Agenda for Sustainable Development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to strengthen intergenerational partnerships, multigenerational dialogue and intergenerational knowledge transfer, including by fostering opportunities for voluntary and regular interactions between young people A/RES/80/180 Policies and programmes involving youth 25-20985 10/11 and older persons, to involve youth and youth organizations in climate and environmental policymaking, to recognize that young people, particularly in developing countries, including African countries and small island developing States, are disproportionately vulnerable to the adverse impacts of climate change, and to develop preventative programmes to equip young people with the tools and skills to contribute to the prevention of violence;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the report of the Secretary-General20 and the recommendations contained therein;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States and relevant United Nations organs and entities to take concrete measures to assist and protect young people in situations of armed conflict, and to increase the full, meaningful and effective participation of youth, especially young women, in conflict prevention and resolution, in peacebuilding and in humanitarian action, while ensuring that young people continue to enjoy their rights to education and health even in situations of conflict, and recognizing the importance of protecting schools, universities, hospitals and medical facilities from attacks and military use, in contravention of international humanitarian law;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to include youth delegates in their delegations at all relevant discussions in the General Assembly and its subsidiary bodies, the Economic and Social Council and its functional commissions and other relevant United Nations conferences, as appropriate, bearing in mind the principles of gender balance and non-discrimination, and emphasizes that such youth representatives should be selected through a transparent process;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to take concerted action, in conformity with international law, to remove obstacles to the full realization of the rights of young people living under foreign occupation, colonial rule and in other areas of conflict or post-conflict situations in order to promote the achievement of the goals of the 2030 Agenda for Sustainable Development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations Youth Office to work closely with Member States, United Nations entities, civil society, youth organizations, academia and the media in fulfilling its mandate, in accordance with resolution 76/306;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note with appreciation of the report of the Secretary-General20 and the recommendations contained therein;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the Department of Economic and Social Affairs of the Secretariat to continue efforts to further collaborate and coordinate, within its mandate, on youth-related economic and social matters, including, inter alia, with Governments on the United Nations Youth Delegate Programme;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to include youth delegates in their delegations at all relevant discussions in the General Assembly and its subsidiary bodies, the Economic and Social Council and its functional commissions and other relevant United Nations conferences, as appropriate, bearing in mind the principles of gender balance and non‑discrimination, and emphasizes that such youth representatives should be selected through a transparent process;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon donors to actively contribute to the United Nations Youth Fund in order to facilitate the participation of youth representatives from developing countries in the activities of the United Nations, taking into account the need for greater geographical balance in terms of youth representation, and in this regard requests the Secretary-General to take appropriate action to encourage contributions to the Fund; __________________ 20 A/80/375. A/C.3/80/L.6 25-16610 10/10
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages the United Nations Youth Office to work closely with Member States, United Nations entities, civil society, youth organizations, academia and the media in fulfilling its mandate, in accordance with resolution 76/306;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests United Nations entities, within their existing mandates and within existing resources, to continue their coordination towards a more coherent, comprehensive and integrated approach to youth development, calls upon them to support local, national, regional and international efforts in addressing challenges hindering youth development, and encourages close collaboration with Member States and other relevant stakeholders, including civil society;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the Department of Economic and Social Affairs of the Secretariat to continue efforts to further collaborate and coordinate, within its mandate, on youth-related economic and social matters, including, inter alia, with Governments on the United Nations Youth Delegate Programme;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit a report, in an accessible format, to the General Assembly at its eighty-second session on the implementation of the present resolution, and be prepared in consultation with Member States, with relevant United Nations organs and entities, including specialized agencies, funds, programmes and regional commissions, and with civil society, particularly youth, youth-led and youth-focused organizations.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon donors to actively contribute to the United Nations Youth Fund in order to facilitate the participation of youth representatives from developing countries in the activities of the United Nations, taking into account the need for greater geographical balance in terms of youth representation, and in this regard requests the Secretary-General to take appropriate action to encourage contributions to the Fund;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests United Nations entities, within their existing mandates and within existing resources, to continue their coordination towards a more coherent, comprehensive and integrated approach to youth development, calls upon them to support local, national, regional and international efforts in addressing challenges hindering youth development, and encourages close collaboration with Member States and other relevant stakeholders, including civil society; _______________ 20 A/80/375. Policies and programmes involving youth A/RES/80/180 11/11 25-20985
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.6</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/180</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit a report, in an accessible format, to the General Assembly at its eighty-second session on the implementation of the present resolution, and be prepared in consultation with Member States, with relevant United Nations organs and entities, including specialized agencies, funds, programmes and regional commissions, and with civil society, particularly youth, youth-led and youth-focused organizations. 62nd plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.6.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -172,35 +659,36 @@
         <span class="text-sm text-muted">2 with signals, 33 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -217,7 +705,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -234,7 +722,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -251,7 +739,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -268,7 +756,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -285,7 +773,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -302,7 +790,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -319,7 +807,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -336,7 +824,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -353,7 +841,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -370,7 +858,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -387,7 +875,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -404,7 +892,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -421,7 +909,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -438,7 +926,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -455,7 +943,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -472,7 +960,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -489,7 +977,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -506,7 +994,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -523,7 +1011,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -540,7 +1028,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -557,7 +1045,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -574,7 +1062,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -591,7 +1079,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -608,7 +1096,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -625,7 +1113,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -642,7 +1130,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -659,7 +1147,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -676,7 +1164,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -693,7 +1181,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -720,7 +1208,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -737,7 +1225,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -754,7 +1242,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -771,7 +1259,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -788,7 +1276,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -819,19 +1307,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -846,14 +1347,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -869,12 +1370,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -893,12 +1394,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

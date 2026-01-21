@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,309 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/214</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/214</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/214?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">32 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/214. National human rights institutions</p>
+    
+    <p class="mt-1 text-muted">32 operative paragraphs · Item 71</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.45</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">13 of 32 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the role of national human rights institutions in advising and working together with States to ensure full respect for human rights at the national level, including their liaison role between their Governments and civil society, all persons with disabilities and their representative organizations, Indigenous Peoples, persons belonging to minorities, minority groups and persons in vulnerable situations, including by contributing to follow-up actions, as appropriate, to the recommendations resulting from the international human rights mechanisms and contributing to the prevention of human rights violations and abuses;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the role of national human rights institutions in advising and working together with States to ensure full respect for human rights at the national level, including their liaison role between their Governments and civil society, all persons with disabilities and their representative organizations, including by contributing to follow-up actions, as appropriate, to the recommendations resulting from the international human rights mechanisms and contributing to the prevention of human rights violations and abuses;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the contribution that national human rights institutions compliant with the Paris Principles have made to the promotion and protection of human rights, and the prevention of human rights violations and abuses, and encourages them to continue to do so, including by: (a) Promoting, protecting, monitoring and reporting on the rights of all persons with disabilities, including by supporting the implementation by States Parties of the Convention of the Rights of Persons with Disabilities and engaging with relevant United Nations bodies and mechanisms and processes, such as the Conference of States Parties to the Convention on the Rights of Persons with Disabilities, the Committee on the Rights of Persons with Disabilities and the Special Rapporteur on the rights of persons with disabilities; (b) Contributing to the protection and implementation of the human rights of all persons with disabilities, including those who require more intensive support, and to the fight against inequality and discrimination on the basis of disability, including multiple and intersecting forms of discrimination, which means any distinction, __________________ 13 A/80/286. A/C.3/80/L.45 25-17783 6/9 exclusion or restriction on the basis of disability that has the purpose or effect of impairing or nullifying the recognition, enjoyment or exercise, on an equal basis with others, of all human rights and fundamental freedoms, and championing the voices of all persons with disabilities through close consultation and the active involvement of such persons through their representative organizations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the contribution that national human rights institutions compliant with the Paris Principles have made to the promotion and protection of human rights, and the prevention of human rights violations and abuses, and encourages them to continue to do so, including by: (a) Promoting, protecting, monitoring and reporting on the rights of all persons with disabilities, including by supporting the implementation by States Parties of the Convention on the Rights of Persons with Disabilities and engaging with relevant United Nations bodies and mechanisms and processes, such as the Conference of States Parties to the Convention on the Rights of Persons with Disabilities, the Committee on the Rights of Persons with Disabilities and the Special Rapporteur on the rights of persons with disabilities; (b) Contributing to the protection and implementation of the human rights of all persons with disabilities, including those who require more intensive support, and to the fight against inequality and discrimination on the basis of disability, including _______________ 13 A/80/286. A/RES/80/214 National human rights institutions 25-20981 6/9 multiple and aggravated forms of discrimination, which means any distinction, exclusion or restriction on the basis of disability that has the purpose or effect of impairing or nullifying the recognition, enjoyment or exercise, on an equal basis with others, of all human rights and fundamental freedoms, and championing the voices of all persons with disabilities through close consultation and the active involvement of such persons through their representative organizations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the role that national human rights institutions can play in preventing and addressing cases of reprisal or intimidation as part of supporting the cooperation between their Governments and the United Nations in the promotion of human rights, including by contributing to follow-up actions, as appropriate, to recommendations made by international human rights mechanisms, and in that regard takes note of the Marrakech Declaration adopted at the thirteenth International Conference of National Human Rights Institutions and of the Kyiv-Copenhagen Declaration adopted at the fourteenth International Conference of National Human Rights Institutions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the role that national human rights institutions can play in preventing and addressing cases of reprisal or intimidation as part of supporting the cooperation between their Governments and the United Nations in the promotion of human rights, including by contributing to follow-up actions, as appropriate, to recommendations made by international human rights mechanisms, and in that regard takes note of the Marrakech Declaration, adopted at the thirteenth International Conference of National Human Rights Institutions;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all Member States to establish effective, independent, pluralistic and adequately resourced national institutions or, where they already exist, to strengthen them, in compliance with the Paris Principles, for the promotion and protection of all human rights and fundamental freedoms for all, as outlined in the Vienna Declaration and Programme of Action, and welcomes the growing number of States establishing national human rights institutions in line with the Paris Principles, including as one of the means for accelerating and guaranteeing progress for the implementation of the 2030 Agenda for Sustainable Development, and to seek technical cooperation and assistance from the Office of the United Nations High Commissioner for Human Rights;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all Member States to establish effective, independent, pluralistic and adequately resourced national institutions or, where they already exist, to strengthen them, in compliance with the Paris Principles, for the promotion and protection of all human rights and fundamental freedoms for all, as outlined in the Vienna Declaration and Programme of Action, and welcomes the growing number of States establishing national human rights institutions in line with the Paris Principles, including as one of the means for accelerating and guaranteeing progress for the implementation of the 2030 Agenda for Sustainable Development, and to seek technical cooperation and assistance from the Office of the United Nations High Commissioner for Human Rights;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that national human rights institutions and their respective members and staff should not face any form of reprisal or intimidation, including A/C.3/80/L.45 7/9 25-17783 political pressure, physical intimidation, harassment or unjustifiable budgetary limitations, as a result of activities undertaken in accordance with their respective mandates, including when taking up individual cases or when reporting on serious or systematic violations in their countries, and calls upon States to promptly and thoroughly investigate cases of alleged reprisal or intimidation against members or staff of national human rights institutions or against individuals who cooperate or seek to cooperate with them and to bring perpetrators to justice, and to ensure access to effective remedies and protection measures for victims;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that national human rights institutions and their respective members and staff should not face any form of reprisal or intimidation, including political pressure, physical intimidation, harassment or unjustifiable budgetary limitations, as National human rights institutions A/RES/80/214 7/9 25-20981 a result of activities undertaken in accordance with their respective mandates, including when taking up individual cases or when reporting on serious or systematic violations in their countries, and calls upon States to promptly and thoroughly investigate cases of alleged reprisal or intimidation against members or staff of national human rights institutions or against individuals who cooperate or seek to cooperate with them and to bring perpetrators to justice, and to ensure access to effective remedies and protection measures for victims;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages national human rights institutions to consider care and support systems in their work;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages national human rights institutions to consider the centrality of care and support from a human rights perspective;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the contribution of national human rights institutions compliant with the Paris Principles to the work of the United Nations, including of the Commission on the Status of Women, the Conference of States Parties to the Convention on the Rights of Persons with Disabilities and the intergovernmental process of the General Assembly on strengthening and enhancing the effective functioning of the human rights treaty body system;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the contribution of national human rights institutions compliant with the Paris Principles to the work of the United Nations, including of the Commission on the Status of Women, the Conference of States Parties to the Convention on the Rights of Persons with Disabilities, and the intergovernmental process of the General Assembly on strengthening and enhancing the effective functioning of the human rights treaty body system;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all relevant United Nations mechanisms, processes and bodies, in accordance with their respective mandates, including the Economic and Social Council and its subsidiary bodies, including the Commission on the Status of Women, and the Conference of States Parties to the Convention on the Rights of Persons with Disabilities and the 2030 Agenda for Sustainable Development, including the high- level political forum on sustainable development and related global and regional processes, to allow for the participation of national human rights institutions compliant with the Paris Principles in their work, through appropriate modalities for accreditation and participation, with a view to ensuring the effective and continuing contribution of national human rights institutions to these United Nations mechanisms, processes and bodies, bearing in mind the relevant provisions dealing with their participation contained in General Assembly resolution 60/251 of 15 March 2006, Human Rights Council resolutions 5/1, 5/2, 16/21 and 57/23 and Commission on Human Rights resolution 2005/74; __________________ 14 See Official Records of the General Assembly, Sixty-second Session, Supplement No. 53 (A/62/53), chap. IV, sect. A. 15 See Official Records of the Economic and Social Council, 2005, Supplement No. 3 and corrigenda (E/2005/23, E/2005/23/Corr.1 and E/2005/23/Corr.2), chap. II, sect. A. 16 See Official Records of the General Assembly, Sixty-sixth Session, Supplement No. 53 (A/66/53), chap. II, sect. A. A/C.3/80/L.45 25-17783 8/9
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all relevant United Nations mechanisms, processes, and bodies, in accordance with their respective mandates, including the Economic and Social Council and its subsidiary bodies, including the Commission on the Status of Women, and the Conference of States Parties to the Convention on the Rights of Persons with Disabilities and the 2030 Agenda for Sustainable Development, including the high-level political forum on sustainable development and related global and regional processes, to allow for the participation of national human rights institutions compliant with the Paris Principles in their work, through appropriate modalities for accreditation and participation, with a view to ensuring the effective and continuing contribution of national human rights institutions to these United Nations mechanisms, processes and bodies, bearing in mind the relevant provisions dealing with their participation contained in General Assembly resolution 60/251 of 15 March 2006, Human Rights Council resolutions 5/1, 5/2, 16/21 and 57/23 and Commission on Human Rights resolution 2005/74;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all other relevant United Nations forums and meetings, in accordance with their respective mandates, existing rules of procedure and modalities, to provide for the engagement of national human rights institutions compliant with the Paris Principles and to allow for their contribution to these forums and meetings;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all other relevant United Nations forums and meetings, in accordance with their respective mandates, existing rules of procedure and modalities, _______________ 14 See Official Records of the General Assembly, Sixty-second Session, Supplement No. 53 (A/62/53), chap. IV, sect. A. 15 See Official Records of the Economic and Social Council, 2005, Supplement No. 3 and corrigenda (E/2005/23, E/2005/23/Corr.1 and E/2005/23/Corr.2), chap. II, sect. A. 16 See Official Records of the General Assembly, Sixty-sixth Session, Supplement No. 53 (A/66/53), chap. II, sect. A. A/RES/80/214 National human rights institutions 25-20981 8/9 to provide for the engagement of national human rights institutions compliant with the Paris Principles and to allow for their contribution to these forums and meetings;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all United Nations human rights mechanisms and relevant United Nations agencies, funds and programmes to work, within their respective mandates, with Member States and national institutions in the promotion and protection of human rights with respect to, inter alia, projects in the area of good governance and the rule of law, welcomes in this regard the efforts made by the United Nations High Commissioner for Human Rights to develop partnerships in support of national institutions, including the tripartite partnership between the Office of the High Commissioner, the United Nations Development Programme and the Global Alliance of National Human Rights Institutions, and in this respect invites all United Nations human rights mechanisms and relevant United Nations agencies, funds and programmes to enhance their interaction with national human rights institutions, including by facilitating their access to relevant information and documentation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all United Nations human rights mechanisms and relevant United Nations agencies, funds and programmes to work, within their respective mandates, with Member States and national institutions in the promotion and protection of human rights with respect to, inter alia, projects in the area of good governance and the rule of law, welcomes in this regard the efforts made by the United Nations High Commissioner for Human Rights to develop partnerships in support of national institutions, including the tripartite partnership between the Office of the High Commissioner, the United Nations Development Programme and the Global Alliance of National Human Rights Institutions, and in this respect encourages all United Nations human rights mechanisms and relevant United Nations agencies, funds and programmes to enhance their interaction with national human rights institutions, including by facilitating their access to relevant information and documentation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the important role played by the Global Alliance of National Human Rights Institutions, in close cooperation with the Office of the High Commissioner, in assisting, when requested, in the establishment of, and in strengthening the compliance of, national human rights institutions with the Paris Principles, in assessing the conformity of national human rights institutions with the Paris Principles and in providing technical assistance to strengthen national human rights institutions, upon request, with a view to enhancing the compliance of national human rights institutions with the Paris Principles, and calls upon Member States and other stakeholders, including United Nations agencies, to follow up on the recommendations of the Subcommittee on Accreditation of the Global Alliance of National Human Rights Institutions, with a view to enabling national human rights institutions to fully comply with the Paris Principles in both law and practice; A/C.3/80/L.45 9/9 25-17783
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the important role played by the Global Alliance of National Human Rights Institutions, in close cooperation with the Office of the High Commissioner, in assisting, when requested, in the establishment of, and in strengthening the compliance of, national human rights institutions with the Paris Principles, in assessing the conformity of national human rights institutions with the Paris Principles and in providing technical assistance to strengthen national human rights institutions, upon request, with a view to enhancing the compliance of national human rights institutions with the Paris Principles, and calls upon Member States and other stakeholders, including United Nations agencies, to follow up on the recommendations of the Subcommittee on Accreditation of the Global Alliance of National Human Rights Institutions, with a view to enabling national human rights institutions to fully comply with the Paris Principles in both law and practice; National human rights institutions A/RES/80/214 9/9 25-20981
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all States Parties to the Convention on the Rights of Persons with Disabilities to consider designating or including national human rights institutions as part of one or more independent monitoring mechanisms, as appropriate, to promote, protect and monitor the implementation of the Convention, taking into account the Paris Principles, consistent with articles 33 (2) and 16 (3) of the Convention;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages all States Parties to the Convention on the Rights of Persons with Disabilities to consider designating or including national human rights institutions as part of one or more independent monitoring mechanisms, as appropriate, to promote, protect and monitor the implementation of the Convention, taking into account the Paris Principles, consistent with article 33 (2) of the Convention;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.45</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also requests the Secretary-General, in consultation with Member States and national human rights institutions, to submit a report to the General Assembly at its eighty-second session on the implementation of the present resolution, including on best practices among national human rights institutions, prepared in consultation with States, national human rights institutions and other relevant stakeholders, and published in accessible formats.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/214</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also requests the Secretary-General, in consultation with Member States and national human rights institutions, to submit a report to the General Assembly at its eighty-second session on the implementation of the present resolution, including on best practices among national human rights institutions, prepared in consultation with States, national human rights institutions and other relevant stakeholders, and published in accessible formats. 69th plenary meeting 18 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.45.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -172,35 +461,36 @@
         <span class="text-sm text-muted">5 with signals, 27 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -217,7 +507,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -234,7 +524,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -251,7 +541,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -278,7 +568,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -295,7 +585,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -312,7 +602,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -329,7 +619,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -356,7 +646,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -373,7 +663,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -390,7 +680,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -407,7 +697,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -424,7 +714,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -441,7 +731,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -458,7 +748,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -485,7 +775,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -502,7 +792,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -529,7 +819,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -546,7 +836,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -563,7 +853,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -580,7 +870,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -597,7 +887,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -614,7 +904,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -631,7 +921,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -648,7 +938,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -665,7 +955,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -682,7 +972,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -699,7 +989,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -716,7 +1006,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -733,7 +1023,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -750,7 +1040,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -767,7 +1057,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["report"]'
          data-has-signals="true">
@@ -798,19 +1088,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -825,14 +1128,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -848,12 +1151,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -872,12 +1175,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

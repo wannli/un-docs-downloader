@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,543 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/187</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/187</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/187?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">92 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/187. Office of the United Nations High Commissioner for Refugees</p>
+    
+    <p class="mt-1 text-muted">92 operative paragraphs · Item 61</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.3/80/L.23</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">26 of 92 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Alarmed by the sharp reductions in funding for the Office of the High Commissioner in 2025, calls upon the international community, including non-traditional donors, to urgently scale up funding, in particular flexible funding, to address the unprecedented funding crisis, which has had an adverse impact on the ability of the Office to deliver on its core mandate, affecting its activities in countries of origin, and exacerbates the burden on already overstretched host countries, severely affecting persons of concern to the Office of the High Commissioner; A/C.3/80/L.23 3/14 25-17660
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Alarmed by the sharp reductions in funding for the Office of the High Commissioner in 2025, calls upon the international community, including non‑traditional donors, to urgently scale up funding, in particular flexible funding, to address the unprecedented funding crisis, which has had an adverse impact on the ability of the Office to deliver on its core mandate, affecting its activities in countries of origin, and exacerbates the burden on already overstretched host countries, severely affecting persons of concern to the Office of the High Commissioner;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Endorses the report of the Executive Committee of the Programme of the United Nations High Commissioner for Refugees on the work of its seventy-sixth session;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Endorses the report of the Executive Committee of the Programme of the United Nations High Commissioner for Refugees on the work of its seventy-sixth session; Office of the United Nations High Commissioner for Refugees A/RES/80/187 3/14 25-20884
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the 1951 Convention relating to the Status of Refugees 3 and the 1967 Protocol thereto 4 as the foundation of the international refugee protection regime, recognizes the importance of their full and effective application by States Parties and the values they embody, notes with satisfaction that 149 States are now Parties to one or both instruments, encourages States not Parties to consider acceding to those instruments and States Parties with reservations to give consideration to withdrawing them, underlines, in particular, the importance of full respect for the principle of non-refoulement, and recognizes that a number of States not Parties to the international refugee instruments have shown a generous approach to hosting refugees;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the 1951 Convention relating to the Status of Refugees 3 and the 1967 Protocol thereto4 as the foundation of the international refugee protection regime, recognizes the importance of their full and effective application by States Parties and the values they embody, notes with satisfaction that 149 States are now Parties to one or both instruments, encourages States not Parties to consider acceding to those instruments and States Parties with reservations to give consideration to withdrawing them, underlines, in particular, the importance of full respect for the principle of non‑refoulement, and recognizes that a number of States not Parties to the international refugee instruments have shown a generous approach to hosting refugees;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also re-emphasizes that protection of, assistance to and achieving durable solutions for internally displaced persons are primarily the responsibility of States, in appropriate cooperation with the international community, in line with applicable __________________ 3 United Nations, Treaty Series, vol. 189, No. 2545. 4 Ibid., vol. 606, No. 8791. 5 Ibid., vol. 360, No. 5158. 6 Ibid., vol. 989, No. 14458. A/C.3/80/L.23 25-17660 4/14 international law, and taking into consideration international and regional norms and standards, as appropriate, and welcomes efforts by States to incorporate such applicable norms and standards into domestic law and national development plans, aimed at, inter alia, facilitating voluntary, safe, sustainable and dignified return, local integration or relocation in their own country;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also re-emphasizes that protection of, assistance to and achieving durable solutions for internally displaced persons are primarily the responsibility of States, in appropriate cooperation with the international community, in line with applicable international law, and taking into consideration international and regional norms and standards, as appropriate, and welcomes efforts by States to incorporate such applicable norms and standards into domestic law and national development plans, _______________ 3 United Nations, Treaty Series, vol. 189, No. 2545. 4 Ibid., vol. 606, No. 8791. 5 Ibid., vol. 360, No. 5158. 6 Ibid., vol. 989, No. 14458. A/RES/80/187 Office of the United Nations High Commissioner for Refugees 25-20884 4/14 aimed at, inter alia, facilitating voluntary, safe, sustainable and dignified return, local integration or relocation in their own country;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages the Office of the High Commissioner to work in partnership and full cooperation with relevant national authorities, United Nations offices and agencies, international and intergovernmental organizations, regional organizations, the private sector and non-governmental organizations to continue to contribute to the development of humanitarian response capacities at all levels;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also encourages the Office of the High Commissioner to work in partnership and full cooperation with relevant national authorities, United Nations offices and agencies, international and intergovernmental organizations, regional organizations, the private sector and non‑governmental organizations to continue to contribute to the development of humanitarian response capacities at all levels;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls the Global Compact on Refugees,8 affirmed on 17 December 2018,9 and calls upon the international community as a whole, including States and other relevant stakeholders, to implement the Compact to achieve its four objectives on an equal footing based on the principle of burden- and responsibility-sharing, and __________________ 7 Resolution 71/1. 8 Official Records of the General Assembly, Seventy-third Session, Supplement No. 12 (A/73/12 (Part I) and A/73/12 (Part II)), part II. 9 See resolution 73/151. A/C.3/80/L.23 5/14 25-17660 in accordance with the guiding principles and paragraph 4 of the Global Compact on Refugees, through concrete actions, pledges and contributions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls the Global Compact on Refugees,8 affirmed on 17 December 2018,9 and calls upon the international community as a whole, including States and other relevant stakeholders, to implement the Compact to achieve its four objectives on an equal footing based on the principle of burden- and responsibility-sharing, and in accordance with the guiding principles and paragraph 4 of the Global Compact on Refugees, through concrete actions, pledges and contributions; _______________ 7 Resolution 71/1. 8 Official Records of the General Assembly, Seventy-third Session, Supplement No. 12 (A/73/12 (Part I) and A/73/12 (Part II)), part II. 9 See resolution 73/151. Office of the United Nations High Commissioner for Refugees A/RES/80/187 5/14 25-20884
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses concern over the significant challenges associated with hosting, protecting and integrating refugees in national systems and strategies given socioeconomic difficulties and stretched resources, affecting, inter alia, infrastructure, social security and the provision of protection services, education, health and employment, and stresses the importance of easing pressure on host countries by facilitating more equitable, sustained and predictable burden- and responsibility- sharing among States and other relevant stakeholders;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses concern over the significant challenges associated with hosting, protecting and integrating refugees in national systems and strategies given socioeconomic difficulties and stretched resources, affecting, inter alia, infrastructure, social security and the provision of protection services, education, health and employment, and stresses the importance of easing pressure on host countries by facilitating more equitable, sustained and predictable burden- and responsibility-sharing among States and other relevant stakeholders;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the efforts made by the increased number of countries applying the comprehensive refugee response framework that is part of the Global Compact on Refugees, including through regional approaches, where applicable, such as the comprehensive regional protection and solutions framework (MIRPS), the Intergovernmental Authority on Development regional approach, the Solutions Strategy for Afghan Refugees and the Central African Republic Solutions Support Platform (CAR-SSP), welcomes the launch and efforts of support platforms established for these mechanisms, as concrete arrangements to support responsibility- sharing, and encourages States, and other stakeholders, to continue their efforts to address the needs of the persons who require international protection, including through support for host communities; A/C.3/80/L.23 25-17660 6/14
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with appreciation the efforts made by the increased number of countries applying the comprehensive refugee response framework that is part of the Global Compact on Refugees, including through regional approaches, where applicable, such as the comprehensive regional protection and solutions framework (MIRPS), the Intergovernmental Authority on Development regional approach, the Solutions Strategy for Afghan Refugees and the Central African Republic Solutions Support Platform (CAR-SSP), welcomes the launch and efforts of support platforms established for these mechanisms, as concrete arrangements to support responsibility- sharing, and encourages States, and other stakeholders, to continue their efforts to address the needs of the persons who require international protection, including through support for host communities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with interest that in 2024 Latin American and Caribbean States commemorated 40 years of the Cartagena Declaration on Refugees, and the regional process, led by Chile, and the adoption of the Declaration and Plan of Action for the next decade (2024–2034) to promote good practices and address regional challenges on international protection;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with interest that in 2024 Latin American and Caribbean States commemorated 40 years of the Cartagena Declaration on Refugees, and the regional process, led by Chile, and the adoption of the Declaration and Plan of Action for the A/RES/80/187 Office of the United Nations High Commissioner for Refugees 25-20884 6/14 next decade (2024–2034) to promote good practices and address regional challenges on international protection;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the active engagement of the Office of the High Commissioner in the United Nations development system reform, including as part of broader efforts A/C.3/80/L.23 7/14 25-17660 towards generating system-wide effectiveness, transparency, accountability and efficiencies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the active engagement of the Office of the High Commissioner in the United Nations development system reform, including as part of broader efforts towards generating system-wide effectiveness, transparency, accountability and efficiencies; Office of the United Nations High Commissioner for Refugees A/RES/80/187 7/14 25-20884
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Deplores the growing number of incidents of refoulement and unlawful expulsion of refugees and asylum-seekers, as well as practices of denial of access to A/C.3/80/L.23 25-17660 8/14 asylum, and calls upon all States concerned to respect the relevant principles of refugee protection and human rights;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Deplores the growing number of incidents of refoulement and unlawful expulsion of refugees and asylum-seekers, as well as practices of denial of access to asylum, and calls upon all States concerned to respect the relevant principles of refugee protection and human rights; A/RES/80/187 Office of the United Nations High Commissioner for Refugees 25-20884 8/14
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 51</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also expresses grave concern about the negative long-term impact of continued cuts in food rations on the nutrition, health and well-being of refugees and A/C.3/80/L.23 9/14 25-17660 hosting communities globally and especially its impacts on women and children, owing to insufficient funding and increased costs, and calls upon donors to ensure sustained support for the Office of the High Commissioner and the World Food Programme, with contributions, including flexible, particularly unearmarked funding, while looking to provide refugees with alternatives to food assistance, pending a durable solution;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also expresses grave concern about the negative long-term impact of continued cuts in food rations on the nutrition, health and well-being of refugees and hosting communities globally and especially its impacts on women and children, owing to insufficient funding and increased costs, and calls upon donors to ensure sustained support for the Office of the High Commissioner and the World Food Office of the United Nations High Commissioner for Refugees A/RES/80/187 9/14 25-20884 Programme, with contributions, including flexible, particularly unearmarked funding, while looking to provide refugees with alternatives to food assistance, pending a durable solution;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 57</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States and the Office of the High Commissioner to ensure that the perspectives of women and girls in situations of displacement are taken into account by promoting their meaningful participation in matters affecting them, as well A/C.3/80/L.23 25-17660 10/14 as women’s full and equal participation in the design, implementation, follow-up and evaluation of policies, programmes and activities related to humanitarian response;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States and the Office of the High Commissioner to ensure that the perspectives of women and girls in situations of displacement are taken into account by promoting their meaningful participation in matters affecting them, as well as women’s full and equal participation in the design, implementation, follow-up and evaluation of policies, programmes and activities related to humanitarian response;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 58</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, in cooperation with the Office of the High Commissioner and with the support of other stakeholders, to ensure that the humanitarian needs of persons of concern to the Office of the High Commissioner, and their host communities, including clean water, food and nutrition, shelter, education, livelihoods, energy, health, including sexual and reproductive health, and other protection needs, are addressed as components of humanitarian response, including through providing timely and adequate resources, while ensuring that their collaborative efforts fully adhere to humanitarian principles;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, in cooperation with the Office of the High Commissioner and with the support of other stakeholders, to ensure that the A/RES/80/187 Office of the United Nations High Commissioner for Refugees 25-20884 10/14 humanitarian needs of persons of concern to the Office of the High Commissioner, and their host communities, including clean water, food and nutrition, shelter, education, livelihoods, energy, health, including sexual and reproductive health, and other protection needs, are addressed as components of humanitarian response, including through providing timely and adequate resources, while ensuring that their collaborative efforts fully adhere to humanitarian principles;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 63</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the increased attention and efforts of the Office of the High Commissioner to address and respond to matters related to the impact of climate change and environmental degradation in its work, including the adoption of the Strategic Framework for Climate Action, within its mandate, in consultation with national authorities and in cooperation with competent agencies; __________________ 10 See United Nations Educational, Scientific and Cultural Organization, Final Report of the World Education Forum 2015, Incheon, Republic of Korea, 19–22 May 2015 (Paris, 2015). A/C.3/80/L.23 11/14 25-17660
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the increased attention and efforts of the Office of the High Commissioner to address and respond to matters related to the impact of climate change and environmental degradation in its work, including the adoption of the Strategic Framework for Climate Action, within its mandate, in consultation with national authorities and in cooperation with competent agencies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 64</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to take appropriate measures to address climate change, including with a view to building local and national resilience and capacity to prevent, prepare for and respond to displacement in this context, in particular in developing countries, including in small island developing States and the least developed countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to take appropriate measures to address climate change, including with a view to building local and national resilience and capacity to prevent, prepare for and respond to displacement in this context, in particular in developing countries, including in small island developing States and the least developed countries; _______________ 10 See United Nations Educational, Scientific and Cultural Organization, Final Report of the World Education Forum 2015, Incheon, Republic of Korea, 19–22 May 2015 (Paris, 2015). Office of the United Nations High Commissioner for Refugees A/RES/80/187 11/14 25-20884
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 67</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls that the work of the High Commissioner shall be of an entirely non-political character; it shall be humanitarian and social and shall relate, as a rule, to groups and categories of refugees, in accordance with the statute of the Office of the United Nations High Commissioner for Refugees;11
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls that the work of the High Commissioner shall be of an entirely non‑political character; it shall be humanitarian and social and shall relate, as a rule, to groups and categories of refugees, in accordance with the statute of the Office of the United Nations High Commissioner for Refugees;11
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 69</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly reaffirms the fundamental importance and the purely humanitarian and non-political character of the function of the Office of the High Commissioner of providing international protection to refugees and seeking durable solutions for them and for refugee situations, and recalls that those solutions include voluntary repatriation and, where appropriate and feasible, local integration and resettlement in a third country, while reaffirming that voluntary repatriation, supported, as necessary, by rehabilitation and development assistance to facilitate sustainable reintegration, remains the preferred solution;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Strongly reaffirms the fundamental importance and the purely humanitarian and non‑political character of the function of the Office of the High Commissioner of providing international protection to refugees and seeking durable solutions for them and for refugee situations, and recalls that those solutions include voluntary repatriation and, where appropriate and feasible, local integration and resettlement in a third country, while reaffirming that voluntary repatriation, supported, as necessary, by rehabilitation and development assistance to facilitate sustainable reintegration, remains the preferred solution;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 71</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further efforts by the Office of the High Commissioner, in cooperation with countries hosting refugees and countries of origin, including their respective local communities, relevant United Nations agencies, international and intergovernmental organizations, regional organizations, as appropriate, non-governmental organizations and development actors, to actively promote durable solutions, particularly in protracted refugee situations, with a focus on sustainable, timely, voluntary, safe and dignified return, which encompasses repatriation, reintegration, rehabilitation and reconstruction activities, and encourages States and other relevant actors to continue to support these efforts through, inter alia, the allocation of funds and strengthening humanitarian, development and peace efforts, particularly in countries of origin; __________________ 11 Resolution 428 (V), annex. A/C.3/80/L.23 25-17660 12/14
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further efforts by the Office of the High Commissioner, in cooperation with countries hosting refugees and countries of origin, including their respective local communities, relevant United Nations agencies, international and intergovernmental organizations, regional organizations, as appropriate, non‑governmental organizations and development actors, to actively promote durable solutions, particularly in protracted refugee situations, with a focus on sustainable, timely, voluntary, safe and dignified return, which encompasses repatriation, reintegration, rehabilitation and reconstruction activities, and encourages States and other relevant actors to continue to support these efforts through, inter alia, the allocation of funds and strengthening humanitarian, development and peace efforts, particularly in countries of origin;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 72</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the purely humanitarian and non-political character of the Office of the High Commissioner, calls upon the international community and the Office to coordinate and exert further efforts to promote and facilitate, whenever the prevailing circumstances are deemed appropriate, the safe, dignified and voluntary repatriation of refugees, through their free and informed choice, in a sustainable manner and in full respect of the principle of non-refoulement, to their countries of origin, and encourages the Office and, where appropriate, other United Nations agencies, to mobilize further resources in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the purely humanitarian and non‑political character of the Office of the High Commissioner, calls upon the international community and the Office to coordinate and exert further efforts to promote and facilitate, whenever the prevailing _______________ 11 Resolution 428 (V), annex. A/RES/80/187 Office of the United Nations High Commissioner for Refugees 25-20884 12/14 circumstances are deemed appropriate, the safe, dignified and voluntary repatriation of refugees, through their free and informed choice, in a sustainable manner and in full respect of the principle of non‑refoulement, to their countries of origin, and encourages the Office and, where appropriate, other United Nations agencies, to mobilize further resources in this regard;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 77</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States and the Office of the High Commissioner to create expanded opportunities for inclusive and non-discriminatory resettlement as a durable solution, broaden the base of countries and actors engaged, expand the scope and size, and maximize the protection and quality of resettlement as an invaluable tool for burden- and responsibility-sharing, and acknowledges with appreciation countries that continue to offer enhanced resettlement opportunities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States and the Office of the High Commissioner to create expanded opportunities for inclusive and non‑discriminatory resettlement as a durable solution, broaden the base of countries and actors engaged, expand the scope and size, and maximize the protection and quality of resettlement as an invaluable tool for burden- and responsibility-sharing, and acknowledges with appreciation countries that continue to offer enhanced resettlement opportunities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 80</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the importance of States and the Office of the High Commissioner discussing and clarifying the role of the Office in mixed movements in order to better address protection needs of persons under the mandate of the Office in the context of mixed movements, especially unregistered persons in need of international protection, bearing in mind the particular needs of persons in vulnerable situations, especially women, children and persons with disabilities, including by safeguarding access to asylum for those in need of international protection, and also notes the A/C.3/80/L.23 13/14 25-17660 readiness of the High Commissioner, consistent with his mandate, to assist States in fulfilling their protection responsibilities in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the importance of States and the Office of the High Commissioner discussing and clarifying the role of the Office in mixed movements in order to better address protection needs of persons under the mandate of the Office in the context of mixed movements, especially unregistered persons in need of international protection, bearing in mind the particular needs of persons in vulnerable situations, especially women, children and persons with disabilities, including by safeguarding access to asylum for those in need of international protection, and also notes the readiness of the High Commissioner, consistent with his mandate, to assist States in fulfilling their protection responsibilities in this regard; Office of the United Nations High Commissioner for Refugees A/RES/80/187 13/14 25-20884
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 86</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses concern that the needs required to protect and assist persons of concern to the Office of the High Commissioner continue to increase and that the gap between global needs and available resources continues to grow, appreciates the continued and increasing hospitality of host countries and generosity of donors, and therefore calls upon the Office to further enhance efforts to broaden its donor base so as to achieve greater burden- and responsibility-sharing by reinforcing cooperation with governmental donors, non-governmental donors and the private sector;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Expresses concern that the needs required to protect and assist persons of concern to the Office of the High Commissioner continue to increase and that the gap between global needs and available resources continues to grow, appreciates the continued and increasing hospitality of host countries and generosity of donors, and therefore calls upon the Office to further enhance efforts to broaden its donor base so as to achieve greater burden- and responsibility-sharing by reinforcing cooperation with governmental donors, non‑governmental donors and the private sector;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 88</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges with appreciation the cooperation of the Office of the High Commissioner with development partners, noting the advantages of complementarity of funding sources to support refugees and host communities as requested by host Governments, and the importance of doing so in a manner that does not negatively A/C.3/80/L.23 25-17660 14/14 impact or reduce support for broader development objectives in host countries and, where appropriate, countries of origin;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges with appreciation the cooperation of the Office of the High Commissioner with development partners, noting the advantages of complementarity of funding sources to support refugees and host communities as requested by host Governments, and the importance of doing so in a manner that does not negatively impact or reduce support for broader development objectives in host countries and, where appropriate, countries of origin; A/RES/80/187 Office of the United Nations High Commissioner for Refugees 25-20884 14/14
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 90</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States and relevant non-governmental and other organizations, in conjunction with the Office of the High Commissioner, in a spirit of international solidarity and burden- and responsibility-sharing, to cooperate and to mobilize resources, including through financial and in-kind assistance, as well as direct aid to host countries, countries of origin, refugees and the communities hosting them, with a view to enhancing their capacity and reducing the heavy burden borne by countries and communities hosting refugees, in particular those that have received large numbers of refugees and asylum-seekers, and whose generosity is appreciated;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges all States and relevant non‑governmental and other organizations, in conjunction with the Office of the High Commissioner, in a spirit of international solidarity and burden- and responsibility-sharing, to cooperate and to mobilize resources, including through financial and in-kind assistance, as well as direct aid to host countries, countries of origin, refugees and the communities hosting them, with a view to enhancing their capacity and reducing the heavy burden borne by countries and communities hosting refugees, in particular those that have received large numbers of refugees and asylum-seekers, and whose generosity is appreciated;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 92</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.3/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the High Commissioner to report on the annual activities of the Office to the General Assembly at its eighty-first session.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/187</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the High Commissioner to report on the annual activities of the Office to the General Assembly at its eighty-first session. 62nd plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.3_80_L.23.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -282,29 +805,30 @@
         <span class="text-sm text-muted">1 with signals, 91 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -321,7 +845,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -338,7 +862,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -355,7 +879,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -372,7 +896,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -389,7 +913,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -406,7 +930,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -423,7 +947,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -440,7 +964,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -457,7 +981,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -474,7 +998,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -491,7 +1015,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -508,7 +1032,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -525,7 +1049,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -542,7 +1066,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -559,7 +1083,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -586,7 +1110,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -603,7 +1127,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -620,7 +1144,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -637,7 +1161,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -654,7 +1178,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -671,7 +1195,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -688,7 +1212,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -705,7 +1229,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -722,7 +1246,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -739,7 +1263,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -756,7 +1280,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -773,7 +1297,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -790,7 +1314,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -807,7 +1331,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -824,7 +1348,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -841,7 +1365,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -858,7 +1382,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -875,7 +1399,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -892,7 +1416,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -909,7 +1433,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -926,7 +1450,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -943,7 +1467,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -960,7 +1484,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -977,7 +1501,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -994,7 +1518,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1011,7 +1535,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1028,7 +1552,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1045,7 +1569,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1062,7 +1586,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1079,7 +1603,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1096,7 +1620,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1113,7 +1637,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1130,7 +1654,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1147,7 +1671,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1164,7 +1688,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1181,7 +1705,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1198,7 +1722,7 @@
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1215,7 +1739,7 @@
         </div>
     </div>
     
-    <div id="para-54" 
+    <div id="para-54"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1232,7 +1756,7 @@
         </div>
     </div>
     
-    <div id="para-55" 
+    <div id="para-55"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1249,7 +1773,7 @@
         </div>
     </div>
     
-    <div id="para-56" 
+    <div id="para-56"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1266,7 +1790,7 @@
         </div>
     </div>
     
-    <div id="para-57" 
+    <div id="para-57"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1283,7 +1807,7 @@
         </div>
     </div>
     
-    <div id="para-58" 
+    <div id="para-58"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1300,7 +1824,7 @@
         </div>
     </div>
     
-    <div id="para-59" 
+    <div id="para-59"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1317,7 +1841,7 @@
         </div>
     </div>
     
-    <div id="para-60" 
+    <div id="para-60"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1334,7 +1858,7 @@
         </div>
     </div>
     
-    <div id="para-61" 
+    <div id="para-61"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1351,7 +1875,7 @@
         </div>
     </div>
     
-    <div id="para-62" 
+    <div id="para-62"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1368,7 +1892,7 @@
         </div>
     </div>
     
-    <div id="para-63" 
+    <div id="para-63"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1385,7 +1909,7 @@
         </div>
     </div>
     
-    <div id="para-64" 
+    <div id="para-64"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1402,7 +1926,7 @@
         </div>
     </div>
     
-    <div id="para-65" 
+    <div id="para-65"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1419,7 +1943,7 @@
         </div>
     </div>
     
-    <div id="para-66" 
+    <div id="para-66"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1436,7 +1960,7 @@
         </div>
     </div>
     
-    <div id="para-67" 
+    <div id="para-67"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1453,7 +1977,7 @@
         </div>
     </div>
     
-    <div id="para-68" 
+    <div id="para-68"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1470,7 +1994,7 @@
         </div>
     </div>
     
-    <div id="para-69" 
+    <div id="para-69"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1487,7 +2011,7 @@
         </div>
     </div>
     
-    <div id="para-70" 
+    <div id="para-70"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1504,7 +2028,7 @@
         </div>
     </div>
     
-    <div id="para-71" 
+    <div id="para-71"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1521,7 +2045,7 @@
         </div>
     </div>
     
-    <div id="para-72" 
+    <div id="para-72"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1538,7 +2062,7 @@
         </div>
     </div>
     
-    <div id="para-73" 
+    <div id="para-73"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1555,7 +2079,7 @@
         </div>
     </div>
     
-    <div id="para-74" 
+    <div id="para-74"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1572,7 +2096,7 @@
         </div>
     </div>
     
-    <div id="para-75" 
+    <div id="para-75"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1589,7 +2113,7 @@
         </div>
     </div>
     
-    <div id="para-76" 
+    <div id="para-76"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1606,7 +2130,7 @@
         </div>
     </div>
     
-    <div id="para-77" 
+    <div id="para-77"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1623,7 +2147,7 @@
         </div>
     </div>
     
-    <div id="para-78" 
+    <div id="para-78"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1640,7 +2164,7 @@
         </div>
     </div>
     
-    <div id="para-79" 
+    <div id="para-79"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1657,7 +2181,7 @@
         </div>
     </div>
     
-    <div id="para-80" 
+    <div id="para-80"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1674,7 +2198,7 @@
         </div>
     </div>
     
-    <div id="para-81" 
+    <div id="para-81"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1691,7 +2215,7 @@
         </div>
     </div>
     
-    <div id="para-82" 
+    <div id="para-82"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1708,7 +2232,7 @@
         </div>
     </div>
     
-    <div id="para-83" 
+    <div id="para-83"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1725,7 +2249,7 @@
         </div>
     </div>
     
-    <div id="para-84" 
+    <div id="para-84"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1742,7 +2266,7 @@
         </div>
     </div>
     
-    <div id="para-85" 
+    <div id="para-85"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1759,7 +2283,7 @@
         </div>
     </div>
     
-    <div id="para-86" 
+    <div id="para-86"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1776,7 +2300,7 @@
         </div>
     </div>
     
-    <div id="para-87" 
+    <div id="para-87"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1793,7 +2317,7 @@
         </div>
     </div>
     
-    <div id="para-88" 
+    <div id="para-88"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1810,7 +2334,7 @@
         </div>
     </div>
     
-    <div id="para-89" 
+    <div id="para-89"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1827,7 +2351,7 @@
         </div>
     </div>
     
-    <div id="para-90" 
+    <div id="para-90"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1844,7 +2368,7 @@
         </div>
     </div>
     
-    <div id="para-91" 
+    <div id="para-91"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1861,7 +2385,7 @@
         </div>
     </div>
     
-    <div id="para-92" 
+    <div id="para-92"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1883,19 +2407,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1910,14 +2447,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1933,12 +2470,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1957,12 +2494,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

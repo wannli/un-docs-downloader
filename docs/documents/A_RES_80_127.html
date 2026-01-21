@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,759 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/127</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/127</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/127?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">53 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/127. Promoting investments for sustainable development</p>
+    
+    <p class="mt-1 text-muted">53 operative paragraphs · Item 16</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.24</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">38 of 53 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that promoting investments in value addition and in the processing of natural resources and productive diversification ensures more inclusive and sustainable development, and in this regard encourages accelerated national efforts and the strengthening of international cooperation in areas that support policies and programmes that increase public and private, domestic and international investments for structural change in the economies of developing countries; A/C.2/80/L.24 7/13 25-16745
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that promoting investments in value addition and in the processing of natural resources and productive diversification ensures more inclusive and sustainable development, and in this regard encourages accelerated national efforts and the strengthening of international cooperation in areas that support policies and programmes that increase public and private, domestic and international investments for structural change in the economies of developing countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 3</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for the promotion of investment in developing countries for lifelong learning, technical and vocational training, skills and digital literacy, expanding access through digital technology, and implementing financial literacy programmes that empower individuals and businesses to make informed decisions, thus promoting financial inclusion, entrepreneurship and decent work;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for the promotion of investment in developing countries for lifelong learning, technical and vocational training, skills and digital literacy, expanding access through digital technology, and implementing financial literacy programmes that empower individuals and businesses to make informed decisions, thus promoting financial inclusion and financial health, entrepreneurship and decent work;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also emphasizes that foreign direct investment may have different impacts on Sustainable Development Goals, and underlines the need to strengthen the alignment of foreign direct investment with national policies and sustainable development strategies and the 2030 Agenda for Sustainable Development2 and promote sustained foreign direct investment in developing countries, in particular countries facing specific challenges, in accordance with the respective countries’ investment priorities, and invites States preparing integrated national financing frameworks to include and implement plans for mobilizing and aligning private finance with national development plans;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also emphasizes that foreign direct investment may have different impacts on Sustainable Development Goals, and underlines the need to strengthen the alignment of foreign direct investment with national policies and sustainable development strategies and the 2030 Agenda for Sustainable Development 5 and promote sustained foreign direct investment in developing countries, in particular countries facing specific challenges, in accordance with the respective countries’ _______________ 5 Resolution 70/1. A/RES/80/127 Promoting investments for sustainable development 25-20740 8/13 investment priorities, and invites States preparing integrated national financing frameworks to include and implement plans for mobilizing and aligning private finance with national development plans;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages national and international efforts to integrate sustainability into the financial system and thus to further reorient capital flows towards __________________ 2 Resolution 70/1. A/C.2/80/L.24 25-16745 8/13 investments that are sustainable from an economic, social and environmental perspective;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages national and international efforts to integrate sustainability into the financial system and thus to further reorient capital flows towards investments that are sustainable from an economic, social and environmental perspective;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for increased foreign direct investments, particularly in developing countries, which have been impacted by the COVID-19 pandemic and current multiple crises, to meet the 4 trillion dollar Sustainable Development Goal investment gap in developing countries, while recognizing the key role of foreign direct investments for economic growth and development and that foreign direct investments can reduce inequalities and can help commodity-dependent countries to transition to manufacturing activities and other higher-value-added activities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for increased foreign direct investments, particularly in developing countries, which have been impacted by the COVID‑19 pandemic and current multiple crises and challenges, to meet the 4 trillion dollar Sustainable Development Goal investment gap in developing countries, while recognizing the key role of foreign direct investments for economic growth and development and that foreign direct investments can reduce inequalities and can help commodity-dependent countries to transition to manufacturing activities and other higher-value-added activities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 17</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages increased investments in social protection systems and in the care economy as key drivers of inclusive and sustainable economic growth, job creation and gender equality;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages increased investments in social protection systems and in the care economy, which are among the key drivers of inclusive and sustainable economic growth, job creation and gender equality;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of private sector engagement with national, international and intergovernmental organizations, Member States and other relevant stakeholders, as appropriate, in their efforts to achieve the Sustainable Development Goals, in an effective, accountable and consultative manner;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of private sector engagement with national, international and intergovernmental organizations, Member States and other relevant stakeholders, as appropriate, in their efforts to achieve the Sustainable Development Goals, in an effective, accountable and consultative manner; Promoting investments for sustainable development A/RES/80/127 9/13 25-20740
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the importance of sustainable corporate practices, including integrating environmental, social and governance factors into company reporting, as appropriate, with countries deciding on the appropriate balance of voluntary and A/C.2/80/L.24 9/13 25-16745 mandatory rules, and encourages businesses to adopt principles for responsible business and investing;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the importance of sustainable corporate practices, including integrating environmental, social and governance factors into company reporting, as appropriate, with countries deciding on the appropriate balance of voluntary and mandatory rules, and encourages businesses to adopt principles for responsible and inclusive business practices;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to reduce tensions and other risk factors and to foster environments that are conducive to scaling up long-term and sustainable investments, characterized by, inter alia, open, transparent and non-discriminatory investment policies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States to reduce tensions and other risk factors and to foster environments that are conducive to scaling up long-term and sustainable investments, characterized by, inter alia, open, transparent and non‑discriminatory investment policies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that the private sector can contribute to the achievement of the 2030 Agenda in many ways, including through applying creative and innovative solutions to solving sustainable development challenges, the alignment of its business models with the Sustainable Development Goals, and supporting the efforts of the public sector in, inter alia, disaster risk reduction, climate action and skills development, in accordance with national plans and policies, and in this regard encourages further policy development and capacity-building on de-risking investments in all countries to mobilize financing;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that the private sector can contribute to the achievement of the 2030 Agenda in many ways, including through applying creative and innovative solutions to solving sustainable development challenges, the alignment of its business models with the Sustainable Development Goals, and supporting the efforts of the public sector in, inter alia, disaster risk reduction, climate action and skills development, in accordance with national plans and policies, and in this regard encourages further policy development and capacity-building on de-risking investments in all countries to mobilize financing and to encourage public-private partnerships;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the growing interest among investors in taking sustainability issues into account in their investment decisions, but acknowledges that further work is needed to analyse, monitor and measure its contribution to the Sustainable Development Goals and maximize its positive development impact, and in this regard takes note of the work of the United Nations Conference on Trade and Development in monitoring sustainable finance and Sustainable Development Goal investment trends of the world’s largest institutional investors through the Global Sustainable Finance Observatory;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the call upon development partners and development finance institutions to further expand and collaborate on the use of risk-sharing instruments, A/RES/80/127 Promoting investments for sustainable development 25-20740 10/13 such as guarantees, securitization, investment vehicles and insurance solutions for private capital mobilization;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that reducing disaster risk, as outlined in the Sendai Framework for Disaster Risk Reduction 2015–2030,3 and the political declaration of the high-level meeting on its midterm review,4 is a cost-effective investment in preventing future losses, encourages Member States to develop standards, legislation __________________ 3 Resolution 69/283, annex II. 4 Resolution 77/289, annex. A/C.2/80/L.24 25-16745 10/13 and regulations, as appropriate, for disaster risk-informed public and private sector investments, including on risk disclosure in investments and transactions, and to ensure that pipeline and bankable projects include multi-hazard and other measures that assess, prevent and mitigate risks, including in infrastructure and the real estate sector, and in this regard encourages Member States to routinely conduct stress testing of infrastructure systems;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the growing interest among investors in taking sustainability issues into account in their investment decisions, but acknowledges that further work is needed to analyse, monitor and measure its contribution to the Sustainable Development Goals and maximize its positive development impact, and in this regard takes note of the work of the United Nations Conference on Trade and Development in monitoring sustainable finance and Sustainable Development Goal investment trends of the world’s largest institutional investors through the Global Sustainable Finance Observatory;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages efforts to align infrastructure plans to disaster risk reduction strategies, including by engaging the insurance companies and promoting multi-hazard disaster risk assessments as a prerequisite for infrastructure, housing and real estate investments in all sectors and stress testing of critical infrastructure systems, with a view to safeguarding gains in sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the commitment to scale up investment in disaster risk reduction and disaster risk financing to safeguard development gains from disasters, and promote risk-informed investment to develop the infrastructure for sustainable development in alignment with the Sendai Framework for Disaster Risk Reduction 2015–2030,6 noting that disasters and shocks are increasingly hampering developing countries’ abilities to make progress towards sustainable development, reversing development gains and stretching national capabilities and the international system’s ability to respond;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to achieve sustainable development in its three dimensions in an innovative, integrated, transparent, inclusive and equitable manner, which requires sufficient, sustainable and predictable investment through both the public and the private sectors;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages efforts to align infrastructure plans to disaster risk reduction strategies, including by engaging the insurance companies and promoting multi- hazard disaster risk assessments as a prerequisite for infrastructure, housing and real estate investments in all sectors and stress testing of critical infrastructure systems, with a view to safeguarding gains in sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all relevant stakeholders to explore the possibilities of taking sustainability factors into account in credit rating assessments and to strengthen credit markets to promote the growth of micro-, small and medium-sized enterprises, in particular those owned by women;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to achieve sustainable development in its three dimensions in an innovative, integrated, transparent, inclusive and equitable manner, which requires sufficient, sustainable and predictable investment through both the public and the private sectors;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the growing momentum around sustainable investment and finance, including through investments in Sustainable Development Goal bonds, and invites private companies, including institutional investors, to adopt sustainable practices that foster long-term value;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all relevant stakeholders to explore the possibilities of taking sustainability factors into account in credit rating assessments and to strengthen credit markets to promote the growth of micro-, small and medium-sized enterprises, in particular those owned by women;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges with great concern the devastating economic impact of the COVID-19 pandemic, which undermines countries’ ability to implement the goals and targets of the 2030 Agenda and the Paris Agreement and threatens to upend the progress made recently in promoting investment in the Sustainable Development Goals, notes the role of multi-stakeholder partnerships, including with the public and private sectors, to foster strategic investment in the Sustainable Development Goals, especially in areas that could contribute more to combat COVID-19 and its resulting socioeconomic impacts, including through innovative financing, inter alia, in healthcare systems, including universal health coverage; food security, including agricultural and food production and related supply chains; digital connectivity; job creation; sustainable and quality infrastructure development and growth in productivity; as well as to ensure an environment-responsive approach to COVID-19 recovery and to counter the shortfall in investment that the pandemic entails, calls upon all stakeholders to cooperate in order to enhance resilience and sustainability in global supply chains and strengthen international investment, including by aligning investments with the 2030 Agenda, and encourages cooperation to facilitate cross-border travel of persons for essential purposes, without undermining efforts to prevent the spread of the virus;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the growing momentum around sustainable investment and finance, including through investments in Sustainable Development Goal bonds, and invites private companies, including institutional investors, to adopt sustainable practices that foster long-term value;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to take stock of public and private initiatives to measure investment impacts on the Sustainable Development Goals, identify their similarities and differences, and lay out potential gaps;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges with great concern the devastating economic impact of the COVID‑19 pandemic, which undermines countries’ ability to implement the goals and targets of the 2030 Agenda and the Paris Agreement and threatens to upend the progress made recently in promoting investment in the Sustainable Development Goals, notes the role of multi-stakeholder partnerships, including with the public and private sectors, to foster strategic investment in the Sustainable Development Goals, especially in areas that could contribute more to combat COVID‑19 and its resulting socioeconomic impacts, including through innovative financing, inter alia, in healthcare systems, including universal health coverage; food security, including agricultural and food production and related supply chains; digital connectivity; job creation; sustainable and quality infrastructure development and growth in productivity; as well as to ensure an environment-responsive approach to COVID‑19 recovery and to counter the shortfall in investment that the pandemic entails, calls upon all stakeholders to cooperate in order to enhance resilience and sustainability in _______________ 6 Resolution 69/283, annex I. Promoting investments for sustainable development A/RES/80/127 11/13 25-20740 global supply chains and strengthen international investment, including by aligning investments with the 2030 Agenda, and encourages cooperation to facilitate cross‑border travel of persons for essential purposes, without undermining efforts to prevent the spread of the virus;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the request, in the outcome document of the 2019 Economic and Social Council forum on financing for development follow-up, to the Inter-Agency Task Force on Financing for Development to continue to further its analysis on the impact and metrics for measurement of the contribution of private sector investments and instruments to the Sustainable Development Goals at the global level, 5 and __________________ 5 See E/FFDF/2019/3. A/C.2/80/L.24 11/13 25-16745 encourages international support for Member States, according to national circumstances and priorities, to voluntarily develop practical tools on measuring and collecting timely and reliable data on the private sector contribution towards the implementation of the Sustainable Development Goals at the national level, as appropriate;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to take stock of public and private initiatives to measure investment impacts on the Sustainable Development Goals, identify their similarities and differences, and lay out potential gaps;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that international public finance plays an important role in complementing the efforts of countries to mobilize public resources domestically and that official development assistance, as a critical source for development finance, helps developing countries to secure sufficient public resources to invest in sectors that could accelerate the delivery of the transformational ambition of the 2030 Agenda, and notes in this regard the need to intensify efforts to meet respective commitments, focusing the most concessional resources on those with the greatest needs and least ability to mobilize other resources;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates the importance of the analysis by the Inter-Agency Task Force on Financing for Development on the impact and metrics for measurement of the contribution of private sector investments and instruments to the Sustainable Development Goals at the global level,7 and encourages international support for Member States, according to national circumstances and priorities, to voluntarily develop practical tools on measuring and collecting timely and reliable data on the private sector contribution towards the implementation of the Sustainable Development Goals at the national level, as appropriate;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 36</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the potential of blended finance, including its ability to crowd in, leverage or catalyse additional financing, and stresses that projects should be aligned with national priorities, have long-lasting development impact and be in the public interest, including those in vulnerable situations, while recognizing that, for different Sustainable Development Goal investment areas, different types of finance may represent the most effective financing modalities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes that international public finance plays an important role in complementing the efforts of countries to mobilize public resources domestically and that official development assistance, as a critical source for development finance, helps developing countries to secure sufficient public resources to invest in sectors that could accelerate the delivery of the transformational ambition of the 2030 Agenda, and notes in this regard the need to intensify efforts to meet respective commitments, focusing the most concessional resources on those with the greatest needs and least ability to mobilize other resources;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 37</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to promote shareholder and consumer engagement that may encourage companies to take into account consumers’ sustainability preferences;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Promotes the creation of capital markets, including both public and private markets, and domestic investment vehicles such as development-oriented venture capital funds, and encourages the development of and promotes innovative financial instruments that are scalable and that support sustainable development, such as thematic bonds (for example, use of proceeds bonds such as Sustainable Development Goal bonds, social, sustainability and green bonds), sustainability-linked bonds, and other instruments including sukuk, along with sound regulatory frameworks and adequate risk management, and encourages the use of such innovative financing instruments in national financing strategies and strengthens institutional capacity to scale up their effective use;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 38</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon development partners to continue to support efforts to strengthen policy frameworks to incentivize finance for productive investment, including building capacity to access available, additional and sustainable sources of financing, including concessional finance, particularly in the least developed countries, landlocked developing countries, small island developing States and African countries, and taking into account the specific challenges faced by middle- income countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the potential of blended finance, including its ability to crowd in, leverage or catalyse additional financing, and stresses that projects should be aligned with national priorities, have long-lasting development impact and be in the public interest, including those in vulnerable situations, while recognizing that, for different Sustainable Development Goal investment areas, different types of finance may represent the most effective financing modalities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 39</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the policy proposals put forward by the United Nations Conference on Trade and Development in its World Investment Report 2022: International Tax Reforms and Sustainable Investment, in particular that the international community should support developing countries, especially in Africa and the least developed countries, including through scaling up technical assistance to take advantage of international tax reforms, and calls upon the United Nations Conference on Trade and Development to work in collaboration with multiple stakeholders to help developing countries to avail themselves of these recommendations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls for blended finance initiatives to: (a) focus on sustainable development impact as well as on quantity and degree of leverage; (b) promote country ownership by aligning with national sustainable development priorities and industrialization strategies; (c) give due consideration to global frameworks; (d) ensure financial and development additionality as well as project viability; (e) to share both risk and rewards fairly; (f) follow relevant standards, be transparent and have clear monitoring and accountability mechanisms; (g) include participation of Indigenous Peoples and local communities as well as relevant stakeholders in decisions affecting them; and (h) take into account debt sustainability monitoring; _______________ 7 See E/FFDF/2019/3. A/RES/80/127 Promoting investments for sustainable development 25-20740 12/13
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes the launch by the United Nations Conference on Trade and Development, together with the International Telecommunication Union, of a multi-stakeholder action agenda for a global partnership to mobilize sustainable investment in digital infrastructure and to advance multilateral dialogue on artificial intelligence governance, with the goal of creating coherent, development-oriented rules;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages Member States to promote shareholder and consumer engagement that may encourage companies to take into account consumers’ sustainability preferences;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 41</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Further notes the World Investment Report 2025: International Investment in the Digital Economy of the United Nations Conference on Trade and Development, and invites the consideration of the proposals contained therein as appropriate;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon development partners to continue to support efforts to strengthen policy frameworks to incentivize finance for productive investment, including building capacity to access available, additional and sustainable sources of financing, including concessional finance, particularly in the least developed countries, landlocked developing countries, small island developing States and African countries, and taking into account the specific challenges faced by middle- income countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that by supporting the development of wider digital government applications, technical assistance for business and investment facilitation, including capacity-building initiatives based on international investment policy instruments, A/C.2/80/L.24 25-16745 12/13 there is the potential to tackle some of the gaps in investment for the Sustainable Development Goals;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the policy proposals put forward by the United Nations Conference on Trade and Development in its World Investment Report 2022: International Tax Reforms and Sustainable Investment, in particular that the international community should support developing countries, especially in Africa and the least developed countries, including through scaling up technical assistance to take advantage of international tax reforms, and calls upon the United Nations Conference on Trade and Development to work in collaboration with multiple stakeholders to help developing countries to avail themselves of these recommendations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes the work of the United Nations Conference on Trade and Development with institutional investors, including sovereign wealth funds, to identify best practices and mobilize affordable capital for investments in sustainable development in developing countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes the launch by the United Nations Conference on Trade and Development, together with the International Telecommunication Union, of a multi‑stakeholder action agenda for a global partnership to mobilize sustainable investment in digital infrastructure, including in artificial intelligence;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 44</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States, development partners and the private sector to invest in technological development, to build more resilient supply chains, increase productive capacity and economic diversification in developing countries, share and transfer technology and know-how on mutually agreed terms and improve domestic investment climates to facilitate mass production, especially of safe, quality, effective and affordable vaccines, therapeutics and medical equipment, promote job creation, adequate training and capacity-building and wealth creation, increase investment in quality, reliable, sustainable and resilient infrastructure, including through the full utilization of the United Nations development system, the World Bank and other multilateral institutions in addressing the capacity and funding gaps, building a pipeline of bankable, quality, reliable, sustainable and resilient infrastructure projects and exploring innovative platform approaches to coordinating, scaling up and channelling public and private finance and technical assistance, increase all components of international public finance, including the catalytic use of official development assistance, domestic and international private sector finance, domestic resource mobilization, and trade, and reduce the average transaction cost of migrant remittances;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the World Investment Report 2025: International Investment in the Digital Economy of the United Nations Conference on Trade and Development, and invites the consideration of the proposals contained therein as appropriate;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 45</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the work of the Secretary-General’s Expert Group on Debt, which stresses the need for investment project pipelines and national investment platforms for well-designed, bankable opportunities that can attract public and private financing, reduce transaction and borrowing costs, and ensure that new borrowing supports long-term financial sustainability and development goals, while enhancing debt transparency and recognizing contingent liabilities to enable securitization of project bundles and the attraction of institutional investors on better financing terms;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that by supporting the development of wider digital government applications, technical assistance for business and investment facilitation, including capacity-building initiatives based on international investment policy instruments, there is the potential to tackle some of the gaps in investment for the Sustainable Development Goals;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 46</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the need for technical assistance and capacity-building support for investment promotion and developing project pipelines and bankable projects, in particular for developing countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes the work of the United Nations Conference on Trade and Development with institutional investors, including sovereign wealth funds, to identify best practices and mobilize affordable capital for investments in sustainable development in developing countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 47</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the United Nations system and all relevant stakeholders to support the capacity-building of developing countries in their efforts to close the Sustainable Development Goal investment gaps, especially at the country programme level, on the use of public finance to leverage private investment for projects benefiting sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States, development partners and the private sector to invest in technological development, to build more resilient supply chains, increase productive capacity and economic diversification in developing countries, share and transfer technology and know-how on mutually agreed terms and improve domestic investment climates to facilitate mass production, especially of safe, quality, effective and affordable vaccines, therapeutics and medical equipment, promote job creation, adequate training and capacity-building and wealth creation, increase investment in quality, reliable, sustainable and resilient infrastructure, including through the full utilization of the United Nations development system, the World Bank and other multilateral institutions in addressing the capacity and funding gaps, building a pipeline of bankable, quality, reliable, sustainable and resilient infrastructure projects and exploring innovative platform approaches to coordinating, scaling up and channelling public and private finance and technical assistance, increase all components of international public finance, including the catalytic use of official development assistance, domestic and international private sector finance, domestic resource mobilization, and trade, and reduce the average transaction cost of migrant remittances; Promoting investments for sustainable development A/RES/80/127 13/13 25-20740
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to craft trade and investment agreements with appropriate safeguards so as not to constrain domestic policies and regulation in the public interest, emphasizes the importance of the provision of capacity-building to developing countries in order to benefit from opportunities in international trade and investment agreements, and encourages the United Nations Conference on Trade and Development to continue and strengthen existing programme of capacity-building, research and policy analysis, regional and multilateral consensus-building and consultations with States on investment agreements;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes the work of the Secretary-General’s Expert Group on Debt, which stresses the need for investment project pipelines and national investment platforms for well-designed, bankable opportunities that can attract public and private financing, reduce transaction and borrowing costs, and ensure that new borrowing supports long-term financial sustainability and development goals, while enhancing debt transparency and recognizing contingent liabilities to enable securitization of project bundles and the attraction of institutional investors on better financing terms;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 49</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, in collaboration with the secretariat of the United Nations Conference on Trade and Development, to inform the General Assembly at its eighty-first session of the implementation of the present resolution, based on their ongoing research, through a dedicated section of the World Investment Report, with a special focus on promoting investments for sustainable development A/C.2/80/L.24 13/13 25-16745 as well as concrete recommendations, including on strategic sectors to invest for the implementation of the 2030 Agenda, and looks forward to the continuing consideration of these issues in the forthcoming reports of the Inter-Agency Task Force on Financing for Development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Emphasizes the need for technical assistance and capacity-building support for investment promotion and developing project pipelines and bankable projects, in particular for developing countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 50</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “Promoting investments for sustainable development”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon the United Nations system and all relevant stakeholders to support the capacity-building of developing countries in their efforts to close the Sustainable Development Goal investment gaps, especially at the country programme level, on the use of public finance to leverage private investment for projects benefiting sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 51</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses the need to craft trade and investment agreements with appropriate safeguards so as not to constrain domestic policies and regulation in the public interest, emphasizes the importance of the provision of capacity-building to developing countries in order to benefit from opportunities in international trade and investment agreements, and encourages the United Nations Conference on Trade and Development to continue and strengthen existing programme of capacity-building, research and policy analysis, regional and multilateral consensus-building and consultations with States on investment agreements;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 52</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General, in collaboration with the secretariat of the United Nations Conference on Trade and Development, to inform the General Assembly at its eighty-first session of the implementation of the present resolution, based on their ongoing research, through a dedicated section of the World Investment Report, with a special focus on promoting investments for sustainable development as well as concrete recommendations, including on strategic sectors to invest for the implementation of the 2030 Agenda, and looks forward to the continuing consideration of these issues in the forthcoming reports of the Inter-Agency Task Force on Financing for Development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 53</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.24</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/127</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “Promoting investments for sustainable development”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.24.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -224,42 +963,43 @@
         <span class="text-sm text-muted">8 with signals, 45 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -276,7 +1016,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -293,7 +1033,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -310,7 +1050,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -327,7 +1067,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -344,7 +1084,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -361,7 +1101,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -378,7 +1118,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -395,7 +1135,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -412,7 +1152,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -429,7 +1169,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -446,7 +1186,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -463,7 +1203,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -480,7 +1220,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -497,7 +1237,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -514,7 +1254,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -531,7 +1271,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -548,7 +1288,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -565,7 +1305,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -582,7 +1322,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -599,7 +1339,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -616,7 +1356,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -633,7 +1373,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -650,7 +1390,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -667,7 +1407,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -684,7 +1424,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -701,7 +1441,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -728,7 +1468,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -745,7 +1485,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -762,7 +1502,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -779,7 +1519,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -796,7 +1536,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -813,7 +1553,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -830,7 +1570,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -847,7 +1587,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -864,7 +1604,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -881,7 +1621,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -898,7 +1638,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -915,7 +1655,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -932,7 +1672,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -949,7 +1689,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -966,7 +1706,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -993,7 +1733,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1020,7 +1760,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1047,7 +1787,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1064,7 +1804,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1091,7 +1831,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1108,7 +1848,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1125,7 +1865,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1142,7 +1882,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1159,7 +1899,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1186,7 +1926,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA", "report"]'
          data-has-signals="true">
@@ -1218,7 +1958,7 @@
         </div>
     </div>
     
-    <div id="para-53" 
+    <div id="para-53"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -1250,19 +1990,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1277,14 +2030,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1300,12 +2053,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1324,12 +2077,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links

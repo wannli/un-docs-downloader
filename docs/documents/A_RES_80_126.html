@@ -57,7 +57,7 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Breadcrumb -->
-<nav class="mb-8">
+<nav class="mb-6">
     <ol class="flex items-center gap-2 text-sm text-muted">
         <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
         <li class="text-gray-300">/</li>
@@ -65,20 +65,939 @@
     </ol>
 </nav>
 
+
+
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/126</h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/RES/80/126</h1>
+            
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-green-50 text-green-700">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Adopted
+            </span>
+            
+        </div>
         <a href="https://docs.un.org/en/a/res/80/126?direct=true" target="_blank"
            class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            View PDF on UN ODS
+            View PDF
         </a>
     </div>
-    <p class="mt-2 text-muted">52 operative paragraphs</p>
+    
+    <p class="mt-2 text-lg text-gray-600">80/126. Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development</p>
+    
+    <p class="mt-1 text-muted">52 operative paragraphs · Item 16</p>
 </div>
+
+
+<!-- Lineage Panel -->
+<div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+    <button onclick="toggleComparison()" id="lineage-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <span class="font-medium text-gray-900">Original: A/C.2/80/L.23</span>
+        </div>
+        <div class="flex items-center gap-3">
+            
+            <span class="text-sm text-muted">48 of 52 paragraphs differ</span>
+            
+            <span id="lineage-chevron" class="text-gray-400 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </span>
+        </div>
+    </button>
+
+    <div id="comparison-panel" class="hidden border-t border-gray-200">
+        
+        <div class="p-4 space-y-6">
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 1</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that preventing and combating illicit financial flows contributes to domestic resource mobilization, which is essential to finance policies aiming to achieve the Sustainable Development Goals; A/C.2/80/L.23 25-16743 6/11
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that preventing and combating illicit financial flows contributes to domestic resource mobilization, which is essential to finance policies aiming to achieve the Sustainable Development Goals;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 2</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General;7
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the report of the Secretary-General;10
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 4</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms its commitment to strive to eliminate safe havens, aggressive tax practices, and loopholes that create incentives for illicit financial flows, and to take effective steps to prevent illicit financial flows from entering our jurisdictions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms its commitment to strengthen regulatory frameworks at all levels in line with international standards and to further increase the transparency and accountability of financial institutions and the corporate sector, as well as public administrations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 5</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also reaffirms its commitment to strengthen regulatory frameworks at all levels in accordance with international standards and to further increase the transparency and accountability of financial institutions and the corporate sector, as well as public administrations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms paragraph 29 (b) of the Sevilla Commitment11 to support the role that the media and civil society play in fairly, transparently and ethically exposing illicit financial flows;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 6</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the work of the media in exposing corruption, tax abuse and the failings of financial integrity regulations and controls;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States Parties to the United Nations Convention against Corruption to ensure that all relevant protections are available to those who report corruption and suspected wrongdoing, noting the role that individuals and groups outside of the public sector play in preventing and detecting corruption;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 7</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States Parties to the United Nations Convention against Corruption to ensure that all relevant protections are available to those who report corruption and suspected wrongdoing, noting the role that individuals and groups outside of the public sector play in preventing and detecting corruption;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the ongoing efforts of Member States to enhance knowledge and broaden understanding of the challenges and opportunities involved in international cooperation to combat illicit financial flows and strengthen good practices on assets recovery and return consistent with the United Nations Convention against Corruption so as to foster sustainable development;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 8</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Welcomes the ongoing efforts of Member States to enhance knowledge and broaden understanding of the challenges and opportunities involved in international cooperation to combat illicit financial flows and strengthen good practices on assets recovery and return consistent with the United Nations Convention against Corruption so as to foster sustainable development;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that combating illicit financial flows requires a range of actions that includes preventing, detecting, investigating, prosecuting and recovering, to counter such flows in source, transit and destination countries, including through expeditious and effective law enforcement action and cooperation, including through the International Criminal Police Organization (INTERPOL), where appropriate;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 9</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Acknowledges that combating illicit financial flows requires a range of actions that includes preventing, detecting, investigating, prosecuting, recovering and therefore countering such flows in source, transit and destination countries through expeditious law enforcement action and cooperation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also acknowledges the need to combat illicit financial flows and strengthen good practices on the identification, freezing, confiscation, recovery and return of assets as one of the sources of financing for development in a broad range _______________ 10 A/80/224. 11 Resolution 79/323, annex. Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development A/RES/80/126 7/12 25-20739 of areas, such as poverty eradication, food security, health, education, investment in social programmes or adaptation to climate change, and may contribute to improved sustainable development outcomes;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 10</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also acknowledges the need to combat illicit financial flows and strengthen good practices on the identification, freezing, confiscation, recovery and return of assets as one of the sources of financing for development in a broad range of areas, such as poverty eradication, food security, health, education, investment in social programmes or adaptation to climate change, and may contribute to improved sustainable development outcomes;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that combating illicit financial flows requires a coordinated, whole-of-government approach and therefore encourages Member States to create domestic institutional mechanisms as appropriate and necessary, including those related to digitalization or other appropriate measures to ensure information-sharing and whole-of-government coordination, in this regard invites those Member States willing to prepare integrated national financing frameworks to include plans for combating illicit financial flows, including through the transfer and sharing of data, where appropriate, and with the necessary safeguards, and looks forward to the formulation by the Inter-Agency Task Force on Financing for Development of guidance on how countries can incorporate financial integrity actions into their financing frameworks;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 11</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that combating illicit financial flows requires a coordinated, whole-of-government approach and therefore encourages Member States to create domestic institutional mechanisms as appropriate and necessary, including those related to digitalization or other appropriate measures to ensure information-sharing and whole-of-government coordination, in this regard invites those Member States willing to prepare integrated national financing frameworks to include plans for combating illicit financial flows, including through the transfer and sharing of data, where appropriate, and with the necessary safeguards, and looks forward to the formulation by the Inter-Agency Task Force on Financing for Development of guidance on how countries can incorporate financial integrity actions into their financing frameworks; __________________ 7 A/80/224. A/C.2/80/L.23 7/11 25-16743
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that international cooperation in combating illicit financial flows is a work in progress that must continue to be pursued, and encourages all countries to develop effective tools and create a policy environment for combating illicit financial flows, in accordance with the existing relevant international frameworks, including the United Nations Convention against Corruption;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 12</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that international cooperation in combating illicit financial flows is a work in progress that must continue to be pursued, and encourages all countries to develop effective tools and create a policy environment for combating illicit financial flows, in accordance with the existing relevant international frameworks, including the United Nations Convention against Corruption;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that measures aimed at combating illicit financial flows require cross-border cooperation between law enforcement agencies without undue political influence and that, where requested, technical assistance can also contribute to better international cooperation, and encourages Member States, where applicable and subject to their domestic legal systems, and in line with their treaty obligations, to cooperate and exchange information and best practices in this regard;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 13</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes that measures aimed at combating illicit financial flows require cross-border cooperation between law enforcement agencies without undue political influence and that, where requested, technical assistance can also contribute to better international cooperation, and encourages Member States, where applicable and subject to their domestic legal systems, and in line with their treaty obligations, to cooperate and exchange information and best practices in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages countries and relevant multilateral and international organizations to continue and strengthen their efforts to provide, upon request, technical assistance and capacity-building assistance to developing countries, as well as to support African and other regional initiatives, to prevent, detect and combat illicit financial flows and to strengthen good practices on the identification, freezing, confiscation, recovery and return of assets to foster sustainable development in line with the 2030 Agenda for Sustainable Development;12
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 14</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages countries and relevant multilateral and international organizations to continue and strengthen their efforts to provide, upon request, technical assistance and capacity-building assistance to developing countries, as well as to support African and other regional initiatives, to prevent, detect and combat illicit financial flows and to strengthen good practices on the identification, freezing, confiscation, recovery and return of assets to foster sustainable development in line with the 2030 Agenda for Sustainable Development;8
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Commits to strengthening efforts in preventing, deterring, detecting and countering corruption, increasing transparency and promoting good governance;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 15</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recommits to preventing, deterring, detecting and countering corruption, increasing transparency and promoting good governance;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon Member States, within their means and in accordance with the fundamental principles of their domestic law, to promote the active participation of individuals and groups outside the public sector, such as civil society, non‑governmental organizations and community-based organizations, in the prevention of and the fight against corruption and to raise public awareness regarding the existence, causes and gravity of the threat posed by corruption;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 16</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States that have not yet done so to consider ratifying or acceding to the United Nations Convention against Corruption and the United Nations Convention against Transnational Organized Crime and the Protocols thereto, 9 and urges States Parties to those Conventions and Protocols to make efforts towards their effective implementation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States that have not yet done so to consider ratifying or acceding to the United Nations Convention against Corruption and the United Nations Convention against Transnational Organized Crime and the Protocols thereto, 13 and urges States Parties to those Conventions and Protocols to make efforts towards their effective implementation; _______________ 12 Resolution 70/1. 13 United Nations, Treaty Series, vols. 2225, 2237, 2241 and 2326, No. 39574. A/RES/80/126 Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development 25-20739 8/12
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 18</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to increase their efforts to prevent and counter corruption that involves vast quantities of assets and related illicit financial flows, noting that no country alone can effectively combat complex cases involving multiple jurisdictions and that international cooperation and technical assistance are needed in the prevention of and fight against corruption, including in asset recovery;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to increase their efforts to prevent and counter corruption that involves vast quantities of assets and related illicit financial flows, noting that no country alone can effectively combat complex cases involving multiple jurisdictions and that international cooperation and technical assistance, including through INTERPOL, where appropriate, are needed in the prevention of and fight against corruption, including in asset recovery;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 20</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that anti-corruption measures should be an integral part of national development policies and strategies and therefore invites countries developing integrated national financing frameworks to include anti-corruption components and standards therein, as appropriate, and further stresses that all jurisdictions should consider undertaking further research, policy development and programming, as appropriate, to address corruption;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that anti‑corruption measures should be an integral part of national development policies and strategies and therefore invites countries developing integrated national financing frameworks to include anti‑corruption components and standards therein, as appropriate, and further stresses that all jurisdictions should consider undertaking further research, policy development and programming, as appropriate, to address corruption;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 22</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with concern that proceeds derived from offences established under the United Nations Convention against Corruption have yet to be disposed of in favour of the requesting States Parties, their prior legitimate owners and victims of __________________ 8 Resolution 70/1. 9 United Nations, Treaty Series, vols. 2225, 2237, 2241 and 2326, No. 39574. A/C.2/80/L.23 25-16743 8/11 the crimes, commits to ensuring that assets confiscated pursuant to the United Nations Convention against Corruption are returned to countries of origin, in accordance with the provisions of the Convention, and are used transparently, and decides to prevent, deter, detect and counter corruption, increase transparency and promote good governance;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with concern that proceeds derived from offences established under the United Nations Convention against Corruption have yet to be disposed of in favour of the requesting States Parties, their prior legitimate owners and victims of the crimes, and decides to prevent, deter, detect and counter corruption, increase transparency and promote good governance;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 23</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States Parties to the United Nations Convention against Corruption to make full use of the asset recovery tools set forth in chapter V of the Convention, including mechanisms for the enforcement of foreign restraining and confiscation orders;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms paragraph 29 (e) of the Sevilla Commitment to ensure that assets confiscated pursuant to the United Nations Convention against Corruption are returned to countries of origin, in accordance with the provisions of the Convention, and are used transparently;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 24</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States Parties to the United Nations Convention against Corruption, in particular requesting and requested States Parties, to cooperate to recover the proceeds of crime as defined in the Convention, and to fulfil their obligation to ensure the return or disposal of such proceeds, in accordance with article 57 of the Convention, and invites States Parties, in accordance with their respective domestic laws, to consider allocating recovered resources to finance the achievement of the Sustainable Development Goals and to strengthening the implementation of existing multilateral legal instruments for the purpose of asset recovery and return;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates its invitation to the Conference of the States Parties to the United Nations Convention against Corruption, in the future, after the conclusion and evaluation of the findings from the second review cycle, to organize a special session of the Conference on all aspects of the asset recovery and return process, with a view to considering all options available under the Convention, including exploring possible areas for improvement of the international asset recovery framework;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 25</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the United Nations Office on Drugs and Crime, in coordination with the Stolen Asset Recovery Initiative, to continue to expand global knowledge and data collection on asset recovery and return by gathering and sharing information on challenges and good practices, as well as on volumes of assets frozen, seized, confiscated and returned in relation to corruption offences, and the number and types of cases, as appropriate, while ensuring the protection of personal data and privacy rights, drawing upon existing efforts, within existing resources; 10
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages States Parties to the United Nations Convention against Corruption to make full use of the asset recovery tools set forth in chapter V of the Convention, including mechanisms for the enforcement of foreign restraining and confiscation orders;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 26</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States Parties to consider, when applicable, using the international cooperation provisions of the United Nations Convention against Transnational Organized Crime and the United Nations Convention against Corruption, in appropriate cases, to investigate and prosecute the smuggling of commercial goods;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all States Parties to the United Nations Convention against Corruption, in particular requesting and requested States Parties, to cooperate to recover the proceeds of crime as defined in the Convention, and to fulfil their obligation defined in the Convention to ensure the return or disposal of such proceeds, in accordance with article 57 of the Convention, and invites States Parties, in accordance with their respective domestic laws, to consider allocating recovered resources to finance the achievement of the Sustainable Development Goals and to strengthening the implementation of existing multilateral legal instruments for the purpose of asset recovery and return; Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development A/RES/80/126 9/12 25-20739
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 27</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to strengthen the capacity of customs administrations for the detection of illicit financial flows at the borders, and to enhance accurate and timely trade data exchange, as appropriate, to address smuggling of commercial goods and trade misinvoicing, including by supporting developing countries to upgrade technology in their ports;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the United Nations Office on Drugs and Crime, in coordination with the Stolen Asset Recovery Initiative, to continue to expand global knowledge and data collection on asset recovery and return by gathering and sharing information on challenges and good practices, as well as on volumes of assets frozen, seized, confiscated and returned in relation to corruption offences, and the number and types of cases, as appropriate, while ensuring the protection of personal data and privacy rights, drawing upon existing efforts, within existing resources;14
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 28</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that efforts in international tax cooperation should be universal in approach and scope and fully take into account the different needs and capacities of all countries, in particular the least developed countries, landlocked developing countries, small island developing States and African countries;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges States Parties to consider, when applicable, using the international cooperation provisions of the United Nations Convention against Transnational Organized Crime and the United Nations Convention against Corruption, in appropriate cases, to investigate and prosecute the smuggling of commercial goods;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 29</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further efforts by relevant national and international actors to mitigate transfer pricing not in line with the arm’s length principle and trade misinvoicing;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Urges Member States to strengthen the capacity of customs administrations for the detection of illicit financial flows at the borders, and to enhance accurate and timely trade data exchange, as appropriate, to address smuggling of commercial goods and trade misinvoicing, including by supporting developing countries to upgrade technology in their ports;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 30</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all countries to work together to eliminate base erosion and profit shifting and to ensure that all companies, including multinationals, pay taxes to the Governments of countries where economic activity occurs and value is created, in accordance with national and international laws and policies;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Stresses that efforts in international tax cooperation should be universal in approach and scope and fully take into account the different needs and capacities of all countries, in particular the least developed countries, landlocked developing countries, small island developing States and African countries;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 31</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon all countries to cooperate, in accordance with applicable bilateral or multilateral agreements, in the areas of mutual legal assistance, __________________ 10 CAC/COSP/2021/17, sect. I.A, resolution 9/2, para. 15. A/C.2/80/L.23 9/11 25-16743 administrative assistance and the exchange of information in tax matters, as well as the automatic exchange of financial account information;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Encourages further efforts by relevant national and international actors to mitigate transfer pricing not in line with the arm’s length principle and trade misinvoicing;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 32</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with concern that developing countries face obstacles in receiving information, and calls upon existing parties to information-exchange agreements to strengthen the cooperation necessary to assist interested developing countries that are parties to such agreements in accessing and using, in a timely manner, relevant information provided under such agreements, and provide capacity-building, where possible, to developing countries to meet the relevant standards;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon all countries to work together to eliminate base erosion and profit shifting and to ensure that all companies, including multinational enterprises, pay taxes to the Governments of countries where economic activity occurs and value is created, in accordance with national and international laws and policies;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 33</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites signatories to bilateral or multilateral tax transparency agreements to consider allowing information exchanged pursuant to those agreements to be used where permitted under such agreements and when written consent is provided, having regard to confidentiality and domestic law limitations;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also calls upon all countries to cooperate, in accordance with applicable bilateral or multilateral agreements, in the areas of mutual legal assistance, administrative assistance and the exchange of information in tax matters, as well as the automatic exchange of financial account information;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 34</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls paragraph 28 (f) of the Sevilla Commitment, on country-by- country reporting of multinational enterprises;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes with concern that developing countries face obstacles in receiving information, and calls upon existing parties to information-exchange agreements to strengthen the cooperation necessary to assist interested developing countries that are parties to such agreements in accessing and using, in a timely manner, relevant information provided under such agreements, and provide capacity-building, where possible, to developing countries to meet the relevant standards;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 35</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the Economic and Social Council to update and strengthen the United Nations code of conduct on cooperation in combating international tax evasion11 in response to new international agreements and to emphasize the importance of developing countries being able to benefit from international tax cooperation;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites signatories to bilateral or multilateral tax transparency agreements to consider allowing information exchanged pursuant to those agreements to be used where permitted under such agreements and when written consent is provided, having regard to confidentiality and domestic law limitations;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 36</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of the consideration of international tax cooperation at the United Nations, and in that regard takes note with appreciation of the work of the Intergovernmental Negotiating Committee on the United Nations Framework Convention on International Tax Cooperation and of the Committee of Experts on International Cooperation in Tax Matters;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls paragraph 28 (f) of the Sevilla Commitment, on country-by- country reporting of multinational enterprises, when applicable;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 37</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the ongoing work on the implementation of the Organisation for Economic Co-operation and Development/Group of 20 two-pillar solution to address the tax challenges arising from the digitalization of the economy, acknowledges the need for a careful analysis of the implications for developing countries, and encourages a special focus on their unique needs and capacities;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the Economic and Social Council to update and strengthen the United Nations code of conduct on cooperation in combating international tax evasion 15 in response to new international agreements and to emphasize the _______________ 14 CAC/COSP/2021/17, sect. I.A, resolution 9/2, para. 15. 15 Economic and Social Council resolution 2017/3. A/RES/80/126 Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development 25-20739 10/12 importance of developing countries being able to benefit from international tax cooperation;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 38</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the analysis, in the Financing for Sustainable Development Report 2022, the Trade and Development Report 2021 of the United Nations Conference on Trade and Development and World Economic Situation and Prospects 2022 of the Department of Economic and Social Affairs of the Secretariat, of the Organisation for Economic Co-operation and Development/Group of 20 two-pillar solution, and calls for inclusive discussions to address the uncertainties and implications for developing countries, including their capacity-building needs;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the importance of the consideration of international tax cooperation at the United Nations, and in that regard takes note with appreciation of the work of the Intergovernmental Negotiating Committee on the United Nations Framework Convention on International Tax Cooperation and of the Committee of Experts on International Cooperation in Tax Matters;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 39</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls that new technologies can both increase efficiency in revenue collection and strengthen the efforts to combat illicit financial flows, expresses concern that virtual assets are being used for illicit activities, and in this regard encourages Member States and other relevant organizations to take measures in line with international standards, where applicable, to prevent and counter their illicit use;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Takes note of the ongoing work on the implementation of the Organisation for Economic Co-operation and Development/Group of 20 two-pillar solution to address the tax challenges arising from the digitalization of the economy, acknowledges the need for a careful analysis of the implications for developing countries, and encourages a special focus on their unique needs and capacities;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 40</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that various jurisdictions have introduced mechanisms to increase beneficial ownership transparency, including beneficial ownership registries of legal entities and legal arrangements, such as companies, trusts and limited liability partnerships;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recalls the analysis, in the Financing for Sustainable Development Report 2022, the Trade and Development Report 2021 of the United Nations Conference on Trade and Development and World Economic Situation and Prospects 2022 of the Department of Economic and Social Affairs of the Secretariat, of the Organisation for Economic Co-operation and Development/Group of 20 two-pillar solution, and calls for inclusive discussions to address the uncertainties and implications for developing countries, including their capacity-building needs;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 41</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Commits to enhancing beneficial ownership transparency and cooperation on exchange of beneficial ownership information by implementing effective domestic beneficial ownership registries with high-quality and standardized information, __________________ 11 Economic and Social Council resolution 2017/3. A/C.2/80/L.23 25-16743 10/11 consistent with international standards, and to enhancing mechanisms for information exchange among national beneficial ownership registries and considering the feasibility and utility of a global beneficial ownership registry, building, in all these efforts, on existing work, facilitating the exchange of knowledge and best practices and providing assistance to developing countries in implementing these transparency standards;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also recalls that new technologies can both increase efficiency in revenue collection and strengthen the efforts to combat illicit financial flows, expresses concern that virtual assets are being used for illicit activities, and in this regard encourages Member States and other relevant organizations to take measures in line with international standards, where applicable, to prevent and counter their illicit use;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 42</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that a wide variety of individuals and entities are involved in the transactions that comprise an illicit financial flow, recognizes the need to consider appropriate business regulatory policies, taking into account national circumstances, urges Member States to effectively regulate professional service providers, as appropriate, at the national level and, building on existing standards, commits to promoting global discussions on standardizing regulatory regimes of professional service providers involved in illicit financial flows, and in this regard reiterates its request to the Department of Economic and Social Affairs, the United Nations Office on Drugs and Crime and the United Nations Conference on Trade and Development to jointly prepare a global mapping of existing standards and guidelines, in consultation with all relevant stakeholders, taking into account national circumstances, and to submit these to the Economic and Social Council for intergovernmental discussion;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Notes that various jurisdictions have introduced mechanisms to increase beneficial ownership transparency, including beneficial ownership registries of legal entities and legal arrangements, such as companies, trusts and limited liability partnerships, encourages all jurisdictions to consider establishing appropriate mechanisms through either a registry of beneficial ownership or an alternative mechanism, in line with domestic law and applicable international standards, and encourages Member States to facilitate the timely availability of adequate, accurate and up-to-date beneficial ownership information;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 43</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to effectively investigate and refer for prosecution professional service providers who are involved in or enable criminal activities related to illicit financial flows, including corruption, tax evasion and money- laundering in accordance with national legislation, and to scale up international cooperation in this regard;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Also notes that a wide variety of individuals and entities are involved in the transactions that comprise an illicit financial flow, recognizes the need to consider appropriate business regulatory policies, taking into account national circumstances, urges Member States to effectively regulate professional service providers, as appropriate, at the national level and, building on existing standards, commits to promoting global discussions on standardizing regulatory regimes of professional service providers involved in illicit financial flows, and reiterates its request to the Department of Economic and Social Affairs, the United Nations Office on Drugs and Crime and the United Nations Conference on Trade and Development to jointly prepare a global mapping of existing standards and guidelines, in consultation with all relevant stakeholders, taking into account national circumstances, and to submit these to the Economic and Social Council for intergovernmental discussion;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 44</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the significant progress and availability of concepts and tested methods to measure illicit financial flows, notes the outcomes of pilot studies across three continents showing that measurement of these flows is possible, while challenging, and requires strengthened support, and calls for increased transparency and the strengthening of efforts to enhance the capacity of national authorities for data collection and analysis to combat illicit financial flows with more informed and targeted policy efforts, emphasizing the need to strengthen national capacity to measure illicit financial flows in the context of the 2030 Agenda and increase the exchange of data within national government institutions as well as from international institutions;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Calls upon States to effectively investigate and refer for prosecution professional service providers who are involved in or enable criminal activities related to illicit financial flows, including corruption, tax evasion and money- laundering in accordance with national legislation, and to scale up international cooperation in this regard; Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development A/RES/80/126 11/12 25-20739
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 45</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates its request to the United Nations Office on Drugs and Crime and the United Nations Conference on Trade and Development, as custodian agencies of Sustainable Development Goal indicator 16.4.1 on the total value of inward and outward illicit financial flows, to urgently strengthen support to Member States, especially developing countries, provide technical guidance and tools for data compilation and reporting, establish a platform to refine concepts and methods and empower national authorities to inform efforts to publish, track and curb the flows and exchange their good practices, and invites all Member States to engage with the custodian agencies towards more informed and effective policy action and reporting of data on the indicator, so as to overcome the substantial and persistent challenges to effectively combating illicit financial flows;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Recognizes the significant progress and availability of concepts and tested methods to measure illicit financial flows, notes the outcomes of pilot studies across three continents showing that measurement of these flows is possible, while challenging, and requires strengthened support, and calls for increased transparency and the strengthening of efforts to enhance the capacity of national authorities for data collection and analysis to combat illicit financial flows with more informed and targeted policy efforts, emphasizing the need to strengthen national capacity to measure illicit financial flows in the context of the 2030 Agenda and increase the exchange of data within national government institutions as well as from international institutions;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 46</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all institutions involved in measuring and reporting on illicit financial flows to use the statistical concepts and methods to estimate illicit financial flows, encourages all Member States to report on Sustainable Development Goal indicator 16.4.1, using the methodology adopted by the Statistical Commission, and calls upon the United Nations system entities, international organizations and donors to work in coordination with the custodian agencies to train national statistical offices A/C.2/80/L.23 11/11 25-16743 and other entities in charge of reporting and publishing results on illicit financial flows on these methods adopted by the Statistical Commission;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reiterates its request to the United Nations Office on Drugs and Crime and the United Nations Conference on Trade and Development, as custodian agencies of Sustainable Development Goal indicator 16.4.1 on the total value of inward and outward illicit financial flows, to urgently strengthen support to Member States, especially developing countries, provide technical guidance and tools for data compilation and reporting, establish a platform to refine concepts and methods and empower national authorities to inform efforts to publish, track and curb the flows and exchange their good practices, and invites all Member States to engage with the custodian agencies towards more informed and effective policy action and reporting of data on the indicator, so as to overcome the substantial and persistent challenges to effectively combating illicit financial flows;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 47</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the President of the General Assembly, the President of the Economic and Social Council, the Secretary-General and the United Nations Office on Drugs and Crime to give appropriate consideration to the importance of combating illicit financial flows and strengthening good practices on asset return to foster sustainable development, calls upon the relevant organizations of the United Nations system, within their respective mandates and resources, to continue their consideration of the negative impact of illicit financial flows on financing the 2030 Agenda based on its indicator 16.4.1 and to coordinate their efforts to further explore policy responses to the phenomenon, and in this regard invites all other relevant international institutions to support these efforts, in accordance with their respective mandates;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites all institutions involved in measuring and reporting on illicit financial flows to use the statistical concepts and methods to estimate illicit financial flows, encourages all Member States to report on Sustainable Development Goal indicator 16.4.1, using the methodology adopted by the Statistical Commission, and calls upon the United Nations system entities, international organizations and donors to work in coordination with the custodian agencies to train national statistical offices and other entities in charge of reporting and publishing results on illicit financial flows on these methods adopted by the Statistical Commission;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 48</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment at the very heart of the 2030 Agenda to leave no one behind and commit to taking more tangible steps to support people in vulnerable situations and the most vulnerable countries and to reach the furthest behind first;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Invites the President of the General Assembly, the President of the Economic and Social Council, the Secretary-General and the United Nations Office on Drugs and Crime to give appropriate consideration to the importance of combating illicit financial flows and strengthening good practices on asset return to foster sustainable development, calls upon the relevant organizations of the United Nations system, within their respective mandates and resources, to continue their consideration of the negative impact of illicit financial flows on financing the 2030 Agenda based on its indicator 16.4.1 and to coordinate their efforts to further explore policy responses to the phenomenon, and in this regard invites all other relevant international institutions to support these efforts, in accordance with their respective mandates;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 49</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Looks forward to the special meeting of the Economic and Social Council on financial integrity to foster dialogue on financial integrity at a systemic level, discuss unintended consequences of financial integrity policies and exchange best practices, including on the use of technologies to effectively combat illicit financial flows;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Reaffirms the commitment at the very heart of the 2030 Agenda to leave no one behind and commit to taking more tangible steps to support people in vulnerable situations and the most vulnerable countries and to reach the furthest behind first;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 50</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a report, within existing resources, in relation to progress made on combating illicit financial flows and the implementation of assets return and recovery based on existing mechanisms, and to elaborate on strengthening international coordination in this regard, and requests the United Nations Conference on Trade and Development and the United Nations Office on Drugs and Crime to inform the General Assembly at its eighty-first session about the implementation of the present resolution, through a dedicated section of the Sustainable Development Goals Pulse report, to be introduced to the Second Committee by the Secretariat, elaborating in particular on the progress in testing, refining and applying the methodology to report on indicator 16.4.1;
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Looks forward to the special meeting of the Economic and Social Council on financial integrity to foster dialogue on financial integrity at a systemic level, discuss unintended consequences of financial integrity policies and exchange best practices, including on the use of technologies to effectively combat illicit financial flows;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 51</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development”.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Requests the Secretary-General to submit to the General Assembly at its eighty-first session a report, within existing resources, in relation to progress made A/RES/80/126 Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development 25-20739 12/12 on combating illicit financial flows and the implementation of assets return and recovery based on existing mechanisms, and to elaborate on strengthening international coordination in this regard, and requests the United Nations Conference on Trade and Development and the United Nations Office on Drugs and Crime to inform the General Assembly at its eighty-first session about the implementation of the present resolution, through a dedicated section of the Sustainable Development Goals Pulse report, to be introduced to the Second Committee by the Secretariat, elaborating in particular on the progress in testing, refining and applying the methodology to report on indicator 16.4.1;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-3">Paragraph 52</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/C.2/80/L.23</div>
+                        <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            (not present)
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-gray-400 uppercase mb-2">A/RES/80/126</div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-sm text-gray-700 leading-relaxed">
+                            Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development”. 64th plenary meeting 15 December 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+            <a href="./A_C.2_80_L.23.html"
+               class="text-sm text-un-blue hover:underline">
+                View full original →
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
 
 <!-- Compute signal data -->
 
@@ -222,42 +1141,43 @@
         <span class="text-sm text-muted">8 with signals, 44 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
-        <button id="btn-signals-only" onclick="showSignalsOnly()" 
+        <button id="btn-signals-only" onclick="showSignalsOnly()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
-        <button onclick="filterSignal('PGA')" 
+        <button onclick="filterSignal('PGA')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
-        <button onclick="filterSignal('report')" 
+        <button onclick="filterSignal('report')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
         </button>
         
-        <button onclick="filterSignal('agenda')" 
+        <button onclick="filterSignal('agenda')"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
-        <button id="btn-show-all" onclick="toggleShowAll()" 
+        <button id="btn-show-all" onclick="toggleShowAll()"
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
 </div>
 
+
 <!-- Paragraphs -->
 <div class="space-y-4" id="paragraphs">
     
-    <div id="para-1" 
+    <div id="para-1"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -274,7 +1194,7 @@
         </div>
     </div>
     
-    <div id="para-2" 
+    <div id="para-2"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -291,7 +1211,7 @@
         </div>
     </div>
     
-    <div id="para-3" 
+    <div id="para-3"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -318,7 +1238,7 @@
         </div>
     </div>
     
-    <div id="para-4" 
+    <div id="para-4"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -335,7 +1255,7 @@
         </div>
     </div>
     
-    <div id="para-5" 
+    <div id="para-5"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -352,7 +1272,7 @@
         </div>
     </div>
     
-    <div id="para-6" 
+    <div id="para-6"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -369,7 +1289,7 @@
         </div>
     </div>
     
-    <div id="para-7" 
+    <div id="para-7"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -386,7 +1306,7 @@
         </div>
     </div>
     
-    <div id="para-8" 
+    <div id="para-8"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -403,7 +1323,7 @@
         </div>
     </div>
     
-    <div id="para-9" 
+    <div id="para-9"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -420,7 +1340,7 @@
         </div>
     </div>
     
-    <div id="para-10" 
+    <div id="para-10"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -437,7 +1357,7 @@
         </div>
     </div>
     
-    <div id="para-11" 
+    <div id="para-11"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -454,7 +1374,7 @@
         </div>
     </div>
     
-    <div id="para-12" 
+    <div id="para-12"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -471,7 +1391,7 @@
         </div>
     </div>
     
-    <div id="para-13" 
+    <div id="para-13"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -488,7 +1408,7 @@
         </div>
     </div>
     
-    <div id="para-14" 
+    <div id="para-14"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -505,7 +1425,7 @@
         </div>
     </div>
     
-    <div id="para-15" 
+    <div id="para-15"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -522,7 +1442,7 @@
         </div>
     </div>
     
-    <div id="para-16" 
+    <div id="para-16"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -539,7 +1459,7 @@
         </div>
     </div>
     
-    <div id="para-17" 
+    <div id="para-17"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -556,7 +1476,7 @@
         </div>
     </div>
     
-    <div id="para-18" 
+    <div id="para-18"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -573,7 +1493,7 @@
         </div>
     </div>
     
-    <div id="para-19" 
+    <div id="para-19"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -590,7 +1510,7 @@
         </div>
     </div>
     
-    <div id="para-20" 
+    <div id="para-20"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -607,7 +1527,7 @@
         </div>
     </div>
     
-    <div id="para-21" 
+    <div id="para-21"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -624,7 +1544,7 @@
         </div>
     </div>
     
-    <div id="para-22" 
+    <div id="para-22"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -641,7 +1561,7 @@
         </div>
     </div>
     
-    <div id="para-23" 
+    <div id="para-23"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -658,7 +1578,7 @@
         </div>
     </div>
     
-    <div id="para-24" 
+    <div id="para-24"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -685,7 +1605,7 @@
         </div>
     </div>
     
-    <div id="para-25" 
+    <div id="para-25"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -702,7 +1622,7 @@
         </div>
     </div>
     
-    <div id="para-26" 
+    <div id="para-26"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -719,7 +1639,7 @@
         </div>
     </div>
     
-    <div id="para-27" 
+    <div id="para-27"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -736,7 +1656,7 @@
         </div>
     </div>
     
-    <div id="para-28" 
+    <div id="para-28"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -753,7 +1673,7 @@
         </div>
     </div>
     
-    <div id="para-29" 
+    <div id="para-29"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -770,7 +1690,7 @@
         </div>
     </div>
     
-    <div id="para-30" 
+    <div id="para-30"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -787,7 +1707,7 @@
         </div>
     </div>
     
-    <div id="para-31" 
+    <div id="para-31"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -804,7 +1724,7 @@
         </div>
     </div>
     
-    <div id="para-32" 
+    <div id="para-32"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -821,7 +1741,7 @@
         </div>
     </div>
     
-    <div id="para-33" 
+    <div id="para-33"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -838,7 +1758,7 @@
         </div>
     </div>
     
-    <div id="para-34" 
+    <div id="para-34"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -855,7 +1775,7 @@
         </div>
     </div>
     
-    <div id="para-35" 
+    <div id="para-35"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -872,7 +1792,7 @@
         </div>
     </div>
     
-    <div id="para-36" 
+    <div id="para-36"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -889,7 +1809,7 @@
         </div>
     </div>
     
-    <div id="para-37" 
+    <div id="para-37"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -906,7 +1826,7 @@
         </div>
     </div>
     
-    <div id="para-38" 
+    <div id="para-38"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -923,7 +1843,7 @@
         </div>
     </div>
     
-    <div id="para-39" 
+    <div id="para-39"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -940,7 +1860,7 @@
         </div>
     </div>
     
-    <div id="para-40" 
+    <div id="para-40"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -967,7 +1887,7 @@
         </div>
     </div>
     
-    <div id="para-41" 
+    <div id="para-41"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -984,7 +1904,7 @@
         </div>
     </div>
     
-    <div id="para-42" 
+    <div id="para-42"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1001,7 +1921,7 @@
         </div>
     </div>
     
-    <div id="para-43" 
+    <div id="para-43"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1028,7 +1948,7 @@
         </div>
     </div>
     
-    <div id="para-44" 
+    <div id="para-44"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1045,7 +1965,7 @@
         </div>
     </div>
     
-    <div id="para-45" 
+    <div id="para-45"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1062,7 +1982,7 @@
         </div>
     </div>
     
-    <div id="para-46" 
+    <div id="para-46"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1089,7 +2009,7 @@
         </div>
     </div>
     
-    <div id="para-47" 
+    <div id="para-47"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1106,7 +2026,7 @@
         </div>
     </div>
     
-    <div id="para-48" 
+    <div id="para-48"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
@@ -1133,7 +2053,7 @@
         </div>
     </div>
     
-    <div id="para-49" 
+    <div id="para-49"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1150,7 +2070,7 @@
         </div>
     </div>
     
-    <div id="para-50" 
+    <div id="para-50"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
@@ -1167,7 +2087,7 @@
         </div>
     </div>
     
-    <div id="para-51" 
+    <div id="para-51"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA", "report"]'
          data-has-signals="true">
@@ -1199,7 +2119,7 @@
         </div>
     </div>
     
-    <div id="para-52" 
+    <div id="para-52"
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
@@ -1231,19 +2151,32 @@
 <script>
 let showingAll = false;
 
+function toggleComparison() {
+    const panel = document.getElementById('comparison-panel');
+    const chevron = document.getElementById('lineage-chevron');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+    } else {
+        panel.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+    }
+}
+
 function filterSignal(signal) {
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
-    
+
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
-        
+
         if (signals.includes(signal)) {
             row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
@@ -1258,14 +2191,14 @@ function filterSignal(signal) {
 function showSignalsOnly() {
     showingAll = false;
     const rows = document.querySelectorAll('.para-row');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
         btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
-    
+
     rows.forEach(row => {
         row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
@@ -1281,12 +2214,12 @@ function toggleShowAll() {
     showingAll = !showingAll;
     const rows = document.querySelectorAll('.para-row');
     const btn = document.getElementById('btn-show-all');
-    
+
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
         b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    
+
     if (showingAll) {
         btn.textContent = 'Hide Others';
         btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
@@ -1305,12 +2238,14 @@ function toggleShowAll() {
     }
 }
 
-// Initialize: show only paragraphs with signals
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
         signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
+    
 });
 
 // Handle anchor links
