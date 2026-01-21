@@ -43,14 +43,16 @@
                     </td>
                     {% for check in checks %}
                     {% set count = matrix.get(pattern.name, {}).get(check.signal, 0) %}
+                    {% set signal_slug = check.signal|lower|replace(' ', '-') %}
                     <td class="text-center py-4 px-4">
                         {% if count > 0 %}
-                        <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium
-                            {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
-                            {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
-                            {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        <a href="./matrix/{{ pattern_slug }}_{{ signal_slug }}.html" 
+                           class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                            {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700 hover:bg-blue-100
+                            {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700 hover:bg-purple-100
+                            {% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
                             {{ count }}
-                        </span>
+                        </a>
                         {% else %}
                         <span class="text-gray-300">—</span>
                         {% endif %}

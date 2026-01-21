@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}{{ signal }} in {{ pattern.name }} - Mandate Pipeline{% endblock %}
+
+{% block nav_index %}../index.html{% endblock %}
+{% block nav_documents %}../documents/index.html{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav class="mb-6 text-sm">
+    <ol class="flex items-center space-x-2 text-muted">
+        <li><a href="../index.html" class="hover:text-un-blue transition-colors">Home</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="../patterns/{{ pattern_slug }}.html" class="hover:text-un-blue transition-colors">{{ pattern.name }}</a></li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">{{ signal }}</li>
+    </ol>
+</nav>
+
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">{{ signal }}</h1>
+    <p class="mt-2 text-lg text-muted">{{ documents|length }} documents in {{ pattern.name }}</p>
+</div>
+
+<!-- Documents Table -->
+{% if documents %}
+<div class="border border-gray-200 rounded-lg overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="bg-gray-50 border-b border-gray-200">
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Symbol</th>
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">Paragraphs</th>
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">{{ signal }} Count</th>
+                <th class="text-right py-3 px-4 text-sm font-medium text-gray-500">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for doc in documents %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        {{ doc.symbol }}
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">{{ doc.num_paragraphs }}</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        {% if 'agenda' in signal|lower %}bg-blue-50 text-blue-700
+                        {% elif 'pga' in signal|lower %}bg-purple-50 text-purple-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ doc.signal_summary.get(signal, 0) }}
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="text-center py-12 text-muted">
+    <p>No documents with {{ signal }} signal in {{ pattern.name }}.</p>
+</div>
+{% endif %}
+
+<!-- Back Link -->
+<div class="mt-8">
+    <a href="../patterns/{{ pattern_slug }}.html" class="text-un-blue hover:underline">← Back to {{ pattern.name }}</a>
+</div>
+{% endblock %}

@@ -289,7 +289,7 @@ def symbol_matches_pattern(symbol: str, pattern: dict) -> bool:
 
     Args:
         symbol: Document symbol (e.g., "A/RES/80/1")
-        pattern: Pattern definition with template
+        pattern: Pattern definition with template and variable values
 
     Returns:
         True if symbol matches the pattern
@@ -297,11 +297,25 @@ def symbol_matches_pattern(symbol: str, pattern: dict) -> bool:
     template = pattern.get("template", "")
     
     # Convert template to regex pattern
-    # e.g., "A/RES/{session}/{number}" -> "A/RES/\d+/\d+"
+    # For variables with specific values in the pattern, use those values
+    # For {number}, always use \d+ since it varies
     regex_pattern = template
-    regex_pattern = regex_pattern.replace("{session}", r"\d+")
+    
+    # Replace {number} with \d+ (always variable)
     regex_pattern = regex_pattern.replace("{number}", r"\d+")
-    regex_pattern = regex_pattern.replace("{committee}", r"\d+")
+    
+    # Replace other placeholders with their actual values or \d+
+    for key in ["session", "committee"]:
+        placeholder = "{" + key + "}"
+        if placeholder in regex_pattern:
+            value = pattern.get(key)
+            if value is not None:
+                # Use the specific value from the pattern
+                regex_pattern = regex_pattern.replace(placeholder, str(value))
+            else:
+                # No specific value, match any digits
+                regex_pattern = regex_pattern.replace(placeholder, r"\d+")
+    
     regex_pattern = "^" + regex_pattern + "$"
     
     return bool(re.match(regex_pattern, symbol))
@@ -339,13 +353,25 @@ def group_documents_by_pattern(documents: list, patterns: list) -> dict:
     return documents_by_pattern
 
 
-def generate_documents_list_page(documents: list, checks: list, output_dir: Path) -> None:
+def natural_sort_key(symbol: str) -> list:
+    """
+    Generate a sort key for natural sorting of document symbols.
+    
+    This ensures A/80/L.9 comes before A/80/L.10.
+    """
+    import re
+    parts = re.split(r'(\d+)', symbol)
+    return [int(p) if p.isdigit() else p.lower() for p in parts]
+
+
+def generate_documents_list_page(documents: list, checks: list, patterns: list, output_dir: Path) -> None:
     """
     Generate documents list page (documents/index.html).
 
     Args:
         documents: All documents
         checks: All check definitions
+        patterns: All pattern definitions
         output_dir: Output directory (documents/ subdirectory)
     """
     output_dir = Path(output_dir)
@@ -360,9 +386,18 @@ def generate_documents_list_page(documents: list, checks: list, output_dir: Path
         for sig, count in doc.get("signal_summary", {}).items():
             total_signal_counts[sig] = total_signal_counts.get(sig, 0) + count
 
+    # Group documents by pattern and sort naturally within each group
+    docs_by_pattern = group_documents_by_pattern(documents, patterns)
+    
+    # Sort documents within each pattern group using natural sort
+    for pattern_name in docs_by_pattern:
+        docs_by_pattern[pattern_name].sort(key=lambda d: natural_sort_key(d["symbol"]))
+
     html = template.render(
         documents=documents,
         checks=checks,
+        patterns=patterns,
+        docs_by_pattern=docs_by_pattern,
         total_docs=len(documents),
         docs_with_signals=len([d for d in documents if d.get("signals")]),
         total_signal_counts=total_signal_counts,
@@ -466,6 +501,68 @@ def generate_pattern_page(documents: list, pattern: dict, checks: list, patterns
         f.write(html)
 
 
+def get_pattern_slug(pattern_name: str) -> str:
+    """Convert pattern name to URL slug."""
+    return pattern_name.lower().replace(" ", "_").replace(".", "").replace("(", "").replace(")", "")
+
+
+def get_signal_slug(signal: str) -> str:
+    """Convert signal name to URL slug."""
+    return signal.lower().replace(" ", "-")
+
+
+def generate_pattern_signal_page(
+    documents: list,
+    pattern: dict,
+    signal: str,
+    patterns: list,
+    output_dir: Path
+) -> None:
+    """
+    Generate page showing documents with a specific signal in a specific pattern.
+
+    Args:
+        documents: All documents
+        pattern: Pattern definition
+        signal: Signal name to filter by
+        patterns: All pattern definitions (for grouping)
+        output_dir: Output directory (matrix/ subdirectory)
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    env = get_templates_env()
+    template = env.get_template("pattern_signal.html")
+
+    pattern_name = pattern["name"]
+    pattern_slug = get_pattern_slug(pattern_name)
+    signal_slug = get_signal_slug(signal)
+
+    # Get documents matching this pattern that have this signal
+    docs_by_pattern = group_documents_by_pattern(documents, patterns)
+    pattern_docs = docs_by_pattern.get(pattern_name, [])
+    
+    # Filter to only docs with this signal
+    filtered_docs = [
+        doc for doc in pattern_docs
+        if signal in doc.get("signal_summary", {})
+    ]
+    
+    # Sort by signal count descending
+    filtered_docs.sort(key=lambda d: d.get("signal_summary", {}).get(signal, 0), reverse=True)
+
+    html = template.render(
+        pattern=pattern,
+        pattern_slug=pattern_slug,
+        signal=signal,
+        documents=filtered_docs,
+    )
+
+    filename = f"{pattern_slug}_{signal_slug}.html"
+    with open(output_dir / filename, "w") as f:
+        f.write(html)
+
+
 def generate_index_page(documents: list, checks: list, patterns: list, output_dir: Path) -> None:
     """
     Generate main index/dashboard page.
@@ -533,10 +630,11 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     (output_dir / "documents").mkdir(exist_ok=True)
     (output_dir / "signals").mkdir(exist_ok=True)
     (output_dir / "patterns").mkdir(exist_ok=True)
+    (output_dir / "matrix").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(documents, checks, patterns, output_dir)
-    generate_documents_list_page(documents, checks, output_dir / "documents")
+    generate_documents_list_page(documents, checks, patterns, output_dir / "documents")
 
     for doc in documents:
         generate_document_page(doc, checks, output_dir / "documents")
@@ -546,6 +644,9 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
 
     for pattern in patterns:
         generate_pattern_page(documents, pattern, checks, patterns, output_dir / "patterns")
+        # Generate pattern+signal pages
+        for check in checks:
+            generate_pattern_signal_page(documents, pattern, check["signal"], patterns, output_dir / "matrix")
 
     # Generate data exports
     generate_data_json(documents, checks, output_dir)
@@ -658,13 +759,14 @@ def generate_site_verbose(
     (output_dir / "documents").mkdir(exist_ok=True)
     (output_dir / "signals").mkdir(exist_ok=True)
     (output_dir / "patterns").mkdir(exist_ok=True)
+    (output_dir / "matrix").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(documents, checks, patterns, output_dir)
     if on_generate_page:
         on_generate_page("index", "index.html")
 
-    generate_documents_list_page(documents, checks, output_dir / "documents")
+    generate_documents_list_page(documents, checks, patterns, output_dir / "documents")
     if on_generate_page:
         on_generate_page("documents_list", "documents/index.html")
 
@@ -680,9 +782,15 @@ def generate_site_verbose(
 
     for pattern in patterns:
         generate_pattern_page(documents, pattern, checks, patterns, output_dir / "patterns")
-        slug = pattern["name"].lower().replace(" ", "_").replace(".", "").replace("(", "").replace(")", "")
+        pattern_slug = get_pattern_slug(pattern["name"])
         if on_generate_page:
-            on_generate_page("pattern", f"patterns/{slug}.html")
+            on_generate_page("pattern", f"patterns/{pattern_slug}.html")
+        # Generate pattern+signal pages
+        for check in checks:
+            generate_pattern_signal_page(documents, pattern, check["signal"], patterns, output_dir / "matrix")
+            signal_slug = get_signal_slug(check["signal"])
+            if on_generate_page:
+                on_generate_page("matrix", f"matrix/{pattern_slug}_{signal_slug}.html")
 
     # Generate data exports
     generate_data_json(documents, checks, output_dir)

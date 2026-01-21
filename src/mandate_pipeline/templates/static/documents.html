@@ -30,75 +30,148 @@
     
     <div class="flex-1"></div>
     
-    <div class="relative">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-        <input type="text" id="search" placeholder="Search documents..." 
-               class="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-un-blue focus:border-un-blue w-64"
-               oninput="performSearch()">
+    <div class="flex items-center gap-4">
+        <button onclick="toggleAllSections()" id="toggle-all-btn" class="text-sm text-un-blue hover:underline">
+            Collapse All
+        </button>
+        <div class="relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" id="search" placeholder="Search documents..." 
+                   class="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-un-blue focus:border-un-blue w-64"
+                   oninput="performSearch()">
+        </div>
+        <span class="text-sm text-muted"><span id="visibleCount">{{ total_docs }}</span> shown</span>
     </div>
-    <span class="text-sm text-muted"><span id="visibleCount">{{ total_docs }}</span> shown</span>
 </div>
 
-<!-- Documents Table -->
-{% if documents %}
-<div class="border border-gray-200 rounded-lg overflow-hidden">
-    <table class="w-full" id="documentsTable">
-        <thead>
-            <tr class="bg-gray-50 border-b border-gray-200">
-                <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Symbol</th>
-                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">Paragraphs</th>
-                {% for check in checks %}
-                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">{{ check.signal }}</th>
-                {% endfor %}
-                <th class="text-right py-3 px-4 text-sm font-medium text-gray-500">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100">
-            {% for doc in documents %}
-            <tr class="doc-row hover:bg-gray-50 transition-colors"
-                data-symbol="{{ doc.symbol|lower }}"
-                data-signals='{{ doc.signal_summary|tojson }}'>
-                <td class="py-3 px-4">
-                    <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
-                        {{ doc.symbol }}
-                    </a>
-                </td>
-                <td class="text-center py-3 px-4 text-sm text-muted">{{ doc.num_paragraphs }}</td>
-                {% for check in checks %}
-                {% set count = doc.signal_summary.get(check.signal, 0) %}
-                <td class="text-center py-3 px-4">
-                    {% if count > 0 %}
-                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
-                        {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
-                        {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
-                        {% else %}bg-gray-100 text-gray-700{% endif %}">
-                        {{ count }}
-                    </span>
-                    {% else %}
-                    <span class="text-gray-300">—</span>
-                    {% endif %}
-                </td>
-                {% endfor %}
-                <td class="text-right py-3 px-4">
-                    <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
-                    <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
-                </td>
-            </tr>
+<!-- Documents grouped by pattern -->
+{% for pattern in patterns %}
+{% set pattern_docs = docs_by_pattern.get(pattern.name, []) %}
+{% set pattern_slug = pattern.name|lower|replace(' ', '_')|replace('.', '')|replace('(', '')|replace(')', '') %}
+{% if pattern_docs %}
+<div class="pattern-section mb-4" data-pattern="{{ pattern.name }}">
+    <!-- Pattern Header (clickable to toggle) -->
+    <button onclick="toggleSection('{{ pattern_slug }}')" 
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg id="chevron-{{ pattern_slug }}" class="w-5 h-5 text-gray-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+            <span class="font-semibold text-gray-900">{{ pattern.name }}</span>
+            <span class="text-sm text-muted">(<span class="pattern-count" data-pattern="{{ pattern.name }}">{{ pattern_docs|length }}</span> documents)</span>
+        </div>
+        <div class="flex items-center gap-2">
+            {% for check in checks %}
+            {% set sig_count = 0 %}
+            {% for doc in pattern_docs %}
+            {% set sig_count = sig_count + doc.signal_summary.get(check.signal, 0) %}
             {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-{% else %}
-<div class="text-center py-16">
-    <p class="text-muted">No documents found. Run the discovery pipeline to download documents.</p>
+            {% if sig_count > 0 %}
+            <span class="px-2 py-0.5 rounded-full text-xs font-medium
+                {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
+                {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
+                {% else %}bg-gray-100 text-gray-700{% endif %}">
+                {{ check.signal }}: {{ sig_count }}
+            </span>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </button>
+    
+    <!-- Pattern Documents Table -->
+    <div id="section-{{ pattern_slug }}" class="pattern-content border-x border-b border-gray-200 rounded-b-lg overflow-hidden">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                    <th class="text-left py-2 px-4 text-xs font-medium text-gray-500 uppercase">Symbol</th>
+                    <th class="text-center py-2 px-4 text-xs font-medium text-gray-500 uppercase">Paragraphs</th>
+                    {% for check in checks %}
+                    <th class="text-center py-2 px-4 text-xs font-medium text-gray-500 uppercase">{{ check.signal }}</th>
+                    {% endfor %}
+                    <th class="text-right py-2 px-4 text-xs font-medium text-gray-500 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for doc in pattern_docs %}
+                <tr class="doc-row hover:bg-gray-50 transition-colors"
+                    data-symbol="{{ doc.symbol|lower }}"
+                    data-pattern="{{ pattern.name }}"
+                    data-signals='{{ doc.signal_summary|tojson }}'>
+                    <td class="py-2 px-4">
+                        <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            {{ doc.symbol }}
+                        </a>
+                    </td>
+                    <td class="text-center py-2 px-4 text-sm text-muted">{{ doc.num_paragraphs }}</td>
+                    {% for check in checks %}
+                    {% set count = doc.signal_summary.get(check.signal, 0) %}
+                    <td class="text-center py-2 px-4">
+                        {% if count > 0 %}
+                        <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                            {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
+                            {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
+                            {% else %}bg-gray-100 text-gray-700{% endif %}">
+                            {{ count }}
+                        </span>
+                        {% else %}
+                        <span class="text-gray-300">-</span>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                    <td class="text-right py-2 px-4">
+                        <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                        <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endif %}
+{% endfor %}
 
 <script>
 let currentFilter = 'all';
+let allExpanded = true;
+
+function toggleSection(slug) {
+    const section = document.getElementById(`section-${slug}`);
+    const chevron = document.getElementById(`chevron-${slug}`);
+    
+    if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        chevron.classList.remove('-rotate-90');
+    } else {
+        section.classList.add('hidden');
+        chevron.classList.add('-rotate-90');
+    }
+    updateToggleAllButton();
+}
+
+function toggleAllSections() {
+    const sections = document.querySelectorAll('.pattern-content');
+    const chevrons = document.querySelectorAll('[id^="chevron-"]');
+    
+    if (allExpanded) {
+        sections.forEach(s => s.classList.add('hidden'));
+        chevrons.forEach(c => c.classList.add('-rotate-90'));
+    } else {
+        sections.forEach(s => s.classList.remove('hidden'));
+        chevrons.forEach(c => c.classList.remove('-rotate-90'));
+    }
+    allExpanded = !allExpanded;
+    updateToggleAllButton();
+}
+
+function updateToggleAllButton() {
+    const sections = document.querySelectorAll('.pattern-content');
+    const hiddenCount = Array.from(sections).filter(s => s.classList.contains('hidden')).length;
+    allExpanded = hiddenCount === 0;
+    document.getElementById('toggle-all-btn').textContent = allExpanded ? 'Collapse All' : 'Expand All';
+}
 
 function filterBySignal(signal) {
     currentFilter = signal;
@@ -128,8 +201,12 @@ function applyFilters() {
     const rows = document.querySelectorAll('.doc-row');
     let visible = 0;
     
+    // Track visible docs per pattern
+    const patternCounts = {};
+    
     rows.forEach(row => {
         const symbol = row.dataset.symbol;
+        const pattern = row.dataset.pattern;
         const signals = JSON.parse(row.dataset.signals || '{}');
         
         let show = true;
@@ -145,10 +222,25 @@ function applyFilters() {
         }
         
         row.style.display = show ? '' : 'none';
-        if (show) visible++;
+        if (show) {
+            visible++;
+            patternCounts[pattern] = (patternCounts[pattern] || 0) + 1;
+        }
     });
     
+    // Update visible count
     document.getElementById('visibleCount').textContent = visible;
+    
+    // Update pattern counts and hide empty pattern sections
+    document.querySelectorAll('.pattern-section').forEach(section => {
+        const patternName = section.dataset.pattern;
+        const count = patternCounts[patternName] || 0;
+        const countSpan = section.querySelector('.pattern-count');
+        if (countSpan) {
+            countSpan.textContent = count;
+        }
+        section.style.display = count > 0 ? '' : 'none';
+    });
 }
 
 // Initialize

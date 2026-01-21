@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agenda in C1 proposals - Mandate Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'un-blue': '#009edb',
+                        'un-blue-dark': '#0077a8',
+                        'muted': '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background: rgba(0, 158, 219, 0.2); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                </a>
+                <nav class="flex items-center gap-8">
+                    <a href="../documents/index.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Documents</a>
+                    <a href="./data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+<!-- Breadcrumb -->
+<nav class="mb-6 text-sm">
+    <ol class="flex items-center space-x-2 text-muted">
+        <li><a href="../index.html" class="hover:text-un-blue transition-colors">Home</a></li>
+        <li class="text-gray-400">/</li>
+        <li><a href="../patterns/c1_proposals.html" class="hover:text-un-blue transition-colors">C1 proposals</a></li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900 font-medium">agenda</li>
+    </ol>
+</nav>
+
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">agenda</h1>
+    <p class="mt-2 text-lg text-muted">59 documents in C1 proposals</p>
+</div>
+
+<!-- Documents Table -->
+
+<div class="border border-gray-200 rounded-lg overflow-hidden">
+    <table class="w-full">
+        <thead>
+            <tr class="bg-gray-50 border-b border-gray-200">
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Symbol</th>
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">Paragraphs</th>
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">agenda Count</th>
+                <th class="text-right py-3 px-4 text-sm font-medium text-gray-500">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.1.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.1
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">12</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.1.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.1?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.2.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.2
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">8</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.2.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.2?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.3.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.3
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">9</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.3.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.3?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.4.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.4
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">13</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.4.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.4?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.5.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.5
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.5.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.5?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.6.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.6
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">9</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.6.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.6?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.7.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.7
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.7.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.7?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.8.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.8
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">4</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.8.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.8?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.9.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.9
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">20</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.9.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.9?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.10.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.10
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">5</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.10.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.10?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.11.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.11
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">8</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.11.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.11?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.12.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.12
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">5</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.12.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.12?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.13.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.13
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">5</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.13.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.13?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.14.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.14
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">9</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.14.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.14?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.15.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.15
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">15</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.15.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.15?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.16.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.16
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">7</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.16.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.16?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.17.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.17
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">7</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.17.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.17?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.18.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.18
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">15</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.18.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.18?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.19.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.19
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">17</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.19.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.19?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.20.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.20
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">4</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.20.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.20?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.21.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.21
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">7</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.21.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.21?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.22.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.22
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.22.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.22?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.24.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.24
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.24.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.24?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.25.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.25
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">4</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.25.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.25?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.26.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.26
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.26.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.26?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.27.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.27
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">9</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.27.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.27?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.28.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.28
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">10</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.28.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.28?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.29.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.29
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">15</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.29.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.29?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.30.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.30
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.30.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.30?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.31.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.31
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">10</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.31.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.31?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.32.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.32
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">8</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.32.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.32?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.33.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.33
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">14</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.33.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.33?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.34.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.34
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">10</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.34.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.34?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.36.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.36
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.36.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.36?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.37.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.37
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">7</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.37.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.37?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.38.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.38
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.38.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.38?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.40.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.40
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.40.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.40?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.41.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.41
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">4</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.41.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.41?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.42.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.42
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">10</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.42.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.42?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.43.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.43
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.43.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.43?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.44.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.44
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">23</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.44.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.44?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.45.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.45
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">6</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.45.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.45?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.46.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.46
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.46.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.46?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.47.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.47
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">12</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.47.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.47?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.48.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.48
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">12</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.48.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.48?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.49.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.49
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">10</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.49.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.49?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.50.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.50
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">5</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.50.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.50?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.51.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.51
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">37</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.51.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.51?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.52.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.52
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.52.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.52?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.53.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.53
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">7</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.53.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.53?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.54.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.54
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">37</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.54.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.54?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.55.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.55
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">32</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.55.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.55?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.56.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.56
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">4</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.56.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.56?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.57.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.57
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">4</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.57.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.57?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.58.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.58
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">11</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.58.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.58?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.59.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.59
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">12</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.59.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.59?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.60.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.60
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">20</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.60.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.60?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.61.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.61
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">10</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.61.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.61?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.62.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        A/C.1/80/L.62
+                    </a>
+                </td>
+                <td class="text-center py-3 px-4 text-sm text-muted">36</td>
+                <td class="text-center py-3 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
+                        bg-blue-50 text-blue-700
+                        ">
+                        1
+                    </span>
+                </td>
+                <td class="text-right py-3 px-4">
+                    <a href="../documents/A_C.1_80_L.62.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                    <a href="https://docs.un.org/en/a/c.1/80/l.62?direct=true" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Back Link -->
+<div class="mt-8">
+    <a href="../patterns/c1_proposals.html" class="text-un-blue hover:underline">← Back to C1 proposals</a>
+</div>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <p class="text-sm text-muted">
+                
+                Generated by Mandate Pipeline
+                
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
