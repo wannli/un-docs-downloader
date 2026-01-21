@@ -8,30 +8,14 @@
 {% block content %}
 <!-- Header -->
 <div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Documents</h1>
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">All Documents</h1>
     <p class="mt-2 text-muted">{{ total_docs }} documents analyzed</p>
 </div>
 
 <!-- Filters -->
 <div class="mb-6 flex flex-wrap items-center gap-4">
-    <!-- View Toggle -->
     <div class="flex items-center gap-2">
-        <span class="text-sm text-muted">View:</span>
-        <button onclick="setView('final')" id="btn-view-final"
-                class="view-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all bg-gray-900 text-white">
-            Final versions
-        </button>
-        <button onclick="setView('all')" id="btn-view-all"
-                class="view-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all bg-gray-100 text-gray-700 hover:bg-gray-200">
-            All
-        </button>
-    </div>
-
-    <div class="w-px h-6 bg-gray-200"></div>
-
-    <!-- Signal Filter -->
-    <div class="flex items-center gap-2">
-        <span class="text-sm text-muted">Signal:</span>
+        <span class="text-sm text-muted">Filter:</span>
         <button onclick="filterBySignal('all')" id="btn-all"
                 class="check-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all bg-gray-900 text-white">
             All
@@ -43,15 +27,18 @@
         </button>
         {% endfor %}
     </div>
-
+    
     <div class="flex-1"></div>
-
+    
     <div class="flex items-center gap-4">
+        <button onclick="toggleAllSections()" id="toggle-all-btn" class="text-sm text-un-blue hover:underline">
+            Collapse All
+        </button>
         <div class="relative">
             <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <input type="text" id="search" placeholder="Search documents..."
+            <input type="text" id="search" placeholder="Search documents..." 
                    class="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-un-blue focus:border-un-blue w-64"
                    oninput="performSearch()">
         </div>
@@ -59,53 +46,68 @@
     </div>
 </div>
 
-<!-- Documents Table -->
-<div class="border border-gray-200 rounded-lg overflow-hidden">
-    <table class="w-full">
-        <thead>
-            <tr class="bg-gray-50 border-b border-gray-200">
-                <th class="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase">Symbol</th>
-                <th class="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase">Title</th>
-                <th class="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase">Signals</th>
-                <th class="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th class="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100">
-            {% for doc in documents %}
-            <tr class="doc-row hover:bg-gray-50 transition-colors {% if doc.status == 'superseded' %}superseded-row{% endif %}"
-                data-symbol="{{ doc.symbol|lower }}"
-                data-status="{{ doc.status }}"
-                data-is-primary="{{ doc.is_primary|lower }}"
-                data-signals='{{ doc.signal_summary|tojson }}'>
-                <td class="py-3 px-4">
-                    <div>
-                        <a href="./{{ doc.symbol|replace('/', '_') }}.html"
-                           class="font-medium {% if doc.status == 'superseded' %}text-gray-400{% else %}text-gray-900 hover:text-un-blue{% endif %} transition-colors">
+<!-- Documents grouped by pattern -->
+{% for pattern in patterns %}
+{% set pattern_docs = docs_by_pattern.get(pattern.name, []) %}
+{% set pattern_slug = pattern.name|lower|replace(' ', '_')|replace('.', '')|replace('(', '')|replace(')', '') %}
+{% if pattern_docs %}
+<div class="pattern-section mb-4" data-pattern="{{ pattern.name }}">
+    <!-- Pattern Header (clickable to toggle) -->
+    <button onclick="toggleSection('{{ pattern_slug }}')" 
+            class="w-full flex items-center justify-between px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
+        <div class="flex items-center gap-3">
+            <svg id="chevron-{{ pattern_slug }}" class="w-5 h-5 text-gray-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+            <span class="font-semibold text-gray-900">{{ pattern.name }}</span>
+            <span class="text-sm text-muted">(<span class="pattern-count" data-pattern="{{ pattern.name }}">{{ pattern_docs|length }}</span> documents)</span>
+        </div>
+        <div class="flex items-center gap-2">
+            {% for check in checks %}
+            {% set sig_count = 0 %}
+            {% for doc in pattern_docs %}
+            {% set sig_count = sig_count + doc.signal_summary.get(check.signal, 0) %}
+            {% endfor %}
+            {% if sig_count > 0 %}
+            <span class="px-2 py-0.5 rounded-full text-xs font-medium
+                {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
+                {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
+                {% else %}bg-gray-100 text-gray-700{% endif %}">
+                {{ check.signal }}: {{ sig_count }}
+            </span>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </button>
+    
+    <!-- Pattern Documents Table -->
+    <div id="section-{{ pattern_slug }}" class="pattern-content border-x border-b border-gray-200 rounded-b-lg overflow-hidden">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                    <th class="text-left py-2 px-4 text-xs font-medium text-gray-500 uppercase">Symbol</th>
+                    <th class="text-center py-2 px-4 text-xs font-medium text-gray-500 uppercase">Paragraphs</th>
+                    {% for check in checks %}
+                    <th class="text-center py-2 px-4 text-xs font-medium text-gray-500 uppercase">{{ check.signal }}</th>
+                    {% endfor %}
+                    <th class="text-right py-2 px-4 text-xs font-medium text-gray-500 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for doc in pattern_docs %}
+                <tr class="doc-row hover:bg-gray-50 transition-colors"
+                    data-symbol="{{ doc.symbol|lower }}"
+                    data-pattern="{{ pattern.name }}"
+                    data-signals='{{ doc.signal_summary|tojson }}'>
+                    <td class="py-2 px-4">
+                        <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
                             {{ doc.symbol }}
                         </a>
-                        {% if doc.status == 'adopted' and doc.linked_proposal_symbols %}
-                        <div class="text-xs text-muted mt-0.5">
-                            ← {{ doc.linked_proposal_symbols[0] }}
-                        </div>
-                        {% endif %}
-                        {% if doc.status == 'superseded' and doc.linked_resolution_symbol %}
-                        <div class="text-xs text-gray-400 mt-0.5">
-                            → {{ doc.linked_resolution_symbol }}
-                        </div>
-                        {% endif %}
-                    </div>
-                </td>
-                <td class="py-3 px-4">
-                    <span class="text-sm {% if doc.status == 'superseded' %}text-gray-400{% else %}text-gray-600{% endif %} line-clamp-1">
-                        {{ doc.title|default('—', true)|truncate(60) }}
-                    </span>
-                </td>
-                <td class="text-center py-3 px-4">
-                    {% if doc.signal_summary %}
-                    <div class="flex flex-wrap justify-center gap-1">
-                        {% for check in checks %}
-                        {% set count = doc.signal_summary.get(check.signal, 0) %}
+                    </td>
+                    <td class="text-center py-2 px-4 text-sm text-muted">{{ doc.num_paragraphs }}</td>
+                    {% for check in checks %}
+                    {% set count = doc.signal_summary.get(check.signal, 0) %}
+                    <td class="text-center py-2 px-4">
                         {% if count > 0 %}
                         <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
                             {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
@@ -113,84 +115,80 @@
                             {% else %}bg-gray-100 text-gray-700{% endif %}">
                             {{ count }}
                         </span>
+                        {% else %}
+                        <span class="text-gray-300">-</span>
                         {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <span class="text-gray-300">—</span>
-                    {% endif %}
-                </td>
-                <td class="text-center py-3 px-4">
-                    {% if doc.status == 'adopted' %}
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-50 text-green-700">
-                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        Adopted
-                    </span>
-                    {% elif doc.status == 'draft' %}
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-50 text-amber-700">
-                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                        </svg>
-                        Draft
-                    </span>
-                    {% elif doc.status == 'superseded' %}
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-500">
-                        Superseded
-                    </span>
-                    {% else %}
-                    <span class="text-gray-300">—</span>
-                    {% endif %}
-                </td>
-                <td class="text-right py-3 px-4">
-                    <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
-                    <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </td>
+                    {% endfor %}
+                    <td class="text-right py-2 px-4">
+                        <a href="./{{ doc.symbol|replace('/', '_') }}.html" class="text-sm text-muted hover:text-un-blue transition-colors mr-3">View</a>
+                        <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
+{% endif %}
+{% endfor %}
 
 <script>
-let currentView = 'final';
 let currentFilter = 'all';
+let allExpanded = true;
 
-function setView(view) {
-    currentView = view;
-
-    // Update view button styles
-    document.querySelectorAll('.view-btn').forEach(btn => {
-        btn.classList.remove('bg-gray-900', 'text-white');
-        btn.classList.add('bg-gray-100', 'text-gray-700');
-    });
-
-    const activeBtn = document.getElementById(`btn-view-${view}`);
-    if (activeBtn) {
-        activeBtn.classList.remove('bg-gray-100', 'text-gray-700');
-        activeBtn.classList.add('bg-gray-900', 'text-white');
+function toggleSection(slug) {
+    const section = document.getElementById(`section-${slug}`);
+    const chevron = document.getElementById(`chevron-${slug}`);
+    
+    if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        chevron.classList.remove('-rotate-90');
+    } else {
+        section.classList.add('hidden');
+        chevron.classList.add('-rotate-90');
     }
+    updateToggleAllButton();
+}
 
-    applyFilters();
+function toggleAllSections() {
+    const sections = document.querySelectorAll('.pattern-content');
+    const chevrons = document.querySelectorAll('[id^="chevron-"]');
+    
+    if (allExpanded) {
+        sections.forEach(s => s.classList.add('hidden'));
+        chevrons.forEach(c => c.classList.add('-rotate-90'));
+    } else {
+        sections.forEach(s => s.classList.remove('hidden'));
+        chevrons.forEach(c => c.classList.remove('-rotate-90'));
+    }
+    allExpanded = !allExpanded;
+    updateToggleAllButton();
+}
+
+function updateToggleAllButton() {
+    const sections = document.querySelectorAll('.pattern-content');
+    const hiddenCount = Array.from(sections).filter(s => s.classList.contains('hidden')).length;
+    allExpanded = hiddenCount === 0;
+    document.getElementById('toggle-all-btn').textContent = allExpanded ? 'Collapse All' : 'Expand All';
 }
 
 function filterBySignal(signal) {
     currentFilter = signal;
-
-    // Update signal button styles
+    
+    // Update button styles
     document.querySelectorAll('.check-btn').forEach(btn => {
         btn.classList.remove('bg-gray-900', 'text-white');
         btn.classList.add('bg-gray-100', 'text-gray-700');
     });
-
+    
     const btnId = signal === 'all' ? 'btn-all' : `btn-${signal.replace(/ /g, '-')}`;
     const activeBtn = document.getElementById(btnId);
     if (activeBtn) {
         activeBtn.classList.remove('bg-gray-100', 'text-gray-700');
         activeBtn.classList.add('bg-gray-900', 'text-white');
     }
-
+    
     applyFilters();
 }
 
@@ -202,43 +200,51 @@ function applyFilters() {
     const searchTerm = document.getElementById('search').value.toLowerCase();
     const rows = document.querySelectorAll('.doc-row');
     let visible = 0;
-
+    
+    // Track visible docs per pattern
+    const patternCounts = {};
+    
     rows.forEach(row => {
         const symbol = row.dataset.symbol;
-        const status = row.dataset.status;
-        const isPrimary = row.dataset.isPrimary === 'true';
+        const pattern = row.dataset.pattern;
         const signals = JSON.parse(row.dataset.signals || '{}');
-
+        
         let show = true;
-
-        // View filter (final versions vs all)
-        if (currentView === 'final' && !isPrimary) {
-            show = false;
-        }
-
+        
         // Signal filter
-        if (show && currentFilter !== 'all' && !signals[currentFilter]) {
+        if (currentFilter !== 'all' && !signals[currentFilter]) {
             show = false;
         }
-
+        
         // Search filter
         if (show && searchTerm && !symbol.includes(searchTerm)) {
             show = false;
         }
-
+        
         row.style.display = show ? '' : 'none';
         if (show) {
             visible++;
+            patternCounts[pattern] = (patternCounts[pattern] || 0) + 1;
         }
     });
-
+    
     // Update visible count
     document.getElementById('visibleCount').textContent = visible;
+    
+    // Update pattern counts and hide empty pattern sections
+    document.querySelectorAll('.pattern-section').forEach(section => {
+        const patternName = section.dataset.pattern;
+        const count = patternCounts[patternName] || 0;
+        const countSpan = section.querySelector('.pattern-count');
+        if (countSpan) {
+            countSpan.textContent = count;
+        }
+        section.style.display = count > 0 ? '' : 'none';
+    });
 }
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    setView('final');
     filterBySignal('all');
 });
 </script>
