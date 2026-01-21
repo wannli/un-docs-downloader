@@ -84,20 +84,32 @@
 
 
     
+        
+            
+        
+    
 
     
 
+    
+        
     
 
     
 
     
+        
+    
 
+    
+        
     
 
     
 
     
+        
+    
 
     
 
@@ -115,6 +127,8 @@
 
     
 
+    
+        
     
 
     
@@ -132,6 +146,8 @@
     
 
     
+        
+    
 
     
 
@@ -146,6 +162,8 @@
     
 
     
+        
+    
 
     
 
@@ -163,6 +181,8 @@
 
     
 
+    
+        
     
 
     
@@ -170,7 +190,11 @@
     
 
     
+        
+    
 
+    
+        
     
 
     
@@ -184,6 +208,8 @@
     
 
     
+        
+    
 
     
 
@@ -201,6 +227,8 @@
 
     
 
+    
+        
     
 
     
@@ -212,6 +240,8 @@
     
 
     
+        
+    
 
     
 
@@ -225,6 +255,8 @@
 
     
 
+    
+        
     
 
     
@@ -238,11 +270,17 @@
     
 
     
+        
+    
 
     
 
     
+        
+    
 
+    
+        
     
         
             
@@ -259,12 +297,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 81 without</span>
+        <span class="text-sm text-muted">18 with signals, 64 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -284,9 +329,9 @@
 <div class="space-y-4" id="paragraphs">
     
     <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -294,7 +339,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Strongly reaffirm our commitment to reduce by one third premature mortality from noncommunicable diseases by 2030 through the prevention and control of noncommunicable diseases, and the promotion of mental health and well- being, by accelerating the implementation of the political declarations and outcome document approved by the previous high-level meetings of the General Assembly on the prevention and control of noncommunicable diseases held in 2011, 1 20142 and 2018;3</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Strongly reaffirm our commitment to reduce by one third premature mortality from noncommunicable diseases by 2030 through the prevention and control of noncommunicable diseases, and the promotion of mental health and well- being, by accelerating the implementation of the political declarations and outcome document approved by the previous <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly on the prevention and control of noncommunicable diseases held in 2011, 1 20142 and 2018;3</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -318,9 +373,9 @@
     </div>
     
     <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -328,7 +383,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirm General Assembly resolution 69/313 of 27 July 2015 on the Addis Ababa Action Agenda of the Third International Conference on Financing for Development, which reaffirmed a strong political commitment to address the challenge of financing and creating an enabling environment at all levels for sustainable development in the spirit of global partnership and solidarity, as well as General Assembly resolution 79/323 of 25 August 2025 on the Sevilla Commitment of the Fourth International Conference on Financing for Development;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirm General Assembly resolution 69/313 of 27 July 2015 on the Addis Ababa Action Agenda of the Third International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, which reaffirmed a strong political commitment to address the challenge of financing and creating an enabling environment at all levels for sustainable development in the spirit of global partnership and solidarity, as well as General Assembly resolution 79/323 of 25 August 2025 on the Sevilla Commitment of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -352,9 +417,9 @@
     </div>
     
     <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -362,16 +427,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recall the political declarations of the high-level meetings of the General Assembly on universal health coverage held in 2019 4 and 2023, 5 on pandemic prevention, preparedness and response in 2023,6 on the fight against tuberculosis in 20237 and on antimicrobial resistance in 2024,8 as appropriate;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recall the political declarations of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly on universal health coverage held in 2019 4 and 2023, 5 on pandemic prevention, preparedness and response in 2023,6 on the fight against tuberculosis in 20237 and on antimicrobial resistance in 2024,8 as appropriate;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-6" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -379,7 +454,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Further recall the preparatory meetings, including global and regional conferences and other technical meetings on noncommunicable diseases and mental health, convened in preparation for the present and prior high-level meetings;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Further recall the preparatory meetings, including global and regional <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and other technical meetings on noncommunicable diseases and mental health, convened in preparation for the present and prior <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -403,9 +488,9 @@
     </div>
     
     <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -413,7 +498,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Emphasize the burden of noncommunicable diseases, which, together, account for more than 43 million deaths each year, 18 million of which occur prematurely (before the age of 70) and include cardiovascular diseases – which account for the largest share of these deaths – cancers, diabetes and chronic _______________ 1 Resolution 66/2, annex. 2 Resolution 68/300. 3 Resolution 73/2. 4 Resolution 74/2. 5 Resolution 78/4, annex. 6 Resolution 78/3, annex. 7 Resolution 78/5, annex. 8 Resolution 79/2, annex. 9 A/79/762. Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 3/14 25-20712 respiratory diseases, while recognizing the burden of conditions beyond these four main noncommunicable diseases;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Emphasize the burden of noncommunicable diseases, which, together, account for more than 43 million deaths each year, 18 million of which occur prematurely (before the age of 70) and include cardiovascular diseases – which account for the largest share of these deaths – cancers, diabetes and chronic _______________ 1 Resolution 66/2, annex. 2 Resolution 68/300. 3 Resolution 73/2. 4 Resolution 74/2. 5 Resolution 78/4, annex. 6 Resolution 78/3, annex. 7 Resolution 78/5, annex. 8 Resolution 79/2, annex. 9 A/79/762. Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 3/14 25-20712 respiratory diseases, while recognizing the burden of conditions beyond these four main noncommunicable diseases;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -556,9 +651,9 @@
     </div>
     
     <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -566,7 +661,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recognize further the increasing gap between life expectancy and healthy life expectancy for older persons and note that, despite the progress achieved at the A/RES/80/117 Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 4/14 global level, many health systems continue to be inadequately prepared to identify and respond to the growing needs of the rapidly ageing population, including the increased prevalence of noncommunicable diseases;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognize further the increasing gap between life expectancy and healthy life expectancy for older persons and note that, despite the progress achieved at the A/RES/80/117 Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 4/14 global level, many health systems continue to be inadequately prepared to identify and respond to the growing needs of the rapidly ageing population, including the increased prevalence of noncommunicable diseases;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -692,9 +797,9 @@
     </div>
     
     <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -702,7 +807,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recognize that achieving universal health coverage is essential for the prevention and control of noncommunicable diseases, including through integrated, sustainable, resilient and well-financed health systems for health promotion, _______________ 10 World Health Organization, document WHA68/2015/REC/1, annex 3. Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 5/14 25-20712 prevention, screening, diagnosis, treatment, care and rehabilitation for people living with, or at elevated risk of, noncommunicable diseases and mental health conditions, focusing on a primary health care approach, while recognizing the importance of well- functioning referral systems, to connect primary health care with secondary and tertiary health care for conditions that require specialized services;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognize that achieving universal health coverage is essential for the prevention and control of noncommunicable diseases, including through integrated, sustainable, resilient and well-financed health systems for health promotion, _______________ 10 World Health Organization, document WHA68/2015/REC/1, annex 3. Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 5/14 25-20712 prevention, screening, diagnosis, treatment, care and rehabilitation for people living with, or at elevated risk of, noncommunicable diseases and mental health conditions, focusing on a primary health care approach, while recognizing the importance of well- functioning referral systems, to connect primary health care with secondary and tertiary health care for conditions that require specialized services;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -811,9 +926,9 @@
     </div>
     
     <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -821,7 +936,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Acknowledge that investing, as appropriate, in the World Health Organization “best buys” aims to save close to 7 million lives, resulting in 50 million additional years of healthy life, and that these outcomes can be achieved with a return A/RES/80/117 Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 6/14 on investment of at least 7 United States dollars by 2030 for every dollar spent, resulting in more than 230 billion dollars in economic benefits between now and 2030;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Acknowledge that investing, as appropriate, in the World Health Organization “best buys” aims to save close to 7 million lives, resulting in 50 million additional years of healthy life, and that these outcomes can be achieved with a return A/RES/80/117 Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 6/14 on investment of at least 7 United States dollars by 2030 for every dollar spent, resulting in more than 230 billion dollars in economic benefits between now and 2030;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -964,9 +1089,9 @@
     </div>
     
     <div id="para-41" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -974,7 +1099,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Fast-track efforts to accelerate progress on noncommunicable diseases and mental health and well-being over the next five years, focusing on tobacco and nicotine control, preventing and scaling up the effective treatment of cardiovascular risk factors, such as hypertension, and improving mental health care, with the aim to reduce by one third premature mortality from noncommunicable diseases and achieve the following global targets by 2030: 150 million fewer people are using tobacco; Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 7/14 25-20712 150 million more people have hypertension under control; and 150 million more people have access to mental health care; To deliver on our commitment to prevent and control noncommunicable diseases and promote mental health and well-being, and in line with our respective national contexts and where appropriate, we will: Create health-promoting environments through action across government</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Fast-track efforts to accelerate progress on noncommunicable diseases and mental health and well-being over the next five years, focusing on tobacco and nicotine control, preventing and scaling up the effective treatment of cardiovascular risk factors, such as hypertension, and improving mental health care, with the aim to reduce by one third premature mortality from noncommunicable diseases and achieve the following global targets by 2030: 150 million fewer people are using tobacco; Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 7/14 25-20712 150 million more people have hypertension under control; and 150 million more people have access to mental health care; To deliver on our commitment to prevent and control noncommunicable diseases and promote mental health and well-being, and in line with our respective national contexts and where appropriate, we will: Create health-promoting environments through action across government</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1015,9 +1150,9 @@
     </div>
     
     <div id="para-44" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1025,16 +1160,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourage within national and, where relevant, regional contexts, as appropriate, legislation and regulation, policies and actions to: (a) Significantly reduce tobacco and nicotine use by: (i) implementing health warnings on all tobacco and nicotine packages; (ii) restricting tobacco and nicotine advertising, promotion and sponsorship, including cross-border, as appropriate; (iii) comprehensively reducing exposure to second-hand tobacco smoke in indoor and outdoor workplaces, public places and public transport; and (iv) promoting safe and evidence-based quitting programmes; (b) Regulate, as appropriate, electronic nicotine delivery systems and electronic non‑nicotine delivery systems, heated tobacco products and nicotine delivery products; (c) Accelerate implementation among Parties to the World Health Organization Framework Convention on Tobacco Control 11 and its Protocol to Eliminate Illicit Trade in Tobacco Products, 12 without any tobacco industry interference; (d) Support programmes that are aimed at combating undernutrition in mothers, in particular during pregnancy and breastfeeding, and in children, and the irreversible effects of chronic undernutrition in early childhood, in particular from birth to the age of 2; _______________ 11 United Nations, Treaty Series, vol. 2302, No. 41032. 12 Ibid., vol. 3276, No. 55487. A/RES/80/117 Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 8/14 (e) Promote healthy diets and reduce unhealthy diets, overweight and obesity through measures such as: (i) promoting the increased availability and affordability of nutritious food and information on healthy eating, including through promoting efficient, inclusive, resilient and sustainable agrifood systems; (ii) improving policies and taking measures to reduce industrially produced trans-fatty acids to the lowest level possible and reduce excessive levels of saturated fats, free sugars and sodium; (iii) providing nutritional information to consumers, such as through front-of-pack labelling; (iv) putting in place public food procurement and service policies for healthy diets; (v) protecting children from the harmful impact of food marketing, including digital marketing; (vi) protecting, promoting and supporting optimal breastfeeding practices, including by regulating the marketing of breastmilk substitutes; and (vii) promoting adequate physical activity, including sports and recreation, and reducing sedentary behaviour, including through increasing access to public spaces; (f) Reduce the harmful use of alcohol through accelerating the implementation of the Global Strategy to Reduce the Harmful Use of Alcohol of 2010 and the global alcohol action plan 2022–2030, including by considering marketing and availability measures; (g) Address the environmental determinants of health, including the exposure to air pollution, by: (i) promoting clean, efficient, safe, accessible and expanded urban public transport options, and active mobility, such as walking and cycling; (ii) reducing the open and uncontrolled burning of toxic residues; (iii) promoting access to affordable, clean, sustainable and less polluting solutions for cooking, heating and electricity generation; (iv) developing, amending and administering regulatory and non‑regulatory measures to tackle air pollution from industrial sectors, vehicles, engines, fuels and consumer and commercial products; (v) reducing the exposure, especially of children, to lead and hazardous and synthetic chemicals; and (vi) strengthening and investing in more resilient health care systems, including infrastructure, service delivery and workforce capacity; (h) Prevent and reduce suicides and take steps to decriminalize attempted suicide, in line with national circumstances, by: (i) developing national suicide prevention strategies and action plans; (ii) limiting access to means of suicide, including highly hazardous pesticides; (iii) reducing stigma related to mental health conditions and neurological disorders; (iv) creating an open environment to discuss mental health; (v) fostering a public health approach; (vi) providing support to persons affected by suicide and self-harm; (vii) promoting and supporting the responsible reporting of suicide by the media, including online, digital and social; and (viii) fostering life skills and support for young people; (i) Scale up efforts to develop, implement and evaluate policies and programmes that promote healthy and active ageing and maintain and improve quality of life of older persons, and to identify and respond to the growing needs of the rapidly ageing population, including the need for preventive, curative, palliative and specialized care for older persons, taking into account the disproportionate burden of noncommunicable diseases on older persons, and that population ageing is a contributing factor in the rising incidence and prevalence of noncommunicable diseases;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourage within national and, where relevant, regional contexts, as appropriate, legislation and regulation, policies and actions to: (a) Significantly reduce tobacco and nicotine use by: (i) implementing health warnings on all tobacco and nicotine packages; (ii) restricting tobacco and nicotine advertising, promotion and sponsorship, including cross-border, as appropriate; (iii) comprehensively reducing exposure to second-hand tobacco smoke in indoor and outdoor workplaces, public places and public transport; and (iv) promoting safe and evidence-based quitting programmes; (b) Regulate, as appropriate, electronic nicotine delivery systems and electronic non‑nicotine delivery systems, heated tobacco products and nicotine delivery products; (c) Accelerate implementation among Parties to the World Health Organization Framework Convention on Tobacco Control 11 and its Protocol to Eliminate Illicit Trade in Tobacco Products, 12 without any tobacco industry interference; (d) Support programmes that are aimed at combating undernutrition in mothers, in particular during pregnancy and breastfeeding, and in children, and the irreversible effects of chronic undernutrition in early childhood, in particular from birth to the age of 2; _______________ 11 United Nations, Treaty Series, vol. 2302, No. 41032. 12 Ibid., vol. 3276, No. 55487. A/RES/80/117 Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 8/14 (e) Promote healthy diets and reduce unhealthy diets, overweight and obesity through measures such as: (i) promoting the increased availability and affordability of nutritious food and information on healthy eating, including through promoting efficient, inclusive, resilient and sustainable agrifood systems; (ii) improving policies and taking measures to reduce industrially produced trans-fatty acids to the lowest level possible and reduce excessive levels of saturated fats, free sugars and sodium; (iii) providing nutritional information to consumers, such as through front-of-pack labelling; (iv) putting in place public food procurement and service policies for healthy diets; (v) protecting children from the harmful impact of food marketing, including digital marketing; (vi) protecting, promoting and supporting optimal breastfeeding practices, including by regulating the marketing of breastmilk substitutes; and (vii) promoting adequate physical activity, including sports and recreation, and reducing sedentary behaviour, including through increasing access to public spaces; (f) Reduce the harmful use of alcohol through accelerating the implementation of the Global Strategy to Reduce the Harmful Use of Alcohol of 2010 and the global alcohol action plan 2022–2030, including by considering marketing and availability measures; (g) Address the environmental determinants of health, including the exposure to air pollution, by: (i) promoting clean, efficient, safe, accessible and expanded urban public transport options, and active mobility, such as walking and cycling; (ii) reducing the open and uncontrolled burning of toxic residues; (iii) promoting access to affordable, clean, sustainable and less polluting solutions for cooking, heating and electricity generation; (iv) developing, amending and administering regulatory and non‑regulatory measures to tackle air pollution from industrial sectors, vehicles, engines, fuels and consumer and commercial products; (v) reducing the exposure, especially of children, to lead and hazardous and synthetic chemicals; and (vi) strengthening and investing in more resilient health care systems, including infrastructure, service delivery and workforce capacity; (h) Prevent and reduce suicides and take steps to decriminalize attempted suicide, in line with national circumstances, by: (i) developing national suicide prevention strategies and action plans; (ii) limiting access to means of suicide, including highly hazardous pesticides; (iii) reducing stigma related to mental health conditions and neurological disorders; (iv) creating an open environment to discuss mental health; (v) fostering a public health approach; (vi) providing support to persons affected by suicide and self-harm; (vii) promoting and supporting the responsible reporting of suicide by the media, including online, digital and social; and (viii) fostering life skills and support for young people; (i) Scale up efforts to develop, implement and evaluate policies and programmes that promote healthy and active ageing and maintain and improve quality of life of older persons, and to identify and respond to the growing needs of the rapidly ageing population, including the need for preventive, curative, palliative and specialized care for older persons, taking into account the disproportionate burden of noncommunicable diseases on older persons, and that population ageing is a contributing factor in the rising incidence and prevalence of noncommunicable diseases;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-45" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1042,7 +1187,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Address the health risks related to digital technology, including social media, such as excessive screen time, exposure to harmful content, social disconnection, social isolation and loneliness, stressing the importance of updating regulatory and educational systems to ensure that children and young people benefit from the opportunities of digital services, that their human rights are protected online Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 9/14 25-20712 and offline and that they are protected from the potential negative impact that digital services can have on their physical and mental health;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Address the health risks related to digital technology, including social media, such as excessive screen time, exposure to harmful content, social disconnection, social isolation and loneliness, stressing the importance of updating regulatory and educational systems to ensure that children and young people benefit from the opportunities of digital services, that their human rights are protected online Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 9/14 25-20712 and offline and that they are protected from the potential negative impact that digital services can have on their physical and mental health;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1134,9 +1289,9 @@
     </div>
     
     <div id="para-51" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1144,7 +1299,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Prevent and control cancers by promoting early access to affordable diagnostics, including cancer staging, screening, treatment and care, as well as vaccines that lower the risk of cancer, as part of a comprehensive approach to prevention and control, taking into account national contexts and regional cooperation; A/RES/80/117 Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 10/14</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Prevent and control cancers by promoting early access to affordable diagnostics, including cancer staging, screening, treatment and care, as well as vaccines that lower the risk of cancer, as part of a comprehensive approach to prevention and control, taking into account national contexts and regional cooperation; A/RES/80/117 Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 10/14</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1287,9 +1452,9 @@
     </div>
     
     <div id="para-60" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1297,7 +1462,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Promote equitable, sustainable and affordable access to quality-assured vaccines, therapeutics, diagnostics, medicines and other health products for noncommunicable diseases and mental health conditions while supporting and creating systems to uphold their quality and safety, including through: (a) applying pricing policies, promoting increased price transparency and strengthening financial Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 11/14 25-20712 protection mechanisms, such as health benefit packages, which reduce out-of-pocket expenditure; (b) strengthening procurement, including through pooled procurement, and diversified, resilient supply chains; and (c) strengthening regulatory systems;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Promote equitable, sustainable and affordable access to quality-assured vaccines, therapeutics, diagnostics, medicines and other health products for noncommunicable diseases and mental health conditions while supporting and creating systems to uphold their quality and safety, including through: (a) applying pricing policies, promoting increased price transparency and strengthening financial Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 11/14 25-20712 protection mechanisms, such as health benefit packages, which reduce out-of-pocket expenditure; (b) strengthening procurement, including through pooled procurement, and diversified, resilient supply chains; and (c) strengthening regulatory systems;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1372,9 +1547,9 @@
     </div>
     
     <div id="para-65" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1382,7 +1557,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Strengthen coordination among existing global health financing frameworks to avoid duplication and fragmentation so as to better meet the needs of all countries, especially of developing countries; _______________ 13 Examples include: (a) digitalized health systems; (b) electronic patient records, appointment reminders, telemedicine, health information systems and digital payments; and (c) access to application chatbots and mobile health services to track health, support medicine adherence and enable behavioural change. A/RES/80/117 Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 12/14</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Strengthen coordination among existing global health financing frameworks to avoid duplication and fragmentation so as to better meet the needs of all countries, especially of developing countries; _______________ 13 Examples include: (a) digitalized health systems; (b) electronic patient records, appointment reminders, telemedicine, health information systems and digital payments; and (c) access to application chatbots and mobile health services to track health, support medicine adherence and enable behavioural change. A/RES/80/117 Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 12/14</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1491,9 +1676,9 @@
     </div>
     
     <div id="para-72" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1501,7 +1686,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Address the impact of misinformation and disinformation around the prevention and treatment of noncommunicable diseases and mental health conditions and their risk factors, including by increasing health literacy and regulating the digital environment in a manner consistent with national and international law, to protect, especially, children and young people; Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 13/14 25-20712 Target: at least 80 per cent of countries have an operational, multisectoral, integrated policy, strategy or action plan on noncommunicable diseases and mental health and well-being by 2030. Support research, strengthen data and public health surveillance, to advance evidence, monitor progress and hold ourselves accountable</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Address the impact of misinformation and disinformation around the prevention and treatment of noncommunicable diseases and mental health conditions and their risk factors, including by increasing health literacy and regulating the digital environment in a manner consistent with national and international law, to protect, especially, children and young people; Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being A/RES/80/117 13/14 25-20712 Target: at least 80 per cent of countries have an operational, multisectoral, integrated policy, strategy or action plan on noncommunicable diseases and mental health and well-being by 2030. Support research, strengthen data and public health surveillance, to advance evidence, monitor progress and hold ourselves accountable</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1593,9 +1788,9 @@
     </div>
     
     <div id="para-78" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1603,7 +1798,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Further call upon United Nations agencies, regional and intergovernmental organizations, within their respective mandates, to support Member States through catalytic development assistance, including through the United Nations Inter-Agency A/RES/80/117 Political declaration of the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 14/14 Task Force on the Prevention and Control of Noncommunicable Diseases and the Health4Life Fund;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Further call upon United Nations agencies, regional and intergovernmental organizations, within their respective mandates, to support Member States through catalytic development assistance, including through the United Nations Inter-Agency A/RES/80/117 Political declaration of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being 25-20712 14/14 Task Force on the Prevention and Control of Noncommunicable Diseases and the Health4Life Fund;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1627,9 +1832,9 @@
     </div>
     
     <div id="para-80" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1637,7 +1842,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Call upon the private sector to strengthen its commitment and contribution to the prevention and control of noncommunicable diseases and the promotion of mental health and well-being through the implementation of the present political declaration and the outcomes of the previous high-level meetings of the General Assembly on the prevention and control of noncommunicable diseases held in 2011, 2014 and 2018, taking into account the need to prevent conflicts of interest;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Call upon the private sector to strengthen its commitment and contribution to the prevention and control of noncommunicable diseases and the promotion of mental health and well-being through the implementation of the present political declaration and the outcomes of the previous <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly on the prevention and control of noncommunicable diseases held in 2011, 2014 and 2018, taking into account the need to prevent conflicts of interest;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1645,7 +1860,7 @@
     
     <div id="para-81" 
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["report"]'
+         data-signals='["PGA", "report"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -1654,9 +1869,15 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Request the Secretary-General, in consultation with Member States and in collaboration with the World Health Organization and relevant funds, programmes and specialized agencies of the United Nations system, to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> by the end of 2030 a progress report on the implementation of the present political declaration on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being, which will serve to inform the next high-level meeting, to be convened in 2031.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Request the Secretary-General, in consultation with Member States and in collaboration with the World Health Organization and relevant funds, programmes and specialized agencies of the United Nations system, to <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> by the end of 2030 a progress report on the implementation of the present political declaration on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being, which will serve to inform the next <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>, to be convened in 2031.</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
                     
                     <span class="px-1.5 py-0.5 rounded text-xs font-medium
                         bg-gray-100 text-gray-700">

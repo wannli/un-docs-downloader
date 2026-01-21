@@ -92,6 +92,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -108,6 +112,8 @@
     
 
     
+        
+    
 
     
 
@@ -119,6 +125,8 @@
 
     
 
+    
+        
     
 
     
@@ -132,6 +140,8 @@
     
 
     
+        
+    
 
     
 
@@ -145,6 +155,8 @@
 
     
 
+    
+        
     
 
     
@@ -158,6 +170,8 @@
     
 
     
+        
+    
 
     
 
@@ -173,6 +187,8 @@
 
     
 
+    
+        
     
 
     
@@ -188,6 +204,8 @@
     
 
     
+        
+    
 
     
 
@@ -204,6 +222,8 @@
     
 
     
+        
+    
 
     
 
@@ -211,14 +231,20 @@
 
     
 
+    
+        
     
 
     
 
     
+        
+    
 
     
 
+    
+        
     
 
     
@@ -228,6 +254,8 @@
     
 
     
+        
+    
 
     
 
@@ -239,6 +267,8 @@
 
     
 
+    
+        
     
 
     
@@ -260,63 +290,7 @@
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+        
     
 
     
@@ -343,6 +317,80 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
 
 
 
@@ -351,12 +399,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 125 without</span>
+        <span class="text-sm text-muted">25 with signals, 102 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -444,9 +499,9 @@
     </div>
     
     <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -454,7 +509,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize that Governments and other stakeholders from many developing countries face barriers to participating fully in international digital governance and policy-making processes due to financial, technical and institutional constraints, as well as infrastructure and connectivity gaps. We acknowledge that particular attention should be paid to address the unique and emerging information _______________ 1 Resolution 79/323, annex. 2 Resolution 217 A (III). 3 See A/C.2/59/3, annex. 4 Ibid. 5 See A/60/687. Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 3/20 25-20874 and communications technology challenges facing all countries, in particular developing countries, including African countries, the least developed countries, landlocked developing countries, small island developing States and middle-income countries, as well as countries and territories under foreign occupation, countries in situations of conflict, post-conflict countries and countries affected by natural disasters.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize that Governments and other stakeholders from many developing countries face barriers to participating fully in international digital governance and policy-making processes due to financial, technical and institutional constraints, as well as infrastructure and connectivity gaps. We acknowledge that particular attention should be paid to address the unique and emerging information _______________ 1 Resolution 79/323, annex. 2 Resolution 217 A (III). 3 See A/C.2/59/3, annex. 4 Ibid. 5 See A/60/687. Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 3/20 25-20874 and communications technology challenges facing all countries, in particular developing countries, including African countries, the least developed countries, landlocked developing countries, small island developing States and middle-income countries, as well as countries and territories under foreign occupation, countries in situations of conflict, post-conflict countries and countries affected by natural disasters.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -580,9 +645,9 @@
     </div>
     
     <div id="para-13" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -590,7 +655,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize that the pace and power of emerging technologies are creating new possibilities but also new risks for humanity, some of which are not yet fully known. We recognize the need to identify and mitigate risks and to ensure human oversight of technology in ways that advance sustainable development and the full A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 4/20 enjoyment of human rights. We further underscore the importance of applying a human-centric approach throughout the life cycle of digital technologies, including in their design, development, deployment and use.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize that the pace and power of emerging technologies are creating new possibilities but also new risks for humanity, some of which are not yet fully known. We recognize the need to identify and mitigate risks and to ensure human oversight of technology in ways that advance sustainable development and the full A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 4/20 enjoyment of human rights. We further underscore the importance of applying a human-centric approach throughout the life cycle of digital technologies, including in their design, development, deployment and use.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -682,9 +757,9 @@
     </div>
     
     <div id="para-19" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -692,7 +767,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize the critical importance of closing digital divides to fulfil the World Summit vision and ensure that everyone can create, access, utilize and share _______________ 6 Resolution 70/1. Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 5/20 25-20874 information and knowledge in order to take advantage of opportunities to benefit from digital technologies and improve their quality of life.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize the critical importance of closing digital divides to fulfil the World Summit vision and ensure that everyone can create, access, utilize and share _______________ 6 Resolution 70/1. Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 5/20 25-20874 information and knowledge in order to take advantage of opportunities to benefit from digital technologies and improve their quality of life.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -784,9 +869,9 @@
     </div>
     
     <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -794,7 +879,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize that digital divides limit capabilities and opportunities for full participation in society. They reach beyond accessibility and include critical issues of affordability, language, ability, technological and innovation capacity, forming a multidimensional and widening challenge to sustainable development, and may exacerbate other social and economic inequalities. Overcoming them is fundamental to achieving the 2030 Agenda for Sustainable Development, the vision of the World Summit on the Information Society, and the objective and commitments of the Global Digital Compact.8 _______________ 7 United Nations, Treaty Series, vol. 2515, No. 44910. 8 Resolution 79/1, annex I. A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 6/20</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize that digital divides limit capabilities and opportunities for full participation in society. They reach beyond accessibility and include critical issues of affordability, language, ability, technological and innovation capacity, forming a multidimensional and widening challenge to sustainable development, and may exacerbate other social and economic inequalities. Overcoming them is fundamental to achieving the 2030 Agenda for Sustainable Development, the vision of the World Summit on the Information Society, and the objective and commitments of the Global Digital Compact.8 _______________ 7 United Nations, Treaty Series, vol. 2515, No. 44910. 8 Resolution 79/1, annex I. A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 6/20</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -903,9 +998,9 @@
     </div>
     
     <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -913,7 +1008,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We note that financial services have evolved rapidly to take advantage of the capabilities of digital transactions, and that Internet banking, cashless payments Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 7/20 25-20874 and mobile money systems have changed the ways in which many businesses and customers now interact, increasing access to financial services for many who were previously excluded. We will support developing countries, in line with their national circumstances and priorities, in creating enabling domestic environments for the development of digital financial services for all.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We note that financial services have evolved rapidly to take advantage of the capabilities of digital transactions, and that Internet banking, cashless payments Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 7/20 25-20874 and mobile money systems have changed the ways in which many businesses and customers now interact, increasing access to financial services for many who were previously excluded. We will support developing countries, in line with their national circumstances and priorities, in creating enabling domestic environments for the development of digital financial services for all.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1005,9 +1110,9 @@
     </div>
     
     <div id="para-38" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1015,7 +1120,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize that digitalization has also enabled new ways of addressing health and medicine by facilitating the dissemination of public health information, including on sexual and reproductive health and on protection against communicable A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 8/20 diseases, remote diagnosis to support local health workers, improved analysis of health data and improvements in clinical practice. We reaffirm our commitment to building on the opportunities of information and communications technologies to improve access to health, especially in developing countries.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize that digitalization has also enabled new ways of addressing health and medicine by facilitating the dissemination of public health information, including on sexual and reproductive health and on protection against communicable A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 8/20 diseases, remote diagnosis to support local health workers, improved analysis of health data and improvements in clinical practice. We reaffirm our commitment to building on the opportunities of information and communications technologies to improve access to health, especially in developing countries.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1141,9 +1256,9 @@
     </div>
     
     <div id="para-46" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1151,7 +1266,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize the need to promote sustainable consumption and production patterns, including sustainable lifestyles and circular economy approaches. We urge all stakeholders, and particularly Governments and the private sector, to develop Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 9/20 25-20874 international standards for the design of sustainable digital products as well as for reuse, repair and recycling.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize the need to promote sustainable consumption and production patterns, including sustainable lifestyles and circular economy approaches. We urge all stakeholders, and particularly Governments and the private sector, to develop Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 9/20 25-20874 international standards for the design of sustainable digital products as well as for reuse, repair and recycling.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1260,9 +1385,9 @@
     </div>
     
     <div id="para-53" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1270,7 +1395,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We commend the work of the regional commissions and other regional organizations to support the development of positive enabling environments. We call upon them, the Commission on Science and Technology for Development and action line facilitators, within their respective mandates, to share experience on the enabling environment and support the development of demand-driven policy guidance, technical assistance and capacity-building, as appropriate, to realize them. A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 10/20 Building confidence and security in the use of information and communications technologies</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We commend the work of the regional commissions and other regional organizations to support the development of positive enabling environments. We call upon them, the Commission on Science and Technology for Development and action line facilitators, within their respective mandates, to share experience on the enabling environment and support the development of demand-driven policy guidance, technical assistance and capacity-building, as appropriate, to realize them. A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 10/20 Building confidence and security in the use of information and communications technologies</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1396,9 +1531,9 @@
     </div>
     
     <div id="para-61" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1406,7 +1541,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize the importance of digital skills and lifelong access to digital learning opportunities, taking into account the specific social, cultural and linguistic Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 11/20 25-20874 needs of each society and persons of all ages and backgrounds. We call upon all stakeholders to promote digital skills and literacy in order to empower individuals with the skills and knowledge needed to make informed choices about their personal data, identify reliable information that will help them to gain access to opportunities, including work and skilling opportunities, and improve their quality of life, and take appropriate steps to safeguard their online security and privacy. Financial mechanisms</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize the importance of digital skills and lifelong access to digital learning opportunities, taking into account the specific social, cultural and linguistic Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 11/20 25-20874 needs of each society and persons of all ages and backgrounds. We call upon all stakeholders to promote digital skills and literacy in order to empower individuals with the skills and knowledge needed to make informed choices about their personal data, identify reliable information that will help them to gain access to opportunities, including work and skilling opportunities, and improve their quality of life, and take appropriate steps to safeguard their online security and privacy. Financial mechanisms</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1464,9 +1609,9 @@
     </div>
     
     <div id="para-65" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1474,7 +1619,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm the call in the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment, adopted by the General Assembly in its resolution 79/323 of 25 August 2025, for the development of financing plans and coordination of investment in digital infrastructure, including digital public infrastructure and digital public goods, and for international collaboration between national Governments, development finance institutions, multilateral development banks and relevant international organizations and private sector actors, to support countries in their design of digital infrastructure, its financing models and impact measurement.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm the call in the outcome document of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, the Sevilla Commitment, adopted by the General Assembly in its resolution 79/323 of 25 August 2025, for the development of financing plans and coordination of investment in digital infrastructure, including digital public infrastructure and digital public goods, and for international collaboration between national Governments, development finance institutions, multilateral development banks and relevant international organizations and private sector actors, to support countries in their design of digital infrastructure, its financing models and impact measurement.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1498,9 +1653,9 @@
     </div>
     
     <div id="para-67" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1508,7 +1663,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We invite the International Telecommunication Union, as the secretariat of the United Nations Group on the Information Society, working with the World Summit action line facilitators and other members of the Group, within existing resources, to establish an internal task force to conduct an assessment of gaps and challenges and to submit concrete recommendations on strengthening financial A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 12/20 mechanisms for digital development for developing countries, building on and complementing existing best practices, including those of multilateral financial institutions, development partners and other relevant stakeholders, such as the private sector. We further request that the work be completed and the outcomes of the work be reported to the Commission on Science and Technology for Development at its thirtieth session, in 2027, for consideration by Member States. We also invite the internal task force to monitor financial commitments for the implementation of these outcomes. Human rights and ethical dimensions of the information society</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We invite the International Telecommunication Union, as the secretariat of the United Nations Group on the Information Society, working with the World Summit action line facilitators and other members of the Group, within existing resources, to establish an internal task force to conduct an assessment of gaps and challenges and to submit concrete recommendations on strengthening financial A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 12/20 mechanisms for digital development for developing countries, building on and complementing existing best practices, including those of multilateral financial institutions, development partners and other relevant stakeholders, such as the private sector. We further request that the work be completed and the outcomes of the work be reported to the Commission on Science and Technology for Development at its thirtieth session, in 2027, for consideration by Member States. We also invite the internal task force to monitor financial commitments for the implementation of these outcomes. Human rights and ethical dimensions of the information society</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1532,9 +1697,9 @@
     </div>
     
     <div id="para-69" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1542,7 +1707,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm our commitment to the universality, indivisibility, interdependence and interrelation of all human rights and fundamental freedoms, including the right to development, as enshrined in the Vienna Declaration and Programme of Action of the World Conference on Human Rights, 9 and to the framework of rights set out in the Universal Declaration of Human Rights and other relevant human rights treaties. We reaffirm that democracy, sustainable development and respect for human rights and fundamental freedoms, as well as good governance at all levels, are interdependent and mutually reinforcing.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm our commitment to the universality, indivisibility, interdependence and interrelation of all human rights and fundamental freedoms, including the right to development, as enshrined in the Vienna Declaration and Programme of Action of the World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Human Rights, 9 and to the framework of rights set out in the Universal Declaration of Human Rights and other relevant human rights treaties. We reaffirm that democracy, sustainable development and respect for human rights and fundamental freedoms, as well as good governance at all levels, are interdependent and mutually reinforcing.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1600,9 +1775,9 @@
     </div>
     
     <div id="para-73" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1610,7 +1785,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm our commitment to article 19 of the Universal Declaration of Human Rights, in which it is stated that everyone has the right to freedom of opinion and expression, and that this right includes freedom to hold opinions without _______________ 9 A/CONF.157/24 (Part I), chap. III. 10 A/HRC/17/31, annex. Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 13/20 25-20874 interference and to seek, receive and impart information and ideas through any media and regardless of frontiers.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm our commitment to article 19 of the Universal Declaration of Human Rights, in which it is stated that everyone has the right to freedom of opinion and expression, and that this right includes freedom to hold opinions without _______________ 9 A/CONF.157/24 (Part I), chap. III. 10 A/HRC/17/31, annex. Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 13/20 25-20874 interference and to seek, receive and impart information and ideas through any media and regardless of frontiers.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1702,9 +1887,9 @@
     </div>
     
     <div id="para-79" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1712,7 +1897,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We stress the importance of ensuring that women and girls can participate in and contribute to society at large on equal terms and without discrimination and reaffirm that the full, equal and meaningful participation of women and girls in the digital age is critical to achieving gender equality and women’s empowerment. We _______________ 11 See resolution 2200 A (XXI), annex. A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 14/20 recognize that we must urgently counter and address all forms of violence, including sexual and gender-based violence, which occurs through or is amplified by the use of technology.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We stress the importance of ensuring that women and girls can participate in and contribute to society at large on equal terms and without discrimination and reaffirm that the full, equal and meaningful participation of women and girls in the digital age is critical to achieving gender equality and women’s empowerment. We _______________ 11 See resolution 2200 A (XXI), annex. A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 14/20 recognize that we must urgently counter and address all forms of violence, including sexual and gender-based violence, which occurs through or is amplified by the use of technology.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1847,9 +2042,9 @@
     </div>
     
     <div id="para-87" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1857,7 +2052,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We note the establishment within the United Nations of the work that is under way to establish a multidisciplinary Independent International Scientific Panel on Artificial Intelligence to promote scientific understanding through evidence-based impact, risk and opportunity assessments, drawing on existing national, regional and _______________ 12 United Nations, Treaty Series, vol. 1577, No. 27531. Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 15/20 25-20874 international initiatives and research networks. We also welcome the initiation of a Global Dialogue on Artificial Intelligence Governance, involving Governments and all relevant stakeholders, which will take place on the margins of existing relevant United Nations conferences and meetings. Internet governance</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We note the establishment within the United Nations of the work that is under way to establish a multidisciplinary Independent International Scientific Panel on Artificial Intelligence to promote scientific understanding through evidence-based impact, risk and opportunity assessments, drawing on existing national, regional and _______________ 12 United Nations, Treaty Series, vol. 1577, No. 27531. Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 15/20 25-20874 international initiatives and research networks. We also welcome the initiation of a Global Dialogue on Artificial Intelligence Governance, involving Governments and all relevant stakeholders, which will take place on the margins of existing relevant United Nations <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and meetings. Internet governance</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1983,9 +2188,9 @@
     </div>
     
     <div id="para-95" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1993,7 +2198,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize that many new initiatives and opportunities have arisen since the World Summit that facilitate discussion and the sharing of experience and cooperation among Governments and with all other stakeholder groups. We call upon Member States and other stakeholders, in their respective roles and responsibilities, to cooperate to achieve the World Summit vision. A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 16/20</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize that many new initiatives and opportunities have arisen since the World Summit that facilitate discussion and the sharing of experience and cooperation among Governments and with all other stakeholder groups. We call upon Member States and other stakeholders, in their respective roles and responsibilities, to cooperate to achieve the World Summit vision. A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 16/20</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -2119,9 +2334,9 @@
     </div>
     
     <div id="para-103" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2129,7 +2344,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We call for the strengthening of the secretariat of the Internet Governance Forum, to enable it to continue its development, implement further improvements and support the work of national and regional Internet governance forums and intersessional activities, and invite the Secretary-General, with support from the Department of Economic and Social Affairs, to submit a proposal to the General Assembly during its eightieth session to ensure sustainable funding for the Forum. Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 17/20 25-20874 Development of the World Summit on the Information Society framework</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We call for the strengthening of the secretariat of the Internet Governance Forum, to enable it to continue its development, implement further improvements and support the work of national and regional Internet governance forums and intersessional activities, and invite the Secretary-General, with support from the Department of Economic and Social Affairs, to submit a proposal to the General Assembly during its eightieth session to ensure sustainable funding for the Forum. Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 17/20 25-20874 Development of the World Summit on the Information Society framework</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -2238,9 +2463,9 @@
     </div>
     
     <div id="para-110" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2248,16 +2473,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We acknowledge the work of the International Telecommunication Union in collaboration with the United Nations Educational, Scientific and Cultural Organization, the United Nations Conference on Trade and Development and the United Nations Development Programme to establish the annual World Summit on the Information Society Forum, which has become an important platform for the sharing of information and best practice and for multi-stakeholder dialogue and collaboration and for developing networks and coordinating initiatives to implement the World Summit vision. We call for the Forum to continue to be held on an annual basis.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We acknowledge the work of the International Telecommunication Union in collaboration with the United Nations Educational, Scientific and Cultural Organization, the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development and the United Nations Development Programme to establish the annual World Summit on the Information Society Forum, which has become an important platform for the sharing of information and best practice and for multi-stakeholder dialogue and collaboration and for developing networks and coordinating initiatives to implement the World Summit vision. We call for the Forum to continue to be held on an annual basis.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-111" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2265,7 +2500,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm our commitment to the framework of action lines established in the Geneva Plan of Action and the Tunis Agenda for the Information Society. We recognize the value that many Governments have attributed to this framework in supporting the formulation of national strategies and approaches to digital development. A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 18/20 We call upon action line facilitators to ensure close alignment with the 2030 Agenda for Sustainable Development when considering new work to implement the outcomes of the World Summit, according to their existing mandates and resources.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We reaffirm our commitment to the framework of action lines established in the Geneva Plan of Action and the Tunis Agenda for the Information Society. We recognize the value that many Governments have attributed to this framework in supporting the formulation of national strategies and approaches to digital development. A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 18/20 We call upon action line facilitators to ensure close alignment with the 2030 Agenda for Sustainable Development when considering new work to implement the outcomes of the World Summit, according to their existing mandates and resources.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -2374,9 +2619,9 @@
     </div>
     
     <div id="para-118" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2384,7 +2629,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recognize the need for further funding and capacity-building of national statistical systems and methodologies to enable all countries to meet the demand for improved data and statistics, and call upon development partners to provide additional resources, share best practices and support capacity development, particularly in developing countries. We urge the private sector to contribute by making appropriate data available to support the gathering and analysis of statistical Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 19/20 25-20874 evidence on the development of the information society, thereby strengthening research, policy development and the work of Governments, civil society, academia and other stakeholders. Follow-up and review</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recognize the need for further funding and capacity-building of national statistical systems and methodologies to enable all countries to meet the demand for improved data and statistics, and call upon development partners to provide additional resources, share best practices and support capacity development, particularly in developing countries. We urge the private sector to contribute by making appropriate data available to support the gathering and analysis of statistical Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society A/RES/80/173 19/20 25-20874 evidence on the development of the information society, thereby strengthening research, policy development and the work of Governments, civil society, academia and other stakeholders. Follow-up and review</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -2502,9 +2757,9 @@
     </div>
     
     <div id="para-125" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2512,16 +2767,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recall that the General Assembly will convene, during its eighty-second session in 2027, a high-level meeting to review progress in the implementation of the Global Digital Compact, on the basis of the progress report of the Secretary-General. A/RES/80/173 Outcome document of the high-level meeting of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 20/20 The review will draw on inputs from all relevant stakeholders, as well as the Commission on Science and Technology for Development, the Internet Governance Forum and facilitators of the World Summit action lines. We encourage the high-level meeting to consider, inter alia, progress made in fostering coherence between the outcomes of the World Summit on the Information Society and the implementation of the Global Digital Compact.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recall that the General Assembly will convene, during its eighty-second session in 2027, a <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> to review progress in the implementation of the Global Digital Compact, on the basis of the progress report of the Secretary-General. A/RES/80/173 Outcome document of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the overall review of the implementation of the outcomes of the World Summit on the Information Society 25-20874 20/20 The review will draw on inputs from all relevant stakeholders, as well as the Commission on Science and Technology for Development, the Internet Governance Forum and facilitators of the World Summit action lines. We encourage the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> to consider, inter alia, progress made in fostering coherence between the outcomes of the World Summit on the Information Society and the implementation of the Global Digital Compact.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-126" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2529,16 +2794,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We recall that the General Assembly determined, in its resolution 70/125, that the outcome of its 20-year review of the World Summit on the Information Society should be an input into the review process for the 2030 Agenda for Sustainable Development. We therefore resolve to submit the present resolution as an input to the high-level meeting to review the 2030 Agenda, which is to be convened by the General Assembly in 2030. We call upon the General Assembly to take into account the outcomes of the joint implementation road map.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We recall that the General Assembly determined, in its resolution 70/125, that the outcome of its 20-year review of the World Summit on the Information Society should be an input into the review process for the 2030 Agenda for Sustainable Development. We therefore resolve to submit the present resolution as an input to the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> to review the 2030 Agenda, which is to be convened by the General Assembly in 2030. We call upon the General Assembly to take into account the outcomes of the joint implementation road map.</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-127" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -2546,7 +2821,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We request the General Assembly to hold a high-level meeting on the overall review of the implementation of the outcomes of the World Summit on the Information Society in 2035, involving the input and participation of all stakeholders, including in the preparatory process, to take stock of progress and challenges concerning the outcomes of the World Summit and identify areas of continued focus. 68th plenary meeting 17 December 2025</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We request the General Assembly to hold a <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> on the overall review of the implementation of the outcomes of the World Summit on the Information Society in 2035, involving the input and participation of all stakeholders, including in the preparatory process, to take stock of progress and challenges concerning the outcomes of the World Summit and identify areas of continued focus. 68th plenary meeting 17 December 2025</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

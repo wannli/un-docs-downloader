@@ -84,11 +84,17 @@
 
 
     
-
+        
+            
+        
     
 
     
 
+    
+
+    
+        
     
 
     
@@ -102,7 +108,25 @@
             
         
     
+        
+    
 
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
     
 
     
@@ -112,41 +136,19 @@
     
 
     
-
+        
     
 
     
 
     
-
+        
     
 
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+        
     
 
     
@@ -164,48 +166,6 @@
     
         
     
-        
-            
-        
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 
     
 
@@ -219,10 +179,14 @@
 
     
         
-            
-        
     
 
+    
+
+    
+
+    
+        
     
         
     
@@ -236,25 +200,7 @@
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
         
-    
-        
-    
-
-    
-
-    
-
     
 
     
@@ -275,6 +221,106 @@
 
     
 
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
     
         
     
@@ -289,12 +335,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">8 with signals, 75 without</span>
+        <span class="text-sm text-muted">28 with signals, 55 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('agenda')" 
@@ -308,13 +361,6 @@
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                 bg-gray-100 text-gray-700 hover:bg-gray-200">
             report
-        </button>
-        
-        <button onclick="filterSignal('PGA')" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-50 text-purple-700 hover:bg-purple-100
-                ">
-            PGA
         </button>
         
         <button onclick="filterSignal('process')" 
@@ -334,9 +380,9 @@
 <div class="space-y-4" id="paragraphs">
     
     <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -344,7 +390,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the reports of the Secretary-General on the follow-up to the Fifth United Nations Conference on the Least Developed Countries14 and on an online university for least developed countries or other equivalent platform to support university-level science, technology, engineering and mathematics education in the least developed countries;15</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the reports of the Secretary-General on the follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries14 and on an online university for least developed countries or other equivalent platform to support university-level science, technology, engineering and mathematics education in the least developed countries;15</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -385,9 +441,9 @@
     </div>
     
     <div id="para-4" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -395,7 +451,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon development partners and all other relevant actors to implement the Doha Programme of Action by integrating it into their respective national cooperation policy frameworks, programmes and activities, as appropriate, _______________ 13 Resolution 79/2, annex. 14 A/80/82-E/2025/63. 15 A/80/426. Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 5/18 25-20774 to ensure enhanced, predictable and targeted support to the least developed countries, as set out in the Programme of Action, and the delivery of their commitments, and to consider appropriate measures to overcome shortfalls or shortcomings, if any;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon development partners and all other relevant actors to implement the Doha Programme of Action by integrating it into their respective national cooperation policy frameworks, programmes and activities, as appropriate, _______________ 13 Resolution 79/2, annex. 14 A/80/82-E/2025/63. 15 A/80/426. Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 5/18 25-20774 to ensure enhanced, predictable and targeted support to the least developed countries, as set out in the Programme of Action, and the delivery of their commitments, and to consider appropriate measures to overcome shortfalls or shortcomings, if any;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -454,7 +520,7 @@
     
     <div id="para-8" 
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda"]'
+         data-signals='["agenda", "PGA"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -463,7 +529,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to include</mark> the Doha Programme of Action as part of its review of the implementation of and follow-up to major United Nations conferences and summits, including the review of the 2030 Agenda for Sustainable Development;</p>
+                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to include</mark> the Doha Programme of Action as part of its review of the implementation of and follow-up to major United Nations <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and summits, including the review of the 2030 Agenda for Sustainable Development;</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
                     
@@ -471,6 +537,12 @@
                         bg-blue-50 text-blue-700
                         ">
                         agenda
+                    </span>
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
                     </span>
                     
                 </div>
@@ -497,9 +569,9 @@
     </div>
     
     <div id="para-10" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -507,16 +579,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the adoption of resolution 79/226 of 19 December 2024 on the quadrennial comprehensive policy review of operational activities for development of the United Nations system, and urges the United Nations development system to continue to prioritize allocations to the least developed countries, in order to support their efforts to implement the 2030 Agenda in a coherent and integrated manner and A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 6/18 ensure effective delivery of support and services to programme countries in accordance with national development policies, plans, priorities and needs and in line with the mandates of the entities of the United Nations development system, further urges the United Nations development system to continue to enhance its support for the implementation of the Doha Programme of Action, which is integral to the 2030 Agenda, and calls upon the entities of the United Nations development system to integrate and mainstream the Doha Programme of Action fully into their operational activities for development;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the adoption of resolution 79/226 of 19 December 2024 on the quadrennial comprehensive policy review of operational activities for development of the United Nations system, and urges the United Nations development system to continue to prioritize allocations to the least developed countries, in order to support their efforts to implement the 2030 Agenda in a coherent and integrated manner and A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 6/18 ensure effective delivery of support and services to programme countries in accordance with national development policies, plans, priorities and needs and in line with the mandates of the entities of the United Nations development system, further urges the United Nations development system to continue to enhance its support for the implementation of the Doha Programme of Action, which is integral to the 2030 Agenda, and calls upon the entities of the United Nations development system to integrate and mainstream the Doha Programme of Action fully into their operational activities for development;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -524,7 +606,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Expresses deep concern at the devastating impacts of the COVID‑19 pandemic on the least developed countries, takes note of the statement dated 28 April 2020 of the Group of Least Developed Countries on COVID‑1916 and commits to supporting its implementation, as appropriate, and invites development partners, international organizations and other stakeholders to support the least developed countries in their recovery efforts and continued implementation of the 2030 Agenda for Sustainable Development, further highlighting the need for greater collaboration and partnerships at all levels to accelerate the implementation of the 2030 Agenda, including the fulfilment of the least developed country-specific targets, the Addis Ababa Action Agenda of the Third International Conference on Financing for Development, and the Sevilla Commitment adopted at the Fourth International Conference on Financing for Development, which is an integral part of the 2030 Agenda;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Expresses deep concern at the devastating impacts of the COVID‑19 pandemic on the least developed countries, takes note of the statement dated 28 April 2020 of the Group of Least Developed Countries on COVID‑1916 and commits to supporting its implementation, as appropriate, and invites development partners, international organizations and other stakeholders to support the least developed countries in their recovery efforts and continued implementation of the 2030 Agenda for Sustainable Development, further highlighting the need for greater collaboration and partnerships at all levels to accelerate the implementation of the 2030 Agenda, including the fulfilment of the least developed country-specific targets, the Addis Ababa Action Agenda of the Third International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, and the Sevilla Commitment adopted at the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, which is an integral part of the 2030 Agenda;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -565,9 +657,9 @@
     </div>
     
     <div id="para-14" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -575,7 +667,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms that the least developed countries, as the most vulnerable group of countries, need enhanced global support to overcome the structural challenges, as well as impacts from pandemics and other health emergencies, conflicts and climate change and the deteriorating situation of food security, lack of access to finance and energy, and increased poverty, that they face in implementing the 2030 Agenda, and in this regard calls upon the international community to prioritize and strengthen support from all sources to facilitate sustained recovery and rebuilding and the _______________ 16 See A/74/843, annex. Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 7/18 25-20774 coordinated implementation and coherent follow-up to and monitoring of the Doha Programme of Action, the 2030 Agenda, the Addis Ababa Action Agenda and the Sevilla Commitment in the least developed countries;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms that the least developed countries, as the most vulnerable group of countries, need enhanced global support to overcome the structural challenges, as well as impacts from pandemics and other health emergencies, conflicts and climate change and the deteriorating situation of food security, lack of access to finance and energy, and increased poverty, that they face in implementing the 2030 Agenda, and in this regard calls upon the international community to prioritize and strengthen support from all sources to facilitate sustained recovery and rebuilding and the _______________ 16 See A/74/843, annex. Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 7/18 25-20774 coordinated implementation and coherent follow-up to and monitoring of the Doha Programme of Action, the 2030 Agenda, the Addis Ababa Action Agenda and the Sevilla Commitment in the least developed countries;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -633,9 +735,9 @@
     </div>
     
     <div id="para-18" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -643,7 +745,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Notes that the global macroeconomic outlook remains highly uncertain, and is particularly bleak for many developing countries, including a large number of least developed countries, faced with significantly higher borrowing costs, growing debt service burdens and tight fiscal constraints, and that such a finance divide will, if left unaddressed, translate into a lasting sustainable development divide; and calls A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 8/18 for improved international debt mechanisms to support debt review, debt payment suspensions, and debt restructuring, as appropriate, with an expansion of support and eligibility to vulnerable countries in need;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Notes that the global macroeconomic outlook remains highly uncertain, and is particularly bleak for many developing countries, including a large number of least developed countries, faced with significantly higher borrowing costs, growing debt service burdens and tight fiscal constraints, and that such a finance divide will, if left unaddressed, translate into a lasting sustainable development divide; and calls A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 8/18 for improved international debt mechanisms to support debt review, debt payment suspensions, and debt restructuring, as appropriate, with an expansion of support and eligibility to vulnerable countries in need;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -667,9 +779,9 @@
     </div>
     
     <div id="para-20" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -677,7 +789,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Stresses the urgency of enhancing ambition for climate action in the implementation of the United Nations Framework Convention on Climate Change and the Paris Agreement in relation to climate mitigation, adaptation and the provision of the means of implementation, especially finance to developing countries; urges the implementation of the decisions adopted at the twenty-seventh session of the Conference of the Parties to the Convention, held in Sharm el-Sheikh, Egypt; recalls its commitment to take concrete steps toward the operationalization of the new funding arrangements for responding to loss and damage, including the fund, by the twenty-eighth session; commits to continuing work to accelerate action to address climate change; and in this regard takes note of the first global stocktake of the Paris Agreement that took place at the twenty-eighth session held in Dubai, United Arab Emirates, and recalls the decisions on the new collective quantified goal on climate finance agreed in Baku at the twenty-ninth session of the Conference of the Parties to the Convention;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Stresses the urgency of enhancing ambition for climate action in the implementation of the United Nations Framework Convention on Climate Change and the Paris Agreement in relation to climate mitigation, adaptation and the provision of the means of implementation, especially finance to developing countries; urges the implementation of the decisions adopted at the twenty-seventh session of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> of the Parties to the Convention, held in Sharm el-Sheikh, Egypt; recalls its commitment to take concrete steps toward the operationalization of the new funding arrangements for responding to loss and damage, including the fund, by the twenty-eighth session; commits to continuing work to accelerate action to address climate change; and in this regard takes note of the first global stocktake of the Paris Agreement that took place at the twenty-eighth session held in Dubai, United Arab Emirates, and recalls the decisions on the new collective quantified goal on climate finance agreed in Baku at the twenty-ninth session of the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> of the Parties to the Convention;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -701,9 +823,9 @@
     </div>
     
     <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -711,7 +833,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Underlines the need for reinforcing the existing comprehensive multi‑hazard early warning system and comprehensive multi-hazard crises mitigation and resilience-building measures, including comprehensive disaster risk financing strategies for the least developed countries aligned with the Sendai Framework for Disaster Risk Reduction 2015–2030 as a key instrument to build resilience against and mitigate the impacts of various shocks, and the commitment to making the best use of existing initiatives, providing support for capacity-building for adaptation planning and implementation, and technical assistance to develop operational national risk information systems to support policymaking, including in the insurance sector, and takes note of the report of the Secretary-General on multi-hazard early warning systems in the least developed countries, as well as the comprehensive technical report entitled “Status of multi-hazard early warning systems in the least developed countries” prepared by the Office of the High Representative in cooperation with the United Nations Office for Disaster Risk Reduction and the World Meteorological Organization; _______________ 17 United Nations Framework Convention on Climate Change and/or Paris Agreement. Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 9/18 25-20774</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Underlines the need for reinforcing the existing comprehensive multi‑hazard early warning system and comprehensive multi-hazard crises mitigation and resilience-building measures, including comprehensive disaster risk financing strategies for the least developed countries aligned with the Sendai Framework for Disaster Risk Reduction 2015–2030 as a key instrument to build resilience against and mitigate the impacts of various shocks, and the commitment to making the best use of existing initiatives, providing support for capacity-building for adaptation planning and implementation, and technical assistance to develop operational national risk information systems to support policymaking, including in the insurance sector, and takes note of the report of the Secretary-General on multi-hazard early warning systems in the least developed countries, as well as the comprehensive technical report entitled “Status of multi-hazard early warning systems in the least developed countries” prepared by the Office of the High Representative in cooperation with the United Nations Office for Disaster Risk Reduction and the World Meteorological Organization; _______________ 17 United Nations Framework Convention on Climate Change and/or Paris Agreement. Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 9/18 25-20774</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -820,9 +952,9 @@
     </div>
     
     <div id="para-29" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -830,7 +962,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Urges the least developed countries and their development partners to make use of existing initiatives and programmes, such as the relevant ministerial decisions of the World Trade Organization on duty-free and quota-free market access for the least developed countries and on preferential rules of origin for those countries, as well as aid-for-trade, reiterates its commitment to increasing aid-for-trade support, in particular for the least developed countries, striving to allocate an increasing proportion of aid-for-trade to the least developed countries, in accordance with development cooperation effectiveness principles, welcomes additional cooperation among developing countries to that end, and encourages the least developed countries to mainstream trade in their national development plans; _______________ 18 A/79/288. A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 10/18</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Urges the least developed countries and their development partners to make use of existing initiatives and programmes, such as the relevant ministerial decisions of the World Trade Organization on duty-free and quota-free market access for the least developed countries and on preferential rules of origin for those countries, as well as aid-for-trade, reiterates its commitment to increasing aid-for-trade support, in particular for the least developed countries, striving to allocate an increasing proportion of aid-for-trade to the least developed countries, in accordance with development cooperation effectiveness principles, welcomes additional cooperation among developing countries to that end, and encourages the least developed countries to mainstream trade in their national development plans; _______________ 18 A/79/288. A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 10/18</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -922,9 +1064,9 @@
     </div>
     
     <div id="para-35" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -932,7 +1074,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recognizes that particular efforts are needed to ensure that all young people, including girls, enjoy equal access to lifelong learning opportunities and equal access to inclusive and quality education at all levels, inclusive of early childhood, primary, secondary and tertiary education, as well as technical and vocational training, notes with concern, in this regard, the lack of progress in closing gender gaps in access to, retention in and completion of secondary education, particularly for girls, _______________ 19 A/77/291 and A/79/540. Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 11/18 25-20774 recognizes the need to continue to provide and encourage, as appropriate, institutes of higher education to allocate places and scholarships for students and trainees from the least developed countries, in particular in the fields of science, technology, business management and economics, and to strengthen support for institutions in relation to gender equality and the empowerment of all women and girls at the global, regional and national levels, and also recognizes that the least developed countries have the most to gain from sustainable development and utilizing the full skills and talents of their people, including women and girls;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes that particular efforts are needed to ensure that all young people, including girls, enjoy equal access to lifelong learning opportunities and equal access to inclusive and quality education at all levels, inclusive of early childhood, primary, secondary and tertiary education, as well as technical and vocational training, notes with concern, in this regard, the lack of progress in closing gender gaps in access to, retention in and completion of secondary education, particularly for girls, _______________ 19 A/77/291 and A/79/540. Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 11/18 25-20774 recognizes the need to continue to provide and encourage, as appropriate, institutes of higher education to allocate places and scholarships for students and trainees from the least developed countries, in particular in the fields of science, technology, business management and economics, and to strengthen support for institutions in relation to gender equality and the empowerment of all women and girls at the global, regional and national levels, and also recognizes that the least developed countries have the most to gain from sustainable development and utilizing the full skills and talents of their people, including women and girls;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -974,7 +1126,7 @@
     
     <div id="para-38" 
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda", "report"]'
+         data-signals='["agenda", "PGA", "report"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -983,7 +1135,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Supports the Technology Bank for the Least Developed Countries as a focal point for the least developed countries to strengthen their science, technology and innovation capacity towards building sustainable productive capacities and promoting structural economic transformation, also supports the Technology Bank in strengthening the science, technology and innovation capacity of least developed countries for structural transformation and productive capacity development, invites Member States, as well as international organizations, foundations and the private sector, to provide voluntary financial and in-kind resources to the Technology Bank in order to enhance its capacity and effectiveness, and to fulfil its mandate and decides to strengthen collaboration among Governments, the private sector and academia to advance science, technology and innovation research and development, build inclusive digital economies and bridge the digital divide, including by facilitating technology transfer on mutually agreed terms; encourages least developed countries to engage with development partners through the Technology Bank, including by utilizing the technology needs assessments; and takes note of the report of the Secretary-General on the work of the Technology Bank for the Least Developed Countries 20 and also <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> the topic “Report on the work of the Technology Bank for the Least Developed Countries” under the sub-item entitled “Follow-up to the Fifth United Nations Conference on the Least Developed Countries” at its eighty-first session, and requests the <mark class="bg-yellow-200 px-0.5 rounded">Secretary-General to submit</mark> a report for its consideration;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Supports the Technology Bank for the Least Developed Countries as a focal point for the least developed countries to strengthen their science, technology and innovation capacity towards building sustainable productive capacities and promoting structural economic transformation, also supports the Technology Bank in strengthening the science, technology and innovation capacity of least developed countries for structural transformation and productive capacity development, invites Member States, as well as international organizations, foundations and the private sector, to provide voluntary financial and in-kind resources to the Technology Bank in order to enhance its capacity and effectiveness, and to fulfil its mandate and decides to strengthen collaboration among Governments, the private sector and academia to advance science, technology and innovation research and development, build inclusive digital economies and bridge the digital divide, including by facilitating technology transfer on mutually agreed terms; encourages least developed countries to engage with development partners through the Technology Bank, including by utilizing the technology needs assessments; and takes note of the report of the Secretary-General on the work of the Technology Bank for the Least Developed Countries 20 and also <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> the topic “Report on the work of the Technology Bank for the Least Developed Countries” under the sub-item entitled “Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries” at its eighty-first session, and requests the <mark class="bg-yellow-200 px-0.5 rounded">Secretary-General to submit</mark> a report for its consideration;</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
                     
@@ -991,6 +1143,12 @@
                         bg-blue-50 text-blue-700
                         ">
                         agenda
+                    </span>
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
                     </span>
                     
                     <span class="px-1.5 py-0.5 rounded text-xs font-medium
@@ -1005,9 +1163,9 @@
     </div>
     
     <div id="para-39" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1015,16 +1173,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms its commitment to implementing the decision contained in the Addis Ababa Action Agenda to adopt and implement investment promotion regimes _______________ 20 A/80/355. A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 12/18 for the least developed countries, and reiterates the decision21 to provide financial and technical support for project preparation and contract negotiation, advisory support for investment-related dispute resolution, access to information on investment facilities, improving enabling environments, and risk insurance and guarantees such as through the Multilateral Investment Guarantee Agency;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms its commitment to implementing the decision contained in the Addis Ababa Action Agenda to adopt and implement investment promotion regimes _______________ 20 A/80/355. A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 12/18 for the least developed countries, and reiterates the decision21 to provide financial and technical support for project preparation and contract negotiation, advisory support for investment-related dispute resolution, access to information on investment facilities, improving enabling environments, and risk insurance and guarantees such as through the Multilateral Investment Guarantee Agency;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-40" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1032,7 +1200,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reiterates the commitment at the Fourth International Conference on Financing for Development that, building on the feasibility study of the Secretary- General, it supports the establishment and operationalization of an international investment support centre for the least developed countries;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reiterates the commitment at the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development that, building on the feasibility study of the Secretary- General, it supports the establishment and operationalization of an international investment support centre for the least developed countries;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1107,9 +1285,9 @@
     </div>
     
     <div id="para-45" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1117,7 +1295,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reiterates its conviction that no country graduating from the least developed country category should have its development progress disrupted or reversed, welcomes the fact that the United Nations graduation process helps to ensure that no graduating country has its special and differential treatment measures and exemptions reduced abruptly, invites development and trading partners to consider extending to graduated countries trade preferences previously made available as a result of least developed country status, or reducing them in a phased manner in order to avoid their abrupt reduction, notes that the Group of Least Developed Countries put forward various proposals at the World Trade Organization, pertaining to, among other things, trade-related challenges and those related to the smooth transition of the countries graduating from the least developed country category and seeks to further examine these issues, and calls upon the development partners to continue to provide, as appropriate, special climate change-related finance and technological support to graduated countries so as to support action towards the achievement of the goals of the Paris Agreement and for a period consistent with their _______________ 21 Resolution 69/313, annex, para. 46. 22 A/80/95. Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 13/18 25-20774 vulnerabilities, sustainable development needs and other national circumstances and emerging challenges;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reiterates its conviction that no country graduating from the least developed country category should have its development progress disrupted or reversed, welcomes the fact that the United Nations graduation process helps to ensure that no graduating country has its special and differential treatment measures and exemptions reduced abruptly, invites development and trading partners to consider extending to graduated countries trade preferences previously made available as a result of least developed country status, or reducing them in a phased manner in order to avoid their abrupt reduction, notes that the Group of Least Developed Countries put forward various proposals at the World Trade Organization, pertaining to, among other things, trade-related challenges and those related to the smooth transition of the countries graduating from the least developed country category and seeks to further examine these issues, and calls upon the development partners to continue to provide, as appropriate, special climate change-related finance and technological support to graduated countries so as to support action towards the achievement of the goals of the Paris Agreement and for a period consistent with their _______________ 21 Resolution 69/313, annex, para. 46. 22 A/80/95. Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 13/18 25-20774 vulnerabilities, sustainable development needs and other national circumstances and emerging challenges;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1226,9 +1414,9 @@
     </div>
     
     <div id="para-52" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1236,7 +1424,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the development partners, international financial institutions and the United Nations system to extend the necessary support for the full and effective operationalization of the Sustainable Graduation Support Facility (iGRAD), in line with the mandate of the Doha Programme of Action for the Least Developed Countries, recognizing its vital role in providing technical assistance, advisory services and capacity development to graduating and graduated least developed countries, and underlining that enhanced international support to iGRAD can play a critical role in ensuring smooth transition, sustaining development gains, and addressing vulnerabilities arising from climate change, economic shocks and other global crises; A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 14/18</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the development partners, international financial institutions and the United Nations system to extend the necessary support for the full and effective operationalization of the Sustainable Graduation Support Facility (iGRAD), in line with the mandate of the Doha Programme of Action for the Least Developed Countries, recognizing its vital role in providing technical assistance, advisory services and capacity development to graduating and graduated least developed countries, and underlining that enhanced international support to iGRAD can play a critical role in ensuring smooth transition, sustaining development gains, and addressing vulnerabilities arising from climate change, economic shocks and other global crises; A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 14/18</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1277,9 +1475,9 @@
     </div>
     
     <div id="para-55" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1287,7 +1485,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Expresses its profound gratitude to the Government and the people of the State of Qatar for hosting the second part of the Fifth United Nations Conference on the Least Developed Countries and for providing all the necessary support to the Conference and its follow-up processes;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Expresses its profound gratitude to the Government and the people of the State of Qatar for hosting the second part of the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries and for providing all the necessary support to the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> and its follow-up processes;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1362,9 +1570,9 @@
     </div>
     
     <div id="para-60" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1372,7 +1580,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also decides that the scope of the midterm comprehensive global review shall be as follows: (a) To undertake a comprehensive review of the implementation of the Doha Programme of Action by the least developed countries and their development partners, share best practices and lessons learned and identify obstacles and constraints encountered and actions and initiatives needed to overcome them, as well as new challenges and emerging issues; Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 15/18 25-20774 (b) To reaffirm the global commitment to address the special needs of the least developed countries made at the Fifth United Nations Conference on the Least Developed Countries and to further strengthen the global partnership for development for least developed countries in all priority areas of the Doha Programme of Action in order to ensure the timely, effective and full implementation of the Programme of Action during the remainder of the Decade, while taking into account the 2030 Agenda for Sustainable Development as it relates to the least developed countries;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also decides that the scope of the midterm comprehensive global review shall be as follows: (a) To undertake a comprehensive review of the implementation of the Doha Programme of Action by the least developed countries and their development partners, share best practices and lessons learned and identify obstacles and constraints encountered and actions and initiatives needed to overcome them, as well as new challenges and emerging issues; Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 15/18 25-20774 (b) To reaffirm the global commitment to address the special needs of the least developed countries made at the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries and to further strengthen the global partnership for development for least developed countries in all priority areas of the Doha Programme of Action in order to ensure the timely, effective and full implementation of the Programme of Action during the remainder of the Decade, while taking into account the 2030 Agenda for Sustainable Development as it relates to the least developed countries;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1515,9 +1733,9 @@
     </div>
     
     <div id="para-67" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1525,16 +1743,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also decides that the Under-Secretary-General and High Representative for the Least Developed Countries, Landlocked Developing Countries and Small Island Developing States shall serve as the Secretary-General of the midterm review and shall be responsible for making the necessary arrangements for carrying out the work of the midterm review; and further underlines that the Office of the High Representative, as the focal point, in accordance with mandates given by the General Assembly in its resolution 56/227 of 24 December 2001, has the responsibility for ensuring that the preparations are carried out effectively and efficiently and for mobilizing and coordinating the active involvement of the organizations of the United Nations system; A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 16/18</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also decides that the Under-Secretary-General and High Representative for the Least Developed Countries, Landlocked Developing Countries and Small Island Developing States shall serve as the Secretary-General of the midterm review and shall be responsible for making the necessary arrangements for carrying out the work of the midterm review; and further underlines that the Office of the High Representative, as the focal point, in accordance with mandates given by the General Assembly in its resolution 56/227 of 24 December 2001, has the responsibility for ensuring that the preparations are carried out effectively and efficiently and for mobilizing and coordinating the active involvement of the organizations of the United Nations system; A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 16/18</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-68" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1542,16 +1770,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Further decides that the thematic meetings will focus on identifying concrete suggestions to further strengthen the global partnership for development for least developed countries in all priority areas of the Doha Programme of Action for the Least Developed Countries in order to ensure the timely, effective and full implementation of the Programme of Action during the remainder of the decade, while taking into account synergy and coherence of the Programme of Action with global processes, including the 2030 Agenda for Sustainable Development, the Sevilla Commitment of the Fourth International Conference on Financing for Development, the Sendai Framework for Disaster Risk Reduction 2015–2030, and the Paris Agreement;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Further decides that the thematic meetings will focus on identifying concrete suggestions to further strengthen the global partnership for development for least developed countries in all priority areas of the Doha Programme of Action for the Least Developed Countries in order to ensure the timely, effective and full implementation of the Programme of Action during the remainder of the decade, while taking into account synergy and coherence of the Programme of Action with global processes, including the 2030 Agenda for Sustainable Development, the Sevilla Commitment of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, the Sendai Framework for Disaster Risk Reduction 2015–2030, and the Paris Agreement;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-69" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1559,7 +1797,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Decides that the organizational arrangements of the round tables will be as follows: (a) Each round table will be co-chaired by two Chairs, one from the least developed countries and one from the development partners, to be appointed by the President of the midterm review, from among representatives at the level of Head of State or Government and/or at the ministerial level; (b) The Secretary-General of the midterm review will select up to four panellists for each of the round tables, and the panel discussion will be followed by an interactive debate among States and other relevant representatives and stakeholders; (c) The round tables will be interactive and open to all conference participants; there will be no prepared list of speakers; at the discretion of the Chair or Chairs, priority in the order of speakers will be given to those speaking at the level of Head of State or Government or at the ministerial level; the round tables will aim to achieve a balance among speakers from all stakeholders; and, in order to provide for maximum participation, interventions should not exceed three minutes;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Decides that the organizational arrangements of the round tables will be as follows: (a) Each round table will be co-chaired by two Chairs, one from the least developed countries and one from the development partners, to be appointed by the President of the midterm review, from among representatives at the level of Head of State or Government and/or at the ministerial level; (b) The Secretary-General of the midterm review will select up to four panellists for each of the round tables, and the panel discussion will be followed by an interactive debate among States and other relevant representatives and stakeholders; (c) The round tables will be interactive and open to all <mark class="bg-yellow-200 px-0.5 rounded">conference</mark> participants; there will be no prepared list of speakers; at the discretion of the Chair or Chairs, priority in the order of speakers will be given to those speaking at the level of Head of State or Government or at the ministerial level; the round tables will aim to achieve a balance among speakers from all stakeholders; and, in order to provide for maximum participation, interventions should not exceed three minutes;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1649,9 +1897,9 @@
     </div>
     
     <div id="para-74" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1659,7 +1907,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Invites the host country to consider hosting, with the assistance of the Office of the High Representative, within its existing mandate and resources, meetings of various stakeholders on the margins of the comprehensive midterm review, and encourages relevant representatives of Member States and relevant stakeholders to support and participate in the meetings; Follow-up to the Fifth United Nations Conference on the Least Developed Countries A/RES/80/150 17/18 25-20774</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Invites the host country to consider hosting, with the assistance of the Office of the High Representative, within its existing mandate and resources, meetings of various stakeholders on the margins of the comprehensive midterm review, and encourages relevant representatives of Member States and relevant stakeholders to support and participate in the meetings; Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries A/RES/80/150 17/18 25-20774</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1744,7 +2002,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Stresses, while recognizing the intergovernmental nature of the comprehensive midterm review, the importance of the effective, well-structured and broad participation of all relevant stakeholders, including parliamentarians, civil society and the private sector, in the midterm review, including national and regional reviews and thematic preparations, as well as in the interactive thematic round tables and side events during the midterm review, underlines that intergovernmental mechanisms at the global and regional levels, including those of the United Nations regional commissions, as well as relevant substantive material and statistical data, should be effectively utilized in the review process, and decides: (a) To invite non‑governmental organizations that are in consultative status with the Economic and Social Council to register with the Secretariat in order to participate in the comprehensive midterm review; (b) To invite other relevant stakeholders, including organizations and bodies of the United Nations system, international financial institutions, civil society organizations, the private sector, other international bodies and other non‑governmental organizations to participate as observers in the midterm review; (c) To request the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to draw up a list of representatives of other relevant non‑governmental organizations, civil society organizations, academic institutions and the private sector who may participate in the A/RES/80/150 Follow-up to the Fifth United Nations Conference on the Least Developed Countries 25-20774 18/18 midterm review, taking into account the principles of transparency and of equitable geographical representation and with due regard for gender parity and to submit the proposed list to Member States for their consideration on a non‑objection basis and bring the list to the attention of the Assembly for a final decision by the Assembly on participation in the midterm review;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Stresses, while recognizing the intergovernmental nature of the comprehensive midterm review, the importance of the effective, well-structured and broad participation of all relevant stakeholders, including parliamentarians, civil society and the private sector, in the midterm review, including national and regional reviews and thematic preparations, as well as in the interactive thematic round tables and side events during the midterm review, underlines that intergovernmental mechanisms at the global and regional levels, including those of the United Nations regional commissions, as well as relevant substantive material and statistical data, should be effectively utilized in the review process, and decides: (a) To invite non‑governmental organizations that are in consultative status with the Economic and Social Council to register with the Secretariat in order to participate in the comprehensive midterm review; (b) To invite other relevant stakeholders, including organizations and bodies of the United Nations system, international financial institutions, civil society organizations, the private sector, other international bodies and other non‑governmental organizations to participate as observers in the midterm review; (c) To request the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to draw up a list of representatives of other relevant non‑governmental organizations, civil society organizations, academic institutions and the private sector who may participate in the A/RES/80/150 Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries 25-20774 18/18 midterm review, taking into account the principles of transparency and of equitable geographical representation and with due regard for gender parity and to submit the proposed list to Member States for their consideration on a non‑objection basis and bring the list to the attention of the Assembly for a final decision by the Assembly on participation in the midterm review;</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
                     
@@ -1813,7 +2071,7 @@
     
     <div id="para-83" 
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda", "report"]'
+         data-signals='["agenda", "PGA", "report"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -1822,7 +2080,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also requests the Secretary-General to prepare and <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-first session, on an exceptional basis, a comprehensive report on the implementation of the Doha Programme of Action over the past four years, and the implementation of the present resolution, highlighting progress made on the Programme’s targets and indicators, challenges encountered and recommendations for the effective implementation of the Programme during the remainder of the decade; and <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> in the provisional agenda of its eighty-first session, under the item entitled “Groups of countries in special situations”, the sub-item entitled “Follow-up to the Fifth United Nations Conference on the Least Developed Countries.” 64th plenary meeting 15 December 2025</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also requests the Secretary-General to prepare and <mark class="bg-yellow-200 px-0.5 rounded">submit to the General Assembly</mark> at its eighty-first session, on an exceptional basis, a comprehensive report on the implementation of the Doha Programme of Action over the past four years, and the implementation of the present resolution, highlighting progress made on the Programme’s targets and indicators, challenges encountered and recommendations for the effective implementation of the Programme during the remainder of the decade; and <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> in the provisional agenda of its eighty-first session, under the item entitled “Groups of countries in special situations”, the sub-item entitled “Follow-up to the Fifth United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on the Least Developed Countries.” 64th plenary meeting 15 December 2025</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
                     
@@ -1830,6 +2088,12 @@
                         bg-blue-50 text-blue-700
                         ">
                         agenda
+                    </span>
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
                     </span>
                     
                     <span class="px-1.5 py-0.5 rounded text-xs font-medium

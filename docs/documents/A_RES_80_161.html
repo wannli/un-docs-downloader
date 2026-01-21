@@ -94,7 +94,9 @@
     
 
     
-
+        
+            
+        
     
 
     
@@ -137,6 +139,10 @@
 
     
 
+    
+
+    
+        
     
 
 
@@ -147,12 +153,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 28 without</span>
+        <span class="text-sm text-muted">2 with signals, 26 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -251,9 +264,9 @@
     </div>
     
     <div id="para-6" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -261,7 +274,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the decision by the Commission to request its secretariat: (a) To conduct preparatory work to refine the scope of possible work on updating the Model Law on Public Procurement and related texts to reflect recent _______________ 1 Official Records of the General Assembly, Eightieth Session, Supplement No. 17 (A/80/17). 2 Ibid., chap. IV, sect. C, and annex I. 3 Ibid., chap. V, sect. B. 4 Ibid., chap. VI, sect. C. 5 Ibid., chap. VII. 6 Ibid., chap. VIII. 7 Ibid., chap. IX. 8 Ibid., chaps. X–XIV. 9 Ibid., chap. XIV. Report of the United Nations Commission on International Trade Law on the work of its fifty-eighth session A/RES/80/161 3/8 25-20854 developments, which would not include issues of climate change mitigation, adaption and resilience;10 (b) To continue to monitor developments related to secured transactions using new types of assets, and to define the scope and form of any future work; 11 (c) To organize colloquiums on possible future work in the area of insolvency law, including possible updates to the Guide to Enactment and Interpretation of the Model Law on Cross-Border Insolvency, in conjunction with Working Group V sessions; (d) In respect of topics related to digital trade: (i) To continue, within the modalities it has defined, its exploratory work on the project on dispute resolution in the digital economy concerning the use of artificial intelligence, platform-based dispute resolution, as well as remote hearings in arbitration and conduct of mediation;12 (ii) To continue its preparatory work on enabling end-to-end trade digitalization and paperless trade;13 (iii) To monitor developments on legal issues relating to the use of decentralized autonomous organizations in trade and to carry out further exploratory work on those issues;14 (iv) To conduct exploratory work on legal aspects of digital trade with a focus on digital platforms and private law;15 (v) To carry out exploratory work on the topic of digital payments, carefully considering any intersection of that work with existing regulatory frameworks; 16 (e) To facilitate intersessional consultations on possible cost-saving and efficiency-enhancing measures;17 (f) To hold colloquiums on topics mentioned in subparagraph (b) and subparagraph (d) (ii), (iv) and (v) above, utilizing the conference resources tentatively allocated to Working Group I in the second half of 2025 and the first half of 2026, as well as any conference resources of other working groups that may become available;18</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the decision by the Commission to request its secretariat: (a) To conduct preparatory work to refine the scope of possible work on updating the Model Law on Public Procurement and related texts to reflect recent _______________ 1 Official Records of the General Assembly, Eightieth Session, Supplement No. 17 (A/80/17). 2 Ibid., chap. IV, sect. C, and annex I. 3 Ibid., chap. V, sect. B. 4 Ibid., chap. VI, sect. C. 5 Ibid., chap. VII. 6 Ibid., chap. VIII. 7 Ibid., chap. IX. 8 Ibid., chaps. X–XIV. 9 Ibid., chap. XIV. Report of the United Nations Commission on International Trade Law on the work of its fifty-eighth session A/RES/80/161 3/8 25-20854 developments, which would not include issues of climate change mitigation, adaption and resilience;10 (b) To continue to monitor developments related to secured transactions using new types of assets, and to define the scope and form of any future work; 11 (c) To organize colloquiums on possible future work in the area of insolvency law, including possible updates to the Guide to Enactment and Interpretation of the Model Law on Cross-Border Insolvency, in conjunction with Working Group V sessions; (d) In respect of topics related to digital trade: (i) To continue, within the modalities it has defined, its exploratory work on the project on dispute resolution in the digital economy concerning the use of artificial intelligence, platform-based dispute resolution, as well as remote hearings in arbitration and conduct of mediation;12 (ii) To continue its preparatory work on enabling end-to-end trade digitalization and paperless trade;13 (iii) To monitor developments on legal issues relating to the use of decentralized autonomous organizations in trade and to carry out further exploratory work on those issues;14 (iv) To conduct exploratory work on legal aspects of digital trade with a focus on digital platforms and private law;15 (v) To carry out exploratory work on the topic of digital payments, carefully considering any intersection of that work with existing regulatory frameworks; 16 (e) To facilitate intersessional consultations on possible cost-saving and efficiency-enhancing measures;17 (f) To hold colloquiums on topics mentioned in subparagraph (b) and subparagraph (d) (ii), (iv) and (v) above, utilizing the <mark class="bg-yellow-200 px-0.5 rounded">conference</mark> resources tentatively allocated to Working Group I in the second half of 2025 and the first half of 2026, as well as any <mark class="bg-yellow-200 px-0.5 rounded">conference</mark> resources of other working groups that may become available;18</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -625,9 +648,9 @@
     </div>
     
     <div id="para-28" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -635,7 +658,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also recalls with satisfaction that, in the Sevilla Commitment of the Fourth International Conference on Financing for Development, 38 States expressed their resolve to support efforts to reform the mechanisms for investor-State dispute settlements in trade and investment agreements, including through a multilateral approach towards the establishment of an advisory centre on international investment dispute resolution, and building on the ongoing work of the Commission. 64th plenary meeting 15 December 2025 _______________ 38 Resolution 79/323, annex, para. 43 (l).</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also recalls with satisfaction that, in the Sevilla Commitment of the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, 38 States expressed their resolve to support efforts to reform the mechanisms for investor-State dispute settlements in trade and investment agreements, including through a multilateral approach towards the establishment of an advisory centre on international investment dispute resolution, and building on the ongoing work of the Commission. 64th plenary meeting 15 December 2025 _______________ 38 Resolution 79/323, annex, para. 43 (l).</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

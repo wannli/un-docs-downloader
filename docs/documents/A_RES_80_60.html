@@ -86,6 +86,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -127,12 +131,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 12 without</span>
+        <span class="text-sm text-muted">3 with signals, 11 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -176,9 +187,9 @@
     </div>
     
     <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -186,7 +197,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Commends the United Nations Regional Centre for Peace and Disarmament in Africa for its sustained support to Member States in implementing disarmament, arms control and non‑proliferation activities through seminars and conferences, capacity-building and training, policy and technical expertise, and information and advocacy at the regional and national levels;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Commends the United Nations Regional Centre for Peace and Disarmament in Africa for its sustained support to Member States in implementing disarmament, arms control and non‑proliferation activities through seminars and <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s, capacity-building and training, policy and technical expertise, and information and advocacy at the regional and national levels;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

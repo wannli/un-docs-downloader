@@ -92,6 +92,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -195,12 +199,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 49 without</span>
+        <span class="text-sm text-muted">2 with signals, 48 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -288,9 +299,9 @@
     </div>
     
     <div id="para-5" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -298,7 +309,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recalls the adoption of the New Urban Agenda at the United Nations Conference on Housing and Sustainable Urban Development (Habitat III), held in __________________ 23 A/80/317. 24 E/CN.6/2025/3/Rev.1. 25 United Nations, Treaty Series, vol. 120, No. 1616. 26 Ibid., vol. 1120, No. 17426. 27 Ibid., vol. 2115, No. 36794. 28 Ibid., vol. 2237, No. 39574. 29 Ibid., vol. 2241, No. 39574. 30 Ibid., vol. 360, No. 5158. 31 Ibid., vol. 989, No. 14458. 32 Resolution 64/293. 33 A/HRC/56/54. 34 A/HRC/59/49. 35 A/79/213. 36 A/80/302. A/C.3/80/L.18 25-16995 8/14 Quito from 17 to 20 October 2016, 37 in which Member States committed to recognizing the contribution of the working poor in the informal economy, particularly women migrant workers, to the urban economies;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls the adoption of the New Urban Agenda at the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Housing and Sustainable Urban Development (Habitat III), held in __________________ 23 A/80/317. 24 E/CN.6/2025/3/Rev.1. 25 United Nations, Treaty Series, vol. 120, No. 1616. 26 Ibid., vol. 1120, No. 17426. 27 Ibid., vol. 2115, No. 36794. 28 Ibid., vol. 2237, No. 39574. 29 Ibid., vol. 2241, No. 39574. 30 Ibid., vol. 360, No. 5158. 31 Ibid., vol. 989, No. 14458. 32 Resolution 64/293. 33 A/HRC/56/54. 34 A/HRC/59/49. 35 A/79/213. 36 A/80/302. A/C.3/80/L.18 25-16995 8/14 Quito from 17 to 20 October 2016, 37 in which Member States committed to recognizing the contribution of the working poor in the informal economy, particularly women migrant workers, to the urban economies;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

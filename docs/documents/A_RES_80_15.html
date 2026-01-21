@@ -90,12 +90,18 @@
     
 
     
+        
+            
+        
+    
 
     
 
     
         
             
+        
+    
         
     
 
@@ -107,12 +113,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 5 without</span>
+        <span class="text-sm text-muted">2 with signals, 4 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('agenda')" 
@@ -184,9 +197,9 @@
     </div>
     
     <div id="para-4" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -194,7 +207,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages once again States Parties to Additional Protocols I and II to the Treaty of Tlatelolco9 to review their interpretative declarations thereto, in accordance with action 9 of the Final Document of the 2010 Review Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons,10 reaffirming and recognizing the legitimate interests of the States that comprise the nuclear- weapon-free zone in Latin America and the Caribbean in receiving full and unequivocal security assurances from the nuclear-weapon States;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages once again States Parties to Additional Protocols I and II to the Treaty of Tlatelolco9 to review their interpretative declarations thereto, in accordance with action 9 of the Final Document of the 2010 Review <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons,10 reaffirming and recognizing the legitimate interests of the States that comprise the nuclear- weapon-free zone in Latin America and the Caribbean in receiving full and unequivocal security assurances from the nuclear-weapon States;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -219,7 +242,7 @@
     
     <div id="para-6" 
          class="para-row border border-gray-200 rounded-lg p-4 transition-all "
-         data-signals='["agenda"]'
+         data-signals='["agenda", "PGA"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
@@ -228,7 +251,7 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to include</mark> in the provisional agenda of its eighty-third session the item entitled “Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean (Treaty of Tlatelolco)”. 52nd plenary meeting 1 December 2025 _______________ 9 United Nations, Treaty Series, vol. 634, No. 9068. 10 See 2010 Review Conference of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons, Final Document, vol. I (NPT/CONF.2010/50 (Vol. I)), part I, Conclusions and recommendations for follow-on actions, section I, entitled “Nuclear disarmament”.</p>
+                <p class="text-gray-700 leading-relaxed text-sm"><mark class="bg-yellow-200 px-0.5 rounded">Decides to include</mark> in the provisional agenda of its eighty-third session the item entitled “Treaty for the Prohibition of Nuclear Weapons in Latin America and the Caribbean (Treaty of Tlatelolco)”. 52nd plenary meeting 1 December 2025 _______________ 9 United Nations, Treaty Series, vol. 634, No. 9068. 10 See 2010 Review <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> of the Parties to the Treaty on the Non-Proliferation of Nuclear Weapons, Final Document, vol. I (NPT/CONF.2010/50 (Vol. I)), part I, Conclusions and recommendations for follow-on actions, section I, entitled “Nuclear disarmament”.</p>
                 
                 <div class="mt-2 flex flex-wrap gap-1">
                     
@@ -236,6 +259,12 @@
                         bg-blue-50 text-blue-700
                         ">
                         agenda
+                    </span>
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
                     </span>
                     
                 </div>

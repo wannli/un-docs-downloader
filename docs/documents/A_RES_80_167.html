@@ -84,6 +84,10 @@
 
 
     
+        
+            
+        
+    
 
     
 
@@ -147,12 +151,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 22 without</span>
+        <span class="text-sm text-muted">3 with signals, 21 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -179,9 +190,9 @@
 <div class="space-y-4" id="paragraphs">
     
     <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -189,7 +200,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recalls the high-level meeting of the General Assembly on the rule of law at the national and international levels, held during the high-level segment of its sixty- seventh session, and the declaration adopted at that meeting,3 takes note of the report of the Secretary-General submitted pursuant to paragraph 41 of the declaration,4 and requests the Sixth Committee to continue its consideration of ways and means of further developing the linkages between the rule of law and the three pillars of the United Nations;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the rule of law at the national and international levels, held during the high-level segment of its sixty- seventh session, and the declaration adopted at that meeting,3 takes note of the report of the Secretary-General submitted pursuant to paragraph 41 of the declaration,4 and requests the Sixth Committee to continue its consideration of ways and means of further developing the linkages between the rule of law and the three pillars of the United Nations;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

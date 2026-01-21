@@ -96,6 +96,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -117,12 +121,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 10 without</span>
+        <span class="text-sm text-muted">2 with signals, 9 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('agenda')" 
@@ -245,9 +256,9 @@
     </div>
     
     <div id="para-7" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -255,7 +266,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Urges all States to remain seized of the issue at the highest political level and, where in a position to do so, to promote adherence to the Convention through bilateral, subregional, regional and multilateral contacts, outreach, seminars and other means, in particular in the light of the decisions adopted at the Fifth Review Conference;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Urges all States to remain seized of the issue at the highest political level and, where in a position to do so, to promote adherence to the Convention through bilateral, subregional, regional and multilateral contacts, outreach, seminars and other means, in particular in the light of the decisions adopted at the Fifth Review <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark>;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

@@ -116,6 +116,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -143,12 +147,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 20 without</span>
+        <span class="text-sm text-muted">3 with signals, 19 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -447,9 +458,9 @@
     </div>
     
     <div id="para-17" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -457,7 +468,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recalls, in this regard, the statement of 15 July 1999 and the declarations adopted on 5 December 2001 and on 17 December 201419 by the Conference of High Contracting Parties to the Fourth Geneva Convention on measures to enforce the Convention in the Occupied Palestinian Territory, including East Jerusalem, welcomes in this regard initiatives by States Parties, both individually and collectively, in accordance with article 1 of the Convention, aimed at ensuring respect for the Convention and accountability, and calls upon all High Contracting Parties to the Convention to continue, individually and collectively, to exert all efforts to ensure respect for its provisions by Israel, the occupying Power, in the Occupied Palestinian Territory, including East Jerusalem, and other Arab territories occupied by Israel since 1967;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls, in this regard, the statement of 15 July 1999 and the declarations adopted on 5 December 2001 and on 17 December 201419 by the <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> of High Contracting Parties to the Fourth Geneva Convention on measures to enforce the Convention in the Occupied Palestinian Territory, including East Jerusalem, welcomes in this regard initiatives by States Parties, both individually and collectively, in accordance with article 1 of the Convention, aimed at ensuring respect for the Convention and accountability, and calls upon all High Contracting Parties to the Convention to continue, individually and collectively, to exert all efforts to ensure respect for its provisions by Israel, the occupying Power, in the Occupied Palestinian Territory, including East Jerusalem, and other Arab territories occupied by Israel since 1967;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

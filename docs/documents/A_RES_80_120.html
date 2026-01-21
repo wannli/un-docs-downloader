@@ -88,6 +88,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -113,12 +117,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 8 without</span>
+        <span class="text-sm text-muted">2 with signals, 7 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -172,9 +183,9 @@
     </div>
     
     <div id="para-3" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -182,7 +193,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Recalls the Bridgetown Covenant, adopted at the fifteenth session of the United Nations Conference on Trade and Development, held in Barbados from 3 to _______________ 3 A/80/415. Unilateral economic measures as a means of political and economic coercion against developing countries A/RES/80/120 3/3 25-20732 7 October 2021,4 in which States are strongly urged to refrain from promulgating and applying any unilateral economic, financial or trade measures not in accordance with international law and the Charter of the United Nations, in the light of concerns over the constraining nature and development implications of such measures that negatively impact the well-being of the populations and can impede the full achievement of economic and social development in the concerned States, as well as impair their trade relations;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls the Bridgetown Covenant, adopted at the fifteenth session of the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Trade and Development, held in Barbados from 3 to _______________ 3 A/80/415. Unilateral economic measures as a means of political and economic coercion against developing countries A/RES/80/120 3/3 25-20732 7 October 2021,4 in which States are strongly urged to refrain from promulgating and applying any unilateral economic, financial or trade measures not in accordance with international law and the Charter of the United Nations, in the light of concerns over the constraining nature and development implications of such measures that negatively impact the well-being of the populations and can impede the full achievement of economic and social development in the concerned States, as well as impair their trade relations;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

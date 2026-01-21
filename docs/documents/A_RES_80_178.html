@@ -98,11 +98,17 @@
     
 
     
+        
+            
+        
+    
 
     
 
     
 
+    
+        
     
 
     
@@ -234,6 +240,8 @@
     
 
     
+        
+    
 
     
 
@@ -251,6 +259,8 @@
 
     
 
+    
+        
     
 
     
@@ -275,12 +285,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">1 with signals, 87 without</span>
+        <span class="text-sm text-muted">5 with signals, 83 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('agenda')" 
@@ -426,9 +443,9 @@
     </div>
     
     <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -436,7 +453,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Emphasizes that the major United Nations conferences and summits, including the Millennium Summit, the International Conference on Financing for Development, in its Monterrey Consensus,23 the 2005 World Summit, the Follow-up International Conference on Financing for Development to Review the Implementation of the Monterrey Consensus, in its Doha Declaration on Financing for Development,24 the high-level plenary meeting of the General Assembly on the Millennium Development Goals, the United Nations Conference on Sustainable Development, the 2013 special event to follow up efforts made towards achieving the Millennium Development Goals, the third International Conference on Financing for Development, in its Addis Ababa Action Agenda, the United Nations summit for the adoption of the post-2015 development agenda, the 2023 Sustainable Development Goals Summit, the 2024 Summit of the Future, and the Fourth International Conference on Financing for Development, have reinforced the priority and urgency of the eradication of poverty in all its forms and dimensions within the United Nations development agenda;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Emphasizes that the major United Nations <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and summits, including the Millennium Summit, the International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, in its Monterrey Consensus,23 the 2005 World Summit, the Follow-up International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development to Review the Implementation of the Monterrey Consensus, in its Doha Declaration on Financing for Development,24 the high-level plenary meeting of the General Assembly on the Millennium Development Goals, the United Nations <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Sustainable Development, the 2013 special event to follow up efforts made towards achieving the Millennium Development Goals, the third International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, in its Addis Ababa Action Agenda, the United Nations summit for the adoption of the post-2015 development agenda, the 2023 Sustainable Development Goals Summit, the 2024 Summit of the Future, and the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, have reinforced the priority and urgency of the eradication of poverty in all its forms and dimensions within the United Nations development agenda;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -477,9 +504,9 @@
     </div>
     
     <div id="para-11" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -487,7 +514,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the importance of supporting the African Union’s development framework, Agenda 2063, as well as its 10-year plan of action, as a strategic framework for ensuring a positive socioeconomic transformation in Africa within the next 50 years, which is the African Union long-term strategy emphasizing industrialization, youth employment, improved natural resource governance and the reduction of inequalities, and its continental programme embedded in the resolutions of the General Assembly on the New Partnership for Africa’s Development25 and _______________ 23 Report of the International Conference on Financing for Development, Monterrey, Mexico, 18–22 March 2002 (United Nations publication, Sales No. E.02.II.A.7), chap. I, resolution 1, annex. 24 Resolution 63/239, annex. 25 A/57/304, annex. A/RES/80/178 Implementation of the outcome of the World Summit for Social Development and of the twenty-fourth special session of the General Assembly 25-20977 10/21 regional initiatives, such as the Comprehensive Africa Agriculture Development Programme;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the importance of supporting the African Union’s development framework, Agenda 2063, as well as its 10-year plan of action, as a strategic framework for ensuring a positive socioeconomic transformation in Africa within the next 50 years, which is the African Union long-term strategy emphasizing industrialization, youth employment, improved natural resource governance and the reduction of inequalities, and its continental programme embedded in the resolutions of the General Assembly on the New Partnership for Africa’s Development25 and _______________ 23 Report of the International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development, Monterrey, Mexico, 18–22 March 2002 (United Nations publication, Sales No. E.02.II.A.7), chap. I, resolution 1, annex. 24 Resolution 63/239, annex. 25 A/57/304, annex. A/RES/80/178 Implementation of the outcome of the World Summit for Social Development and of the twenty-fourth special session of the General Assembly 25-20977 10/21 regional initiatives, such as the Comprehensive Africa Agriculture Development Programme;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1582,9 +1619,9 @@
     </div>
     
     <div id="para-76" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1592,7 +1629,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the commitments made at the Fourth International Conference on Financing for Development and in its outcome document to take concrete actions A/RES/80/178 Implementation of the outcome of the World Summit for Social Development and of the twenty-fourth special session of the General Assembly 25-20977 20/21 to enhance fiscal space, address debt challenges of developing countries and lower the cost of capital and to provide and mobilize additional, innovative, adequate, affordable, predictable and accessible financing from all sources, recognizing the comparative advantages of public and private finance;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the commitments made at the Fourth International <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Financing for Development and in its outcome document to take concrete actions A/RES/80/178 Implementation of the outcome of the World Summit for Social Development and of the twenty-fourth special session of the General Assembly 25-20977 20/21 to enhance fiscal space, address debt challenges of developing countries and lower the cost of capital and to provide and mobilize additional, innovative, adequate, affordable, predictable and accessible financing from all sources, recognizing the comparative advantages of public and private finance;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1735,9 +1782,9 @@
     </div>
     
     <div id="para-85" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -1745,7 +1792,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the Commission for Social Development to continue to address inequality in all its dimensions, in the context of the implementation of the Copenhagen Declaration and the Programme of Action, as well as the implementation of the 2030 Agenda, and invites the Commission to emphasize the increased exchange of national, regional and international experiences, the focused and interactive dialogues among experts and practitioners and the sharing of best practices and lessons learned;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon the Commission for Social Development to continue to address inequality in all its dimensions, in the context of the implementation of the Copenhagen Declaration and the Programme of Action, as well as the implementation of the 2030 Agenda, and invites the Commission to emphasize the increased exchange of national, regional and international experiences, the focused and <mark class="bg-yellow-200 px-0.5 rounded">interactive dialogue</mark>s among experts and practitioners and the sharing of best practices and lessons learned;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

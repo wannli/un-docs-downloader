@@ -144,6 +144,10 @@
     
 
     
+        
+            
+        
+    
 
 
 
@@ -153,12 +157,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">0 with signals, 31 without</span>
+        <span class="text-sm text-muted">1 with signals, 30 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
@@ -682,9 +693,9 @@
     </div>
     
     <div id="para-31" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -692,7 +703,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">We acknowledge that the gaps between the Global Plan of Action and its implementation by Member States should be closed, and recognize that arrangements are needed to ensure the systematic follow-up to and review of all of the commitments we are making at the present high-level meeting, including in the quadrennial high- level meetings of the General Assembly to appraise progress achieved in the implementation of the Global Plan of Action. We will also promote the development of clearer analysis of successful counter-trafficking responses, and assessment and evaluation frameworks that include consideration of how laws, policies or practical measures affect victims of trafficking in persons. _______________ 15 Guiding Principles on Business and Human Rights: Implementing the United Nations “Protect, Respect and Remedy” Framework (A/HRC/17/31, annex).</p>
+                <p class="text-gray-700 leading-relaxed text-sm">We acknowledge that the gaps between the Global Plan of Action and its implementation by Member States should be closed, and recognize that arrangements are needed to ensure the systematic follow-up to and review of all of the commitments we are making at the present <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>, including in the quadrennial high- level meetings of the General Assembly to appraise progress achieved in the implementation of the Global Plan of Action. We will also promote the development of clearer analysis of successful counter-trafficking responses, and assessment and evaluation frameworks that include consideration of how laws, policies or practical measures affect victims of trafficking in persons. _______________ 15 Guiding Principles on Business and Human Rights: Implementing the United Nations “Protect, Respect and Remedy” Framework (A/HRC/17/31, annex).</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

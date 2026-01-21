@@ -84,7 +84,27 @@
 
 
     
+        
+            
+        
+    
 
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
     
 
     
@@ -100,7 +120,7 @@
     
 
     
-
+        
     
 
     
@@ -116,7 +136,33 @@
     
 
     
+        
+    
 
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
     
 
     
@@ -130,33 +176,7 @@
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+        
     
 
     
@@ -189,12 +209,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">3 with signals, 42 without</span>
+        <span class="text-sm text-muted">12 with signals, 33 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -214,9 +241,9 @@
 <div class="space-y-4" id="paragraphs">
     
     <div id="para-1" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -224,16 +251,26 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Takes note with appreciation of the report of the Secretary-General on the measures taken and progress achieved in follow-up to and implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third _______________ 10 A/80/260. Follow-up to the Fourth World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly A/RES/80/186 5/10 25-20883 special session of the General Assembly11 and of the report of the Secretary-General on improvement in the status of women in the United Nations system;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note with appreciation of the report of the Secretary-General on the measures taken and progress achieved in follow-up to and implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third _______________ 10 A/80/260. Follow-up to the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly A/RES/80/186 5/10 25-20883 special session of the General Assembly11 and of the report of the Secretary-General on improvement in the status of women in the United Nations system;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
     </div>
     
     <div id="para-2" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -241,7 +278,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the Beijing Declaration and Platform for Action adopted at the Fourth World Conference on Women and the outcome of the twenty-third special session of the General Assembly, also reaffirms the political declaration on the occasion of the thirtieth anniversary of the Fourth World Conference on Women adopted by the Commission on the Status of Women at its sixty-ninth session, and affirms its commitment to their full, effective and accelerated implementation;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms the Beijing Declaration and Platform for Action adopted at the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and the outcome of the twenty-third special session of the General Assembly, also reaffirms the political declaration on the occasion of the thirtieth anniversary of the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women adopted by the Commission on the Status of Women at its sixty-ninth session, and affirms its commitment to their full, effective and accelerated implementation;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -333,9 +380,9 @@
     </div>
     
     <div id="para-8" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -343,7 +390,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon States Parties to comply fully with their obligations under the Convention on the Elimination of All Forms of Discrimination against Women and the Optional Protocol thereto 14 and to take into consideration the concluding observations as well as the general recommendations of the Committee, urges States Parties to consider limiting the extent of any reservations that they lodge to the Convention, to formulate any reservations as precisely and narrowly as possible and to regularly review such reservations with a view to withdrawing them so as to ensure _______________ 11 A/80/261. 12 Resolution 79/1. 13 United Nations, Treaty Series, vol. 1249, No. 20378. 14 Ibid., vol. 2131, No. 20378. A/RES/80/186 Follow-up to the Fourth World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly 25-20883 6/10 that no reservation is incompatible with the object and purpose of the Convention, urges all Member States that have not yet ratified or acceded to the Convention to consider doing so, and calls upon those Member States that have not yet done so to consider signing and ratifying or acceding to the Optional Protocol;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon States Parties to comply fully with their obligations under the Convention on the Elimination of All Forms of Discrimination against Women and the Optional Protocol thereto 14 and to take into consideration the concluding observations as well as the general recommendations of the Committee, urges States Parties to consider limiting the extent of any reservations that they lodge to the Convention, to formulate any reservations as precisely and narrowly as possible and to regularly review such reservations with a view to withdrawing them so as to ensure _______________ 11 A/80/261. 12 Resolution 79/1. 13 United Nations, Treaty Series, vol. 1249, No. 20378. 14 Ibid., vol. 2131, No. 20378. A/RES/80/186 Follow-up to the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly 25-20883 6/10 that no reservation is incompatible with the object and purpose of the Convention, urges all Member States that have not yet ratified or acceded to the Convention to consider doing so, and calls upon those Member States that have not yet done so to consider signing and ratifying or acceding to the Optional Protocol;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -452,9 +509,9 @@
     </div>
     
     <div id="para-15" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -462,7 +519,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also recognizes the important role of UN-Women in promoting gender equality, and the empowerment of all women and girls and the central role that it plays in supporting Member States, in coordinating the United Nations system and in Follow-up to the Fourth World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly A/RES/80/186 7/10 25-20883 mobilizing civil society, the private sector and other relevant stakeholders, at all levels, in support of the implementation of the Beijing Declaration and Platform for Action, and calls upon UN-Women and the United Nations system, within their respective mandates, to continue to support the full, effective and accelerated implementation of the Beijing Declaration and Platform for Action at the international, regional, national and local levels, including through systematic gender mainstreaming, the mobilization of resources to deliver positive results and the monitoring of progress with adequate data and robust accountability systems;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also recognizes the important role of UN-Women in promoting gender equality, and the empowerment of all women and girls and the central role that it plays in supporting Member States, in coordinating the United Nations system and in Follow-up to the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly A/RES/80/186 7/10 25-20883 mobilizing civil society, the private sector and other relevant stakeholders, at all levels, in support of the implementation of the Beijing Declaration and Platform for Action, and calls upon UN-Women and the United Nations system, within their respective mandates, to continue to support the full, effective and accelerated implementation of the Beijing Declaration and Platform for Action at the international, regional, national and local levels, including through systematic gender mainstreaming, the mobilization of resources to deliver positive results and the monitoring of progress with adequate data and robust accountability systems;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -571,9 +638,9 @@
     </div>
     
     <div id="para-22" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -581,7 +648,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages all actors, including Governments, the United Nations system, other international organizations and civil society, to continue to support the work of the Commission on the Status of Women in fulfilling its central role in the follow-up to and review of the implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session and, as applicable, to carry out the recommendations of the Commission, welcomes in this regard the Commission’s continued sharing of experiences, lessons learned and good practices in overcoming challenges to the full implementation at the national and international levels and the evaluation of progress in the implementation of priority themes, and encourages the intergovernmental bodies of the United Nations system, as appropriate, to incorporate the outcomes of the Commission into their work; A/RES/80/186 Follow-up to the Fourth World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly 25-20883 8/10</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages all actors, including Governments, the United Nations system, other international organizations and civil society, to continue to support the work of the Commission on the Status of Women in fulfilling its central role in the follow-up to and review of the implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session and, as applicable, to carry out the recommendations of the Commission, welcomes in this regard the Commission’s continued sharing of experiences, lessons learned and good practices in overcoming challenges to the full implementation at the national and international levels and the evaluation of progress in the implementation of priority themes, and encourages the intergovernmental bodies of the United Nations system, as appropriate, to incorporate the outcomes of the Commission into their work; A/RES/80/186 Follow-up to the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly 25-20883 8/10</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -622,9 +699,9 @@
     </div>
     
     <div id="para-25" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -632,7 +709,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Reiterates its call upon the United Nations system, including the main organs, their main committees and subsidiary bodies, the funds and programmes and the specialized agencies, to increase efforts to fully mainstream a gender perspective into all issues under their consideration and within their mandates, as well as into all United Nations summits, conferences and special sessions and their follow-up processes;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reiterates its call upon the United Nations system, including the main organs, their main committees and subsidiary bodies, the funds and programmes and the specialized agencies, to increase efforts to fully mainstream a gender perspective into all issues under their consideration and within their mandates, as well as into all United Nations summits, <mark class="bg-yellow-200 px-0.5 rounded">conference</mark>s and special sessions and their follow-up processes;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -656,9 +743,9 @@
     </div>
     
     <div id="para-27" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -666,7 +753,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Commits to intensifying efforts to further integrate a gender perspective into the work of the General Assembly, including in plenary and high-level meetings;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Commits to intensifying efforts to further integrate a gender perspective into the work of the General Assembly, including in plenary and <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -741,9 +838,9 @@
     </div>
     
     <div id="para-32" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -751,7 +848,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Encourages Member States, with the support of, as appropriate, United Nations entities, including UN-Women, international and regional organizations and other relevant actors, to prioritize the strengthening of national data collection and monitoring capacities with regard to statistics disaggregated by sex and age, as well as national tracking indicators for gender equality and the empowerment of women, through multisectoral efforts and partnerships; Follow-up to the Fourth World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly A/RES/80/186 9/10 25-20883</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages Member States, with the support of, as appropriate, United Nations entities, including UN-Women, international and regional organizations and other relevant actors, to prioritize the strengthening of national data collection and monitoring capacities with regard to statistics disaggregated by sex and age, as well as national tracking indicators for gender equality and the empowerment of women, through multisectoral efforts and partnerships; Follow-up to the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly A/RES/80/186 9/10 25-20883</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
@@ -843,9 +950,9 @@
     </div>
     
     <div id="para-38" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -853,7 +960,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Also requests the entities of the United Nations, at both headquarters and non‑headquarters levels, inter alia, the United Nations country team level, to continue to appoint gender focal points to provide support for the advancement of gender parity, led and coordinated by UN-Women, including through the implementation of entity-specific implementation plans as well as the recommendations contained in the A/RES/80/186 Follow-up to the Fourth World Conference on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly 25-20883 10/10 Enabling Environment Guidelines for the United Nations System and the Field- specific Enabling Environment Guidelines;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also requests the entities of the United Nations, at both headquarters and non‑headquarters levels, inter alia, the United Nations country team level, to continue to appoint gender focal points to provide support for the advancement of gender parity, led and coordinated by UN-Women, including through the implementation of entity-specific implementation plans as well as the recommendations contained in the A/RES/80/186 Follow-up to the Fourth World <mark class="bg-yellow-200 px-0.5 rounded">Conference</mark> on Women and full implementation of the Beijing Declaration and Platform for Action and the outcome of the twenty-third special session of the General Assembly 25-20883 10/10 Enabling Environment Guidelines for the United Nations System and the Field- specific Enabling Environment Guidelines;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>

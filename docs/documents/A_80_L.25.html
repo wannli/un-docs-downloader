@@ -134,6 +134,10 @@
     
 
     
+        
+            
+        
+    
 
     
 
@@ -287,12 +291,19 @@
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
-        <span class="text-sm text-muted">2 with signals, 93 without</span>
+        <span class="text-sm text-muted">3 with signals, 92 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
+        </button>
+        
+        <button onclick="filterSignal('PGA')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-purple-50 text-purple-700 hover:bg-purple-100
+                ">
+            PGA
         </button>
         
         <button onclick="filterSignal('report')" 
@@ -737,9 +748,9 @@
     </div>
     
     <div id="para-26" 
-         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
-         data-signals='[]'
-         data-has-signals="false">
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
+         data-signals='["PGA"]'
+         data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
                 <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
@@ -747,7 +758,17 @@
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-gray-700 leading-relaxed text-sm">Calls upon Member States, the United Nations and humanitarian organizations and relevant stakeholders to scale up systematic prevention, preparedness and response to health emergencies in humanitarian contexts, and to draw on lessons learned from the COVID‑19 pandemic, including as it relates to the strengthening of national, regional and multilateral approaches and international cooperation, and takes note of the political declarations on pandemic prevention, preparedness and response, on universal health coverage and on the fight against tuberculosis adopted at the respective high-level meetings of the General Assembly held in New York in September 2023, as well as General Assembly resolutions on the control and elimination of malaria;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Calls upon Member States, the United Nations and humanitarian organizations and relevant stakeholders to scale up systematic prevention, preparedness and response to health emergencies in humanitarian contexts, and to draw on lessons learned from the COVID‑19 pandemic, including as it relates to the strengthening of national, regional and multilateral approaches and international cooperation, and takes note of the political declarations on pandemic prevention, preparedness and response, on universal health coverage and on the fight against tuberculosis adopted at the respective <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s of the General Assembly held in New York in September 2023, as well as General Assembly resolutions on the control and elimination of malaria;</p>
+                
+                <div class="mt-2 flex flex-wrap gap-1">
+                    
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    
+                </div>
                 
             </div>
         </div>
