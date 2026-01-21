@@ -56,26 +56,28 @@
     <!-- Main content -->
     <main class="max-w-5xl mx-auto px-6 py-10">
         
+<!-- Breadcrumb -->
+<nav class="mb-8">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+        <li><a href="./index.html" class="hover:text-un-blue transition-colors">Documents</a></li>
+        <li class="text-gray-300">/</li>
+        <li class="text-gray-900 font-medium">A/C.2/80/L.39</li>
+    </ol>
+</nav>
+
 <!-- Header -->
-<div class="mb-6">
-    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
-        <a href="./index.html" class="hover:text-sky-600">Documents</a>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-        <span class="text-slate-900">A/C.2/80/L.39</span>
-    </div>
+<div class="mb-8">
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-slate-900">A/C.2/80/L.39</h1>
+        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">A/C.2/80/L.39</h1>
         <a href="https://docs.un.org/en/a/c.2/80/l.39?direct=true" target="_blank"
-           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+           class="inline-flex items-center px-4 py-2 bg-un-blue hover:bg-un-blue-dark text-white font-medium rounded-lg transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
             View PDF on UN ODS
         </a>
     </div>
-    <p class="mt-2 text-slate-600">28 operative paragraphs</p>
+    <p class="mt-2 text-muted">28 operative paragraphs</p>
 </div>
 
 <!-- Compute signal data -->
@@ -151,33 +153,34 @@
 
 
 
-<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+<!-- Filter Controls -->
+<div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between mb-3">
-        <h2 class="text-sm font-medium text-slate-700">Filter Paragraphs</h2>
-        <span class="text-xs text-slate-500">3 with signals, 25 without</span>
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Filter Paragraphs</h2>
+        <span class="text-sm text-muted">3 with signals, 25 without</span>
     </div>
     <div class="flex flex-wrap gap-2">
         <button id="btn-signals-only" onclick="showSignalsOnly()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-sky-600 text-white hover:bg-sky-700 transition-all">
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-un-blue text-white transition-all">
             Signals Only
         </button>
         
         <button onclick="filterSignal('PGA')" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-purple-100 text-purple-700 hover:bg-purple-200
+                bg-purple-50 text-purple-700 hover:bg-purple-100
                 ">
             PGA
         </button>
         
         <button onclick="filterSignal('agenda')" 
                 class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                bg-blue-100 text-blue-700 hover:bg-blue-200
+                bg-blue-50 text-blue-700 hover:bg-blue-100
                 ">
             agenda
         </button>
         
         <button id="btn-show-all" onclick="toggleShowAll()" 
-                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-200 text-slate-700 hover:bg-slate-300 transition-all">
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all">
             Show All
         </button>
     </div>
@@ -187,73 +190,73 @@
 <div class="space-y-4" id="paragraphs">
     
     <div id="para-1" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     1
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Takes note of the report of the Secretary-General;14</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the report of the Secretary-General;14</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-2" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     2
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recognizes that sand and dust storms are increasing in intensity and frequency in several regions, affecting more than 150 countries, and pose a serious challenge to the sustainable development of affected countries and regions, also recognizes that, in the past few years, sand and dust storms have inflicted substantial economic, social and environmental damage on the inhabitants of the world’s arid, semi-arid and dry subhumid areas, especially in Africa and Asia, and underscores the need to treat them and to promptly take measures to address those challenges;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes that sand and dust storms are increasing in intensity and frequency in several regions, affecting more than 150 countries, and pose a serious challenge to the sustainable development of affected countries and regions, also recognizes that, in the past few years, sand and dust storms have inflicted substantial economic, social and environmental damage on the inhabitants of the world’s arid, semi-arid and dry subhumid areas, especially in Africa and Asia, and underscores the need to treat them and to promptly take measures to address those challenges;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-3" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     3
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recognizes also that sand and dust storms are an issue of international concern, the costs of which are measured in economic, social and environmental terms, and that sand and dust storms continue to grow and negatively affect the achievement of 11 of the 17 Sustainable Development Goals and their means of implementation, and that addressing such global challenge requires international cooperation and adequate means of implementation;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes also that sand and dust storms are an issue of international concern, the costs of which are measured in economic, social and environmental terms, and that sand and dust storms continue to grow and negatively affect the achievement of 11 of the 17 Sustainable Development Goals and their means of implementation, and that addressing such global challenge requires international cooperation and adequate means of implementation;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-4" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all "
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     4
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recalls the convening of a high-level interactive dialogue on sand and dust storms, held at Headquarters in New York on 16 July 2018, to discuss action-oriented recommendations and address the challenges faced by the affected countries, including ways to improve policy coordination at the global level to tackle those challenges in the context of the Sustainable Development Goals, during which the continuing need to confront the challenges presented by sand and dust storms was highlighted, and also recalls the convening of the high-level meeting on sand and dust storms, by the President of the General Assembly at the seventy-ninth session of the Assembly, in collaboration with the United Nations Coalition on Combating Sand and Dust Storms, in the General Assembly Hall, at United Nations Headquarters in New York, held on 10 July 2025 in the context of the International Day of Combating Sand and Dust Storms, to discuss the challenges faced by affected countries to further practical actions at the regional and global levels;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls the convening of a high-level interactive dialogue on sand and dust storms, held at Headquarters in New York on 16 July 2018, to discuss action-oriented recommendations and address the challenges faced by the affected countries, including ways to improve policy coordination at the global level to tackle those challenges in the context of the Sustainable Development Goals, during which the continuing need to confront the challenges presented by sand and dust storms was highlighted, and also recalls the convening of the high-level meeting on sand and dust storms, by the President of the General Assembly at the seventy-ninth session of the Assembly, in collaboration with the United Nations Coalition on Combating Sand and Dust Storms, in the General Assembly Hall, at United Nations Headquarters in New York, held on 10 July 2025 in the context of the International Day of Combating Sand and Dust Storms, to discuss the challenges faced by affected countries to further practical actions at the regional and global levels;</p>
                 
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="mt-2 flex flex-wrap gap-1">
                     
-                    <span class="px-2 py-0.5 rounded text-xs font-medium
-                        bg-purple-100 text-purple-700
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
                         ">
                         PGA
                     </span>
@@ -265,362 +268,362 @@
     </div>
     
     <div id="para-5" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     5
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Welcomes the efforts of the United Nations Coalition on Combating Sand and Dust Storms, which is pursuing efforts, within its mandate and resources, to move to the implementation stage, and aims, inter alia, to promote and coordinate a collaborative United Nations system response to the growing issue of sand and dust storms on a local, national, regional and global scale, ensuring that unified and coherent action is taken, and to facilitate the capacity-building of Member States, raise their awareness and enhance their preparedness and response to sand and dust storms in critical regions and assess affected countries on developing and implementing national and regional policies and action plans on sand and dust storms, as well as implement and finance related projects and programmes;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the efforts of the United Nations Coalition on Combating Sand and Dust Storms, which is pursuing efforts, within its mandate and resources, to move to the implementation stage, and aims, inter alia, to promote and coordinate a collaborative United Nations system response to the growing issue of sand and dust storms on a local, national, regional and global scale, ensuring that unified and coherent action is taken, and to facilitate the capacity-building of Member States, raise their awareness and enhance their preparedness and response to sand and dust storms in critical regions and assess affected countries on developing and implementing national and regional policies and action plans on sand and dust storms, as well as implement and finance related projects and programmes;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-6" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     6
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Invites once again the Secretary-General to consider designating a relevant agency or entity with adequate capacity, by July 2026, to act as a focal point on sand and dust storms in the United Nations system to follow up the decisions in the relevant resolutions and the United Nations Coalition on Combating Sand and Dust Storms;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Invites once again the Secretary-General to consider designating a relevant agency or entity with adequate capacity, by July 2026, to act as a focal point on sand and dust storms in the United Nations system to follow up the decisions in the relevant resolutions and the United Nations Coalition on Combating Sand and Dust Storms;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-7" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     7
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recognizes the importance of new and innovative technologies and best practices in combating sand and dust storms, as well as their sharing and transfer on mutually agreed terms; __________________ 14 A/80/265. A/C.2/80/L.39 25-16953 6/8</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes the importance of new and innovative technologies and best practices in combating sand and dust storms, as well as their sharing and transfer on mutually agreed terms; __________________ 14 A/80/265. A/C.2/80/L.39 25-16953 6/8</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-8" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     8
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Encourages regional, subregional and interregional organizations and processes to continue to share best practices, policies, experiences and technical expertise promoting local, national, regional and global strategies in combating and preventing sand and dust storms to address the root causes and mitigate the impacts of sand and dust storms, and find sustainable solutions, including through improved implementation of sustainable land management, soil, agricultural and livestock practices, as well as sustainable water management, and to promote regional cooperation in this matter to reduce the risks and impact of future sand and dust storms at all levels, including local, national, regional and global, and to provide affected countries with capacity-building and technical support from the relevant United Nations organizations, such as the World Meteorological Organization, the United Nations Environment Programme and the World Health Organization, within their respective mandates, to this end;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages regional, subregional and interregional organizations and processes to continue to share best practices, policies, experiences and technical expertise promoting local, national, regional and global strategies in combating and preventing sand and dust storms to address the root causes and mitigate the impacts of sand and dust storms, and find sustainable solutions, including through improved implementation of sustainable land management, soil, agricultural and livestock practices, as well as sustainable water management, and to promote regional cooperation in this matter to reduce the risks and impact of future sand and dust storms at all levels, including local, national, regional and global, and to provide affected countries with capacity-building and technical support from the relevant United Nations organizations, such as the World Meteorological Organization, the United Nations Environment Programme and the World Health Organization, within their respective mandates, to this end;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-9" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     9
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Takes note of the convening of the second International Conference on Combating Sand and Dust Storms, in Tehran on 9 and 10 September 2023;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the convening of the second International Conference on Combating Sand and Dust Storms, in Tehran on 9 and 10 September 2023;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-10" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     10
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Invites all affected Member States as well as relevant entities of the United Nations development system, regional organizations and other relevant stakeholders to endeavour to meet the objectives set out in the present resolution;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Invites all affected Member States as well as relevant entities of the United Nations development system, regional organizations and other relevant stakeholders to endeavour to meet the objectives set out in the present resolution;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-11" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     11
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Welcomes the convening of the interregional forum organized by the Economic and Social Commission for Western Asia and the Economic and Social Commission for Asia and the Pacific, held in Beirut on 7 and 8 October 2025, in collaboration with the United Nations Coalition on Combating Sand and Dust Storms, and implemented within the framework of activities planned by the Coalition’s Working Group on Regional Collaboration in support of the United Nations Decade on Combating Sand and Dust Storms (2025–2034), aimed at fostering regional and interregional dialogue on joint actions and cooperative responses to combat sand and dust storms;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the convening of the interregional forum organized by the Economic and Social Commission for Western Asia and the Economic and Social Commission for Asia and the Pacific, held in Beirut on 7 and 8 October 2025, in collaboration with the United Nations Coalition on Combating Sand and Dust Storms, and implemented within the framework of activities planned by the Coalition’s Working Group on Regional Collaboration in support of the United Nations Decade on Combating Sand and Dust Storms (2025–2034), aimed at fostering regional and interregional dialogue on joint actions and cooperative responses to combat sand and dust storms;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-12" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     12
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Takes note of the establishment of a regional and global trust fund for the West Asia and African region to combat sand and dust storms, supported by voluntary contributions from interested countries, intergovernmental and non-governmental organizations, major groups and other donors, the private sector, civil society and regional development banks, to undertake the implementation of regional and subregional programmes and action plans without prejudice to the possibility that this fund may include other regions in the future, while respecting international frameworks and any relevant documents on combating sand and dust storms to ensure coordinated action at a global scale;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the establishment of a regional and global trust fund for the West Asia and African region to combat sand and dust storms, supported by voluntary contributions from interested countries, intergovernmental and non-governmental organizations, major groups and other donors, the private sector, civil society and regional development banks, to undertake the implementation of regional and subregional programmes and action plans without prejudice to the possibility that this fund may include other regions in the future, while respecting international frameworks and any relevant documents on combating sand and dust storms to ensure coordinated action at a global scale;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-13" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     13
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Reaffirms that climate change is one of the greatest challenges of our time and, among other factors, is a serious challenge to the sustainable development of all countries, including those affected by sand and dust storms, and emphasizes that, among other factors, climate change is an important potential contributor to future wind erosion and the risk of sand and dust storms, especially the occurrence of more extreme wind events worsening drought conditions and the movement towards drier climates, although reverse effects are possible;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Reaffirms that climate change is one of the greatest challenges of our time and, among other factors, is a serious challenge to the sustainable development of all countries, including those affected by sand and dust storms, and emphasizes that, among other factors, climate change is an important potential contributor to future wind erosion and the risk of sand and dust storms, especially the occurrence of more extreme wind events worsening drought conditions and the movement towards drier climates, although reverse effects are possible;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-14" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     14
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recognizes that sand and dust storms cause numerous human health problems in different regions around the world, especially in arid, semi-arid and dry subhumid regions, and that there is a need to reinforce protective strategies to reduce the negative impacts of sand and dust storms on human health, invites the World Health Organization, with the cooperation of other relevant United Nations system entities, as appropriate, to support affected countries in combating health problems caused by sand and dust storms, within their respective mandates, recognizes the formation of a working group on sand and dust storms to discuss emerging issues and A/C.2/80/L.39 7/8 25-16953 share information under the technical advisory group on global air pollution and health of the World Health Organization, and also recognizes the publication of a dedicated section on the health effects of sand and dust storms as part of the World Health Organization global air quality guidelines released in September 2021, and the development of standard operating procedures to assess and address the short-term health effects of desert dust by the World Health Organization, in collaboration with experts from the World Meteorological Organization;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recognizes that sand and dust storms cause numerous human health problems in different regions around the world, especially in arid, semi-arid and dry subhumid regions, and that there is a need to reinforce protective strategies to reduce the negative impacts of sand and dust storms on human health, invites the World Health Organization, with the cooperation of other relevant United Nations system entities, as appropriate, to support affected countries in combating health problems caused by sand and dust storms, within their respective mandates, recognizes the formation of a working group on sand and dust storms to discuss emerging issues and A/C.2/80/L.39 7/8 25-16953 share information under the technical advisory group on global air pollution and health of the World Health Organization, and also recognizes the publication of a dedicated section on the health effects of sand and dust storms as part of the World Health Organization global air quality guidelines released in September 2021, and the development of standard operating procedures to assess and address the short-term health effects of desert dust by the World Health Organization, in collaboration with experts from the World Meteorological Organization;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-15" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     15
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Emphasizes that sand and dust storm issues will continue to constitute important components of the global coalition on health, environment and climate change launched in May 2018 by the World Health Organization, the United Nations Environment Programme and the World Meteorological Organization to improve coordination and reduce deaths that are attributed to environmental risks, such as air pollution;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Emphasizes that sand and dust storm issues will continue to constitute important components of the global coalition on health, environment and climate change launched in May 2018 by the World Health Organization, the United Nations Environment Programme and the World Meteorological Organization to improve coordination and reduce deaths that are attributed to environmental risks, such as air pollution;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-16" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     16
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Commends the United Nations Environment Assembly on its commitment to addressing sand and dust storms, and in this regard notes Environment Assembly resolution 2/21 on sand and dust storms, adopted during its second session, resolution 4/10 on innovation on biodiversity and land degradation, adopted during its fourth session, and resolution 6/7 on combating sand and dust storms, adopted during its sixth session;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Commends the United Nations Environment Assembly on its commitment to addressing sand and dust storms, and in this regard notes Environment Assembly resolution 2/21 on sand and dust storms, adopted during its second session, resolution 4/10 on innovation on biodiversity and land degradation, adopted during its fourth session, and resolution 6/7 on combating sand and dust storms, adopted during its sixth session;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-17" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     17
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Takes note of the convening of the regional ministerial meeting on environmental cooperation for a better future held in the Islamic Republic of Iran on 12 July 2022 to find solutions for regional environmental challenges, especially the issue of sand and dust storms;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Takes note of the convening of the regional ministerial meeting on environmental cooperation for a better future held in the Islamic Republic of Iran on 12 July 2022 to find solutions for regional environmental challenges, especially the issue of sand and dust storms;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-18" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     18
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recalls the convening of the sixth session of the United Nations Environment Assembly in Nairobi from 26 February to 1 March 2024, under the theme “Effective, inclusive and sustainable multilateral actions to tackle climate change, biodiversity loss and pollution”, and looks forward to the seventh session of the Environment Assembly, to be held in Nairobi from 8 to 12 December 2025;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls the convening of the sixth session of the United Nations Environment Assembly in Nairobi from 26 February to 1 March 2024, under the theme “Effective, inclusive and sustainable multilateral actions to tackle climate change, biodiversity loss and pollution”, and looks forward to the seventh session of the Environment Assembly, to be held in Nairobi from 8 to 12 December 2025;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-19" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     19
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Commends the secretariat of the United Nations Convention to Combat Desertification in Those Countries Experiencing Serious Drought and/or Desertification, Particularly in Africa, on its efforts to develop both a global base map of sand and dust storm sources, in collaboration with the United Nations Environment Programme and the World Meteorological Organization, and the Sand and Dust Storms Compendium: Information and Guidance on Assessing and Addressing the Risks, in collaboration with the Science-Policy Interface of the Convention and other relevant United Nations system entities, as a comprehensive collation of material designed to provide information and guidance on how to assess and address the risks posed by sand and dust storms and plan actions to combat their recurrence and impacts;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Commends the secretariat of the United Nations Convention to Combat Desertification in Those Countries Experiencing Serious Drought and/or Desertification, Particularly in Africa, on its efforts to develop both a global base map of sand and dust storm sources, in collaboration with the United Nations Environment Programme and the World Meteorological Organization, and the Sand and Dust Storms Compendium: Information and Guidance on Assessing and Addressing the Risks, in collaboration with the Science-Policy Interface of the Convention and other relevant United Nations system entities, as a comprehensive collation of material designed to provide information and guidance on how to assess and address the risks posed by sand and dust storms and plan actions to combat their recurrence and impacts;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-20" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     20
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Also commends the World Meteorological Organization for achieving several improvements to the observation and modelling systems that are part of its Sand and Dust Storm Warning Advisory and Assessment System, which provides sand and dust storm forecasts for early warning systems in various countries, and encourages the strengthening of early warning systems and the exchange of weather information for predicting sand and dust storms, to better prepare vulnerable countries, and encourages the World Meteorological Organization and all relevant stakeholders to broaden the regional domains of this system to cover the highly affected regions and to continue to make technical improvements to it;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also commends the World Meteorological Organization for achieving several improvements to the observation and modelling systems that are part of its Sand and Dust Storm Warning Advisory and Assessment System, which provides sand and dust storm forecasts for early warning systems in various countries, and encourages the strengthening of early warning systems and the exchange of weather information for predicting sand and dust storms, to better prepare vulnerable countries, and encourages the World Meteorological Organization and all relevant stakeholders to broaden the regional domains of this system to cover the highly affected regions and to continue to make technical improvements to it;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-21" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     21
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Welcomes the convening of the sixteenth session of the Conference of the Parties to the United Nations Convention to Combat Desertification, in Riyadh, from 2 to 13 December 2024; A/C.2/80/L.39 25-16953 8/8</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Welcomes the convening of the sixteenth session of the Conference of the Parties to the United Nations Convention to Combat Desertification, in Riyadh, from 2 to 13 December 2024; A/C.2/80/L.39 25-16953 8/8</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-22" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     22
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Encourages the relevant entities of the United Nations, including the World Health Organization, the United Nations Environment Programme, the United Nations Development Programme, the World Meteorological Organization, the United Nations Office for Disaster Risk Reduction, the Food and Agriculture Organization of the United Nations and the Department of Economic and Social Affairs of the Secretariat, within their respective mandates and resources, and donors to continue to provide capacity-building and technical assistance for combating and preventing sand and dust storms, and to continue to support the implementation of the national, regional and global action plans of the affected countries;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Encourages the relevant entities of the United Nations, including the World Health Organization, the United Nations Environment Programme, the United Nations Development Programme, the World Meteorological Organization, the United Nations Office for Disaster Risk Reduction, the Food and Agriculture Organization of the United Nations and the Department of Economic and Social Affairs of the Secretariat, within their respective mandates and resources, and donors to continue to provide capacity-building and technical assistance for combating and preventing sand and dust storms, and to continue to support the implementation of the national, regional and global action plans of the affected countries;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-23" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     23
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Recalls its resolution 77/294 of 8 June 2023, in which 12 July of each year was proclaimed as International Day of Combating Sand and Dust Storms, to further raise international awareness of sand and dust storms, and stresses the need for global and regional cooperation to manage and mitigate their effects;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Recalls its resolution 77/294 of 8 June 2023, in which 12 July of each year was proclaimed as International Day of Combating Sand and Dust Storms, to further raise international awareness of sand and dust storms, and stresses the need for global and regional cooperation to manage and mitigate their effects;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-24" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     24
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Also recalls its resolution 78/314 of 10 July 2024, in which it proclaimed 2025–2034 the United Nations Decade on Combating Sand and Dust Storms, within existing structures and available resources, with the aim of enhancing international and regional cooperation and supporting and scaling up efforts to prevent, halt and mitigate the negative effects of sand and dust storms, especially on the affected countries;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also recalls its resolution 78/314 of 10 July 2024, in which it proclaimed 2025–2034 the United Nations Decade on Combating Sand and Dust Storms, within existing structures and available resources, with the aim of enhancing international and regional cooperation and supporting and scaling up efforts to prevent, halt and mitigate the negative effects of sand and dust storms, especially on the affected countries;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-25" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all "
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["PGA"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     25
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Emphasizes the importance of reviewing the implementation of the United Nations Decade on Combating Sand and Dust Storms at its eighty-fourth session, as a means to assess progress made and identify challenges encountered, with a view to enhancing international cooperation and support for affected countries and providing timely opportunities to advance discussion on the matter, including the convening of the first United Nations Conference on Combating Sand and Dust Storms under the auspices of the President of the General Assembly,</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Emphasizes the importance of reviewing the implementation of the United Nations Decade on Combating Sand and Dust Storms at its eighty-fourth session, as a means to assess progress made and identify challenges encountered, with a view to enhancing international cooperation and support for affected countries and providing timely opportunities to advance discussion on the matter, including the convening of the first United Nations Conference on Combating Sand and Dust Storms under the auspices of the President of the General Assembly,</p>
                 
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="mt-2 flex flex-wrap gap-1">
                     
-                    <span class="px-2 py-0.5 rounded text-xs font-medium
-                        bg-purple-100 text-purple-700
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-purple-50 text-purple-700
                         ">
                         PGA
                     </span>
@@ -632,56 +635,56 @@
     </div>
     
     <div id="para-26" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     26
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Acknowledges the global assessment of sand and dust storms prepared by the United Nations Environment Programme in collaboration with other relevant United Nations system entities, including the World Meteorological Organization and the secretariat of the United Nations Convention to Combat Desertification, which sets out proposals for consolidated and coordinated technical and policy options for responding to sand and dust storms;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Acknowledges the global assessment of sand and dust storms prepared by the United Nations Environment Programme in collaboration with other relevant United Nations system entities, including the World Meteorological Organization and the secretariat of the United Nations Convention to Combat Desertification, which sets out proposals for consolidated and coordinated technical and policy options for responding to sand and dust storms;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-27" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all no-signals hidden"
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all no-signals hidden"
          data-signals='[]'
          data-has-signals="false">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     27
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to further encourage the United Nations Coalition on Combating Sand and Dust Storms to conduct its priority activities as identified by the Coalition’s five working groups, which are knowledge-sharing, capacity-building, training, awareness-raising and support for the formulation of national, regional and interregional plans, to mitigate and prevent sand and dust storm hazards, to encourage the Coalition to enhance resource mobilization efforts so as to increase voluntary contributions to the Coalition and its member agencies, and invites the Coalition to consider the possibility of broadening the scope of the concept note to include other sectors affected by sand and dust storms, in order to align with the workplan of the Coalition, and requests it to develop its action plan for the coming years in line with the needs and priorities of affected countries and General Assembly resolutions, in particular resolution 78/314;</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Requests the Secretary-General to further encourage the United Nations Coalition on Combating Sand and Dust Storms to conduct its priority activities as identified by the Coalition’s five working groups, which are knowledge-sharing, capacity-building, training, awareness-raising and support for the formulation of national, regional and interregional plans, to mitigate and prevent sand and dust storm hazards, to encourage the Coalition to enhance resource mobilization efforts so as to increase voluntary contributions to the Coalition and its member agencies, and invites the Coalition to consider the possibility of broadening the scope of the concept note to include other sectors affected by sand and dust storms, in order to align with the workplan of the Coalition, and requests it to develop its action plan for the coming years in line with the needs and priorities of affected countries and General Assembly resolutions, in particular resolution 78/314;</p>
                 
             </div>
         </div>
     </div>
     
     <div id="para-28" 
-         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all "
+         class="para-row border border-gray-200 rounded-lg p-4 transition-all "
          data-signals='["agenda"]'
          data-has-signals="true">
         <div class="flex items-start gap-4">
             <div class="flex-shrink-0">
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-sm">
                     28
                 </span>
             </div>
             <div class="flex-1">
-                <p class="text-slate-800 leading-relaxed">Also requests the Secretary-General to submit to the General Assembly at its eighty-first session a report on the implementation of the present resolution, while including best practices aimed at adapting, mitigating, controlling and combating sand and dust storms in collaboration with the affected nations and other countries, and decides to include in the provisional agenda of its eighty-first session, under the item entitled “Sustainable development”, the sub-item entitled “Combating sand and dust storms”.</p>
+                <p class="text-gray-700 leading-relaxed text-sm">Also requests the Secretary-General to submit to the General Assembly at its eighty-first session a report on the implementation of the present resolution, while including best practices aimed at adapting, mitigating, controlling and combating sand and dust storms in collaboration with the affected nations and other countries, and decides to include in the provisional agenda of its eighty-first session, under the item entitled “Sustainable development”, the sub-item entitled “Combating sand and dust storms”.</p>
                 
-                <div class="mt-3 flex flex-wrap gap-2">
+                <div class="mt-2 flex flex-wrap gap-1">
                     
-                    <span class="px-2 py-0.5 rounded text-xs font-medium
-                        bg-blue-100 text-blue-700
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        bg-blue-50 text-blue-700
                         ">
                         agenda
                     </span>
@@ -702,22 +705,20 @@ function filterSignal(signal) {
     
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
-        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-sky-500');
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-sky-500');
+    event.currentTarget.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     
     rows.forEach(row => {
         const signals = JSON.parse(row.dataset.signals || '[]');
         const hasSignals = row.dataset.hasSignals === 'true';
         
         if (signals.includes(signal)) {
-            row.classList.remove('hidden', 'opacity-40', 'scale-[0.98]');
+            row.classList.remove('hidden', 'opacity-40');
         } else if (showingAll) {
-            // When showing all, dim non-matching but keep visible
             row.classList.remove('hidden');
-            row.classList.add('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-40');
         } else {
-            // When not showing all, hide non-matching
             row.classList.add('hidden');
         }
     });
@@ -729,13 +730,13 @@ function showSignalsOnly() {
     
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(btn => {
-        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-sky-500');
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
-    document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-sky-500');
+    document.getElementById('btn-signals-only').classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     document.getElementById('btn-show-all').textContent = 'Show All';
     
     rows.forEach(row => {
-        row.classList.remove('opacity-40', 'scale-[0.98]');
+        row.classList.remove('opacity-40');
         const hasSignals = row.dataset.hasSignals === 'true';
         if (hasSignals) {
             row.classList.remove('hidden');
@@ -752,19 +753,19 @@ function toggleShowAll() {
     
     // Update button styles
     document.querySelectorAll('.signal-btn').forEach(b => {
-        b.classList.remove('ring-2', 'ring-offset-2', 'ring-sky-500');
+        b.classList.remove('ring-2', 'ring-offset-2', 'ring-un-blue');
     });
     
     if (showingAll) {
         btn.textContent = 'Hide Others';
-        btn.classList.add('ring-2', 'ring-offset-2', 'ring-sky-500');
+        btn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
         rows.forEach(row => {
             row.classList.remove('hidden');
             const hasSignals = row.dataset.hasSignals === 'true';
             if (!hasSignals) {
-                row.classList.add('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-40');
             } else {
-                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.remove('opacity-40');
             }
         });
     } else {
@@ -775,10 +776,9 @@ function toggleShowAll() {
 
 // Initialize: show only paragraphs with signals
 document.addEventListener('DOMContentLoaded', function() {
-    // Mark the "Signals Only" button as active by default
     const signalsOnlyBtn = document.getElementById('btn-signals-only');
     if (signalsOnlyBtn) {
-        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-sky-500');
+        signalsOnlyBtn.classList.add('ring-2', 'ring-offset-2', 'ring-un-blue');
     }
 });
 
@@ -786,12 +786,11 @@ document.addEventListener('DOMContentLoaded', function() {
 if (window.location.hash) {
     const target = document.querySelector(window.location.hash);
     if (target) {
-        // If target is hidden, show all paragraphs first
         if (target.classList.contains('hidden')) {
             toggleShowAll();
         }
         target.scrollIntoView({ behavior: 'smooth' });
-        target.classList.add('ring-2', 'ring-sky-500');
+        target.classList.add('ring-2', 'ring-un-blue');
     }
 }
 </script>
