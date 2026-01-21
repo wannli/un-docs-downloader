@@ -216,6 +216,8 @@ def link_documents(documents: list[dict]) -> None:
         doc["linked_proposal_symbols"] = linked
         doc["link_method"] = "symbol_reference"
         doc["link_confidence"] = 1.0
+        if doc.get("base_proposal_symbol") is None:
+            doc["base_proposal_symbol"] = linked[0]
         for ref in linked:
             proposal = proposals_by_symbol.get(ref)
             if proposal is None:
@@ -269,6 +271,8 @@ def link_documents(documents: list[dict]) -> None:
             doc["linked_proposal_symbols"] = [best_match["symbol"]]
             doc["link_method"] = "title_agenda_fuzzy"
             doc["link_confidence"] = best_confidence
+            if doc.get("base_proposal_symbol") is None:
+                doc["base_proposal_symbol"] = best_match["symbol"]
 
             if best_match.get("linked_resolution_symbol") is None:
                 best_match["linked_resolution_symbol"] = doc["symbol"]
