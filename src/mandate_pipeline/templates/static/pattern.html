@@ -42,57 +42,108 @@
     </div>
 </div>
 
-<!-- Documents in this pattern -->
+<!-- Documents with signal paragraphs -->
 {% if documents %}
 <div>
-    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Documents</h2>
-    <div class="border border-gray-200 rounded-lg overflow-hidden">
-        <table class="w-full">
-            <thead>
-                <tr class="bg-gray-50 border-b border-gray-200">
-                    <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Symbol</th>
-                    <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">Paragraphs</th>
-                    {% for check in checks %}
-                    <th class="text-center py-3 px-4 text-sm font-medium text-gray-500">{{ check.signal }}</th>
-                    {% endfor %}
-                    <th class="text-right py-3 px-4 text-sm font-medium text-gray-500">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                {% for doc in documents %}
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="py-3 px-4">
-                        <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
-                            {{ doc.symbol }}
-                        </a>
-                    </td>
-                    <td class="text-center py-3 px-4 text-sm text-muted">{{ doc.num_paragraphs }}</td>
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Documents</h2>
+        <div class="flex gap-2">
+            <button id="signals-only-btn" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-un-blue text-white">
+                Signals Only
+            </button>
+            <button id="show-all-btn" class="px-3 py-1.5 text-sm font-medium rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                Show All
+            </button>
+        </div>
+    </div>
+    
+    <div class="space-y-6">
+        {% for doc in documents %}
+        {% set has_signals = doc.signal_paragraphs|length > 0 %}
+        <div class="border border-gray-200 rounded-lg overflow-hidden doc-card {% if not has_signals %}no-signals{% endif %}" data-has-signals="{{ has_signals|lower }}">
+            <!-- Document Header -->
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" class="font-semibold text-gray-900 hover:text-un-blue transition-colors">
+                        {{ doc.symbol }}
+                    </a>
+                    <span class="text-sm text-muted">{{ doc.num_paragraphs }} paragraphs</span>
                     {% for check in checks %}
                     {% set count = doc.signal_summary.get(check.signal, 0) %}
-                    <td class="text-center py-3 px-4">
-                        {% if count > 0 %}
-                        <span class="inline-flex items-center justify-center min-w-[1.5rem] px-2 py-0.5 rounded-full text-xs font-medium
-                            {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
-                            {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
-                            {% else %}bg-gray-100 text-gray-700{% endif %}">
-                            {{ count }}
-                        </span>
-                        {% else %}
-                        <span class="text-gray-300">—</span>
-                        {% endif %}
-                    </td>
+                    {% if count > 0 %}
+                    <span class="px-2 py-0.5 rounded-full text-xs font-medium
+                        {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
+                        {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ check.signal }}: {{ count }}
+                    </span>
+                    {% endif %}
                     {% endfor %}
-                    <td class="text-right py-3 px-4">
-                        <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">
-                            PDF ↗
+                </div>
+                <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+            </div>
+            
+            <!-- Paragraphs -->
+            {% if doc.signal_paragraphs %}
+            <div class="divide-y divide-gray-100">
+                {% for para in doc.signal_paragraphs %}
+                <div class="px-4 py-3 flex gap-4">
+                    <div class="flex-shrink-0">
+                        <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html#para-{{ para.number }}" 
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-700 font-medium text-sm hover:bg-un-blue hover:text-white transition-colors">
+                            {{ para.number }}
                         </a>
-                    </td>
-                </tr>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-gray-700 leading-relaxed text-sm">{{ para.text }}</p>
+                        <div class="mt-1 flex gap-1">
+                            {% for signal in para.signals %}
+                            <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                                {% if 'agenda' in signal|lower %}bg-blue-50 text-blue-700
+                                {% elif 'pga' in signal|lower %}bg-purple-50 text-purple-700
+                                {% else %}bg-gray-100 text-gray-700{% endif %}">
+                                {{ signal }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
-            </tbody>
-        </table>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const signalsOnlyBtn = document.getElementById('signals-only-btn');
+    const showAllBtn = document.getElementById('show-all-btn');
+    const noSignalDocs = document.querySelectorAll('.doc-card.no-signals');
+    
+    function setSignalsOnly() {
+        signalsOnlyBtn.className = 'px-3 py-1.5 text-sm font-medium rounded-lg bg-un-blue text-white';
+        showAllBtn.className = 'px-3 py-1.5 text-sm font-medium rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors';
+        noSignalDocs.forEach(doc => doc.style.display = 'none');
+    }
+    
+    function setShowAll() {
+        showAllBtn.className = 'px-3 py-1.5 text-sm font-medium rounded-lg bg-un-blue text-white';
+        signalsOnlyBtn.className = 'px-3 py-1.5 text-sm font-medium rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors';
+        noSignalDocs.forEach(doc => {
+            doc.style.display = 'block';
+            doc.style.opacity = '0.6';
+        });
+    }
+    
+    signalsOnlyBtn.addEventListener('click', setSignalsOnly);
+    showAllBtn.addEventListener('click', setShowAll);
+    
+    // Default: signals only
+    setSignalsOnly();
+});
+</script>
 
 {% else %}
 <div class="text-center py-16">

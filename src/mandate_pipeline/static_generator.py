@@ -487,12 +487,36 @@ def generate_pattern_page(documents: list, pattern: dict, checks: list, patterns
         for sig, count in doc.get("signal_summary", {}).items():
             pattern_signal_counts[sig] = pattern_signal_counts.get(sig, 0) + count
 
+    # Add signal_paragraphs to each document
+    enriched_docs = []
+    for doc in pattern_docs:
+        doc_copy = doc.copy()
+        
+        # Find all paragraphs that have any signal
+        signal_paras = []
+        for para_num, para_signals in doc.get("signals", {}).items():
+            if para_signals:  # Has at least one signal
+                para_text = doc.get("paragraphs", {}).get(para_num, "")
+                signal_paras.append({
+                    "number": para_num,
+                    "text": para_text,
+                    "signals": para_signals
+                })
+        
+        # Sort paragraphs by number
+        signal_paras.sort(key=lambda p: int(p["number"]))
+        doc_copy["signal_paragraphs"] = signal_paras
+        enriched_docs.append(doc_copy)
+    
+    # Sort documents naturally by symbol
+    enriched_docs.sort(key=lambda d: natural_sort_key(d["symbol"]))
+
     html = template.render(
         pattern=pattern,
-        documents=pattern_docs,
+        documents=enriched_docs,
         checks=checks,
         pattern_signal_counts=pattern_signal_counts,
-        total_docs=len(pattern_docs),
+        total_docs=len(enriched_docs),
     )
 
     # Create slug from pattern name
