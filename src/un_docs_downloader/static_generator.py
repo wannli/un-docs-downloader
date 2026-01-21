@@ -287,6 +287,26 @@ def generate_signal_page(documents: list, check: dict, output_dir: Path) -> None
         f.write(html)
 
 
+def group_documents_by_pattern(documents: list) -> dict:
+    """
+    Group documents by their source pattern directory.
+
+    Args:
+        documents: List of document dicts
+
+    Returns:
+        Dict mapping pattern names to lists of documents
+    """
+    documents_by_pattern = {}
+    for doc in documents:
+        # Convert pattern_dir (e.g., "L_documents") to readable name (e.g., "L documents")
+        pattern = doc.get("pattern_dir", "Unknown").replace("_", " ")
+        if pattern not in documents_by_pattern:
+            documents_by_pattern[pattern] = []
+        documents_by_pattern[pattern].append(doc)
+    return documents_by_pattern
+
+
 def generate_documents_list_page(documents: list, checks: list, output_dir: Path) -> None:
     """
     Generate documents list page (documents/index.html).
@@ -308,8 +328,12 @@ def generate_documents_list_page(documents: list, checks: list, output_dir: Path
         for sig, count in doc.get("signal_summary", {}).items():
             total_signal_counts[sig] = total_signal_counts.get(sig, 0) + count
 
+    # Group documents by pattern
+    documents_by_pattern = group_documents_by_pattern(documents)
+
     html = template.render(
         documents=documents,
+        documents_by_pattern=documents_by_pattern,
         checks=checks,
         total_docs=len(documents),
         docs_with_signals=len([d for d in documents if d.get("signals")]),

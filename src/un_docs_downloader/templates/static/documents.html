@@ -45,64 +45,80 @@
                        class="pl-9 pr-4 py-1.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 w-48"
                        oninput="performSearch()">
             </div>
-            <span class="text-sm text-slate-500"><span id="visibleCount">{{ documents|length }}</span> shown</span>
+            <span class="text-sm text-slate-500"><span id="visibleCount">{{ total_docs }}</span> shown</span>
         </div>
     </div>
 </div>
 
-<!-- Documents List -->
-{% if documents %}
-<div class="space-y-3" id="documentsList">
-    {% for doc in documents %}
-    <div class="doc-row bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all"
-         data-symbol="{{ doc.symbol|lower }}"
-         data-signals='{{ doc.signal_summary|tojson }}'
-         data-content="{{ doc.paragraphs.values()|join(' ')|truncate(500) }}">
-        
-        <!-- Document Header -->
-        <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50">
-            <div class="flex items-center gap-4">
-                <a href="./{{ doc.symbol|replace('/', '_') }}.html" 
-                   class="font-bold text-lg text-slate-900 hover:text-sky-600 transition-colors">
-                    {{ doc.symbol }}
-                </a>
-                <span class="text-sm text-slate-500">{{ doc.num_paragraphs }} paragraphs</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="./{{ doc.symbol|replace('/', '_') }}.html" 
-                   class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-sky-600 hover:bg-sky-50 rounded-lg transition-colors">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                    </svg>
-                    View
-                </a>
-                <a href="{{ doc.un_url }}" target="_blank"
-                   class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
-                    PDF
-                </a>
-            </div>
+<!-- Documents List grouped by Pattern -->
+{% if documents_by_pattern %}
+<div id="documentsList">
+    {% for pattern_name, docs in documents_by_pattern.items() %}
+    <div class="pattern-group mb-8" data-pattern="{{ pattern_name|lower }}">
+        <!-- Pattern Header -->
+        <div class="flex items-center gap-3 mb-4">
+            <h2 class="text-xl font-semibold text-slate-800">{{ pattern_name }}</h2>
+            <span class="px-2.5 py-1 bg-slate-100 text-slate-600 text-sm font-medium rounded-full">
+                {{ docs|length }} documents
+            </span>
         </div>
         
-        <!-- Signal Summary -->
-        <div class="p-4">
-            {% if doc.signal_summary %}
-            <div class="flex flex-wrap gap-2">
-                {% for signal, count in doc.signal_summary.items() %}
-                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium
-                    {% if 'agenda' in signal|lower %}bg-blue-50 text-blue-700 border border-blue-200
-                    {% elif 'pga' in signal|lower %}bg-purple-50 text-purple-700 border border-purple-200
-                    {% elif 'sg' in signal|lower %}bg-amber-50 text-amber-700 border border-amber-200
-                    {% elif 'follow' in signal|lower %}bg-rose-50 text-rose-700 border border-rose-200
-                    {% else %}bg-slate-50 text-slate-700 border border-slate-200{% endif %}">
-                    {{ signal }}
-                    <span class="px-1.5 py-0.5 rounded bg-white text-xs font-bold">{{ count }}</span>
-                </span>
-                {% endfor %}
+        <!-- Documents in this pattern -->
+        <div class="space-y-3">
+            {% for doc in docs %}
+            <div class="doc-row bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all"
+                 data-symbol="{{ doc.symbol|lower }}"
+                 data-pattern="{{ pattern_name|lower }}"
+                 data-signals='{{ doc.signal_summary|tojson }}'
+                 data-content="{{ doc.paragraphs.values()|join(' ')|truncate(500) }}">
+                
+                <!-- Document Header -->
+                <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50">
+                    <div class="flex items-center gap-4">
+                        <a href="./{{ doc.symbol|replace('/', '_') }}.html" 
+                           class="font-bold text-lg text-slate-900 hover:text-sky-600 transition-colors">
+                            {{ doc.symbol }}
+                        </a>
+                        <span class="text-sm text-slate-500">{{ doc.num_paragraphs }} paragraphs</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="./{{ doc.symbol|replace('/', '_') }}.html" 
+                           class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-sky-600 hover:bg-sky-50 rounded-lg transition-colors">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            View
+                        </a>
+                        <a href="{{ doc.un_url }}" target="_blank"
+                           class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+                            PDF
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Signal Summary -->
+                <div class="p-4">
+                    {% if doc.signal_summary %}
+                    <div class="flex flex-wrap gap-2">
+                        {% for signal, count in doc.signal_summary.items() %}
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium
+                            {% if 'agenda' in signal|lower %}bg-blue-50 text-blue-700 border border-blue-200
+                            {% elif 'pga' in signal|lower %}bg-purple-50 text-purple-700 border border-purple-200
+                            {% elif 'sg' in signal|lower %}bg-amber-50 text-amber-700 border border-amber-200
+                            {% elif 'follow' in signal|lower %}bg-rose-50 text-rose-700 border border-rose-200
+                            {% else %}bg-slate-50 text-slate-700 border border-slate-200{% endif %}">
+                            {{ signal }}
+                            <span class="px-1.5 py-0.5 rounded bg-white text-xs font-bold">{{ count }}</span>
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="text-slate-400 text-sm italic">No signals detected</p>
+                    {% endif %}
+                </div>
             </div>
-            {% else %}
-            <p class="text-slate-400 text-sm italic">No signals detected</p>
-            {% endif %}
+            {% endfor %}
         </div>
     </div>
     {% endfor %}
@@ -163,6 +179,7 @@ function performSearch() {
 function applyFilters() {
     const searchTerm = document.getElementById('search').value.toLowerCase();
     const rows = document.querySelectorAll('.doc-row');
+    const groups = document.querySelectorAll('.pattern-group');
     let visible = 0;
     
     // Get search results if we have an index and search term
@@ -198,6 +215,12 @@ function applyFilters() {
         
         row.style.display = show ? '' : 'none';
         if (show) visible++;
+    });
+    
+    // Hide pattern groups that have no visible documents
+    groups.forEach(group => {
+        const visibleDocs = group.querySelectorAll('.doc-row:not([style*="display: none"])');
+        group.style.display = visibleDocs.length > 0 ? '' : 'none';
     });
     
     document.getElementById('visibleCount').textContent = visible;
