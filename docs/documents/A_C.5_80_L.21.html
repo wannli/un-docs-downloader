@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/C.5/80/L.21 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/C.5/80/L.21</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/C.5/80/L.21</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FC.5%2F80%2FL.21/pdf/A%2FC.5%2F80%2FL.21.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">6 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+        
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Endorses the conclusions and recommendations contained in the report of the Advisory Committee on Administrative and Budgetary Questions, and requests the Secretary-General to ensure their full implementation; Estimates for the period from 1 October 2025 to 30 June 2026</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Authorizes the Secretary-General to establish a special account for the United Nations Support Office in Haiti for the purpose of accounting for the income received and the expenditure incurred in respect of the Office;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also authorizes the Secretary-General to enter into commitments for the Office in an amount not exceeding 271,328,700 United States dollars for the period from 1 October 2025 to 30 June 2026, inclusive of the amounts of 54,163,500 dollars and of 50,000,000 dollars of the available balance of the stores available from the __________________ 1 A/80/499. 2 A/80/567. A/C.5/80/L.21 25-21133 2/2 Organization’s strategic deployment stocks, previously authorized by the Advisory Committee for the period from 1 October to 31 December 2025 under the terms of section VI of General Assembly resolution 64/269 of 24 June 2010; Financing of the commitment authority</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Decides to apportion among Member States the amount of 271,328,700 dollars for the period from 1 October 2025 to 30 June 2026, in accordance with the levels updated in its resolution 79/250 of 24 December 2024, taking into account the scale of assessments for 2025 and 2026, as set out in its resolution 79/249 of 24 December 2024;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also decides that, in accordance with the provisions of its resolution 973 (X) of 15 December 1955, there shall be set off against the apportionment among Member States, as provided for in paragraph 4 above, their respective share in the Tax Equalization Fund of 1,792,900 dollars, representing the estimated staff assessment income approved for the Office for the period from 1 October 2025 to 30 June 2026;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites voluntary contributions to the United Nations trust fund established to support the Gang Suppression Force.</p>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/95 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/95</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/95</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F95/pdf/A%2FRES%2F80%2F95.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">13 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+    
+
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms the inalienable right of the people of French Polynesia to self- determination, in conformity with the Charter of the United Nations and with General Assembly resolution 1514 (XV), containing the Declaration on the Granting of Independence to Colonial Countries and Peoples;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also reaffirms that it is ultimately for the people of French Polynesia to determine freely their future political status in accordance with the relevant provisions of the Charter, the Declaration and the relevant resolutions of the General Assembly, and in that connection calls upon the administering Power, in cooperation with the territorial Government and appropriate bodies of the United Nations system, to develop political education programmes for the Territory in order to foster an awareness among the people of French Polynesia of their right to self-determination in conformity with the legitimate political status options, based on the principles clearly defined in Assembly resolution 1541 (XV) and other relevant resolutions and decisions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the statement made by the President of the Territory in October 2024 that the territorial Government fully supports a comprehensive, transparent and peaceful decolonization process under the scrutiny of the United Nations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms, in this regard, General Assembly resolution 67/265, which provided for the reinscription of French Polynesia on the list of Non-Self-Governing Territories, and takes careful note of an independent self-governance assessment of the Territory, presented to the Fourth Committee on 4 October 2016, 9 that the Territory did not meet the full measure of self-government;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon the administering Power to participate in and cooperate fully with the work of the Special Committee on the Situation with regard to the Implementation of the Declaration on the Granting of Independence to Colonial Countries and Peoples in order to implement the provisions of Article 73 e of the _______________ 7 A/C.4/79/SR.3, paras. 8–13. 8 Ibid., para. 11. 9 A/C.4/71/SR.3, paras. 71 and 72. A/RES/80/95 Question of French Polynesia 25-20352 4/4 Charter and the Declaration and in order to advise the Special Committee on the implementation of the provisions under Article 73 b of the Charter on efforts to promote self-government in French Polynesia, and encourages the administering Power to facilitate visiting and special missions to the Territory;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the multiple requests of representatives of the Territory for the dispatch of a visiting mission to the Territory as part of efforts to assess the overall situation of the people of French Polynesia, and in this regard reiterates its request to the administering Power to facilitate a visiting mission to the Territory, and requests the Chair of the Special Committee to take all the steps necessary to that end;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Regrets that the administering Power has not responded to the request to submit information on French Polynesia under Article 73 e of the Charter since the reinscription of the Territory by the General Assembly in 2013;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms that an obligation exists on the part of the administering Power to transmit information under Chapter XI of the Charter, and requests the administering Power to transmit to the Secretary-General such information on French Polynesia as called for under the Charter;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges the administering Power to ensure the permanent sovereignty of the people of French Polynesia over their natural resources, including marine resources and undersea minerals, in accordance with the relevant resolutions of the General Assembly;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the efforts made by the administering Power concerning the recognition and compensation of victims of nuclear tests, and in that regard encourages the administering Power to take steps to this effect;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal", "follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to provide an update to the report submitted to the General Assembly at its seventy-second session on the environmental, ecological, health and other impacts of the 30-year period of nuclear testing in French Polynesia as information becomes available, in follow-up to the report of the Secretary-General on the matter prepared pursuant to paragraph 7 of Assembly resolution 71/120;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon the administering Power to initiate a dialogue with the Government of French Polynesia in order to facilitate rapid progress towards a fair and effective self-determination process, under which the terms and timelines for an act of self-determination would be agreed, and to consider developing, in close cooperation, a constructive programme of work for the Territory, in line with the provisions of paragraph 8 (d) of General Assembly resolution 79/114 of 4 December 2024;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Special Committee to continue to examine the question of the Non-Self-Governing Territory of French Polynesia and to report thereon to the General Assembly at its eighty-first session. 55th plenary meeting 5 December 2025</p>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

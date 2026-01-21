@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/C.4/80/L.20 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/C.4/80/L.20</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/C.4/80/L.20</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FC.4%2F80%2FL.20/pdf/A%2FC.4%2F80%2FL.20.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">22 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+            
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms that the Israeli settlements in the Occupied Palestinian Territory, including East Jerusalem, and in the occupied Syrian Golan are illegal and an obstacle to peace and economic and social development;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Demands that Israel accept the de jure applicability of the Geneva Convention relative to the Protection of Civilian Persons in Time of War, of 12 August 1949, to the Occupied Palestinian Territory, including East Jerusalem, and other Arab territories occupied by Israel since 1967, including the occupied Syrian Golan, and abide scrupulously by the provisions of the Convention, in particular article 49, and comply with all of its obligations under international law and cease immediately all actions causing the alteration of the character, status and demographic composition of the Occupied Palestinian Territory, including East Jerusalem, and of the occupied Syrian Golan;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates its demand for the immediate and complete cessation of all Israeli settlement activities in all of the Occupied Palestinian Territory, including East Jerusalem, and in the occupied Syrian Golan, and calls in this regard for the full implementation of all the relevant resolutions of the Security Council, including, inter alia, resolutions 446 (1979), 452 (1979) of 20 July 1979, 465 (1980), 476 (1980), 478 (1980), 1515 (2003) of 19 November 2003 and 2334 (2016);</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that a complete cessation of all Israeli settlement activities is essential for salvaging the two-State solution on the basis of the pre-1967 borders;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also stresses the urgent need to reverse negative trends on the ground, including the building of settlements and the demolition of Palestinian homes, which are imperilling the viability of the two-State solution and entrenching a situation of unequal rights and discrimination, and are preventing the Palestinian people from exercising their fundamental rights;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls the affirmation by the Security Council, in its resolution 2334 (2016), that it will not recognize any changes to the 4 June 1967 lines, including with regard to Jerusalem, other than those agreed by the parties through negotiations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls the determination by the International Court of Justice, in its advisory opinion rendered on 19 July 2024, that Israel’s policies and practices amount __________________ 16 A/80/443 and A/80/399; see also A/80/365. A/C.4/80/L.20 5/7 25-18257 to annexation of large parts of the Occupied Palestinian Territory, contrary to the prohibition of the use of force in international relations and its corollary principle of the non-acquisition of territory by force, and stresses in this regard that the occupation of a territory is to be a temporary, de facto situation, whereby the occupying Power can neither claim possession nor exert its sovereignty over the territory it occupies, and recalls the principle of the inadmissibility of the acquisition of land by force and therefore the illegality of the annexation of any part of the Occupied Palestinian Territory, including East Jerusalem, which constitutes a breach of international law, undermines the viability of the two-State solution and challenges the prospects for a just, lasting and comprehensive peace settlement;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Condemns in this regard settlement activities in the Occupied Palestinian Territory, including East Jerusalem, and in the occupied Syrian Golan and any activities involving the confiscation of land, the disruption of the livelihood of protected persons, the forced transfer of civilians and the annexation of land, whether de facto or through national legislation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls that the International Court of Justice observed that Israel’s legislation and measures impose and serve to maintain a near-complete separation in the West Bank, including East Jerusalem, between the settler and Palestinian communities and considered that they constitute a breach of article 3 of the International Convention on the Elimination of All Forms of Racial Discrimination; 17</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Demands that Israel, the occupying Power, comply with its legal obligations, as mentioned in the advisory opinions rendered on 9 July 2004 and 19 July 2024 by the International Court of Justice, including to bring an end to its unlawful presence in the Occupied Palestinian Territory as rapidly as possible, to cease immediately all new settlement activities and to evacuate all settlers from the Occupied Palestinian Territory, and to put an end to its unlawful acts, including by repealing all legislation and measures creating or maintaining the unlawful situation, inter alia, those which discriminate against the Palestinian people in the Occupied Palestinian Territory, as well as all measures aimed at modifying the demographic composition of any parts of the Territory;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls in this regard the conclusion of the International Court of Justice that Israel is under an obligation to provide full reparation for the damage caused by its internationally wrongful acts to all natural or legal persons concerned;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates its call for the prevention of all acts of violence, destruction, harassment and provocation by Israeli settlers, especially against Palestinian civilians and their properties, including historic and religious sites and including in Occupied East Jerusalem, and their agricultural lands;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for accountability for the illegal actions perpetrated by Israeli settlers in the Occupied Palestinian Territory, stresses in this regard the need for the implementation of Security Council resolution 904 (1994), in which the Council called upon Israel, the occupying Power, to continue to take and implement measures, including the confiscation of arms, aimed at preventing illegal acts of violence by Israeli settlers, and called for measures to be taken to guarantee the safety and protection of the Palestinian civilians in the occupied territory, recalls in this regard the report of the Secretary-General on the protection of the Palestinian civilian population, 18 and welcomes the Secretary-General’s observations, including with respect to the expansion of existing protection mechanisms to prevent and deter violations; __________________ 17 United Nations, Treaty Series, vol. 660, No. 9464. 18 A/ES-10/794. A/C.4/80/L.20 25-18257 6/7</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the responsibility of Israel, the occupying Power, to investigate all acts of settler violence against Palestinian civilians and their properties and to ensure accountability for these acts and end prevailing impunity in this regard;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States and international organizations to continue to actively pursue policies that ensure respect for their obligations under international law, including those outlined in the advisory opinion rendered by the International Court of Justice on 19 July 2024, with regard to Israel’s unlawful presence and all illegal Israeli practices and measures in the Occupied Palestinian Territory, including East Jerusalem, particularly in relation to Israeli settlements and their associated regime, including, inter alia, the obligations of distinction and of non-recognition and non-assistance to the unlawful presence of Israel in the Occupied Palestinian Territory and to its unlawful acts, as well as the obligation, while respecting the Charter of the United Nations and international law, to ensure that any impediment resulting from the illegal presence of Israel in the Occupied Palestinian Territory to the exercise of the Palestinian people of its right to self-determination is brought to an end and the obligation of all the States Parties to the Fourth Geneva Convention, while respecting the Charter of the United Nations and international law, to ensure compliance by Israel with international humanitarian law as embodied in that Convention;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for measures of accountability, consistent with international law, including targeted measures against extremist settlers and against entities and organizations which support them, in the light of continued non-compliance with the demands for a complete and immediate cessation of all settlement activities, which are illegal under international law, constitute an obstacle to peace and threaten to make a two-State solution impossible, stressing that compliance with and respect for international humanitarian law and international human rights law is a cornerstone for peace and security in the region;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls, in this regard, the statement of 15 July 1999 and the declarations adopted on 5 December 2001 and on 17 December 201419 by the Conference of High Contracting Parties to the Fourth Geneva Convention on measures to enforce the Convention in the Occupied Palestinian Territory, including East Jerusalem, welcomes in this regard initiatives by States Parties, both individually and collectively, in accordance with article 1 of the Convention, aimed at ensuring respect for the Convention and accountability, and calls upon all High Contracting Parties to the Convention to continue, individually and collectively, to exert all efforts to ensure respect for its provisions by Israel, the occupying Power, in the Occupied Palestinian Territory, including East Jerusalem, and other Arab territories occupied by Israel since 1967;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recalls that the Security Council, in its resolution 2334 (2016), called upon all States to distinguish, in their relevant dealings, between the territory of the State of Israel and the territories occupied since 1967;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States, consistent with their obligations under international law and the relevant resolutions, not to recognize, and not to render aid or assistance in maintaining, the situation created by measures that are illegal under international law, including those aimed at advancing annexation in the Occupied Palestinian Territory, including East Jerusalem, and other Arab territories occupied by Israel since 1967;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon the relevant United Nations bodies to take all necessary measures and actions within their mandates to ensure full respect for and compliance with Human Rights Council resolution 17/4 of 16 June 2011,20 concerning the Guiding Principles __________________ 19 A/69/711-S/2015/1, annex. 20 See Official Records of the General Assembly, Sixty-sixth Session, Supplement No. 53 (A/66/53), chap. III, sect. A. A/C.4/80/L.20 7/7 25-18257 on Business and Human Rights21 and other relevant international laws and standards, and to ensure the implementation of the United Nations “Protect, Respect and Remedy” Framework, which provides a global standard for upholding human rights in relation to business activities that are connected with Israeli settlements in the Occupied Palestinian Territory, including East Jerusalem;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to report to the General Assembly at its eighty-first session on the implementation of the present resolution;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Decides to include in the provisional agenda of its eighty-first session the item entitled “Israeli practices and settlement activities affecting the rights of the Palestinian people and other Arabs of the occupied territories”. __________________ 21 A/HRC/17/31, annex.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

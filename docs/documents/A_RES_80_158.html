@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/158 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/158</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/158</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F158/pdf/A%2FRES%2F80%2F158.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">13 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+        
+            
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms the inalienable rights of the Palestinian people and of the population of the occupied Syrian Golan over their natural resources, including land, water and energy resources;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Demands that Israel, the occupying Power, cease the exploitation, damage, cause of loss or depletion and endangerment of the natural resources in the Occupied Palestinian Territory, including East Jerusalem, and in the occupied Syrian Golan; _______________ 6 A/HRC/22/63. 7 A/56/1026-S/2002/932, annex II, resolution 14/221. 8 S/2003/529, annex. 9 A/79/975-E/2025/82. A/RES/80/158 Permanent sovereignty of the Palestinian people in the Occupied Palestinian Territory, including East Jerusalem, and of the Arab population in the occupied Syrian Golan over their natural resources 25-20756 4/5</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the right of the Palestinian people to claim restitution as a result of any exploitation, damage, loss or depletion or endangerment of their natural resources resulting from illegal measures taken by Israel, the occupying Power, and Israeli settlers in the Occupied Palestinian Territory, including East Jerusalem, and expresses the hope that this issue will be dealt with within the framework of the final status negotiations between the Palestinian and Israeli sides;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that the wall and settlements being constructed by Israel in the Occupied Palestinian Territory, including in and around East Jerusalem, are contrary to international law and are seriously depriving the Palestinian people of their natural resources, and calls in this regard for full compliance with the legal obligations affirmed in the 9 July 2004 advisory opinion of the International Court of Justice 10 and in relevant United Nations resolutions, including General Assembly resolution ES-10/15;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Israel, the occupying Power, to comply strictly with its obligations under international law, including international humanitarian law, and to cease immediately and completely all policies and measures aimed at the alteration of the character and status of the Occupied Palestinian Territory, including East Jerusalem;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also calls upon Israel, the occupying Power, to bring a halt to all actions, including those perpetrated by Israeli settlers, harming the environment, including the dumping of all kinds of waste materials, in the Occupied Palestinian Territory, including East Jerusalem, and in the occupied Syrian Golan, which gravely threaten their natural resources, namely water and land resources, and which pose an environmental, sanitation and health threat to the civilian populations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further calls upon Israel to cease its destruction of vital infrastructure, including water pipelines, sewage networks and electricity networks, and to cease its demolition and confiscation of Palestinian homes and civilian infrastructure, agricultural lands and water wells, which, inter alia, have a negative impact on the natural resources of the Palestinian people, stresses the urgent need to advance reconstruction and development projects in this regard, including in the Gaza Strip, and calls for support for the necessary efforts in this regard;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Israel, the occupying Power, to remove all obstacles to the implementation of critical environmental projects, including sewage treatment plants in the Gaza Strip and the reconstruction and development of water infrastructure, including the project for the desalination facility for the Gaza Strip;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also calls upon Israel not to impede Palestinian development and export of discovered oil and natural gas reserves;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for the immediate and safe removal of all unexploded ordnance in the Gaza Strip and for support for the efforts of the Mine Action Service of the United Nations in this regard, and welcomes the extensive efforts exerted by the Mine Action Service to date;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages all States and international organizations to continue to actively pursue policies to ensure respect for their obligations under international law with regard to all illegal Israeli practices and measures in the Occupied Palestinian Territory, including East Jerusalem, particularly Israeli settlement activities and the exploitation of natural resources; _______________ 10 See A/ES-10/273 and A/ES-10/273/Corr.1. Permanent sovereignty of the Palestinian people in the Occupied Palestinian Territory, including East Jerusalem, and of the Arab population in the occupied Syrian Golan over their natural resources A/RES/80/158 5/5 25-20756</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underscores, in this regard, the call by the Security Council, in its resolution 2334 (2016), upon all States to distinguish, in their relevant dealings, between the territory of the State of Israel and the territories occupied since 1967;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to report to the General Assembly at its eighty-first session on the implementation of the present resolution, including with regard to the cumulative impact of the exploitation, damage and depletion by Israel of natural resources in the Occupied Palestinian Territory, including East Jerusalem, and in the occupied Syrian Golan, and with regard to the impact of such practices on the promotion of the Sustainable Development Goals,11 and decides to include in the provisional agenda of its eighty-first session the item entitled “Permanent sovereignty of the Palestinian people in the Occupied Palestinian Territory, including East Jerusalem, and of the Arab population in the occupied Syrian Golan over their natural resources”. 64th plenary meeting 15 December 2025 _______________ 11 See resolution 70/1.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

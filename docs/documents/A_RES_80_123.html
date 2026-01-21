@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/123 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/123</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/123</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F123/pdf/A%2FRES%2F80%2F123.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">55 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the report of the United Nations Conference on Trade and Development;8</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the outcome document of the Fourth International Conference on Financing for Development, the Sevilla Commitment,9 and calls for its timely and effective implementation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges with appreciation the advancements made in the Sevilla Commitment on debt and debt sustainability; _______________ 8 A/80/220 and A/80/220/Corr.1. 9 Resolution 79/323, annex. A/RES/80/123 External debt sustainability and development 25-20754 6/13</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes the special importance of predictable, timely, effective, comprehensive and durable solutions to the debt problems of developing countries to promote their economic growth and development;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the importance, in particular, of new and emerging challenges and vulnerabilities in regard to developing country external debt sustainability arising from structural changes to overall debt composition, the rapid growth of private sector debt in many emerging and developing countries and the growing use of new debt financing instruments and approaches;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the growing concerns about fast-rising corporate debt, high-risk exposure to volatile international financial markets and fast-growing debt servicing burdens as potential triggers of financial and debt crises and the consequent need for coordinated policy responses;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the need to continue to assist developing countries in avoiding a build-up of unsustainable debt and in implementing resilience measures so as to reduce the risk of relapsing into another debt crisis, taking into account the challenges posed by the global economic environment and risks for debt sustainability in a growing number of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges the role played by the Debt Sustainability Framework for Low-Income Countries, jointly developed by the International Monetary Fund and the World Bank, to guide borrowing and lending decisions, and notes its operationalization in 2018 and its ongoing review that aims at further improving the methodology underpinning the International Monetary Fund and World Bank debt sustainability analysis for low-income countries and thus contributes to understanding and addressing debt vulnerabilities more effectively, and the further enhancement of debt sustainability assessment frameworks, consistent with the 2030 Agenda for Sustainable Development10 and longer-term structural transformation;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates that no single indicator should be used to make definitive judgments about a country’s debt sustainability, and, in view of the new challenges and vulnerabilities for developing countries’ external debt sustainability, substantiated by the work of the United Nations Conference on Trade and Development and recent joint analyses of the International Monetary Fund and the World Bank, stresses the need for improved data collection and quality in areas that include domestic public debt and domestic and external private debt, as well as legal and regulatory features, such as ownership, currency denomination and jurisdiction according to national priorities, and in this regard supports the call for action contained in the Sevilla Commitment, and welcomes the final report of the High-level Panel on the Development of a Multidimensional Vulnerability Index for Small Island Developing States, and the adoption of General Assembly resolution 78/322 of 13 August 2024, entitled “Multidimensional vulnerability index”;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also reiterates that timely and comprehensive data on the level and composition of debt are necessary for, inter alia, building early warning systems aimed at limiting the impact of debt crises, calls for debtor and creditor countries to intensify their efforts to collect and release data, where appropriate, welcomes the ongoing work of relevant institutions to apply innovative tools for monitoring financial stress in developing countries and to invite relevant institutions to consider the creation of a central data registry that includes information on debt restructuring, and calls for donors to consider increasing their support for technical cooperation programmes aimed at increasing the statistical capacity of developing countries in that regard; _______________ 10 Resolution 70/1. External debt sustainability and development A/RES/80/123 7/13 25-20754</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the United Nations system, the World Bank Group, the International Monetary Fund and other relevant stakeholders, including the Development Assistance Committee of the Organisation for Economic Co-operation and Development, to continue to conduct analytical activities and to provide policy advice and technical assistance to Governments, upon request, in the areas of managing debt, and operating and maintaining databases, and in this regard recalls that the United Nations Conference on Trade and Development should continue its analytical and policy work and technical assistance on debt issues, including the Debt Management and Financial Analysis System Programme, so that this extends not only to improvements in the timeliness and accuracy of debt data recording, but also to the enhanced coverage of public sector and other relevant debt data, including, in particular, heretofore unrecorded or hidden debt instruments, contingent liabilities and more complex debt instruments;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the need to strengthen information-sharing and transparency among all creditors and borrowers to ensure that debt sustainability assessments are based on comprehensive, objective and reliable data, including an assessment of national public and private debt, in order to ensure the achievement of the Sustainable Development Goals, encourages further improvement of the mutual exchange of information, on a voluntary basis, on borrowing and lending among all creditors and borrowers, and takes note of the Paris Forum initiative, which gathers together sovereign creditors and debtors annually to share views and information, promote greater debt transparency and preserve debt sustainability;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that the long-term sustainability of debt depends on, inter alia, economic growth, the mobilization of domestic and international resources, the export prospects of debtor countries, sustainable debt management, sound macroeconomic policies that also support job creation, transparent and effective regulatory frameworks and success in overcoming structural development problems and, hence, on the creation of an enabling environment at all levels that is conducive to sustainable development, and also recognizes the need to assist developing countries in attaining long-term debt sustainability, through coordinated policies aimed at fostering adequate debt financing and resolution tools, such as debt relief and debt restructuring supporting sound debt management;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with concern that some low- and middle-income developing countries that were not part of the existing debt relief initiatives now have large debt burdens that may create constraints on mobilizing the resources needed to achieve the Sustainable Development Goals, indicating a need to consider, as appropriate, stronger debt management initiatives for those countries, and stresses the importance of medium- and long-term debt sustainability to deal with debt, including non‑Paris Club debt;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the fact that heavily indebted poor countries eligible for debt relief will not be able to enjoy the full benefits unless all creditors, both public and private, contribute to debt workouts, as appropriate, in order to ensure the debt sustainability of those countries to further support their efforts to achieve sustainable development, and invites creditors, both private and public, that are not yet fully participating in debt relief initiatives to substantially increase their participation, including by providing comparable treatment to debtor countries that have concluded sustainable debt relief agreements with creditors;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the need for the international community to remain vigilant in monitoring the debt situation of developing countries, including the least developed countries, landlocked developing countries and small island developing States, and to continue to take effective measures, preferably within existing frameworks, when applicable, to address the debt problem of those countries, acknowledges that sound A/RES/80/123 External debt sustainability and development 25-20754 8/13 debt management initiatives can play a key role in liberating resources that should be directed towards activities consistent with the eradication of poverty in all its forms and dimensions, including extreme poverty, and with the promotion of sustained economic growth and development and the internationally agreed development goals, including the Sustainable Development Goals, and in this regard urges countries to direct the resources freed through debt relief, for example, through debt restructuring, cancellation and reduction, as appropriate, towards achieving those objectives, while still maintaining sustainable debt levels through prudent fiscal management, including in the context of the 2030 Agenda, according to their national priorities and strategies;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes that countries can seek to negotiate, as a last resort, on a case-by- case basis and through existing frameworks, agreements on temporary debt standstills between debtors and creditors in order to help to mitigate the adverse impacts of a debt crisis and stabilize macroeconomic developments;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges the efforts of, and invites creditors to provide additional flexibility to, developing countries affected by natural disasters so as to allow them to address their national debt concerns, while taking into account their specific economic and social situations and needs;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that the detrimental impact of disasters on the debt sustainability of many least developed countries, small island developing States and middle-income countries warrants further attention and that preserving external debt sustainability requires ex ante financing to enable the systematic reduction of disaster risk and resilience-building, as well as the disclosure of disaster risk to avoid exacerbating debt distress, when feasible, and in this regard recognizes that many least developed countries, small island developing States and middle-income countries have limited access to financing to invest in disaster risk reduction for resilience before and after disasters, while noting the potential benefits of climate- resilient debt instruments;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the promotion of the use of state-contingent clauses in official lending, including climate-resilient debt clauses and debt pause clauses, where appropriate, to ensure the possibility of debt service suspension during times of crises, disasters and shocks that are not covered by standard force majeure clauses, and to enhance the fiscal resilience of developing countries vulnerable to external shocks, and encourages the use of such clauses in commercial loan and debt contracts, where appropriate, in consultation with borrowing countries, and building on the work of the Group of 20 and the progress made by international financial institutions, invites the relevant international financial institutions to implement solutions to help to incorporate state-contingent clauses into commercial debt contracts, such as through reinsurance, and encourages support for this work;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that, in some cases, the use of public debt and renewed external borrowing to absorb the impact of a disaster could lead to higher debt servicing for developing countries and constrain their growth and their capacity to invest in long- term resilience-building measures, and further acknowledges that, with each new disaster, financial vulnerabilities grow and domestic response capacities weaken;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes the importance of the creation of robust, nationally appropriate legal and regulatory frameworks for sustainable national and municipal borrowing, on the basis of sustainable debt management, supported by adequate revenue and capacities, by means of local creditworthiness, as well as expanded sustainable municipal debt markets, when appropriate, and in this regard underlines the importance of the establishment of appropriate financial intermediaries for urban financing, such as regional, national, subnational and local development funds or External debt sustainability and development A/RES/80/123 9/13 25-20754 development banks, including pooled financing mechanisms, which can catalyse public and private, national and international financing;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further recognizes that developing countries experiencing high debt distress can concurrently experience socioeconomic challenges and stretched social safety nets, and invites a multilateral response that supports these countries to achieve debt sustainability and sustainable development;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the importance of multilateral efforts to tackle increasingly complex cross-border challenges that have serious effects on development and debt sustainability;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes with appreciation the steps taken by the Group of 20, in particular under the presidencies of Saudi Arabia, Italy, Indonesia, India, Brazil and South Africa to further promote debt-related measures and the implementation of the Debt Service Suspension Initiative and the Common Framework for Debt Treatments beyond the Debt Service Suspension Initiative, and the recent agreements concluded under the Common Framework, and calls to implement it fully in a transparent, predictable, timely, orderly and coordinated manner, including to increase the fiscal space of countries in debt distress, encourages greater private sector participation through more clarity in assessing comparability of treatment, while also noting that more needs to be done to respond to the need of countries not covered by current initiatives, including middle-income countries, and in this regard reaffirms the growing urgency of dealing not only with liquidity but also solvency risks;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further recognizes with appreciation the steps taken by the Group of 20 to provide additional clarity on the processes and enhance the implementation of the Common Framework;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges the importance of coordinated and enhanced liquidity and debt management support to developing countries committed to their ambitious development objectives, expresses appreciation for ongoing efforts in this area, including the three-pillar approach proposed by the International Monetary Fund and the World Bank to help to address debt service challenges, as well as other efforts made by the international community, and calls for further strengthening and systematizing this support through an institutional home within an existing facility, for example in the World Bank or the International Monetary Fund, that is accessible to all developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the special drawing rights allocation of the equivalent of 650 billion United States dollars of 23 August 2021, commends the achievement of the target of 100 billion dollars in pledges for rechannelling special drawing rights or equivalent contributions, recommends the exploration of further voluntary options related to special drawing rights that could serve the needs of developing member countries of the International Monetary Fund, calls for the urgent voluntary rechannelling of special drawing rights for countries most in need, including through multilateral development banks, while respecting relevant legal frameworks and preserving the reserve asset character of special drawing rights, and will explore ways for future allocations of special drawing rights to benefit those countries most in need;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the interim review of the Resilience and Sustainability Trust, and looks forward to a more comprehensive review planned for 2026;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-30" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    30
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recommends assisting developing countries in attaining long-term debt sustainability through coordinated policies aimed at fostering debt financing, debt relief, debt restructuring and sound debt management, as appropriate, to enhance the ability of countries to achieve the Sustainable Development Goals; A/RES/80/123 External debt sustainability and development 25-20754 10/13</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-31" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    31
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recommends the facilitation of timely and orderly debt treatment with the broad participation of all creditors, including those in the private sector, on comparable terms, stresses the need in the medium term to strengthen information- sharing between debtors and creditors, as necessary, and long-term debt sustainability analysis, based on comprehensive, objective, transparent and reliable data, and technical cooperation that takes account of the requirements of sustainable development and the 2030 Agenda, and emphasizes the urgency of strengthening international efforts and cooperation and responding to the call for the easing of debt burdens by addressing the debt vulnerability, in the immediate term, and the debt sustainability, in the long term, of heavily indebted developing countries;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-32" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    32
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the role of the United Nations and of the international financial institutions, in accordance with their respective mandates, and encourages them to continue to support global efforts towards sustained and inclusive growth, sustainable development and the external debt sustainability of developing countries, including through continued monitoring of global financial flows and their implications in this regard;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-33" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    33
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the International Monetary Fund Executive Board decision in October 2024 for the review of charges and the surcharge policy, and the setting of a regular review cycle for the surcharge policy to allow for timely assessments and updates to the surcharge policy framework, every five years or earlier if warranted;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-34" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    34
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the important role of credit ratings in the capital market ecosystem, as they provide creditors and the public with assessments of a debtor’s relative risk of default, and acknowledges that downgraded ratings may negatively affect the opinion of lenders and bondholders and as a result raise the cost and reduce the availability of future debt funding, and that it is important that credit rating agencies ensure that their ratings are objective, independent and based on accurate information and sound analytical methods, including by considering development, social and environmental indicators and impacts of external shocks in their ratings, to the extent that these factors have an impact on debt risk, noting in this regard the high- level meeting on the role of credit rating agencies in the implementation of the 2030 Agenda;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-35" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    35
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates that debtors and creditors must work together in a transparent manner to prevent and resolve unsustainable debt situations and that maintaining sustainable debt levels is the responsibility of the borrowing countries, acknowledges that lenders also have a responsibility to lend in a way that does not undermine a country’s debt sustainability, and in this regard takes note of the principles on responsible sovereign lending and borrowing of the United Nations Conference on Trade and Development, recognizes the applicable requirements of the debt limits policy of the International Monetary Fund and/or the non‑concessional borrowing policy of the World Bank and the safeguards of the Development Assistance Committee of the Organisation for Economic Co-operation and Development in its statistical system to enhance the debt sustainability of recipient countries, and resolves to work towards a global consensus on guidelines for debtor and creditor responsibilities in borrowing by and lending to sovereigns, building on existing initiatives;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-36" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    36
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for the intensification of efforts to prevent and mitigate the prevalence and cost of debt crises by enhancing international financial mechanisms for crisis prevention and resolution, encourages the private sector to cooperate in this regard, and invites creditors and debtors to further explore, where appropriate and on a mutually agreed, transparent and case-by-case basis, the use of new and improved debt instruments such as debt swaps, including debt for equity in Sustainable Development Goal projects, as well as debt indexation instruments; External debt sustainability and development A/RES/80/123 11/13 25-20754</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-37" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    37
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the need for multilateral debt mechanisms to fully address sovereign external debt distress and provide an effective, efficient, equitable and predictable mechanism for managing debt crises in view of the development needs of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-38" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    38
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls the holding of the sixteenth session of the United Nations Conference on Trade and Development in Geneva from 20 to 23 October 2025, and the Bridgetown Covenant,11 and encourages the United Nations Conference on Trade and Development, in cooperation with the World Bank and the International Monetary Fund, to continue its analytical and policy work and technical assistance on debt issues, including to promote policies for responsible, sustainable and transparent sovereign borrowing and lending, as appropriate, and to enhance the efficiency of the global economic system and debt sustainability for the realization of the 2030 Agenda in developing countries;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-39" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    39
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses its concern regarding the ability of non‑cooperative minority bondholders to disrupt the will of the large majority of bondholders who accept a restructuring of a debt-crisis country’s obligations, given the potential broader implications in other countries, notes contractual and legislative steps taken by countries to prevent these activities, and encourages all Governments to take action, as appropriate, and, furthermore, takes note of discussions in the United Nations on debt issues;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-40" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    40
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Governments to be mindful of the ability of non‑cooperative minority bondholders to block a restructuring of a debt-crisis country’s obligations, and encourages debtors and creditors to work together to draft bond agreements accordingly;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-41" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    41
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the reforms to pari passu and collective action clauses proposed by the International Capital Market Association and endorsed by the International Monetary Fund to reduce the vulnerability of sovereigns to holdout creditors, encourages countries to take further action to include those clauses in all their bond issuances, and welcomes the continued work of the International Monetary Fund to monitor the uptake of the clauses and explore options for resolving the issue with the outstanding stock of debt without such clauses;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-42" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    42
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls that the United Nations, as a universal intergovernmental body, has provided a platform for both creditors and debtors to discuss ways to improve external debt sustainability, notes the convening of the ministerial fireside chat on lowering borrowing costs and advancing development-oriented debt solutions during the 2025 Economic and Social Council forum on financing for development follow‑up, and in this regard invites continued ongoing cooperation among the international financial institutions, including the Bretton Woods institutions, in particular the International Monetary Fund, relevant United Nations system entities, including the United Nations Conference on Trade and Development, and other relevant forums, in accordance with their respective mandates pursuant to the relevant resolutions on this matter;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-43" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    43
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recalls the request in the Sevilla Commitment to the Secretary- General to convene a working group tasked with proposing a consolidated set of voluntary guiding principles on responsible sovereign borrowing and lending;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-44" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    44
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges the efforts to establish the platform for borrower countries with support from existing institutions and a United Nations entity serving as its secretariat; _______________ 11 TD/541/Add.2. A/RES/80/123 External debt sustainability and development 25-20754 12/13</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-45" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    45
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls paragraph 50 (f) of the Sevilla Commitment on the initiation of the intergovernmental process on debt at the United Nations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-46" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    46
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recalls the establishment of the Intergovernmental Group of Experts on Financing for Development of the United Nations Conference on Trade and Development, notes that its ninth session will be held in December 2025, recalls the request that the work of the Intergovernmental Group of Experts on Financing for Development at the United Nations Conference on Trade and Development be presented as a regular input to the Economic and Social Council forum on financing for development follow-up, in accordance with the terms of reference of the Intergovernmental Group of Experts, and also recalls the pending review of the Group;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-47" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    47
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the invitation to the President of the General Assembly and the Secretary-General to give appropriate consideration to the central role of maintaining and facilitating the financial and macroeconomic stability of developing countries, including debt sustainability, and of supporting an appropriately enabling domestic and international economic, financial and regulatory environment for the means of implementation of the 2030 Agenda, and in this regard invites all major institutional stakeholders, including the International Monetary Fund, the World Bank and the United Nations Conference on Trade and Development, to support these efforts, in accordance with their respective mandates;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-48" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    48
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, the United Nations system, the World Bank Group, the International Monetary Fund and other relevant stakeholders, and international financial institutions, to scale up technical assistance in debt management, including debt data recording and reporting, and debt transparency and to provide greater coordination of advice, for the delivery of such technical assistance upon request, and to ensure synergies with the full spectrum of debt management mechanisms;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-49" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    49
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites donor countries, taking into account country-specific debt sustainability analyses, to continue their provision of concessional and grant-based financing to developing countries, which could contribute to debt sustainability in the medium to long term, and notes the provision by the International Monetary Fund of interest relief to eligible developing countries in the form of zero-interest loans;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-50" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    50
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for the scaling up of debt swaps for the Sustainable Development Goals, including debt swaps for climate and nature and debt swaps for food security, as appropriate, while recognizing that debt swaps cannot replace broader debt treatments in unsustainable debt situations, to allow developing countries to use debt service payments for investments in sustainable development, and takes note of the policy recommendations of the United Nations Conference on Trade and Development contained in its report,12 on the use of debt swaps for development;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-51" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    51
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites the international community to continue efforts to increase support, including financial and technical assistance, for institutional capacity-building in developing countries to enhance sustainable upstream and downstream debt management as an integral part of national development strategies, including by promoting transparent and accountable debt management systems and negotiation and renegotiation capacities and through supporting legal advice in relation to tackling external debt litigation and debt data reconciliation between creditors and debtors so that debt sustainability may be achieved and maintained;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-52" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    52
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the United Nations Conference on Trade and Development, and invites the International Monetary Fund and the World Bank, in cooperation with the _______________ 12 See A/80/220 and A/80/220/Corr.1. External debt sustainability and development A/RES/80/123 13/13 25-20754 regional commissions, regional development banks and other relevant multilateral financial institutions and stakeholders, to intensify cooperation in respect of activities relating to capacity-building and to early warning monitoring systems in developing countries in the area of debt management and debt sustainability, with a view to contributing to the implementation of the 2030 Agenda;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-53" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    53
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites the United Nations Conference on Trade and Development, in cooperation and inclusive dialogue with international financial institutions and relevant international stakeholders, to continue its analytical, policy, technical cooperation and statistical work on debt issues and to strengthen its contribution to enhancing long-term financial and debt sustainability in developing countries, taking into account also the impact of investment requirements arising from the COVID‑19 pandemic and other global crises, in accordance with the Bridgetown Covenant;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-54" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    54
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all Member States and the United Nations system to take appropriate measures and actions for the implementation of the commitments, agreements and decisions of the major United Nations conferences and summits, in particular those related to the question of the external debt sustainability of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-55" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    55
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to submit to the General Assembly at its eighty-first session an action-oriented report on the implementation of the present resolution and to include in his report progress made on international measures and concrete recommendations to accelerate the implementation of the Sevilla Commitment of the Fourth International Conference on Financing for Development and the 2030 Agenda with respect to matters of debt and debt sustainability and the related efforts to recover from the COVID‑19 pandemic, as well as their implications for external debt sustainability and development, and decides to include in the provisional agenda of its eighty-first session, under the item entitled “Macroeconomic policy questions”, the sub-item entitled “External debt sustainability and development”, unless otherwise agreed. 64th plenary meeting 15 December 2025</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

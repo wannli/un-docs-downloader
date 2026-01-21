@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/C.4/80/L.8 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/C.4/80/L.8</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/C.4/80/L.8</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FC.4%2F80%2FL.8/pdf/A%2FC.4%2F80%2FL.8.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">49 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Endorses the report of the Committee on the Peaceful Uses of Outer Space on the work of its sixty-eighth session;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Agrees that the Committee, at its sixty-ninth session, should consider the substantive items recommended at its sixty-eighth session,10 taking into account the concerns of all countries, in particular those of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Committee to further consult on the proposal to hold a fourth United Nations Conference on the Peaceful Exploration of Outer Space (UNISPACE IV) in 2027;11</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction that, at its sixty-fourth session, the Legal Subcommittee and its working groups continued their work,12 as mandated by the General Assembly in its resolution 79/87;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Agrees that the Legal Subcommittee, at its sixty-fifth session, should consider the substantive items and reconvene the working groups recommended by the Committee,13 including holding intersessional consultations as necessary, taking into account the concerns of all countries, in particular those of developing countries; __________________ 4 Resolution 66/288, annex, para. 274. 5 Resolution 76/3. 6 The 2030 Agenda for Sustainable Development, the Sendai Framework for Disaster Risk Reduction 2015–2030 and the Paris Agreement. 7 Resolution 79/1, action 56. 8 Ibid. 9 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20). 10 Ibid., para. 324. 11 Ibid., para. 259; see also resolution 79/1, action 56. 12 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), chap. II, sect. C; see also A/AC.105/1362. 13 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 159–161. A/C.4/80/L.8 25-17043 4/9</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Member States that have not yet become Parties to the international treaties governing the uses of outer space14 to give consideration to ratifying or acceding to those treaties in accordance with their national law, as well as incorporating them into their national legislation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Member States that are not yet members of the Committee on the Peaceful Uses of Outer Space to give consideration to applying for membership of the Committee as a unique platform for international cooperation in the exploration and use of outer space for peaceful purposes;15</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction that the space law curriculum developed by the Office for Outer Space Affairs of the Secretariat and published in all official languages of the United Nations could encourage further studies within Member States in cooperation with relevant entities in support of capacity-building efforts in space law and policy;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also notes with satisfaction that, at its sixty-second session, the Scientific and Technical Subcommittee and its working groups continued their work,16 as mandated by the General Assembly in its resolution 79/87;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Agrees that the Scientific and Technical Subcommittee, at its sixty-third session, should consider the substantive items and reconvene the working groups recommended by the Committee,17 including holding intersessional consultations as necessary, taking into account the concerns of all countries, in particular those of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls with satisfaction the establishment of the Space and Global Health Platform, based in Geneva, welcomes the progress in the work of the Space and Global Health Network,18 and reiterates its request to the Office to strengthen capacity-building and networking in Africa, Asia and the Pacific and Latin America and the Caribbean, through regional technical cooperation projects, and to support field projects for strengthening collaboration between the space and global health sectors as an efficient strategy for making better use of space science and technology for access to global health for beneficiary States and taking better advantage of opportunities offered by bilateral or multilateral collaboration, as mandated by the General Assembly in its resolution 77/120;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with appreciation that the long-term strategy on space and global health for the period 2025–2035 serves as an effective framework for the implementation of recommendations contained in resolution 77/120;19</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the importance of information-sharing in discovering, monitoring and physically characterizing potentially hazardous near-Earth objects to __________________ 14 Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, including the Moon and Other Celestial Bodies (United Nations, Treaty Series, vol. 610, No. 8843); Agreement on the Rescue of Astronauts, the Return of Astronauts and the Return of Objects Launched into Outer Space (United Nations, Treaty Series, vol. 672, No. 9574); Convention on International Liability for Damage Caused by Space Objects (United Nations, Treaty Series, vol. 961, No. 13810); Convention on Registration of Objects Launched into Outer Space (United Nations, Treaty Series, vol. 1023, No. 15020); and Agreement Governing the Activities of States on the Moon and Other Celestial Bodies (United Nations, Treaty Series, vol. 1363, No. 23002). 15 Resolution 76/3, para. 10. 16 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), chap. II, sect. B; see also A/AC.105/1338. 17 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 125–127. 18 Ibid., para. 116. 19 Ibid., para. 115; see also A/AC.105/C.1/127. A/C.4/80/L.8 5/9 25-17043 ensure that all countries, in particular developing countries with limited capacity for predicting and mitigating a near-Earth object impact, are aware of potential threats, emphasizes the need for capacity-building for effective emergency response and disaster management in the event of a near-Earth object impact, and notes with satisfaction the work carried out by the International Asteroid Warning Network and the Space Mission Planning Advisory Group to strengthen international cooperation to mitigate the potential threat posed by near-Earth objects, with the support of the Office, serving as the permanent secretariat of the Advisory Group; 20</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls with satisfaction the adoption by the Committee of the preamble and 21 Guidelines for the Long-term Sustainability of Outer Space Activities, as contained in annex II to the report of the Committee on its sixty-second session,21 recalls that the Committee encouraged States and international intergovernmental organizations to voluntarily take measures to ensure that the Guidelines were implemented to the greatest extent feasible and practicable, and emphasizes that the Committee serves as the principal forum for continued institutionalized dialogue on issues related to the implementation and review of the Guidelines;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction the establishment, by the Working Group on the Long-term Sustainability of Outer Space Activities of the Scientific and Technical Subcommittee, of the Expert Group on Space Situational Awareness;22</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with appreciation that some Member States are already implementing space debris mitigation measures on a voluntary basis, through national mechanisms and consistent with the Space Debris Mitigation Guidelines of the Inter-Agency Space Debris Coordination Committee and with the Space Debris Mitigation Guidelines of the Committee on the Peaceful Uses of Outer Space, 23 endorsed by the General Assembly in its resolution 62/217, and invites other States to implement, through relevant national mechanisms, the Space Debris Mitigation Guidelines of the Committee on the Peaceful Uses of Outer Space;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Considers that it is essential that Member States pay urgent attention to the problem of the gradually increasing probability of collisions of space objects, especially those with nuclear power sources, with space debris, and other aspects of space debris, calls for the continuation of national research on this question, for the development of improved technology for the monitoring of space debris and for the compilation and dissemination of data on space debris, considers that, to the extent possible, information thereon should be provided to the Scientific and Technical Subcommittee, and agrees that international cooperation is needed to expand appropriate and affordable strategies to minimize the impact of space debris on future space missions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges all Member States, in particular those with major space capabilities, to contribute actively to the goal of preventing an arms race in outer space as an essential condition for the promotion of international cooperation in the exploration and use of outer space for peaceful purposes;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Committee to continue to consider, as a matter of priority, ways and means of maintaining outer space for peaceful purposes and to report thereon to the General Assembly at its eighty-first session, and agrees that the Committee should continue to consider the broader perspective of space security and associated matters that would be instrumental in ensuring the safe and responsible conduct of space activities, including ways to promote international, regional and interregional cooperation to that end; __________________ 20 A/AC.105/1338, paras. 95, 96 (a), 98–100 and 104–106. 21 Official Records of the General Assembly, Seventy-fourth Session, Supplement No. 20 (A/74/20). 22 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 110–112. 23 Ibid., Sixty-second Session, Supplement No. 20 (A/62/20), paras. 117 and 118 and annex. A/C.4/80/L.8 25-17043 6/9</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Decides to convene a joint half-day panel discussion of the Disarmament and International Security Committee (First Committee) and the Special Political and Decolonization Committee (Fourth Committee) to address possible challenges to space security and sustainability, and to include in the provisional agenda of its eighty-first session, under the item entitled “International cooperation in the peaceful uses of outer space”, the sub-item entitled “Joint panel discussion of the First and Fourth Committees on possible challenges to space security and sustainability”;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls that the Committee should carry out a midterm review of progress made in implementing the “Space2030” Agenda,24 and notes that Member States and organizations having observer status with the Committee will continue to be invited to submit reports on the implementation of the “Space2030” Agenda for consideration by the Committee at its sixty-ninth session;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction the establishment of the Action Team on Lunar Activities Consultation of the Committee to facilitate international consultations to ensure that lunar activities are conducted in a safe, peaceful and transparent manner, and welcomes the establishment of the Bureau and the endorsement of the workplan of the Action Team;25</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes the central role of the Office in promoting international cooperation in the exploration and peaceful uses of outer space for economic, social and scientific development, in particular for the benefit of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction the programme of work undertaken by the Office in 2025 to strengthen international cooperation in the conduct of space activities for peaceful purposes and the use of space science and technology and their applications towards the achievement of the internationally agreed Sustainable Development Goals, including the workshops and symposiums conducted to build capacity, the assistance provided to developing countries, at their request, in the development of national space policy and legislation in conformity with international space law, and actions implemented to strengthen institutional capacity in space activities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes, in that regard, the activities being carried out by the Office to promote gender equality and the increased role of women in space activities, including through targeted capacity-building and technical advisory activities, and efforts to encourage enhanced involvement of women and girls in science, technology, engineering and mathematics education, and invites Member States to make voluntary contributions to those activities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Office to continue to apprise the Committee and its Scientific and Technical Subcommittee and Legal Subcommittee, at their respective sessions in 2026, of the status of its capacity-building activities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes with appreciation the capacity-building activities under the United Nations Programme on Space Applications, which provide unique benefits for Member States, in particular developing countries, participating in those activities, and calls upon the Office to further its support in this regard, particularly to developing countries;26</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction the activities carried out under the United Nations Platform for Space-based Information for Disaster Management and Emergency Response (UN-SPIDER), and recognizes the significant achievements made and the advisory support provided to Member States, in particular to developing countries, __________________ 24 Resolution 76/3, para. 30. 25 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 253 and 257 and annex I. 26 See A/AC.105/1338, para. 41. A/C.4/80/L.8 7/9 25-17043 within the framework of UN-SPIDER since its establishment in 200627 with the valuable contributions of its network of regional support offices, and encourages Member States, on a voluntary basis, to provide the programme with the additional resources necessary to address the increasing demand for support successfully and in a timely manner, while taking into consideration recent natural disaster events, including severe weather and sea-level rise due to climate change;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the importance of the Sendai Framework for Disaster Risk Reduction 2015–2030,28 in which the value of space-based technology and Earth observation for disaster management and emergency response is recognized, and, in that regard, notes with satisfaction the efforts of the Office and its UN-SPIDER programme towards promoting international cooperation as a way to enhance the use of space-based technologies and related services at the national and local levels in contributing to the implementation of the Sendai Framework and the 2030 Agenda for Sustainable Development;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-30" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    30
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with satisfaction the continuous progress made by the International Committee on Global Navigation Satellite Systems with the support of the Office, in its capacity as executive secretariat of the International Committee, towards achieving compatibility and interoperability among global and regional space-based positioning, navigation and timing systems and in the promotion of the use of global navigation satellite systems and their integration into national infrastructure, particularly in developing countries, and notes with appreciation that the International Committee held its nineteenth meeting in Busan, Republic of Korea, from 19 to 24 October 2025;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-31" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    31
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with appreciation that the regional centres for space science and technology education, affiliated to the United Nations, namely, the African regional centres for space science and technology education in the French and English languages, located in Morocco and Nigeria, respectively, the Regional Centre for Space Science and Technology Education for Asia and the Pacific, located in China, the Centre for Space Science and Technology Education in Asia and the Pacific, located in India, the Regional Centre for Space Science and Technology Education for Latin America and the Caribbean, with campuses located in Brazil and Mexico, and the Regional Centre for Space Science and Technology Education for Western Asia, located in Jordan, have continued their education programmes in 2025, encourages the regional centres to continue to promote greater participation of women in their education programmes, and agrees that the regional centres should continue to report to the Committee on the Peaceful Uses of Outer Space on their activities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-32" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    32
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that regional and interregional cooperation in the field of space activities is essential to strengthen the peaceful uses of outer space, assist Member States in the development of their space capabilities and contribute to the implementation of the 2030 Agenda for Sustainable Development, to that end requests relevant regional organizations and their groups of experts to offer the assistance necessary so that countries can carry out the recommendations of regional conferences, and in that regard notes the importance of the equal participation of women in all fields of science and technology;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-33" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    33
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes, in that regard, the important role played by such organizations as the Asia-Pacific Space Cooperation Organization and the European Space Agency and by conferences and other mechanisms, such as the African Leadership Conference on Space Science and Technology for Sustainable Development, the Asia-Pacific Regional Space Agency Forum and the Space Conference of the Americas, in strengthening regional and international cooperation among States; __________________ 27 See resolution 61/110. 28 Resolution 69/283, annex II. A/C.4/80/L.8 25-17043 8/9</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-34" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    34
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls the adoption of the African Space Policy and Strategy by the Assembly of the African Union at its twenty-sixth ordinary session, held in Addis Ababa on 30 and 31 January 2016, also recalls that this achievement marks the first step towards the realization of an African outer space programme within the framework of the African Union Agenda 2063, and welcomes in that regard the inauguration of the African Space Agency, headquartered in Egypt;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-35" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    35
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes the need to increase the benefits of space technology and its applications and to contribute to an orderly growth of space activities favourable to sustained economic growth and sustainable development in all countries, including strengthening sustainable spatial data infrastructure at the regional and national levels and building resilience to reduce the consequences of disasters, in particular in developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-36" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    36
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the need to promote the benefits of space technology and its applications in the major United Nations conferences and summits for economic, social and cultural development and related fields, and recognizes that the fundamental significance of space science and technology and their applications for global, regional, national and local sustainable development processes should be promoted in the formulation of policies and programmes of action and their implementation, including through efforts towards achieving the objectives of those conferences and summits and in implementing the 2030 Agenda for Sustainable Development;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-37" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    37
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, to that end, to promote the inclusion in those conferences, summits and processes of the relevance of space science and technology applications and the use of space-derived geospatial data, and in general, space-based data and infrastructures, with the involvement of the Office;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-38" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    38
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Office to take active part in those conferences, summits and processes and other activities in support of their objectives, as appropriate, and to conduct capacity-building activities, hold lectures and participate in academic and research activities to foster international cooperation in the peaceful uses of outer space;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-39" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    39
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges the Inter-Agency Meeting on Outer Space Activities (UN-Space), under the leadership of the Office, to continue to examine how space science and technology and their applications could contribute to the 2030 Agenda for Sustainable Development, and encourages entities of the United Nations system to increase their collaboration, including through UN-Space, with a view to better coordinating their data-sharing, building United Nations system capacity and cooperating on the procurement of space-based information, to achieve cost savings in that regard, to accelerate the application of space assets in order to achieve the Sustainable Development Goals, and to participate, as appropriate, in UN-Space coordination efforts;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-40" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    40
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Office to continue to conduct capacity-building and outreach activities associated with space security and transparency and confidence- building measures in outer space activities, as appropriate, and within the context of the long-term sustainability of outer space activities, in particular for developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-41" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    41
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages the Office to explore existing avenues and new opportunities to increase its capability to meet the growing demand for support to strengthen the capacity of countries, in particular developing countries, in using space science and technology and their applications and to inform the Committee of those efforts;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-42" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    42
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Agrees that the Office should pursue greater engagement with industry and private sector entities to further their support for and contributions to the overall work of the Office;29 __________________ 29 Official Records of the General Assembly, Seventy-second Session, Supplement No. 20 (A/72/20), para. 326. A/C.4/80/L.8 9/9 25-17043</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-43" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    43
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Appeals to Governments, the relevant entities of the United Nations system, intergovernmental and non-governmental organizations, institutions, industry and private sector entities and individuals to urgently increase their voluntary contributions to the trust fund in support of the United Nations Programme on the Peaceful Uses of Outer Space in order to support the efforts of the Office to secure additional resources to facilitate the full implementation of its programme of work, including, where appropriate, the financing of special projects, and otherwise to assist the Office in carrying out technical cooperation and assistance activities, in particular for developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-44" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    44
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls that the Western European and other States, the Asia-Pacific States and the Eastern European States have nominated their candidates for the offices of Chair of the Committee, Chair of the Scientific and Technical Subcommittee and First Vice-Chair of the Committee, respectively, for the period 2026–2027,30 notes that the Latin American and Caribbean States have nominated their candidates for the office of Chair of the Legal Subcommittee for 2026 and 2027, and urges the African States to nominate their candidate for the office of Second Vice-Chair/Rapporteur of the Committee for the period 2026–2027, before the next session of the Committee, to be held in 2026;31</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-45" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    45
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates, with regard to the composition of the bureaux of the Committee and its subcommittees for the period 2026–2027,32 that the Committee and its subcommittees should elect their officers at their respective sessions in 2026 in accordance with that composition;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-46" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    46
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges the African States, the Asia-Pacific States, the Eastern European States, the Latin American and Caribbean States and the Western European and other States to nominate their candidates for the offices of Chair of the Scientific and Technical Subcommittee, First Vice-Chair of the Committee, Chair of the Legal Subcommittee, Chair of the Committee and Second Vice-Chair/Rapporteur of the Committee, respectively, for the period 2028–2029, before the next session of the Committee, to be held in 2026;33</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-47" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    47
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Endorses the decision of the Committee to grant permanent observer status to the African Space Agency;34</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-48" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    48
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also endorses the decision of the Committee to grant the status of observer to the International Council on Monuments and Sites, the Alliance for Collaboration in the Exploration of Space (ACES Worldwide), the Lunar Policy Platform Foundation, AeroAI Global Solutions, Inc., and Women in Aerospace Europe, in accordance with the procedures of the Committee;35</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-49" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    49
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the regional groups to promote active participation in the work of the Committee and its subsidiary bodies by the States members of the Committee that are also members of the respective regional groups. __________________ 30 Ibid., Seventy-ninth Session, Supplement No. 20 (A/79/20), paras. 380 and 381; and official communications from the Office for Outer Space Affairs to States members of the Committee, dated 18 and 25 October 2024. 31 Official Records of the General Assembly, Eightieth Session, Supplement No. 20 (A/80/20), paras. 301 and 302. 32 Ibid., Fifty-eighth Session, Supplement No. 20 (A/58/20), para. 12 and annex II. 33 Ibid., Eightieth Session, Supplement No. 20 (A/80/20), paras. 303 and 304. 34 Ibid., paras. 308 and 309. 35 Ibid., paras. 310–320.</p>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

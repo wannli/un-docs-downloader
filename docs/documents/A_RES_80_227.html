@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/227 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/227</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/227</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F227/pdf/A%2FRES%2F80%2F227.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">22 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that illicit trafficking in wild fauna and flora, including timber and timber products, and the illegal mining of and illicit trafficking in minerals and precious metals, as well as illicit trafficking in waste, may constitute crimes that affect the environment of a serious nature and are increasingly being exploited by transnational criminal organizations as a source of significant profit of their operations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes the economic, social and environmental impacts of crimes that affect the environment, where firm and strengthened action needs to be taken in countries of supply, transit and demand to tackle transnational organized crimes that affect the environment, and re-emphasizes the importance, in that regard, of effective international cooperation among Member States, based on the principle of shared responsibility and in accordance with international law;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further recognizes therefore the need for a balanced approach to tackling crimes that affect the environment, whereby enforcement is complemented by action _______________ 8 United Nations, Treaty Series, vol. 2225, No. 39574. 9 Ibid., vol. 2349, No. 42146. A/RES/80/227 Tackling illicit trafficking in wild fauna and flora, including timber and timber products, the illegal mining of and illicit trafficking in minerals and precious metals, illicit trafficking in waste and other crimes that affect the environment 25-20945 4/6 to raise awareness and reduce demand, as well as action to enhance the provision of adequate means of implementation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Member States to undertake or increase efforts to raise awareness about and address the problems and risks associated with the supply and transit of and demand for illicitly trafficked wild fauna and flora, timber and timber products, and minerals and precious metal products, and to devote resources for those purposes, including by improving cooperation with all relevant stakeholders;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also urges Member States, in accordance with their domestic law, legal systems and international obligations, to provide one another with the broadest possible assistance, including mutual legal assistance, as appropriate, within their financial means, to enhance the effectiveness of action aimed at tackling illicit trafficking in wild fauna and flora, including timber and timber products, and the illegal mining of and illicit trafficking in minerals and precious metals, as well as illicit trafficking in waste and other crimes that affect the environment;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to take the necessary and appropriate measures to ensure the consistency and compatibility of their relevant domestic legal frameworks, on a mutually agreed basis and where possible, in order to establish the criminalization, where appropriate, of the mining, possession, import, export, transport, buying or selling of minerals and precious metals obtained without proper legal authorization, including appropriate exploration and mining licenses or mineral transportation and other relevant permits, as well as the criminalization of the forgery or unlawful alteration of documents related to those crimes;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States to take the necessary and appropriate measures to ensure the consistency and compatibility of their relevant domestic legal frameworks, on a mutually agreed basis and where possible, in order to establish the criminalization, where appropriate, of the capture, collection, exposure for sale, import, export, purchase, sale, delivery, transportation, transfer, receipt, acquisition, possession or holding in custody of specimens of wild fauna and flora, including timber and timber products, without legal authorization, as well as the criminalization of the forgery or unlawful alteration of documents related to those crimes;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further encourages Member States to establish, in accordance with their national legislation, where appropriate, the illegal mining of and illicit trafficking in minerals and precious metals as serious crimes, as defined in article 2 (b) of the United Nations Convention against Transnational Organized Crime, and to take suitable measures, where the offence is transnational in nature and involves an organized criminal group, to prevent and combat the illegal mining of and illicit trafficking in minerals and precious metals;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States to establish illicit trafficking in protected species of wild fauna and flora and other crimes that affect the environment, such as trafficking in wildlife, timber and hazardous wastes, involving an organized criminal group as serious crimes, in accordance with their national legislation and article 2 (b) of the Organized Crime Convention;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to develop or amend their national legislation, as necessary and appropriate, in accordance with the fundamental principles of their domestic law, so that the illegal mining of and illicit trafficking in minerals and precious metals can be considered as predicate offences, as defined in the Organized Crime Convention and as mandated in its article 6, for the purposes of money- laundering offences and are actionable under domestic legislation on proceeds of crime, so that assets derived from such crimes can be seized, confiscated and disposed of; Tackling illicit trafficking in wild fauna and flora, including timber and timber products, the illegal mining of and illicit trafficking in minerals and precious metals, illicit trafficking in waste and other crimes that affect the environment A/RES/80/227 5/6 25-20945</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States to develop or amend their national legislation, as necessary and appropriate, in accordance with the fundamental principles of their domestic law, so that trafficking in wild fauna and flora, including timber and timber products, can be considered as a predicate offence, as defined in the Organized Crime Convention and as mandated in its article 6, for the purposes of money-laundering offences and are actionable under domestic legislation on proceeds of crime, so that assets derived from such crimes can be seized, confiscated and disposed of;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further encourages Member States, within their means, to cooperate with each other in providing technical assistance in relation to illicit trafficking in minerals and precious metals to law enforcement personnel in terms of identifying, investigating, taking samples, dispatching samples to laboratories for analysis, recording and reporting seizures and producing relevant statistics on seizures and prosecutions at the national level, as well as through financial investigation techniques that take into consideration, where appropriate, relevant international standards and through the establishment of multi-agency and joint investigations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, in accordance with their domestic law, to work in cooperation with each other and with relevant organizations and stakeholders to identify and promote the use of solutions that utilize technology, in particular in regard to illicit trafficking in wild fauna and flora, including timber and timber products, and in minerals and precious metals, as well as illicit trafficking in waste and other crimes that affect the environment, in order to promote identification, traceability and authentication for forensic science applications to support criminal prosecutions, while respecting applicable international trade rules and agreements;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States, where relevant and appropriate, to enhance cooperation for the timely and cost-efficient repatriation of live illegally traded wildlife, including eggs, consistent with the Convention on International Trade in Endangered Species of Wild Fauna and Flora, 10 and also, where relevant and appropriate, to enhance information-sharing among national and international authorities on the seizure of illegally traded wildlife and wildlife products in order to facilitate follow-up investigation and prosecution;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges States, in that regard, to adopt concrete and effective measures to recover and return, in appropriate cases, the proceeds of and assets derived from such crimes, in accordance with the Organized Crime Convention and the United Nations Convention against Corruption, and emphasizes the importance of enhancing measures for the recovery and return of those assets and proceeds;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, in accordance with their national law, to investigate, as appropriate, the financial aspect of crimes that affect the environment, and encourages the increased use of financial investigation techniques, including through the establishment of multi-agency and joint investigation teams, and public- private collaboration, where appropriate, to identify criminals and their networks;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States to increase international cooperation in order to strengthen the appropriate capacity of law enforcement agencies to monitor and investigate illegal online trade that facilitates illicit trafficking in wildlife, timber and timber products, minerals, precious metals and waste, including hazardous waste, collect and analyse relevant evidence, including through the use of digital forensics, and develop enforcement countermeasures, including, when relevant, by engaging in public-private collaboration and supply and demand reduction efforts in order to establish strategies to prevent illegal online trade; _______________ 10 Ibid., vol. 993, No. 14537. A/RES/80/227 Tackling illicit trafficking in wild fauna and flora, including timber and timber products, the illegal mining of and illicit trafficking in minerals and precious metals, illicit trafficking in waste and other crimes that affect the environment 25-20945 6/6</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the establishment, in accordance with Conference of the Parties to the United Nations Convention against Transnational Organized Crime resolution 12/4, of the open-ended intergovernmental expert group on crimes that affect the environment, whose mandate is: (a) firstly, to take stock of the application and collective implementation of the Convention in addressing such crimes; (b) secondly, to identify any gaps that may exist in the international legal framework and that could be addressed under the Convention to prevent and combat such crimes; and (c) thirdly, to consider possible responses relevant to those gaps, including the possibility, feasibility and merits of any additional protocol to the Convention, and which is also to submit a summary of the deliberations and any consensual recommendations to the Conference at its thirteenth session;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to give special consideration, at the Fifteenth United Nations Congress on Crime Prevention and Criminal Justice, to be held in the United Arab Emirates in 2026, to the challenges posed by crimes that affect the environment;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States to continue considering all aspects of the fight against crimes that affect the environment, including possible responses to those crimes, in the appropriate forums, giving due consideration to the work of the open- ended intergovernmental expert group on crimes that affect the environment and to the summary that is to be submitted to the Conference of the Parties to the Organized Crime Convention at its thirteenth session;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages States Parties, when responding to the self-assessment questionnaires for the review of the implementation of the Organized Crime Convention and its Protocols, to provide, on a voluntary basis, any relevant information regarding their national measures to tackle crimes that affect the environment;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites Member States and other donors to provide extrabudgetary resources for the purposes set out in the present resolution, acknowledging that such extrabudgetary resources are subject to the rules and procedures of the United Nations, and requests the United Nations Office on Drugs and Crime to utilize any such extrabudgetary resources efficiently and effectively. 69th plenary meeting 18 December 2025</p>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

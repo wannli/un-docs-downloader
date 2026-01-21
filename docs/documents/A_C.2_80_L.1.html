@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/C.2/80/L.1 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/C.2/80/L.1</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/C.2/80/L.1</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FC.2%2F80%2FL.1/pdf/A%2FC.2%2F80%2FL.1.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">13 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+        
+            
+        
+    
+        
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">The agenda items allocated by the General Assembly to the Second Committee are listed in the note by the Secretariat (A/C.2/80/1). Background information on those items can be found in the annotations to the agenda (A/80/100 and A/80/100/Add.1). Programme of work</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">The draft programme of work (see annex) has been prepared bearing in mind paragraph (b) of rule 99 of the rules of procedure of the General Assembly, Assembly decision 79/545 on the programme of work of the Second Committee for the eightieth session of the Assembly, by which the Assembly invited the Bureau of the Second Committee to take into account the provisional timetable of the Committee as contained in conference room paper A/C.2/79/CRP.1, the provisional agenda of the eightieth session of the Assembly (A/80/150) and the availability of documentation. The number of meetings suggested for the general discussion of the agenda items allocated to the Second Committee is based on past experience. List of documents</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Attention is drawn to the addendum to the present note (A/C.2/80/L.1/Add.1), which lists the documentation submitted under the various agenda items allocated to the Second Committee. General debate</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">In accordance with General Assembly decision 78/534 on the revitalization of the work of the Second Committee and following consultations with the membership of the Committee, the Bureau proposed the theme “Five years to 2030: multilateral solutions for sustainable development” for the general debate, taking into account the theme agreed by the Assembly for the 2026 session of the Economic and Social Council and the 2026 high-level political forum on sustainable development. A/C.2/80/L.1 25-14596 2/8</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Delegations may make only one national statement during the debate. The statement may cover any or all items allocated to the Committee. General discussions of agenda items, introduction of reports and question time</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">During the general discussions of agenda items, the introductions of the reports of the Secretary-General will be made through brief oral statements of no more than six minutes at the meeting at which the item is considered. Some flexibility with regard to the time limit may be exercised when two or more reports are introduced in one statement. Immediately following the introduction of reports, and in accordance with the practice of the Main Committees, delegations will be invited to make comments or pose questions to the presenters on the reports introduced. Delegations are invited to participate actively in the dialogues with questions and unscripted comments. Such interventions should be brief and to the point, not exceeding two minutes. Statements by delegations</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">The lists of speakers for the general debate and the general discussions of individual agenda items will be opened on 16 September 2025. For planning purposes, inscriptions in the general debate should be submitted by 29 September and in the general discussions by 1 October. In accordance with General Assembly decision 65/530, statements in the general debate should be limited to no more than 10 minutes for statements made on behalf of groups and 7 minutes for national statements. Statements in the general discussions of items should be limited to no more than five minutes for statements made on behalf of groups and three minutes for national statements. The lists of speakers for a given meeting will be prepared on the basis of these time limits, which will be strictly implemented, including, as necessary, by switching off microphones automatically after the allotted time. Pursuant to General Assembly resolution 72/313, delegations are encouraged to adhere to the “all protocol observed” principle and to refrain from listing standard protocol expressions during their statements. In the same resolution, the Assembly recommended that speakers should be mindful of the speed of statement delivery, bearing in mind the need for accuracy of interpretation.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">In accordance with previous decisions of the General Assembly and the practice of the Committee, delegations should exercise their right of reply at the end of the day whenever two meetings have been scheduled for the consideration of the relevant agenda item on that day, or at the conclusion of the consideration of the item, if that is sooner. The number of interventions in exercise of the right of reply for any delegation at a given meeting should be limited to two per item, with the first intervention limited to five minutes and the second, if any, to three minutes.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also in accordance with previous decisions of the General Assembly and the practice of the Committee, explanations of vote should be limited to five minutes, and points of order should be limited to three minutes. Conference facilities and meeting arrangements</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Unless otherwise specified, in-person meetings of the Second Committee will be held at 10 a.m. and 3 p.m. in Conference Room 2. The General Assembly has stressed that punctuality is of the utmost importance in the interest of ensuring an effective and orderly organization of work and achieving economies for the United Nations. In this regard, rule 108 of the rules of procedure of the Assembly requiring the presence of at least one quarter of the members of the Committee to declare a meeting open and permit the debate to proceed has been waived by the Assembly. A/C.2/80/L.1 3/8 25-14596 Informal consultations</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">In accordance with established practice, informal consultations will be used for expressing general observations on the proposals and for agreeing on them ad referendum. All drafting will be done at the level of informal informal consultations (without interpretation or other services) and will be conducted by the appointed facilitators. The Bureau will coordinate a comprehensive calendar of informal consultations, within regular meeting hours, while limiting parallel negotiations to the extent possible. Report of the Economic and Social Council</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Pursuant to paragraph 4 (c) of section D of the annex to General Assembly resolution 58/316, the item entitled “Report of the Economic and Social Council” should be considered in its entirety in plenary; subsequently, it was clarified by the General Committee that the relevant parts of chapter I of the report that fall under agenda items already allocated to the Main Committees would be considered by the Committee concerned for final action by the Assembly (see A/59/250/Add.1, para. 4). Conclusion of the work of the Committee</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Bearing in mind the number of meetings available to the Second Committee, a target date of 26 November 2025 has been set for the conclusion of its work. A/C.2/80/L.1 25-14596 4/8 Annex Draft programme of work of the Second Committee Wednesday, 1 October 2025 10 a.m. Organizational meeting Item 137: Programme planning Followed by: (informal meeting) Item 137: Programme planning Week of 6–10 October 2025 Monday, 6 October 10 a.m.–1 p.m. Keynote address Opening of the general debate 3–6 p.m. General debate (continued) Tuesday, 7 October 10 a.m.–1 p.m. General debate (continued) 3–6 p.m. General debate (concluded) Wednesday, 8 October 10 a.m.–1 p.m. Introductory statements and joint general discussion on: Item 21: Groups of countries in special situations: (a) Follow-up to the Fifth United Nations Conference on the Least Developed Countries (b) Follow-up to the Third United Nations Conference on Landlocked Developing Countries Item 23: Operational activities for development: (a) Operational activities for development of the United Nations system (b) South-South cooperation for development A/C.2/80/L.1 5/8 25-14596 Thursday, 9 October 10 a.m.–1 p.m. and 3–6 p.m. Introductory statements and joint general discussion on: Item 16: Macroeconomic policy questions: (a) International trade and development (b) International financial system and development (c) External debt sustainability and development (d) Commodities (e) Financial inclusion for sustainable development (f) Promotion of international cooperation to combat illicit financial flows and strengthen good practices on assets return to foster sustainable development (g) Promoting investments for sustainable development (h) Promotion of inclusive and effective international tax cooperation at the United Nations Item 17: Follow-up to and implementation of the outcomes of the International Conferences on Financing for Development Friday, 10 October Introductory statements and joint general discussion on: Item 15: Information and communications technologies for sustainable development Item 20: Globalization and interdependence: (a) Science, technology and innovation for sustainable development (b) Culture and sustainable development (c) Development cooperation with middle-income countries 3 p.m.: deadline for submission of draft proposals under item 21 and sub-items (a) and (b) and item 23 and sub-items (a) and (b) Week of 13–17 October 2025 Monday, 13 October 10 a.m.–1 p.m. and 3–6 p.m. Introductory statements and joint general discussion on: Item 18: Sustainable development: (a) Towards the achievement of sustainable development: implementation of the 2030 Agenda for Sustainable Development, including through sustainable consumption and production, building on Agenda 21 (b) Follow-up to and implementation of the Antigua and Barbuda Agenda for Small Island Developing States: A Renewed Declaration for Resilient Prosperity (c) Disaster risk reduction A/C.2/80/L.1 25-14596 6/8 (d) Protection of global climate for present and future generations of humankind (e) Implementation of the United Nations Convention to Combat Desertification in Those Countries Experiencing Serious Drought and/or Desertification, Particularly in Africa (f) Convention on Biological Diversity (g) Education for sustainable development (h) Ensuring access to affordable, reliable, sustainable and modern energy for all (i) Combating sand and dust storms (j) Sustainable mountain development (k) Strengthening cooperation for integrated coastal zone management for achieving sustainable development (l) Multidimensional vulnerability index Item 19: Global Code of Ethics for Tourism 3 p.m.: deadline for submission of draft proposals under item 16 and sub-items (a) to (d) and item 17 Tuesday, 14 October 10 a.m.–1 p.m. Joint meeting with the Economic and Social Council1 3–6 p.m. Joint general discussion on: Item 18: Sustainable development and sub-items (a) to (l) (concluded) Item 19: Global Code of Ethics for Tourism (concluded) 3 p.m.: deadline for submission of draft proposals under item 15 and item 20 and sub- items (a) to (c) Wednesday, 15 October 10 a.m.–1 p.m. and 3–6 p.m. Introductory statements and joint general discussion on: Item 22: Eradication of poverty and other development issues: (a) Implementation of the Third United Nations Decade for the Eradication of Poverty (2018–2027) (b) Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development Item 24: Agriculture development, food security and nutrition (a) Agriculture development, food security and nutrition (b) Natural plant fibres and sustainable development 3 p.m.: deadline for submission of draft proposals under sub-items (e) to (h) of item 16 __________________ 1 A concept note will be made available on the iGov portal. A/C.2/80/L.1 7/8 25-14596 Thursday, 16 October 10 a.m.–1 p.m. Side event2 3 p.m.: deadline for submission of draft proposals under item 18 and sub-items (a) to (c) and item 19 Friday, 17 October 10 a.m.–1 p.m. Introductory statement and general discussion on: Item 60: Permanent sovereignty of the Palestinian people in the Occupied Palestinian Territory, including East Jerusalem, and of the Arab population in the occupied Syrian Golan over their natural resources 3 p.m.: deadline for submission of draft proposals under item 22 and sub-items (a) and (b) and item 24 and sub-items (a) and (b) Week of 20–24 October 2025 Monday, 20 October (United Nations floating holiday) No meetings scheduled 3 p.m.: deadline for submission of draft proposals under sub-items (d) to (h) of item 18 Tuesday, 21 October 10 a.m.–1 p.m. (informal meeting) Dialogue with the Executive Secretaries of the regional commissions 3 3 p.m.: deadline for submission of draft proposals under sub items (i) to (l) of item 18 and item 60 Week of 10–14 November 2025 Wednesday, 12 November 10 a.m.–11.30 a.m. Introduction of and action on draft proposals4 Week of 17–21 November 2025 Tuesday, 18 November 3 p.m.: deadline for submission of final draft proposals __________________ 2 A concept note will be made available on the iGov portal. 3 A concept note will be made available on the iGov portal. 4 Meetings of the Committee to take action on draft proposals are scheduled on a preliminary basis and will be convened and/or rescheduled depending on the availability of documentation. A/C.2/80/L.1 25-14596 8/8 Week of 24–28 November 2025 Monday, 24 November 3–6 p.m. Action on draft proposals4 Tuesday, 25 November 10 a.m.–1 p.m. and 3–6 p.m. Action on draft proposals4 Wednesday, 26 November 10 a.m.–1 p.m. General discussion on: Item 121: Revitalization of the work of the General Assembly Action on draft proposals4 3–6 p.m. Action on draft proposals4 Conclusion of the work of the Second Committee</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

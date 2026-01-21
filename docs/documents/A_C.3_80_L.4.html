@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/C.3/80/L.4 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/C.3/80/L.4</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/C.3/80/L.4</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FC.3%2F80%2FL.4/pdf/A%2FC.3%2F80%2FL.4.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">38 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Member States that have not yet done so to consider ratifying or acceding to, as a matter of priority, the United Nations Convention against Transnational Organized Crime and the Protocol to Prevent, Suppress and Punish Trafficking in Persons, Especially Women and Children, supplementing the United Nations Convention against Transnational Organized Crime, taking into consideration the central role of those instruments in the fight against trafficking in persons, and also urges States Parties to those instruments to fully and effectively implement their obligations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Member States and other stakeholders mentioned in the United Nations Global Plan of Action to Combat Trafficking in Persons, 35 and invites the Conference of the Parties to the United Nations Convention against Transnational Organized Crime and relevant international, regional and subregional organizations, within their respective mandates, to continue to contribute to the full and effective implementation of the Global Plan of Action, including by means of strengthening cooperation and improving coordination among themselves in achieving that goal;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Governments to closely follow developments in the area of international protection of victims of trafficking in persons in order to protect the human rights of such persons and to ensure compliance with international humanitarian law and international human rights law;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls the holding of the high-level meetings of the General Assembly during its sixty-seventh session, from 13 to 15 May 2013, during its seventy-second session, on 27 and 28 September 2017, during its seventy-sixth session, on 22 and 23 November 2021, and during its eightieth session, on 24 and 25 November 2025, to appraise the progress achieved in the implementation of the Global Plan of Action, which, inter alia, reiterated strong political will to take decisive concerted action against trafficking in persons;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recalls its decision, in its resolution 68/192, to appraise, from within existing resources, on a four-year basis starting at its seventy-second session, the progress achieved in the implementation of the Global Plan of Action in order to assess achievements, gaps and challenges, including in the implementation of the relevant legal instruments, and therefore decides to convene a high-level meeting of the General Assembly on the progress achieved in the implementation of the Global __________________ 33 See CTOC/COP/2020/10, sect. I.A. 34 See CTOC/COP/2022/9, sect. I.A. 35 Resolution 64/293. A/C.3/80/L.4 25-16618 10/14 Plan of Action at its eighty-fourth session, after the general debate, but no later than December 2029;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms its request to the Secretary-General and to the President of the General Assembly, in close cooperation and coordination with Member States, to take all appropriate measures to arrange the high-level meeting;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls its decision to designate 30 July as the World Day against Trafficking in Persons, to be observed annually, and, while welcoming events held by Member States, United Nations agencies, other international organizations and civil society at the international, regional and national levels to mark the World Day, invites all stakeholders to continue to observe the World Day in order to raise awareness of trafficking in persons and the situation of the victims of this crime and for the promotion and protection of their rights;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses solidarity with and compassion for victims and survivors of trafficking in persons, and calls for the full respect of their human rights and the provision of appropriate victim-centred, trauma-informed, gender-responsive and age-sensitive care and assistance, where applicable, including interpretation and sign language, where appropriate, to victims of trafficking, and services for their rehabilitation or recovery, as appropriate, in cooperation with civil society and other relevant partners;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the need to ensure that victims are treated with respect and dignity and are not inappropriately penalized or adversely affected by any actions taken by government authorities and communities, including criminal, civil, administrative and immigration penalties, for acts that they commit as a direct consequence of their trafficking situation, through the implementation of the principles of both non-prosecution and non-punishment of victims of trafficking subject to national laws, rules and regulations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses support for the activities of the United Nations Office on Drugs and Crime, reaffirms its request to the Secretary-General to provide adequate support to the Commission on Crime Prevention and Criminal Justice, and invites Member States to make voluntary contributions to the Office for the purpose of providing assistance to Member States upon request;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the United Nations Office on Drugs and Crime to cooperate with relevant international organizations outside the United Nations system and to invite such organizations and interested Member States to participate, when appropriate, in the meetings of the Inter-Agency Coordination Group against Trafficking in Persons and to keep Member States informed of the schedule of and the progress made by the Coordination Group;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites Member States to consider the recommendations of the Working Group on Trafficking in Persons for strengthening international cooperation and exchanging best practices in the fight against this crime;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls the Inter-Agency Coordination Group Plan of Action, endorsed on 15 December 2020, as well as of the first regional consultation on trafficking in persons in Eastern Africa, held in virtual format on 7 and 8 February 2022, and takes note of the regional consultation with civil society and international organizations on trafficking in persons in the Americas, held in Panama City on 8 May 2025;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the sixth and seventh meetings of the Inter-Agency Coordination Group at the level of principals, held in virtual format on 13 December 2024 and on 29 October 2025, which reinforced the vital role of inter-agency partnership in tackling trafficking in persons, and requests the United Nations Office on Drugs and Crime, as coordinator of the Coordination Group, to continue to A/C.3/80/L.4 11/14 25-16618 convene such meetings of the Coordination Group at the level of principals on a regular basis, and in this context takes note of the engagement of the European Union Anti-Trafficking Coordinator with the Coordination Group, and encourages the Coordination Group to engage with relevant regional and international organizations from other regions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also welcomes the Special Rapporteur on the sale, sexual exploitation and sexual abuse of children as the newest partner of the Coordination Group;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites regional and international organizations, within their mandates, to join and consider co-chairing, along with a United Nations agency, the Inter-Agency Coordination Group to strengthen the exchange of expertise and regional experiences and thus enhance international cooperation in combating trafficking in persons and assisting the victims of this crime;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the ongoing process undertaken by the Inter-Agency Coordination Group to sustain the focus on child trafficking and explore a possible nexus between trafficking in persons and other forms of organized crime, and to ensure that information-sharing among relevant agencies and between countries is done in accordance with international and national legal frameworks and takes into account privacy and confidentiality;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites the United Nations Office on Drugs and Crime, in its capacity as coordinator of the Inter-Agency Coordination Group, and other relevant agencies of the United Nations system to further strengthen their activities related to the implementation of relevant international instruments and the Global Plan of Action to drive greater progress in eliminating trafficking in persons, and invites Member States and other international and bilateral donors to provide voluntary contributions to the Office for these purposes, in accordance with the policies, rules and procedures of the United Nations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States to take into consideration new methods of recruiting those at risk of being subjected to trafficking in persons, such as the misuse of the Internet by traffickers, in particular for recruiting children, to take measures to develop targeted awareness-raising campaigns, including for law enforcement, front- line service providers and at-risk industries, to identify the signs of trafficking in persons and to develop specialized training for law enforcement and criminal justice practitioners;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to harness the opportunities presented by technology, including artificial intelligence, to strengthen detection, investigation, prevention and victim assistance in cases of trafficking in persons, and to promote cooperation and the exchange of good practices in this regard, including with relevant stakeholders in line with applicable international law, including international human rights obligations and domestic legal frameworks;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States to take, consistent with domestic law, legislative or other measures, where appropriate, to facilitate the detection, by Internet service and access providers or other relevant entities, of child sexual exploitation and child abuse materials related to offences involving trafficking in children, as required by domestic frameworks and to ensure, in compliance with domestic law, the reporting of such materials to the relevant authorities and their removal by Internet service and access providers or other relevant entities, including in conjunction with law enforcement in the investigation and prosecution;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further encourages Member States to scale up their efforts to combat emerging forms of technology-facilitated and cyber-enabled trafficking in persons, in particular online scams and online fraud for purposes of trafficking in persons, A/C.3/80/L.4 25-16618 12/14 including by developing digital literacy programmes for at-risk populations, most notably for children and adolescents, and addressing the gender-related risks and challenges emerging from the use of technologies;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms Member States’ commitment to address the social, economic, cultural, political and other factors that make people vulnerable to trafficking in persons, such as poverty, underdevelopment, unemployment, inequality, humanitarian emergencies, armed conflicts and natural disasters, sexual violence, gender discrimination, racial discrimination, social and financial exclusion and marginalization, as well as negative social norms, and a culture of tolerance towards violence against women, youth and children;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that in armed conflicts trafficking in persons can be prevalent, and in this regard calls upon Member States to ensure the comprehensive application of international humanitarian law, international criminal law, international human rights law and international refugee law, in accordance with respective obligations, to trafficking in persons in conflict situations for all purposes of exploitation, and to both internal and cross-border trafficking in persons, in order to ensure accountability, prevent impunity and provide effective access to justice for trafficked persons;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses deep concern about the increasing links between armed groups, including terrorist groups, and trafficking in persons, involving the coercion of victims, in particular women, into forced marriages, girls into child, early and forced marriages, forced religious conversions, sexual slavery, forced pregnancy, forced labour, domestic servitude and sexual exploitation, and subjecting men and boys to forced labour or act as combatants;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to seek to address trafficking in persons in global supply chains, including by considering the development of common public procurement standards, compliance requirements or codes of conduct and by harmonizing frameworks, in line with domestic legislation, including those guiding anti-trafficking efforts and sustainable procurement;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States, international organizations, civil society organizations, the private sector and financial institutions, through partnerships, as appropriate, to increase and support prevention efforts in countries of origin, transit and destination by focusing domestically and globally on the demand and supply chains that foster all forms of trafficking and the goods and services produced as a result of trafficking in persons and to consider cooperating to organize awareness- raising campaigns, programmes to facilitate the identification of victims of trafficking and the provision of assistance to those victims;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon States, in accordance with domestic law and taking into account best practices or other promising measures developed in response to emerging trends in trafficking in persons, to encourage the private sector to conduct due diligence with respect to their supply chains and consider the risks of trafficking in persons in their own operations and in those of their subcontractors and suppliers, aiming to ensure that they address risks proactively;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the need to intensify the efforts to prevent irregular migration and create and strengthen pathways for safe, orderly and regular migration to reduce the exposure of people on the move who are vulnerable to trafficking in persons, and in this regard encourages Member States to take legislative or other measures to prevent, combat and eradicate trafficking in persons in the context of international migration by strengthening capacities and international cooperation to investigate, prosecute and penalize trafficking in persons, discouraging demand that fosters exploitation leading to trafficking, and ending impunity of trafficking networks; A/C.3/80/L.4 13/14 25-16618</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-30" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    30
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to cooperate on issues concerning trafficking in persons with the Inter-Agency Coordination Group;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-31" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    31
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States to cooperate with the Special Rapporteur on contemporary forms of slavery and trafficking in persons, and with other relevant special procedure mandate holders of the Human Rights Council, including the Special Rapporteur on violence against women and girls, its causes and consequences, and the Special Rapporteur on the sale, sexual exploitation and sexual abuse of children, as well as with the Special Representative of the Secretary-General on Violence against Children;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-32" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    32
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States to continue their efforts to criminalize trafficking in persons in all its forms, including the exploitation of the prostitution of others or other forms of sexual exploitation, forced labour or services, slavery or practices similar to slavery, servitude or the removal of organs, especially concerning child labour, children and persons with disabilities, and to strengthen cooperation and coordination in countries of origin, transit and destination in order to disrupt and dismantle criminal networks involved in such crimes, inter alia, through the enhancement of information-sharing, including through the secure communications channels of the International Criminal Police Organization, where appropriate, as well as through mutual legal assistance and extradition, with full respect for international law and domestic law, and to investigate, prosecute and penalize traffickers and intermediaries while providing victim-centred, trauma-informed, gender- and age- sensitive protection and assistance to the victims of trafficking with full respect for their human rights, and invites Member States to continue to support those United Nations agencies and international organizations that are actively involved in victim protection;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-33" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    33
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also calls upon Member States to take measures to support family reunification for victims of trafficking in persons, where safe and appropriate, especially when those are children, taking into consideration the best interests of the child;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-34" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    34
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the second consultative meeting on strengthening partnerships with national rapporteurs and relevant mechanisms on trafficking in persons, held in Bangkok on 21 and 22 May 2014, co-hosted by the United Nations Office on Drugs and Crime, the Special Rapporteur on trafficking in persons, especially women and children, and the Office of the United Nations High Commissioner for Human Rights, and the establishment of an informal network of such mechanisms located all over the world to address trafficking in persons in a consistent manner and to exchange information and best practices built on different national experiences, requests the United Nations Office on Drugs and Crime to continue its efforts to collect information on national efforts to combat trafficking in persons, as well as on relevant national mechanisms, to make up-to-date information available to Member States, and invites Member States to host consultative meetings between relevant national mechanisms on trafficking in persons that continue transnational dialogue and the exchange of information on common challenges;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-35" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    35
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the United Nations Office on Drugs and Crime, in its capacity as fund manager of the United Nations voluntary trust fund for victims of trafficking in persons, especially women and children, to continue to encourage contributions by States and all other relevant stakeholders to the trust fund;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-36" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    36
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the biennial publication of the Global Report on Trafficking in Persons, prepared by the United Nations Office on Drugs and Crime, looks forward to the next such report, to be produced by the Office in 2026, pursuant to the Global Plan of Action, supports the United Nations Office on Drugs and Crime trafficking in A/C.3/80/L.4 25-16618 14/14 persons data capacity-building programme, and strongly encourages Member States to provide to the Office evidence-based internationally standardized data on patterns, flows and forms of trafficking in persons, including for the purpose of the removal of organs and in the context of sport, based on the International Classification of Crime for Statistical Purposes;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-37" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    37
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Office of the United Nations High Commissioner for Human Rights, the United Nations Children’s Fund and the Inter-Agency Coordination Group against Trafficking in Persons in coordination with the United Nations Office on Drugs and Crime to consider updating, subject to the availability of extrabudgetary resources, respectively the Recommended Principles and Guidelines on Human Rights and Human Trafficking and the commentary thereon, the Guidelines on the Protection of Child Victims of Trafficking and the Toolkit for Guidance in Designing and Evaluating Counter-Trafficking Programmes of the Coordination Group;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-38" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    38
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to submit a report on the implementation of the present resolution to the General Assembly at its eighty-second session, including recommendations on measures to bring greater urgency to and improve the coordination of efforts against trafficking in persons.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

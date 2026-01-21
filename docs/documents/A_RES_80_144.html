@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/144 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/144</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/144</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F144/pdf/A%2FRES%2F80%2F144.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">41 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the report of the Secretary-General;17</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, as appropriate, to adopt a long-term vision and holistic approaches to sustainable mountain development, including by incorporating mountain-specific policies into national sustainable development strategies, increasing efforts to end poverty in all its forms and dimensions, addressing food insecurity and malnutrition, promoting the conservation and sustainable use of biodiversity, traditional crops and diets, and fighting against social exclusion, environmental degradation and disaster risk in mountain areas, taking into account that an integrated landscape approach that addresses natural resources management, including watershed and sustainable forest management as well as climate change resilience through multi-stakeholder approaches, can lead to the sustainable development of highland mountain areas, the improvement of the livelihood of the local mountain communities and the sustainable use of mountain resources;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages Member States, and invites international organizations and other relevant stakeholders, with respect to sustainable mountain development, to reduce and reverse biodiversity loss and the degradation of land and soil, contributing to the achievement of the Sustainable Development Goals;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note with appreciation of the International Partnership for Sustainable Development in Mountain Regions (Mountain Partnership), the only United Nations voluntary alliance of partners dedicated to improving the lives of people living in mountain areas and protecting mountain environments around the world, benefiting from the committed support of 671 members, including 74 Governments, 23 intergovernmental organizations and 574 major groups, and engaged in the promotion of sustainable development in its three dimensions – economic, social and environmental – in mountain regions, as well as the work of the Mountain Partnership Products initiative;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the special vulnerability of people living in mountain environments, in particular Indigenous Peoples and local communities, often with limited access to health, education and economic systems and particularly at risk because of the negative impact of extreme natural phenomena, and invites States to strengthen cooperative action, with the effective involvement and sharing of knowledge and experience of all relevant stakeholders, including traditional knowledge of Indigenous Peoples and local mountain communities living in mountain areas and their cultures, by strengthening existing arrangements, agreements and centres of excellence for sustainable mountain development, as well as exploring new arrangements and agreements, as appropriate;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also stresses the importance of the diversification of livelihoods and income enhancement opportunities for local mountain communities, and in this regard encourages the promotion of innovative solutions and entrepreneurship within local mountain communities, as appropriate, to end poverty and hunger; _______________ 17 A/80/255. Sustainable mountain development A/RES/80/144 7/12 25-20783</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Supports energy access in accordance with the national needs of developing countries, including mountain countries, to tackle their energy access challenges by identifying the specific needs of each country by mobilizing technical and financial assistance and tools to deploy affordable, reliable, sustainable and modern energy solutions, and expand the use of renewable energy, to tackle the energy access deficit;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of mountain family farming communities and Indigenous Peoples, as one of the custodians of natural and cultural heritage, and encourages Member States to support the activities related to the United Nations Decade of Family Farming (2019–2028), in line with its global action plan, to promote national policies, as appropriate, that support secure land tenure, provide access to resources, ensure gender equality and women’s empowerment, in particular the economic empowerment of women, and empower people in vulnerable situations, and to implement practical actions that can safeguard decent work opportunities, particularly for youth, in rural areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the importance of a One Health and other holistic approaches that deliver multiple benefits to the health and well-being of people, animals, plants and ecosystems, including in mountain regions, and would further strengthen the capacity to address biodiversity loss, to prevent, prepare for and respond to the emergence of diseases, including zoonotic infections and future health emergencies, and to combat antimicrobial resistance;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that the traditional knowledge of Indigenous Peoples and of local mountain communities living in mountain areas, particularly in the fields of agriculture, medicine and the management of natural resources, should be fully considered, respected and promoted in development policy, strategies and programmes in mountain regions, and underlines the need to promote the full participation and involvement of local mountain communities in decisions that affect them and to integrate Indigenous and local knowledge, heritage and values in all development initiatives, in consultation with and with the consent of the Indigenous Peoples and local mountain communities concerned, as appropriate;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the need to increase the adaptive capacity, resilience and sustainability of food and agricultural production with regard to climate change, notes that sustainable production practices, agroforestry and the conservation of agrobiodiversity in mountain areas ensure food security and nutrition and dietary diversity and quality, generate income for smallholder farmers and aid conservation and restoration, addressing the particular vulnerabilities of food production systems to the adverse impacts of climate change, and also notes that mountain farmers and pastoralists play a key role in agroecology;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes that urgent action is needed to reduce poverty in mountain areas, and in this regard encourages Member States and all relevant stakeholders to take concrete and targeted measures to eradicate poverty in all its forms and dimensions, including extreme poverty, in mountain areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes that women are often the primary managers of mountain resources and the main actors in agriculture, underlines the need for improved access to resources and productive assets, including land and economic and financial services, for women in mountain regions, as well as the need to strengthen the role of women in mountain regions in decision-making processes that affect their communities, cultures and environments, and encourages Governments and intergovernmental organizations to mainstream a gender perspective, including through data disaggregated by sex, in mountain development activities, programmes and projects towards the achievement of gender equality and women’s empowerment; A/RES/80/144 Sustainable mountain development 25-20783 8/12</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that mountains provide sensitive indications of climate change through phenomena such as modifications to biological diversity, the retreat of mountain glaciers, flash floods and changes in seasonal run-off, which are having an impact on major sources of freshwater in the world, and stresses the need to take actions to minimize the negative effects of these phenomena, promote adaptation measures and prevent the loss of biological diversity;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Highlights the vital role of mountain ecosystems as “water towers”, which are crucial for water supply, food production and climate resilience, and the need to advocate for their protection, restoration and sustainable management within relevant instruments, frameworks and bodies, in line with the respective mandates, in order to strengthen adaptation and long-term resilience;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that the mountain cryosphere has an impact on surrounding lowland areas, even far from the mountains, and that widespread cryosphere changes affect physical, biological and human systems in the mountains and surrounding lowlands, with impacts evident even in the ocean;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes the important role of the cryosphere (glaciers, snow, ice and permafrost) in maintaining ecosystems that provide essential services, which are critical foundations for sustainable development and human well-being, especially for the most vulnerable populations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Highlights the importance of preventing, reducing and sustainably managing waste and pollution in mountain regions, and encourages Member States to take necessary action in this respect, with the participation of relevant stakeholders and through international cooperation, as appropriate;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to collect at the local, national and regional levels, as appropriate, disaggregated scientific data on mountain areas through systematic monitoring, including of trends of progress and change, based on relevant criteria, to support interdisciplinary research programmes and projects and to enhance an integrated and inclusive approach to decision-making and planning, while ensuring that additional indicators complement existing international frameworks, avoid duplication and minimize reporting burden, and in this regard notes that the Mountain Green Cover Index is included in the global indicator framework for the Sustainable Development Goals and targets of the 2030 Agenda for Sustainable Development 18 as an indicator for target 15.4 of the Sustainable Development Goals, and also notes the need to validate the related national data and improve its data accuracy and analysis at the country level for the implementation of appropriate policies aimed at restoring and protecting mountain environments;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States to strengthen cooperation between scientific institutions, including in the field of mountain glacier studies, on the global and regional scales, and to promote the availability of research results and findings to stakeholders to develop public policies and programmes of action at the international, regional, bilateral and national levels;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States and all relevant stakeholders to continue to increase public awareness, including through the commemoration of International Mountain Day, on 11 December, established in its resolution 57/245, and the Five Years of Action for the Development of Mountain Regions 2023–2027, proclaimed in its resolution 77/172, with respect to the economic benefits that mountains provide, for instance through ecosystem services or sustainable tourism, not only to highland _______________ 18 Resolution 70/1. Sustainable mountain development A/RES/80/144 9/12 25-20783 communities but also to a large portion of the world’s population living in lowland areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes, in this regard, the contribution of sustainable tourism initiatives in mountain regions as a way to enhance environmental protection and generate socioeconomic benefits for local communities, Indigenous Peoples and rural populations, including opportunities for productive employment, economic growth and the promotion of local culture and products;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses its deep concern at the number and scale of natural and human- made disasters and their increasing impact in recent years, which have resulted in massive loss of life and long-term negative social, economic and environmental consequences for societies throughout the world, and recognizes that disaster risk reduction requires a broader and more people-centred preventive approach, reflecting the 2030 Agenda for Sustainable Development, and an all-of-society engagement and partnership, empowerment and inclusive, accessible and non‑discriminatory participation, paying special attention to people disproportionately affected by disasters, many of which are exacerbated by climate change, especially the poorest, and also taking into account the vulnerability of people living in mountain environments, especially those in developing countries;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages States, as appropriate, to strengthen disaster risk governance, to invest in disaster risk reduction for resilience and to develop and improve disaster risk strategies in mountain regions through increased generation and use of climate and disaster risk information, improved risk communication and participation of mountain communities, development of hazard risk maps and platforms, improvement of early warning systems and application of the risk-based approach in all development planning, in order to cope with such extreme events as rockfalls, avalanches, glacial lake outburst floods and landslides, which can be exacerbated by climate change and deforestation, consistent with the Sendai Framework for Disaster Risk Reduction 2015–2030;19</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages, in this regard, the increased involvement of local authorities, as well as other relevant stakeholders, in particular the rural population, Indigenous Peoples and local communities, civil society and the private sector, in the development and implementation of programmes, land-use planning and land tenure arrangements, and in other relevant activities related to sustainable development in mountains;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with concern that the access to services and infrastructure is lower in the highlands than in other areas, and encourages Member States to improve basic infrastructure in mountain areas towards achieving the Sustainable Development Goals;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the need for the sustainable management of forests and the conservation and sustainable use of mountains, which, together with other natural ecosystems, act as natural sinks and reservoirs of biodiversity and greenhouse gases, reducing vulnerability to climate change impacts, allowing the continuity of the hydrological cycle, and encourages Member States to adopt nature-based solutions, ecosystem-based approaches, in line with United Nations Environment Assembly resolution 5/5 of 2 March 2022;20</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the importance of ensuring the protection, restoration and conservation of mountain ecosystems, including their biodiversity, in order to enhance their capacity to provide benefits that are essential for human well-being, _______________ 19 Resolution 69/283, annex II. 20 UNEP/EA.5/Res.5. A/RES/80/144 Sustainable mountain development 25-20783 10/12 economic activity and sustainable development, and of developing innovative means of implementation for their protection, in this regard recognizes with appreciation the establishment of relevant funds, including the Mountain Facility of the Mountain Partnership Secretariat, focusing on climate resilient business models that enhance mountain biodiversity, and the efforts made by relevant United Nations entities to promote the conservation of mountain ecosystems, and encourages Member States and all relevant stakeholders to financially support it on a voluntary basis;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages greater efforts by States, all relevant stakeholders and the international community towards the conservation of mountain ecosystems and the enhancement of the well-being of their local populations, including by promoting investment in infrastructure in mountain areas, such as transport and information and communications technologies, and supporting education, culture, extension and capacity-building programmes, especially among local mountain communities and other relevant stakeholders, strengthening the role of youth through education and training on sustainable mountain development and taking into account the extent of the current challenges that they face and bearing in mind the increased economic, social and environmental costs that inaction might represent for countries and societies;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-30" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    30
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the fact that action at the national level is a key factor in achieving progress in sustainable mountain development, welcomes its steady increase in recent years with a multitude of events, activities and initiatives, and invites the international community to support the efforts of developing countries to develop and implement strategies and programmes, including, where required, enabling policies and laws for the sustainable development of mountains, within the framework of national sustainable development plans, including by building and strengthening institutional capacities, as appropriate;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-31" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    31
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the further undertaking of multi-stakeholder and transboundary initiatives at the national, regional and global levels, where appropriate, such as those supported by all relevant international and regional organizations, to enhance sustainable development in mountain regions, and notes in this regard the numerous initiatives undertaken, including the fifth global meeting of the Mountain Partnership, held in Rome from 11 to 13 December 2017, the fourth World Mountain Forum, held in Bishkek from 23 to 26 October 2018, the High Mountain Summit, held in Geneva from 29 to 31 October 2019, the sixth global meeting of the Mountain Partnership, held in Aspen from 27 to 29 September 2022, the international conference entitled “Global Mountain Dialogue for Sustainable Development: Towards the Bishkek+25 Summit”, held in Kyrgyzstan on 24 and 25 April 2025, the first edition of the Sagarmatha Sambaad on “Climate change, mountains and the future of humanity”, held in Nepal from 16 to 18 May 2025, which issued the Sagarmatha Call for Action as the outcome document, and the International Mountain Conference 2025, held in Innsbruck, Austria, from 14 to 18 September 2025, looks forward to the seventh global meeting of the Mountain Partnership, to be hosted by the Government of Andorra in Andorra from 26 to 28 March 2026, and welcomes the generous offer of the Government of Kyrgyzstan to convene the second Global Mountain Summit in Bishkek from 21 to 23 October 2027;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-32" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    32
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States and all relevant stakeholders to consider, as appropriate, mountain-related issues in the processes of United Nations conventions and other relevant global forums, and to support efforts towards the implementation of the Kunming-Montreal Global Biodiversity Framework, and stresses the importance of regional and transboundary collaboration as means of implementation; Sustainable mountain development A/RES/80/144 11/12 25-20783</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-33" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    33
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites Member States and all relevant stakeholders to consider, as appropriate, intensifying their efforts to advocate and support for the importance of mountain-related issues in international frameworks;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-34" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    34
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States to promote ecosystem-based adaptation, bearing in mind the guidelines adopted by the fourteenth meeting of the Conference of the Parties to the Convention on Biological Diversity, in 2018, the Kunming- Montreal Global Biodiversity Framework adopted in 2022, and climate-smart wildlife conservation as tools for reducing impacts on communities and species, and welcomes the efforts of partners such as the United Nations Environment Programme, the International Union for Conservation of Nature and the Mountain Institute in promoting ecosystem-based adaptation in mountain regions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-35" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    35
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages all relevant entities of the United Nations system, within their respective mandates, to further enhance their constructive efforts to strengthen inter‑agency collaboration to promote sustainable mountain development;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-36" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    36
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that mountain ranges are usually shared among several countries, and in this context encourages transboundary cooperation approaches where the States concerned agree to the sustainable development of mountain ranges and information-sharing in this regard;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-37" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    37
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with appreciation, in this context, the Convention on the Protection of the Alps 21 and the Framework Convention on the Protection and Sustainable Development of the Carpathians, and the recent adoption of the Protocol on Sustainable Agriculture and Rural Development and the entry into force of the Protocol on Sustainable Transport, which promote constructive new approaches to integrated, sustainable mountain development and provide a forum for dialogue among stakeholders, and notes other transboundary approaches and initiatives such as the Andean Initiative for mountains, the Scientific Network for the Caucasus Mountain Region and the established Caucasus Mountain Forum, the African Mountains Regional Forum, the European Union Strategy for the Alpine Region and the Zurich process, the Hindu Kush Himalayan Partnership for Sustainable Mountain Development, the Hindu Kush Himalayan Monitoring and Assessment Programme, the International Snow Leopard and Ecosystem Forum of 2017, the fourth World Nomad Games, in 2022, and the Pyrenean Climate Change Observatory, as well as other relevant initiatives promoting transboundary cooperation and dialogue supported by the United Nations Environment Programme and other partners;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-38" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    38
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites Member States and relevant United Nations agencies, within their mandates, to further enhance support to sustainable mountain development, including through participation in the Five Years of Action for the Development of Mountain Regions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-39" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    39
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that the costs of all activities that may arise from the implementation of the present resolution should be met from voluntary contributions, and that such activities would be subject to the availability and provision of voluntary contributions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-40" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    40
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon mountain countries, the United Nations system and other relevant stakeholders, such as academia, the private sector and investors, to strengthen international cooperation, including by furthering financial mechanisms between mountain countries and attracting investments; _______________ 21 United Nations, Treaty Series, vol. 1917, No. 32724. A/RES/80/144 Sustainable mountain development 25-20783 12/12</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-41" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    41
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to report to the General Assembly at its eighty-third session on the implementation of the present resolution, including on the Five Years of Action for the Development of Mountain Regions, under the sub-item entitled “Sustainable mountain development” of the item entitled “Sustainable development”. 64th plenary meeting 15 December 2025</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

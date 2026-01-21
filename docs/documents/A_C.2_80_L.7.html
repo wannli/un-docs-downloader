@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/C.2/80/L.7 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/C.2/80/L.7</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/C.2/80/L.7</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FC.2%2F80%2FL.7/pdf/A%2FC.2%2F80%2FL.7.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">29 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+        
+            
+        
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the report of the Secretary-General;21</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States to include sustainable agricultural development as an integral part of their national policies and strategies, acknowledges the positive impact of international development cooperation, including North-South, triangular and South-South cooperation, as a complement to, not a substitute for, North-South cooperation, and urges the relevant bodies of the United Nations system to include elements of agricultural technology, innovation, research and extension in efforts to realize the 2030 Agenda for Sustainable Development,22 with a focus on the research and co-development of technologies that are available, accessible, affordable, durable and sustainable and that can be easily used by and disseminated to smallholder and family farmers, in particular rural women, young and ageing farmers;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the importance of supporting sustainable agriculture including agroecology, regenerative agriculture and other innovative approaches and advancing research in improving and diversifying crop varieties and seed systems, as well as supporting the establishment of sustainable and resilient agricultural systems, sustainable management practices and the use of new and existing technologies, such as conservation agriculture, integrated soil fertility management, integrated farming systems, animal disease prevention and control and integrated pest management, precision agriculture, irrigation, livestock husbandry and biotechnologies, in order to make agriculture more sustainable and productive, make food more nutritious and, in particular, make crops and farm animals more resistant to diseases, including drug- resistant infections, considering international standards in this regard, pests and environmental stresses, including the impacts of climate change, drought and extreme rainfall events, in accordance with national regulations and relevant international agreements;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the important role of family farming and smallholder farming in adapting and developing sustainable, affordable and context-specific innovations and technologies while helping to preserve and promote traditional products, and in contributing to global food security, poverty eradication and sustainability, as well as job creation, and in ending chronic child malnutrition, and in this regard calls upon Member States, academia, the private sector and other relevant stakeholders to adapt agricultural technologies to the needs of small- and medium-scale family farmers and combine them with credit access for sustainable production and significant investment in rural infrastructure as well as the training and education of those who would most benefit from them;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes that strengthening urban-rural linkages can improve both rural and urban food security and nutrition, and in this regard highlights the need for integrated urban and rural agricultural land planning, improved rural-urban transportation links, food processing and packaging technology and cold chain development to reduce food loss, and for effective trade links across the urban-rural continuum, which will contribute to ensuring that small-scale farmers and fishers are linked to local, subnational, national, regional and global value chains and markets;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests relevant United Nations organizations, including the Food and Agriculture Organization of the United Nations, the International Fund for Agricultural Development and the United Nations Conference on Trade and Development, to promote, support and facilitate the exchange of experience among Member States __________________ 21 A/80/377. 22 Resolution 70/1. A/C.2/80/L.7 7/10 25-16437 through, inter alia, recommendations and other public goods related to ways to promote sustainable agriculture and increase the productivity and adaptive capacity of agriculture and the use of a broad range of agricultural technologies that support more efficient, inclusive, resilient and sustainable agrifood systems, build long-term fertility, healthy and resilient agroecosystems and secure livelihoods and have a positive impact on the entire value chain, including technology for post-harvest crop storage, processing, handling and transportation, including in pressing environmental circumstances;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of indicators that can be used to formulate targeted policies towards the development and adoption of, access to and use of agricultural technology and to measure their impact on the Sustainable Development Goals, and in this regard encourages Member States, in cooperation with all relevant stakeholders, to continue to contribute to the ongoing work of the Statistical Commission on the global indicator framework;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the need to analyse the potential risks and impacts of agricultural technologies before their implementation, to ensure that agrifood systems are more inclusive, equitable, efficient, resilient and sustainable and can deliver nutritious food, and that fostering synergies between government departments, research institutions, national and international organizations, alliances and coalitions can accelerate the development and adoption of technologies;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also notes that the development of and access to new technologies should be combined with the preservation and promotion of traditional knowledge, where relevant, to attract Indigenous Peoples and local communities and enable young people to be drivers of more efficient, inclusive, equitable, resilient and sustainable agrifood systems, that investments are needed to improve inclusive digital literacy and build the digital competencies of young rural people, and that relevant and effective policy frameworks and incentives, regulatory measures and economic and legal instruments should be promoted to ensure equity and inclusion in the development of and access to technologies;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the urgent need to enhance adaptive capacity, strengthen resilience and reduce vulnerability to climate change, and urges Member States to continue to engage in adaptation planning processes and the implementation of mitigation actions;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also stresses the need to significantly reduce pre-harvest, post-harvest and other food losses and waste throughout the food supply chain through, inter alia, improved production planning, the promotion of resource-efficient production and processing practices, improved processing, preservation and packing technologies, improved transportation and logistics management and enhanced household and business awareness of food losses and waste prevention, to help all actors in the value chain to enjoy greater benefits and to contribute to environmental protection;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further stresses the need to improve the uptake and scaling-up of technologies as effective ways to improve agrifood systems, by increasing productivity, sustainably managing natural resources, reducing the risk of pests and diseases, increasing input use efficiency and creating new income generation opportunities, and in this regard, urges Member States to promote technology platforms and hubs, new institutional models, digitalization, foresight, participatory research for development, agricultural innovation systems, pluralistic extension services, community-based learning approaches and partnerships with the private sector, while promoting social inclusion;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the importance of the sustainable use and management of water resources to increase and contribute to agricultural productivity, calls upon A/C.2/80/L.7 25-16437 8/10 stakeholders to promote integrated water resources management in agriculture and adapt agricultural systems to improve their overall water efficiency and water productivity, and their resilience to water stresses, inter alia, by developing and implementing adaptive water and agricultural strategies and action plans based on a comprehensive approach to the long-term availability and variability of all water sources, reducing water scarcity risks through integrated water resources management options, designing and implementing agricultural and landscape management practices that increase the resilience of agricultural systems to water stress and reduce pollution, making rain-fed agriculture systems a more reliable option, investing in an enabling environment and mobilizing the full set of tools available to them, and calls for further efforts to develop and strengthen irrigation facilities and water-saving technology, which can also enhance resilience to the current and projected adverse impacts of climate change;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States, academia, the private sector and other stakeholders to harness science, technology and innovation, including co-innovation, by promoting coherent and integrated agricultural innovation systems through participatory research, demand-driven extension and rural advisory services and increased, responsible and inclusive public and private investment, building human capacity, encouraging entrepreneurship, creating an enabling economic and institutional environment and strengthening knowledge flows, in particular between scientists and farmers, taking into account local and traditional knowledge systems, in combination with new sources of knowledge;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites the United Nations system and all relevant stakeholders to consider ways to make available, on mutually agreed terms, data and information relating to agrifood systems, including meteorology, big data, satellite imagery, early warning systems and other data-based technologies, that could help to build the resilience of smallholder and family farmers, optimize yields and support rural livelihoods;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that weather forecasting and climate services and products allow farmers to better plan agricultural activities, optimize production, manage climate-related risks and integrate climate change adaptation into their decisions, and therefore encourages governments and meteorological agencies to improve the collection, dissemination and analysis of agrometeorological and agroclimatological data and information;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes that advanced technologies, such as big data, artificial intelligence and machine learning, distributed ledgers, remote sensing and geospatial analysis, have the potential to increase agricultural productivity, improve access to markets and efficiency of inputs, and ensure timely communication for informed decision-making, while acknowledging that this should be examined carefully to maximize benefits and minimize downsides;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further recognizes that sustainable agricultural mechanization could help to address shortages of labour, ease drudgery, increase incomes, enhance productivity and the timeliness of agricultural activities, promote efficient resource use, enable better market access and attract new investment and talent into agriculture, thereby creating better prospects for sustainable growth and support measures to mitigate climate- and weather-related hazards, and acknowledges that mechanization and digitalization can also create new and higher-paying jobs in agricultural value chains, making it more attractive for youth to stay in rural areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the important role of information and communications technology, as well as digitalization and e-agriculture, in achieving the Sustainable Development Goals and in improving agricultural productivity, practices and smallholder livelihoods, strengthening agricultural markets and institutions, A/C.2/80/L.7 9/10 25-16437 improving agricultural extension and rural advisory services, empowering farmer communities, keeping farmers and rural entrepreneurs informed about agricultural innovations, weather conditions, input availability, financial services and market prices and connecting them with buyers, and stresses the need to ensure that women and youth and Indigenous Peoples have equitable access to information and communications technology, digitalization and e-agriculture, especially in rural areas, and to close digital divides within and between countries, as well as the gender digital divide, to accelerate the achievement of the Sustainable Development Goals;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the instrumental role of agricultural technology, agricultural research and innovation and technology transfer on mutually agreed terms and the sharing of knowledge and practices in furthering sustainable development and in achieving the Sustainable Development Goals, calls, therefore, upon Member States, and encourages relevant international bodies, to support sustainable agricultural research and development, emphasizes that research outputs should be appropriate to the needs of and accessible to end users, including governments, water managers, large-scale private sector enterprises and women, smallholder and family farmers, and in this regard calls for continued support to the international agricultural research system, including the research centres of CGIAR and other relevant international organizations and initiatives;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that agricultural biotechnologies have the potential to enhance food production, improve nutrition and reduce environmental impacts, notes with concern that national agricultural research systems in developing countries face barriers such as restricted access, limited funding and regulatory frameworks to use advanced biotechnologies, and in this regard welcomes the convening of the Global Agrifood Biotechnologies Conference by the Food and Agriculture Organization of the United Nations, from 16 to 18 June 2025 in Rome, at which participants examined how biotechnologies can improve agrifood systems, and reiterates the need to accelerate the transfer of environmentally sound technologies to developing countries on mutually agreed terms;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes that, according to World Bank estimates, at least 300 billion United States dollars in investments are needed annually to promote sustainable food systems and that many developing countries, particularly low-income countries, are grappling with multiple crises, including extreme weather disasters, constrained fiscal conditions, and escalating interest rates, making it challenging to finance emergency responses while simultaneously investing in sustainable food systems, and in this regard calls upon Member States to promote a concerted effort to jointly mobilize public and private capital, to achieve high-performing food systems;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Member States, relevant United Nations organizations and other stakeholders to strengthen efforts to improve the development of sustainable agricultural technologies and their transfer and dissemination on mutually agreed terms to developing countries, especially the least developed countries, in particular at the bilateral and regional levels, and encourages international, regional and national efforts to strengthen capacity and foster the utilization of local know-how in developing countries, especially that of smallholder and family farmers, in particular rural women and youth, in order to enhance agricultural productivity and the nutritional quality of agricultural products, promote sustainable practices in pre-harvest and post-harvest agricultural activities and enhance food security and nutrition-related programmes and policies that take into consideration the specific needs of women, young children and youth, with particular attention to securing the prohibition and elimination of the worst forms of child labour, strengthening progress towards achieving the Sustainable Development Goals; A/C.2/80/L.7 25-16437 10/10</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States and relevant United Nations organizations and other stakeholders to mainstream gender perspectives into agricultural policies and projects and to focus on closing the gender gap by, inter alia, encouraging gender- balanced investments and innovation in small-scale agricultural production and distribution, and a gender-responsive value chain supported by integrated and multisectoral policies, in order to improve women’s productive capacity and incomes, strengthen their resilience and achieve equitable access to all forms of financing, markets and networks, labour-saving technologies and agricultural technology information and know-how, equipment, decision-making forums and associated agricultural resources to ensure that agriculture, food security and nutrition-related programmes and policies take into consideration the specific needs of women and the barriers that women face in accessing agricultural inputs and resources;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Governments to develop and implement youth-focused agricultural development projects and programmes, youth innovation labs, youth innovation and research challenges, including through training, education, financial inclusion services, including microcredit services, and capacity-building, including with regard to innovation, in association with the private sector, in order to stimulate the interest and the involvement of youth in sustainable agriculture;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Remains concerned that agricultural innovations and technologies often bypass ageing farmers, and in particular ageing women farmers, as many do not possess the financial resources or the skills to adopt new practices, and in this regard stresses the need to strengthen the capacity of ageing farmers through continued access to financial and infrastructure services and training for improved farming techniques and technologies;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges that technological innovations can be supported by financial innovations and financial support, such as de-risking strategies and blended finance options, and that blended finance mechanisms are new institutional models that link public and private financing and patient capital with equity investments and promote schemes that more effectively distribute investments to small-scale enterprises and producers;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, civil society and public and private institutions to develop partnerships to support financial and market services, including training, capacity-building, infrastructure and extension and rural advisory services, and calls for further efforts by all stakeholders to include smallholder and family farmers, in particular rural women and youth, in planning and in taking decisions about making appropriate sustainable agricultural technologies and practices accessible and affordable to them, and strengthen the links between community-based initiatives and financial institutions, including through the promotion of financing tools that foster agricultural sustainability;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to submit to the General Assembly at its eighty-second session, within existing resources, an action-oriented report that examines the current technological trends and key advances in agricultural technologies, provides illustrative examples of the transformative use of technologies at scale and includes recommendations that assist Member States in accelerating their efforts to implement the relevant goals and targets of the 2030 Agenda, and decides to include in the provisional agenda of its eighty-second session the item entitled “Sustainable development”.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

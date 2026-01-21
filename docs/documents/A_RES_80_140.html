@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/140 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/140</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/140</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F140/pdf/A%2FRES%2F80%2F140.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">49 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the report of the Executive Secretary of the Convention on Biological Diversity;24</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites the Parties to the Convention to provide the Executive Secretary of the Convention with full support in the fulfilment of her mandate and in promoting the implementation of the Convention;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the urgent need to halt the global decline of biodiversity, which is unprecedented in human history, including its main indirect and direct drivers, in particular changes in land and sea use, direct exploitation of organisms, climate change, pollution and invasion of alien species;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the findings of the Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services in its assessment report on the diverse values and valuation of nature, as well as in its subsequent assessment reports, and stresses _______________ 21 United Nations Environment Programme, document UNEP/CBD/COP/10/27, annex, decision X/1. 22 United Nations, Treaty Series, vol. 2226, No. 30619. 23 See United Nations Environment Programme, document UNEP/CBD/BS/COP-MOP/5/17, annex, decision BS-V/11. 24 A/80/373, sect. III. Implementation of the Convention on Biological Diversity and its contribution to sustainable development A/RES/80/140 7/13 25-20770 that achieving a sustainable and just future requires institutions that enable a recognition and integration of the diverse values of nature and nature’s contributions to people, and that the transformative change needed to address the global biodiversity crisis relies on shifting away from predominant values that currently overemphasize short-term and individual material gains to nurturing sustainability-aligned values across society;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the Intergovernmental Science-Policy Platform on Biodiversity and Ecosystem Services assessment reports on the sustainable use of wild species and on invasive alien species and their control, and stresses that the impacts of invasive alien species are increasing rapidly and are predicted to continue rising in the future, whereas they can be prevented and mitigated through effective management, with closer collaboration across sectors and countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the convening of the sixteenth meeting of the Conference of the Parties to the Convention on Biological Diversity, as well as the Meetings of the Parties to the Protocols to the Convention, held in Cali, Colombia, from 21 October to 1 November 2024, under the theme “Peace with nature”, as well as of the two resumed sessions of the sixteenth meeting of the Conference of the Parties to the Convention held online from 3 to 6 December 2024 and in Rome, Italy, from 25 to 27 February 2025 and takes note of their adopted decisions, and looks forward to the seventeenth meeting of the Conference of the Parties and the meetings of the Conference of the Parties serving as the Meetings of the Parties to the Protocols to the Convention to be held in Yerevan, Armenia, from 18 to 30 October 2026;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also welcomes the Kunming-Montreal Global Biodiversity Framework to contribute to the 2030 Agenda for Sustainable Development,25 to the 2030 mission to halt and reverse biodiversity loss by 2030 and to place the global community on a path towards realizing the 2050 Vision for Biodiversity, and urges Parties and invites other Governments, with the support of United Nations entities and the participation of all other stakeholders, to ensure the early, inclusive and effective implementation of the Framework and all other decisions adopted by the Parties;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for the provision and mobilization of new and additional means of implementation to support the full implementation of the Convention on Biological Diversity, and further emphasizes the importance of urgently increasing the mobilization of financial resources from all sources, domestic and international, public and private, with a view to closing the biodiversity financing gap and making adequate and predictable resources available in a timely manner for the effective implementation of the Kunming-Montreal Global Biodiversity Framework;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the strategy for resource mobilization for the period 2025–2030, adopted at the sixteenth meeting of the Conference of the Parties to the Convention, for the implementation of the Convention and its Protocols, as well as the achievement of the goals and targets of the Kunming-Montreal Global Biodiversity Framework, and the decision to implement articles 21 and 39 of the Convention and to address the global biodiversity finance gap by 2030 by establishing the permanent arrangement for the financial mechanism envisioned under article 21 of the Convention and assessing and improving the mobilization of finance from all sources;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that the successful implementation of the Kunming-Montreal Global Biodiversity Framework requires responsibility and transparency, which will be supported by effective mechanisms for planning, monitoring, reporting and review, including through revising or updating national biodiversity strategies and action _______________ 25 Resolution 70/1. A/RES/80/140 Implementation of the Convention on Biological Diversity and its contribution to sustainable development 25-20770 8/13 plans, in alignment with the Framework, its goals and its targets, in line with decisions 15/6, 16/31 and 16/32;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Looks forward to the global review of the collective progress in implementation of the Kunming-Montreal Global Biodiversity Framework, and recalls that Parties are requested to submit their seventh national report, in line with decision 16/32, and for those that have not yet done so, to revise or update their national biodiversity strategies and action plans in line with decisions 15/6 and 16/1;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the continuation of efforts made by the secretariat of the Convention, Parties to the Convention and the Global Environment Facility, as the financial mechanism of the Convention, in conjunction with United Nations funds and programmes and the specialized agencies, as well as other entities, in organizing capacity-building activities to support countries in the updating of national biodiversity strategies and action plans, with a view to enhancing capacity and addressing the need for human, technical and financial resources to implement the Convention and the Kunming-Montreal Global Biodiversity Framework, in particular for developing countries;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the establishment by the Global Environment Facility of the Global Biodiversity Framework Fund to support the implementation of the Kunming- Montreal Global Biodiversity Framework;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for continued capitalization and timely operationalization of the Global Biodiversity Framework Fund commensurate with the targets of the Framework, from all sources, including, inter alia, international financial resources from developed countries, philanthropic organizations and the private sector, and to progress towards implementation as soon as possible;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges the adoption of the decision on the modalities for operationalizing the multilateral mechanism for the fair and equitable sharing of benefits from the use of digital sequence information on genetic resources, and welcomes the launch of the global fund (referred to as the Cali Fund), at the sixteenth meeting of the Conference of the Parties to the Convention;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also acknowledges the important roles and contributions of Indigenous Peoples and local communities as custodians of biodiversity and as partners in its conservation, restoration and sustainable use, stresses that the implementation of the Kunming-Montreal Global Biodiversity Framework must ensure that the rights, knowledge, including traditional knowledge associated with biodiversity, innovations, world views, values and practices of Indigenous Peoples and local communities are respected, and documented and preserved with their free, prior and informed consent, 26 including through their full and effective participation in decision-making, in accordance with relevant national legislation, international instruments, including the United Nations Declaration on the Rights of Indigenous Peoples, and human rights law, and takes note with appreciation of the goal of providing up to 20 per cent of the programming share of the Global Biodiversity Framework Fund by 2030 to support action by Indigenous Peoples and local communities for the conservation, restoration, sustainable use and management of biodiversity;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls decision 16/6 entitled “Role of people of African descent, comprising collectives embodying traditional lifestyles, in the implementation of the _______________ 26 In this framework, free, prior and informed consent refers to the tripartite terminology of “prior and informed consent” or “free, prior and informed consent” or “approval and involvement”. Implementation of the Convention on Biological Diversity and its contribution to sustainable development A/RES/80/140 9/13 25-20770 Convention on Biological Diversity”, adopted at the sixteenth meeting of the Conference of the Parties to the Convention on Biological Diversity;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges Parties to the Convention to ensure the coherence and complementarity of the Kunming-Montreal Global Biodiversity Framework with other existing or upcoming international processes, in particular with regard to the 2030 Agenda, the Paris Agreement, and other related processes, frameworks and strategies, and reiterates the invitation to the other multilateral environmental agreements, including biodiversity-related conventions and the Rio conventions, relevant international organizations and their programmes, and other relevant processes to actively participate in their implementation;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages support for the Sharm el-Sheikh to Kunming Action Agenda for Nature and People, which is aimed at collecting, coordinating and celebrating actions in support of biodiversity conservation and its sustainable use, encourages all relevant stakeholders, including Indigenous Peoples and local communities and the private sector, to consider developing biodiversity commitments, and invites relevant agencies, funds and programmes of the United Nations system and other relevant institutions and intergovernmental organizations, where relevant, to support the implementation of the Action Agenda;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the adoption of the Global Action Plan on Biodiversity and Health at the sixteenth meeting of the Conference of the Parties to the Convention on Biological Diversity, as a voluntary plan for supporting the implementation of the Kunming-Montreal Global Biodiversity Framework, and encourages Parties to implement it when mainstreaming biodiversity and health interlinkages and to provide information on their implementing activities and the result thereof, including in national reports, as appropriate;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes that the COVID‑19 pandemic has exacerbated pre‑existing inequalities and challenges for the implementation of the Convention and further highlighted that the loss and degradation of biodiversity increases the risk of zoonotic disease spillover from wildlife to people and urges Parties to the Convention and all other relevant stakeholders to continue to mainstream biodiversity into COVID‑19 recovery plans and in plans aimed at reducing the risk of future pandemics, emphasizes the importance of a One Health approach and other holistic approaches that deliver multiple benefits to the health and well-being of people and planet, that would further strengthen the capacity to address biodiversity loss, prevent and respond to the emergence of diseases, including zoonotic infections, and future pandemics, and contribute to reducing the adverse impacts of climate change, calls for transformative actions from all relevant stakeholders and adequate and sufficient means of implementation, particularly for developing countries, to ensure the full implementation of the Convention to halt and reverse biodiversity loss, and welcomes the financial commitments and initiatives that have been announced from governments, organizations and the private sector that contribute to biodiversity conservation, restoration and sustainable use and maintain the political momentum for the implementation of the Kunming-Montreal Global Biodiversity Framework;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with concern the limited progress made in the implementation of the three objectives of the Convention, namely, the conservation of biological diversity, the sustainable use of its components and the fair and equitable sharing of the benefits arising out of the utilization of genetic resources, as well as the limited progress made in the implementation of the Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from Their Utilization;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the limited progress made in mainstreaming article 8 (j) of the Convention and related provisions into various areas of work under the Convention, A/RES/80/140 Implementation of the Convention on Biological Diversity and its contribution to sustainable development 25-20770 10/13 takes note with appreciation of decisions 15/10 and 16/4 of the Conference of the Parties to the Convention to develop and adopt a new programme of work on article 8 (j) and other provisions of the Convention related to Indigenous Peoples and local communities to 2030 aligned with the Kunming-Montreal Global Biodiversity Framework, with the full and effective participation of Indigenous Peoples and local communities, and in this regard invites the secretariat of the Convention, through the Secretary-General, to report on the progress made by the Subsidiary Body on Article 8 (j) and Other Provisions of the Convention on Biological Diversity related to Indigenous Peoples and Local Communities when reporting on the implementation of the present resolution to the General Assembly;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the decision to establish the Subsidiary Body on Article 8 (j) and Other Provisions of the Convention on Biological Diversity related to Indigenous Peoples and Local Communities, which met for the first time from 27 to 30 October 2025 in Panama City, and encourages Parties, other Governments and relevant organizations to provide additional support to representatives of Indigenous Peoples and local communities, to participate effectively in its meetings;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the respective Parties, in close collaboration with the relevant stakeholders, to take concrete measures towards achieving and coherently and effectively implementing the objectives of the Convention and its Protocols, and calls upon parties and stakeholders to strengthen international cooperation measures for the fulfilment of obligations contained in the Convention and its protocols, including through comprehensively addressing at all levels the difficulties that may impede their implementation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Highlights the importance of Parties raising high-level political engagement for the achievement of the objectives of the Convention and the Kunming-Montreal Global Biodiversity Framework adopted at the fifteenth session of the Conference of the Parties, and the related Goals and targets of the 2030 Agenda;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites all Parties, relevant departments of the Secretariat, the specialized agencies, funds and programmes of the United Nations system and the regional commissions to continue to contribute to the achievement of the objectives of the Convention;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the important role of the United Nations Environment Management Group in enhancing inter-agency coordination to support the implementation of the Kunming-Montreal Global Biodiversity Framework;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of mainstreaming biodiversity across government and society for achieving the objectives of the Convention, as well as the mission, vision, goals and targets of the Kunming-Montreal Global Biodiversity Framework adopted at the fifteenth session of the Conference of the Parties, and urges all relevant stakeholders to mainstream biodiversity in all relevant sectors;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-30" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    30
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Governments and all stakeholders to take appropriate measures to mainstream consideration of the socioeconomic impacts and benefits of the conservation and sustainable use of biodiversity and its components, as well as ecosystems that provide essential services, into relevant programmes and policies at all levels, in accordance with national legislation, circumstances and priorities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-31" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    31
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of mainstreaming biodiversity in the implementation of the 2030 Agenda as part of national implementation plans for the Sustainable Development Goals, in particular all biodiversity-related Goals and targets; Implementation of the Convention on Biological Diversity and its contribution to sustainable development A/RES/80/140 11/13 25-20770</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-32" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    32
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that integrating biodiversity considerations into sectoral and cross-sectoral policies, plans and programmes at all levels is critical for harnessing the benefits of enhanced synergies and policy coherence;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-33" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    33
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the decisions of the Parties to the Convention to better mainstream biodiversity and to take specific actions tailored to national needs and circumstances, and in line with other relevant international agreements, including in key sectors, such as agriculture, forestry, fisheries and tourism, as well as health, energy, mining, infrastructure, manufacturing and processing sectors, which are crucial for addressing biodiversity loss, bearing in mind the impact of these sectors on biodiversity;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-34" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    34
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls its resolution 77/321 of 1 August 2023 entitled “Agreement under the United Nations Convention on the Law of the Sea on the Conservation and Sustainable Use of Marine Biological Diversity of Areas beyond National Jurisdiction”, and welcomes the upcoming entry into force on 17 January 2026 of the Agreement;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-35" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    35
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes the importance of ending illegal, unreported and unregulated fishing, and welcomes the Agreement on Fisheries Subsidies reached at the Twelfth Ministerial Conference of the World Trade Organization;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-36" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    36
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes the critical role of biodiversity and ecosystem functions and services for climate change adaptation, mitigation and disaster risk reduction, including by adding resilience to fragile ecosystems and making them less vulnerable, and that continued climate change will have predominantly adverse and often irreversible impacts on many ecosystems and their functions and services, with significant negative economic, social and cultural consequences, and notes in this regard decision 16/22 on biodiversity and climate change, adopted at the sixteenth meeting of the Conference of the Parties to the Convention on Biological Diversity;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-37" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    37
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges the Parties to the Convention to facilitate the transfer of technology on mutually agreed terms for the effective implementation of the Convention in accordance with article 16 and other relevant provisions of the Convention, and in this regard welcomes the decision to establish an informal advisory group on technical and scientific cooperation, to provide strategic advice on practical measures, tools and opportunities to promote and facilitate technical and scientific cooperation in accordance with the terms of reference contained in annex III to decision 15/8 of the Conference of the Parties to the Convention;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-38" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    38
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges parties and invites other Governments and relevant organizations to recognize the important role of, and to promote, science, technology and innovation in supporting the implementation of the goals and targets of the Kunming-Montreal Global Biodiversity Framework towards achieving the 2050 Vision for Biodiversity of living in harmony with nature;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-39" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    39
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls decision 15/11 of the Conference of the Parties to the Convention, entitled “Gender Plan of Action”, which recognizes the importance of advancing efforts to achieve gender equality and the empowerment of all women and girls and of supporting and advancing gender mainstreaming and gender-responsive implementation of the Kunming-Montreal Global Biodiversity Framework, and encourages Parties to promote the mainstreaming of a gender perspective in developing, implementing and revising their national, and where appropriate, regional and subnational biodiversity strategies and action plans and equivalent instruments in implementing the three objectives of the Convention, and also recognizes the need to enhance cooperation on capacity-building in order to support Parties in this process; A/RES/80/140 Implementation of the Convention on Biological Diversity and its contribution to sustainable development 25-20770 12/13</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-40" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    40
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes decision 16/35 adopted at the sixteenth meeting of the Conference of the Parties to the Convention on Biological Diversity, which notes the work of the Joint Liaison Group of the Rio Conventions and the Liaison Group of Biodiversity- related Conventions for enhancing cooperation and synergies among the conventions, invites the Parties to the Rio conventions to strengthen synergies and cooperation in the implementation of each convention, in accordance with national circumstances and priorities, and further invites Parties and other Governments to continue to enhance synergies among the biodiversity-related conventions, in line with options for action at the national level provided in decision XIII/24, in accordance with their national circumstances and priorities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-41" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    41
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites countries that have not yet done so to ratify or accede to the Convention;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-42" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    42
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites Parties to the Convention to ratify or accede to the Nagoya Protocol, and invites the Executive Secretary of the Convention and the Global Environment Facility, within its mandate as the financial mechanism of the Convention, in collaboration with relevant organizations, to continue to support capacity-building and development activities to support the ratification and implementation of the Protocol;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-43" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    43
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also invites Parties to the Convention to consider, as appropriate, ratifying or acceding to the Cartagena Protocol;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-44" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    44
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Invites Parties to the Cartagena Protocol to consider, as appropriate, ratifying or acceding to the Nagoya-Kuala Lumpur Supplementary Protocol on Liability and Redress to the Cartagena Protocol on Biosafety;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-45" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    45
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes that increasing investments in nature-based solutions, ecosystem- based approaches and other management and conservation approaches, in line with resolution 5/5 of the United Nations Environment Assembly, has the potential to cost- effectively support biodiversity conservation, restoration and its sustainable use, to help advance climate mitigation and adaptation and to reduce adverse impacts of climate change and to slow, halt and even reverse some aspects of biodiversity and ecosystem loss, and therefore invites all relevant stakeholders to consider the opportunities it presents;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-46" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    46
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of engaging Indigenous Peoples and local communities, women, youth, civil society, local governments and authorities, academia, the business and financial sectors and other relevant stakeholders to support action towards the implementation of the Kunming-Montreal Global Biodiversity Framework, the 2050 Vision for Biodiversity and the three objectives of the Convention, and invites them to align their practices more explicitly with the objectives of the Convention, including through partnerships, in accordance with national legislation, circumstances and priorities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-47" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    47
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the private sector, in particular business and financial institutions, to progressively reduce negative impacts on biodiversity, increase positive impacts, reduce biodiversity-related risks to business and financial institutions, and promote actions to ensure sustainable patterns of production, in this regard stresses the importance of the work of the Global Partnership for Business and Biodiversity, and notes other related and complementary initiatives;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-48" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    48
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms the commitment at the very heart of the 2030 Agenda to leave no one behind and commit to taking more tangible steps to support people in vulnerable situations and the most vulnerable countries and to reach the furthest behind first; Implementation of the Convention on Biological Diversity and its contribution to sustainable development A/RES/80/140 13/13 25-20770</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-49" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    49
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to submit to the General Assembly, at its eighty-first session, a report on the implementation of the present resolution, progress in the implementation of the Convention on Biological Diversity and the Kunming- Montreal Global Biodiversity Framework, and decides to include in the provisional agenda of its eighty-first session, under the item entitled “Sustainable development”, the sub-item entitled “Convention on Biological Diversity”. 64th plenary meeting 15 December 2025</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

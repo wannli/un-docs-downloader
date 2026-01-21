@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/80/L.18 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/80/L.18</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/80/L.18</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2F80%2FL.18/pdf/A%2F80%2FL.18.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">52 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+        
+            
+        
+    
+
+    
+
+    
+        
+            
+        
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note with appreciation of the report of the Secretary-General;17</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges all States to make every effort to ensure the full and effective implementation of the relevant principles and rules of international law, including international humanitarian law and human rights law, and refugee law as applicable, related to the safety and security of humanitarian personnel and United Nations personnel;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Condemns in the strongest possible terms the continued threats to and deliberate targeting of humanitarian personnel and United Nations and associated personnel, acts of terrorism and attacks on humanitarian convoys, and the continued increase in the scale and the increasingly complex nature of threats faced by such personnel, such as the disturbing trend of politically and criminally motivated attacks, including extremist attacks, against them;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Acknowledges, with immense regret, that the two consecutive years, 2023 and 2024, were the worst years on record for deaths of humanitarian personnel, and furthermore condemns, in the strongest terms, the increasing attacks against __________________ 16 Resolution 78/290. 17 A/80/292. A/80/L.18 25-19372 8/14 humanitarian and United Nations and associated personnel, including national and locally recruited personnel;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Strongly urges all States to take the measures necessary to ensure the safety and security of national and international humanitarian personnel and United Nations and associated personnel and to respect and ensure respect for the inviolability of United Nations premises, which are essential to the continuation and successful implementation of United Nations operations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all Governments and parties in complex humanitarian emergencies, in particular in armed conflicts and in post-conflict situations, in countries in which humanitarian personnel are operating, in conformity with the relevant provisions of international law and national laws, to cooperate fully with the United Nations and other humanitarian agencies and organizations and to ensure the safe and unhindered access of humanitarian personnel and the delivery of supplies and equipment, in order to allow those personnel to perform efficiently their task of assisting the affected civilian population, including refugees and internally displaced persons;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States and parties in complex humanitarian emergencies, in particular in armed conflict and in post-conflict situations, to ensure the safe and unhindered access of humanitarian and medical personnel, including those responding to pandemics and other health emergencies, as well as their means of transport, supplies and equipment, and to support, facilitate and enable transportation and logistical supply lines, in order to allow such personnel to efficiently and safely perform their task of assisting affected populations, and in this regard also reaffirms the need to take the measures necessary to respect and protect such personnel, hospitals and other medical facilities, as well as their means of transport, supplies and equipment, and urges all parties to armed conflicts, consistent with international humanitarian law, to protect civilian infrastructure which is critical to the delivery of humanitarian assistance for the provision of essential service;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States to consider becoming parties to and to respect fully their obligations under the relevant international instruments;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also calls upon all States to consider becoming parties to the Rome Statute of the International Criminal Court;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further calls upon all States to consider becoming parties to the Optional Protocol to the Convention on the Safety of United Nations and Associated Personnel, and urges States parties to put in place appropriate national legislation, as necessary, to enable its effective implementation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States, all parties involved in armed conflict and all humanitarian actors to respect the principles of humanity, neutrality, impartiality and independence for the provision of humanitarian assistance;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the contribution of female humanitarian personnel and United Nations and associated personnel, including national and locally recruited personnel, in humanitarian and United Nations operations, expresses concern that these personnel may be more exposed to certain forms of violence, including sexual violence; sexual exploitation and abuse; crime; and acts of intimidation and harassment, strongly urges the United Nations system and Member States to analyse the different forms of violence, including sexual violence; sexual exploitation and abuse; crime; acts of intimidation and harassment to which women and men are differently exposed, and also strongly urges the United Nations system and Member States to choose appropriate and gender-sensitive approaches for their safety and security while allowing them to fulfil their duties, and to ensure that female humanitarian personnel and United Nations and associated personnel are A/80/L.18 9/14 25-19372 meaningfully included in decisions related to their safety and security, and that all reports of sexual violence against humanitarian workers are thoroughly investigated, and the alleged perpetrators brought to justice, in accordance with applicable laws;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Strongly condemns all acts of violence, attacks and threats against humanitarian personnel and United Nations and associated personnel, also condemns attacks intentionally directed against personnel involved in a peacekeeping mission in accordance with the Charter of the United Nations as long as they are entitled to protection from attack under international humanitarian law, and reaffirms the need to prosecute, penalize and punish those responsible for such acts;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States and the United Nations system to take appropriate action to address the increasing threat of disinformation campaigns, misinformation, incitement to violence, and hate speech targeting humanitarian personnel, as well as to address the increase in malicious information and communications technology activities, including data breaches and information operations, that target humanitarian organizations, disrupt their relief operations, undermine trust in United Nations and humanitarian organizations, threaten the safety and security of their personnel, premises and assets, and ultimately their access and ability to carry out humanitarian activities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underscores the critical importance of protecting all persons affected by humanitarian crises, in particular women and children, from any form of sexual exploitation and abuse and sexual harassment, including those perpetrated by United Nations and humanitarian personnel, welcomes the determination of the Secretary- General to fully implement the United Nations policy of zero tolerance for sexual exploitation and abuse and stresses that victims and survivors should be at the core of such efforts, and in this regard requests the Secretary-General to continue to work in close consultation with Member States for the effective implementation of the policy, including prevention, reporting, enforcement and remedial actions;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of continued close coordination and consultation with host Governments on the functioning of the security risk management process and related tools, and in this regard encourages the Secretary-General to continue to consult with the host Governments;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also stresses the importance of ensuring that the security and safety of humanitarian and United Nations personnel, including national and locally recruited personnel, is consistently and integrally considered in the planning for humanitarian action;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States to comply fully with their obligations under international humanitarian law, including as provided for under the Geneva Convention relative to the Protection of Civilian Persons in Time of War of 12 August 1949,18 in order to respect and protect civilians, including humanitarian personnel;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the obligation, in accordance with international humanitarian law and national laws and regulations, as applicable, to respect and protect medical personnel, as well as humanitarian personnel exclusively engaged in medical duties, their means of transport and equipment, as well as hospitals and other medical facilities, in all circumstances, in this regard notes the role of domestic legal frameworks and other appropriate measures in promoting the safety and protection of such personnel, urges States and all parties to armed conflict to develop and integrate effective measures to prevent and address violence against such personnel, their means of transport and equipment, as well as hospitals and other medical facilities, and strongly urges States to conduct full, prompt, impartial and effective __________________ 18 United Nations, Treaty Series, vol. 75, No. 973. A/80/L.18 25-19372 10/14 investigations within their jurisdiction of violations of international humanitarian law related to the protection of the wounded and sick, medical personnel and humanitarian personnel exclusively engaged in medical duties, their means of transport and equipment, as well as hospitals and other medical facilities in armed conflict, and, where appropriate, to take action against those responsible in accordance with domestic and international law, with a view to reinforcing preventive measures, ensuring accountability and addressing the grievances of victims;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges States, while undertaking counter-terrorism activities, to respect their international obligations, including whenever international humanitarian law is applicable, in particular regarding the provision of humanitarian assistance to civilian populations, as well as recognizes the key role humanitarian organizations play in the provision of principled humanitarian assistance, while also recognizing the importance of preventing and suppressing the financing of and other forms of support to terrorism;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Strongly urges all States to take stronger action to ensure that crimes against humanitarian personnel and United Nations and associated personnel, including national and locally recruited personnel, as well as against their premises and assets, and personnel involved in a peacekeeping mission in accordance with the Charter as long as they are entitled to protection from attack under international humanitarian law, do not remain unpunished and are investigated fully, promptly, impartially and effectively, and affirms the need for States to ensure that perpetrators of any such acts committed on their territory do not operate with impunity, as provided for by national laws and obligations under international law, with a view to reinforcing preventive and remedial measures, ensuring accountability and addressing the grievances of victims, and further urges that perpetrators of serious violations of international humanitarian law are prosecuted, and to strengthen international cooperation in this regard;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all States to provide adequate and prompt information in the event of the arrest or detention of humanitarian personnel or United Nations and associated personnel so as to afford them the necessary medical assistance and to allow independent medical teams to visit and examine the health of those detained and to ensure their right to legal counsel, and urges States to take the measures necessary to ensure the speedy release of those who have been arrested or detained in violation of the relevant conventions referred to in the present resolution and applicable international humanitarian law;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all parties involved in armed conflict not to abduct, take hostage or kidnap humanitarian personnel or United Nations and associated personnel, including national and locally recruited personnel, or to detain them in violation of the relevant conventions referred to in the present resolution and applicable international humanitarian law, and immediately to release, without harm or requirement of concession, any abductee or detainee;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to take the measures necessary to promote full respect for the human rights, privileges and immunities of United Nations and associated personnel, and also requests the Secretary-General to seek the inclusion, in negotiations of headquarters and other mission agreements concerning United Nations and associated personnel, of the applicable conditions contained in the Convention on the Privileges and Immunities of the United Nations, 19 the Convention on the Privileges and Immunities of the Specialized Agencies 20 and the Convention on the Safety of United Nations and Associated Personnel; __________________ 19 Resolution 22 A (I). 20 Resolution 179 (II). A/80/L.18 11/14 25-19372</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recommends that the Secretary-General continue to seek the inclusion of, and that host countries include, key provisions of the Convention on the Safety of United Nations and Associated Personnel, among others, those regarding the prevention of attacks against members of the operation, the establishment of such attacks as crimes punishable by law and the prosecution or extradition of offenders, in future as well as, if necessary, in existing status-of-forces, status-of-mission, host country and other related agreements negotiated between the United Nations and those countries, mindful of the importance of the timely conclusion of such agreements, and encourages further efforts in this regard;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal", "follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Secretary-General to strengthen the ongoing efforts of the United Nations to develop a more systematic follow-up process with relevant host Governments on cases of serious crimes and acts of violence resulting in the death or serious injury of United Nations system personnel, in order to ensure accountability and bring perpetrators to justice;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon States to explore and scale up measures for more systematic monitoring, reporting and investigation of attacks against humanitarian and medical personnel and their premises and assets;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-28" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal", "follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    28
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with appreciation the adoption by the Department of Safety and Security, in collaboration with other departments and offices of the Secretariat, of standard operating procedures on the victims of violence registry for fatalities in service, designed to provide follow-up with relevant host Governments on cases of serious crimes and acts of violence resulting in the death or serious injury of United Nations personnel;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-29" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    29
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls attention to and reaffirms the obligation of all humanitarian personnel and United Nations and associated personnel to respect and, where required, observe the national laws of the country in which they are operating, in accordance with international law and the Charter;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-30" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    30
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of ensuring that humanitarian personnel and United Nations and associated personnel are aware and respectful of national and local customs and traditions in their countries of assignment and communicate clearly their purpose and objectives to local populations in order to enhance their acceptance, thereby contributing to their safety and security, and in this regard ensure that humanitarian action is guided by humanitarian principles;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-31" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    31
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges the United Nations and other relevant humanitarian actors to include as part of their risk management strategy and training the building of good relations and trust with national and local governments and the promotion of acceptance by local communities and all relevant actors, with a view to enhancing safety and security and ensuring safe and unhindered access to the affected populations, and encourages Member States to support efforts by the United Nations and other relevant humanitarian actors to provide training to humanitarian personnel in this regard;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-32" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    32
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to continue to take the measures necessary to ensure that United Nations and other personnel carrying out activities in fulfilment of the mandate of a United Nations operation are properly informed about and operate in conformity with mandatory security risk management measures and relevant codes of conduct and are properly informed about the conditions under which they are called upon to operate and the standards that they are required to meet, including those contained in relevant national laws and international law, and that adequate training in security, human rights law and international humanitarian law is provided so as to enhance their security and effectiveness in accomplishing their functions, and reaffirms the necessity for all other humanitarian organizations to provide their personnel with similar support; A/80/L.18 25-19372 12/14</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-33" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    33
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also requests the Secretary-General to continue, in coordination with Member States, to take the measures necessary to ensure that all United Nations premises and assets, including staff residences, are compliant with the United Nations mandatory security risk management measures and other relevant United Nations security standards, and to continue the ongoing assessment of United Nations premises and physical security worldwide;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-34" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    34
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the ongoing efforts of the Secretary-General to ensure that all United Nations personnel receive adequate safety and security training, stresses the need to continue to improve training so as to enhance cultural awareness and knowledge of relevant law, including international humanitarian law, prior to their deployment to the field, and reaffirms the necessity for all other humanitarian organizations to provide their personnel with similar support;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-35" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    35
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also welcomes the efforts of the Secretary-General to provide counselling and support services to United Nations personnel affected by safety and security incidents, and emphasizes the importance of making available mental health and psychosocial support services, including stress management for United Nations personnel throughout the system, and encourages the United Nations and humanitarian organizations to scale up mental health and psychosocial support services, including stress management capacities, accordingly;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-36" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    36
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further welcomes the ongoing measures taken by the Secretary-General and the United Nations system to enhance road safety, including through the United Nations system road safety strategy, so as to reduce incidents caused by road hazards and, in particular, to reduce casualties or injuries resulting from such incidents among United Nations and associated personnel and among the civilian population in the host country, encourages humanitarian organizations to promote similar approaches among their personnel, and requests the Secretary-General to continue the collection and analysis of data to report on road incidents, including civilian casualties resulting from road accidents, and to encourage road safety preventive measures such as specialized trainings;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-37" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal", "SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    37
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the progress made towards further enhancing the security management system of the United Nations, including the major progress in the completion of the integration of all security personnel of the Secretariat under the leadership of the Under-Secretary-General for Safety and Security, and supports the continued implementation of the stay-and-deliver strategy while focusing on effectively managing the risks to which personnel are exposed in order to enable the United Nations system to deliver the most critical programmes, even in high-risk environments;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-38" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    38
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Secretary-General to continue consistent implementation of the programme criticality framework as an operational tool allowing informed decisions on acceptable risk to United Nations personnel, and welcomes the revised programme criticality framework;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-39" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    39
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also encourages the Secretary-General to continue to develop enabling procedures that facilitate the deployment of suitably qualified United Nations security personnel with the appropriate knowledge, skills and experience, with the aim of improving the safety and security measures of the United Nations, in order to strengthen the ability of the United Nations to deliver on its programmes, mandates and activities, including humanitarian programmes;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-40" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    40
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General, inter alia, through the Inter-Agency Security Management Network, to continue the increased cooperation and collaboration among United Nations departments, organizations, funds and programmes and affiliated international organizations, including between their headquarters and field offices, in the planning and implementation of measures aimed A/80/L.18 13/14 25-19372 at improving staff security, training and awareness, including field crisis management and gender inclusion in security management, calls upon all relevant United Nations departments, organizations, funds and programmes and affiliated international organizations to support those efforts, and notes the approval by the Inter-Agency Security Management Network of a system-wide policy on the security of locally recruited personnel;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-41" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    41
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all relevant actors to make every effort to support in their public statements and other forms of advocacy a favourable environment for the safety and security of humanitarian personnel and United Nations and associated personnel, including locally recruited personnel;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-42" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    42
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes the need to pay particular attention to the safety and security of locally recruited humanitarian personnel and United Nations and associated personnel, who play an important role, are often at great personal risk, account for the large majority of casualties and are particularly vulnerable to attacks, including in cases of kidnapping, hostage-taking, harassment, banditry and intimidation, requests the Secretary-General to keep under review the relevant United Nations safety and security policy and to enhance the safety and security of locally recruited personnel, while maintaining operational effectiveness, and calls upon the United Nations and humanitarian organizations to ensure that their personnel are adequately consulted on, informed about and trained in the relevant security measures, plans and initiatives of their respective organizations, which should be in line with applicable national laws and international law;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-43" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    43
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Department of Safety and Security of the Secretariat to further strengthen the security management of the United Nations, focusing on strengthening security risk management policy and tools and their application, enhancing the use of technologies, including digital technologies, increasing situational awareness, analysis and emergency response capacity, taking into account a disaster risk-informed perspective, including by enhancing strategic foresight and planning, strengthening policy development and promoting best practices, increasing compliance with risk management measures and improving monitoring and evaluation, enhancing surge capacity for emergency response, devising effective physical security measures, developing the expertise of security professionals and strengthening support to the designated officials and the security management teams in the field, increasing lessons learned, extending common security training capacities, and continuing to review safety and security policies, training and risk management processes, and promoting an effective and preventive security management approach that is multidimensional;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-44" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    44
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages the Secretary-General, together with the United Nations security management system organizations, to continue to improve and effectively utilize the existing incident data system, including digital tools, and strengthen monitoring and management of security risks, including through a gender perspective;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-45" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    45
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon Member States and relevant actors to enhance existing data- sharing mechanisms as appropriate, and to facilitate field-driven support services to humanitarian actors, including training and orientation sessions and sharing comparative, predictive and thematic analyses that take into account disaggregated data;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-46" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    46
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the work of the Secretary-General in enhancing security collaboration with host Governments, including efforts to support United Nations designated officials with regard to collaboration with host government authorities on the safety and security of personnel;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-47" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    47
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that the effective functioning at the country level of security operations requires a unified and robust capacity for policy, standards, coordination, A/80/L.18 25-19372 14/14 communication, compliance and threat and risk assessment and operational and deployment flexibility to ensure that the security workforce reflects the changing dynamics of the security environment, and notes the benefits thereof to United Nations and associated personnel, including those achieved by the Department of Safety and Security since its establishment;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-48" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    48
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes the steps taken by the Secretary-General thus far to strengthen partnerships, and encourages further efforts to enhance coordination, cooperation and information- and data-sharing, as appropriate, at both the headquarters and field levels, between the United Nations, regional organizations and other humanitarian and non-governmental organizations on matters relating to the safety and security of humanitarian personnel and United Nations and associated personnel, with a view to addressing mutual security concerns in the field, based on the Saving Lives Together framework as well as other relevant national and local initiatives in this regard, and requests the Secretary-General in this respect to enhance further collaborative initiatives to address the security needs of implementing partners, including through enhanced information- and data-sharing, as appropriate, assistance in emergency situations, when feasible, and, where appropriate, security training, invites Member States to consider increasing support to those initiatives, and requests the Secretary- General to report on steps taken in this regard;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-49" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    49
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underlines the urgent need to allocate adequate and predictable resources to the safety and security of United Nations and associated personnel, through regular and extrabudgetary resources, including through the consolidated appeals process, and encourages all States to contribute to the trust fund for security of staff members of the United Nations system, inter alia, with a view to reinforcing the efforts of the Department of Safety and Security to meet its mandate and responsibilities to enable the safe delivery of programmes;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-50" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    50
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also underlines the need for better coordination between the United Nations and host Governments, in accordance with the relevant provisions of international law and national laws, on the use and deployment of essential equipment required to provide for the safety and security of United Nations personnel and associated personnel working in the delivery of humanitarian assistance by United Nations organizations;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-51" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    51
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon States to consider acceding to or ratifying the Tampere Convention on the Provision of Telecommunication Resources for Disaster Mitigation and Relief Operations of 18 June 1998,21 which entered into force on 8 January 2005, and urges them to facilitate and expedite, consistent with their national laws and international obligations applicable to them, the use of communications equipment in those and other relief operations, inter alia, by limiting and, whenever possible, expeditiously lifting the restrictions placed on the use of communications equipment by United Nations and associated personnel;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-52" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    52
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to submit to the General Assembly at its eighty-first session a comprehensive and updated report on the safety and security of humanitarian personnel and protection of United Nations personnel and on the implementation of the present resolution, including an assessment of the impact of safety and security risks on such personnel, and the development, implementation and outcomes of policies, strategies and initiatives of the United Nations system in the field of safety and security. __________________ 21 United Nations, Treaty Series, vol. 2296, No. 40906.</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

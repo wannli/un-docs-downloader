@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/154 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/154</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/154</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F154/pdf/A%2FRES%2F80%2F154.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">27 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+        
+            
+        
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+        
+    
+        
+    
+
+    
+        
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('agenda signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-blue-100 text-blue-700 hover:bg-blue-200
+                ">
+            agenda signal
+        </button>
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('Secretariat signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-slate-100 text-slate-700 hover:bg-slate-200">
+            Secretariat signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note of the report of the Secretary-General 7 and the recommendations contained therein;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms that eradicating poverty in all its forms and dimensions, including extreme poverty, for all people everywhere, is the greatest global challenge and an indispensable requirement for sustainable development, as well as an overarching objective of the 2030 Agenda for Sustainable Development,8 of which the Addis Ababa Action Agenda of the Third International Conference on Financing for Development is an integral part, supporting and complementing it;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses its deep concern that the progress in reducing poverty remains uneven, with 1.1 billion people still living in multidimensional poverty, 84 per cent of whom live in rural areas, and that this number continues to be significant and unacceptably high, whereas the levels of inequality in income, wealth and opportunities remain high or are increasing in a number of countries, and the non‑income dimensions of poverty and deprivation, such as access to inclusive and equitable quality education or basic health services, and relative poverty remain major concerns, and stresses the importance of national and global efforts to create the conditions for achieving sustainable development in its three dimensions, economic, social and environmental, sustained, inclusive and sustainable economic growth, shared prosperity and decent work for all in society, taking into account different levels of national development capacities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the importance of promoting socioeconomic development in rural areas as an effective strategy and important means at the global level for the eradication of poverty, including extreme poverty, and therefore underlines the importance of shaping a rural poverty eradication pattern with the concerted efforts of the whole of society to promote socioeconomic development in rural areas and create sound policy frameworks at the local, national, regional and international levels based on pro-poor and gender-sensitive development strategies to support accelerated investment in poverty eradication action; _______________ 7 A/80/282. 8 Resolution 70/1. A/RES/80/154 Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development 25-20789 6/9</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that economic growth continues to leave rural dwellers behind, that rural areas host a disproportionate share of people living in multidimensional poverty, and recommends that countries promote dedicated and coordinated social, economic, agricultural and rural development in their national policies, including by adopting rural-focused poverty eradication strategies in alignment with the 2030 Agenda, social policies aimed at improving human capital in rural areas and ensuring access to adequate social protection coverage, agricultural policies aimed at boosting agricultural productivity, and rural development policies aimed at improving access to rural infrastructure and basic services of high quality and at boosting non‑farm employment opportunities;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the critical role and contribution of rural women, including smallholders and women farmers, fishers, Indigenous women and their traditional knowledge and women in local communities, in enhancing agricultural and rural development, improving food security and nutrition and eradicating rural poverty, and therefore highlights the importance of promoting their economic empowerment, their full access to land ownership and decent work and economic opportunities and their participation in decision-making;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of establishing and implementing targeted policies and measures to eradicate poverty in all its forms and dimensions, including extreme poverty, by formulating rural development strategies with clear poverty eradication goals, strengthening national statistical capacity and monitoring systems, including innovative use of telephone surveys and high-resolution data facilitated by remote sensing, and implementing nationally appropriate social protection systems and measures for all, and taking concrete actions to prevent the return to poverty, especially when recent years have witnessed a sharp setback in poverty reduction, with a view to achieving sustainable development in its three dimensions, economic, social and environmental, and building the resilience of the poor and those in vulnerable situations, and encourages experience-sharing and international cooperation among different countries in these regards;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages all countries and other relevant stakeholders to promote inclusive economic transformation in rural areas that increases productivity and contributes to bridging the present rural-urban divide while ensuring productive employment and decent work; access to reliable and appropriate social protection systems, inclusive and equitable quality education and skills training, healthcare services, quality, resilient and sustainable infrastructure, roads and telecommunications, and financial inclusion and support; preparedness planning for crises and early warning; cooperation on mutually agreed terms on digital, information and communications technology, science, technology and innovation, especially in the area of e-commerce, financial technology (fintech); affordable and reliable Internet connectivity and digital infrastructure investment and construction; and functioning of food and agriculture supply chains, to achieve momentum under the 2030 Agenda for an inclusive, sustainable and resilient recovery for global development, putting people at the centre of the response, protecting our planet and achieving prosperity, with no one left behind, in line with the 2030 Agenda;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes that eradicating poverty in rural areas cannot be separated from the sustainable transformation and strengthening of food systems, improving agricultural productivity, strengthening the resilience of micro-, small and medium- sized enterprises in the agrifood sector, building sustainable linkages between micro- , small and medium-sized enterprises, larger-scale business partners and support institutions to help micro-, small and medium-sized enterprises to increase their competitiveness through economies of scale, use of shared services such as industrial parks, and access to training, expertise and knowledge, and that ensuring fair markets Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development A/RES/80/154 7/9 25-20789 that enable the participation of smallholder and family farmers in food systems, particularly in value chains where small-scale producers have a comparative advantage, will continue to be important, and in this regard takes note with appreciation of the United Nations Food Systems Summit, held in 2021, which recognized the transformative effects of sustainable food systems as a driver for the achievement of the Sustainable Development Goals by 2030;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Underscores that promoting a universal, rules-based, open, transparent, predictable, inclusive, non‑discriminatory and equitable multilateral trading system under the World Trade Organization is essential for building sustainable, inclusive and resilient food systems, and thus stresses the importance of keeping trade channels and markets open, equitable, transparent, non‑discriminatory and predictable for the movement of food, fertilizer and other agricultural inputs and outputs and access to energy, and emphasizes the urgent need to combat protectionism in all its forms and to correct and prevent trade restrictions and distortions that are inconsistent with World Trade Organization rules in world agricultural markets;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Notes with great concern that the poorest population spends a larger share of income on food, which means extreme food price volatility can have devastating impacts, and is a driver of increased poverty, particularly in rural areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls upon all countries to promote agricultural and rural development in their national policies and renew their efforts to promote innovative approaches, including agroecology, among other approaches, to enhance capacity for food production, distribution and storage, cooperate in the relevant areas of science, research, technology and innovation, as appropriate and consistent with national policies and frameworks, to strengthen sustainable agrifood systems that enhance food security and nutrition, including sustainable productivity growth, significantly reducing food loss and waste, and strengthen policies that support small-scale producers in engaging in agrifood system value chains;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the importance of employment and education for pro-poor growth in rural areas and the collaboration among government agencies, the private sector, civil society and other actors to design and implement national skills development strategies responsive to local labour market needs, and encourages the United Nations system and development partners to assist countries, upon their request, in mainstreaming employment into investment policy and poverty reduction strategies, including those focused on rural area development, and fostering rapid agricultural productivity growth, especially in developing countries, by increasing investment in agricultural and related rural off-farm activities and strengthening capacity-building for agricultural producers;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also recognizes the essential role of inclusive and sustainable industrial development, which can diversify income opportunities as part of a comprehensive strategy of structural economic transformation in eradicating poverty in all its forms and dimensions, especially in rural areas, supporting inclusive, sustained and sustainable economic growth, and thus in contributing to achieving sustainable development in developing countries, and calls upon international industrial cooperation to advance inclusive and sustainable industrialization and innovation and help developing countries to improve industrial production capacity;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Further recognizes the importance of exploring the potential of other new economic activities in rural areas, which could involve tertiary industry or span different industries, by leveraging rich natural resources, featured production techniques and unique traditional cultures, and encourages the transformation of local advantages to featured industries to create more decent jobs and foster sustained productivity of and long-lasting development in rural areas; A/RES/80/154 Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development 25-20789 8/9</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the need to design, implement and pursue gender-responsive economic and social policies aimed at, inter alia, eradicating poverty, including in rural areas, and combating the feminization of poverty, ensuring the full and equal participation of rural women in the development, implementation and follow-up of development policies and programmes and poverty eradication strategies, supporting increased rural employment and decent work and the redistribution of unpaid domestic and care work as well as care systems, and promoting the full, equal and meaningful participation and leadership of women at all levels and sectors of the rural economy and in diverse on-farm and off-farm economic activities, including sustainable agricultural and fisheries production;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Encourages Member States, international organizations, the private sector and other partners to develop programmes to foster the creation of decent work in rural areas and increase the investment in agricultural and related off-farm activities, especially for young people, including through economic diversification and effective employment matching mechanisms in rural areas, development of value chain across all stages, the promotion of sustainable agrifood systems and a balanced territorial approach, along a continuum that includes intermediate settlements and cities nested amid agricultural zones, with varying levels of agglomeration, as a key to reducing rural poverty and persistent inequalities between urban, peri-urban and rural areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that, globally, 1.4 billion people, primarily in rural areas in developing countries, do not have access to formal financial products and services, and encourages further efforts of the international community to offer affordable ways to access finance, including through financial education and training on the effective use of financial instruments, for the financially excluded in rural areas;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Also emphasizes the need to increase investment, including through enhanced international cooperation, in quality, reliable, sustainable and resilient rural infrastructure, especially in roads, water, sanitation, electricity and Internet connectivity, and to provide an inclusive and sustainable digital transformation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses its commitment to raising public awareness to promote the eradication of poverty in all its forms and dimensions, including extreme poverty, in all countries, to mobilizing the enthusiasm and creativity of all stakeholders, especially the rural dwellers living in extreme poverty, to fight against poverty, to promoting their active participation in the design and implementation of programmes and policies that affect them, and to providing quality education for the rural poor, with the aim of achieving the 2030 Agenda and its Sustainable Development Goals;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the need for enhanced and expanded access on mutually agreed terms by developing countries to appropriate technologies that are pro-poor and raise productivity, and underlines the need for measures to increase investment in agriculture, including modern technologies, as well as in natural resources management and capacity-building of developing countries;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that the achievement of sustainable development and the eradication of poverty also hinge on the ability and readiness of countries to effectively mobilize domestic resources, attract foreign direct investment, fulfil official development assistance commitments and use official development assistance effectively, and facilitate the transfer of technology to developing countries, on mutually agreed terms, and further stresses that the resolution of unsustainable debt situations is critical for heavily indebted poor countries, while remittances have become a significant source of income and finance for receiving economies and their contribution to the achievement of sustainable development;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes the importance of addressing the diverse needs of and challenges faced by countries in special situations, in particular African countries, the Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development A/RES/80/154 9/9 25-20789 least developed countries, landlocked developing countries and small island developing States, as well as the specific challenges facing many middle-income countries, and therefore requests the United Nations development system, the international financial institutions, regional organizations and other stakeholders to ensure that these diverse and specific development needs are appropriately considered and addressed, in a tailored fashion, in their relevant strategies and policies, with a view to promoting a coherent and comprehensive approach towards individual countries;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-24" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    24
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Realizes that bridging the digital divides will require strong commitment by all relevant stakeholders at the national and international levels, reiterates the importance of investing in infrastructure for greater access to affordable technological devices and services for rural populations, which includes leveraging technology- enabled financial services and financial technologies to promote financial inclusion, and encourages efforts by all relevant stakeholders, especially United Nations agencies, funds and programmes, in the spirit of win-win cooperation, to assist developing countries in overcoming the digital divides and promoting the use of information and communications technologies to foster economic and social development, particularly in rural areas, with the aim of building a shared future for humankind;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-25" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    25
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Calls for measures by relevant United Nations bodies, in accordance with their respective mandates, and other stakeholders to make good use of their experience and advantages to further help developing countries with the aim of improving rural development planning, including poverty eradication and multisectoral development activities covering economic and social aspects, including a gender perspective;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-26" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["Secretariat signal", "SG signal", "follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    26
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reiterates the urgent need to accelerate the pace of rural poverty eradication, and requests the Secretary-General, in close collaboration with the secretariat of the Food and Agriculture Organization of the United Nations, as well as other relevant international organizations, to submit to the General Assembly at its eighty-first session a report on the status of the implementation of and follow-up to the present resolution in order to identify the progress achieved, gaps and challenges faced in rural poverty eradication, especially in developing countries, and to list rural poverty eradication as a priority for an annual Sustainable Development Goals Moment to highlight inspiring action on the Goals, in the context of the general debate of the Assembly;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-slate-100 text-slate-700">
+                        Secretariat signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-27" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["agenda signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    27
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Decides to include in the provisional agenda of its eighty-first session, under the item entitled “Eradication of poverty and other development issues”, the sub-item entitled “Eradicating rural poverty to implement the 2030 Agenda for Sustainable Development”. 64th plenary meeting 15 December 2025</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-blue-100 text-blue-700
+                        ">
+                        agenda signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>

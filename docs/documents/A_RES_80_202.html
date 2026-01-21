@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/RES/80/202 - UN Docs Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        un: {
+                            blue: '#009edb',
+                            dark: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="h-full bg-slate-50">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-8">
+                        <a href="./index.html" class="flex items-center space-x-2">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-white font-bold text-lg">UN Docs Analyzer</span>
+                        </a>
+                        <div class="hidden md:flex items-center space-x-1">
+                            <a href="../index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                            <a href="./index.html" class="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Documents</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            
+<!-- Header -->
+<div class="mb-6">
+    <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+        <a href="./index.html" class="hover:text-sky-600">Documents</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-slate-900">A/RES/80/202</span>
+    </div>
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-slate-900">A/RES/80/202</h1>
+        <a href="https://documents.un.org/doc/UNDOC/GEN/A%2FRES%2F80%2F202/pdf/A%2FRES%2F80%2F202.pdf?OpenElement" target="_blank"
+           class="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            View PDF on UN ODS
+        </a>
+    </div>
+    <p class="mt-2 text-slate-600">23 operative paragraphs</p>
+</div>
+
+<!-- Signal Summary -->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+            
+        
+    
+
+    
+        
+            
+        
+    
+
+    
+
+    
+
+
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <h2 class="text-sm font-medium text-slate-700 mb-3">Signals Detected</h2>
+    <div class="flex flex-wrap gap-2">
+        
+        <button onclick="highlightSignal('follow-up signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-rose-100 text-rose-700 hover:bg-rose-200
+                ">
+            follow-up signal
+        </button>
+        
+        <button onclick="highlightSignal('SG signal')" 
+                class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                bg-amber-100 text-amber-700 hover:bg-amber-200
+                ">
+            SG signal
+        </button>
+        
+        <button onclick="highlightSignal('all')" class="signal-btn px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-900 text-white">
+            Show All
+        </button>
+    </div>
+</div>
+
+
+<!-- Paragraphs -->
+<div class="space-y-4" id="paragraphs">
+    
+    <div id="para-1" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    1
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses that everyone has the right to freedom of thought, conscience and religion or belief, which includes the freedom to have or not to have, or to adopt, a religion or belief of one’s own choice and the freedom, either alone or in community with others and in public or private, to manifest one’s religion or belief in teaching, practice, worship and observance, including the right to change one’s religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-2" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    2
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that the right to freedom of thought, conscience and religion or belief applies equally to all persons, regardless of their religion or belief and without any discrimination as to their equal protection by the law;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-3" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    3
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Strongly condemns violations of freedom of thought, conscience and religion or belief, as well as all forms of intolerance, discrimination and violence based on religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-4" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    4
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes with deep concern the overall rise in instances of discrimination, intolerance and violence, regardless of the actors, directed against members of many religious and other communities in various parts of the world, including cases motivated by Islamophobia, antisemitism and Christianophobia and prejudices against persons of other religions or beliefs;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-5" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    5
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Reaffirms that terrorism cannot and should not be associated with any religion or belief, as this may have adverse consequences for the enjoyment of the right to freedom of religion or belief of all members of the religious communities concerned;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-6" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    6
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Strongly condemns continuing violence and acts of terrorism targeting individuals, including persons belonging to religious minorities, on the basis of or in the name of religion or belief, and underlines the importance of a comprehensive and inclusive community-based preventive approach, involving a wide set of actors, including civil society and religious communities;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-7" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    7
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recalls that States have an obligation to exercise due diligence to prevent, investigate and punish acts of violence, intimidation and harassment against a person or a group of persons belonging to a religious minority, regardless of the perpetrator, and that failure to do so may constitute a human rights violation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-8" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    8
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that freedom of religion or belief, freedom of opinion and expression, the right to peaceful assembly and the right to freedom of association are interdependent, interrelated and mutually reinforcing, and stresses the role that these rights can play in the fight against all forms of intolerance and of discrimination based on religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-9" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    9
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Strongly condemns any advocacy of hatred based on religion or belief that constitutes incitement to discrimination, hostility or violence, whether it involves the use of print, audiovisual or electronic media or any other means;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-10" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    10
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses concern at the persistence of institutionalized social intolerance and discrimination practised against many on the grounds of religion or belief, and emphasizes that legal procedures pertaining to religious or belief-based groups and places of worship are not a prerequisite for the exercise of the right to manifest one’s religion or belief and that such procedures, when legally required at the national or A/RES/80/202 Freedom of religion or belief 25-20955 4/6 local level, should be non‑discriminatory in order to contribute to the effective protection of the right of all persons to practise their religion or belief, either individually or in community with others and in public or private;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-11" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    11
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recognizes with concern the challenges that persons in vulnerable situations, including persons deprived of their liberty, refugees, asylum-seekers and internally displaced persons, children, persons belonging to national or ethnic, religious and linguistic minorities and migrants, as well as women, are facing as regards their ability to freely exercise their right to freedom of religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-12" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    12
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Emphasizes that, as underlined by the Human Rights Committee, restrictions on the freedom to manifest one’s religion or belief are permitted only if limitations are prescribed by law, are necessary to protect public safety, order, health or morals or the fundamental rights and freedoms of others, are non‑discriminatory and are applied in a manner that does not vitiate the right to freedom of thought, conscience and religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-13" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    13
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Expresses deep concern at continued obstacles to the enjoyment of the right to freedom of religion or belief, as well as the increasing number of instances of intolerance, discrimination and violence based on religion or belief, including: (a) Acts of violence and intolerance directed against individuals based on their religion or belief, including religious persons and persons belonging to religious minorities and other communities in various parts of the world; (b) The rise of religious extremism in various parts of the world that affects the human rights of individuals, including persons belonging to religious minorities; (c) Incidents of hatred, discrimination, intolerance and violence based on religion or belief, which may be associated with or manifested by the derogatory stereotyping, negative profiling and stigmatization of persons based on their religion or belief; (d) Attacks on or the destruction of religious places, sites and shrines that violate international law, in particular international human rights law and international humanitarian law, as they have more than material significance for the dignity and lives of persons holding spiritual or religious beliefs; (e) Instances, both in law and practice, that constitute violations of the human right to freedom of religion or belief, including of the individual right to publicly express one’s spiritual and religious beliefs, taking into account the relevant articles of the International Covenant on Civil and Political Rights, as well as other international instruments; (f) Constitutional and legislative systems that fail to provide adequate and effective guarantees of freedom of thought, conscience and religion or belief to all without distinction;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-14" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    14
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges States to step up their efforts to protect and promote freedom of thought, conscience and religion or belief, and to that end: (a) To ensure that their constitutional and legislative systems provide adequate and effective guarantees of freedom of thought, conscience and religion or belief to all without distinction by, inter alia, providing access to justice, including by facilitating legal assistance and effective remedies in cases where the right to freedom of thought, conscience and religion or belief or the right to freely choose and practise one’s religion or belief is violated, paying particular attention to persons belonging to religious minorities; Freedom of religion or belief A/RES/80/202 5/6 25-20955 (b) To implement all accepted universal periodic review recommendations related to the promotion and protection of freedom of religion or belief; (c) To ensure that no one within their territory and subject to their jurisdiction is deprived of the right to life, liberty and security of person because of religion or belief, to provide adequate protection to persons at risk of violent attack on the grounds of their religion or belief, to ensure that no one is subjected to torture or other cruel, inhuman or degrading treatment or punishment or arbitrary arrest or detention on that account and to bring to justice all perpetrators of violations of these rights; (d) To end violations of the human rights of women and girls and to devote particular attention to appropriate measures modifying or abolishing existing laws, regulations, customs and practices that discriminate against them, including in the exercise of their right to freedom of thought, conscience and religion or belief, and to foster practical ways to ensure gender equality; (e) To ensure that existing legislation is not implemented in a discriminatory manner or does not result in discrimination based on religion or belief, that no one is discriminated against on the basis of his or her religion or belief when accessing, inter alia, education, medical care, employment, humanitarian assistance or social benefits, and that everyone has the right and the opportunity to have access, on general terms of equality, to public services in their country, without any discrimination based on religion or belief; (f) To review, whenever relevant, existing registration practices in order to ensure that such practices do not limit the right of all persons to manifest their religion or belief, either alone or in community with others and in public or private; (g) To ensure that no official documents are withheld from the individual on the grounds of religion or belief and that everyone has the right to refrain from disclosing information concerning their religious affiliation in such documents against their will; (h) To ensure, in particular, the right of all persons to worship, assemble or teach in connection with a religion or belief, their right to establish and maintain places for these purposes and the right of all persons to seek, receive and impart information and ideas in these areas; (i) To ensure that, in accordance with appropriate national legislation and in conformity with international human rights law, the freedom of all persons and members of groups to establish and maintain religious, charitable or humanitarian institutions is fully respected and protected; (j) To ensure that all public officials and civil servants, including members of law enforcement bodies, and personnel of detention facilities, the military and educators, in the course of fulfilling their official duties, respect freedom of religion or belief and do not discriminate for reasons based on religion or belief, and that they receive all necessary and appropriate awareness-raising, education or training on respect for freedom of religion or belief; (k) To take all necessary and appropriate action, in conformity with international standards of human rights, to combat hatred, discrimination, intolerance and acts of violence, intimidation and coercion motivated by intolerance based on religion or belief, as well as incitement to hostility and violence, with particular regard to persons belonging to religious minorities in all parts of the world; (l) To promote, through education and other means, mutual understanding, tolerance, non‑discrimination and respect in all matters relating to freedom of religion or belief by encouraging, in society at large, a wider knowledge of the diversity of religions and beliefs and of the history, traditions, languages and cultures of the various religious minorities existing within their jurisdiction; A/RES/80/202 Freedom of religion or belief 25-20955 6/6 (m) To prevent any distinction, exclusion, restriction or preference based on religion or belief that impairs the recognition, enjoyment or exercise of human rights and fundamental freedoms on an equal basis and to detect signs of intolerance that may lead to discrimination based on religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-15" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    15
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes and encourages initiatives by the media to promote tolerance and respect for religious and cultural diversity and the universal promotion and protection of human rights, including freedom of religion or belief, and stresses the importance of unhindered participation in the media and in public discourse for all persons, regardless of their religion or belief;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-16" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    16
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Stresses the importance of a continued and strengthened dialogue in all its forms, including among and within religions or beliefs, and with broader participation, including of women, to promote greater tolerance, respect and mutual understanding, and welcomes different initiatives in this regard, including the United Nations Alliance of Civilizations initiative and the programmes led by the United Nations Educational, Scientific and Cultural Organization;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-17" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    17
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Welcomes and encourages the continuing efforts of all actors in society, including national human rights institutions, non‑governmental organizations and bodies and groups based on religion or belief, to promote the implementation of the Declaration on the Elimination of All Forms of Intolerance and of Discrimination Based on Religion or Belief,5 and further encourages their work in promoting freedom of religion or belief, in highlighting cases of religious intolerance, discrimination and persecution and in promoting religious tolerance;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-18" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    18
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Recommends that States, the United Nations and other actors, including national human rights institutions, non‑governmental organizations and bodies and groups based on religion or belief, in their efforts to promote freedom of religion or belief, ensure the widest possible dissemination of the text of the Declaration in as many different languages as possible and promote its implementation;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-19" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    19
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Takes note with appreciation of the work and the interim report of the Special Rapporteur on freedom of religion or belief; 6</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-20" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["follow-up signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    20
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Urges all Governments to cooperate fully with the Special Rapporteur, to respond favourably to her requests to visit their countries and to provide all information and follow-up necessary for the effective fulfilment of her mandate;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-rose-100 text-rose-700
+                        ">
+                        follow-up signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-21" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='["SG signal"]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    21
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Secretary-General to ensure that the Special Rapporteur receives the resources necessary to fully discharge her mandate;</p>
+                
+                <div class="mt-3 flex flex-wrap gap-2">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs font-medium
+                        bg-amber-100 text-amber-700
+                        ">
+                        SG signal
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-22" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    22
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Requests the Special Rapporteur to submit an interim report to the General Assembly at its eighty-first session;</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="para-23" 
+         class="para-row bg-white rounded-xl shadow-sm border border-slate-200 p-4 transition-all"
+         data-signals='[]'>
+        <div class="flex items-start gap-4">
+            <div class="flex-shrink-0">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                    23
+                </span>
+            </div>
+            <div class="flex-1">
+                <p class="text-slate-800 leading-relaxed">Decides to consider the question of the elimination of all forms of religious intolerance at its eighty-first session under the item entitled “Promotion and protection of human rights”. 69th plenary meeting 18 December 2025 _______________ 5 Resolution 36/55. 6 See A/80/205 and A/80/205/Corr.1.</p>
+                
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function highlightSignal(signal) {
+    const rows = document.querySelectorAll('.para-row');
+    
+    // Update button styles
+    document.querySelectorAll('.signal-btn').forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-offset-2', 'ring-slate-900');
+    });
+    
+    if (signal === 'all') {
+        rows.forEach(row => {
+            row.classList.remove('opacity-40', 'scale-[0.98]');
+            row.classList.add('opacity-100');
+        });
+    } else {
+        rows.forEach(row => {
+            const signals = JSON.parse(row.dataset.signals || '[]');
+            if (signals.includes(signal)) {
+                row.classList.remove('opacity-40', 'scale-[0.98]');
+                row.classList.add('opacity-100');
+            } else {
+                row.classList.remove('opacity-100');
+                row.classList.add('opacity-40', 'scale-[0.98]');
+            }
+        });
+    }
+}
+
+// Handle anchor links
+if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add('ring-2', 'ring-sky-500');
+    }
+}
+</script>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
+            
+            Generated by UN Docs Analyzer
+            
+        </footer>
+    </div>
+</body>
+</html>
