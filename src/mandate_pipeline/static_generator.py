@@ -511,17 +511,18 @@ def generate_pattern_page(documents: list, pattern: dict, checks: list, patterns
     # Sort documents naturally by symbol
     enriched_docs.sort(key=lambda d: natural_sort_key(d["symbol"]))
 
+    # Create slug from pattern name
+    pattern_slug = get_pattern_slug(pattern_name)
+
     html = template.render(
         pattern=pattern,
+        pattern_slug=pattern_slug,
         documents=enriched_docs,
         checks=checks,
         pattern_signal_counts=pattern_signal_counts,
         total_docs=len(enriched_docs),
     )
-
-    # Create slug from pattern name
-    slug = pattern_name.lower().replace(" ", "_").replace(".", "").replace("(", "").replace(")", "")
-    with open(output_dir / f"{slug}.html", "w") as f:
+    with open(output_dir / f"{pattern_slug}.html", "w") as f:
         f.write(html)
 
 
