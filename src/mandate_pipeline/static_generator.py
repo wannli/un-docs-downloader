@@ -8,7 +8,15 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 from .checks import load_checks, run_checks
-from .extractor import extract_text, extract_operative_paragraphs
+from rapidfuzz import fuzz
+
+from .extractor import (
+    extract_text,
+    extract_operative_paragraphs,
+    extract_title,
+    extract_agenda_items,
+    find_symbol_references,
+)
 from .pipeline import load_patterns
 
 
@@ -83,6 +91,22 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
             # Extract text and paragraphs
             text = extract_text(pdf_file)
             paragraphs = extract_operative_paragraphs(text)
+            title = extract_title(text)
+            agenda_items = extract_agenda_items(text)
+            symbol_references = find_symbol_references(text)
+            doc_type = classify_doc_type(symbol, text)
+            base_proposal_symbol = None
+            if doc_type == "proposal":
+                base_proposal_symbol = symbol
+            elif doc_type == "amendment":
+                front_matter = text.split("\f", 2)[0:2]
+                front_matter_text = "\f".join(front_matter)[:4000]
+                symbol_match = re.search(
+                    r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
+                    front_matter_text
+                )
+                if symbol_match:
+                    base_proposal_symbol = symbol_match.group(0)
 
             # Run checks
             signals = run_checks(paragraphs, checks) if checks else {}
@@ -97,6 +121,11 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
                 "symbol": symbol,
                 "filename": pdf_file.name,
                 "paragraphs": paragraphs,
+                "title": title,
+                "agenda_items": agenda_items,
+                "symbol_references": symbol_references,
+                "doc_type": doc_type,
+                "base_proposal_symbol": base_proposal_symbol,
                 "signals": signals,
                 "signal_summary": signal_summary,
                 "num_paragraphs": len(paragraphs),
@@ -115,6 +144,119 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     documents.sort(key=sort_key)
 
     return documents
+
+
+def normalize_title(title: str) -> str:
+    """Normalize a title for fuzzy matching."""
+    return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
+
+
+def is_resolution(symbol: str) -> bool:
+    """Return True if symbol looks like a resolution."""
+    return "/RES/" in symbol
+
+
+def is_proposal(symbol: str) -> bool:
+    """Return True if symbol looks like a draft/proposal (L. symbol)."""
+    return "/L." in symbol
+
+
+def classify_doc_type(symbol: str, text: str) -> str:
+    """Classify document type for linking metadata."""
+    if is_resolution(symbol):
+        return "resolution"
+    if is_proposal(symbol):
+        front_matter = "\n".join(text.splitlines()[:50])
+        if "/Rev." in symbol or re.search(r"\bamendment\b", front_matter, re.IGNORECASE):
+            return "amendment"
+        return "proposal"
+    return "other"
+
+
+def link_documents(documents: list[dict]) -> None:
+    """
+    Link resolutions to proposals using explicit references and fuzzy matching.
+
+    First pass: link by symbol references.
+    Second pass: link by normalized title similarity and agenda overlap.
+    """
+    proposals_by_symbol = {doc["symbol"]: doc for doc in documents if is_proposal(doc["symbol"])}
+    proposals = list(proposals_by_symbol.values())
+
+    for doc in documents:
+        doc.setdefault("linked_resolution_symbol", None)
+        doc.setdefault("linked_proposal_symbols", [])
+        doc.setdefault("link_method", None)
+        doc.setdefault("link_confidence", None)
+
+    for doc in documents:
+        if not is_resolution(doc["symbol"]):
+            continue
+        references = doc.get("symbol_references", [])
+        linked = [ref for ref in references if ref in proposals_by_symbol]
+        if not linked:
+            continue
+        doc["linked_proposal_symbols"] = linked
+        doc["link_method"] = "symbol_reference"
+        doc["link_confidence"] = 1.0
+        for ref in linked:
+            proposal = proposals_by_symbol.get(ref)
+            if proposal is None:
+                continue
+            if proposal.get("linked_resolution_symbol") is None:
+                proposal["linked_resolution_symbol"] = doc["symbol"]
+                proposal["link_method"] = "symbol_reference"
+                proposal["link_confidence"] = 1.0
+
+    for doc in documents:
+        if not is_resolution(doc["symbol"]):
+            continue
+        if doc.get("linked_proposal_symbols"):
+            continue
+
+        title = normalize_title(doc.get("title", ""))
+        if not title:
+            continue
+        agenda_items = set(doc.get("agenda_items") or [])
+
+        best_match = None
+        best_score = 0.0
+        best_confidence = 0.0
+
+        for proposal in proposals:
+            if proposal.get("linked_resolution_symbol") not in (None, doc["symbol"]):
+                continue
+
+            proposal_title = normalize_title(proposal.get("title", ""))
+            if not proposal_title:
+                continue
+
+            proposal_agenda = set(proposal.get("agenda_items") or [])
+            if agenda_items and proposal_agenda and not agenda_items.intersection(proposal_agenda):
+                continue
+
+            similarity = fuzz.ratio(title, proposal_title)
+            if similarity < 85:
+                continue
+
+            confidence = similarity / 100.0
+            if agenda_items and proposal_agenda:
+                confidence = min(confidence + 0.05, 1.0)
+
+            if similarity > best_score:
+                best_score = similarity
+                best_match = proposal
+                best_confidence = confidence
+
+        if best_match:
+            doc["linked_proposal_symbols"] = [best_match["symbol"]]
+            doc["link_method"] = "title_agenda_fuzzy"
+            doc["link_confidence"] = best_confidence
+
+            if best_match.get("linked_resolution_symbol") is None:
+                best_match["linked_resolution_symbol"] = doc["symbol"]
+                best_match["link_method"] = "title_agenda_fuzzy"
+                best_match["link_confidence"] = best_confidence
 
 
 def generate_data_json(documents: list, checks: list, output_dir: Path) -> None:
@@ -743,6 +885,7 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
 
     # Load all documents
     documents = load_all_documents(data_dir, checks)
+    link_documents(documents)
 
     # Create output directories
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -830,6 +973,22 @@ def generate_site_verbose(
             try:
                 text = extract_text(pdf_file)
                 paragraphs = extract_operative_paragraphs(text)
+                title = extract_title(text)
+                agenda_items = extract_agenda_items(text)
+                symbol_references = find_symbol_references(text)
+                doc_type = classify_doc_type(symbol, text)
+                base_proposal_symbol = None
+                if doc_type == "proposal":
+                    base_proposal_symbol = symbol
+                elif doc_type == "amendment":
+                    front_matter = text.split("\f", 2)[0:2]
+                    front_matter_text = "\f".join(front_matter)[:4000]
+                    symbol_match = re.search(
+                        r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
+                        front_matter_text
+                    )
+                    if symbol_match:
+                        base_proposal_symbol = symbol_match.group(0)
                 signals = run_checks(paragraphs, checks) if checks else {}
 
                 # Build signal summary
@@ -842,6 +1001,11 @@ def generate_site_verbose(
                     "symbol": symbol,
                     "filename": pdf_file.name,
                     "paragraphs": paragraphs,
+                    "title": title,
+                    "agenda_items": agenda_items,
+                    "symbol_references": symbol_references,
+                    "doc_type": doc_type,
+                    "base_proposal_symbol": base_proposal_symbol,
                     "signals": signals,
                     "signal_summary": signal_summary,
                     "num_paragraphs": len(paragraphs),
@@ -862,6 +1026,8 @@ def generate_site_verbose(
         numbers = re.findall(r'\d+', doc["symbol"])
         return [int(n) for n in numbers] if numbers else [0]
     documents.sort(key=sort_key)
+
+    link_documents(documents)
 
     load_duration = time.time() - load_start_time
     if on_load_end:
