@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Resolution Origins - Mandate Pipeline{% endblock %}
+
+{% block nav_index %}../index.html{% endblock %}
+{% block nav_documents %}../documents/index.html{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav class="mb-8">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+        <li><a href="../index.html" class="hover:text-un-blue transition-colors">Home</a></li>
+        <li class="text-gray-300">/</li>
+        <li class="text-gray-900 font-medium">Resolution Origins</li>
+    </ol>
+</nav>
+
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Resolution Origins</h1>
+    <p class="mt-2 text-muted max-w-2xl">
+        Resolutions grouped by their origin committee. The origin is derived from the linked draft proposals.
+    </p>
+</div>
+
+<!-- Stats Summary -->
+<div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
+    {% for origin_code, origin_data in origins.items() %}
+    <a href="#origin-{{ origin_code|lower }}"
+       class="block p-4 bg-white border border-gray-200 rounded-lg hover:border-un-blue hover:shadow-sm transition-all text-center">
+        <div class="text-2xl font-bold text-gray-900">{{ origin_data.resolutions|length }}</div>
+        <div class="text-xs text-muted mt-1">{{ origin_code }}</div>
+    </a>
+    {% endfor %}
+</div>
+
+<!-- Coverage Stats -->
+<div class="bg-gray-50 rounded-lg p-4 mb-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <span class="text-sm font-medium text-gray-700">Linking Coverage:</span>
+            <span class="text-sm text-muted ml-2">{{ coverage.linked }} of {{ coverage.total }} resolutions linked ({{ coverage.percentage }}%)</span>
+        </div>
+        <a href="./debug/orphans.html" class="text-sm text-un-blue hover:underline">
+            View {{ coverage.unlinked }} unlinked &rarr;
+        </a>
+    </div>
+</div>
+
+<!-- Origins Sections -->
+{% for origin_code, origin_data in origins.items() %}
+<section id="origin-{{ origin_code|lower }}" class="mb-12">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900">{{ origin_data.name }}</h2>
+            <p class="text-sm text-muted">{{ origin_data.resolutions|length }} resolution{% if origin_data.resolutions|length != 1 %}s{% endif %}</p>
+        </div>
+        {% if origin_code != "Unknown" %}
+        <span class="px-3 py-1 rounded-full text-sm font-medium
+            {% if origin_code == 'Plenary' %}bg-amber-50 text-amber-700
+            {% elif origin_code == 'C1' %}bg-red-50 text-red-700
+            {% elif origin_code == 'C2' %}bg-green-50 text-green-700
+            {% elif origin_code == 'C3' %}bg-blue-50 text-blue-700
+            {% elif origin_code == 'C4' %}bg-purple-50 text-purple-700
+            {% elif origin_code == 'C5' %}bg-orange-50 text-orange-700
+            {% elif origin_code == 'C6' %}bg-teal-50 text-teal-700
+            {% else %}bg-gray-100 text-gray-700{% endif %}">
+            {{ origin_code }}
+        </span>
+        {% endif %}
+    </div>
+
+    {% if origin_data.resolutions %}
+    <div class="space-y-3">
+        {% for res in origin_data.resolutions %}
+        <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+            <div class="flex items-start justify-between">
+                <div class="flex-1">
+                    <a href="../documents/{{ res.filename }}" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                        {{ res.symbol }}
+                    </a>
+                    {% if res.title %}
+                    <p class="text-sm text-muted mt-1 line-clamp-1">{{ res.title }}</p>
+                    {% endif %}
+                </div>
+                <div class="flex items-center gap-2 ml-4">
+                    {% for sig, count in res.signal_summary.items() %}
+                    <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                        {% if 'agenda' in sig|lower %}bg-blue-50 text-blue-700
+                        {% elif 'pga' in sig|lower %}bg-purple-50 text-purple-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ sig }}({{ count }})
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Linked Proposals -->
+            {% if res.linked_proposals %}
+            <div class="mt-3 pt-3 border-t border-gray-100">
+                <div class="flex items-center gap-2 text-xs text-muted mb-2">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    </svg>
+                    Origin Draft{% if res.linked_proposals|length > 1 %}s{% endif %}:
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    {% for proposal in res.linked_proposals %}
+                    <a href="../documents/{{ proposal.filename }}"
+                       class="inline-flex items-center px-2 py-1 rounded bg-gray-50 border border-gray-200 text-xs font-medium text-gray-700 hover:border-un-blue hover:text-un-blue transition-colors">
+                        {{ proposal.symbol }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% if res.linking_method %}
+                <div class="mt-2 text-xs text-muted">
+                    Linked via: <span class="font-medium">{{ res.linking_method }}</span>
+                    {% if res.linking_confidence %}
+                    ({{ res.linking_confidence }}% confidence)
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-sm text-muted italic">No resolutions in this category.</p>
+    {% endif %}
+</section>
+{% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+Generated {{ generated_at }} · <a href="./debug/linking.html" class="text-un-blue hover:underline">Linking Debug</a>
+{% endblock %}

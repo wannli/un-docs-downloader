@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Debug Tools - Mandate Pipeline{% endblock %}
+
+{% block nav_index %}../../index.html{% endblock %}
+{% block nav_documents %}../../documents/index.html{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav class="mb-8">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+        <li><a href="../../index.html" class="hover:text-un-blue transition-colors">Home</a></li>
+        <li class="text-gray-300">/</li>
+        <li class="text-gray-900 font-medium">Debug Tools</li>
+    </ol>
+</nav>
+
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Debug Tools</h1>
+    <p class="mt-2 text-muted">
+        Diagnostic tools for verifying data extraction, linking quality, and system health.
+    </p>
+</div>
+
+<!-- Debug Tools Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Linking Audit -->
+    <a href="./linking.html" class="block p-6 bg-white border border-gray-200 rounded-lg hover:border-un-blue hover:shadow-md transition-all group">
+        <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Linking Audit</h2>
+                <p class="text-sm text-muted mt-1">Detailed breakdown of how each resolution was linked to source proposals. Includes UNDL cache inspection.</p>
+                <div class="mt-3 flex items-center gap-4 text-xs text-muted">
+                    <span class="flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        {{ stats.linked }} linked
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                        {{ stats.unlinked }} unlinked
+                    </span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Unlinked Resolutions -->
+    <a href="./orphans.html" class="block p-6 bg-white border border-gray-200 rounded-lg hover:border-un-blue hover:shadow-md transition-all group">
+        <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-100 transition-colors">
+                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Unlinked Resolutions</h2>
+                <p class="text-sm text-muted mt-1">Resolutions that couldn't be automatically linked. Includes diagnostics and suggested candidates.</p>
+                <div class="mt-3 text-xs">
+                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-700 font-medium">{{ stats.unlinked }} need review</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Fuzzy Match Explorer -->
+    <a href="./fuzzy.html" class="block p-6 bg-white border border-gray-200 rounded-lg hover:border-un-blue hover:shadow-md transition-all group">
+        <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 transition-colors">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Fuzzy Match Explorer</h2>
+                <p class="text-sm text-muted mt-1">Explore title similarity scores between resolutions and proposals. See near-misses and matching candidates.</p>
+                <div class="mt-3 flex items-center gap-4 text-xs text-muted">
+                    <span>Threshold: 85%</span>
+                    <span class="flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        {{ stats.near_misses }} near misses
+                    </span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Extraction Verification -->
+    <a href="./extraction.html" class="block p-6 bg-white border border-gray-200 rounded-lg hover:border-un-blue hover:shadow-md transition-all group">
+        <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-100 transition-colors">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Extraction Verification</h2>
+                <p class="text-sm text-muted mt-1">Review PDF extraction quality. Check titles, paragraph counts, and identify documents with potential issues.</p>
+                <div class="mt-3 flex items-center gap-4 text-xs text-muted">
+                    <span class="flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        {{ stats.with_title }} with title
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                        {{ stats.potential_issues }} issues
+                    </span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!-- Quick Stats -->
+<div class="mt-12">
+    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">System Overview</h2>
+    <div class="bg-gray-50 rounded-lg p-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div>
+                <div class="text-3xl font-bold text-gray-900">{{ stats.total_docs }}</div>
+                <div class="text-sm text-muted">Total Documents</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-gray-900">{{ stats.total_resolutions }}</div>
+                <div class="text-sm text-muted">Resolutions</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-gray-900">{{ stats.total_proposals }}</div>
+                <div class="text-sm text-muted">Proposals</div>
+            </div>
+            <div>
+                <div class="text-3xl font-bold text-un-blue">{{ "%.1f"|format(stats.coverage_pct) }}%</div>
+                <div class="text-sm text-muted">Link Coverage</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+Generated {{ generated_at }}
+{% endblock %}

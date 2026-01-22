@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Matrix - Mandate Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'un-blue': '#009edb',
+                        'un-blue-dark': '#0077a8',
+                        'muted': '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background: rgba(0, 158, 219, 0.2); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="./index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                </a>
+                <nav class="flex items-center gap-6">
+                    <a href="./documents/index.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Documents</a>
+                    <a href="./provenance/index.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Origins</a>
+                    <a href="./origin_matrix.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Matrix</a>
+                    <div class="relative group">
+                        <button class="text-muted hover:text-un-blue transition-colors text-sm font-medium flex items-center gap-1">
+                            Debug
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                            <a href="./debug/index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue rounded-t-lg">Overview</a>
+                            <a href="./debug/linking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue">Linking Audit</a>
+                            <a href="./debug/orphans.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue">Unlinked</a>
+                            <a href="./debug/fuzzy.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue">Fuzzy Matches</a>
+                            <a href="./debug/extraction.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue rounded-b-lg">Extraction</a>
+                        </div>
+                    </div>
+                    <a href="./data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Origin Matrix</h1>
+    <p class="mt-2 text-muted max-w-2xl">
+        Signal distribution across resolution origins. Shows which committees produce resolutions with specific mandate signals.
+    </p>
+</div>
+
+<!-- Matrix Table -->
+<div class="overflow-x-auto mb-8">
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50 rounded-tl-lg">Origin</th>
+                
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50">
+                    <a href="./signals/agenda.html" class="hover:text-un-blue transition-colors">
+                        agenda
+                    </a>
+                </th>
+                
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50">
+                    <a href="./signals/pga.html" class="hover:text-un-blue transition-colors">
+                        PGA
+                    </a>
+                </th>
+                
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50">
+                    <a href="./signals/process.html" class="hover:text-un-blue transition-colors">
+                        process
+                    </a>
+                </th>
+                
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50">
+                    <a href="./signals/report.html" class="hover:text-un-blue transition-colors">
+                        report
+                    </a>
+                </th>
+                
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50 rounded-tr-lg">Total</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-plenary" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-amber-50 text-amber-700
+                            ">
+                            Pl
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Plenary (General Assembly)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/plenary_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        7
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/plenary_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        102
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/plenary_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        21
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/plenary_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        10
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        140
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-c1" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-red-50 text-red-700
+                            ">
+                            C1
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            First Committee (Disarmament)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c1_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        59
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c1_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        139
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c1_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        3
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c1_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        32
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        233
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-c2" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-green-50 text-green-700
+                            ">
+                            C2
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Second Committee (Economic &amp; Financial)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c2_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        40
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c2_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        203
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c2_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        7
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c2_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        40
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        290
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-c3" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-blue-50 text-blue-700
+                            ">
+                            C3
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Third Committee (Social, Humanitarian &amp; Cultural)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c3_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        9
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c3_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        86
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c3_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        2
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c3_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        49
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        146
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-c4" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-purple-50 text-purple-700
+                            ">
+                            C4
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Fourth Committee (Decolonization)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c4_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        4
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c4_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        12
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c4_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        2
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c4_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        14
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        32
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-c5" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-orange-50 text-orange-700
+                            ">
+                            C5
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Fifth Committee (Administrative &amp; Budgetary)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c5_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        2
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c5_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        58
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c5_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        4
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c5_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        35
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        99
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-c6" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-teal-50 text-teal-700
+                            ">
+                            C6
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Sixth Committee (Legal)
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c6_agenda.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-blue-50 text-blue-700 hover:bg-blue-100
+                        ">
+                        11
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c6_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        21
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c6_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        2
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/c6_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        11
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        45
+                    </span>
+                </td>
+            </tr>
+            
+            
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-unknown" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            bg-gray-100 text-gray-700">
+                            Un
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            Unknown Origin
+                        </span>
+                    </a>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <span class="text-gray-300">&mdash;</span>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/unknown_pga.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-purple-50 text-purple-700 hover:bg-purple-100
+                        ">
+                        2
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/unknown_process.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        1
+                    </a>
+                    
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    
+                    <a href="./origin_signal/unknown_report.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        bg-gray-100 text-gray-700 hover:bg-gray-200">
+                        20
+                    </a>
+                    
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        23
+                    </span>
+                </td>
+            </tr>
+            
+            <!-- Totals Row -->
+            <tr class="bg-gray-50 font-medium">
+                <td class="py-4 px-4 text-gray-700">Total</td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
+                        bg-blue-100 text-blue-800
+                        ">
+                        132
+                    </span>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
+                        bg-purple-100 text-purple-800
+                        ">
+                        623
+                    </span>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
+                        bg-gray-200 text-gray-800">
+                        42
+                    </span>
+                </td>
+                
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
+                        bg-gray-200 text-gray-800">
+                        211
+                    </span>
+                </td>
+                
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-300 text-gray-900">
+                        1008
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Insights Panel -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Top Producers -->
+    <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Top Signal Producers</h3>
+        <div class="space-y-3">
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold
+                        bg-green-50 text-green-700
+                        ">
+                        C2
+                    </span>
+                    <span class="text-sm text-gray-700">C2</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-gray-900">290</span>
+                    <span class="text-xs text-muted">signals</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold
+                        bg-red-50 text-red-700
+                        ">
+                        C1
+                    </span>
+                    <span class="text-sm text-gray-700">C1</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-gray-900">233</span>
+                    <span class="text-xs text-muted">signals</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold
+                        bg-blue-50 text-blue-700
+                        ">
+                        C3
+                    </span>
+                    <span class="text-sm text-gray-700">C3</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-gray-900">146</span>
+                    <span class="text-xs text-muted">signals</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold
+                        bg-amber-50 text-amber-700
+                        ">
+                        Pl
+                    </span>
+                    <span class="text-sm text-gray-700">Plenary</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-gray-900">140</span>
+                    <span class="text-xs text-muted">signals</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold
+                        bg-orange-50 text-orange-700
+                        ">
+                        C5
+                    </span>
+                    <span class="text-sm text-gray-700">C5</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-gray-900">99</span>
+                    <span class="text-xs text-muted">signals</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Signal Distribution -->
+    <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Signal Distribution</h3>
+        <div class="space-y-3">
+            
+            
+            
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium
+                        text-blue-700
+                        ">
+                        agenda
+                    </span>
+                    <span class="text-sm text-muted">132 (13.1%)</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full
+                        bg-blue-400
+                        "
+                         style="width: 13.095238095238097%"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium
+                        text-purple-700
+                        ">
+                        PGA
+                    </span>
+                    <span class="text-sm text-muted">623 (61.8%)</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full
+                        bg-purple-400
+                        "
+                         style="width: 61.80555555555556%"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium
+                        text-gray-700">
+                        process
+                    </span>
+                    <span class="text-sm text-muted">42 (4.2%)</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full
+                        bg-gray-400"
+                         style="width: 4.166666666666666%"></div>
+                </div>
+            </div>
+            
+            
+            
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium
+                        text-gray-700">
+                        report
+                    </span>
+                    <span class="text-sm text-muted">211 (20.9%)</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full
+                        bg-gray-400"
+                         style="width: 20.932539682539684%"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <p class="text-sm text-muted">
+                
+Generated 2026-01-22 17:11 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
