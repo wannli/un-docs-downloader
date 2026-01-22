@@ -224,6 +224,7 @@ mandate generate \
   --config ./config \
   --data ./data \
   --output ./docs \
+  --clean-output \
   --verbose
 ```
 
@@ -232,6 +233,7 @@ mandate generate \
 | `--config` | Directory containing checks.yaml and patterns.yaml |
 | `--data` | Directory with pdfs/ subdirectory |
 | `--output` | Output directory for static site |
+| `--clean-output` | Delete existing output directory contents before generation |
 | `--verbose` | Log each document processed |
 
 ### mandate build
@@ -243,6 +245,7 @@ mandate build \
   --config ./config \
   --data ./data \
   --output ./docs \
+  --clean-output \
   --max-misses 3 \
   --verbose
 ```
