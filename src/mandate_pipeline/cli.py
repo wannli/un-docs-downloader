@@ -7,9 +7,8 @@ import time
 from pathlib import Path
 
 from .discovery import sync_all_patterns_verbose, load_sync_state
-from .generation import generate_site_verbose, load_all_documents, generate_data_json
+from .generation import generate_site_verbose
 from .detection import load_checks
-from .linking import update_lineage_cache
 
 
 def is_github_actions() -> bool:
@@ -177,35 +176,6 @@ def main():
         help="Enable verbose logging",
     )
 
-    # Lineage analysis command
-    lineage_parser = subparsers.add_parser(
-        "lineage",
-        help="Update lineage cache and export data.json",
-    )
-    lineage_parser.add_argument(
-        "--config",
-        type=Path,
-        default=Path("./config"),
-        help="Path to config directory (default: ./config)",
-    )
-    lineage_parser.add_argument(
-        "--data",
-        type=Path,
-        default=Path("./data"),
-        help="Path to data directory (default: ./data)",
-    )
-    lineage_parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path("./docs"),
-        help="Path to output directory for data.json (default: ./docs)",
-    )
-    lineage_parser.add_argument(
-        "--verbose", "-v",
-        action="store_true",
-        help="Enable verbose logging",
-    )
-
     args = parser.parse_args()
 
     if args.command is None:
@@ -218,8 +188,6 @@ def main():
         cmd_generate(args)
     elif args.command == "build":
         cmd_build(args)
-    elif args.command == "lineage":
-        cmd_lineage(args)
 
 
 def cmd_discover(args):
@@ -440,33 +408,6 @@ def cmd_build(args):
         )
     
     return 0 if not gen_errors else 1
-
-
-def cmd_lineage(args):
-    """Run the lineage analysis command."""
-    verbose = args.verbose or is_github_actions()
-
-    gh_group_start("Lineage Analysis Configuration")
-    print(f"Config directory: {args.config}")
-    print(f"Data directory: {args.data}")
-    print(f"Output directory: {args.output}")
-    print(f"Verbose: {verbose}")
-    gh_group_end()
-
-    gh_group_start("Updating Lineage Cache")
-    stats = update_lineage_cache(args.data)
-    print(f"Total PDFs: {stats['total']}")
-    print(f"Updated: {stats['updated']}")
-    print(f"Reused: {stats['reused']}")
-    print(f"Removed: {stats['removed']}")
-    gh_group_end()
-
-    gh_group_start("Exporting data.json")
-    checks = load_checks(args.config / "checks.yaml")
-    documents = load_all_documents(args.data, checks)
-    generate_data_json(documents, checks, args.output)
-    print(f"Exported data.json with {len(documents)} documents")
-    gh_group_end()
 
 
 def write_job_summary(

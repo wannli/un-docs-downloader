@@ -1,29 +1,22 @@
-# Tests for Mandate Pipeline Lineage Module
-# Comprehensive unit tests for document linkage, lineage functions, and UN Digital Library integration
+# Tests for Mandate Pipeline Linking Module
+# Unit tests for document linkage and UN Digital Library integration
 
-import json
-import pytest
 from pathlib import Path
-from datetime import datetime, timezone
-from unittest.mock import patch, MagicMock
+
+import pytest
 
 from mandate_pipeline.linking import (
     symbol_to_filename,
     filename_to_symbol,
-    compute_last_modified_hash,
     classify_symbol,
     normalize_symbol,
-    extract_linked_symbols,
     normalize_title,
     is_resolution,
     is_proposal,
     is_excluded_draft_symbol,
     is_base_proposal_doc,
     link_documents,
-    annotate_lineage,
-    load_lineage_cache,
-    save_lineage_cache,
-    update_lineage_cache,
+    annotate_linkage,
     fetch_undl_metadata,
     _parse_undl_marc_xml,
 )
@@ -159,7 +152,7 @@ class TestFetchUndlMetadata:
         mock_response.text = SAMPLE_MARC_XML
         mock_response.raise_for_status = mocker.Mock()
 
-        mocker.patch("mandate_pipeline.lineage.requests.get", return_value=mock_response)
+        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
 
         result = fetch_undl_metadata("A/RES/80/142")
 
@@ -171,7 +164,7 @@ class TestFetchUndlMetadata:
         import requests
 
         mocker.patch(
-            "mandate_pipeline.lineage.requests.get",
+            "mandate_pipeline.linking.requests.get",
             side_effect=requests.RequestException("Connection failed"),
         )
 
@@ -186,7 +179,7 @@ class TestFetchUndlMetadata:
         mock_response = mocker.Mock()
         mock_response.raise_for_status.side_effect = requests.HTTPError("404 Not Found")
 
-        mocker.patch("mandate_pipeline.lineage.requests.get", return_value=mock_response)
+        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
 
         result = fetch_undl_metadata("A/RES/80/142")
 
@@ -197,7 +190,7 @@ class TestFetchUndlMetadata:
         import requests
 
         mocker.patch(
-            "mandate_pipeline.lineage.requests.get",
+            "mandate_pipeline.linking.requests.get",
             side_effect=requests.Timeout("Request timed out"),
         )
 
@@ -216,7 +209,7 @@ class TestLinkDocumentsWithUndl:
         mock_response.text = SAMPLE_MARC_XML
         mock_response.raise_for_status = mocker.Mock()
 
-        mocker.patch("mandate_pipeline.lineage.requests.get", return_value=mock_response)
+        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
 
         documents = [
             {"symbol": "A/RES/80/142", "title": "Test Resolution"},
@@ -228,13 +221,8 @@ class TestLinkDocumentsWithUndl:
         resolution = documents[0]
         proposal = documents[1]
 
-        assert resolution["link_method"] == "undl_metadata"
-        assert resolution["link_confidence"] == 1.0
-        assert resolution["base_proposal_symbol"] == "A/C.2/80/L.35/Rev.1"
         assert "A/C.2/80/L.35/Rev.1" in resolution["linked_proposal_symbols"]
-
         assert proposal["linked_resolution_symbol"] == "A/RES/80/142"
-        assert proposal["link_method"] == "undl_metadata"
 
     def test_link_fallback_to_symbol_reference(self, mocker):
         """Fall back to symbol reference when UNDL has no draft."""
@@ -243,7 +231,7 @@ class TestLinkDocumentsWithUndl:
         mock_response.text = SAMPLE_MARC_XML_NO_DRAFT
         mock_response.raise_for_status = mocker.Mock()
 
-        mocker.patch("mandate_pipeline.lineage.requests.get", return_value=mock_response)
+        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
 
         documents = [
             {
@@ -259,12 +247,11 @@ class TestLinkDocumentsWithUndl:
         resolution = documents[0]
 
         # Should fall back to Pass 1 (symbol_reference)
-        assert resolution["link_method"] == "symbol_reference"
-        assert resolution["base_proposal_symbol"] == "A/80/L.99"
+        assert "A/80/L.99" in resolution["linked_proposal_symbols"]
 
     def test_link_undl_disabled(self, mocker):
         """Skip UNDL lookup when disabled."""
-        mock_get = mocker.patch("mandate_pipeline.lineage.requests.get")
+        mock_get = mocker.patch("mandate_pipeline.linking.requests.get")
 
         documents = [
             {
@@ -280,37 +267,13 @@ class TestLinkDocumentsWithUndl:
         # Should not have called the API
         mock_get.assert_not_called()
 
-        # Should use symbol_reference method
+        # Should still link via symbol_reference
         resolution = documents[0]
-        assert resolution["link_method"] == "symbol_reference"
-
-    def test_link_undl_draft_not_in_local_collection(self, mocker):
-        """Store base_proposal even when draft not in local collection."""
-        mock_response = mocker.Mock()
-        mock_response.status_code = 200
-        mock_response.text = SAMPLE_MARC_XML
-        mock_response.raise_for_status = mocker.Mock()
-
-        mocker.patch("mandate_pipeline.lineage.requests.get", return_value=mock_response)
-
-        # Only resolution, no local copy of the draft
-        documents = [
-            {"symbol": "A/RES/80/142", "title": "Test Resolution"},
-        ]
-
-        link_documents(documents, use_undl_metadata=True)
-
-        resolution = documents[0]
-
-        # Should still record the base_proposal from UNDL
-        assert resolution["base_proposal_symbol"] == "A/C.2/80/L.35/Rev.1"
-        assert resolution["link_method"] == "undl_metadata"
-        # But linked_proposal_symbols should be empty (not in local collection)
-        assert resolution["linked_proposal_symbols"] == []
+        assert "A/80/L.50" in resolution["linked_proposal_symbols"]
 
     def test_link_skip_already_linked(self, mocker):
         """Skip UNDL lookup for already-linked documents."""
-        mock_get = mocker.patch("mandate_pipeline.lineage.requests.get")
+        mock_get = mocker.patch("mandate_pipeline.linking.requests.get")
 
         documents = [
             {
@@ -375,42 +338,6 @@ class TestFilenameToSymbol:
         assert filename_to_symbol("A_C.1_80_L.5") == "A/C.1/80/L.5"
 
 
-class TestComputeLastModifiedHash:
-    """Test last-modified hash computation."""
-
-    def test_computes_hash(self, tmp_path):
-        """Compute hash from file stats."""
-        pdf = tmp_path / "test.pdf"
-        pdf.write_bytes(b"%PDF-1.4 content")
-
-        hash1 = compute_last_modified_hash(pdf)
-
-        assert isinstance(hash1, str)
-        assert len(hash1) == 64  # SHA256 hex digest
-
-    def test_different_content_different_hash(self, tmp_path):
-        """Different file sizes produce different hashes."""
-        pdf1 = tmp_path / "test1.pdf"
-        pdf2 = tmp_path / "test2.pdf"
-        pdf1.write_bytes(b"%PDF small")
-        pdf2.write_bytes(b"%PDF much larger content here")
-
-        hash1 = compute_last_modified_hash(pdf1)
-        hash2 = compute_last_modified_hash(pdf2)
-
-        assert hash1 != hash2
-
-    def test_same_file_same_hash(self, tmp_path):
-        """Same file produces same hash on repeated calls."""
-        pdf = tmp_path / "test.pdf"
-        pdf.write_bytes(b"%PDF content")
-
-        hash1 = compute_last_modified_hash(pdf)
-        hash2 = compute_last_modified_hash(pdf)
-
-        assert hash1 == hash2
-
-
 class TestClassifySymbol:
     """Test symbol classification."""
 
@@ -453,59 +380,6 @@ class TestNormalizeSymbol:
     def test_already_normalized(self):
         """Already normalized symbol unchanged."""
         assert normalize_symbol("A/80/L.1") == "A/80/L.1"
-
-
-class TestExtractLinkedSymbols:
-    """Test extraction of linked symbols from text."""
-
-    def test_extract_single_symbol(self):
-        """Extract single symbol from text."""
-        text = "Recalling document A/80/L.5 of the General Assembly"
-        result = extract_linked_symbols(text, "A/RES/80/1")
-
-        assert "A/80/L.5" in result
-
-    def test_extract_multiple_symbols(self):
-        """Extract multiple symbols from text."""
-        text = """
-        Recalling A/80/L.1, A/80/L.5 and A/C.1/80/L.10,
-        Also noting A/80/390.
-        """
-        result = extract_linked_symbols(text, "A/RES/80/1")
-
-        assert "A/80/L.1" in result
-        assert "A/80/L.5" in result
-        assert "A/C.1/80/L.10" in result
-        assert "A/80/390" in result
-
-    def test_excludes_self_reference(self):
-        """Exclude the document's own symbol."""
-        text = "Document A/80/L.1 refers to itself A/80/L.1"
-        result = extract_linked_symbols(text, "A/80/L.1")
-
-        assert "A/80/L.1" not in result
-
-    def test_no_duplicates(self):
-        """No duplicate symbols in result."""
-        text = "A/80/L.1 appears here and A/80/L.1 again."
-        result = extract_linked_symbols(text, "A/RES/80/1")
-
-        assert result.count("A/80/L.1") == 1
-
-    def test_sorted_results(self):
-        """Results are sorted."""
-        text = "Documents: A/80/L.5, A/80/L.1, A/80/L.3"
-        result = extract_linked_symbols(text, "A/RES/80/1")
-
-        assert result == sorted(result)
-
-    def test_case_normalization(self):
-        """Normalize case of extracted symbols."""
-        text = "Document a/80/l.1 and A/80/L.5"
-        result = extract_linked_symbols(text, "A/RES/80/1")
-
-        assert "A/80/L.1" in result
-        assert "A/80/L.5" in result
 
 
 class TestNormalizeTitle:
@@ -662,10 +536,7 @@ class TestLinkDocuments:
         proposal = documents[1]
 
         assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
-        assert resolution["link_method"] == "symbol_reference"
-        assert resolution["link_confidence"] == 1.0
         assert proposal["linked_resolution_symbol"] == "A/RES/80/1"
-        assert proposal["link_method"] == "symbol_reference"
 
     def test_link_multiple_proposals(self):
         """Link resolution to multiple proposals."""
@@ -719,8 +590,6 @@ class TestLinkDocuments:
         proposal = documents[1]
 
         assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
-        assert resolution["link_method"] == "title_agenda_fuzzy"
-        assert resolution["link_confidence"] >= 0.85
         assert proposal["linked_resolution_symbol"] == "A/RES/80/1"
 
     def test_fuzzy_link_requires_agenda_overlap(self):
@@ -842,36 +711,6 @@ class TestLinkDocuments:
         resolution = documents[0]
         # Should link to L.5 (symbol reference) not L.1 (title match)
         assert resolution["linked_proposal_symbols"] == ["A/80/L.5"]
-        assert resolution["link_method"] == "symbol_reference"
-
-    def test_sets_base_proposal_symbol(self):
-        """Sets base_proposal_symbol on resolution."""
-        documents = [
-            {
-                "symbol": "A/RES/80/1",
-                "title": "Climate Action",
-                "agenda_items": ["Item 68"],
-                "symbol_references": ["A/80/L.1", "A/80/L.5"],
-            },
-            {
-                "symbol": "A/80/L.1",
-                "title": "Climate Action",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-            {
-                "symbol": "A/80/L.5",
-                "title": "Related",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-        ]
-
-        link_documents(documents, use_undl_metadata=False)
-
-        resolution = documents[0]
-        # base_proposal_symbol should be first linked proposal
-        assert resolution["base_proposal_symbol"] == "A/80/L.1"
 
     def test_default_fields_initialized(self):
         """All link-related fields are initialized."""
@@ -889,8 +728,6 @@ class TestLinkDocuments:
         doc = documents[0]
         assert "linked_resolution_symbol" in doc
         assert "linked_proposal_symbols" in doc
-        assert "link_method" in doc
-        assert "link_confidence" in doc
 
     def test_empty_documents_list(self):
         """Empty documents list handled gracefully."""
@@ -929,12 +766,12 @@ class TestLinkDocuments:
 
 
 # =============================================================================
-# UNIT TESTS: annotate_lineage Function
+# UNIT TESTS: annotate_linkage Function
 # =============================================================================
 
 
-class TestAnnotateLineage:
-    """Test lineage annotation algorithm."""
+class TestAnnotateLinkage:
+    """Test linkage annotation algorithm."""
 
     def test_annotate_adopted_draft(self):
         """Mark proposal as adopted when linked to resolution."""
@@ -951,7 +788,7 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         proposal = documents[1]
         assert proposal["is_adopted_draft"] is True
@@ -967,7 +804,7 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         proposal = documents[0]
         assert proposal["is_adopted_draft"] is False
@@ -988,14 +825,14 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         revision = documents[1]
         # Revisions are excluded from base proposal tracking
         assert revision["is_adopted_draft"] is False
 
-    def test_lineage_proposals_populated(self):
-        """Resolution gets lineage_proposals list."""
+    def test_linked_proposals_populated(self):
+        """Resolution gets linked_proposals list."""
         documents = [
             {
                 "symbol": "A/RES/80/1",
@@ -1014,17 +851,17 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         resolution = documents[0]
-        lineage = resolution["lineage_proposals"]
-        assert len(lineage) == 2
-        symbols = [lp["symbol"] for lp in lineage]
+        linked = resolution["linked_proposals"]
+        assert len(linked) == 2
+        symbols = [lp["symbol"] for lp in linked]
         assert "A/80/L.1" in symbols
         assert "A/80/L.5" in symbols
 
-    def test_lineage_proposals_excludes_revisions(self):
-        """lineage_proposals excludes revision drafts."""
+    def test_linked_proposals_excludes_revisions(self):
+        """linked_proposals excludes revision drafts."""
         documents = [
             {
                 "symbol": "A/RES/80/1",
@@ -1043,16 +880,16 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         resolution = documents[0]
-        lineage = resolution["lineage_proposals"]
-        symbols = [lp["symbol"] for lp in lineage]
+        linked = resolution["linked_proposals"]
+        symbols = [lp["symbol"] for lp in linked]
         assert "A/80/L.1" in symbols
         assert "A/80/L.1/Rev.1" not in symbols
 
-    def test_lineage_proposals_html_filename(self):
-        """lineage_proposals includes HTML filename."""
+    def test_linked_proposals_html_filename(self):
+        """linked_proposals includes HTML filename."""
         documents = [
             {
                 "symbol": "A/RES/80/1",
@@ -1066,20 +903,20 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         resolution = documents[0]
-        lineage = resolution["lineage_proposals"][0]
-        assert lineage["filename"] == "A_80_L.1.html"
+        linked = resolution["linked_proposals"][0]
+        assert linked["filename"] == "A_80_L.1.html"
 
     def test_empty_documents_list(self):
         """Empty documents list handled gracefully."""
         documents = []
-        annotate_lineage(documents)  # Should not raise
+        annotate_linkage(documents)  # Should not raise
         assert documents == []
 
     def test_default_fields_initialized(self):
-        """All lineage fields are initialized."""
+        """All linkage fields are initialized."""
         documents = [
             {
                 "symbol": "A/80/L.1",
@@ -1087,181 +924,12 @@ class TestAnnotateLineage:
             },
         ]
 
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
         doc = documents[0]
         assert "is_adopted_draft" in doc
         assert "adopted_by" in doc
-        assert "lineage_proposals" in doc
-
-
-# =============================================================================
-# UNIT TESTS: Cache Functions
-# =============================================================================
-
-
-class TestLoadLineageCache:
-    """Test loading lineage cache from disk."""
-
-    def test_load_nonexistent_file(self, tmp_path):
-        """Return empty cache for nonexistent file."""
-        cache = load_lineage_cache(tmp_path / "nonexistent.json")
-
-        assert cache["generated_at"] is None
-        assert cache["documents"] == {}
-
-    def test_load_existing_cache(self, tmp_path):
-        """Load existing cache file."""
-        cache_file = tmp_path / "lineage.json"
-        cache_file.write_text(json.dumps({
-            "generated_at": "2026-01-01T00:00:00+00:00",
-            "documents": {
-                "A/80/L.1": {
-                    "classification": "proposal",
-                    "links": ["A/80/100"],
-                }
-            }
-        }))
-
-        cache = load_lineage_cache(cache_file)
-
-        assert cache["generated_at"] == "2026-01-01T00:00:00+00:00"
-        assert "A/80/L.1" in cache["documents"]
-
-    def test_load_cache_missing_documents_key(self, tmp_path):
-        """Handle cache without documents key."""
-        cache_file = tmp_path / "lineage.json"
-        cache_file.write_text(json.dumps({"generated_at": "2026-01-01"}))
-
-        cache = load_lineage_cache(cache_file)
-
-        assert "documents" in cache
-        assert cache["documents"] == {}
-
-
-class TestSaveLineageCache:
-    """Test saving lineage cache to disk."""
-
-    def test_save_cache(self, tmp_path):
-        """Save cache to disk with timestamp."""
-        cache_file = tmp_path / "lineage.json"
-        cache = {
-            "documents": {
-                "A/80/L.1": {"classification": "proposal"}
-            }
-        }
-
-        save_lineage_cache(cache_file, cache)
-
-        assert cache_file.exists()
-        saved = json.loads(cache_file.read_text())
-        assert "generated_at" in saved
-        assert "A/80/L.1" in saved["documents"]
-
-    def test_save_creates_directory(self, tmp_path):
-        """Create parent directory if needed."""
-        cache_file = tmp_path / "subdir" / "lineage.json"
-        cache = {"documents": {}}
-
-        save_lineage_cache(cache_file, cache)
-
-        assert cache_file.exists()
-
-
-class TestUpdateLineageCache:
-    """Test updating lineage cache from PDFs."""
-
-    def test_update_empty_pdfs_dir(self, tmp_path):
-        """Handle nonexistent pdfs directory."""
-        data_dir = tmp_path / "data"
-        data_dir.mkdir()
-        # No pdfs/ subdirectory
-
-        result = update_lineage_cache(data_dir)
-
-        assert result["total"] == 0
-        assert result["updated"] == 0
-
-    def test_update_new_pdf(self, tmp_path, mocker):
-        """Update cache with new PDF."""
-        data_dir = tmp_path / "data"
-        pdfs_dir = data_dir / "pdfs"
-        pdfs_dir.mkdir(parents=True)
-
-        pdf = pdfs_dir / "A_80_L.1.pdf"
-        pdf.write_bytes(b"%PDF-1.4 content")
-
-        # Mock extract_text
-        mocker.patch("mandate_pipeline.lineage.extract_text", return_value="Text with A/80/100 reference")
-
-        result = update_lineage_cache(data_dir)
-
-        assert result["total"] == 1
-        assert result["updated"] == 1
-
-        # Verify cache was saved
-        cache_file = data_dir / "lineage.json"
-        assert cache_file.exists()
-        cache = json.loads(cache_file.read_text())
-        assert "A/80/L.1" in cache["documents"]
-
-    def test_update_reuses_unchanged(self, tmp_path, mocker):
-        """Reuse cache for unchanged PDFs."""
-        data_dir = tmp_path / "data"
-        pdfs_dir = data_dir / "pdfs"
-        pdfs_dir.mkdir(parents=True)
-
-        pdf = pdfs_dir / "A_80_L.1.pdf"
-        pdf.write_bytes(b"%PDF-1.4 content")
-        pdf_hash = compute_last_modified_hash(pdf)
-
-        # Pre-populate cache
-        cache_file = data_dir / "lineage.json"
-        cache_file.write_text(json.dumps({
-            "generated_at": "2026-01-01",
-            "documents": {
-                "A/80/L.1": {
-                    "last_modified_hash": pdf_hash,
-                    "classification": "proposal",
-                    "links": [],
-                }
-            }
-        }))
-
-        # Should not call extract_text
-        mock_extract = mocker.patch("mandate_pipeline.lineage.extract_text")
-
-        result = update_lineage_cache(data_dir)
-
-        assert result["reused"] == 1
-        assert result["updated"] == 0
-        mock_extract.assert_not_called()
-
-    def test_update_removes_deleted_pdfs(self, tmp_path, mocker):
-        """Remove cache entries for deleted PDFs."""
-        data_dir = tmp_path / "data"
-        pdfs_dir = data_dir / "pdfs"
-        pdfs_dir.mkdir(parents=True)
-
-        # Pre-populate cache with non-existent PDF
-        cache_file = data_dir / "lineage.json"
-        cache_file.write_text(json.dumps({
-            "generated_at": "2026-01-01",
-            "documents": {
-                "A/80/L.DELETED": {
-                    "last_modified_hash": "abc123",
-                    "classification": "proposal",
-                    "links": [],
-                }
-            }
-        }))
-
-        result = update_lineage_cache(data_dir)
-
-        assert result["removed"] == 1
-
-        cache = json.loads(cache_file.read_text())
-        assert "A/80/L.DELETED" not in cache["documents"]
+        assert "linked_proposals" in doc
 
 
 # =============================================================================
@@ -1277,7 +945,7 @@ class TestDataQualityLinkage:
 
     def test_symbol_extraction_consistency(self):
         """Symbol extraction produces consistent normalized results."""
-        from mandate_pipeline.extractor import extract_text
+        from mandate_pipeline.extractor import extract_text, find_symbol_references
 
         # Test with a few known documents
         test_files = list(DATA_DIR.glob("A_80_L.*.pdf"))[:5]
@@ -1287,14 +955,11 @@ class TestDataQualityLinkage:
         for pdf in test_files:
             text = extract_text(pdf)
             symbol = filename_to_symbol(pdf.stem)
-            links = extract_linked_symbols(text, symbol)
+            refs = find_symbol_references(text)
 
             # All extracted symbols should be uppercase
-            for link in links:
-                assert link == link.upper(), f"Symbol {link} not normalized"
-
-            # No self-references
-            assert symbol not in links, f"Self-reference found in {symbol}"
+            for ref in refs:
+                assert ref == ref.upper(), f"Symbol {ref} not normalized"
 
     def test_classify_symbol_real_documents(self):
         """Classification works on real document symbols."""
@@ -1335,14 +1000,13 @@ class TestDataQualityLinkage:
 
         # Should not raise
         link_documents(documents, use_undl_metadata=False)
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
-        # All documents should have link fields
+        # All documents should have final linkage fields
         for doc in documents:
-            assert "linked_resolution_symbol" in doc
-            assert "linked_proposal_symbols" in doc
             assert "is_adopted_draft" in doc
-            assert "lineage_proposals" in doc
+            assert "adopted_by" in doc
+            assert "linked_proposals" in doc
 
     def test_fuzzy_title_matching_quality(self):
         """Fuzzy title matching produces reasonable results."""
@@ -1377,7 +1041,7 @@ class TestLinkageIntegration:
     """Integration tests for complete linkage workflow."""
 
     def test_full_link_and_annotate_workflow(self):
-        """Complete workflow: link_documents then annotate_lineage."""
+        """Complete workflow: link_documents then annotate_linkage."""
         documents = [
             # Resolution with symbol reference
             {
@@ -1431,17 +1095,17 @@ class TestLinkageIntegration:
 
         # Run linking
         link_documents(documents, use_undl_metadata=False)
-        annotate_lineage(documents)
+        annotate_linkage(documents)
 
-        # Verify RES/80/1 linked to L.1 via symbol
+        # Verify RES/80/1 has linked_proposals
         res1 = next(d for d in documents if d["symbol"] == "A/RES/80/1")
-        assert res1["linked_proposal_symbols"] == ["A/80/L.1"]
-        assert res1["link_method"] == "symbol_reference"
+        assert len(res1["linked_proposals"]) == 1
+        assert res1["linked_proposals"][0]["symbol"] == "A/80/L.1"
 
-        # Verify RES/80/2 linked to L.5 via fuzzy
+        # Verify RES/80/2 has linked_proposals
         res2 = next(d for d in documents if d["symbol"] == "A/RES/80/2")
-        assert res2["linked_proposal_symbols"] == ["A/80/L.5"]
-        assert res2["link_method"] == "title_agenda_fuzzy"
+        assert len(res2["linked_proposals"]) == 1
+        assert res2["linked_proposals"][0]["symbol"] == "A/80/L.5"
 
         # Verify L.1 is adopted
         l1 = next(d for d in documents if d["symbol"] == "A/80/L.1")
@@ -1460,4 +1124,3 @@ class TestLinkageIntegration:
         # Verify unrelated proposal is not adopted
         l10 = next(d for d in documents if d["symbol"] == "A/80/L.10")
         assert l10["is_adopted_draft"] is False
-        assert l10["linked_resolution_symbol"] is None

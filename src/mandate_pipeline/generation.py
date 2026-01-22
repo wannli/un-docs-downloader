@@ -18,9 +18,8 @@ from .extractor import (
 )
 from .discovery import load_patterns
 from .linking import (
-    load_lineage_cache,
     link_documents,
-    annotate_lineage,
+    annotate_linkage,
     is_resolution,
     is_proposal,
     symbol_to_filename,
@@ -77,27 +76,6 @@ def classify_doc_type(symbol: str, text: str) -> str:
     return "other"
 
 
-def infer_base_proposal_symbol(symbol: str, doc_type: str, text: str) -> str | None:
-    """Infer the base proposal symbol for proposals or amendments."""
-    # Heuristic trade-offs:
-    # - We scan a short front-matter window to keep it fast, but
-    #   amendments can reference targets later in the document.
-    # - The regex is conservative, so unknown formats fall back to None.
-    # - We now capture optional /Rev.X suffixes found in draft symbols.
-    if doc_type == "proposal":
-        return symbol
-    if doc_type == "amendment":
-        front_matter = text.split("\f", 2)[0:2]
-        front_matter_text = "\f".join(front_matter)[:4000]
-        symbol_match = re.search(
-            r"\bA/\d+/(?:L\.\d+|C\.\d+/\d+/L\.\d+|C\.\d+/L\.\d+)(?:/Rev\.\d+)?\b",
-            front_matter_text,
-        )
-        if symbol_match:
-            return symbol_match.group(0)
-    return None
-
-
 def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     """
     Load all documents from the data directory.
@@ -117,9 +95,6 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     if not pdfs_dir.exists():
         return documents
 
-    lineage_cache = load_lineage_cache(data_dir / "lineage.json")
-    lineage_documents = lineage_cache.get("documents", {})
-
     for pdf_file in pdfs_dir.glob("*.pdf"):
         # Extract symbol from filename
         symbol = filename_to_symbol(pdf_file.stem)
@@ -132,7 +107,6 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
             agenda_items = extract_agenda_items(text)
             symbol_references = find_symbol_references(text)
             doc_type = classify_doc_type(symbol, text)
-            base_proposal_symbol = infer_base_proposal_symbol(symbol, doc_type, text)
 
             # Run checks
             signals = run_checks(paragraphs, checks) if checks else {}
@@ -147,16 +121,12 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
                 "symbol": symbol,
                 "filename": pdf_file.name,
                 "doc_type": doc_type,
-                "base_proposal_symbol": base_proposal_symbol,
                 "paragraphs": paragraphs,
                 "title": title,
                 "agenda_items": agenda_items,
                 "symbol_references": symbol_references,
-                "doc_type": doc_type,
-                "base_proposal_symbol": base_proposal_symbol,
                 "signals": signals,
                 "signal_summary": signal_summary,
-                "lineage": lineage_documents.get(symbol, {}),
                 "num_paragraphs": len(paragraphs),
                 "un_url": get_un_document_url(symbol),
             })
@@ -843,7 +813,7 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     # Load all documents
     documents = load_all_documents(data_dir, checks)
     link_documents(documents)
-    annotate_lineage(documents)
+    annotate_linkage(documents)
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     # Create output directories
@@ -923,8 +893,6 @@ def generate_site_verbose(
     load_start_time = time.time()
     documents = []
     pdfs_dir = data_dir / "pdfs"
-    lineage_cache = load_lineage_cache(data_dir / "lineage.json")
-    lineage_documents = lineage_cache.get("documents", {})
 
     if pdfs_dir.exists():
         for pdf_file in pdfs_dir.glob("*.pdf"):
@@ -938,7 +906,6 @@ def generate_site_verbose(
                 agenda_items = extract_agenda_items(text)
                 symbol_references = find_symbol_references(text)
                 doc_type = classify_doc_type(symbol, text)
-                base_proposal_symbol = infer_base_proposal_symbol(symbol, doc_type, text)
                 signals = run_checks(paragraphs, checks) if checks else {}
 
                 # Build signal summary
@@ -951,16 +918,12 @@ def generate_site_verbose(
                     "symbol": symbol,
                     "filename": pdf_file.name,
                     "doc_type": doc_type,
-                    "base_proposal_symbol": base_proposal_symbol,
                     "paragraphs": paragraphs,
                     "title": title,
                     "agenda_items": agenda_items,
                     "symbol_references": symbol_references,
-                    "doc_type": doc_type,
-                    "base_proposal_symbol": base_proposal_symbol,
                     "signals": signals,
                     "signal_summary": signal_summary,
-                    "lineage": lineage_documents.get(symbol, {}),
                     "num_paragraphs": len(paragraphs),
                     "un_url": get_un_document_url(symbol),
                 }
@@ -981,7 +944,7 @@ def generate_site_verbose(
     documents.sort(key=sort_key)
 
     link_documents(documents)
-    annotate_lineage(documents)
+    annotate_linkage(documents)
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     load_duration = time.time() - load_start_time

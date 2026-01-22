@@ -31,15 +31,15 @@
 </div>
 
 {% if doc.doc_type == "resolution" %}
-{% set lineage = doc.lineage_proposals or [] %}
+{% set linked = doc.linked_proposals or [] %}
 <div class="bg-white rounded-lg border border-gray-200 p-4 mb-8">
     <div class="flex items-center justify-between">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Lineage</h2>
-        <span class="text-sm text-muted">{{ lineage|length }} linked draft{% if lineage|length != 1 %}s{% endif %}</span>
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Linked Drafts</h2>
+        <span class="text-sm text-muted">{{ linked|length }} linked draft{% if linked|length != 1 %}s{% endif %}</span>
     </div>
-    {% if lineage %}
+    {% if linked %}
     <div class="mt-3 space-y-2">
-        {% for item in lineage %}
+        {% for item in linked %}
         <a href="./{{ item.filename }}" class="block px-3 py-2 rounded-lg border border-gray-200 hover:border-un-blue hover:bg-blue-50 transition-colors">
             <span class="font-medium text-gray-900">{{ item.symbol }}</span>
         </a>

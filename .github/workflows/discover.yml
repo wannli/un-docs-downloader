@@ -1,4 +1,4 @@
-name: Fetch Documents
+name: Discover Documents
 
 on:
   schedule:
@@ -11,11 +11,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: "data-fetch"
+  group: "discover"
   cancel-in-progress: false
 
 jobs:
-  fetch:
+  discover:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,46 +28,19 @@ jobs:
           cache: 'pip'
 
       - name: Install dependencies
-        run: |
-          pip install -e .
-
-      - name: Show configuration
-        run: |
-          echo "::group::Patterns Configuration"
-          cat ./config/patterns.yaml
-          echo "::endgroup::"
-          
-          echo "::group::Checks Configuration"
-          cat ./config/checks.yaml
-          echo "::endgroup::"
-          
-          echo "::group::Current State"
-          echo "Cached PDFs: $(find ./data/pdfs -name '*.pdf' 2>/dev/null | wc -l || echo 0)"
-          if [ -f ./data/state.json ]; then
-            cat ./data/state.json
-          else
-            echo "No state file yet (first run)"
-          fi
-          echo "::endgroup::"
+        run: pip install -e .
 
       - name: Discover new documents
-        run: |
-          python -m mandate_pipeline.cli discover --verbose --config ./config --data ./data
+        run: python -m mandate_pipeline.cli discover --config ./config --data ./data
 
       - name: Check for changes
         id: changes
         run: |
           git add data/
-          echo "::group::Changes Summary"
-          git diff --staged --stat || echo "No changes"
-          echo "::endgroup::"
-          
           if git diff --staged --quiet; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "::notice::No changes to commit"
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "::notice::Changes detected, will commit"
           fi
 
       - name: Commit changes
@@ -75,7 +48,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: fetch documents $(date -I)"
+          git commit -m "chore: discover $(date -I)"
           # Pull any changes that happened during the build, then push
           git pull --rebase origin main || true
           git push

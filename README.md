@@ -22,8 +22,7 @@ mandate build --config ./config --data ./data --output ./docs --verbose
 
 # Or run specific stages
 mandate discover --config ./config --data ./data --verbose          # Stage 1: Discovery
-mandate lineage --config ./config --data ./data --output ./docs    # Stage 4: Linking
-mandate generate --config ./config --data ./data --output ./docs   # Stages 2, 3, 5: Extraction, Detection, Generation
+mandate generate --config ./config --data ./data --output ./docs   # Stages 2-5: Extraction, Detection, Linking, Generation
 ```
 
 ## Project Structure
@@ -35,8 +34,7 @@ mandate-pipeline/
 │   └── patterns.yaml         # Document patterns to discover
 ├── data/                      # Persistent data
 │   ├── pdfs/                 # Downloaded PDF documents
-│   ├── state.json            # Discovery sync state
-│   └── lineage.json          # Document linkage cache
+│   └── state.json            # Discovery sync state
 ├── docs/                      # Generated static website
 ├── src/mandate_pipeline/      # Core Python package
 │   ├── cli.py                # Command-line interface
@@ -96,12 +94,10 @@ Identifies mandate-related signals in document text.
 Builds relationships between documents (resolutions ↔ proposals).
 
 **Process:**
-1. **Lineage Cache**: Scan all PDFs and extract symbol references
-2. **Classification**: Classify documents (resolution/proposal/other)
-3. **Explicit Linking**: Link via symbol references (100% confidence)
-4. **Fuzzy Matching**: Link via title similarity (85%+ threshold)
-5. **Caching**: Save results in `data/lineage.json` (uses hash to skip unchanged files)
-6. **Export**: Generate metadata for `docs/data.json`
+1. **Classification**: Classify documents (resolution/proposal/other)
+2. **Explicit Linking**: Link via symbol references found in text (100% confidence)
+3. **Fuzzy Matching**: Link via title similarity (85%+ threshold)
+4. **Annotation**: Mark proposals as "adopted" when linked to resolutions
 
 ### Stage 5: Generation (`generation.py`)
 
@@ -128,7 +124,7 @@ data/pdfs/*.pdf
     ↓
 [Stage 3: Detection] → Matched phrases per paragraph
     ↓
-[Stage 4: Linking] → Resolution ↔ Proposal relationships + data/lineage.json
+[Stage 4: Linking] → Resolution ↔ Proposal relationships
     ↓
 [Stage 5: Generation]
     ↓
@@ -234,7 +230,7 @@ mandate generate \
 | Option | Description |
 |--------|-------------|
 | `--config` | Directory containing checks.yaml and patterns.yaml |
-| `--data` | Directory with pdfs/ and lineage.json |
+| `--data` | Directory with pdfs/ subdirectory |
 | `--output` | Output directory for static site |
 | `--verbose` | Log each document processed |
 
@@ -248,18 +244,6 @@ mandate build \
   --data ./data \
   --output ./docs \
   --max-misses 3 \
-  --verbose
-```
-
-### mandate lineage
-
-Update document linkage cache and export data.json (runs Stage 4: Linking).
-
-```bash
-mandate lineage \
-  --config ./config \
-  --data ./data \
-  --output ./docs \
   --verbose
 ```
 
@@ -278,23 +262,6 @@ Tracks discovery progress:
     },
     "General Assembly proposals": {
       "highest_found": 185
-    }
-  }
-}
-```
-
-### data/lineage.json
-
-Caches document linkage data:
-
-```json
-{
-  "generated_at": "2026-01-20T10:35:22.123456+00:00",
-  "documents": {
-    "A/80/L.1": {
-      "last_modified_hash": "sha256...",
-      "classification": "proposal",
-      "links": ["A/80/L.2", "A/RES/80/5"]
     }
   }
 }
@@ -319,7 +286,7 @@ Complete metadata export for external tools:
 
 ## GitHub Actions Automation
 
-Three workflows automate the pipeline:
+Two workflows automate the pipeline:
 
 ### fetch-documents.yml
 
@@ -327,15 +294,9 @@ Three workflows automate the pipeline:
 - **Action**: Run `mandate discover`, commit new PDFs
 - **Result**: `data/pdfs/` and `data/state.json` updated
 
-### linkage-analysis.yml
-
-- **Trigger**: After fetch-documents or manual
-- **Action**: Run `mandate lineage`
-- **Result**: `data/lineage.json` and `docs/data.json` updated
-
 ### build-site.yml
 
-- **Trigger**: Changes to data/lineage.json, config/, or src/
+- **Trigger**: Changes to data/pdfs/, config/, or src/
 - **Action**: Run `mandate generate`, deploy to GitHub Pages
 - **Result**: Static website updated
 

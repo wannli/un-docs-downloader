@@ -295,7 +295,7 @@ class TestDiscoverDocuments:
         }
 
         # Mock document_exists: 1,2,3 exist, then 4,5,6 don't exist
-        mock_exists = mocker.patch("mandate_pipeline.pipeline.document_exists")
+        mock_exists = mocker.patch("mandate_pipeline.discovery.document_exists")
         mock_exists.side_effect = [True, True, True, False, False, False]
 
         found = list(discover_documents(pattern, max_consecutive_misses=3))
@@ -313,7 +313,7 @@ class TestDiscoverDocuments:
         }
 
         # Pattern: hit, miss, miss, hit, miss, miss, miss (stop)
-        mock_exists = mocker.patch("mandate_pipeline.pipeline.document_exists")
+        mock_exists = mocker.patch("mandate_pipeline.discovery.document_exists")
         mock_exists.side_effect = [True, False, False, True, False, False, False]
 
         found = list(discover_documents(pattern, max_consecutive_misses=3))
@@ -346,14 +346,14 @@ class TestSyncState:
 
     def test_load_state_empty(self, tmp_path):
         """Load state returns empty dict if no state file exists."""
-        from mandate_pipeline.pipeline import load_sync_state
+        from mandate_pipeline.discovery import load_sync_state
 
         state = load_sync_state(tmp_path / "state.json")
         assert state == {"patterns": {}}
 
     def test_save_and_load_state(self, tmp_path):
         """Save and load sync state."""
-        from mandate_pipeline.pipeline import load_sync_state, save_sync_state
+        from mandate_pipeline.discovery import load_sync_state, save_sync_state
 
         state = {
             "last_sync": "2026-01-20T06:00:00Z",
@@ -371,7 +371,7 @@ class TestSyncState:
 
     def test_get_start_number_no_state(self, tmp_path):
         """Get start number returns pattern start if no state."""
-        from mandate_pipeline.pipeline import get_start_number
+        from mandate_pipeline.discovery import get_start_number
 
         pattern = {"name": "L documents", "start": 1}
         state = {"patterns": {}}
@@ -380,7 +380,7 @@ class TestSyncState:
 
     def test_get_start_number_with_state(self, tmp_path):
         """Get start number returns highest_found + 1 if state exists."""
-        from mandate_pipeline.pipeline import get_start_number
+        from mandate_pipeline.discovery import get_start_number
 
         pattern = {"name": "L documents", "start": 1}
         state = {"patterns": {"L documents": {"highest_found": 42}}}
@@ -393,7 +393,7 @@ class TestSyncDocuments:
 
     def test_sync_downloads_new_documents(self, tmp_path, mocker):
         """Sync discovers and downloads new documents."""
-        from mandate_pipeline.pipeline import sync_pattern
+        from mandate_pipeline.discovery import sync_pattern
 
         pattern = {
             "name": "L documents",
@@ -404,11 +404,11 @@ class TestSyncDocuments:
         state = {"patterns": {"L documents": {"highest_found": 2}}}
 
         # Mock: docs 3, 4 exist, then 5, 6, 7 don't
-        mock_exists = mocker.patch("mandate_pipeline.pipeline.document_exists")
+        mock_exists = mocker.patch("mandate_pipeline.discovery.document_exists")
         mock_exists.side_effect = [True, True, False, False, False]
 
         # Mock download
-        mock_download = mocker.patch("mandate_pipeline.pipeline.download_document")
+        mock_download = mocker.patch("mandate_pipeline.discovery.download_document")
         mock_download.return_value = tmp_path / "fake.pdf"
 
         data_dir = tmp_path / "data"
@@ -424,7 +424,7 @@ class TestSyncDocuments:
 
     def test_sync_no_new_documents(self, tmp_path, mocker):
         """Sync returns empty list when no new documents."""
-        from mandate_pipeline.pipeline import sync_pattern
+        from mandate_pipeline.discovery import sync_pattern
 
         pattern = {
             "name": "L documents",
@@ -435,10 +435,10 @@ class TestSyncDocuments:
         state = {"patterns": {"L documents": {"highest_found": 42}}}
 
         # Mock: 43, 44, 45 all don't exist
-        mock_exists = mocker.patch("mandate_pipeline.pipeline.document_exists")
+        mock_exists = mocker.patch("mandate_pipeline.discovery.document_exists")
         mock_exists.side_effect = [False, False, False]
 
-        mock_download = mocker.patch("mandate_pipeline.pipeline.download_document")
+        mock_download = mocker.patch("mandate_pipeline.discovery.download_document")
 
         data_dir = tmp_path / "data"
         data_dir.mkdir()
@@ -457,7 +457,7 @@ class TestStaticGenerator:
 
     def test_generate_data_json(self, tmp_path):
         """Generate data.json with correct structure."""
-        from mandate_pipeline.static_generator import generate_data_json
+        from mandate_pipeline.generation import generate_data_json
 
         documents = [
             {
@@ -485,7 +485,7 @@ class TestStaticGenerator:
 
     def test_generate_search_index(self, tmp_path):
         """Generate Lunr.js compatible search index."""
-        from mandate_pipeline.static_generator import generate_search_index
+        from mandate_pipeline.generation import generate_search_index
 
         documents = [
             {
@@ -519,7 +519,7 @@ class TestStaticGenerator:
 
     def test_generate_document_page(self, tmp_path):
         """Generate individual document HTML page."""
-        from mandate_pipeline.static_generator import generate_document_page
+        from mandate_pipeline.generation import generate_document_page
 
         doc = {
             "symbol": "A/80/L.1",
@@ -545,7 +545,7 @@ class TestStaticGenerator:
 
     def test_generate_signal_page(self, tmp_path):
         """Generate signal-filtered page."""
-        from mandate_pipeline.static_generator import generate_signal_page
+        from mandate_pipeline.generation import generate_signal_page
 
         documents = [
             {
@@ -584,7 +584,7 @@ class TestStaticGenerator:
 
     def test_get_un_document_url(self):
         """Generate correct UN ODS URL for a symbol."""
-        from mandate_pipeline.static_generator import get_un_document_url
+        from mandate_pipeline.generation import get_un_document_url
 
         url = get_un_document_url("A/80/L.1")
         assert url == "https://docs.un.org/en/a/80/l.1?direct=true"
@@ -595,7 +595,7 @@ class TestStaticGenerator:
 
     def test_load_all_documents(self, tmp_path, mocker):
         """Load all documents from data directory."""
-        from mandate_pipeline.static_generator import load_all_documents
+        from mandate_pipeline.generation import load_all_documents
 
         # Create fake PDF structure (flat pdfs/ directory)
         pdf_dir = tmp_path / "data" / "pdfs"
@@ -604,11 +604,11 @@ class TestStaticGenerator:
 
         # Mock extraction
         mocker.patch(
-            "mandate_pipeline.static_generator.extract_text",
+            "mandate_pipeline.generation.extract_text",
             return_value="1. First operative paragraph about agenda;",
         )
         mocker.patch(
-            "mandate_pipeline.static_generator.extract_operative_paragraphs",
+            "mandate_pipeline.generation.extract_operative_paragraphs",
             return_value={1: "First operative paragraph about agenda;"},
         )
 
@@ -624,7 +624,7 @@ class TestStaticGenerator:
 
     def test_generate_site_creates_all_files(self, tmp_path, mocker):
         """Full site generation creates expected file structure."""
-        from mandate_pipeline.static_generator import generate_site
+        from mandate_pipeline.generation import generate_site
 
         # Setup directories
         config_dir = tmp_path / "config"
@@ -657,11 +657,11 @@ patterns:
 
         # Mock extraction
         mocker.patch(
-            "mandate_pipeline.static_generator.extract_text",
+            "mandate_pipeline.generation.extract_text",
             return_value="1. First paragraph about agenda;",
         )
         mocker.patch(
-            "mandate_pipeline.static_generator.extract_operative_paragraphs",
+            "mandate_pipeline.generation.extract_operative_paragraphs",
             return_value={1: "First paragraph about agenda;"},
         )
 
