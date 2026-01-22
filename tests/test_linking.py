@@ -142,57 +142,64 @@ class TestParseUndlMarcXml:
         assert result["symbol"] == "a/res/80/142"
 
 
+@pytest.fixture
+def mock_session(mocker):
+    """Fixture to mock _get_session helper."""
+    mock_s = mocker.Mock()
+    mocker.patch("mandate_pipeline.linking._get_session", return_value=mock_s)
+    return mock_s
+
 class TestFetchUndlMetadata:
     """Tests for UN Digital Library API fetching."""
 
-    def test_fetch_success(self, mocker):
+    def test_fetch_success(self, mocker, mock_session):
         """Fetch metadata successfully from UNDL."""
         mock_response = mocker.Mock()
         mock_response.status_code = 200
         mock_response.text = SAMPLE_MARC_XML
         mock_response.raise_for_status = mocker.Mock()
 
-        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
+        mock_session.get.return_value = mock_response
+
+        mocker.patch("mandate_pipeline.linking.time.sleep")
+        mocker.patch("mandate_pipeline.linking._save_cached_metadata")
 
         result = fetch_undl_metadata("A/RES/80/142")
 
         assert result is not None
         assert result["base_proposal"] == "A/C.2/80/L.35/Rev.1"
 
-    def test_fetch_network_error(self, mocker):
+    def test_fetch_network_error(self, mocker, mock_session):
         """Return None on network error."""
         import requests
 
-        mocker.patch(
-            "mandate_pipeline.linking.requests.get",
-            side_effect=requests.RequestException("Connection failed"),
-        )
+        mock_session.get.side_effect = requests.RequestException("Connection failed")
+        mocker.patch("mandate_pipeline.linking._get_cached_metadata", return_value=None)
 
         result = fetch_undl_metadata("A/RES/80/142")
 
         assert result is None
 
-    def test_fetch_http_error(self, mocker):
+    def test_fetch_http_error(self, mocker, mock_session):
         """Return None on HTTP error status."""
         import requests
 
         mock_response = mocker.Mock()
         mock_response.raise_for_status.side_effect = requests.HTTPError("404 Not Found")
 
-        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
+        mock_session.get.return_value = mock_response
+        mocker.patch("mandate_pipeline.linking._get_cached_metadata", return_value=None)
 
         result = fetch_undl_metadata("A/RES/80/142")
 
         assert result is None
 
-    def test_fetch_timeout(self, mocker):
+    def test_fetch_timeout(self, mocker, mock_session):
         """Return None on timeout."""
         import requests
 
-        mocker.patch(
-            "mandate_pipeline.linking.requests.get",
-            side_effect=requests.Timeout("Request timed out"),
-        )
+        mock_session.get.side_effect = requests.Timeout("Request timed out")
+        mocker.patch("mandate_pipeline.linking._get_cached_metadata", return_value=None)
 
         result = fetch_undl_metadata("A/RES/80/142")
 
@@ -202,14 +209,16 @@ class TestFetchUndlMetadata:
 class TestLinkDocumentsWithUndl:
     """Tests for link_documents with UNDL metadata integration."""
 
-    def test_link_via_undl_metadata(self, mocker):
+    def test_link_via_undl_metadata(self, mocker, mock_session):
         """Link resolution to proposal via UNDL metadata (Pass 0)."""
         mock_response = mocker.Mock()
         mock_response.status_code = 200
         mock_response.text = SAMPLE_MARC_XML
         mock_response.raise_for_status = mocker.Mock()
 
-        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
+        mock_session.get.return_value = mock_response
+        mocker.patch("mandate_pipeline.linking.time.sleep")
+        mocker.patch("mandate_pipeline.linking._save_cached_metadata")
 
         documents = [
             {"symbol": "A/RES/80/142", "title": "Test Resolution"},
@@ -224,14 +233,16 @@ class TestLinkDocumentsWithUndl:
         assert "A/C.2/80/L.35/Rev.1" in resolution["linked_proposal_symbols"]
         assert proposal["linked_resolution_symbol"] == "A/RES/80/142"
 
-    def test_link_fallback_to_symbol_reference(self, mocker):
+    def test_link_fallback_to_symbol_reference(self, mocker, mock_session):
         """Fall back to symbol reference when UNDL has no draft."""
         mock_response = mocker.Mock()
         mock_response.status_code = 200
         mock_response.text = SAMPLE_MARC_XML_NO_DRAFT
         mock_response.raise_for_status = mocker.Mock()
 
-        mocker.patch("mandate_pipeline.linking.requests.get", return_value=mock_response)
+        mock_session.get.return_value = mock_response
+        mocker.patch("mandate_pipeline.linking.time.sleep")
+        mocker.patch("mandate_pipeline.linking._save_cached_metadata")
 
         documents = [
             {
@@ -251,7 +262,7 @@ class TestLinkDocumentsWithUndl:
 
     def test_link_undl_disabled(self, mocker):
         """Skip UNDL lookup when disabled."""
-        mock_get = mocker.patch("mandate_pipeline.linking.requests.get")
+        mock_get_session = mocker.patch("mandate_pipeline.linking._get_session")
 
         documents = [
             {
@@ -265,7 +276,7 @@ class TestLinkDocumentsWithUndl:
         link_documents(documents, use_undl_metadata=False)
 
         # Should not have called the API
-        mock_get.assert_not_called()
+        mock_get_session.assert_not_called()
 
         # Should still link via symbol_reference
         resolution = documents[0]
@@ -273,7 +284,7 @@ class TestLinkDocumentsWithUndl:
 
     def test_link_skip_already_linked(self, mocker):
         """Skip UNDL lookup for already-linked documents."""
-        mock_get = mocker.patch("mandate_pipeline.linking.requests.get")
+        mock_get_session = mocker.patch("mandate_pipeline.linking._get_session")
 
         documents = [
             {
@@ -286,7 +297,7 @@ class TestLinkDocumentsWithUndl:
         link_documents(documents, use_undl_metadata=True)
 
         # Should not call API for already-linked resolution
-        mock_get.assert_not_called()
+        mock_get_session.assert_not_called()
 
 
 # =============================================================================

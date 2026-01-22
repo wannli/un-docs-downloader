@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
 import re
+import time
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 import requests
 from rapidfuzz import fuzz
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +21,24 @@ logger = logging.getLogger(__name__)
 UNDL_SEARCH_URL = "https://digitallibrary.un.org/search"
 UNDL_TIMEOUT = 30  # seconds
 MARC_NS = {"marc": "http://www.loc.gov/MARC21/slim"}
+CACHE_DIR = Path("data/cache/undl")
+
+_SESSION = None
+
+
+def _get_session() -> requests.Session:
+    """Get or create a reusable requests session with retries."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = requests.Session()
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["GET"],
+        )
+        _SESSION.mount("https://", HTTPAdapter(max_retries=retries))
+    return _SESSION
 
 
 def fetch_undl_metadata(symbol: str) -> dict | None:
@@ -23,6 +47,8 @@ def fetch_undl_metadata(symbol: str) -> dict | None:
 
     Queries the UNDL search API for the given symbol and parses the MARC XML
     response to extract related document symbols from tag 993.
+
+    Includes caching and rate limiting.
 
     Args:
         symbol: UN resolution symbol (e.g., "A/RES/80/142")
@@ -36,6 +62,11 @@ def fetch_undl_metadata(symbol: str) -> dict | None:
             "base_proposal": str | None,   # first L. document
         }
     """
+    # 1. Check cache
+    cached = _get_cached_metadata(symbol)
+    if cached:
+        return cached
+
     params = {
         "ln": "en",
         "of": "xm",  # MARC XML output format
@@ -43,14 +74,59 @@ def fetch_undl_metadata(symbol: str) -> dict | None:
         "rg": "5",  # limit results
     }
 
+    # 2. Use reused session
+    session = _get_session()
+
     try:
-        resp = requests.get(UNDL_SEARCH_URL, params=params, timeout=UNDL_TIMEOUT)
+        resp = session.get(UNDL_SEARCH_URL, params=params, timeout=UNDL_TIMEOUT)
         resp.raise_for_status()
+
+        result = _parse_undl_marc_xml(resp.text, symbol)
+
+        if result:
+            _save_cached_metadata(symbol, result)
+
+        # 3. Be polite
+        time.sleep(1)
+
+        return result
+
     except requests.RequestException as e:
         logger.warning("Failed to fetch UNDL metadata for %s: %s", symbol, e)
         return None
 
-    return _parse_undl_marc_xml(resp.text, symbol)
+
+def _get_cache_path(symbol: str) -> Path:
+    """Generate a safe cache file path for a symbol."""
+    # Use MD5 hash to handle special characters and length
+    symbol_hash = hashlib.md5(symbol.encode("utf-8")).hexdigest()
+    return CACHE_DIR / f"{symbol_hash}.json"
+
+
+def _get_cached_metadata(symbol: str) -> dict | None:
+    """Retrieve metadata from local cache if it exists."""
+    cache_path = _get_cache_path(symbol)
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError) as e:
+            logger.warning("Failed to read cache for %s: %s", symbol, e)
+    return None
+
+
+def _save_cached_metadata(symbol: str, data: dict) -> None:
+    """Save metadata to local cache."""
+    if not data:
+        return
+
+    try:
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        cache_path = _get_cache_path(symbol)
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except OSError as e:
+        logger.warning("Failed to save cache for %s: %s", symbol, e)
 
 
 def _parse_undl_marc_xml(xml_text: str, target_symbol: str) -> dict | None:
