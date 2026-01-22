@@ -1169,6 +1169,7 @@ def generate_site_verbose(
     config_dir: Path,
     data_dir: Path,
     output_dir: Path,
+    skip_debug: bool = False,
     on_load_start: callable = None,
     on_load_document: callable = None,
     on_load_error: callable = None,
@@ -1184,6 +1185,7 @@ def generate_site_verbose(
         config_dir: Directory containing checks.yaml and patterns.yaml
         data_dir: Directory containing pdfs/ subdirectory
         output_dir: Output directory for static site
+        skip_debug: If True, skip generating debug pages (faster builds)
         on_load_start: Callback() when starting to load documents
         on_load_document: Callback(symbol, num_paragraphs, signals, duration) for each doc
         on_load_error: Callback(path, error) for load errors
@@ -1196,6 +1198,7 @@ def generate_site_verbose(
         Dict with stats: total_documents, documents_with_signals, signal_counts, etc.
     """
     import time
+    from concurrent.futures import ThreadPoolExecutor, as_completed
 
     config_dir = Path(config_dir)
     data_dir = Path(data_dir)
@@ -1213,48 +1216,58 @@ def generate_site_verbose(
     documents = []
     pdfs_dir = data_dir / "pdfs"
 
+    def process_pdf(pdf_file: Path) -> tuple:
+        """Process a single PDF file and return (doc, error) tuple."""
+        doc_start_time = time.time()
+        symbol = filename_to_symbol(pdf_file.stem)
+
+        try:
+            text = extract_text(pdf_file)
+            paragraphs = extract_operative_paragraphs(text)
+            title = extract_title(text)
+            agenda_items = extract_agenda_items(text)
+            symbol_references = find_symbol_references(text)
+            doc_type = classify_doc_type(symbol, text)
+            signals = run_checks(paragraphs, checks) if checks else {}
+
+            # Build signal summary
+            signal_summary = {}
+            for para_signals in signals.values():
+                for sig in para_signals:
+                    signal_summary[sig] = signal_summary.get(sig, 0) + 1
+
+            doc = {
+                "symbol": symbol,
+                "filename": pdf_file.name,
+                "doc_type": doc_type,
+                "paragraphs": paragraphs,
+                "title": title,
+                "agenda_items": agenda_items,
+                "symbol_references": symbol_references,
+                "signals": signals,
+                "signal_summary": signal_summary,
+                "num_paragraphs": len(paragraphs),
+                "un_url": get_un_document_url(symbol),
+            }
+            doc_duration = time.time() - doc_start_time
+            return (doc, None, symbol, len(paragraphs), signal_summary, doc_duration)
+
+        except Exception as e:
+            return (None, str(e), str(pdf_file), 0, {}, 0)
+
     if pdfs_dir.exists():
-        for pdf_file in pdfs_dir.glob("*.pdf"):
-            doc_start_time = time.time()
-            symbol = filename_to_symbol(pdf_file.stem)
-
-            try:
-                text = extract_text(pdf_file)
-                paragraphs = extract_operative_paragraphs(text)
-                title = extract_title(text)
-                agenda_items = extract_agenda_items(text)
-                symbol_references = find_symbol_references(text)
-                doc_type = classify_doc_type(symbol, text)
-                signals = run_checks(paragraphs, checks) if checks else {}
-
-                # Build signal summary
-                signal_summary = {}
-                for para_signals in signals.values():
-                    for sig in para_signals:
-                        signal_summary[sig] = signal_summary.get(sig, 0) + 1
-
-                doc = {
-                    "symbol": symbol,
-                    "filename": pdf_file.name,
-                    "doc_type": doc_type,
-                    "paragraphs": paragraphs,
-                    "title": title,
-                    "agenda_items": agenda_items,
-                    "symbol_references": symbol_references,
-                    "signals": signals,
-                    "signal_summary": signal_summary,
-                    "num_paragraphs": len(paragraphs),
-                    "un_url": get_un_document_url(symbol),
-                }
-                documents.append(doc)
-
-                doc_duration = time.time() - doc_start_time
-                if on_load_document:
-                    on_load_document(symbol, len(paragraphs), signal_summary, doc_duration)
-
-            except Exception as e:
-                if on_load_error:
-                    on_load_error(str(pdf_file), str(e))
+        pdf_files = list(pdfs_dir.glob("*.pdf"))
+        # Use ThreadPoolExecutor for parallel PDF extraction
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            futures = {executor.submit(process_pdf, pdf_file): pdf_file for pdf_file in pdf_files}
+            for future in as_completed(futures):
+                doc, error, identifier, num_paras, signal_summary, duration = future.result()
+                if doc:
+                    documents.append(doc)
+                    if on_load_document:
+                        on_load_document(identifier, num_paras, signal_summary, duration)
+                elif error and on_load_error:
+                    on_load_error(identifier, error)
 
     # Sort documents
     def sort_key(doc):
@@ -1283,7 +1296,8 @@ def generate_site_verbose(
     (output_dir / "patterns").mkdir(exist_ok=True)
     (output_dir / "matrix").mkdir(exist_ok=True)
     (output_dir / "provenance").mkdir(exist_ok=True)
-    (output_dir / "debug").mkdir(exist_ok=True)
+    if not skip_debug:
+        (output_dir / "debug").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(visible_documents, checks, patterns, output_dir)
@@ -1325,9 +1339,10 @@ def generate_site_verbose(
     if on_generate_page:
         on_generate_page("origin_matrix", "origin_matrix.html")
 
-    generate_debug_pages(documents, checks, output_dir / "debug")
-    if on_generate_page:
-        on_generate_page("debug", "debug/index.html")
+    if not skip_debug:
+        generate_debug_pages(documents, checks, output_dir / "debug")
+        if on_generate_page:
+            on_generate_page("debug", "debug/index.html")
 
     # Generate data exports
     generate_data_json(visible_documents, checks, output_dir)

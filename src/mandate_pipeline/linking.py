@@ -102,8 +102,8 @@ def fetch_undl_metadata(symbol: str) -> dict | None:
         if result:
             _save_cached_metadata(symbol, result)
 
-        # 3. Be polite
-        time.sleep(1)
+        # 3. Be polite (0.5s delay balances speed and rate limiting)
+        time.sleep(0.5)
 
         return result
 

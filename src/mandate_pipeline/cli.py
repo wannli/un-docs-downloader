@@ -146,6 +146,11 @@ def main():
         action="store_true",
         help="Enable verbose logging",
     )
+    generate_parser.add_argument(
+        "--skip-debug",
+        action="store_true",
+        help="Skip generating debug pages (faster builds)",
+    )
 
     # Build command (discover + generate)
     build_parser = subparsers.add_parser(
@@ -185,6 +190,11 @@ def main():
         "--verbose", "-v",
         action="store_true",
         help="Enable verbose logging",
+    )
+    build_parser.add_argument(
+        "--skip-debug",
+        action="store_true",
+        help="Skip generating debug pages (faster builds)",
     )
 
     args = parser.parse_args()
@@ -340,6 +350,7 @@ def cmd_generate(args):
         config_dir=args.config,
         data_dir=args.data,
         output_dir=args.output,
+        skip_debug=getattr(args, 'skip_debug', False),
         on_load_start=on_load_start if verbose else None,
         on_load_document=on_load_document if verbose else None,
         on_load_error=on_load_error,
