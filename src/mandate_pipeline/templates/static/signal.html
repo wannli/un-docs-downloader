@@ -4,12 +4,7 @@
 
 {% block nav_index %}../index.html{% endblock %}
 {% block nav_signals %}../signals.html{% endblock %}
-{% block nav_documents %}../documents/index.html{% endblock %}
-{% block nav_debug %}../debug/index.html{% endblock %}
-{% block nav_linking %}../debug/linking.html{% endblock %}
-{% block nav_orphans %}../debug/orphans.html{% endblock %}
-{% block nav_fuzzy %}../debug/fuzzy.html{% endblock %}
-{% block nav_extraction %}../debug/extraction.html{% endblock %}
+{% block nav_signals_info %}../signals-info.html{% endblock %}
 {% block nav_api %}../data.json{% endblock %}
 
 {% block content %}
@@ -61,30 +56,19 @@
             <!-- Document Header -->
             <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gray-50">
                 <div class="flex items-center gap-4">
-                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" 
-                       class="font-semibold text-lg text-gray-900 hover:text-un-blue transition-colors">
+                    <span class="font-semibold text-lg text-gray-900">
                         {{ doc.symbol }}
-                    </a>
-                    <span class="text-sm text-muted">
-                        {{ doc.signal_paragraphs|length }} match{% if doc.signal_paragraphs|length != 1 %}es{% endif %}
                     </span>
                     {% if is_adopted and doc.adopted_by %}
                     <span class="text-xs text-muted">
-                        Adopted by
-                        <a href="../documents/{{ doc.adopted_by|replace('/', '_') }}.html" class="hover:text-un-blue transition-colors">
-                            {{ doc.adopted_by }}
-                        </a>
+                        Adopted by {{ doc.adopted_by }}
                     </span>
                     {% endif %}
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" 
-                       class="text-sm font-medium text-un-blue hover:text-un-blue-dark transition-colors">
-                        View document
-                    </a>
                     <a href="{{ doc.un_url }}" target="_blank"
                        class="text-sm text-muted hover:text-un-blue transition-colors">
-                        PDF ↗
+                        View PDF
                     </a>
                 </div>
             </div>
@@ -93,14 +77,26 @@
             <div class="p-5 space-y-4">
                 {% for para in doc.signal_paragraphs %}
                 <div class="flex gap-4">
-                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html#para-{{ para.num }}"
-                       class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold 
-                       {% if 'agenda' in signal|lower %}bg-blue-100 text-blue-700
-                       {% elif 'pga' in signal|lower %}bg-purple-100 text-purple-700
-                       {% else %}bg-gray-100 text-gray-700{% endif %}
-                       hover:opacity-80 transition-opacity">
-                        {{ para.num }}
-                    </a>
+                    <div class="flex-shrink-0 text-center">
+                        <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold
+                           {% if signal == 'agenda' %}bg-blue-100 text-blue-700
+                           {% elif signal == 'PGA' %}bg-purple-100 text-purple-700
+                           {% elif signal == 'process' %}bg-amber-100 text-amber-700
+                           {% elif signal == 'report' %}bg-green-100 text-green-700
+                           {% else %}bg-gray-100 text-gray-700{% endif %}">
+                            {{ para.num }}
+                        </div>
+                        <div class="mt-1">
+                            <span class="px-1.5 py-0.5 rounded text-xs font-medium
+                                {% if signal == 'agenda' %}bg-blue-100 text-blue-700
+                                {% elif signal == 'PGA' %}bg-purple-100 text-purple-700
+                                {% elif signal == 'process' %}bg-amber-100 text-amber-700
+                                {% elif signal == 'report' %}bg-green-100 text-green-700
+                                {% else %}bg-gray-100 text-gray-700{% endif %}">
+                                {{ signal }}
+                            </span>
+                        </div>
+                    </div>
                     <p class="text-sm text-gray-700 leading-relaxed">
                         {{ para.text|highlight_signals([signal]) }}
                     </p>

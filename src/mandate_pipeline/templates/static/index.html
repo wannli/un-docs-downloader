@@ -4,7 +4,7 @@
 
 {% block nav_index %}./index.html{% endblock %}
 {% block nav_signals %}./signals.html{% endblock %}
-{% block nav_documents %}./documents/index.html{% endblock %}
+{% block nav_signals_info %}./signals-info.html{% endblock %}
 
 {% block content %}
 <!-- Hero -->
@@ -17,7 +17,6 @@
 
 <!-- Signal Source Matrix (Origin × Signal) -->
 <div class="mb-12">
-    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Signal Source Matrix</h2>
     <div class="overflow-x-auto">
         <table class="w-full">
             <thead>
@@ -61,8 +60,10 @@
                         {% if count > 0 %}
                         <a href="./signals.html?source={{ origin_code|urlencode }}&signal={{ check.signal|urlencode }}"
                            class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
-                            {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700 hover:bg-blue-100
-                            {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700 hover:bg-purple-100
+                            {% if check.signal == 'agenda' %}bg-blue-50 text-blue-700 hover:bg-blue-100
+                            {% elif check.signal == 'PGA' %}bg-purple-50 text-purple-700 hover:bg-purple-100
+                            {% elif check.signal == 'process' %}bg-amber-50 text-amber-700 hover:bg-amber-100
+                            {% elif check.signal == 'report' %}bg-green-50 text-green-700 hover:bg-green-100
                             {% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
                             {{ count }}
                         </a>
@@ -86,8 +87,10 @@
                     <td class="text-center py-4 px-4">
                         <a href="./signals.html?signal={{ check.signal|urlencode }}"
                            class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
-                            {% if 'agenda' in check.signal|lower %}bg-blue-100 text-blue-800
-                            {% elif 'pga' in check.signal|lower %}bg-purple-100 text-purple-800
+                            {% if check.signal == 'agenda' %}bg-blue-100 text-blue-800
+                            {% elif check.signal == 'PGA' %}bg-purple-100 text-purple-800
+                            {% elif check.signal == 'process' %}bg-amber-100 text-amber-800
+                            {% elif check.signal == 'report' %}bg-green-100 text-green-800
                             {% else %}bg-gray-200 text-gray-800{% endif %}">
                             {{ total }}
                         </a>

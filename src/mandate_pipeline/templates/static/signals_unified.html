@@ -4,7 +4,7 @@
 
 {% block nav_index %}./index.html{% endblock %}
 {% block nav_signals %}./signals.html{% endblock %}
-{% block nav_documents %}./documents/index.html{% endblock %}
+{% block nav_signals_info %}./signals-info.html{% endblock %}
 
 {% block content %}
 <!-- Header -->
@@ -19,8 +19,7 @@
 <div class="mb-8 flex flex-wrap gap-4 items-end">
     <div class="flex-1 min-w-[200px]">
         <label for="source-filter" class="block text-sm font-medium text-gray-700 mb-1">Source</label>
-        <select id="source-filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-            <option value="">All Sources</option>
+        <select id="source-filter" multiple class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
             {% for origin_code in origin_order %}
             <option value="{{ origin_code }}">{{ origin_names.get(origin_code, origin_code) }}</option>
             {% endfor %}
@@ -28,17 +27,19 @@
     </div>
     <div class="flex-1 min-w-[200px]">
         <label for="signal-filter" class="block text-sm font-medium text-gray-700 mb-1">Signal Type</label>
-        <select id="signal-filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-            <option value="">All Signals</option>
+        <select id="signal-filter" multiple class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
             {% for check in checks %}
-            <option value="{{ check.signal }}">{{ check.signal }}</option>
+            <option value="{{ check.signal }}"
+                {% if check.signal == 'agenda' %}class="text-blue-700"
+                {% elif check.signal == 'PGA' %}class="text-purple-700"
+                {% elif check.signal == 'process' %}class="text-amber-700"
+                {% elif check.signal == 'report' %}class="text-green-700"{% endif %}>{{ check.signal }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="flex-1 min-w-[200px]">
         <label for="doctype-filter" class="block text-sm font-medium text-gray-700 mb-1">Document Type</label>
-        <select id="doctype-filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-            <option value="">All Types</option>
+        <select id="doctype-filter" multiple class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
             <option value="resolution">Resolutions</option>
             <option value="proposal">Non-adopted Proposals</option>
         </select>
@@ -84,22 +85,15 @@
                                     {% else %}bg-gray-100 text-gray-700{% endif %}">
                                     {{ doc.origin[:2] }}
                                 </span>
-                                <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                                    {{ doc.signal_paragraphs|length }} paragraph{% if doc.signal_paragraphs|length != 1 %}s{% endif %}
-                                </span>
                             </div>
                             {% if doc.title %}
                             <p class="text-sm text-gray-600 truncate" title="{{ doc.title }}">{{ doc.title }}</p>
                             {% endif %}
                         </div>
                         <div class="flex items-center gap-2 flex-shrink-0">
-                            <a href="./documents/{{ doc.symbol|replace('/', '_') }}.html"
-                               class="text-xs text-muted hover:text-un-blue transition-colors">
-                                Details
-                            </a>
                             <a href="{{ doc.un_url }}" target="_blank"
                                class="text-xs text-muted hover:text-un-blue transition-colors">
-                                PDF
+                                View PDF
                             </a>
                         </div>
                     </div>
@@ -109,23 +103,24 @@
                 <div class="divide-y divide-gray-100">
                     {% for para in doc.signal_paragraphs %}
                     <div class="px-4 py-3 flex gap-4 paragraph-item" data-signals="{{ para.signals|join(',') }}">
-                        <div class="flex-shrink-0">
-                            <a href="./documents/{{ doc.symbol|replace('/', '_') }}.html#para-{{ para.number }}"
-                               class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-700 font-medium text-sm hover:bg-un-blue hover:text-white transition-colors">
+                        <div class="flex-shrink-0 text-center">
+                            <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-700 font-medium text-sm">
                                 {{ para.number }}
-                            </a>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex flex-wrap gap-1 mb-2">
+                            </div>
+                            <div class="flex flex-col gap-1 mt-2">
                                 {% for signal in para.signals %}
-                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag
-                                    {% if 'agenda' in signal|lower %}bg-blue-50 text-blue-700
-                                    {% elif 'pga' in signal|lower %}bg-purple-50 text-purple-700
+                                <span class="px-1.5 py-0.5 rounded text-xs font-medium signal-tag
+                                    {% if signal == 'agenda' %}bg-blue-100 text-blue-700
+                                    {% elif signal == 'PGA' %}bg-purple-100 text-purple-700
+                                    {% elif signal == 'process' %}bg-amber-100 text-amber-700
+                                    {% elif signal == 'report' %}bg-green-100 text-green-700
                                     {% else %}bg-gray-100 text-gray-600{% endif %}">
                                     {{ signal }}
                                 </span>
                                 {% endfor %}
                             </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
                             <p class="text-gray-700 leading-relaxed text-sm">{{ para.text|highlight_signals(para.signals) }}</p>
                         </div>
                     </div>
@@ -157,16 +152,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const emptyState = document.getElementById('empty-state');
     const statsText = document.getElementById('stats-text');
 
+    // Get selected values from multiselect
+    function getSelectedValues(selectElement) {
+        return Array.from(selectElement.selectedOptions).map(opt => opt.value);
+    }
+
     // Parse URL params and set initial filter state
     function initFromUrl() {
         const params = new URLSearchParams(window.location.search);
-        const source = params.get('source');
-        const signal = params.get('signal');
-        const doctype = params.get('type');
+        const sources = params.getAll('source');
+        const signals = params.getAll('signal');
+        const doctypes = params.getAll('type');
 
-        if (source) sourceFilter.value = source;
-        if (signal) signalFilter.value = signal;
-        if (doctype) doctypeFilter.value = doctype;
+        // Set multiselect values
+        sources.forEach(source => {
+            const opt = sourceFilter.querySelector(`option[value="${source}"]`);
+            if (opt) opt.selected = true;
+        });
+        signals.forEach(signal => {
+            const opt = signalFilter.querySelector(`option[value="${signal}"]`);
+            if (opt) opt.selected = true;
+        });
+        doctypes.forEach(doctype => {
+            const opt = doctypeFilter.querySelector(`option[value="${doctype}"]`);
+            if (opt) opt.selected = true;
+        });
 
         applyFilters();
     }
@@ -174,9 +184,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update URL without reloading
     function updateUrl() {
         const params = new URLSearchParams();
-        if (sourceFilter.value) params.set('source', sourceFilter.value);
-        if (signalFilter.value) params.set('signal', signalFilter.value);
-        if (doctypeFilter.value) params.set('type', doctypeFilter.value);
+        getSelectedValues(sourceFilter).forEach(v => params.append('source', v));
+        getSelectedValues(signalFilter).forEach(v => params.append('signal', v));
+        getSelectedValues(doctypeFilter).forEach(v => params.append('type', v));
 
         const newUrl = params.toString()
             ? `${window.location.pathname}?${params.toString()}`
@@ -185,9 +195,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function applyFilters() {
-        const selectedSource = sourceFilter.value;
-        const selectedSignal = signalFilter.value;
-        const selectedDoctype = doctypeFilter.value;
+        const selectedSources = getSelectedValues(sourceFilter);
+        const selectedSignals = getSelectedValues(signalFilter);
+        const selectedDoctypes = getSelectedValues(doctypeFilter);
         let resolutionCount = 0;
         let proposalCount = 0;
         let paragraphCount = 0;
@@ -197,14 +207,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const cardDoctype = card.dataset.doctype;
             const cardSignals = card.dataset.signals.split(',').filter(s => s);
 
-            // Check source filter
-            const sourceMatch = !selectedSource || cardSource === selectedSource;
+            // Check source filter (match any selected)
+            const sourceMatch = selectedSources.length === 0 || selectedSources.includes(cardSource);
 
-            // Check signal filter
-            const signalMatch = !selectedSignal || cardSignals.includes(selectedSignal);
+            // Check signal filter (match any selected)
+            const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
 
-            // Check document type filter
-            const doctypeMatch = !selectedDoctype || cardDoctype === selectedDoctype;
+            // Check document type filter (match any selected)
+            const doctypeMatch = selectedDoctypes.length === 0 || selectedDoctypes.includes(cardDoctype);
 
             if (sourceMatch && signalMatch && doctypeMatch) {
                 card.classList.remove('hidden');
@@ -218,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const paragraphs = card.querySelectorAll('.paragraph-item');
                 paragraphs.forEach(para => {
                     const paraSignals = para.dataset.signals.split(',').filter(s => s);
-                    if (!selectedSignal || paraSignals.includes(selectedSignal)) {
+                    if (selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s))) {
                         para.classList.remove('hidden');
                         paragraphCount++;
                     } else {
@@ -241,7 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Update stats
-        let statsStr = `${paragraphCount} paragraphs across `;
         const parts = [];
         if (resolutionCount > 0) {
             parts.push(`${resolutionCount} resolution${resolutionCount !== 1 ? 's' : ''}`);
@@ -249,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (proposalCount > 0) {
             parts.push(`${proposalCount} non-adopted proposal${proposalCount !== 1 ? 's' : ''}`);
         }
-        statsText.textContent = statsStr + (parts.length > 0 ? parts.join(' and ') : '0 documents');
+        statsText.textContent = parts.length > 0 ? parts.join(' and ') : '0 documents';
 
         updateUrl();
     }
@@ -260,9 +269,10 @@ document.addEventListener('DOMContentLoaded', function() {
     doctypeFilter.addEventListener('change', applyFilters);
 
     clearFiltersBtn.addEventListener('click', function() {
-        sourceFilter.value = '';
-        signalFilter.value = '';
-        doctypeFilter.value = '';
+        // Deselect all options in multiselects
+        Array.from(sourceFilter.options).forEach(opt => opt.selected = false);
+        Array.from(signalFilter.options).forEach(opt => opt.selected = false);
+        Array.from(doctypeFilter.options).forEach(opt => opt.selected = false);
         applyFilters();
     });
 

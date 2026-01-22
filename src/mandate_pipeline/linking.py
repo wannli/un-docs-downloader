@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from rapidfuzz import fuzz
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -224,13 +223,6 @@ def normalize_symbol(symbol: str) -> str:
     return symbol.strip().upper()
 
 
-def normalize_title(title: str | None) -> str:
-    """Normalize a title for fuzzy matching."""
-    if not title:
-        return ""
-    # Strip resolution/decision number prefix like "80/60." or "80/60 "
-    title = re.sub(r"^\d+/\d+[.\s]+", "", title)
-    return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
 
 
 def is_resolution(symbol: str) -> bool:
@@ -467,75 +459,6 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
             if proposal.get("linked_resolution_symbol") is None:
                 proposal["linked_resolution_symbol"] = doc["symbol"]
 
-    # Pass 2: Fuzzy title matching with agenda overlap
-    for doc in documents:
-        if not is_resolution(doc["symbol"]):
-            continue
-        if doc.get("linked_proposal_symbols"):
-            continue
-
-        audit = _linking_audit[doc["symbol"]]
-        audit["pass2_fuzzy"]["attempted"] = True
-
-        title = normalize_title(doc.get("title", ""))
-        if not title:
-            continue
-        agenda_items = set(doc.get("agenda_items") or [])
-
-        best_match = None
-        best_score = 0.0
-        candidates = []
-
-        for proposal in proposals:
-            if proposal.get("linked_resolution_symbol") not in (None, doc["symbol"]):
-                continue
-
-            proposal_title = normalize_title(proposal.get("title", ""))
-            if not proposal_title:
-                continue
-
-            proposal_agenda = set(proposal.get("agenda_items") or [])
-            agenda_overlap = bool(agenda_items and proposal_agenda and agenda_items.intersection(proposal_agenda))
-
-            if agenda_items and proposal_agenda and not agenda_overlap:
-                continue
-
-            similarity = fuzz.ratio(title, proposal_title)
-
-            # Record all candidates with > 50% similarity for audit
-            if similarity >= 50:
-                candidates.append({
-                    "symbol": proposal["symbol"],
-                    "title": proposal.get("title", ""),
-                    "normalized_title": proposal_title,
-                    "score": similarity,
-                    "agenda_overlap": agenda_overlap,
-                })
-
-            if similarity < 85:
-                continue
-
-            if similarity > best_score:
-                best_score = similarity
-                best_match = proposal
-
-        # Sort candidates by score
-        candidates.sort(key=lambda x: x["score"], reverse=True)
-        audit["pass2_fuzzy"]["candidates"] = candidates[:10]  # Top 10
-
-        if best_match:
-            doc["linked_proposal_symbols"] = [best_match["symbol"]]
-            audit["pass2_fuzzy"]["best_match"] = best_match["symbol"]
-            audit["pass2_fuzzy"]["best_score"] = best_score
-            audit["pass2_fuzzy"]["agenda_overlap"] = any(
-                c["agenda_overlap"] for c in candidates if c["symbol"] == best_match["symbol"]
-            )
-            audit["final_method"] = "fuzzy"
-            audit["final_linked"] = [best_match["symbol"]]
-            audit["confidence"] = int(best_score)
-
-            if best_match.get("linked_resolution_symbol") is None:
-                best_match["linked_resolution_symbol"] = doc["symbol"]
 
 
 def annotate_linkage(documents: list[dict]) -> None:

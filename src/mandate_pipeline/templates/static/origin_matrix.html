@@ -4,7 +4,7 @@
 
 {% block nav_index %}./index.html{% endblock %}
 {% block nav_signals %}./signals.html{% endblock %}
-{% block nav_documents %}./documents/index.html{% endblock %}
+{% block nav_signals_info %}./signals-info.html{% endblock %}
 
 {% block content %}
 <!-- Header -->
@@ -57,10 +57,12 @@
                 {% set count = origin_data.get(check.signal, 0) %}
                 <td class="text-center py-4 px-4">
                     {% if count > 0 %}
-                    <a href="./origin_signal/{{ origin_code|lower }}_{{ check.signal|lower|replace(' ', '-') }}.html"
+                    <a href="./signals.html?source={{ origin_code|urlencode }}&signal={{ check.signal|urlencode }}"
                        class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
-                        {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700 hover:bg-blue-100
-                        {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700 hover:bg-purple-100
+                        {% if check.signal == 'agenda' %}bg-blue-50 text-blue-700 hover:bg-blue-100
+                        {% elif check.signal == 'PGA' %}bg-purple-50 text-purple-700 hover:bg-purple-100
+                        {% elif check.signal == 'process' %}bg-amber-50 text-amber-700 hover:bg-amber-100
+                        {% elif check.signal == 'report' %}bg-green-50 text-green-700 hover:bg-green-100
                         {% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
                         {{ count }}
                     </a>
@@ -83,8 +85,10 @@
                 {% set total = signal_totals.get(check.signal, 0) %}
                 <td class="text-center py-4 px-4">
                     <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
-                        {% if 'agenda' in check.signal|lower %}bg-blue-100 text-blue-800
-                        {% elif 'pga' in check.signal|lower %}bg-purple-100 text-purple-800
+                        {% if check.signal == 'agenda' %}bg-blue-100 text-blue-800
+                        {% elif check.signal == 'PGA' %}bg-purple-100 text-purple-800
+                        {% elif check.signal == 'process' %}bg-amber-100 text-amber-800
+                        {% elif check.signal == 'report' %}bg-green-100 text-green-800
                         {% else %}bg-gray-200 text-gray-800{% endif %}">
                         {{ total }}
                     </span>
@@ -141,8 +145,10 @@
             <div>
                 <div class="flex items-center justify-between mb-1">
                     <span class="text-sm font-medium
-                        {% if 'agenda' in check.signal|lower %}text-blue-700
-                        {% elif 'pga' in check.signal|lower %}text-purple-700
+                        {% if check.signal == 'agenda' %}text-blue-700
+                        {% elif check.signal == 'PGA' %}text-purple-700
+                        {% elif check.signal == 'process' %}text-amber-700
+                        {% elif check.signal == 'report' %}text-green-700
                         {% else %}text-gray-700{% endif %}">
                         {{ check.signal }}
                     </span>
@@ -150,8 +156,10 @@
                 </div>
                 <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div class="h-full rounded-full
-                        {% if 'agenda' in check.signal|lower %}bg-blue-400
-                        {% elif 'pga' in check.signal|lower %}bg-purple-400
+                        {% if check.signal == 'agenda' %}bg-blue-400
+                        {% elif check.signal == 'PGA' %}bg-purple-400
+                        {% elif check.signal == 'process' %}bg-amber-400
+                        {% elif check.signal == 'report' %}bg-green-400
                         {% else %}bg-gray-400{% endif %}"
                          style="width: {{ pct }}%"></div>
                 </div>

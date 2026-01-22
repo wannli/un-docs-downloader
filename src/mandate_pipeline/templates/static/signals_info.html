@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}About Signals - Mandate Pipeline{% endblock %}
+
+{% block nav_index %}./index.html{% endblock %}
+{% block nav_signals %}./signals.html{% endblock %}
+{% block nav_signals_info %}./signals-info.html{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">About Signals</h1>
+    <p class="mt-2 text-muted">
+        Understanding how the Mandate Pipeline detects and categorizes signals in UN documents.
+    </p>
+</div>
+
+<!-- Overview -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">What are Signals?</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+        Signals are specific phrases or patterns in UN General Assembly documents that indicate particular types of mandates, requests, or procedural actions. The Mandate Pipeline automatically scans operative paragraphs of resolutions and proposals to identify these signals.
+    </p>
+    <p class="text-gray-700 leading-relaxed">
+        Each signal corresponds to a category of action that the General Assembly may take, such as requesting reports, scheduling meetings, or establishing processes.
+    </p>
+</div>
+
+<!-- Signal Types -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-6">Signal Types</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+        {% for check in checks %}
+        <div class="border rounded-lg p-5
+            {% if check.signal == 'agenda' %}border-blue-200 bg-blue-50/30
+            {% elif check.signal == 'PGA' %}border-purple-200 bg-purple-50/30
+            {% elif check.signal == 'process' %}border-amber-200 bg-amber-50/30
+            {% elif check.signal == 'report' %}border-green-200 bg-green-50/30
+            {% else %}border-gray-200 bg-gray-50/30{% endif %}">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded text-sm font-semibold
+                    {% if check.signal == 'agenda' %}bg-blue-100 text-blue-800
+                    {% elif check.signal == 'PGA' %}bg-purple-100 text-purple-800
+                    {% elif check.signal == 'process' %}bg-amber-100 text-amber-800
+                    {% elif check.signal == 'report' %}bg-green-100 text-green-800
+                    {% else %}bg-gray-100 text-gray-800{% endif %}">
+                    {{ check.signal }}
+                </span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">
+                {% if check.signal == 'agenda' %}
+                Indicates decisions about agenda items, scheduling of future consideration, or requests for inclusion in upcoming sessions.
+                {% elif check.signal == 'PGA' %}
+                References the President of the General Assembly, high-level meetings, interactive dialogues, or multistakeholder events.
+                {% elif check.signal == 'process' %}
+                Indicates procedural arrangements such as the appointment of co-facilitators, co-chairs, or informal consultations.
+                {% elif check.signal == 'report' %}
+                Requests for reports from the Secretary-General or other bodies to inform the General Assembly.
+                {% else %}
+                Miscellaneous signal type.
+                {% endif %}
+            </p>
+            <div class="mt-4">
+                <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Trigger Phrases</p>
+                <div class="flex flex-wrap gap-1.5">
+                    {% for phrase in check.phrases %}
+                    <span class="px-2 py-0.5 rounded text-xs
+                        {% if check.signal == 'agenda' %}bg-blue-100 text-blue-700
+                        {% elif check.signal == 'PGA' %}bg-purple-100 text-purple-700
+                        {% elif check.signal == 'process' %}bg-amber-100 text-amber-700
+                        {% elif check.signal == 'report' %}bg-green-100 text-green-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ phrase }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- How Detection Works -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">How Detection Works</h2>
+    <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+        <ol class="list-decimal list-inside space-y-3 text-gray-700">
+            <li><span class="font-medium">Document Processing:</span> PDF documents are parsed to extract text content.</li>
+            <li><span class="font-medium">Paragraph Extraction:</span> Operative paragraphs (numbered paragraphs in the resolution body) are identified and extracted.</li>
+            <li><span class="font-medium">Phrase Matching:</span> Each paragraph is scanned for the trigger phrases defined for each signal type.</li>
+            <li><span class="font-medium">Signal Assignment:</span> When a phrase is found, the corresponding signal is assigned to that paragraph.</li>
+            <li><span class="font-medium">Aggregation:</span> Signals are aggregated at the document level for filtering and analysis.</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Configuration -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Configuration</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+        Signals are configured in the <code class="px-1.5 py-0.5 bg-gray-100 rounded text-sm font-mono">config/checks.yaml</code> file. Each signal definition includes:
+    </p>
+    <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4">
+        <li><span class="font-medium">signal:</span> The name/identifier for the signal type</li>
+        <li><span class="font-medium">phrases:</span> A list of text patterns that trigger this signal when found in a paragraph</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed">
+        Phrase matching is case-insensitive. A paragraph can have multiple signals if it contains phrases from different signal types.
+    </p>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+Generated {{ generated_at }} · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+{% endblock %}

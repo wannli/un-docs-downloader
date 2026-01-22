@@ -4,12 +4,7 @@
 
 {% block nav_index %}../index.html{% endblock %}
 {% block nav_signals %}../signals.html{% endblock %}
-{% block nav_documents %}../documents/index.html{% endblock %}
-{% block nav_debug %}../debug/index.html{% endblock %}
-{% block nav_linking %}../debug/linking.html{% endblock %}
-{% block nav_orphans %}../debug/orphans.html{% endblock %}
-{% block nav_fuzzy %}../debug/fuzzy.html{% endblock %}
-{% block nav_extraction %}../debug/extraction.html{% endblock %}
+{% block nav_signals_info %}../signals-info.html{% endblock %}
 {% block nav_api %}../data.json{% endblock %}
 
 {% block content %}
@@ -83,31 +78,30 @@
             <!-- Document Header -->
             <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html" class="font-semibold text-gray-900 hover:text-un-blue transition-colors">
+                    <span class="font-semibold text-gray-900">
                         {{ doc.symbol }}
-                    </a>
+                    </span>
                     <span class="text-sm text-muted">{{ doc.num_paragraphs }} paragraphs</span>
                     {% if is_adopted and doc.adopted_by %}
                     <span class="text-xs text-muted">
-                        Adopted by
-                        <a href="../documents/{{ doc.adopted_by|replace('/', '_') }}.html" class="hover:text-un-blue transition-colors">
-                            {{ doc.adopted_by }}
-                        </a>
+                        Adopted by {{ doc.adopted_by }}
                     </span>
                     {% endif %}
                     {% for check in checks %}
                     {% set count = doc.signal_summary.get(check.signal, 0) %}
                     {% if count > 0 %}
                     <span class="px-2 py-0.5 rounded-full text-xs font-medium
-                        {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700
-                        {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700
+                        {% if check.signal == 'agenda' %}bg-blue-50 text-blue-700
+                        {% elif check.signal == 'PGA' %}bg-purple-50 text-purple-700
+                        {% elif check.signal == 'process' %}bg-amber-50 text-amber-700
+                        {% elif check.signal == 'report' %}bg-green-50 text-green-700
                         {% else %}bg-gray-100 text-gray-700{% endif %}">
                         {{ check.signal }}: {{ count }}
                     </span>
                     {% endif %}
                     {% endfor %}
                 </div>
-                <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">PDF ↗</a>
+                <a href="{{ doc.un_url }}" target="_blank" class="text-sm text-muted hover:text-un-blue transition-colors">View PDF</a>
             </div>
             
             <!-- Paragraphs -->
@@ -115,24 +109,25 @@
             <div class="divide-y divide-gray-100">
                 {% for para in doc.signal_paragraphs %}
                 <div class="px-4 py-3 flex gap-4">
-                    <div class="flex-shrink-0">
-                        <a href="../documents/{{ doc.symbol|replace('/', '_') }}.html#para-{{ para.number }}" 
-                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-700 font-medium text-sm hover:bg-un-blue hover:text-white transition-colors">
+                    <div class="flex-shrink-0 text-center">
+                        <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-700 font-medium text-sm">
                             {{ para.number }}
-                        </a>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-gray-700 leading-relaxed text-sm">{{ para.text|highlight_signals(para.signals) }}</p>
-                        <div class="mt-1 flex gap-1">
+                        </div>
+                        <div class="flex flex-col gap-1 mt-2">
                             {% for signal in para.signals %}
                             <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                                {% if 'agenda' in signal|lower %}bg-blue-50 text-blue-700
-                                {% elif 'pga' in signal|lower %}bg-purple-50 text-purple-700
+                                {% if signal == 'agenda' %}bg-blue-100 text-blue-700
+                                {% elif signal == 'PGA' %}bg-purple-100 text-purple-700
+                                {% elif signal == 'process' %}bg-amber-100 text-amber-700
+                                {% elif signal == 'report' %}bg-green-100 text-green-700
                                 {% else %}bg-gray-100 text-gray-700{% endif %}">
                                 {{ signal }}
                             </span>
                             {% endfor %}
                         </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-gray-700 leading-relaxed text-sm">{{ para.text|highlight_signals(para.signals) }}</p>
                     </div>
                 </div>
                 {% endfor %}

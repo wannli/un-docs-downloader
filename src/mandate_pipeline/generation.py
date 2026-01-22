@@ -27,9 +27,6 @@ from .linking import (
     symbol_to_filename,
     derive_resolution_origin,
     derive_origin_from_symbol,
-    get_linking_audit,
-    get_undl_cache_stats,
-    normalize_title,
     COMMITTEE_NAMES,
 )
 
@@ -1092,6 +1089,41 @@ def generate_unified_signals_page(
         f.write(html)
 
 
+def generate_signals_info_page(
+    checks: list,
+    output_dir: Path
+) -> None:
+    """
+    Generate the signals info page explaining what signals are and how they're configured.
+
+    Args:
+        checks: All check definitions
+        output_dir: Root output directory
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    env = get_templates_env(checks)
+    template = env.get_template("signals_info.html")
+
+    # Define signal colors for consistency
+    signal_colors = {
+        "agenda": {"bg": "bg-blue-50", "text": "text-blue-700", "border": "border-blue-200"},
+        "PGA": {"bg": "bg-purple-50", "text": "text-purple-700", "border": "border-purple-200"},
+        "process": {"bg": "bg-amber-50", "text": "text-amber-700", "border": "border-amber-200"},
+        "report": {"bg": "bg-green-50", "text": "text-green-700", "border": "border-green-200"},
+    }
+
+    html = template.render(
+        checks=checks,
+        signal_colors=signal_colors,
+        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+    )
+
+    with open(output_dir / "signals-info.html", "w") as f:
+        f.write(html)
+
+
 def generate_debug_pages(
     documents: list,
     checks: list,
@@ -1294,19 +1326,14 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
 
     # Create output directories
     output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "documents").mkdir(exist_ok=True)
     (output_dir / "signals").mkdir(exist_ok=True)
     (output_dir / "patterns").mkdir(exist_ok=True)
     (output_dir / "matrix").mkdir(exist_ok=True)
     (output_dir / "provenance").mkdir(exist_ok=True)
-    (output_dir / "debug").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(visible_documents, checks, patterns, output_dir)
-    generate_documents_list_page(documents, visible_documents, checks, patterns, output_dir / "documents")
-
-    for doc in documents:
-        generate_document_page(doc, checks, output_dir / "documents")
+    generate_signals_info_page(checks, output_dir)
 
     for check in checks:
         generate_signal_page(documents, visible_documents, check, checks, output_dir / "signals")
@@ -1321,7 +1348,6 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     generate_provenance_page(documents, checks, output_dir / "provenance")
     generate_origin_matrix_page(documents, checks, output_dir)
     generate_unified_signals_page(documents, checks, output_dir)
-    generate_debug_pages(documents, checks, output_dir / "debug")
 
     # Generate data exports
     generate_data_json(visible_documents, checks, output_dir)
@@ -1468,27 +1494,19 @@ def generate_site_verbose(
 
     # Create output directories
     output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "documents").mkdir(exist_ok=True)
     (output_dir / "signals").mkdir(exist_ok=True)
     (output_dir / "patterns").mkdir(exist_ok=True)
     (output_dir / "matrix").mkdir(exist_ok=True)
     (output_dir / "provenance").mkdir(exist_ok=True)
-    if not skip_debug:
-        (output_dir / "debug").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(visible_documents, checks, patterns, output_dir)
     if on_generate_page:
         on_generate_page("index", "index.html")
 
-    generate_documents_list_page(documents, visible_documents, checks, patterns, output_dir / "documents")
+    generate_signals_info_page(checks, output_dir)
     if on_generate_page:
-        on_generate_page("documents_list", "documents/index.html")
-
-    for doc in documents:
-        generate_document_page(doc, checks, output_dir / "documents")
-        if on_generate_page:
-            on_generate_page("document", f"documents/{symbol_to_filename(doc['symbol'])}.html")
+        on_generate_page("signals_info", "signals-info.html")
 
     for check in checks:
         generate_signal_page(documents, visible_documents, check, checks, output_dir / "signals")
@@ -1519,11 +1537,6 @@ def generate_site_verbose(
     generate_unified_signals_page(documents, checks, output_dir)
     if on_generate_page:
         on_generate_page("signals_unified", "signals.html")
-
-    if not skip_debug:
-        generate_debug_pages(documents, checks, output_dir / "debug")
-        if on_generate_page:
-            on_generate_page("debug", "debug/index.html")
 
     # Generate data exports
     generate_data_json(visible_documents, checks, output_dir)

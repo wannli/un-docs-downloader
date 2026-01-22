@@ -4,12 +4,7 @@
 
 {% block nav_index %}../index.html{% endblock %}
 {% block nav_signals %}../signals.html{% endblock %}
-{% block nav_documents %}../documents/index.html{% endblock %}
-{% block nav_debug %}../debug/index.html{% endblock %}
-{% block nav_linking %}../debug/linking.html{% endblock %}
-{% block nav_orphans %}../debug/orphans.html{% endblock %}
-{% block nav_fuzzy %}../debug/fuzzy.html{% endblock %}
-{% block nav_extraction %}../debug/extraction.html{% endblock %}
+{% block nav_signals_info %}../signals-info.html{% endblock %}
 {% block nav_api %}../data.json{% endblock %}
 
 {% block content %}
@@ -48,9 +43,9 @@
             <span class="text-sm font-medium text-gray-700">Linking Coverage:</span>
             <span class="text-sm text-muted ml-2">{{ coverage.linked }} of {{ coverage.total }} resolutions linked ({{ coverage.percentage }}%)</span>
         </div>
-        <a href="../debug/orphans.html" class="text-sm text-un-blue hover:underline">
-            View {{ coverage.unlinked }} unlinked &rarr;
-        </a>
+        <span class="text-sm text-muted">
+            {{ coverage.unlinked }} unlinked
+        </span>
     </div>
 </div>
 
@@ -83,9 +78,9 @@
         <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
             <div class="flex items-start justify-between">
                 <div class="flex-1">
-                    <a href="../documents/{{ res.filename }}" class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    <span class="font-medium text-gray-900">
                         {{ res.symbol }}
-                    </a>
+                    </span>
                     {% if res.title %}
                     <p class="text-sm text-muted mt-1 line-clamp-1">{{ res.title }}</p>
                     {% endif %}
@@ -93,8 +88,10 @@
                 <div class="flex items-center gap-2 ml-4">
                     {% for sig, count in res.signal_summary.items() %}
                     <span class="px-1.5 py-0.5 rounded text-xs font-medium
-                        {% if 'agenda' in sig|lower %}bg-blue-50 text-blue-700
-                        {% elif 'pga' in sig|lower %}bg-purple-50 text-purple-700
+                        {% if sig == 'agenda' %}bg-blue-50 text-blue-700
+                        {% elif sig == 'PGA' %}bg-purple-50 text-purple-700
+                        {% elif sig == 'process' %}bg-amber-50 text-amber-700
+                        {% elif sig == 'report' %}bg-green-50 text-green-700
                         {% else %}bg-gray-100 text-gray-700{% endif %}">
                         {{ sig }}({{ count }})
                     </span>
@@ -113,10 +110,9 @@
                 </div>
                 <div class="flex flex-wrap gap-2">
                     {% for proposal in res.linked_proposals %}
-                    <a href="../documents/{{ proposal.filename }}"
-                       class="inline-flex items-center px-2 py-1 rounded bg-gray-50 border border-gray-200 text-xs font-medium text-gray-700 hover:border-un-blue hover:text-un-blue transition-colors">
+                    <span class="inline-flex items-center px-2 py-1 rounded bg-gray-50 border border-gray-200 text-xs font-medium text-gray-700">
                         {{ proposal.symbol }}
-                    </a>
+                    </span>
                     {% endfor %}
                 </div>
                 {% if res.linking_method %}
@@ -141,5 +137,5 @@
 {% endblock %}
 
 {% block footer %}
-Generated {{ generated_at }} · <a href="./debug/linking.html" class="text-un-blue hover:underline">Linking Debug</a>
+Generated {{ generated_at }} · <a href="../data.json" class="text-un-blue hover:underline">JSON API</a>
 {% endblock %}
