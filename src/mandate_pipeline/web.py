@@ -13,8 +13,8 @@ from fastapi.staticfiles import StaticFiles
 
 from .downloader import download_document
 from .extractor import extract_text, extract_operative_paragraphs
-from .checks import load_checks, run_checks
-from .pipeline import load_patterns, generate_symbols, document_exists
+from .detection import load_checks, run_checks
+from .discovery import load_patterns, generate_symbols, document_exists
 
 app = FastAPI(title="Mandate Pipeline", description="Download and analyze UN documents")
 
