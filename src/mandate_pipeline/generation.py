@@ -18,9 +18,8 @@ from .extractor import (
 )
 from .discovery import load_patterns
 from .linking import (
-    load_lineage_cache,
     link_documents,
-    annotate_lineage,
+    annotate_linkage,
     is_resolution,
     is_proposal,
     symbol_to_filename,
@@ -117,9 +116,6 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     if not pdfs_dir.exists():
         return documents
 
-    lineage_cache = load_lineage_cache(data_dir / "lineage.json")
-    lineage_documents = lineage_cache.get("documents", {})
-
     for pdf_file in pdfs_dir.glob("*.pdf"):
         # Extract symbol from filename
         symbol = filename_to_symbol(pdf_file.stem)
@@ -152,11 +148,8 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
                 "title": title,
                 "agenda_items": agenda_items,
                 "symbol_references": symbol_references,
-                "doc_type": doc_type,
-                "base_proposal_symbol": base_proposal_symbol,
                 "signals": signals,
                 "signal_summary": signal_summary,
-                "lineage": lineage_documents.get(symbol, {}),
                 "num_paragraphs": len(paragraphs),
                 "un_url": get_un_document_url(symbol),
             })
@@ -843,7 +836,7 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     # Load all documents
     documents = load_all_documents(data_dir, checks)
     link_documents(documents)
-    annotate_lineage(documents)
+    annotate_linkage(documents)
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     # Create output directories
@@ -923,8 +916,6 @@ def generate_site_verbose(
     load_start_time = time.time()
     documents = []
     pdfs_dir = data_dir / "pdfs"
-    lineage_cache = load_lineage_cache(data_dir / "lineage.json")
-    lineage_documents = lineage_cache.get("documents", {})
 
     if pdfs_dir.exists():
         for pdf_file in pdfs_dir.glob("*.pdf"):
@@ -956,11 +947,8 @@ def generate_site_verbose(
                     "title": title,
                     "agenda_items": agenda_items,
                     "symbol_references": symbol_references,
-                    "doc_type": doc_type,
-                    "base_proposal_symbol": base_proposal_symbol,
                     "signals": signals,
                     "signal_summary": signal_summary,
-                    "lineage": lineage_documents.get(symbol, {}),
                     "num_paragraphs": len(paragraphs),
                     "un_url": get_un_document_url(symbol),
                 }
@@ -981,7 +969,7 @@ def generate_site_verbose(
     documents.sort(key=sort_key)
 
     link_documents(documents)
-    annotate_lineage(documents)
+    annotate_linkage(documents)
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     load_duration = time.time() - load_start_time
