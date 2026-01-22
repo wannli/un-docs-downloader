@@ -4,16 +4,115 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import re
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
+import requests
 from rapidfuzz import fuzz
 
 from .extractor import extract_text
 
+logger = logging.getLogger(__name__)
+
 
 SYMBOL_PATTERN = re.compile(r"\b[A-Z](?:/[A-Z0-9.]+)+\b", re.IGNORECASE)
+
+# UN Digital Library API for MARC XML metadata
+UNDL_SEARCH_URL = "https://digitallibrary.un.org/search"
+UNDL_TIMEOUT = 30  # seconds
+MARC_NS = {"marc": "http://www.loc.gov/MARC21/slim"}
+
+
+def fetch_undl_metadata(symbol: str) -> dict | None:
+    """
+    Fetch resolution metadata from UN Digital Library.
+
+    Queries the UNDL search API for the given symbol and parses the MARC XML
+    response to extract related document symbols from tag 993.
+
+    Args:
+        symbol: UN resolution symbol (e.g., "A/RES/80/142")
+
+    Returns:
+        Dictionary with metadata if found, None otherwise:
+        {
+            "symbol": str,
+            "related_symbols": list[str],  # all tag 993 references
+            "draft_symbols": list[str],    # only L. documents
+            "base_proposal": str | None,   # first L. document
+        }
+    """
+    params = {
+        "ln": "en",
+        "of": "xm",  # MARC XML output format
+        "p": symbol,
+        "rg": "5",  # limit results
+    }
+
+    try:
+        resp = requests.get(UNDL_SEARCH_URL, params=params, timeout=UNDL_TIMEOUT)
+        resp.raise_for_status()
+    except requests.RequestException as e:
+        logger.warning("Failed to fetch UNDL metadata for %s: %s", symbol, e)
+        return None
+
+    return _parse_undl_marc_xml(resp.text, symbol)
+
+
+def _parse_undl_marc_xml(xml_text: str, target_symbol: str) -> dict | None:
+    """
+    Parse MARC XML response and extract related symbols.
+
+    Args:
+        xml_text: Raw XML response from UNDL
+        target_symbol: The resolution symbol we're looking for
+
+    Returns:
+        Parsed metadata dictionary or None if not found
+    """
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError as e:
+        logger.warning("Failed to parse UNDL XML for %s: %s", target_symbol, e)
+        return None
+
+    # Normalize target for comparison
+    target_upper = target_symbol.upper()
+
+    for record in root.findall(".//marc:record", MARC_NS):
+        # Check tag 191 subfield 'a' for the document symbol
+        tag_191 = record.find(
+            ".//marc:datafield[@tag='191']/marc:subfield[@code='a']", MARC_NS
+        )
+        if tag_191 is None or not tag_191.text:
+            continue
+
+        record_symbol = tag_191.text.strip().upper()
+        if record_symbol != target_upper:
+            continue
+
+        # Found matching record - extract tag 993 cross-references
+        related_symbols = []
+        for tag_993 in record.findall(
+            ".//marc:datafield[@tag='993']/marc:subfield[@code='a']", MARC_NS
+        ):
+            if tag_993.text:
+                related_symbols.append(tag_993.text.strip())
+
+        # Filter for L. documents (draft proposals)
+        draft_symbols = [s for s in related_symbols if re.search(r"/L\.\d+", s)]
+
+        return {
+            "symbol": target_symbol,
+            "related_symbols": related_symbols,
+            "draft_symbols": draft_symbols,
+            "base_proposal": draft_symbols[0] if draft_symbols else None,
+        }
+
+    return None
 
 
 def symbol_to_filename(symbol: str) -> str:
@@ -167,12 +266,18 @@ def is_base_proposal_doc(doc: dict) -> bool:
     return is_proposal(symbol)
 
 
-def link_documents(documents: list[dict]) -> None:
+def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> None:
     """
     Link resolutions to proposals using explicit references and fuzzy matching.
 
-    First pass: link by symbol references.
-    Second pass: link by normalized title similarity and agenda overlap.
+    Pass 0 (optional): Fetch base proposal from UN Digital Library metadata.
+    Pass 1: Link by symbol references found in PDF text.
+    Pass 2: Link by normalized title similarity and agenda overlap.
+
+    Args:
+        documents: List of document dictionaries with at least 'symbol' key.
+        use_undl_metadata: If True, query UN Digital Library for authoritative
+            base proposal symbols before falling back to PDF text extraction.
     """
     proposals_by_symbol = {doc["symbol"]: doc for doc in documents if is_proposal(doc["symbol"])}
     proposals = list(proposals_by_symbol.values())
@@ -183,8 +288,55 @@ def link_documents(documents: list[dict]) -> None:
         doc.setdefault("link_method", None)
         doc.setdefault("link_confidence", None)
 
+    # Pass 0: UN Digital Library metadata lookup (authoritative source)
+    if use_undl_metadata:
+        for doc in documents:
+            if not is_resolution(doc["symbol"]):
+                continue
+            # Skip if already linked
+            if doc.get("linked_proposal_symbols"):
+                continue
+
+            metadata = fetch_undl_metadata(doc["symbol"])
+            if metadata is None or not metadata.get("draft_symbols"):
+                continue
+
+            draft_symbols = metadata["draft_symbols"]
+            # Filter to only include proposals we have locally
+            linked = [s for s in draft_symbols if s in proposals_by_symbol]
+
+            if linked:
+                doc["linked_proposal_symbols"] = linked
+                doc["link_method"] = "undl_metadata"
+                doc["link_confidence"] = 1.0
+                if doc.get("base_proposal_symbol") is None:
+                    doc["base_proposal_symbol"] = linked[0]
+
+                # Mark the proposals as linked to this resolution
+                for ref in linked:
+                    proposal = proposals_by_symbol.get(ref)
+                    if proposal and proposal.get("linked_resolution_symbol") is None:
+                        proposal["linked_resolution_symbol"] = doc["symbol"]
+                        proposal["link_method"] = "undl_metadata"
+                        proposal["link_confidence"] = 1.0
+            elif draft_symbols:
+                # Store the base proposal even if we don't have the PDF locally
+                # This helps identify which drafts we should consider downloading
+                doc["base_proposal_symbol"] = draft_symbols[0]
+                doc["link_method"] = "undl_metadata"
+                doc["link_confidence"] = 1.0
+                logger.info(
+                    "UNDL metadata found draft %s for %s (not in local collection)",
+                    draft_symbols[0],
+                    doc["symbol"],
+                )
+
+    # Pass 1: Symbol references from PDF text
     for doc in documents:
         if not is_resolution(doc["symbol"]):
+            continue
+        # Skip if already linked via UNDL metadata
+        if doc.get("linked_proposal_symbols"):
             continue
         references = doc.get("symbol_references", [])
         linked = [ref for ref in references if ref in proposals_by_symbol]
@@ -204,6 +356,7 @@ def link_documents(documents: list[dict]) -> None:
                 proposal["link_method"] = "symbol_reference"
                 proposal["link_confidence"] = 1.0
 
+    # Pass 2: Fuzzy title matching with agenda overlap
     for doc in documents:
         if not is_resolution(doc["symbol"]):
             continue
