@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -136,6 +137,11 @@ def main():
         help="Path to output directory (default: ./docs)",
     )
     generate_parser.add_argument(
+        "--clean-output",
+        action="store_true",
+        help="Delete existing output directory contents before generation",
+    )
+    generate_parser.add_argument(
         "--verbose", "-v",
         action="store_true",
         help="Enable verbose logging",
@@ -163,6 +169,11 @@ def main():
         type=Path,
         default=Path("./docs"),
         help="Path to output directory (default: ./docs)",
+    )
+    build_parser.add_argument(
+        "--clean-output",
+        action="store_true",
+        help="Delete existing output directory contents before generation",
     )
     build_parser.add_argument(
         "--max-misses",
@@ -280,8 +291,16 @@ def cmd_generate(args):
     print(f"Config directory: {args.config}")
     print(f"Data directory: {args.data}")
     print(f"Output directory: {args.output}")
+    print(f"Clean output: {args.clean_output}")
     print(f"Verbose: {verbose}")
     gh_group_end()
+
+    if args.clean_output and args.output.exists():
+        gh_group_start("Cleaning Output")
+        print(f"Removing existing output directory: {args.output}")
+        shutil.rmtree(args.output)
+        args.output.mkdir(parents=True, exist_ok=True)
+        gh_group_end()
     
     # Run generation with verbose callback
     start_time = time.time()
@@ -378,6 +397,7 @@ def cmd_build(args):
         config=args.config,
         data=args.data,
         output=args.output,
+        clean_output=args.clean_output,
         verbose=verbose,
     )
     gen_stats, gen_errors, generate_duration = cmd_generate(generate_args)
