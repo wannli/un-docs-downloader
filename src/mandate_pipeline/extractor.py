@@ -61,6 +61,35 @@ def extract_operative_paragraphs(text: str) -> dict[int, str]:
     return paragraphs
 
 
+def extract_lettered_paragraphs(text: str) -> dict[str, str]:
+    """
+    Extract lettered paragraphs from UN draft decisions.
+
+    Draft decisions use lettered paragraphs (a), (b), (c) instead of
+    numbered paragraphs 1., 2., 3.
+
+    Args:
+        text: Full text of the draft decision
+
+    Returns:
+        Dictionary mapping paragraph letters to their text content
+    """
+    paragraphs = {}
+
+    # Pattern: (a), (b), (c), etc. at start of line
+    # The paragraph continues until the next lettered paragraph or end
+    pattern = r"^\s*\(([a-z])\)\s+(.+?)(?=^\s*\([a-z]\)\s+|\Z)"
+
+    matches = re.findall(pattern, text, re.MULTILINE | re.DOTALL)
+
+    for letter, content in matches:
+        # Clean up the content: normalize whitespace
+        cleaned = " ".join(content.split())
+        paragraphs[letter] = cleaned
+
+    return paragraphs
+
+
 def extract_title(text: str) -> str:
     """
     Extract a document title using simple heuristics.
@@ -213,6 +242,49 @@ def extract_title(text: str) -> str:
 
     if title_parts:
         return " ".join(title_parts)
+
+    # Special case: outcome documents where title follows "Adopts the following outcome document"
+    # Structure: "Adopts the following outcome document...:" then blank lines, then actual title
+    outcome_start = None
+    for idx, line in enumerate(lines):
+        if re.search(r"Adopts the following outcome document", line, re.IGNORECASE):
+            outcome_start = idx
+            break
+
+    if outcome_start is not None:
+        # First, skip past the "Adopts..." sentence (ends with colon)
+        colon_found = False
+        title_start = outcome_start
+        for idx, line in enumerate(lines[outcome_start:], start=outcome_start):
+            if ":" in line:
+                colon_found = True
+                title_start = idx + 1
+                break
+
+        if colon_found:
+            outcome_title_parts = []
+            collecting_outcome = False
+            for line in lines[title_start:]:
+                candidate = line.strip()
+
+                # Skip empty lines before title
+                if not candidate and not collecting_outcome:
+                    continue
+
+                # Stop at preambular markers (We, the Ministers... or Recalling...)
+                if re.match(r"^(We,|Recalling|Reaffirming|Noting)", candidate):
+                    break
+
+                # Empty line after collecting means done
+                if not candidate and collecting_outcome:
+                    break
+
+                if candidate:
+                    outcome_title_parts.append(candidate)
+                    collecting_outcome = True
+
+            if outcome_title_parts:
+                return " ".join(outcome_title_parts)
 
     return ""
 

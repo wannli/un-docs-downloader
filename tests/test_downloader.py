@@ -555,6 +555,7 @@ class TestStaticGenerator:
                 "signals": {1: ["agenda"]},
                 "signal_summary": {"agenda": 1},
                 "un_url": "https://docs.un.org/en/a/80/l.1?direct=true",
+                "is_adopted_draft": False,
             },
             {
                 "symbol": "A/80/L.2",
@@ -563,6 +564,7 @@ class TestStaticGenerator:
                 "signals": {},
                 "signal_summary": {},
                 "un_url": "https://docs.un.org/en/a/80/l.2?direct=true",
+                "is_adopted_draft": False,
             },
         ]
         check = {"signal": "agenda", "phrases": ["decides to include"]}
@@ -571,7 +573,7 @@ class TestStaticGenerator:
         output_dir = tmp_path / "docs" / "signals"
         output_dir.mkdir(parents=True)
 
-        generate_signal_page(documents, check, checks, output_dir)
+        generate_signal_page(documents, documents, check, checks, output_dir)
 
         html_file = output_dir / "agenda.html"
         assert html_file.exists()

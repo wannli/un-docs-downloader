@@ -8,7 +8,6 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 from .checks import load_checks, run_checks
-from rapidfuzz import fuzz
 
 from .extractor import (
     extract_text,
@@ -18,7 +17,14 @@ from .extractor import (
     find_symbol_references,
 )
 from .pipeline import load_patterns
-from .lineage import load_lineage_cache
+from .lineage import (
+    load_lineage_cache,
+    link_documents,
+    annotate_lineage,
+    is_resolution,
+    is_proposal,
+    symbol_to_filename,
+)
 
 
 def get_un_document_url(symbol: str) -> str:
@@ -35,12 +41,6 @@ def get_un_document_url(symbol: str) -> str:
     # e.g., A/RES/80/233 -> https://docs.un.org/en/a/res/80/233?direct=true
     symbol_lower = symbol.lower()
     return f"https://docs.un.org/en/{symbol_lower}?direct=true"
-
-
-def symbol_to_filename(symbol: str) -> str:
-    """Convert a UN symbol to a safe filename."""
-    # Replace / with _ but preserve dots
-    return symbol.replace("/", "_")
 
 
 def filename_to_symbol(filename: str) -> str:
@@ -173,157 +173,6 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     documents.sort(key=sort_key)
 
     return documents
-
-
-def normalize_title(title: str) -> str:
-    """Normalize a title for fuzzy matching."""
-    # Strip resolution/decision number prefix like "80/60." or "80/60 "
-    title = re.sub(r"^\d+/\d+[.\s]+", "", title)
-    return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
-
-
-def is_resolution(symbol: str) -> bool:
-    """Return True if symbol looks like a resolution."""
-    return "/RES/" in symbol
-
-
-def is_proposal(symbol: str) -> bool:
-    """Return True if symbol looks like a draft/proposal (L. symbol)."""
-    return "/L." in symbol
-
-
-def is_excluded_draft_symbol(symbol: str) -> bool:
-    """Return True if symbol is a revision/addendum/corrigendum draft."""
-    upper_symbol = symbol.upper()
-    return any(token in upper_symbol for token in ("/REV.", "/ADD.", "/CORR."))
-
-
-def is_base_proposal_doc(doc: dict) -> bool:
-    """Return True if doc is a base draft proposal (not a revision/amendment)."""
-    symbol = doc.get("symbol", "")
-    if doc.get("doc_type") != "proposal":
-        return False
-    if is_excluded_draft_symbol(symbol):
-        return False
-    return is_proposal(symbol)
-
-
-def link_documents(documents: list[dict]) -> None:
-    """
-    Link resolutions to proposals using explicit references and fuzzy matching.
-
-    First pass: link by symbol references.
-    Second pass: link by normalized title similarity and agenda overlap.
-    """
-    proposals_by_symbol = {doc["symbol"]: doc for doc in documents if is_proposal(doc["symbol"])}
-    proposals = list(proposals_by_symbol.values())
-
-    for doc in documents:
-        doc.setdefault("linked_resolution_symbol", None)
-        doc.setdefault("linked_proposal_symbols", [])
-        doc.setdefault("link_method", None)
-        doc.setdefault("link_confidence", None)
-
-    for doc in documents:
-        if not is_resolution(doc["symbol"]):
-            continue
-        references = doc.get("symbol_references", [])
-        linked = [ref for ref in references if ref in proposals_by_symbol]
-        if not linked:
-            continue
-        doc["linked_proposal_symbols"] = linked
-        doc["link_method"] = "symbol_reference"
-        doc["link_confidence"] = 1.0
-        if doc.get("base_proposal_symbol") is None:
-            doc["base_proposal_symbol"] = linked[0]
-        for ref in linked:
-            proposal = proposals_by_symbol.get(ref)
-            if proposal is None:
-                continue
-            if proposal.get("linked_resolution_symbol") is None:
-                proposal["linked_resolution_symbol"] = doc["symbol"]
-                proposal["link_method"] = "symbol_reference"
-                proposal["link_confidence"] = 1.0
-
-    for doc in documents:
-        if not is_resolution(doc["symbol"]):
-            continue
-        if doc.get("linked_proposal_symbols"):
-            continue
-
-        title = normalize_title(doc.get("title", ""))
-        if not title:
-            continue
-        agenda_items = set(doc.get("agenda_items") or [])
-
-        best_match = None
-        best_score = 0.0
-        best_confidence = 0.0
-
-        for proposal in proposals:
-            if proposal.get("linked_resolution_symbol") not in (None, doc["symbol"]):
-                continue
-
-            proposal_title = normalize_title(proposal.get("title", ""))
-            if not proposal_title:
-                continue
-
-            proposal_agenda = set(proposal.get("agenda_items") or [])
-            if agenda_items and proposal_agenda and not agenda_items.intersection(proposal_agenda):
-                continue
-
-            similarity = fuzz.ratio(title, proposal_title)
-            if similarity < 85:
-                continue
-
-            confidence = similarity / 100.0
-            if agenda_items and proposal_agenda:
-                confidence = min(confidence + 0.05, 1.0)
-
-            if similarity > best_score:
-                best_score = similarity
-                best_match = proposal
-                best_confidence = confidence
-
-        if best_match:
-            doc["linked_proposal_symbols"] = [best_match["symbol"]]
-            doc["link_method"] = "title_agenda_fuzzy"
-            doc["link_confidence"] = best_confidence
-            if doc.get("base_proposal_symbol") is None:
-                doc["base_proposal_symbol"] = best_match["symbol"]
-
-            if best_match.get("linked_resolution_symbol") is None:
-                best_match["linked_resolution_symbol"] = doc["symbol"]
-                best_match["link_method"] = "title_agenda_fuzzy"
-                best_match["link_confidence"] = best_confidence
-
-
-def annotate_lineage(documents: list[dict]) -> None:
-    """Annotate documents with adopted draft status and lineage metadata."""
-    base_proposals = {doc["symbol"]: doc for doc in documents if is_base_proposal_doc(doc)}
-
-    for doc in documents:
-        doc["is_adopted_draft"] = False
-        doc["adopted_by"] = None
-        doc["lineage_proposals"] = []
-
-    for proposal in base_proposals.values():
-        linked_resolution = proposal.get("linked_resolution_symbol")
-        if linked_resolution:
-            proposal["is_adopted_draft"] = True
-            proposal["adopted_by"] = linked_resolution
-
-    for doc in documents:
-        if not is_resolution(doc.get("symbol", "")):
-            continue
-        linked = [
-            symbol for symbol in doc.get("linked_proposal_symbols", [])
-            if symbol in base_proposals
-        ]
-        doc["lineage_proposals"] = [
-            {"symbol": symbol, "filename": symbol_to_filename(symbol) + ".html"}
-            for symbol in linked
-        ]
 
 
 def generate_data_json(documents: list, checks: list, output_dir: Path) -> None:
