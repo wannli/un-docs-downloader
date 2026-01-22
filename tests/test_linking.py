@@ -10,7 +10,6 @@ from mandate_pipeline.linking import (
     filename_to_symbol,
     classify_symbol,
     normalize_symbol,
-    normalize_title,
     is_resolution,
     is_proposal,
     is_excluded_draft_symbol,
@@ -393,36 +392,6 @@ class TestNormalizeSymbol:
         assert normalize_symbol("A/80/L.1") == "A/80/L.1"
 
 
-class TestNormalizeTitle:
-    """Test title normalization for fuzzy matching."""
-
-    def test_lowercase_conversion(self):
-        """Convert to lowercase."""
-        assert "climate" in normalize_title("Climate Action")
-
-    def test_remove_special_chars(self):
-        """Remove special characters."""
-        result = normalize_title("Climate: Action & Plans!")
-        assert ":" not in result
-        assert "&" not in result
-        assert "!" not in result
-
-    def test_strip_resolution_prefix(self):
-        """Strip resolution number prefix like 80/60."""
-        result = normalize_title("80/60. Climate Action")
-        assert "80/60" not in result
-        assert "climate" in result
-
-    def test_normalize_whitespace(self):
-        """Normalize multiple spaces."""
-        result = normalize_title("Climate   Action   Plan")
-        assert "  " not in result
-
-    def test_empty_string(self):
-        """Empty string returns empty string."""
-        assert normalize_title("") == ""
-
-
 class TestIsResolution:
     """Test resolution symbol detection."""
 
@@ -578,99 +547,6 @@ class TestLinkDocuments:
         assert "A/80/L.1" in resolution["linked_proposal_symbols"]
         assert "A/80/L.5" in resolution["linked_proposal_symbols"]
 
-    def test_link_by_fuzzy_title_match(self):
-        """Link by fuzzy title matching when no symbol reference."""
-        documents = [
-            {
-                "symbol": "A/RES/80/1",
-                "title": "80/1. Strengthening humanitarian assistance",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-            {
-                "symbol": "A/80/L.1",
-                "title": "Strengthening humanitarian assistance",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-        ]
-
-        link_documents(documents, use_undl_metadata=False)
-
-        resolution = documents[0]
-        proposal = documents[1]
-
-        assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
-        assert proposal["linked_resolution_symbol"] == "A/RES/80/1"
-
-    def test_fuzzy_link_requires_agenda_overlap(self):
-        """Fuzzy matching requires agenda item overlap if both have items."""
-        documents = [
-            {
-                "symbol": "A/RES/80/1",
-                "title": "Climate Action",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-            {
-                "symbol": "A/80/L.1",
-                "title": "Climate Action",
-                "agenda_items": ["Item 125"],  # Different agenda item
-                "symbol_references": [],
-            },
-        ]
-
-        link_documents(documents, use_undl_metadata=False)
-
-        resolution = documents[0]
-        # Should not link due to agenda mismatch
-        assert resolution["linked_proposal_symbols"] == []
-
-    def test_fuzzy_link_ignores_agenda_if_missing(self):
-        """Fuzzy matching works if one side has no agenda items."""
-        documents = [
-            {
-                "symbol": "A/RES/80/1",
-                "title": "Climate Action",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-            {
-                "symbol": "A/80/L.1",
-                "title": "Climate Action",
-                "agenda_items": [],  # No agenda items
-                "symbol_references": [],
-            },
-        ]
-
-        link_documents(documents, use_undl_metadata=False)
-
-        resolution = documents[0]
-        assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
-
-    def test_fuzzy_link_threshold(self):
-        """Fuzzy match requires 85% similarity threshold."""
-        documents = [
-            {
-                "symbol": "A/RES/80/1",
-                "title": "Climate Action for Sustainable Development",
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-            {
-                "symbol": "A/80/L.1",
-                "title": "Totally Different Topic Here",  # Low similarity
-                "agenda_items": ["Item 68"],
-                "symbol_references": [],
-            },
-        ]
-
-        link_documents(documents, use_undl_metadata=False)
-
-        resolution = documents[0]
-        # Should not link due to low title similarity
-        assert resolution["linked_proposal_symbols"] == []
-
     def test_no_link_for_proposals(self):
         """Proposals don't initiate linking (only resolutions do)."""
         documents = [
@@ -695,7 +571,7 @@ class TestLinkDocuments:
         assert proposal["linked_proposal_symbols"] == []
 
     def test_symbol_link_takes_precedence(self):
-        """Symbol-based linking takes precedence over fuzzy matching."""
+        """Symbol-based linking takes precedence over other matches."""
         documents = [
             {
                 "symbol": "A/RES/80/1",
@@ -747,7 +623,7 @@ class TestLinkDocuments:
         assert documents == []
 
     def test_proposal_already_linked_not_relinked(self):
-        """Proposals already linked to a resolution are skipped in fuzzy matching."""
+        """Proposals already linked to a resolution are skipped."""
         documents = [
             {
                 "symbol": "A/RES/80/1",
@@ -1019,30 +895,6 @@ class TestDataQualityLinkage:
             assert "adopted_by" in doc
             assert "linked_proposals" in doc
 
-    def test_fuzzy_title_matching_quality(self):
-        """Fuzzy title matching produces reasonable results."""
-        # Test cases with known similar titles
-        test_cases = [
-            ("80/1. Climate Action", "Climate Action", True),
-            ("80/1. Climate Action for Development", "Climate Action for Development", True),
-            ("Climate Action", "Totally Different Topic", False),
-            ("Humanitarian Assistance", "humanitarian assistance", True),
-            ("Short", "Completely Different and Much Longer Title", False),
-        ]
-
-        for title1, title2, should_match in test_cases:
-            norm1 = normalize_title(title1)
-            norm2 = normalize_title(title2)
-
-            from rapidfuzz import fuzz
-            similarity = fuzz.ratio(norm1, norm2)
-
-            if should_match:
-                assert similarity >= 85, f"Expected match: {title1} vs {title2}"
-            else:
-                assert similarity < 85, f"Expected no match: {title1} vs {title2}"
-
-
 # =============================================================================
 # INTEGRATION TESTS: Full Pipeline
 # =============================================================================
@@ -1062,13 +914,13 @@ class TestLinkageIntegration:
                 "agenda_items": ["Item 68"],
                 "symbol_references": ["A/80/L.1"],
             },
-            # Resolution without symbol reference (needs fuzzy match)
+            # Resolution linked via symbol reference
             {
                 "symbol": "A/RES/80/2",
                 "doc_type": "resolution",
                 "title": "80/2. Humanitarian Assistance",
                 "agenda_items": ["Item 70"],
-                "symbol_references": [],
+                "symbol_references": ["A/80/L.5"],
             },
             # Base proposal (will be linked and adopted)
             {
@@ -1078,7 +930,7 @@ class TestLinkageIntegration:
                 "agenda_items": ["Item 68"],
                 "symbol_references": [],
             },
-            # Base proposal (fuzzy match candidate)
+            # Base proposal (symbol reference candidate)
             {
                 "symbol": "A/80/L.5",
                 "doc_type": "proposal",

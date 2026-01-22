@@ -360,13 +360,6 @@ PASS 1: Explicit References
     FOR EACH symbol_reference:
       IF symbol_reference IS proposal:
         LINK(resolution → proposal, confidence=1.0)
-
-PASS 2: Fuzzy Title Matching
-  FOR EACH unlinked resolution:
-    FOR EACH proposal:
-      IF fuzzy_match(title) >= 85%:
-        confidence = similarity + (0.05 IF agenda_overlap)
-        LINK(resolution → proposal, confidence)
 ```
 
 ## Generated Website Structure
@@ -389,7 +382,6 @@ PASS 2: Fuzzy Title Matching
 - `pymupdf` - PDF text extraction
 - `pyyaml` - YAML configuration parsing
 - `jinja2` - HTML template rendering
-- `rapidfuzz` - Fuzzy string matching
 
 **Development:**
 - `pytest` - Testing framework
