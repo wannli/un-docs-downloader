@@ -1,14 +1,37 @@
-# Tests for lineage analysis and UN Digital Library integration
+# Tests for Mandate Pipeline Lineage Module
+# Comprehensive unit tests for document linkage, lineage functions, and UN Digital Library integration
 
+import json
 import pytest
+from pathlib import Path
+from datetime import datetime, timezone
+from unittest.mock import patch, MagicMock
 
 from mandate_pipeline.lineage import (
-    fetch_undl_metadata,
-    _parse_undl_marc_xml,
-    link_documents,
+    symbol_to_filename,
+    filename_to_symbol,
+    compute_last_modified_hash,
+    classify_symbol,
+    normalize_symbol,
+    extract_linked_symbols,
+    normalize_title,
     is_resolution,
     is_proposal,
+    is_excluded_draft_symbol,
+    is_base_proposal_doc,
+    link_documents,
+    annotate_lineage,
+    load_lineage_cache,
+    save_lineage_cache,
+    update_lineage_cache,
+    fetch_undl_metadata,
+    _parse_undl_marc_xml,
 )
+
+
+# =============================================================================
+# UNIT TESTS: UN Digital Library Integration
+# =============================================================================
 
 
 # Sample MARC XML response for testing
@@ -303,20 +326,1138 @@ class TestLinkDocumentsWithUndl:
         mock_get.assert_not_called()
 
 
-class TestHelperFunctions:
-    """Tests for helper functions."""
+# =============================================================================
+# UNIT TESTS: Helper Functions
+# =============================================================================
 
-    def test_is_resolution(self):
-        """Identify resolution symbols."""
-        assert is_resolution("A/RES/80/142") is True
-        assert is_resolution("A/RES/79/1") is True
+
+class TestSymbolToFilename:
+    """Test symbol_to_filename conversion."""
+
+    def test_simple_symbol(self):
+        """Convert simple A/80/L.1 to A_80_L.1."""
+        assert symbol_to_filename("A/80/L.1") == "A_80_L.1"
+
+    def test_resolution_symbol(self):
+        """Convert resolution A/RES/80/1 to A_RES_80_1."""
+        assert symbol_to_filename("A/RES/80/1") == "A_RES_80_1"
+
+    def test_committee_symbol(self):
+        """Convert committee A/C.1/80/L.5 to A_C.1_80_L.5."""
+        assert symbol_to_filename("A/C.1/80/L.5") == "A_C.1_80_L.5"
+
+    def test_revision_symbol(self):
+        """Convert revision A/80/L.1/Rev.1 to A_80_L.1_Rev.1."""
+        assert symbol_to_filename("A/80/L.1/Rev.1") == "A_80_L.1_Rev.1"
+
+    def test_empty_symbol(self):
+        """Empty string returns empty string."""
+        assert symbol_to_filename("") == ""
+
+
+class TestFilenameToSymbol:
+    """Test filename_to_symbol conversion."""
+
+    def test_simple_filename(self):
+        """Convert A_80_L.1 to A/80/L.1."""
+        assert filename_to_symbol("A_80_L.1") == "A/80/L.1"
+
+    def test_filename_with_pdf(self):
+        """Strip .pdf extension and convert."""
+        assert filename_to_symbol("A_80_L.1.pdf") == "A/80/L.1"
+
+    def test_resolution_filename(self):
+        """Convert A_RES_80_1 to A/RES/80/1."""
+        assert filename_to_symbol("A_RES_80_1") == "A/RES/80/1"
+
+    def test_committee_filename(self):
+        """Convert A_C.1_80_L.5 to A/C.1/80/L.5."""
+        assert filename_to_symbol("A_C.1_80_L.5") == "A/C.1/80/L.5"
+
+
+class TestComputeLastModifiedHash:
+    """Test last-modified hash computation."""
+
+    def test_computes_hash(self, tmp_path):
+        """Compute hash from file stats."""
+        pdf = tmp_path / "test.pdf"
+        pdf.write_bytes(b"%PDF-1.4 content")
+
+        hash1 = compute_last_modified_hash(pdf)
+
+        assert isinstance(hash1, str)
+        assert len(hash1) == 64  # SHA256 hex digest
+
+    def test_different_content_different_hash(self, tmp_path):
+        """Different file sizes produce different hashes."""
+        pdf1 = tmp_path / "test1.pdf"
+        pdf2 = tmp_path / "test2.pdf"
+        pdf1.write_bytes(b"%PDF small")
+        pdf2.write_bytes(b"%PDF much larger content here")
+
+        hash1 = compute_last_modified_hash(pdf1)
+        hash2 = compute_last_modified_hash(pdf2)
+
+        assert hash1 != hash2
+
+    def test_same_file_same_hash(self, tmp_path):
+        """Same file produces same hash on repeated calls."""
+        pdf = tmp_path / "test.pdf"
+        pdf.write_bytes(b"%PDF content")
+
+        hash1 = compute_last_modified_hash(pdf)
+        hash2 = compute_last_modified_hash(pdf)
+
+        assert hash1 == hash2
+
+
+class TestClassifySymbol:
+    """Test symbol classification."""
+
+    def test_resolution_symbol(self):
+        """Classify A/RES/80/1 as resolution."""
+        assert classify_symbol("A/RES/80/1") == "resolution"
+
+    def test_resolution_lowercase(self):
+        """Classify lowercase a/res/80/1 as resolution."""
+        assert classify_symbol("a/res/80/1") == "resolution"
+
+    def test_proposal_symbol(self):
+        """Classify A/80/L.1 as proposal."""
+        assert classify_symbol("A/80/L.1") == "proposal"
+
+    def test_committee_proposal(self):
+        """Classify A/C.1/80/L.5 as proposal."""
+        assert classify_symbol("A/C.1/80/L.5") == "proposal"
+
+    def test_other_document(self):
+        """Classify A/80/100 as other."""
+        assert classify_symbol("A/80/100") == "other"
+
+    def test_report_document(self):
+        """Classify A/80/390 as other (report)."""
+        assert classify_symbol("A/80/390") == "other"
+
+
+class TestNormalizeSymbol:
+    """Test symbol normalization."""
+
+    def test_uppercase_conversion(self):
+        """Convert to uppercase."""
+        assert normalize_symbol("a/80/l.1") == "A/80/L.1"
+
+    def test_strip_whitespace(self):
+        """Strip leading/trailing whitespace."""
+        assert normalize_symbol("  A/80/L.1  ") == "A/80/L.1"
+
+    def test_already_normalized(self):
+        """Already normalized symbol unchanged."""
+        assert normalize_symbol("A/80/L.1") == "A/80/L.1"
+
+
+class TestExtractLinkedSymbols:
+    """Test extraction of linked symbols from text."""
+
+    def test_extract_single_symbol(self):
+        """Extract single symbol from text."""
+        text = "Recalling document A/80/L.5 of the General Assembly"
+        result = extract_linked_symbols(text, "A/RES/80/1")
+
+        assert "A/80/L.5" in result
+
+    def test_extract_multiple_symbols(self):
+        """Extract multiple symbols from text."""
+        text = """
+        Recalling A/80/L.1, A/80/L.5 and A/C.1/80/L.10,
+        Also noting A/80/390.
+        """
+        result = extract_linked_symbols(text, "A/RES/80/1")
+
+        assert "A/80/L.1" in result
+        assert "A/80/L.5" in result
+        assert "A/C.1/80/L.10" in result
+        assert "A/80/390" in result
+
+    def test_excludes_self_reference(self):
+        """Exclude the document's own symbol."""
+        text = "Document A/80/L.1 refers to itself A/80/L.1"
+        result = extract_linked_symbols(text, "A/80/L.1")
+
+        assert "A/80/L.1" not in result
+
+    def test_no_duplicates(self):
+        """No duplicate symbols in result."""
+        text = "A/80/L.1 appears here and A/80/L.1 again."
+        result = extract_linked_symbols(text, "A/RES/80/1")
+
+        assert result.count("A/80/L.1") == 1
+
+    def test_sorted_results(self):
+        """Results are sorted."""
+        text = "Documents: A/80/L.5, A/80/L.1, A/80/L.3"
+        result = extract_linked_symbols(text, "A/RES/80/1")
+
+        assert result == sorted(result)
+
+    def test_case_normalization(self):
+        """Normalize case of extracted symbols."""
+        text = "Document a/80/l.1 and A/80/L.5"
+        result = extract_linked_symbols(text, "A/RES/80/1")
+
+        assert "A/80/L.1" in result
+        assert "A/80/L.5" in result
+
+
+class TestNormalizeTitle:
+    """Test title normalization for fuzzy matching."""
+
+    def test_lowercase_conversion(self):
+        """Convert to lowercase."""
+        assert "climate" in normalize_title("Climate Action")
+
+    def test_remove_special_chars(self):
+        """Remove special characters."""
+        result = normalize_title("Climate: Action & Plans!")
+        assert ":" not in result
+        assert "&" not in result
+        assert "!" not in result
+
+    def test_strip_resolution_prefix(self):
+        """Strip resolution number prefix like 80/60."""
+        result = normalize_title("80/60. Climate Action")
+        assert "80/60" not in result
+        assert "climate" in result
+
+    def test_normalize_whitespace(self):
+        """Normalize multiple spaces."""
+        result = normalize_title("Climate   Action   Plan")
+        assert "  " not in result
+
+    def test_empty_string(self):
+        """Empty string returns empty string."""
+        assert normalize_title("") == ""
+
+
+class TestIsResolution:
+    """Test resolution symbol detection."""
+
+    def test_resolution_true(self):
+        """A/RES/80/1 is a resolution."""
+        assert is_resolution("A/RES/80/1") is True
+
+    def test_proposal_false(self):
+        """A/80/L.1 is not a resolution."""
         assert is_resolution("A/80/L.1") is False
-        assert is_resolution("A/C.1/80/L.5") is False
 
-    def test_is_proposal(self):
-        """Identify proposal/draft symbols."""
+    def test_other_false(self):
+        """A/80/100 is not a resolution."""
+        assert is_resolution("A/80/100") is False
+
+
+class TestIsProposal:
+    """Test proposal symbol detection."""
+
+    def test_proposal_true(self):
+        """A/80/L.1 is a proposal."""
         assert is_proposal("A/80/L.1") is True
+
+    def test_committee_proposal_true(self):
+        """A/C.1/80/L.5 is a proposal."""
         assert is_proposal("A/C.1/80/L.5") is True
-        assert is_proposal("A/C.2/80/L.35/Rev.1") is True
-        assert is_proposal("A/RES/80/142") is False
+
+    def test_resolution_false(self):
+        """A/RES/80/1 is not a proposal."""
+        assert is_proposal("A/RES/80/1") is False
+
+    def test_other_false(self):
+        """A/80/100 is not a proposal."""
         assert is_proposal("A/80/100") is False
+
+
+class TestIsExcludedDraftSymbol:
+    """Test detection of revision/addendum/corrigendum drafts."""
+
+    def test_revision_excluded(self):
+        """A/80/L.1/Rev.1 is excluded."""
+        assert is_excluded_draft_symbol("A/80/L.1/Rev.1") is True
+
+    def test_addendum_excluded(self):
+        """A/80/L.1/Add.1 is excluded."""
+        assert is_excluded_draft_symbol("A/80/L.1/Add.1") is True
+
+    def test_corrigendum_excluded(self):
+        """A/80/L.1/Corr.1 is excluded."""
+        assert is_excluded_draft_symbol("A/80/L.1/Corr.1") is True
+
+    def test_base_proposal_not_excluded(self):
+        """A/80/L.1 is not excluded."""
+        assert is_excluded_draft_symbol("A/80/L.1") is False
+
+    def test_resolution_not_excluded(self):
+        """A/RES/80/1 is not excluded."""
+        assert is_excluded_draft_symbol("A/RES/80/1") is False
+
+    def test_case_insensitive(self):
+        """Case insensitive detection."""
+        assert is_excluded_draft_symbol("A/80/L.1/rev.1") is True
+
+
+class TestIsBaseProposalDoc:
+    """Test base proposal document detection."""
+
+    def test_base_proposal_true(self):
+        """Base proposal doc returns True."""
+        doc = {"symbol": "A/80/L.1", "doc_type": "proposal"}
+        assert is_base_proposal_doc(doc) is True
+
+    def test_revision_false(self):
+        """Revision doc returns False."""
+        doc = {"symbol": "A/80/L.1/Rev.1", "doc_type": "proposal"}
+        assert is_base_proposal_doc(doc) is False
+
+    def test_wrong_doc_type_false(self):
+        """Wrong doc_type returns False."""
+        doc = {"symbol": "A/80/L.1", "doc_type": "amendment"}
+        assert is_base_proposal_doc(doc) is False
+
+    def test_resolution_false(self):
+        """Resolution returns False."""
+        doc = {"symbol": "A/RES/80/1", "doc_type": "resolution"}
+        assert is_base_proposal_doc(doc) is False
+
+    def test_missing_symbol_false(self):
+        """Missing symbol returns False."""
+        doc = {"doc_type": "proposal"}
+        assert is_base_proposal_doc(doc) is False
+
+
+# =============================================================================
+# UNIT TESTS: link_documents Function
+# =============================================================================
+
+
+class TestLinkDocuments:
+    """Test document linking algorithm."""
+
+    def test_link_by_symbol_reference(self):
+        """Link resolution to proposal via explicit symbol reference."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.1"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        proposal = documents[1]
+
+        assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
+        assert resolution["link_method"] == "symbol_reference"
+        assert resolution["link_confidence"] == 1.0
+        assert proposal["linked_resolution_symbol"] == "A/RES/80/1"
+        assert proposal["link_method"] == "symbol_reference"
+
+    def test_link_multiple_proposals(self):
+        """Link resolution to multiple proposals."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.1", "A/80/L.5"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.5",
+                "title": "Related Topic",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        assert "A/80/L.1" in resolution["linked_proposal_symbols"]
+        assert "A/80/L.5" in resolution["linked_proposal_symbols"]
+
+    def test_link_by_fuzzy_title_match(self):
+        """Link by fuzzy title matching when no symbol reference."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "80/1. Strengthening humanitarian assistance",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Strengthening humanitarian assistance",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        proposal = documents[1]
+
+        assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
+        assert resolution["link_method"] == "title_agenda_fuzzy"
+        assert resolution["link_confidence"] >= 0.85
+        assert proposal["linked_resolution_symbol"] == "A/RES/80/1"
+
+    def test_fuzzy_link_requires_agenda_overlap(self):
+        """Fuzzy matching requires agenda item overlap if both have items."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 125"],  # Different agenda item
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        # Should not link due to agenda mismatch
+        assert resolution["linked_proposal_symbols"] == []
+
+    def test_fuzzy_link_ignores_agenda_if_missing(self):
+        """Fuzzy matching works if one side has no agenda items."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": [],  # No agenda items
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        assert resolution["linked_proposal_symbols"] == ["A/80/L.1"]
+
+    def test_fuzzy_link_threshold(self):
+        """Fuzzy match requires 85% similarity threshold."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action for Sustainable Development",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Totally Different Topic Here",  # Low similarity
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        # Should not link due to low title similarity
+        assert resolution["linked_proposal_symbols"] == []
+
+    def test_no_link_for_proposals(self):
+        """Proposals don't initiate linking (only resolutions do)."""
+        documents = [
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.5"],
+            },
+            {
+                "symbol": "A/80/L.5",
+                "title": "Related Topic",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        # Proposals don't get linked_proposal_symbols from their references
+        proposal = documents[0]
+        assert proposal["linked_proposal_symbols"] == []
+
+    def test_symbol_link_takes_precedence(self):
+        """Symbol-based linking takes precedence over fuzzy matching."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.5"],  # References L.5
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",  # Better title match
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.5",
+                "title": "Different Title",  # Worse title match
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        # Should link to L.5 (symbol reference) not L.1 (title match)
+        assert resolution["linked_proposal_symbols"] == ["A/80/L.5"]
+        assert resolution["link_method"] == "symbol_reference"
+
+    def test_sets_base_proposal_symbol(self):
+        """Sets base_proposal_symbol on resolution."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.1", "A/80/L.5"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.5",
+                "title": "Related",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        resolution = documents[0]
+        # base_proposal_symbol should be first linked proposal
+        assert resolution["base_proposal_symbol"] == "A/80/L.1"
+
+    def test_default_fields_initialized(self):
+        """All link-related fields are initialized."""
+        documents = [
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        doc = documents[0]
+        assert "linked_resolution_symbol" in doc
+        assert "linked_proposal_symbols" in doc
+        assert "link_method" in doc
+        assert "link_confidence" in doc
+
+    def test_empty_documents_list(self):
+        """Empty documents list handled gracefully."""
+        documents = []
+        link_documents(documents, use_undl_metadata=False)  # Should not raise
+        assert documents == []
+
+    def test_proposal_already_linked_not_relinked(self):
+        """Proposals already linked to a resolution are skipped in fuzzy matching."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.1"],
+            },
+            {
+                "symbol": "A/RES/80/2",
+                "title": "Climate Action",  # Same title
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+        ]
+
+        link_documents(documents, use_undl_metadata=False)
+
+        # A/80/L.1 should be linked to A/RES/80/1 (symbol ref), not A/RES/80/2
+        proposal = documents[2]
+        assert proposal["linked_resolution_symbol"] == "A/RES/80/1"
+
+
+# =============================================================================
+# UNIT TESTS: annotate_lineage Function
+# =============================================================================
+
+
+class TestAnnotateLineage:
+    """Test lineage annotation algorithm."""
+
+    def test_annotate_adopted_draft(self):
+        """Mark proposal as adopted when linked to resolution."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "doc_type": "resolution",
+                "linked_proposal_symbols": ["A/80/L.1"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        proposal = documents[1]
+        assert proposal["is_adopted_draft"] is True
+        assert proposal["adopted_by"] == "A/RES/80/1"
+
+    def test_unadopted_draft(self):
+        """Proposal without linked resolution is not adopted."""
+        documents = [
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": None,
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        proposal = documents[0]
+        assert proposal["is_adopted_draft"] is False
+        assert proposal["adopted_by"] is None
+
+    def test_revision_not_marked_adopted(self):
+        """Revision drafts are not marked as adopted base proposals."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "doc_type": "resolution",
+                "linked_proposal_symbols": ["A/80/L.1/Rev.1"],
+            },
+            {
+                "symbol": "A/80/L.1/Rev.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        revision = documents[1]
+        # Revisions are excluded from base proposal tracking
+        assert revision["is_adopted_draft"] is False
+
+    def test_lineage_proposals_populated(self):
+        """Resolution gets lineage_proposals list."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "doc_type": "resolution",
+                "linked_proposal_symbols": ["A/80/L.1", "A/80/L.5"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+            {
+                "symbol": "A/80/L.5",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        resolution = documents[0]
+        lineage = resolution["lineage_proposals"]
+        assert len(lineage) == 2
+        symbols = [lp["symbol"] for lp in lineage]
+        assert "A/80/L.1" in symbols
+        assert "A/80/L.5" in symbols
+
+    def test_lineage_proposals_excludes_revisions(self):
+        """lineage_proposals excludes revision drafts."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "doc_type": "resolution",
+                "linked_proposal_symbols": ["A/80/L.1", "A/80/L.1/Rev.1"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+            {
+                "symbol": "A/80/L.1/Rev.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        resolution = documents[0]
+        lineage = resolution["lineage_proposals"]
+        symbols = [lp["symbol"] for lp in lineage]
+        assert "A/80/L.1" in symbols
+        assert "A/80/L.1/Rev.1" not in symbols
+
+    def test_lineage_proposals_html_filename(self):
+        """lineage_proposals includes HTML filename."""
+        documents = [
+            {
+                "symbol": "A/RES/80/1",
+                "doc_type": "resolution",
+                "linked_proposal_symbols": ["A/80/L.1"],
+            },
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+                "linked_resolution_symbol": "A/RES/80/1",
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        resolution = documents[0]
+        lineage = resolution["lineage_proposals"][0]
+        assert lineage["filename"] == "A_80_L.1.html"
+
+    def test_empty_documents_list(self):
+        """Empty documents list handled gracefully."""
+        documents = []
+        annotate_lineage(documents)  # Should not raise
+        assert documents == []
+
+    def test_default_fields_initialized(self):
+        """All lineage fields are initialized."""
+        documents = [
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+            },
+        ]
+
+        annotate_lineage(documents)
+
+        doc = documents[0]
+        assert "is_adopted_draft" in doc
+        assert "adopted_by" in doc
+        assert "lineage_proposals" in doc
+
+
+# =============================================================================
+# UNIT TESTS: Cache Functions
+# =============================================================================
+
+
+class TestLoadLineageCache:
+    """Test loading lineage cache from disk."""
+
+    def test_load_nonexistent_file(self, tmp_path):
+        """Return empty cache for nonexistent file."""
+        cache = load_lineage_cache(tmp_path / "nonexistent.json")
+
+        assert cache["generated_at"] is None
+        assert cache["documents"] == {}
+
+    def test_load_existing_cache(self, tmp_path):
+        """Load existing cache file."""
+        cache_file = tmp_path / "lineage.json"
+        cache_file.write_text(json.dumps({
+            "generated_at": "2026-01-01T00:00:00+00:00",
+            "documents": {
+                "A/80/L.1": {
+                    "classification": "proposal",
+                    "links": ["A/80/100"],
+                }
+            }
+        }))
+
+        cache = load_lineage_cache(cache_file)
+
+        assert cache["generated_at"] == "2026-01-01T00:00:00+00:00"
+        assert "A/80/L.1" in cache["documents"]
+
+    def test_load_cache_missing_documents_key(self, tmp_path):
+        """Handle cache without documents key."""
+        cache_file = tmp_path / "lineage.json"
+        cache_file.write_text(json.dumps({"generated_at": "2026-01-01"}))
+
+        cache = load_lineage_cache(cache_file)
+
+        assert "documents" in cache
+        assert cache["documents"] == {}
+
+
+class TestSaveLineageCache:
+    """Test saving lineage cache to disk."""
+
+    def test_save_cache(self, tmp_path):
+        """Save cache to disk with timestamp."""
+        cache_file = tmp_path / "lineage.json"
+        cache = {
+            "documents": {
+                "A/80/L.1": {"classification": "proposal"}
+            }
+        }
+
+        save_lineage_cache(cache_file, cache)
+
+        assert cache_file.exists()
+        saved = json.loads(cache_file.read_text())
+        assert "generated_at" in saved
+        assert "A/80/L.1" in saved["documents"]
+
+    def test_save_creates_directory(self, tmp_path):
+        """Create parent directory if needed."""
+        cache_file = tmp_path / "subdir" / "lineage.json"
+        cache = {"documents": {}}
+
+        save_lineage_cache(cache_file, cache)
+
+        assert cache_file.exists()
+
+
+class TestUpdateLineageCache:
+    """Test updating lineage cache from PDFs."""
+
+    def test_update_empty_pdfs_dir(self, tmp_path):
+        """Handle nonexistent pdfs directory."""
+        data_dir = tmp_path / "data"
+        data_dir.mkdir()
+        # No pdfs/ subdirectory
+
+        result = update_lineage_cache(data_dir)
+
+        assert result["total"] == 0
+        assert result["updated"] == 0
+
+    def test_update_new_pdf(self, tmp_path, mocker):
+        """Update cache with new PDF."""
+        data_dir = tmp_path / "data"
+        pdfs_dir = data_dir / "pdfs"
+        pdfs_dir.mkdir(parents=True)
+
+        pdf = pdfs_dir / "A_80_L.1.pdf"
+        pdf.write_bytes(b"%PDF-1.4 content")
+
+        # Mock extract_text
+        mocker.patch("mandate_pipeline.lineage.extract_text", return_value="Text with A/80/100 reference")
+
+        result = update_lineage_cache(data_dir)
+
+        assert result["total"] == 1
+        assert result["updated"] == 1
+
+        # Verify cache was saved
+        cache_file = data_dir / "lineage.json"
+        assert cache_file.exists()
+        cache = json.loads(cache_file.read_text())
+        assert "A/80/L.1" in cache["documents"]
+
+    def test_update_reuses_unchanged(self, tmp_path, mocker):
+        """Reuse cache for unchanged PDFs."""
+        data_dir = tmp_path / "data"
+        pdfs_dir = data_dir / "pdfs"
+        pdfs_dir.mkdir(parents=True)
+
+        pdf = pdfs_dir / "A_80_L.1.pdf"
+        pdf.write_bytes(b"%PDF-1.4 content")
+        pdf_hash = compute_last_modified_hash(pdf)
+
+        # Pre-populate cache
+        cache_file = data_dir / "lineage.json"
+        cache_file.write_text(json.dumps({
+            "generated_at": "2026-01-01",
+            "documents": {
+                "A/80/L.1": {
+                    "last_modified_hash": pdf_hash,
+                    "classification": "proposal",
+                    "links": [],
+                }
+            }
+        }))
+
+        # Should not call extract_text
+        mock_extract = mocker.patch("mandate_pipeline.lineage.extract_text")
+
+        result = update_lineage_cache(data_dir)
+
+        assert result["reused"] == 1
+        assert result["updated"] == 0
+        mock_extract.assert_not_called()
+
+    def test_update_removes_deleted_pdfs(self, tmp_path, mocker):
+        """Remove cache entries for deleted PDFs."""
+        data_dir = tmp_path / "data"
+        pdfs_dir = data_dir / "pdfs"
+        pdfs_dir.mkdir(parents=True)
+
+        # Pre-populate cache with non-existent PDF
+        cache_file = data_dir / "lineage.json"
+        cache_file.write_text(json.dumps({
+            "generated_at": "2026-01-01",
+            "documents": {
+                "A/80/L.DELETED": {
+                    "last_modified_hash": "abc123",
+                    "classification": "proposal",
+                    "links": [],
+                }
+            }
+        }))
+
+        result = update_lineage_cache(data_dir)
+
+        assert result["removed"] == 1
+
+        cache = json.loads(cache_file.read_text())
+        assert "A/80/L.DELETED" not in cache["documents"]
+
+
+# =============================================================================
+# DATA QUALITY TESTS: Real Documents
+# =============================================================================
+
+DATA_DIR = Path(__file__).parent.parent / "data" / "pdfs"
+
+
+@pytest.mark.skipif(not DATA_DIR.exists(), reason="Data directory not available")
+class TestDataQualityLinkage:
+    """Data quality tests for linkage using real documents."""
+
+    def test_symbol_extraction_consistency(self):
+        """Symbol extraction produces consistent normalized results."""
+        from mandate_pipeline.extractor import extract_text
+
+        # Test with a few known documents
+        test_files = list(DATA_DIR.glob("A_80_L.*.pdf"))[:5]
+        if len(test_files) < 3:
+            pytest.skip("Not enough test files")
+
+        for pdf in test_files:
+            text = extract_text(pdf)
+            symbol = filename_to_symbol(pdf.stem)
+            links = extract_linked_symbols(text, symbol)
+
+            # All extracted symbols should be uppercase
+            for link in links:
+                assert link == link.upper(), f"Symbol {link} not normalized"
+
+            # No self-references
+            assert symbol not in links, f"Self-reference found in {symbol}"
+
+    def test_classify_symbol_real_documents(self):
+        """Classification works on real document symbols."""
+        # Test known document types
+        proposals = ["A/80/L.1", "A/80/L.10", "A/C.1/80/L.5"]
+        resolutions = ["A/RES/80/1", "A/RES/80/100"]
+        others = ["A/80/390", "A/80/100"]
+
+        for symbol in proposals:
+            assert classify_symbol(symbol) == "proposal", f"{symbol} should be proposal"
+
+        for symbol in resolutions:
+            assert classify_symbol(symbol) == "resolution", f"{symbol} should be resolution"
+
+        for symbol in others:
+            assert classify_symbol(symbol) == "other", f"{symbol} should be other"
+
+    def test_link_documents_with_real_structure(self):
+        """link_documents works with realistic document structure."""
+        from mandate_pipeline.extractor import extract_text, extract_title, extract_agenda_items, find_symbol_references
+
+        test_files = list(DATA_DIR.glob("A_80_L.*.pdf"))[:10]
+        if len(test_files) < 5:
+            pytest.skip("Not enough test files")
+
+        documents = []
+        for pdf in test_files:
+            text = extract_text(pdf)
+            symbol = filename_to_symbol(pdf.stem)
+
+            documents.append({
+                "symbol": symbol,
+                "doc_type": "proposal",
+                "title": extract_title(text),
+                "agenda_items": extract_agenda_items(text),
+                "symbol_references": find_symbol_references(text),
+            })
+
+        # Should not raise
+        link_documents(documents, use_undl_metadata=False)
+        annotate_lineage(documents)
+
+        # All documents should have link fields
+        for doc in documents:
+            assert "linked_resolution_symbol" in doc
+            assert "linked_proposal_symbols" in doc
+            assert "is_adopted_draft" in doc
+            assert "lineage_proposals" in doc
+
+    def test_fuzzy_title_matching_quality(self):
+        """Fuzzy title matching produces reasonable results."""
+        # Test cases with known similar titles
+        test_cases = [
+            ("80/1. Climate Action", "Climate Action", True),
+            ("80/1. Climate Action for Development", "Climate Action for Development", True),
+            ("Climate Action", "Totally Different Topic", False),
+            ("Humanitarian Assistance", "humanitarian assistance", True),
+            ("Short", "Completely Different and Much Longer Title", False),
+        ]
+
+        for title1, title2, should_match in test_cases:
+            norm1 = normalize_title(title1)
+            norm2 = normalize_title(title2)
+
+            from rapidfuzz import fuzz
+            similarity = fuzz.ratio(norm1, norm2)
+
+            if should_match:
+                assert similarity >= 85, f"Expected match: {title1} vs {title2}"
+            else:
+                assert similarity < 85, f"Expected no match: {title1} vs {title2}"
+
+
+# =============================================================================
+# INTEGRATION TESTS: Full Pipeline
+# =============================================================================
+
+
+class TestLinkageIntegration:
+    """Integration tests for complete linkage workflow."""
+
+    def test_full_link_and_annotate_workflow(self):
+        """Complete workflow: link_documents then annotate_lineage."""
+        documents = [
+            # Resolution with symbol reference
+            {
+                "symbol": "A/RES/80/1",
+                "doc_type": "resolution",
+                "title": "80/1. Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": ["A/80/L.1"],
+            },
+            # Resolution without symbol reference (needs fuzzy match)
+            {
+                "symbol": "A/RES/80/2",
+                "doc_type": "resolution",
+                "title": "80/2. Humanitarian Assistance",
+                "agenda_items": ["Item 70"],
+                "symbol_references": [],
+            },
+            # Base proposal (will be linked and adopted)
+            {
+                "symbol": "A/80/L.1",
+                "doc_type": "proposal",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            # Base proposal (fuzzy match candidate)
+            {
+                "symbol": "A/80/L.5",
+                "doc_type": "proposal",
+                "title": "Humanitarian Assistance",
+                "agenda_items": ["Item 70"],
+                "symbol_references": [],
+            },
+            # Revision (should not be marked as adopted base)
+            {
+                "symbol": "A/80/L.1/Rev.1",
+                "doc_type": "proposal",
+                "title": "Climate Action",
+                "agenda_items": ["Item 68"],
+                "symbol_references": [],
+            },
+            # Unrelated proposal (should remain unlinked)
+            {
+                "symbol": "A/80/L.10",
+                "doc_type": "proposal",
+                "title": "Completely Different Topic",
+                "agenda_items": ["Item 125"],
+                "symbol_references": [],
+            },
+        ]
+
+        # Run linking
+        link_documents(documents, use_undl_metadata=False)
+        annotate_lineage(documents)
+
+        # Verify RES/80/1 linked to L.1 via symbol
+        res1 = next(d for d in documents if d["symbol"] == "A/RES/80/1")
+        assert res1["linked_proposal_symbols"] == ["A/80/L.1"]
+        assert res1["link_method"] == "symbol_reference"
+
+        # Verify RES/80/2 linked to L.5 via fuzzy
+        res2 = next(d for d in documents if d["symbol"] == "A/RES/80/2")
+        assert res2["linked_proposal_symbols"] == ["A/80/L.5"]
+        assert res2["link_method"] == "title_agenda_fuzzy"
+
+        # Verify L.1 is adopted
+        l1 = next(d for d in documents if d["symbol"] == "A/80/L.1")
+        assert l1["is_adopted_draft"] is True
+        assert l1["adopted_by"] == "A/RES/80/1"
+
+        # Verify L.5 is adopted
+        l5 = next(d for d in documents if d["symbol"] == "A/80/L.5")
+        assert l5["is_adopted_draft"] is True
+        assert l5["adopted_by"] == "A/RES/80/2"
+
+        # Verify revision is NOT marked as adopted base
+        rev = next(d for d in documents if d["symbol"] == "A/80/L.1/Rev.1")
+        assert rev["is_adopted_draft"] is False
+
+        # Verify unrelated proposal is not adopted
+        l10 = next(d for d in documents if d["symbol"] == "A/80/L.10")
+        assert l10["is_adopted_draft"] is False
+        assert l10["linked_resolution_symbol"] is None

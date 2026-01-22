@@ -18,7 +18,7 @@ from .extractor import extract_text
 logger = logging.getLogger(__name__)
 
 
-SYMBOL_PATTERN = re.compile(r"\b[A-Z](?:/[A-Z0-9.]+)+\b")
+SYMBOL_PATTERN = re.compile(r"\b[A-Z](?:/[A-Z0-9.]+)+\b", re.IGNORECASE)
 
 # UN Digital Library API for MARC XML metadata
 UNDL_SEARCH_URL = "https://digitallibrary.un.org/search"
@@ -231,8 +231,10 @@ def update_lineage_cache(data_dir: Path, cache_path: Path | None = None) -> dict
     }
 
 
-def normalize_title(title: str) -> str:
+def normalize_title(title: str | None) -> str:
     """Normalize a title for fuzzy matching."""
+    if not title:
+        return ""
     # Strip resolution/decision number prefix like "80/60." or "80/60 "
     title = re.sub(r"^\d+/\d+[.\s]+", "", title)
     return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
