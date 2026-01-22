@@ -37,6 +37,14 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
 
+      - name: Cache UNDL metadata
+        uses: actions/cache@v4
+        with:
+          path: data/cache/undl
+          key: undl-cache-${{ hashFiles('data/pdfs/*.pdf') }}
+          restore-keys: |
+            undl-cache-
+
       - name: Generate static site
         run: python -m mandate_pipeline.cli generate --config ./config --data ./data --output ./docs --skip-debug
 
