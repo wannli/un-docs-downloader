@@ -23,6 +23,12 @@ from .linking import (
     is_resolution,
     is_proposal,
     symbol_to_filename,
+    derive_resolution_origin,
+    derive_origin_from_symbol,
+    get_linking_audit,
+    get_undl_cache_stats,
+    normalize_title,
+    COMMITTEE_NAMES,
 )
 
 
@@ -793,6 +799,312 @@ def generate_index_page(documents: list, checks: list, patterns: list, output_di
         f.write(html)
 
 
+def generate_provenance_page(
+    documents: list,
+    checks: list,
+    output_dir: Path
+) -> None:
+    """
+    Generate the Resolution Provenance page showing resolutions grouped by origin committee.
+
+    Args:
+        documents: All documents
+        checks: All check definitions
+        output_dir: Output directory (provenance/ subdirectory)
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    env = get_templates_env(checks)
+    template = env.get_template("provenance.html")
+
+    # Get linking audit data
+    audit_data = get_linking_audit()
+
+    # Group resolutions by origin
+    resolutions = [doc for doc in documents if is_resolution(doc.get("symbol", ""))]
+    origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6", "Unknown"]
+    origins = {code: {"name": COMMITTEE_NAMES.get(code, code), "resolutions": []} for code in origin_order}
+
+    linked_count = 0
+    for res in resolutions:
+        origin = derive_resolution_origin(res)
+        res_data = {
+            **res,
+            "filename": symbol_to_filename(res["symbol"]) + ".html",
+        }
+        # Add linking method info from audit
+        if res["symbol"] in audit_data:
+            audit = audit_data[res["symbol"]]
+            res_data["linking_method"] = audit.get("final_method")
+            res_data["linking_confidence"] = audit.get("confidence")
+        if res.get("linked_proposals"):
+            linked_count += 1
+        origins[origin]["resolutions"].append(res_data)
+
+    # Sort resolutions within each origin
+    for origin_data in origins.values():
+        origin_data["resolutions"].sort(key=lambda r: natural_sort_key(r["symbol"]))
+
+    # Coverage stats
+    total_resolutions = len(resolutions)
+    coverage = {
+        "total": total_resolutions,
+        "linked": linked_count,
+        "unlinked": total_resolutions - linked_count,
+        "percentage": round(linked_count / total_resolutions * 100, 1) if total_resolutions > 0 else 0,
+    }
+
+    html = template.render(
+        origins=origins,
+        coverage=coverage,
+        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+    )
+
+    with open(output_dir / "index.html", "w") as f:
+        f.write(html)
+
+
+def generate_origin_matrix_page(
+    documents: list,
+    checks: list,
+    output_dir: Path
+) -> None:
+    """
+    Generate the Origin × Signal matrix page.
+
+    Args:
+        documents: All documents
+        checks: All check definitions
+        output_dir: Root output directory
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    env = get_templates_env(checks)
+    template = env.get_template("origin_matrix.html")
+
+    # Get resolutions only
+    resolutions = [doc for doc in documents if is_resolution(doc.get("symbol", ""))]
+
+    # Build origin × signal matrix
+    origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6", "Unknown"]
+    origin_matrix = {code: {} for code in origin_order}
+    origin_totals = {code: 0 for code in origin_order}
+    signal_totals = {check["signal"]: 0 for check in checks}
+
+    for res in resolutions:
+        origin = derive_resolution_origin(res)
+        for check in checks:
+            signal = check["signal"]
+            count = res.get("signal_summary", {}).get(signal, 0)
+            origin_matrix[origin][signal] = origin_matrix[origin].get(signal, 0) + count
+            if count > 0:
+                signal_totals[signal] += count
+                origin_totals[origin] += count
+
+    grand_total = sum(origin_totals.values())
+
+    # Top producers
+    top_producers = sorted(
+        [{"origin": code, "count": count} for code, count in origin_totals.items()],
+        key=lambda x: x["count"],
+        reverse=True
+    )
+
+    html = template.render(
+        origin_matrix=origin_matrix,
+        origin_order=origin_order,
+        origin_names=COMMITTEE_NAMES,
+        origin_totals=origin_totals,
+        signal_totals=signal_totals,
+        grand_total=grand_total,
+        top_producers=top_producers,
+        checks=checks,
+        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+    )
+
+    with open(output_dir / "origin_matrix.html", "w") as f:
+        f.write(html)
+
+
+def generate_debug_pages(
+    documents: list,
+    checks: list,
+    output_dir: Path
+) -> None:
+    """
+    Generate all debug pages.
+
+    Args:
+        documents: All documents
+        checks: All check definitions
+        output_dir: Output directory (debug/ subdirectory)
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    env = get_templates_env(checks)
+    audit_data = get_linking_audit()
+    undl_cache = get_undl_cache_stats()
+
+    resolutions = [doc for doc in documents if is_resolution(doc.get("symbol", ""))]
+    proposals = [doc for doc in documents if is_proposal(doc.get("symbol", ""))]
+
+    # Count linking methods
+    linked_count = 0
+    by_method = {"undl": 0, "symbol_ref": 0, "fuzzy": 0}
+    for symbol, audit in audit_data.items():
+        if audit.get("final_method"):
+            linked_count += 1
+            method = audit["final_method"]
+            by_method[method] = by_method.get(method, 0) + 1
+
+    # Stats for debug index
+    stats = {
+        "total_docs": len(documents),
+        "total_resolutions": len(resolutions),
+        "total_proposals": len(proposals),
+        "linked": linked_count,
+        "unlinked": len(resolutions) - linked_count,
+        "coverage_pct": round(linked_count / len(resolutions) * 100, 1) if resolutions else 0,
+        "by_method": by_method,
+        "with_title": len([d for d in documents if d.get("title") and len(d["title"]) > 5]),
+        "with_paragraphs": len([d for d in documents if d.get("num_paragraphs", 0) > 0]),
+        "with_refs": len([d for d in documents if d.get("symbol_references")]),
+        "potential_issues": len([d for d in documents if not d.get("title") or d.get("num_paragraphs", 0) == 0]),
+        "near_misses": 0,
+    }
+
+    # Count near misses
+    for audit in audit_data.values():
+        candidates = audit.get("pass2_fuzzy", {}).get("candidates", [])
+        if candidates and not audit.get("final_linked"):
+            if candidates[0]["score"] >= 70:
+                stats["near_misses"] += 1
+
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+    # Generate debug index
+    template = env.get_template("debug/index.html")
+    html = template.render(
+        stats=stats,
+        generated_at=generated_at,
+    )
+    with open(output_dir / "index.html", "w") as f:
+        f.write(html)
+
+    # Generate linking audit page
+    template = env.get_template("debug/linking.html")
+    html = template.render(
+        audit_data=audit_data,
+        undl_cache=undl_cache,
+        stats={
+            "total": len(resolutions),
+            "linked": linked_count,
+            "unlinked": len(resolutions) - linked_count,
+            "coverage_pct": stats["coverage_pct"],
+            "by_method": by_method,
+        },
+        generated_at=generated_at,
+    )
+    with open(output_dir / "linking.html", "w") as f:
+        f.write(html)
+
+    # Generate orphans page
+    orphans = [
+        {**doc, "filename": symbol_to_filename(doc["symbol"]) + ".html"}
+        for doc in resolutions
+        if not doc.get("linked_proposals")
+    ]
+    template = env.get_template("debug/orphans.html")
+    html = template.render(
+        orphans=orphans,
+        audit_data=audit_data,
+        total_resolutions=len(resolutions),
+        coverage_pct=stats["coverage_pct"],
+        generated_at=generated_at,
+    )
+    with open(output_dir / "orphans.html", "w") as f:
+        f.write(html)
+
+    # Generate fuzzy match explorer
+    fuzzy_entries = []
+    fuzzy_linked = 0
+    near_misses = 0
+    no_match = 0
+
+    for res in resolutions:
+        audit = audit_data.get(res["symbol"], {})
+        fuzzy_data = audit.get("pass2_fuzzy", {})
+        entry = {
+            "symbol": res["symbol"],
+            "filename": symbol_to_filename(res["symbol"]) + ".html",
+            "title": res.get("title", ""),
+            "normalized_title": fuzzy_data.get("resolution_title", normalize_title(res.get("title", ""))),
+            "candidates": fuzzy_data.get("candidates", []),
+            "linked": bool(audit.get("final_linked")),
+            "linked_symbol": audit.get("final_linked", [None])[0] if audit.get("final_linked") else None,
+        }
+        fuzzy_entries.append(entry)
+
+        if entry["linked"]:
+            if audit.get("final_method") == "fuzzy":
+                fuzzy_linked += 1
+        elif entry["candidates"] and entry["candidates"][0]["score"] >= 70:
+            near_misses += 1
+        else:
+            no_match += 1
+
+    # Sort by symbol
+    fuzzy_entries.sort(key=lambda x: natural_sort_key(x["symbol"]))
+
+    template = env.get_template("debug/fuzzy.html")
+    html = template.render(
+        fuzzy_entries=fuzzy_entries,
+        stats={
+            "total_resolutions": len(resolutions),
+            "total_proposals": len(proposals),
+            "fuzzy_linked": by_method.get("fuzzy", 0),
+            "near_misses": near_misses,
+            "no_match": no_match,
+        },
+        generated_at=generated_at,
+    )
+    with open(output_dir / "fuzzy.html", "w") as f:
+        f.write(html)
+
+    # Generate extraction verification page
+    extraction_docs = []
+    for doc in documents:
+        extraction_docs.append({
+            "symbol": doc["symbol"],
+            "filename": symbol_to_filename(doc["symbol"]) + ".html",
+            "title": doc.get("title", ""),
+            "num_paragraphs": doc.get("num_paragraphs", 0),
+            "signal_summary": doc.get("signal_summary", {}),
+            "symbol_references": doc.get("symbol_references", []),
+            "agenda_items": doc.get("agenda_items", []),
+            "un_url": doc.get("un_url", ""),
+        })
+    extraction_docs.sort(key=lambda x: natural_sort_key(x["symbol"]))
+
+    template = env.get_template("debug/extraction.html")
+    html = template.render(
+        documents=extraction_docs,
+        stats={
+            "total_docs": len(documents),
+            "with_title": stats["with_title"],
+            "with_paragraphs": stats["with_paragraphs"],
+            "with_refs": stats["with_refs"],
+            "potential_issues": stats["potential_issues"],
+        },
+        generated_at=generated_at,
+    )
+    with open(output_dir / "extraction.html", "w") as f:
+        f.write(html)
+
+
 def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     """
     Generate the complete static site.
@@ -822,6 +1134,8 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     (output_dir / "signals").mkdir(exist_ok=True)
     (output_dir / "patterns").mkdir(exist_ok=True)
     (output_dir / "matrix").mkdir(exist_ok=True)
+    (output_dir / "provenance").mkdir(exist_ok=True)
+    (output_dir / "debug").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(visible_documents, checks, patterns, output_dir)
@@ -838,6 +1152,11 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
         # Generate pattern+signal pages
         for check in checks:
             generate_pattern_signal_page(documents, visible_documents, pattern, check["signal"], checks, patterns, output_dir / "matrix")
+
+    # Generate new UI pages
+    generate_provenance_page(documents, checks, output_dir / "provenance")
+    generate_origin_matrix_page(documents, checks, output_dir)
+    generate_debug_pages(documents, checks, output_dir / "debug")
 
     # Generate data exports
     generate_data_json(visible_documents, checks, output_dir)
@@ -963,6 +1282,8 @@ def generate_site_verbose(
     (output_dir / "signals").mkdir(exist_ok=True)
     (output_dir / "patterns").mkdir(exist_ok=True)
     (output_dir / "matrix").mkdir(exist_ok=True)
+    (output_dir / "provenance").mkdir(exist_ok=True)
+    (output_dir / "debug").mkdir(exist_ok=True)
 
     # Generate pages
     generate_index_page(visible_documents, checks, patterns, output_dir)
@@ -994,6 +1315,19 @@ def generate_site_verbose(
             signal_slug = get_signal_slug(check["signal"])
             if on_generate_page:
                 on_generate_page("matrix", f"matrix/{pattern_slug}_{signal_slug}.html")
+
+    # Generate new UI pages
+    generate_provenance_page(documents, checks, output_dir / "provenance")
+    if on_generate_page:
+        on_generate_page("provenance", "provenance/index.html")
+
+    generate_origin_matrix_page(documents, checks, output_dir)
+    if on_generate_page:
+        on_generate_page("origin_matrix", "origin_matrix.html")
+
+    generate_debug_pages(documents, checks, output_dir / "debug")
+    if on_generate_page:
+        on_generate_page("debug", "debug/index.html")
 
     # Generate data exports
     generate_data_json(visible_documents, checks, output_dir)

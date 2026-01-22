@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlinked Resolutions - Mandate Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'un-blue': '#009edb',
+                        'un-blue-dark': '#0077a8',
+                        'muted': '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background: rgba(0, 158, 219, 0.2); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../../index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                </a>
+                <nav class="flex items-center gap-6">
+                    <a href="../../documents/index.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Documents</a>
+                    <a href="./provenance/index.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Origins</a>
+                    <a href="./origin_matrix.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Matrix</a>
+                    <div class="relative group">
+                        <button class="text-muted hover:text-un-blue transition-colors text-sm font-medium flex items-center gap-1">
+                            Debug
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                            <a href="./debug/index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue rounded-t-lg">Overview</a>
+                            <a href="./debug/linking.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue">Linking Audit</a>
+                            <a href="./debug/orphans.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue">Unlinked</a>
+                            <a href="./debug/fuzzy.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue">Fuzzy Matches</a>
+                            <a href="./debug/extraction.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-un-blue rounded-b-lg">Extraction</a>
+                        </div>
+                    </div>
+                    <a href="./data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+<!-- Breadcrumb -->
+<nav class="mb-8">
+    <ol class="flex items-center gap-2 text-sm text-muted">
+        <li><a href="../../index.html" class="hover:text-un-blue transition-colors">Home</a></li>
+        <li class="text-gray-300">/</li>
+        <li><a href="./index.html" class="hover:text-un-blue transition-colors">Debug</a></li>
+        <li class="text-gray-300">/</li>
+        <li class="text-gray-900 font-medium">Unlinked Resolutions</li>
+    </ol>
+</nav>
+
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Unlinked Resolutions</h1>
+    <p class="mt-2 text-muted">
+        Resolutions that could not be automatically linked to source proposals. These may require manual review.
+    </p>
+</div>
+
+<!-- Coverage Stats -->
+<div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+            <div>
+                <p class="font-medium text-amber-800">20 of 243 resolutions unlinked</p>
+                <p class="text-sm text-amber-700">Coverage: 91.8%</p>
+            </div>
+        </div>
+        <a href="./linking.html" class="text-sm text-amber-700 hover:text-amber-900 hover:underline">
+            View full audit &rarr;
+        </a>
+    </div>
+</div>
+
+
+<!-- Possible Reasons -->
+<div class="bg-white border border-gray-200 rounded-lg p-4 mb-8">
+    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Common Reasons for Unlinked Resolutions</h2>
+    <ul class="text-sm text-muted space-y-2">
+        <li class="flex items-start gap-2">
+            <span class="text-gray-400 mt-0.5">1.</span>
+            <span><strong>Procedural resolution</strong> - Some resolutions (e.g., election of officers) don't originate from draft proposals</span>
+        </li>
+        <li class="flex items-start gap-2">
+            <span class="text-gray-400 mt-0.5">2.</span>
+            <span><strong>Missing proposal PDF</strong> - The source proposal may not have been downloaded yet</span>
+        </li>
+        <li class="flex items-start gap-2">
+            <span class="text-gray-400 mt-0.5">3.</span>
+            <span><strong>Title mismatch</strong> - The resolution title differs significantly from the proposal title</span>
+        </li>
+        <li class="flex items-start gap-2">
+            <span class="text-gray-400 mt-0.5">4.</span>
+            <span><strong>UNDL metadata unavailable</strong> - The UN Digital Library may not have cross-reference data</span>
+        </li>
+    </ul>
+</div>
+
+<!-- Orphan List -->
+<div class="space-y-4">
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_85.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/85
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/85. Information from Non-Self-Governing Territories transmitted under Article 73 e of the Charter of the United Nations</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/85?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    <span class="text-gray-500 ml-1">No candidates</span>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_86.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/86
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/86. Economic and other activities which affect the interests of the peoples of the Non-Self-Governing Territories</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/86?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    <span class="text-gray-500 ml-1">No candidates</span>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_87.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/87
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/87. Implementation of the Declaration on the Granting of Independence to Colonial Countries and Peoples by the specialized agencies and the international institutions associated with the United Nations</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/87?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    <span class="text-gray-500 ml-1">No candidates</span>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_90.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/90
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/90. Question of American Samoa</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/90?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (63%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 63%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_91.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/91
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/91. Question of Anguilla</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/91?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (78%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 78%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+        <div class="mt-3 text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 inline-block">
+            Near miss: Best candidate at 78% (threshold: 85%)
+        </div>
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_92.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/92
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/92. Question of Bermuda</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/92?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (75%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 75%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+        <div class="mt-3 text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 inline-block">
+            Near miss: Best candidate at 75% (threshold: 85%)
+        </div>
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_93.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/93
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/93. Question of the British Virgin Islands</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/93?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (54%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 54%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_94.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/94
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/94. Question of the Cayman Islands</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/94?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (58%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 58%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_95.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/95
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/95. Question of French Polynesia</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/95?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (61%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 61%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_96.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/96
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/96. Question of Guam</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/96?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (75%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 75%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+        <div class="mt-3 text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 inline-block">
+            Near miss: Best candidate at 75% (threshold: 85%)
+        </div>
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_97.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/97
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/97. Question of Montserrat</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/97?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (69%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 69%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_98.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/98
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/98. Question of New Caledonia</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/98?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (65%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 65%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_99.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/99
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/99. Question of Pitcairn</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/99?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (78%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 78%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+        <div class="mt-3 text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 inline-block">
+            Near miss: Best candidate at 78% (threshold: 85%)
+        </div>
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_100.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/100
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/100. Question of Saint Helena</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/100?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (66%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 66%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_101.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/101
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/101. Question of Tokelau</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/101?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (70%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 70%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+        <div class="mt-3 text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 inline-block">
+            Near miss: Best candidate at 70% (threshold: 85%)
+        </div>
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_102.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/102
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/102. Question of the Turks and Caicos Islands</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/102?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.3 (52%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.3.html" class="hover:text-un-blue">
+                            A/C.4/80/L.3
+                        </a>
+                        : 52%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Question of Gibraltar"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_103.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/103
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/103. Question of the United States Virgin Islands</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/103?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    <span class="text-gray-500 ml-1">No candidates</span>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_104.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/104
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/104. Dissemination of information on decolonization</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/104?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.4/80/L.1 (56%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.4_80_L.1.html" class="hover:text-un-blue">
+                            A/C.4/80/L.1
+                        </a>
+                        : 56%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Special Political and Decolonization Committee"</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_105.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/105
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/105. Implementation of the Declaration on the Granting of Independence to Colonial Countries and Peoples</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/105?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    <span class="text-gray-500 ml-1">No candidates</span>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+    
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between mb-3">
+            <div>
+                <a href="../../documents/A_RES_80_114.html" class="font-mono font-medium text-gray-900 hover:text-un-blue transition-colors">
+                    A/RES/80/114
+                </a>
+                
+                <p class="text-sm text-muted mt-1">80/114. Credentials of representatives to the eightieth session of the General Assembly</p>
+                
+            </div>
+            <a href="https://docs.un.org/en/a/res/80/114?direct=true" target="_blank" class="text-xs text-un-blue hover:underline">
+                View PDF &rarr;
+            </a>
+        </div>
+
+        <!-- Diagnostic Info -->
+        <div class="bg-gray-50 rounded p-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- UNDL Status -->
+                <div>
+                    <span class="font-medium text-gray-700">UNDL Lookup:</span>
+                    
+                    <span class="text-red-600 ml-1">No cross-references</span>
+                    
+                </div>
+
+                <!-- Symbol Refs -->
+                <div>
+                    <span class="font-medium text-gray-700">Symbol Refs:</span>
+                    
+                    <span class="text-gray-500 ml-1">None in text</span>
+                    
+                </div>
+
+                <!-- Best Fuzzy Match -->
+                <div>
+                    <span class="font-medium text-gray-700">Best Fuzzy:</span>
+                    
+                    
+                    <span class="text-amber-600 ml-1">A/C.3/80/L.60 (66%)</span>
+                    
+                </div>
+            </div>
+
+            
+            <details class="mt-3">
+                <summary class="cursor-pointer text-un-blue hover:underline">View fuzzy candidates</summary>
+                <ul class="mt-2 ml-4 space-y-1 text-muted">
+                    
+                    <li>
+                        <a href="../../documents/A_C.3_80_L.60.html" class="hover:text-un-blue">
+                            A/C.3/80/L.60
+                        </a>
+                        : 66%
+                        <span class="text-green-600">(agenda match)</span>
+                        <span class="text-gray-400 ml-2">"Draft programme of work of the Third Committee for..."</span>
+                    </li>
+                    
+                </ul>
+            </details>
+            
+        </div>
+
+        <!-- Likely Reason -->
+        
+    </div>
+    
+</div>
+
+
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <p class="text-sm text-muted">
+                
+Generated 2026-01-22 17:11 UTC
+
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

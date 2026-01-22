@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Origin Matrix - Mandate Pipeline{% endblock %}
+
+{% block nav_index %}./index.html{% endblock %}
+{% block nav_documents %}./documents/index.html{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Origin Matrix</h1>
+    <p class="mt-2 text-muted max-w-2xl">
+        Signal distribution across resolution origins. Shows which committees produce resolutions with specific mandate signals.
+    </p>
+</div>
+
+<!-- Matrix Table -->
+<div class="overflow-x-auto mb-8">
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50 rounded-tl-lg">Origin</th>
+                {% for check in checks %}
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50">
+                    <a href="./signals/{{ check.signal|lower|replace(' ', '-') }}.html" class="hover:text-un-blue transition-colors">
+                        {{ check.signal }}
+                    </a>
+                </th>
+                {% endfor %}
+                <th class="text-center py-3 px-4 text-sm font-medium text-gray-500 bg-gray-50 rounded-tr-lg">Total</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for origin_code in origin_order %}
+            {% set origin_data = origin_matrix.get(origin_code, {}) %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="py-4 px-4">
+                    <a href="./provenance/index.html#origin-{{ origin_code|lower }}" class="flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold
+                            {% if origin_code == 'Plenary' %}bg-amber-50 text-amber-700
+                            {% elif origin_code == 'C1' %}bg-red-50 text-red-700
+                            {% elif origin_code == 'C2' %}bg-green-50 text-green-700
+                            {% elif origin_code == 'C3' %}bg-blue-50 text-blue-700
+                            {% elif origin_code == 'C4' %}bg-purple-50 text-purple-700
+                            {% elif origin_code == 'C5' %}bg-orange-50 text-orange-700
+                            {% elif origin_code == 'C6' %}bg-teal-50 text-teal-700
+                            {% else %}bg-gray-100 text-gray-700{% endif %}">
+                            {{ origin_code[:2] }}
+                        </span>
+                        <span class="font-medium text-gray-900 hover:text-un-blue transition-colors">
+                            {{ origin_names.get(origin_code, origin_code) }}
+                        </span>
+                    </a>
+                </td>
+                {% for check in checks %}
+                {% set count = origin_data.get(check.signal, 0) %}
+                <td class="text-center py-4 px-4">
+                    {% if count > 0 %}
+                    <a href="./origin_signal/{{ origin_code|lower }}_{{ check.signal|lower|replace(' ', '-') }}.html"
+                       class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-medium transition-all hover:scale-110
+                        {% if 'agenda' in check.signal|lower %}bg-blue-50 text-blue-700 hover:bg-blue-100
+                        {% elif 'pga' in check.signal|lower %}bg-purple-50 text-purple-700 hover:bg-purple-100
+                        {% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                        {{ count }}
+                    </a>
+                    {% else %}
+                    <span class="text-gray-300">&mdash;</span>
+                    {% endif %}
+                </td>
+                {% endfor %}
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-200 text-gray-800">
+                        {{ origin_totals.get(origin_code, 0) }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+            <!-- Totals Row -->
+            <tr class="bg-gray-50 font-medium">
+                <td class="py-4 px-4 text-gray-700">Total</td>
+                {% for check in checks %}
+                {% set total = signal_totals.get(check.signal, 0) %}
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold
+                        {% if 'agenda' in check.signal|lower %}bg-blue-100 text-blue-800
+                        {% elif 'pga' in check.signal|lower %}bg-purple-100 text-purple-800
+                        {% else %}bg-gray-200 text-gray-800{% endif %}">
+                        {{ total }}
+                    </span>
+                </td>
+                {% endfor %}
+                <td class="text-center py-4 px-4">
+                    <span class="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-full text-sm font-bold bg-gray-300 text-gray-900">
+                        {{ grand_total }}
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Insights Panel -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Top Producers -->
+    <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Top Signal Producers</h3>
+        <div class="space-y-3">
+            {% for item in top_producers[:5] %}
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold
+                        {% if item.origin == 'Plenary' %}bg-amber-50 text-amber-700
+                        {% elif item.origin == 'C1' %}bg-red-50 text-red-700
+                        {% elif item.origin == 'C2' %}bg-green-50 text-green-700
+                        {% elif item.origin == 'C3' %}bg-blue-50 text-blue-700
+                        {% elif item.origin == 'C4' %}bg-purple-50 text-purple-700
+                        {% elif item.origin == 'C5' %}bg-orange-50 text-orange-700
+                        {% elif item.origin == 'C6' %}bg-teal-50 text-teal-700
+                        {% else %}bg-gray-100 text-gray-700{% endif %}">
+                        {{ item.origin[:2] }}
+                    </span>
+                    <span class="text-sm text-gray-700">{{ item.origin }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-gray-900">{{ item.count }}</span>
+                    <span class="text-xs text-muted">signals</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Signal Distribution -->
+    <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Signal Distribution</h3>
+        <div class="space-y-3">
+            {% for check in checks %}
+            {% set total = signal_totals.get(check.signal, 0) %}
+            {% set pct = (total / grand_total * 100) if grand_total > 0 else 0 %}
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-sm font-medium
+                        {% if 'agenda' in check.signal|lower %}text-blue-700
+                        {% elif 'pga' in check.signal|lower %}text-purple-700
+                        {% else %}text-gray-700{% endif %}">
+                        {{ check.signal }}
+                    </span>
+                    <span class="text-sm text-muted">{{ total }} ({{ "%.1f"|format(pct) }}%)</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full
+                        {% if 'agenda' in check.signal|lower %}bg-blue-400
+                        {% elif 'pga' in check.signal|lower %}bg-purple-400
+                        {% else %}bg-gray-400{% endif %}"
+                         style="width: {{ pct }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+Generated {{ generated_at }} · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+{% endblock %}

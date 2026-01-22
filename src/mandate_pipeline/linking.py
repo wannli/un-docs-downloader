@@ -9,6 +9,7 @@ import re
 import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from typing import Any
 
 import requests
 from rapidfuzz import fuzz
@@ -22,6 +23,21 @@ UNDL_SEARCH_URL = "https://digitallibrary.un.org/search"
 UNDL_TIMEOUT = 30  # seconds
 MARC_NS = {"marc": "http://www.loc.gov/MARC21/slim"}
 CACHE_DIR = Path("data/cache/undl")
+
+# Committee names for display
+COMMITTEE_NAMES = {
+    "Plenary": "Plenary (General Assembly)",
+    "C1": "First Committee (Disarmament)",
+    "C2": "Second Committee (Economic & Financial)",
+    "C3": "Third Committee (Social, Humanitarian & Cultural)",
+    "C4": "Fourth Committee (Decolonization)",
+    "C5": "Fifth Committee (Administrative & Budgetary)",
+    "C6": "Sixth Committee (Legal)",
+    "Unknown": "Unknown Origin",
+}
+
+# Global linking audit storage
+_linking_audit: dict[str, dict[str, Any]] = {}
 
 _SESSION = None
 
@@ -243,6 +259,101 @@ def is_base_proposal_doc(doc: dict) -> bool:
     return is_proposal(symbol)
 
 
+def derive_origin_from_symbol(symbol: str) -> str:
+    """
+    Derive the origin committee from a proposal symbol.
+
+    Args:
+        symbol: UN document symbol (e.g., "A/C.3/80/L.42", "A/80/L.50")
+
+    Returns:
+        Origin code: "Plenary", "C1", "C2", "C3", "C4", "C5", "C6", or "Unknown"
+    """
+    upper = symbol.upper()
+    if "/C.1/" in upper:
+        return "C1"
+    if "/C.2/" in upper:
+        return "C2"
+    if "/C.3/" in upper:
+        return "C3"
+    if "/C.4/" in upper:
+        return "C4"
+    if "/C.5/" in upper:
+        return "C5"
+    if "/C.6/" in upper:
+        return "C6"
+    if "/L." in upper:
+        # A/80/L.X pattern = Plenary draft
+        return "Plenary"
+    return "Unknown"
+
+
+def derive_resolution_origin(doc: dict) -> str:
+    """
+    Derive the origin committee for a resolution based on its linked proposals.
+
+    Args:
+        doc: Resolution document dict with 'linked_proposals' field
+
+    Returns:
+        Origin code: "Plenary", "C1"-"C6", or "Unknown"
+    """
+    if not is_resolution(doc.get("symbol", "")):
+        return "Unknown"
+
+    linked = doc.get("linked_proposals", [])
+    if not linked:
+        return "Unknown"
+
+    # Use the first linked proposal's origin
+    first_proposal = linked[0]
+    proposal_symbol = first_proposal.get("symbol", "") if isinstance(first_proposal, dict) else first_proposal
+    return derive_origin_from_symbol(proposal_symbol)
+
+
+def get_linking_audit() -> dict[str, dict[str, Any]]:
+    """Return the current linking audit data."""
+    return _linking_audit.copy()
+
+
+def clear_linking_audit() -> None:
+    """Clear the linking audit data."""
+    global _linking_audit
+    _linking_audit = {}
+
+
+def get_undl_cache_stats() -> dict[str, Any]:
+    """Get statistics about the UNDL metadata cache."""
+    if not CACHE_DIR.exists():
+        return {"total_entries": 0, "cache_size_bytes": 0, "entries": []}
+
+    entries = []
+    total_size = 0
+
+    for cache_file in CACHE_DIR.glob("*.json"):
+        try:
+            stat = cache_file.stat()
+            total_size += stat.st_size
+            with open(cache_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            entries.append({
+                "symbol": data.get("symbol", "Unknown"),
+                "file": cache_file.name,
+                "size_bytes": stat.st_size,
+                "mtime": stat.st_mtime,
+                "draft_symbols": data.get("draft_symbols", []),
+                "related_symbols": data.get("related_symbols", []),
+            })
+        except (json.JSONDecodeError, OSError):
+            continue
+
+    return {
+        "total_entries": len(entries),
+        "cache_size_bytes": total_size,
+        "entries": sorted(entries, key=lambda x: x.get("mtime", 0), reverse=True),
+    }
+
+
 def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> None:
     """
     Link resolutions to proposals using explicit references and fuzzy matching.
@@ -256,12 +367,36 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
         use_undl_metadata: If True, query UN Digital Library for authoritative
             base proposal symbols before falling back to PDF text extraction.
     """
+    global _linking_audit
+    clear_linking_audit()
+
     proposals_by_symbol = {doc["symbol"]: doc for doc in documents if is_proposal(doc["symbol"])}
     proposals = list(proposals_by_symbol.values())
 
     for doc in documents:
         doc.setdefault("linked_resolution_symbol", None)
         doc.setdefault("linked_proposal_symbols", [])
+
+    # Initialize audit entries for all resolutions
+    for doc in documents:
+        if is_resolution(doc["symbol"]):
+            _linking_audit[doc["symbol"]] = {
+                "symbol": doc["symbol"],
+                "title": doc.get("title", ""),
+                "pass0_undl": {"attempted": False, "found": False, "refs": [], "linked": []},
+                "pass1_symbol_refs": {"attempted": False, "refs_in_text": [], "linked": []},
+                "pass2_fuzzy": {
+                    "attempted": False,
+                    "resolution_title": normalize_title(doc.get("title", "")),
+                    "candidates": [],
+                    "best_match": None,
+                    "best_score": 0.0,
+                    "agenda_overlap": False,
+                },
+                "final_method": None,
+                "final_linked": [],
+                "confidence": 0,
+            }
 
     # Pass 0: UN Digital Library metadata lookup (authoritative source)
     if use_undl_metadata:
@@ -272,16 +407,26 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
             if doc.get("linked_proposal_symbols"):
                 continue
 
+            audit = _linking_audit[doc["symbol"]]
+            audit["pass0_undl"]["attempted"] = True
+
             metadata = fetch_undl_metadata(doc["symbol"])
             if metadata is None or not metadata.get("draft_symbols"):
                 continue
 
             draft_symbols = metadata["draft_symbols"]
+            audit["pass0_undl"]["refs"] = draft_symbols
+            audit["pass0_undl"]["found"] = True
+
             # Filter to only include proposals we have locally
             linked = [s for s in draft_symbols if s in proposals_by_symbol]
+            audit["pass0_undl"]["linked"] = linked
 
             if linked:
                 doc["linked_proposal_symbols"] = linked
+                audit["final_method"] = "undl"
+                audit["final_linked"] = linked
+                audit["confidence"] = 100
 
                 # Mark the proposals as linked to this resolution
                 for ref in linked:
@@ -293,14 +438,28 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
     for doc in documents:
         if not is_resolution(doc["symbol"]):
             continue
+
+        audit = _linking_audit[doc["symbol"]]
+        references = doc.get("symbol_references", [])
+        proposal_refs = [ref for ref in references if is_proposal(ref)]
+        audit["pass1_symbol_refs"]["refs_in_text"] = proposal_refs
+
         # Skip if already linked via UNDL metadata
         if doc.get("linked_proposal_symbols"):
             continue
-        references = doc.get("symbol_references", [])
-        linked = [ref for ref in references if ref in proposals_by_symbol]
+
+        audit["pass1_symbol_refs"]["attempted"] = True
+        linked = [ref for ref in proposal_refs if ref in proposals_by_symbol]
+        audit["pass1_symbol_refs"]["linked"] = linked
+
         if not linked:
             continue
+
         doc["linked_proposal_symbols"] = linked
+        audit["final_method"] = "symbol_ref"
+        audit["final_linked"] = linked
+        audit["confidence"] = 100
+
         for ref in linked:
             proposal = proposals_by_symbol.get(ref)
             if proposal is None:
@@ -315,6 +474,9 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
         if doc.get("linked_proposal_symbols"):
             continue
 
+        audit = _linking_audit[doc["symbol"]]
+        audit["pass2_fuzzy"]["attempted"] = True
+
         title = normalize_title(doc.get("title", ""))
         if not title:
             continue
@@ -322,6 +484,7 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
 
         best_match = None
         best_score = 0.0
+        candidates = []
 
         for proposal in proposals:
             if proposal.get("linked_resolution_symbol") not in (None, doc["symbol"]):
@@ -332,10 +495,23 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
                 continue
 
             proposal_agenda = set(proposal.get("agenda_items") or [])
-            if agenda_items and proposal_agenda and not agenda_items.intersection(proposal_agenda):
+            agenda_overlap = bool(agenda_items and proposal_agenda and agenda_items.intersection(proposal_agenda))
+
+            if agenda_items and proposal_agenda and not agenda_overlap:
                 continue
 
             similarity = fuzz.ratio(title, proposal_title)
+
+            # Record all candidates with > 50% similarity for audit
+            if similarity >= 50:
+                candidates.append({
+                    "symbol": proposal["symbol"],
+                    "title": proposal.get("title", ""),
+                    "normalized_title": proposal_title,
+                    "score": similarity,
+                    "agenda_overlap": agenda_overlap,
+                })
+
             if similarity < 85:
                 continue
 
@@ -343,8 +519,21 @@ def link_documents(documents: list[dict], use_undl_metadata: bool = True) -> Non
                 best_score = similarity
                 best_match = proposal
 
+        # Sort candidates by score
+        candidates.sort(key=lambda x: x["score"], reverse=True)
+        audit["pass2_fuzzy"]["candidates"] = candidates[:10]  # Top 10
+
         if best_match:
             doc["linked_proposal_symbols"] = [best_match["symbol"]]
+            audit["pass2_fuzzy"]["best_match"] = best_match["symbol"]
+            audit["pass2_fuzzy"]["best_score"] = best_score
+            audit["pass2_fuzzy"]["agenda_overlap"] = any(
+                c["agenda_overlap"] for c in candidates if c["symbol"] == best_match["symbol"]
+            )
+            audit["final_method"] = "fuzzy"
+            audit["final_linked"] = [best_match["symbol"]]
+            audit["confidence"] = int(best_score)
+
             if best_match.get("linked_resolution_symbol") is None:
                 best_match["linked_resolution_symbol"] = doc["symbol"]
 
