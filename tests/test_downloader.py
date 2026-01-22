@@ -567,11 +567,12 @@ class TestStaticGenerator:
         ]
         check = {"signal": "agenda", "phrases": ["decides to include"]}
         checks = [check]
+        visible_documents = [d for d in documents if d["signal_summary"].get("agenda")]
 
         output_dir = tmp_path / "docs" / "signals"
         output_dir.mkdir(parents=True)
 
-        generate_signal_page(documents, check, checks, output_dir)
+        generate_signal_page(documents, visible_documents, check, checks, output_dir)
 
         html_file = output_dir / "agenda.html"
         assert html_file.exists()

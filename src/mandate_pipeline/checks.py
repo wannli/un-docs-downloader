@@ -5,6 +5,26 @@ from pathlib import Path
 import yaml
 
 
+def parse_checks_yaml(yaml_content) -> list[dict]:
+    """
+    Parse check definitions from YAML content string or stream.
+
+    Args:
+        yaml_content: String or stream containing YAML configuration
+
+    Returns:
+        List of check definitions
+    """
+    if not yaml_content:
+        return []
+
+    config = yaml.safe_load(yaml_content)
+    if not config:
+        return []
+
+    return config.get("checks", [])
+
+
 def load_checks(config_path: Path) -> list[dict]:
     """
     Load check definitions from a YAML file.
@@ -23,9 +43,7 @@ def load_checks(config_path: Path) -> list[dict]:
         raise FileNotFoundError(f"Config file not found: {config_path}")
 
     with open(config_path) as f:
-        config = yaml.safe_load(f)
-
-    return config.get("checks", [])
+        return parse_checks_yaml(f)
 
 
 def run_checks(paragraphs: dict[int, str], checks: list[dict]) -> dict[int, list[str]]:

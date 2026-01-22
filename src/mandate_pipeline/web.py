@@ -13,7 +13,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .downloader import download_document
 from .extractor import extract_text, extract_operative_paragraphs
-from .checks import load_checks, run_checks
+from .checks import load_checks, run_checks, parse_checks_yaml
 from .pipeline import load_patterns, generate_symbols, document_exists
 
 app = FastAPI(title="Mandate Pipeline", description="Download and analyze UN documents")
@@ -72,9 +72,13 @@ async def checks_page(request: Request):
     checks_yaml = ""
     checks = []
     
-    if checks_path.exists():
-        checks_yaml = checks_path.read_text()
-        checks = load_checks(checks_path)
+    # Try to read file asynchronously
+    try:
+        checks_yaml = await asyncio.to_thread(checks_path.read_text)
+        checks = parse_checks_yaml(checks_yaml)
+    except FileNotFoundError:
+        # File doesn't exist, just use empty defaults
+        pass
     
     return templates.TemplateResponse("checks.html", {
         "request": request,
