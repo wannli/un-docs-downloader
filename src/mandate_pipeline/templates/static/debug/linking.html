@@ -48,7 +48,7 @@
 <!-- Method Breakdown -->
 <div class="bg-white border border-gray-200 rounded-lg p-4 mb-8">
     <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Linking Methods Used</h2>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 gap-4">
         <div class="text-center">
             <div class="text-xl font-bold text-green-600">{{ stats.by_method.undl }}</div>
             <div class="text-sm text-muted">UNDL Metadata</div>
@@ -58,11 +58,6 @@
             <div class="text-xl font-bold text-blue-600">{{ stats.by_method.symbol_ref }}</div>
             <div class="text-sm text-muted">Symbol Reference</div>
             <div class="text-xs text-gray-400">(from PDF text)</div>
-        </div>
-        <div class="text-center">
-            <div class="text-xl font-bold text-amber-600">{{ stats.by_method.fuzzy }}</div>
-            <div class="text-sm text-muted">Fuzzy Title Match</div>
-            <div class="text-xs text-gray-400">(similarity-based)</div>
         </div>
     </div>
 </div>
@@ -187,43 +182,6 @@
                     No matching local proposals found
                     {% else %}
                     Skipped (already linked)
-                    {% endif %}
-                </div>
-            </div>
-
-            <!-- Pass 2: Fuzzy -->
-            <div class="mb-4">
-                <div class="flex items-center gap-2 mb-2">
-                    {% if audit.pass2_fuzzy.best_match %}
-                    <span class="text-green-500">&#10004;</span>
-                    {% elif audit.pass2_fuzzy.attempted %}
-                    <span class="text-red-500">&#10008;</span>
-                    {% else %}
-                    <span class="text-gray-400">&#9679;</span>
-                    {% endif %}
-                    <span class="text-sm font-medium text-gray-700">Pass 2: Fuzzy Title Match</span>
-                </div>
-                <div class="ml-6 text-xs text-muted">
-                    {% if audit.pass2_fuzzy.resolution_title %}
-                    Normalized title: "{{ audit.pass2_fuzzy.resolution_title }}"<br>
-                    {% endif %}
-                    {% if audit.pass2_fuzzy.best_match %}
-                    Best match: {{ audit.pass2_fuzzy.best_match }} ({{ audit.pass2_fuzzy.best_score|int }}%)
-                    {% if audit.pass2_fuzzy.agenda_overlap %} + agenda overlap{% endif %}<br>
-                    {% elif audit.pass2_fuzzy.attempted %}
-                    No match above 85% threshold<br>
-                    {% else %}
-                    Skipped (already linked)<br>
-                    {% endif %}
-                    {% if audit.pass2_fuzzy.candidates %}
-                    <details class="mt-2">
-                        <summary class="cursor-pointer text-un-blue hover:underline">View candidates ({{ audit.pass2_fuzzy.candidates|length }})</summary>
-                        <ul class="mt-1 ml-2 space-y-1">
-                            {% for cand in audit.pass2_fuzzy.candidates %}
-                            <li>{{ cand.symbol }}: {{ cand.score|int }}%{% if cand.agenda_overlap %} (agenda match){% endif %}</li>
-                            {% endfor %}
-                        </ul>
-                    </details>
                     {% endif %}
                 </div>
             </div>

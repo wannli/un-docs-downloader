@@ -27,7 +27,6 @@ from .linking import (
     derive_origin_from_symbol,
     get_linking_audit,
     get_undl_cache_stats,
-    normalize_title,
     COMMITTEE_NAMES,
 )
 
@@ -953,7 +952,7 @@ def generate_debug_pages(
 
     # Count linking methods
     linked_count = 0
-    by_method = {"undl": 0, "symbol_ref": 0, "fuzzy": 0}
+    by_method = {"undl": 0, "symbol_ref": 0}
     for symbol, audit in audit_data.items():
         if audit.get("final_method"):
             linked_count += 1
@@ -973,15 +972,7 @@ def generate_debug_pages(
         "with_paragraphs": len([d for d in documents if d.get("num_paragraphs", 0) > 0]),
         "with_refs": len([d for d in documents if d.get("symbol_references")]),
         "potential_issues": len([d for d in documents if not d.get("title") or d.get("num_paragraphs", 0) == 0]),
-        "near_misses": 0,
     }
-
-    # Count near misses
-    for audit in audit_data.values():
-        candidates = audit.get("pass2_fuzzy", {}).get("candidates", [])
-        if candidates and not audit.get("final_linked"):
-            if candidates[0]["score"] >= 70:
-                stats["near_misses"] += 1
 
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
@@ -1026,52 +1017,6 @@ def generate_debug_pages(
         generated_at=generated_at,
     )
     with open(output_dir / "orphans.html", "w") as f:
-        f.write(html)
-
-    # Generate fuzzy match explorer
-    fuzzy_entries = []
-    fuzzy_linked = 0
-    near_misses = 0
-    no_match = 0
-
-    for res in resolutions:
-        audit = audit_data.get(res["symbol"], {})
-        fuzzy_data = audit.get("pass2_fuzzy", {})
-        entry = {
-            "symbol": res["symbol"],
-            "filename": symbol_to_filename(res["symbol"]) + ".html",
-            "title": res.get("title", ""),
-            "normalized_title": fuzzy_data.get("resolution_title", normalize_title(res.get("title", ""))),
-            "candidates": fuzzy_data.get("candidates", []),
-            "linked": bool(audit.get("final_linked")),
-            "linked_symbol": audit.get("final_linked", [None])[0] if audit.get("final_linked") else None,
-        }
-        fuzzy_entries.append(entry)
-
-        if entry["linked"]:
-            if audit.get("final_method") == "fuzzy":
-                fuzzy_linked += 1
-        elif entry["candidates"] and entry["candidates"][0]["score"] >= 70:
-            near_misses += 1
-        else:
-            no_match += 1
-
-    # Sort by symbol
-    fuzzy_entries.sort(key=lambda x: natural_sort_key(x["symbol"]))
-
-    template = env.get_template("debug/fuzzy.html")
-    html = template.render(
-        fuzzy_entries=fuzzy_entries,
-        stats={
-            "total_resolutions": len(resolutions),
-            "total_proposals": len(proposals),
-            "fuzzy_linked": by_method.get("fuzzy", 0),
-            "near_misses": near_misses,
-            "no_match": no_match,
-        },
-        generated_at=generated_at,
-    )
-    with open(output_dir / "fuzzy.html", "w") as f:
         f.write(html)
 
     # Generate extraction verification page
