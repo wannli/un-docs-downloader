@@ -191,10 +191,11 @@ async def run_pipeline_stream(pattern_index: int, max_misses: int = 3):
     async def generate():
         consecutive_misses = 0
         found_count = 0
+        loop = asyncio.get_running_loop()
         
         for symbol in generate_symbols(pattern):
             # Check if document exists
-            if document_exists(symbol):
+            if await loop.run_in_executor(None, document_exists, symbol):
                 consecutive_misses = 0
                 found_count += 1
                 
@@ -202,17 +203,21 @@ async def run_pipeline_stream(pattern_index: int, max_misses: int = 3):
                 
                 try:
                     # Download
-                    pdf_path = download_document(symbol, output_dir=output_dir)
+                    # Use lambda to pass kwargs
+                    pdf_path = await loop.run_in_executor(
+                        None,
+                        lambda: download_document(symbol, output_dir=output_dir)
+                    )
                     yield f"data: {json.dumps({'type': 'downloaded', 'symbol': symbol, 'size': pdf_path.stat().st_size})}\n\n"
                     
                     # Extract
-                    text = extract_text(pdf_path)
-                    paragraphs = extract_operative_paragraphs(text)
+                    text = await loop.run_in_executor(None, extract_text, pdf_path)
+                    paragraphs = await loop.run_in_executor(None, extract_operative_paragraphs, text)
                     yield f"data: {json.dumps({'type': 'extracted', 'symbol': symbol, 'paragraphs': len(paragraphs)})}\n\n"
                     
                     # Run checks
                     if checks:
-                        results = run_checks(paragraphs, checks)
+                        results = await loop.run_in_executor(None, run_checks, paragraphs, checks)
                         if results:
                             yield f"data: {json.dumps({'type': 'signals', 'symbol': symbol, 'results': {str(k): v for k, v in results.items()}})}\n\n"
                     
