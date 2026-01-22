@@ -27,6 +27,7 @@ from .linking import (
     symbol_to_filename,
     derive_resolution_origin,
     derive_origin_from_symbol,
+    normalize_title,
     COMMITTEE_NAMES,
 )
 

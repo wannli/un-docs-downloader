@@ -223,6 +223,9 @@ def normalize_symbol(symbol: str) -> str:
     return symbol.strip().upper()
 
 
+def normalize_title(title: str) -> str:
+    """Normalize a document title for fuzzy matching."""
+    return title.strip().lower()
 
 
 def is_resolution(symbol: str) -> bool:
