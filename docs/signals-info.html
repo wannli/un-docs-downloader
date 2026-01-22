@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Signals - Mandate Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'un-blue': '#009edb',
+                        'un-blue-dark': '#0077a8',
+                        'muted': '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background: rgba(0, 158, 219, 0.2); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="./index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                </a>
+                <nav class="flex items-center gap-6">
+                    <a href="./signals.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Browser</a>
+                    <a href="./signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">About Signals</a>
+                    <a href="./data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+<!-- Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">About Signals</h1>
+    <p class="mt-2 text-muted">
+        Understanding how the Mandate Pipeline detects and categorizes signals in UN documents.
+    </p>
+</div>
+
+<!-- Overview -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">What are Signals?</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+        Signals are specific phrases or patterns in UN General Assembly documents that indicate particular types of mandates, requests, or procedural actions. The Mandate Pipeline automatically scans operative paragraphs of resolutions and proposals to identify these signals.
+    </p>
+    <p class="text-gray-700 leading-relaxed">
+        Each signal corresponds to a category of action that the General Assembly may take, such as requesting reports, scheduling meetings, or establishing processes.
+    </p>
+</div>
+
+<!-- Signal Types -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-6">Signal Types</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+        
+        <div class="border rounded-lg p-5
+            border-blue-200 bg-blue-50/30
+            ">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded text-sm font-semibold
+                    bg-blue-100 text-blue-800
+                    ">
+                    agenda
+                </span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">
+                
+                Indicates decisions about agenda items, scheduling of future consideration, or requests for inclusion in upcoming sessions.
+                
+            </p>
+            <div class="mt-4">
+                <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Trigger Phrases</p>
+                <div class="flex flex-wrap gap-1.5">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        decides to include
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        decides to place on the provisional agenda
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        requests the inclusion
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        invites the Secretary-General to brief
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        requests the President of the General Assembly to hold a meeting
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        decides to convene a meeting
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        decides to review
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-blue-100 text-blue-700
+                        ">
+                        decides to consider
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="border rounded-lg p-5
+            border-purple-200 bg-purple-50/30
+            ">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded text-sm font-semibold
+                    bg-purple-100 text-purple-800
+                    ">
+                    PGA
+                </span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">
+                
+                References the President of the General Assembly, high-level meetings, interactive dialogues, or multistakeholder events.
+                
+            </p>
+            <div class="mt-4">
+                <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Trigger Phrases</p>
+                <div class="flex flex-wrap gap-1.5">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        President of the General Assembly
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        decides to hold
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        decides to convene
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        high-level meeting
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        shall be held
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        interactive dialogue
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        multistakeholder
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        high-level panel
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-purple-100 text-purple-700
+                        ">
+                        high-level segment
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="border rounded-lg p-5
+            border-amber-200 bg-amber-50/30
+            ">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded text-sm font-semibold
+                    bg-amber-100 text-amber-800
+                    ">
+                    process
+                </span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">
+                
+                Indicates procedural arrangements such as the appointment of co-facilitators, co-chairs, or informal consultations.
+                
+            </p>
+            <div class="mt-4">
+                <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Trigger Phrases</p>
+                <div class="flex flex-wrap gap-1.5">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-amber-100 text-amber-700
+                        ">
+                        co-facilitators
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-amber-100 text-amber-700
+                        ">
+                        co-chairs
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-amber-100 text-amber-700
+                        ">
+                        co-conveners
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-amber-100 text-amber-700
+                        ">
+                        informal consultations
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="border rounded-lg p-5
+            border-green-200 bg-green-50/30
+            ">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded text-sm font-semibold
+                    bg-green-100 text-green-800
+                    ">
+                    report
+                </span>
+            </div>
+            <p class="text-sm text-gray-600 mb-3">
+                
+                Requests for reports from the Secretary-General or other bodies to inform the General Assembly.
+                
+            </p>
+            <div class="mt-4">
+                <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Trigger Phrases</p>
+                <div class="flex flex-wrap gap-1.5">
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        report to the General Assembly
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        submit a report
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        report thereon
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        shall report
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        apprise the General Assembly
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        inform the General Assembly
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        include in his report
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        include in the report
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        Secretary-General to submit
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        Secretary-General to report
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        Secretary-General to provide a report
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        submit to the General Assembly
+                    </span>
+                    
+                    <span class="px-2 py-0.5 rounded text-xs
+                        bg-green-100 text-green-700
+                        ">
+                        report to the Assembly
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- How Detection Works -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">How Detection Works</h2>
+    <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+        <ol class="list-decimal list-inside space-y-3 text-gray-700">
+            <li><span class="font-medium">Document Processing:</span> PDF documents are parsed to extract text content.</li>
+            <li><span class="font-medium">Paragraph Extraction:</span> Operative paragraphs (numbered paragraphs in the resolution body) are identified and extracted.</li>
+            <li><span class="font-medium">Phrase Matching:</span> Each paragraph is scanned for the trigger phrases defined for each signal type.</li>
+            <li><span class="font-medium">Signal Assignment:</span> When a phrase is found, the corresponding signal is assigned to that paragraph.</li>
+            <li><span class="font-medium">Aggregation:</span> Signals are aggregated at the document level for filtering and analysis.</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Configuration -->
+<div class="mb-10">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Configuration</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+        Signals are configured in the <code class="px-1.5 py-0.5 bg-gray-100 rounded text-sm font-mono">config/checks.yaml</code> file. Each signal definition includes:
+    </p>
+    <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4">
+        <li><span class="font-medium">signal:</span> The name/identifier for the signal type</li>
+        <li><span class="font-medium">phrases:</span> A list of text patterns that trigger this signal when found in a paragraph</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed">
+        Phrase matching is case-insensitive. A paragraph can have multiple signals if it contains phrases from different signal types.
+    </p>
+</div>
+
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <p class="text-sm text-muted">
+                
+Generated 2026-01-22 23:07 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
