@@ -40,8 +40,8 @@
     </button>
 </div>
 
-<!-- Main Content Area with Split View -->
-<div class="flex gap-6" id="main-content">
+<!-- Main Content Area -->
+<div class="flex gap-6">
     <!-- Document List -->
     <div class="flex-1 min-w-0" id="document-list">
         <div class="space-y-4" id="documents-container">
@@ -49,18 +49,15 @@
             <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
                  data-symbol="{{ doc.symbol }}"
                  data-source="{{ doc.origin }}"
-                 data-signals="{{ doc.signal_summary.keys()|list|join(',') }}"
-                 data-un-url="{{ doc.un_url }}">
+                 data-signals="{{ doc.signal_summary.keys()|list|join(',') }}">
                 <!-- Document Header -->
                 <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-3 mb-1">
-                                <button class="view-doc-btn font-semibold text-gray-900 hover:text-un-blue transition-colors text-left"
-                                        data-symbol="{{ doc.symbol }}"
-                                        data-un-url="{{ doc.un_url }}">
+                                <a href="{{ doc.un_url }}" target="_blank" class="font-semibold text-gray-900 hover:text-un-blue transition-colors text-left">
                                     {{ doc.symbol }}
-                                </button>
+                                </a>
                                 <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold flex-shrink-0
                                     {% if doc.origin == 'Plenary' %}bg-amber-50 text-amber-700
                                     {% elif doc.origin == 'C1' %}bg-red-50 text-red-700
@@ -132,27 +129,6 @@
         </div>
     </div>
 
-    <!-- Document Embed Panel -->
-    <div id="embed-panel" class="hidden w-[500px] flex-shrink-0 sticky top-24 h-[calc(100vh-8rem)]">
-        <div class="border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col bg-white shadow-lg">
-            <div class="px-4 py-3 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span id="embed-symbol" class="font-semibold text-gray-900"></span>
-                    <a id="embed-external-link" href="#" target="_blank" class="text-xs text-muted hover:text-un-blue">
-                        Open in new tab
-                    </a>
-                </div>
-                <button id="close-embed" class="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="flex-1 bg-gray-100">
-                <iframe id="embed-iframe" class="w-full h-full border-0" src="about:blank"></iframe>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -164,12 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const documentCards = document.querySelectorAll('.document-card');
     const emptyState = document.getElementById('empty-state');
     const statsText = document.getElementById('stats-text');
-    const embedPanel = document.getElementById('embed-panel');
-    const embedIframe = document.getElementById('embed-iframe');
-    const embedSymbol = document.getElementById('embed-symbol');
-    const embedExternalLink = document.getElementById('embed-external-link');
-    const closeEmbedBtn = document.getElementById('close-embed');
-    const mainContent = document.getElementById('main-content');
 
     // Parse URL params and set initial filter state
     function initFromUrl() {
@@ -246,21 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateUrl();
     }
 
-    // Document embed functionality
-    function showEmbed(symbol, url) {
-        embedSymbol.textContent = symbol;
-        embedExternalLink.href = url;
-        embedIframe.src = url;
-        embedPanel.classList.remove('hidden');
-        mainContent.classList.add('embed-open');
-    }
-
-    function hideEmbed() {
-        embedPanel.classList.add('hidden');
-        embedIframe.src = 'about:blank';
-        mainContent.classList.remove('embed-open');
-    }
-
     // Event listeners
     sourceFilter.addEventListener('change', applyFilters);
     signalFilter.addEventListener('change', applyFilters);
@@ -271,27 +226,10 @@ document.addEventListener('DOMContentLoaded', function() {
         applyFilters();
     });
 
-    closeEmbedBtn.addEventListener('click', hideEmbed);
-
-    // View document button clicks
-    document.querySelectorAll('.view-doc-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const symbol = this.dataset.symbol;
-            const url = this.dataset.unUrl;
-            showEmbed(symbol, url);
-        });
-    });
-
     // Initialize from URL
     initFromUrl();
 });
 </script>
-
-<style>
-.embed-open #document-list {
-    max-width: calc(100% - 520px);
-}
-</style>
 {% endblock %}
 
 {% block footer %}
