@@ -6,10 +6,10 @@ import sys
 import time
 from pathlib import Path
 
-from .pipeline import sync_all_patterns_verbose, load_sync_state
-from .static_generator import generate_site_verbose, load_all_documents, generate_data_json
-from .checks import load_checks
-from .lineage import update_lineage_cache
+from .discovery import sync_all_patterns_verbose, load_sync_state
+from .generation import generate_site_verbose, load_all_documents, generate_data_json
+from .detection import load_checks
+from .linking import update_lineage_cache
 
 
 def is_github_actions() -> bool:

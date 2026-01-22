@@ -17,12 +17,13 @@ The Mandate Pipeline automates the process of:
 # Install dependencies
 pip install -e .
 
-# Run full pipeline (discover + generate)
+# Run full pipeline (all five stages)
 mandate build --config ./config --data ./data --output ./docs --verbose
 
-# Or run stages separately
-mandate discover --config ./config --data ./data --verbose
-mandate generate --config ./config --data ./data --output ./docs --verbose
+# Or run specific stages
+mandate discover --config ./config --data ./data --verbose          # Stage 1: Discovery
+mandate lineage --config ./config --data ./data --output ./docs    # Stage 4: Linking
+mandate generate --config ./config --data ./data --output ./docs   # Stages 2, 3, 5: Extraction, Detection, Generation
 ```
 
 ## Project Structure
@@ -39,19 +40,21 @@ mandate-pipeline/
 ├── docs/                      # Generated static website
 ├── src/mandate_pipeline/      # Core Python package
 │   ├── cli.py                # Command-line interface
-│   ├── pipeline.py           # Document discovery logic
+│   ├── discovery.py          # Stage 1: Document discovery
 │   ├── downloader.py         # PDF download from UN servers
-│   ├── extractor.py          # PDF text extraction
-│   ├── checks.py             # Signal detection system
-│   ├── lineage.py            # Document linkage analysis
-│   ├── static_generator.py   # HTML site generation
+│   ├── extractor.py          # Stage 2: Text extraction
+│   ├── detection.py          # Stage 3: Signal detection
+│   ├── linking.py            # Stage 4: Document linkage
+│   ├── generation.py         # Stage 5: Site generation
 │   └── templates/            # Jinja2 HTML templates
 └── tests/                     # Test suite
 ```
 
 ## Pipeline Architecture
 
-### Phase 1: Document Discovery
+The pipeline consists of five sequential stages that transform UN documents from discovery to an interactive website:
+
+### Stage 1: Discovery (`discovery.py`)
 
 The `discover` command finds and downloads new UN documents.
 
@@ -68,58 +71,66 @@ The `discover` command finds and downloads new UN documents.
 - **Adaptive**: Resets miss counter on successful finds (handles numbering gaps)
 - **Stateful**: Progress persisted between runs
 
-### Phase 2: Site Generation
+### Stage 2: Extraction (`extractor.py`)
 
-The `generate` command processes documents and builds the website.
-
-**Substages:**
-
-1. **Document Loading**: Scan all PDFs in `data/pdfs/`
-
-2. **Text Extraction** (`extractor.py`):
-   - Extract full text using PyMUPDF
-   - Parse operative paragraphs (numbered sections)
-   - Extract document title
-   - Find agenda item references
-   - Identify UN symbol references
-
-3. **Signal Detection** (`checks.py`):
-   - Match phrases from `config/checks.yaml` against paragraphs
-   - Case-insensitive substring matching
-   - Each paragraph can trigger multiple signals
-
-4. **Document Linking** (`static_generator.py`):
-   - **Pass 1**: Link via explicit symbol references (100% confidence)
-   - **Pass 2**: Link via fuzzy title matching (85%+ similarity threshold)
-
-5. **Site Generation**: Create HTML pages and data exports
-
-### Phase 3: Lineage Analysis
-
-The `lineage` command builds the document relationship cache.
+Extracts structured content from PDF documents.
 
 **Process:**
-1. Scan all PDFs and extract symbol references
-2. Classify documents (resolution/proposal/other)
-3. Cache results in `data/lineage.json` (uses hash to skip unchanged files)
-4. Export metadata to `docs/data.json`
+- Extract full text using PyMUPDF
+- Parse operative paragraphs (numbered sections)
+- Extract document title
+- Find agenda item references
+- Identify UN symbol references
+
+### Stage 3: Detection (`detection.py`)
+
+Identifies mandate-related signals in document text.
+
+**Process:**
+- Match phrases from `config/checks.yaml` against paragraphs
+- Case-insensitive substring matching
+- Each paragraph can trigger multiple signals
+
+### Stage 4: Linking (`linking.py`)
+
+Builds relationships between documents (resolutions ↔ proposals).
+
+**Process:**
+1. **Lineage Cache**: Scan all PDFs and extract symbol references
+2. **Classification**: Classify documents (resolution/proposal/other)
+3. **Explicit Linking**: Link via symbol references (100% confidence)
+4. **Fuzzy Matching**: Link via title similarity (85%+ threshold)
+5. **Caching**: Save results in `data/lineage.json` (uses hash to skip unchanged files)
+6. **Export**: Generate metadata for `docs/data.json`
+
+### Stage 5: Generation (`generation.py`)
+
+Creates the static website and data exports.
+
+**Process:**
+1. Load all processed documents
+2. Generate HTML pages (index, documents, signals, patterns, matrix)
+3. Create machine-readable exports (data.json, search-index.json)
+4. Apply Jinja2 templates for consistent styling
 
 ## Data Flow
+
+The five stages process data sequentially:
 
 ```
 UN ODS API
     ↓
-[Discovery] → data/state.json
+[Stage 1: Discovery] → data/state.json
     ↓
 data/pdfs/*.pdf
     ↓
-[Extraction] → Text, paragraphs, titles, references
+[Stage 2: Extraction] → Text, paragraphs, titles, references
     ↓
-[Signal Detection] → Matched phrases per paragraph
+[Stage 3: Detection] → Matched phrases per paragraph
     ↓
-[Document Linking] → Resolution ↔ Proposal relationships
+[Stage 4: Linking] → Resolution ↔ Proposal relationships + data/lineage.json
     ↓
-[Site Generation]
+[Stage 5: Generation]
     ↓
 docs/                 (static website)
 ├── index.html       (dashboard)
@@ -242,7 +253,7 @@ mandate build \
 
 ### mandate lineage
 
-Update lineage cache and export data.json.
+Update document linkage cache and export data.json (runs Stage 4: Linking).
 
 ```bash
 mandate lineage \
@@ -468,11 +479,19 @@ checks:
 
 ### Custom Extraction
 
-Extend `src/mandate_pipeline/extractor.py` to parse additional data from PDFs.
+Extend `src/mandate_pipeline/extractor.py` (Stage 2) to parse additional data from PDFs.
+
+### Custom Detection Rules
+
+Add new signals in `config/checks.yaml` and extend `src/mandate_pipeline/detection.py` (Stage 3) for custom detection logic.
+
+### Custom Linking
+
+Extend `src/mandate_pipeline/linking.py` (Stage 4) to implement additional document relationship analysis.
 
 ### Custom Reports
 
-Extend `src/mandate_pipeline/static_generator.py` to generate additional HTML pages or exports.
+Extend `src/mandate_pipeline/generation.py` (Stage 5) to generate additional HTML pages or exports.
 
 ## License
 

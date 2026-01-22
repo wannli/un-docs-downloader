@@ -7,7 +7,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from .checks import load_checks, run_checks
+from .detection import load_checks, run_checks
 
 from .extractor import (
     extract_text,
@@ -16,8 +16,8 @@ from .extractor import (
     extract_agenda_items,
     find_symbol_references,
 )
-from .pipeline import load_patterns
-from .lineage import (
+from .discovery import load_patterns
+from .linking import (
     load_lineage_cache,
     link_documents,
     annotate_lineage,

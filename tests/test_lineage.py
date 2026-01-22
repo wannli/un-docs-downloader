@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock
 
-from mandate_pipeline.lineage import (
+from mandate_pipeline.linking import (
     symbol_to_filename,
     filename_to_symbol,
     compute_last_modified_hash,
