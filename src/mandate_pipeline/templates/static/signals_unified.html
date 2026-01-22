@@ -11,7 +11,7 @@
 <div class="mb-8">
     <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Signal Browser</h1>
     <p class="mt-2 text-muted" id="stats-text">
-        {{ total_paragraphs }} paragraphs across {{ total_docs }} resolutions
+        {{ total_paragraphs }} paragraphs across {{ resolution_count }} resolution{% if resolution_count != 1 %}s{% endif %}{% if proposal_count > 0 %} and {{ proposal_count }} non-adopted proposal{% if proposal_count != 1 %}s{% endif %}{% endif %}
     </p>
 </div>
 
@@ -35,6 +35,14 @@
             {% endfor %}
         </select>
     </div>
+    <div class="flex-1 min-w-[200px]">
+        <label for="doctype-filter" class="block text-sm font-medium text-gray-700 mb-1">Document Type</label>
+        <select id="doctype-filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+            <option value="">All Types</option>
+            <option value="resolution">Resolutions</option>
+            <option value="proposal">Non-adopted Proposals</option>
+        </select>
+    </div>
     <button id="clear-filters" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
         Clear filters
     </button>
@@ -46,9 +54,10 @@
     <div class="flex-1 min-w-0" id="document-list">
         <div class="space-y-4" id="documents-container">
             {% for doc in documents %}
-            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors{% if doc.doc_type == 'proposal' %} border-l-4 border-l-amber-400{% endif %}"
                  data-symbol="{{ doc.symbol }}"
                  data-source="{{ doc.origin }}"
+                 data-doctype="{{ doc.doc_type }}"
                  data-signals="{{ doc.signal_summary.keys()|list|join(',') }}"
                  data-un-url="{{ doc.un_url }}">
                 <!-- Document Header -->
@@ -61,6 +70,11 @@
                                         data-un-url="{{ doc.un_url }}">
                                     {{ doc.symbol }}
                                 </button>
+                                {% if doc.doc_type == 'proposal' %}
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                                    Proposal
+                                </span>
+                                {% endif %}
                                 <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold flex-shrink-0
                                     {% if doc.origin == 'Plenary' %}bg-amber-50 text-amber-700
                                     {% elif doc.origin == 'C1' %}bg-red-50 text-red-700
@@ -159,6 +173,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const sourceFilter = document.getElementById('source-filter');
     const signalFilter = document.getElementById('signal-filter');
+    const doctypeFilter = document.getElementById('doctype-filter');
     const clearFiltersBtn = document.getElementById('clear-filters');
     const documentsContainer = document.getElementById('documents-container');
     const documentCards = document.querySelectorAll('.document-card');
@@ -176,9 +191,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const params = new URLSearchParams(window.location.search);
         const source = params.get('source');
         const signal = params.get('signal');
+        const doctype = params.get('type');
 
         if (source) sourceFilter.value = source;
         if (signal) signalFilter.value = signal;
+        if (doctype) doctypeFilter.value = doctype;
 
         applyFilters();
     }
@@ -188,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const params = new URLSearchParams();
         if (sourceFilter.value) params.set('source', sourceFilter.value);
         if (signalFilter.value) params.set('signal', signalFilter.value);
+        if (doctypeFilter.value) params.set('type', doctypeFilter.value);
 
         const newUrl = params.toString()
             ? `${window.location.pathname}?${params.toString()}`
@@ -198,11 +216,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function applyFilters() {
         const selectedSource = sourceFilter.value;
         const selectedSignal = signalFilter.value;
-        let visibleCount = 0;
+        const selectedDoctype = doctypeFilter.value;
+        let resolutionCount = 0;
+        let proposalCount = 0;
         let paragraphCount = 0;
 
         documentCards.forEach(card => {
             const cardSource = card.dataset.source;
+            const cardDoctype = card.dataset.doctype;
             const cardSignals = card.dataset.signals.split(',').filter(s => s);
 
             // Check source filter
@@ -211,9 +232,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check signal filter
             const signalMatch = !selectedSignal || cardSignals.includes(selectedSignal);
 
-            if (sourceMatch && signalMatch) {
+            // Check document type filter
+            const doctypeMatch = !selectedDoctype || cardDoctype === selectedDoctype;
+
+            if (sourceMatch && signalMatch && doctypeMatch) {
                 card.classList.remove('hidden');
-                visibleCount++;
+                if (cardDoctype === 'resolution') {
+                    resolutionCount++;
+                } else {
+                    proposalCount++;
+                }
 
                 // Filter paragraphs within the card if signal filter is active
                 const paragraphs = card.querySelectorAll('.paragraph-item');
@@ -232,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Show/hide empty state
+        const visibleCount = resolutionCount + proposalCount;
         if (visibleCount === 0) {
             emptyState.classList.remove('hidden');
             documentsContainer.classList.add('hidden');
@@ -241,7 +270,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Update stats
-        statsText.textContent = `${paragraphCount} paragraphs across ${visibleCount} resolutions`;
+        let statsStr = `${paragraphCount} paragraphs across `;
+        const parts = [];
+        if (resolutionCount > 0) {
+            parts.push(`${resolutionCount} resolution${resolutionCount !== 1 ? 's' : ''}`);
+        }
+        if (proposalCount > 0) {
+            parts.push(`${proposalCount} non-adopted proposal${proposalCount !== 1 ? 's' : ''}`);
+        }
+        statsText.textContent = statsStr + (parts.length > 0 ? parts.join(' and ') : '0 documents');
 
         updateUrl();
     }
@@ -264,10 +301,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners
     sourceFilter.addEventListener('change', applyFilters);
     signalFilter.addEventListener('change', applyFilters);
+    doctypeFilter.addEventListener('change', applyFilters);
 
     clearFiltersBtn.addEventListener('click', function() {
         sourceFilter.value = '';
         signalFilter.value = '';
+        doctypeFilter.value = '';
         applyFilters();
     });
 
