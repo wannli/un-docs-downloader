@@ -973,15 +973,22 @@ def generate_unified_signals_page(
     env = get_templates_env(checks)
     template = env.get_template("signals_unified.html")
 
-    # Get resolutions with signals only
+    # Get resolutions and non-adopted proposals with signals
     resolutions = [doc for doc in documents if is_resolution(doc.get("symbol", ""))]
+    non_adopted_proposals = [
+        doc for doc in documents
+        if is_proposal(doc.get("symbol", "")) and not doc.get("is_adopted_draft")
+    ]
 
     origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6", "Unknown"]
 
     # Prepare document data with origin and signal paragraphs
     docs_with_signals = []
     total_paragraphs = 0
+    resolution_count = 0
+    proposal_count = 0
 
+    # Process resolutions
     for res in resolutions:
         if not res.get("signal_summary"):
             continue
@@ -1005,13 +1012,51 @@ def generate_unified_signals_page(
         # Sort paragraphs by number
         signal_paras.sort(key=lambda p: int(p["number"]))
         total_paragraphs += len(signal_paras)
+        resolution_count += 1
 
         docs_with_signals.append({
             "symbol": res["symbol"],
             "title": res.get("title", ""),
             "origin": origin,
+            "doc_type": "resolution",
             "un_url": res.get("un_url", get_un_document_url(res["symbol"])),
             "signal_summary": res.get("signal_summary", {}),
+            "signal_paragraphs": signal_paras,
+        })
+
+    # Process non-adopted proposals
+    for prop in non_adopted_proposals:
+        if not prop.get("signal_summary"):
+            continue
+
+        origin = derive_origin_from_symbol(prop.get("symbol", ""))
+
+        # Find all paragraphs that have any signal
+        signal_paras = []
+        for para_num, para_signals in prop.get("signals", {}).items():
+            if para_signals:
+                para_text = prop.get("paragraphs", {}).get(para_num, "")
+                signal_paras.append({
+                    "number": para_num,
+                    "text": para_text,
+                    "signals": para_signals
+                })
+
+        if not signal_paras:
+            continue
+
+        # Sort paragraphs by number
+        signal_paras.sort(key=lambda p: int(p["number"]))
+        total_paragraphs += len(signal_paras)
+        proposal_count += 1
+
+        docs_with_signals.append({
+            "symbol": prop["symbol"],
+            "title": prop.get("title", ""),
+            "origin": origin,
+            "doc_type": "proposal",
+            "un_url": prop.get("un_url", get_un_document_url(prop["symbol"])),
+            "signal_summary": prop.get("signal_summary", {}),
             "signal_paragraphs": signal_paras,
         })
 
@@ -1025,6 +1070,8 @@ def generate_unified_signals_page(
         origin_names=COMMITTEE_NAMES,
         total_docs=len(docs_with_signals),
         total_paragraphs=total_paragraphs,
+        resolution_count=resolution_count,
+        proposal_count=proposal_count,
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
     )
 
