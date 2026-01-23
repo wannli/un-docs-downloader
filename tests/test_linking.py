@@ -205,6 +205,26 @@ class TestFetchUndlMetadata:
 
         assert result is None
 
+    def test_fetch_symbol_not_found_cached(self, mocker, mock_session):
+        """Cache empty metadata when the symbol is missing from a valid response."""
+        mock_response = mocker.Mock()
+        mock_response.status_code = 200
+        mock_response.text = SAMPLE_MARC_XML
+        mock_response.raise_for_status = mocker.Mock()
+
+        mock_session.get.return_value = mock_response
+        mocker.patch("mandate_pipeline.linking.time.sleep")
+        save_cache = mocker.patch("mandate_pipeline.linking._save_cached_metadata")
+        mocker.patch("mandate_pipeline.linking._get_cached_metadata", return_value=None)
+
+        result = fetch_undl_metadata("A/RES/80/999")
+
+        assert result is not None
+        assert result["draft_symbols"] == []
+        assert result["base_proposal"] is None
+        assert result["not_found"] is True
+        save_cache.assert_called_once()
+
 
 class TestLinkDocumentsWithUndl:
     """Tests for link_documents with UNDL metadata integration."""

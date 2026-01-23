@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 import re
 import time
 import xml.etree.ElementTree as ET
@@ -21,7 +22,8 @@ logger = logging.getLogger(__name__)
 UNDL_SEARCH_URL = "https://digitallibrary.un.org/search"
 UNDL_TIMEOUT = 30  # seconds
 MARC_NS = {"marc": "http://www.loc.gov/MARC21/slim"}
-CACHE_DIR = Path("data/cache/undl")
+UNDL_CACHE_ENV = "MANDATE_UNDL_CACHE_DIR"
+CACHE_DIR = Path(os.getenv(UNDL_CACHE_ENV, "data/cache/undl"))
 
 # Committee names for display
 COMMITTEE_NAMES = {
@@ -63,7 +65,8 @@ def fetch_undl_metadata(symbol: str) -> dict | None:
     Queries the UNDL search API for the given symbol and parses the MARC XML
     response to extract related document symbols from tag 993.
 
-    Includes caching and rate limiting.
+    Includes caching and rate limiting. Cache location can be overridden via
+    the MANDATE_UNDL_CACHE_DIR environment variable.
 
     Args:
         symbol: UN resolution symbol (e.g., "A/RES/80/142")
@@ -96,9 +99,12 @@ def fetch_undl_metadata(symbol: str) -> dict | None:
         resp = session.get(UNDL_SEARCH_URL, params=params, timeout=UNDL_TIMEOUT)
         resp.raise_for_status()
 
-        result = _parse_undl_marc_xml(resp.text, symbol)
+        result, parsed_ok = _parse_undl_marc_xml_with_status(resp.text, symbol)
 
         if result:
+            _save_cached_metadata(symbol, result)
+        elif parsed_ok:
+            result = _build_empty_metadata(symbol)
             _save_cached_metadata(symbol, result)
 
         # 3. Be polite (1s delay balances speed and rate limiting)
@@ -116,6 +122,17 @@ def _get_cache_path(symbol: str) -> Path:
     # Use MD5 hash to handle special characters and length
     symbol_hash = hashlib.md5(symbol.encode("utf-8")).hexdigest()
     return CACHE_DIR / f"{symbol_hash}.json"
+
+
+def _build_empty_metadata(symbol: str) -> dict:
+    """Build an empty metadata payload for symbols with no UNDL record."""
+    return {
+        "symbol": symbol,
+        "related_symbols": [],
+        "draft_symbols": [],
+        "base_proposal": None,
+        "not_found": True,
+    }
 
 
 def _get_cached_metadata(symbol: str) -> dict | None:
@@ -144,23 +161,8 @@ def _save_cached_metadata(symbol: str, data: dict) -> None:
         logger.warning("Failed to save cache for %s: %s", symbol, e)
 
 
-def _parse_undl_marc_xml(xml_text: str, target_symbol: str) -> dict | None:
-    """
-    Parse MARC XML response and extract related symbols.
-
-    Args:
-        xml_text: Raw XML response from UNDL
-        target_symbol: The resolution symbol we're looking for
-
-    Returns:
-        Parsed metadata dictionary or None if not found
-    """
-    try:
-        root = ET.fromstring(xml_text)
-    except ET.ParseError as e:
-        logger.warning("Failed to parse UNDL XML for %s: %s", target_symbol, e)
-        return None
-
+def _extract_undl_metadata(root: ET.Element, target_symbol: str) -> dict | None:
+    """Extract metadata for a target symbol from a parsed MARC XML root."""
     # Normalize target for comparison
     target_upper = target_symbol.upper()
 
@@ -195,6 +197,39 @@ def _parse_undl_marc_xml(xml_text: str, target_symbol: str) -> dict | None:
         }
 
     return None
+
+
+def _parse_undl_marc_xml_with_status(
+    xml_text: str, target_symbol: str
+) -> tuple[dict | None, bool]:
+    """
+    Parse MARC XML response and extract related symbols.
+
+    Returns:
+        Tuple of (parsed metadata dict or None, whether XML parsed successfully)
+    """
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError as e:
+        logger.warning("Failed to parse UNDL XML for %s: %s", target_symbol, e)
+        return None, False
+
+    return _extract_undl_metadata(root, target_symbol), True
+
+
+def _parse_undl_marc_xml(xml_text: str, target_symbol: str) -> dict | None:
+    """
+    Parse MARC XML response and extract related symbols.
+
+    Args:
+        xml_text: Raw XML response from UNDL
+        target_symbol: The resolution symbol we're looking for
+
+    Returns:
+        Parsed metadata dictionary or None if not found
+    """
+    result, _ = _parse_undl_marc_xml_with_status(xml_text, target_symbol)
+    return result
 
 
 def symbol_to_filename(symbol: str) -> str:
