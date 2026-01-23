@@ -197,42 +197,22 @@ checks:
 ## Email Signal Reports (GitHub Actions)
 
 The `Email Signal Reports` workflow (`.github/workflows/email-signals.yml`) can run daily to
-execute the pipeline and send one email per signal. Each email includes all resolutions for
-that signal, with newly discovered resolutions listed first and bolded.
-
-Manual runs (`workflow_dispatch`) default to a **dry run** that does not send email. Instead,
-the workflow writes email previews to `./email-previews`, uploads them as a workflow artifact,
-and lists the preview filenames in the GitHub Actions job summary.
+execute the pipeline and generate one markdown report per signal. Each report includes all
+resolutions for that signal, with newly discovered resolutions listed first and bolded. The
+workflow writes markdown previews to `./email-previews`, uploads them as a workflow artifact,
+and lists the preview filenames plus an inlined markdown summary in the GitHub Actions job
+summary.
 
 ### Required GitHub Secrets
 
-Configure the SMTP or Mailgun secrets in your repository settings, plus recipients:
-
-**Mailgun (optional, preferred if configured)**
-
-- `MAILGUN_API_KEY`: Mailgun API key
-- `MAILGUN_DOMAIN`: Mailgun sending domain
-- `MAILGUN_FROM`: From address (defaults to `SMTP_FROM` if omitted)
-- `MAILGUN_BASE_URL`: Override API base URL (e.g., `https://api.eu.mailgun.net/v3`) (optional)
-
-**SMTP (fallback if Mailgun is not configured)**
-
-- `SMTP_HOST`: SMTP server hostname
-- `SMTP_PORT`: SMTP server port (default 587)
-- `SMTP_USERNAME`: SMTP username (optional if server allows unauthenticated sends)
-- `SMTP_PASSWORD`: SMTP password
-- `SMTP_FROM`: From address (e.g., `mandate-bot@example.com`)
-- `SMTP_USE_SSL`: `true` if you need implicit SSL (optional)
-- `SMTP_STARTTLS`: `true` to use STARTTLS on standard ports (optional)
-
 **Recipients**
 
-- `SIGNAL_EMAIL_RECIPIENTS`: JSON mapping of signals to recipient lists
+- `SIGNAL_EMAIL_RECIPIENTS`: JSON mapping of signals to recipient lists (optional; if omitted,
+  all signals are included)
 
-### Manual dry-run behavior
+### Optional behavior
 
-To override the default dry-run behavior, set `EMAIL_REPORT_DRY_RUN=false` in the workflow
-environment. You can also set `EMAIL_REPORT_PREVIEW_DIR` to change where previews are written.
+Set `EMAIL_REPORT_PREVIEW_DIR` to change where previews are written.
 
 Example `SIGNAL_EMAIL_RECIPIENTS` secret:
 

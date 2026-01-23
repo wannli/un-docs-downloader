@@ -38,21 +38,9 @@ jobs:
       - name: Run pipeline
         run: python -m mandate_pipeline.cli build --config ./config --data ./data --output ./docs --skip-debug
 
-      - name: Send signal email reports
+      - name: Generate signal markdown reports
         env:
-          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
-          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
-          MAILGUN_FROM: ${{ secrets.MAILGUN_FROM }}
-          MAILGUN_BASE_URL: ${{ secrets.MAILGUN_BASE_URL }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          SMTP_FROM: ${{ secrets.SMTP_FROM }}
-          SMTP_USE_SSL: ${{ secrets.SMTP_USE_SSL }}
-          SMTP_STARTTLS: ${{ secrets.SMTP_STARTTLS }}
           SIGNAL_EMAIL_RECIPIENTS: ${{ secrets.SIGNAL_EMAIL_RECIPIENTS }}
-          EMAIL_REPORT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' }}
           EMAIL_REPORT_PREVIEW_DIR: ./email-previews
         run: |
           if [ -f /tmp/previous-data.json ]; then
@@ -62,7 +50,6 @@ jobs:
           fi
 
       - name: Upload email previews
-        if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v4
         with:
           name: email-previews
