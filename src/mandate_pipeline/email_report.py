@@ -48,15 +48,56 @@ def append_summary_entry(
     summary_file = os.getenv("GITHUB_STEP_SUMMARY")
     if not summary_file:
         return
+    size_limit = int(os.getenv("GITHUB_STEP_SUMMARY_LIMIT", "1048576"))
+    current_size = 0
+    if os.path.exists(summary_file):
+        current_size = os.path.getsize(summary_file)
+
+    def entry_bytes(value: str) -> int:
+        return len(value.encode("utf-8"))
+
+    def truncate_to_bytes(value: str, max_bytes: int) -> str:
+        if entry_bytes(value) <= max_bytes:
+            return value
+        encoded = value.encode("utf-8")[:max_bytes]
+        trimmed = encoded.decode("utf-8", errors="ignore")
+        return trimmed.rstrip()
+
+    header_lines = [f"## {signal}", "", f"**{subject}**", ""]
+    if preview_path:
+        header_lines.append(f"Preview: `{preview_path}`")
+        header_lines.append("")
+    header = "\n".join(header_lines) + "\n"
+    if current_size + entry_bytes(header) >= size_limit:
+        return
+
+    detail_open = "<details>\n<summary>Markdown report</summary>\n\n"
+    detail_close = "\n\n</details>\n\n"
+    summary_note = "\n\n_Markdown report omitted due to summary size limit._\n\n"
+
     with open(summary_file, "a", encoding="utf-8") as handle:
-        handle.write(f"## {signal}\n\n")
-        handle.write(f"**{subject}**\n\n")
-        if preview_path:
-            handle.write(f"Preview: `{preview_path}`\n\n")
-        if markdown_body:
-            handle.write("<details>\n<summary>Markdown report</summary>\n\n")
-            handle.write(markdown_body)
-            handle.write("\n\n</details>\n\n")
+        handle.write(header)
+        current_size += entry_bytes(header)
+        if not markdown_body:
+            return
+
+        available = size_limit - current_size
+        required = entry_bytes(detail_open) + entry_bytes(detail_close)
+        if available <= required + 1:
+            handle.write(truncate_to_bytes(summary_note, available))
+            return
+
+        allowed_body = available - required
+        body = truncate_to_bytes(markdown_body, allowed_body)
+        if not body:
+            handle.write(truncate_to_bytes(summary_note, available))
+            return
+
+        handle.write(detail_open)
+        handle.write(body)
+        if entry_bytes(body) < entry_bytes(markdown_body):
+            handle.write("\n\n_…truncated to fit GitHub summary size limit._")
+        handle.write(detail_close)
 
 
 def load_data(path: Path) -> dict:
