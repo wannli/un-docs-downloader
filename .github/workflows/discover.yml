@@ -33,6 +33,22 @@ jobs:
       - name: Discover new documents
         run: python -m mandate_pipeline.cli discover --config ./config --data ./data
 
+      - name: Record discovery run metadata
+        if: always()
+        run: |
+          cat > data/last_discover_run.json << 'EOF'
+          {
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "event_name": "${{ github.event_name }}",
+            "ref": "${{ github.ref }}",
+            "ref_name": "${{ github.ref_name }}",
+            "sha": "${{ github.sha }}",
+            "actor": "${{ github.actor }}",
+            "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+
       - name: Check for changes
         id: changes
         run: |

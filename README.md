@@ -343,7 +343,7 @@ Complete metadata export for external tools:
 
 Two workflows automate the pipeline:
 
-### fetch-documents.yml
+### discover.yml
 
 - **Trigger**: Daily at 6 AM UTC or manual
 - **Action**: Run `mandate discover`, commit new PDFs
@@ -359,7 +359,7 @@ Two workflows automate the pipeline:
 ```
 Schedule (6 AM UTC)
     ↓
-fetch-documents.yml
+discover.yml
     ↓ (on success)
 linkage-analysis.yml
     ↓ (triggers)
