@@ -1,0 +1,69 @@
+name: Email Signal Reports
+
+on:
+  schedule:
+    # Run daily at 7 AM UTC
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "email-signals"
+  cancel-in-progress: false
+
+jobs:
+  email-reports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Cache previous data snapshot
+        run: |
+          if [ -f docs/data.json ]; then
+            cp docs/data.json /tmp/previous-data.json
+          fi
+
+      - name: Run pipeline
+        run: python -m mandate_pipeline.cli build --config ./config --data ./data --output ./docs --skip-debug
+
+      - name: Send signal email reports
+        env:
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
+          MAILGUN_FROM: ${{ secrets.MAILGUN_FROM }}
+          MAILGUN_BASE_URL: ${{ secrets.MAILGUN_BASE_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          SMTP_USE_SSL: ${{ secrets.SMTP_USE_SSL }}
+          SMTP_STARTTLS: ${{ secrets.SMTP_STARTTLS }}
+          SIGNAL_EMAIL_RECIPIENTS: ${{ secrets.SIGNAL_EMAIL_RECIPIENTS }}
+          EMAIL_REPORT_DRY_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+          EMAIL_REPORT_PREVIEW_DIR: ./email-previews
+        run: |
+          if [ -f /tmp/previous-data.json ]; then
+            python -m mandate_pipeline.email_report --current ./docs/data.json --previous /tmp/previous-data.json
+          else
+            python -m mandate_pipeline.email_report --current ./docs/data.json
+          fi
+
+      - name: Upload email previews
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: email-previews
+          path: ./email-previews
