@@ -103,8 +103,8 @@
                 <div class="divide-y divide-gray-100">
                     {% for para in doc.signal_paragraphs %}
                     <div class="px-4 py-3 paragraph-item" data-signals="{{ para.signals|join(',') }}">
-                        <p class="text-gray-700 leading-relaxed text-sm flex flex-wrap items-baseline gap-2">
-                            <span class="flex flex-wrap gap-1.5">
+                        <p class="text-gray-700 leading-relaxed text-sm">
+                            <span class="inline-flex flex-wrap gap-1.5 align-baseline mr-2">
                                 {% for signal in para.signals %}
                                 <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
                                     {% if signal == 'agenda' %}bg-blue-100 text-blue-700
@@ -116,8 +116,8 @@
                                 </span>
                                 {% endfor %}
                             </span>
-                            <span class="font-medium text-gray-700">{{ para.number }}.</span>
-                            <span class="min-w-0">{{ para.text|highlight_signals(para.signals) }}</span>
+                            <span class="font-medium text-gray-700 mr-2">{{ para.number }}.</span>
+                            <span>{{ para.text|highlight_signals(para.signals) }}</span>
                         </p>
                     </div>
                     {% endfor %}
