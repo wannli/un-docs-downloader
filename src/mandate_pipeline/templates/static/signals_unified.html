@@ -18,16 +18,16 @@
 <!-- Filter Controls -->
 <div class="mb-8 flex flex-wrap gap-4 items-end">
     <div class="flex-1 min-w-[200px]">
-        <label for="source-filter" class="block text-sm font-medium text-gray-700 mb-1">Source</label>
-        <select id="source-filter" multiple class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
+        <label for="source-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Source</label>
+        <select id="source-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
             {% for origin_code in origin_order %}
             <option value="{{ origin_code }}">{{ origin_names.get(origin_code, origin_code) }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="flex-1 min-w-[200px]">
-        <label for="signal-filter" class="block text-sm font-medium text-gray-700 mb-1">Signal Type</label>
-        <select id="signal-filter" multiple class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
+        <label for="signal-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Signal Type</label>
+        <select id="signal-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
             {% for check in checks %}
             <option value="{{ check.signal }}"
                 {% if check.signal == 'agenda' %}class="text-blue-700"
@@ -38,8 +38,8 @@
         </select>
     </div>
     <div class="flex-1 min-w-[200px]">
-        <label for="doctype-filter" class="block text-sm font-medium text-gray-700 mb-1">Document Type</label>
-        <select id="doctype-filter" multiple class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
+        <label for="doctype-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Document Type</label>
+        <select id="doctype-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
             <option value="resolution">Resolutions</option>
             <option value="proposal">Non-adopted Proposals</option>
         </select>
@@ -102,11 +102,11 @@
                 <!-- Paragraphs -->
                 <div class="divide-y divide-gray-100">
                     {% for para in doc.signal_paragraphs %}
-                    <div class="px-4 py-3 flex gap-4 paragraph-item" data-signals="{{ para.signals|join(',') }}">
-                        <div class="flex-shrink-0 text-center">
-                            <div class="flex flex-col gap-1">
+                    <div class="px-4 py-3 paragraph-item" data-signals="{{ para.signals|join(',') }}">
+                        <p class="text-gray-700 leading-relaxed text-sm flex flex-wrap items-baseline gap-2">
+                            <span class="flex flex-wrap gap-1.5">
                                 {% for signal in para.signals %}
-                                <span class="px-1.5 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center w-24 text-center
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
                                     {% if signal == 'agenda' %}bg-blue-100 text-blue-700
                                     {% elif signal == 'PGA' %}bg-purple-100 text-purple-700
                                     {% elif signal == 'process' %}bg-amber-100 text-amber-700
@@ -115,14 +115,10 @@
                                     {{ signal }}
                                 </span>
                                 {% endfor %}
-                            </div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-gray-700 leading-relaxed text-sm">
-                                <span class="font-medium text-gray-700 mr-1">{{ para.number }}.</span>
-                                {{ para.text|highlight_signals(para.signals) }}
-                            </p>
-                        </div>
+                            </span>
+                            <span class="font-medium text-gray-700">{{ para.number }}.</span>
+                            <span class="min-w-0">{{ para.text|highlight_signals(para.signals) }}</span>
+                        </p>
                     </div>
                     {% endfor %}
                 </div>
