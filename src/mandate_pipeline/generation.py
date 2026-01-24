@@ -1019,7 +1019,7 @@ def generate_session_unified_signals_page(
     all_documents: list[dict],
     checks: list,
     output_dir: Path
-) -> None:
+) -> dict:
     """
     Generate signals.html for a specific historical session using the same template as main site.
 
@@ -1101,6 +1101,12 @@ def generate_session_unified_signals_page(
 
     with open(session_output_dir / "signals.html", "w") as f:
         f.write(html)
+
+    return {
+        "total_documents": len(enriched_docs),
+        "documents_with_signals": len(docs_with_signals),
+        "total_signal_paragraphs": total_paragraphs,
+    }
 
 
 def generate_signals_info_page(

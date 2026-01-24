@@ -905,7 +905,7 @@ def cmd_generate_session(args):
 
     # Generate session signal browser
     start_time = time.time()
-    generate_session_unified_signals_page(args.session, documents, checks, args.output)
+    gen_stats = generate_session_unified_signals_page(args.session, documents, checks, args.output)
     generate_duration = time.time() - start_time
 
     # Generate session dashboard
@@ -919,12 +919,9 @@ def cmd_generate_session(args):
 
     # Summary
     gh_group_start("Generation Summary")
-    docs_with_signals = [d for d in documents if d.get("signal_paragraphs")]
-    total_signals = sum(len(d.get("signal_paragraphs", {})) for d in documents)
-
-    print(f"Session {args.session}: {len(documents)} documents processed")
-    print(f"Documents with signals: {len(docs_with_signals)}")
-    print(f"Total signal paragraphs: {total_signals}")
+    print(f"Session {args.session}: {gen_stats['total_documents']} documents processed")
+    print(f"Documents with signals: {gen_stats['documents_with_signals']}")
+    print(f"Total signal paragraphs: {gen_stats['total_signal_paragraphs']}")
     print(f"Processing duration: {format_duration(process_duration)}")
     print(f"Generation duration: {format_duration(generate_duration)}")
     print(f"Total duration: {format_duration(process_duration + generate_duration)}")
@@ -933,9 +930,9 @@ def cmd_generate_session(args):
 
     return {
         "session": args.session,
-        "total_documents": len(documents),
-        "documents_with_signals": len(docs_with_signals),
-        "total_signals": total_signals,
+        "total_documents": gen_stats['total_documents'],
+        "documents_with_signals": gen_stats['documents_with_signals'],
+        "total_signals": gen_stats['total_signal_paragraphs'],
     }, process_duration + generate_duration
 
 
