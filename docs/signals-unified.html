@@ -71282,6 +71282,14 @@ function normalizeDocument(doc, session) {
     };
 }
 
+function getSessionSortValue(session) {
+    if (session === 'current') {
+        return Number.MAX_SAFE_INTEGER;
+    }
+    const parsed = Number.parseInt(session, 10);
+    return Number.isNaN(parsed) ? -1 : parsed;
+}
+
 // Initialize the explorer
 document.addEventListener('DOMContentLoaded', function() {
     // Store original document HTML for current session
@@ -71291,9 +71299,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeSearch();
     initializeSessionSelector();
     initializeDetailPanel();
-
-    // Don't load initial data - keep server-rendered current session documents
-    // Only load when user changes session selection
 });
 
 // Session selector
@@ -71301,7 +71306,9 @@ function initializeSessionSelector() {
     const sessionSelector = document.getElementById('session-selector');
 
     // Populate session options dynamically
-    populateSessionOptions(sessionSelector);
+    populateSessionOptions(sessionSelector).then(() => {
+        loadSelectedSessions();
+    });
 
     sessionSelector.addEventListener('change', function() {
         const selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
@@ -71338,7 +71345,7 @@ async function populateSessionOptions(selector) {
                 const option = document.createElement('option');
                 option.value = session.toString();
                 option.textContent = `Session ${session}`;
-                // Don't auto-select - let user choose
+                option.selected = true;
                 selector.appendChild(option);
             }
         } catch (error) {
@@ -71347,9 +71354,8 @@ async function populateSessionOptions(selector) {
         }
     }
 
-    // Start with only current session selected
-    selectedSessions = ['current'];
-    selector.value = 'current'; // Ensure only current is selected
+    // Select all available sessions by default
+    selectedSessions = Array.from(selector.options).map(option => option.value);
 }
 
 // Load all selected sessions and combine their documents
@@ -71406,7 +71412,11 @@ async function loadSelectedSessions() {
 function renderCombinedDocuments(allDocuments) {
     // Sort documents by our unified sorting logic
     allDocuments.sort((a, b) => {
-        // Simple sort - in production this would use the same logic as backend
+        const sessionA = getSessionSortValue(a.session);
+        const sessionB = getSessionSortValue(b.session);
+        if (sessionA !== sessionB) {
+            return sessionB - sessionA;
+        }
         const aKey = `${a.symbol}`;
         const bKey = `${b.symbol}`;
         return aKey.localeCompare(bKey);
@@ -71628,7 +71638,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-01-24 04:43 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-01-24 04:51 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
