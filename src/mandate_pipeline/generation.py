@@ -1021,8 +1021,8 @@ def generate_unified_signals_page(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Filter to documents with signals
-    docs_with_signals = [doc for doc in documents if doc.get("signal_paragraphs")]
+    # Filter to documents with signals (use signal_summary for linked documents)
+    docs_with_signals = [doc for doc in documents if doc.get("signal_summary") or doc.get("signal_paragraphs")]
 
     # Count signal types
     resolution_count = len([d for d in docs_with_signals if d.get("doc_type") == "resolution"])
@@ -1096,8 +1096,14 @@ def generate_unified_explorer_page(
     resolution_count = len([d for d in docs_with_signals if d.get("doc_type") == "resolution"])
     proposal_count = len([d for d in docs_with_signals if d.get("doc_type") == "proposal"])
 
-    # Count total paragraphs with signals
-    total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
+    # Count total paragraphs/signals (use available data)
+    if docs_with_signals and docs_with_signals[0].get("signal_paragraphs"):
+        # Original format with paragraph details
+        total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
+    else:
+        # Linked format with summary only - count total signal instances
+        total_paragraphs = sum(sum(counts.values()) for doc in docs_with_signals
+                              for counts in [doc.get("signal_summary", {})])
     count_time = time.time() - count_start
     logger.info(f"Counted statistics in {count_time:.2f}s: {resolution_count} resolutions, {proposal_count} proposals, {total_paragraphs} paragraphs")
 
