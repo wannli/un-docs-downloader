@@ -573,13 +573,33 @@ function normalizeDocument(doc, session) {
     const signalSummary = doc.signal_summary && Object.keys(doc.signal_summary).length > 0
         ? doc.signal_summary
         : buildSignalSummary(signalParagraphs);
+    const derivedSession = getSessionFromSymbol(doc.symbol);
 
     return {
         ...doc,
-        session,
+        session: derivedSession || session,
         signal_paragraphs: signalParagraphs,
         signal_summary: signalSummary,
     };
+}
+
+function getSessionFromSymbol(symbol) {
+    if (!symbol) {
+        return null;
+    }
+    const resMatch = symbol.match(/^A\/RES\/(\d+)/);
+    if (resMatch) {
+        return resMatch[1];
+    }
+    const committeeMatch = symbol.match(/^A\/C\.\d+\/(\d+)\/L\./);
+    if (committeeMatch) {
+        return committeeMatch[1];
+    }
+    const plenaryMatch = symbol.match(/^A\/(\d+)\/L\./);
+    if (plenaryMatch) {
+        return plenaryMatch[1];
+    }
+    return null;
 }
 
 function getDisplayTitle(doc) {
