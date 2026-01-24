@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
 
-      - name: Generate static site
+      - name: Generate unified signals explorer
         env:
           SKIP_UNDL_METADATA: ${{ vars.SKIP_UNDL_METADATA || 'false' }}
           SKIP_DETAILED_PAGES: ${{ vars.SKIP_DETAILED_PAGES || 'false' }}
@@ -71,28 +71,21 @@ jobs:
           import json
           from pathlib import Path
           sys.path.insert(0, 'src')
-          from mandate_pipeline.generation import generate_site_verbose
+          from mandate_pipeline.generation import generate_unified_explorer_page
           from mandate_pipeline.detection import load_checks
 
-          print('Starting incremental site generation...')
+          print('Starting unified signals explorer generation...')
           print('Environment variables:')
           print(f'  SKIP_UNDL_METADATA: {os.getenv(\"SKIP_UNDL_METADATA\", \"not set\")}')
           print(f'  SKIP_DETAILED_PAGES: {os.getenv(\"SKIP_DETAILED_PAGES\", \"not set\")}')
           print(f'  MAX_DOCUMENTS: {os.getenv(\"MAX_DOCUMENTS\", \"not set\")}')
 
-          # Load checks for signal definitions
-          checks = load_checks(Path('config/checks.yaml'))
-          print(f'Loaded {len(checks)} signal definitions')
-
-          # For incremental generation, we'd ideally only regenerate changed pages
-          # For now, we'll do a full regeneration (can be optimized later)
-
-          # Load all linked documents
+          # Load all linked documents with streaming approach
           linked_dir = Path('data/linked')
           documents = []
 
           if linked_dir.exists():
-              # Load documents from linked data
+              print('Loading linked documents...')
               for linked_file in linked_dir.glob('*.json'):
                   if linked_file.name == 'index.json':
                       continue
@@ -105,51 +98,30 @@ jobs:
 
           print(f'Loaded {len(documents)} linked documents')
 
-          # Create document objects compatible with generation
-          processed_docs = []
-          for doc in documents:
-              # Convert linked format to generation format
-              processed_doc = {
-                  'symbol': doc['symbol'],
-                  'filename': doc['symbol'].replace('/', '_') + '.pdf',
-                  'title': f'Document {doc[\"symbol\"]}',  # Would need to load from extracted data
-                  'text': '',  # Would need to load from extracted data
-                  'paragraphs': {},  # Would need to load from extracted data
-                  'signals': doc.get('signals', {}),
-                  'signal_summary': doc.get('signal_summary', {}),
-                  'doc_type': doc.get('doc_type', 'other'),
-                  'origin': doc.get('origin', 'Unknown'),
-                  'agenda_items': [],  # Would need to load from extracted data
-                  'symbol_references': [],  # Would need to load from extracted data
-                  'un_url': f'https://documents.un.org/doc/{doc[\"symbol\"].replace(\"/\", \"\").replace(\" \", \"\")}',
-                  'is_adopted_draft': False,
-                  'adopted_by': None,
-                  'linked_proposals': doc.get('linked_proposals', []),
-              }
-              processed_docs.append(processed_doc)
-
           # Apply MAX_DOCUMENTS limit if set
           max_docs = os.getenv('MAX_DOCUMENTS')
           if max_docs and max_docs.isdigit():
               max_docs = int(max_docs)
               print(f'Limiting to {max_docs} documents for faster processing')
-              processed_docs = processed_docs[:max_docs]
+              documents = documents[:max_docs]
 
-          if processed_docs:
-              # Generate site
-              print('Generating static site...')
-              stats = generate_site_verbose(
-                  config_dir=Path('config'),
-                  data_dir=Path('data'),
-                  output_dir=Path('docs'),
-                  skip_debug=True,
-                  on_generate_page=lambda page_type, name: print(f'Generated: {page_type} - {name}'),
-                  on_generate_end=lambda duration: print(f'Site generation completed in {duration:.1f}s')
-              )
+          if documents:
+              # Sort documents using unified sorting
+              print('Sorting documents...')
+              from mandate_pipeline.generation import unified_sort_key
+              documents.sort(key=unified_sort_key)
 
-              print(f'Site generation stats: {stats}')
+              # Load checks for signal definitions
+              checks = load_checks(Path('config/checks.yaml'))
+              print(f'Loaded {len(checks)} signal definitions')
+
+              # Generate unified explorer
+              print('Generating unified signals explorer...')
+              generate_unified_explorer_page(documents, checks, Path('docs'))
+
+              print('Unified signals explorer generation completed!')
           else:
-              print('No documents to generate site for')
+              print('No documents to generate unified explorer for')
           "
 
       - name: Commit site changes
