@@ -106,16 +106,11 @@ jobs:
               documents = documents[:max_docs]
 
           if documents:
-              # Sort documents using unified sorting
-              print('Sorting documents...')
-              from mandate_pipeline.generation import unified_sort_key
-              documents.sort(key=unified_sort_key)
-
               # Load checks for signal definitions
               checks = load_checks(Path('config/checks.yaml'))
-              print(f'Loaded {len(checks)} signal definitions')
+              print(f'Loaded {len(checks)} checks')
 
-              # Generate unified explorer
+              # Generate unified explorer (handles filtering and sorting internally)
               print('Generating unified signals explorer...')
               generate_unified_explorer_page(documents, checks, Path('docs'))
 
