@@ -23,16 +23,16 @@
 
     <!-- Filters -->
     <div class="rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
-        <div class="grid gap-2 md:grid-cols-2">
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500 hidden sm:inline-flex">Adoption Session</label>
-                <div id="session-selector" class="mt-1.5 flex flex-wrap gap-1.5">
+        <div class="flex flex-wrap items-center gap-1.5 md:grid md:grid-cols-2">
+            <div class="flex flex-wrap items-center gap-1.5 md:block">
+                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
+                <div id="session-selector" class="flex flex-wrap gap-1.5 md:mt-1.5">
                     <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500 hidden sm:inline-flex">Signal</label>
-                <div id="signal-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+            <div class="flex flex-wrap items-center gap-1.5 md:block">
+                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</label>
+                <div id="signal-filter" class="flex flex-wrap gap-1.5 md:mt-1.5">
                     {% for check in checks %}
                     <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
                     {% endfor %}
@@ -40,12 +40,11 @@
             </div>
         </div>
         <div class="mt-2 flex items-center justify-between md:hidden">
-            <span class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">More filters</span>
             <button id="toggle-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
-                Show
+                More filters
             </button>
         </div>
-        <div id="extra-filters" class="mt-2 hidden grid gap-2 md:grid md:grid-cols-2">
+        <div id="extra-filters" class="mt-2 hidden md:grid md:grid-cols-2 gap-2">
             <div class="min-h-[60px]">
                 <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Implementation Session</label>
                 <div id="implementation-filter" class="mt-1.5 flex flex-wrap gap-1.5">
@@ -968,7 +967,7 @@ function initializeFilters() {
         toggleFiltersBtn.addEventListener('click', function() {
             const isHidden = extraFilters.classList.contains('hidden');
             extraFilters.classList.toggle('hidden', !isHidden);
-            toggleFiltersBtn.textContent = isHidden ? 'Hide' : 'Show';
+            toggleFiltersBtn.textContent = isHidden ? 'Hide filters' : 'More filters';
             toggleFiltersBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
         });
     }
