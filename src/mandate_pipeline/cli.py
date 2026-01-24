@@ -817,12 +817,12 @@ def cmd_process_session(args):
             symbol_refs = find_symbol_references(text)
 
             # Run signal detection
-            signal_paragraphs = run_checks(paragraphs, checks)
+            signals = run_checks(paragraphs, checks)
 
             # Create signal summary (for template compatibility)
             signal_summary = {}
-            if signal_paragraphs:
-                for para_signals in signal_paragraphs.values():
+            if signals:
+                for para_signals in signals.values():
                     for signal in para_signals:
                         signal_summary[signal] = signal_summary.get(signal, 0) + 1
 
@@ -842,7 +842,7 @@ def cmd_process_session(args):
                 "title": title,
                 "text": text,
                 "paragraphs": paragraphs,
-                "signal_paragraphs": signal_paragraphs,
+                "signals": signals,
                 "signal_summary": signal_summary,
                 "doc_type": doc_type,
                 "origin": origin,
@@ -857,8 +857,8 @@ def cmd_process_session(args):
             documents.append(doc)
 
             if verbose:
-                signal_count = len(signal_paragraphs)
-                signal_names = list(signal_paragraphs.keys())
+                signal_count = len(signals)
+                signal_names = list(signals.keys())
                 signal_str = ", ".join(str(name) for name in signal_names) if signal_names else "none"
                 print(f"  [PROCESS] {symbol}: {len(paragraphs)} paragraphs, {signal_count} signals ({signal_str})")
 
@@ -1012,6 +1012,10 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
     session_dir.mkdir(parents=True, exist_ok=True)
 
     # Simple HTML dashboard
+    total_resolutions = len(documents)
+    with_signals = len([d for d in documents if d.get('signal_paragraphs')])
+    signal_paragraphs = sum(len(d.get('signal_paragraphs', {})) for d in documents)
+
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1051,14 +1055,14 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
                         <div class="p-5">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
                                         <dt class="text-sm font-medium text-gray-500 truncate">Total Resolutions</dt>
-                                        <dd class="text-lg font-medium text-gray-900">{len(documents)}</dd>
+                                        <dd class="text-lg font-medium text-gray-900">{total_resolutions}</dd>
                                     </dl>
                                 </div>
                             </div>
@@ -1069,14 +1073,14 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
                         <div class="p-5">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                     </svg>
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
                                         <dt class="text-sm font-medium text-gray-500 truncate">With Signals</dt>
-                                        <dd class="text-lg font-medium text-gray-900">{len([d for d in documents if d.get('signal_paragraphs')])}</dd>
+                                        <dd class="text-lg font-medium text-gray-900">{with_signals}</dd>
                                     </dl>
                                 </div>
                             </div>
@@ -1087,14 +1091,14 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
                         <div class="p-5">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2m4 0H8l.5 16h7L16 4z"></path>
                                     </svg>
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
                                         <dt class="text-sm font-medium text-gray-500 truncate">Signal Paragraphs</dt>
-                                        <dd class="text-lg font-medium text-gray-900">{sum(len(d.get('signal_paragraphs', {})) for d in documents)}</dd>
+                                        <dd class="text-lg font-medium text-gray-900">{signal_paragraphs}</dd>
                                     </dl>
                                 </div>
                             </div>

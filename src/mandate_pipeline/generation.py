@@ -1036,8 +1036,29 @@ def generate_session_unified_signals_page(
     # Filter to session resolutions only
     session_docs = [doc for doc in all_documents if f"/RES/{session}/" in doc["symbol"]]
 
+    # Transform signals to signal_paragraphs format for template compatibility
+    enriched_docs = []
+    for doc in session_docs:
+        doc_copy = doc.copy()
+
+        # Find all paragraphs that have any signal
+        signal_paras = []
+        for para_num, para_signals in doc.get("signals", {}).items():
+            if para_signals:  # Has at least one signal
+                para_text = doc.get("paragraphs", {}).get(para_num, "")
+                signal_paras.append({
+                    "number": para_num,
+                    "text": para_text,
+                    "signals": para_signals
+                })
+
+        # Sort paragraphs by number
+        signal_paras.sort(key=lambda p: int(p["number"]))
+        doc_copy["signal_paragraphs"] = signal_paras
+        enriched_docs.append(doc_copy)
+
     # Filter to documents with signals
-    docs_with_signals = [doc for doc in session_docs if doc.get("signal_paragraphs")]
+    docs_with_signals = [doc for doc in enriched_docs if doc.get("signal_paragraphs")]
 
     # Ensure all documents have required fields for template compatibility
     for doc in docs_with_signals:
