@@ -13,50 +13,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  find-changed-pdfs:
-    runs-on: ubuntu-latest
-    outputs:
-      pdfs: ${{ steps.find-pdfs.outputs.pdfs }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Find changed PDFs
-        id: find-pdfs
-        run: |
-          # Get list of PDFs that changed in this push
-          if [ "${{ github.event_name }}" = "push" ]; then
-            # Compare with previous commit
-            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- data/pdfs/*.pdf || echo "")
-          else
-            # Manual trigger - find all PDFs
-            CHANGED_FILES=$(find data/pdfs -name "*.pdf" -type f)
-          fi
-
-          # Filter to PDF files and format as JSON array
-          PDF_ARRAY="[]"
-          if [ -n "$CHANGED_FILES" ]; then
-            # Clean up the file list and create JSON array
-            CLEAN_FILES=$(echo "$CHANGED_FILES" | sed '/^$/d')
-            if [ -n "$CLEAN_FILES" ]; then
-              PDF_ARRAY=$(echo "$CLEAN_FILES" | jq -R -s 'split("\n") | map(select(. != "" and . != null))')
-            fi
-          fi
-
-          echo "pdfs=$PDF_ARRAY" >> $GITHUB_OUTPUT
-          PDF_COUNT=$(echo "$PDF_ARRAY" | jq length)
-          echo "Found $PDF_COUNT PDFs to process"
-
   extract:
     runs-on: ubuntu-latest
-    needs: find-changed-pdfs
-    if: needs.find-changed-pdfs.outputs.pdfs != '[]'
-    strategy:
-      matrix:
-        pdf: ${{ fromJson(needs.find-changed-pdfs.outputs.pdfs) }}
-      max-parallel: 5  # Limit parallel extractions
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -72,47 +30,84 @@ jobs:
 
       - name: Extract document content
         run: |
-          # Extract text and metadata from single PDF
           python -c "
           import sys
+          import os
+          from pathlib import Path
           sys.path.insert(0, 'src')
           from mandate_pipeline.extractor import extract_text, extract_operative_paragraphs, extract_title, extract_agenda_items, find_symbol_references
-          from pathlib import Path
           import json
+          import subprocess
 
-          pdf_path = Path('${{ matrix.pdf }}')
-          if not pdf_path.exists():
-              print(f'PDF not found: {pdf_path}')
-              sys.exit(1)
+          print('Finding PDFs to process...')
 
-          print(f'Extracting: {pdf_path.name}')
+          # Get list of PDFs to process
+          if os.environ.get('GITHUB_EVENT_NAME') == 'push':
+              # Compare with previous commit
+              try:
+                  result = subprocess.run(['git', 'diff', '--name-only', 'HEAD~1', 'HEAD', '--', 'data/pdfs/*.pdf'],
+                                        capture_output=True, text=True, cwd='.')
+                  changed_files = result.stdout.strip().split('\n') if result.stdout.strip() else []
+              except:
+                  changed_files = []
+          else:
+              # Manual trigger - find all PDFs
+              pdf_dir = Path('data/pdfs')
+              changed_files = [str(f) for f in pdf_dir.rglob('*.pdf')] if pdf_dir.exists() else []
 
-          # Extract content
-          text = extract_text(pdf_path)
-          paragraphs = extract_operative_paragraphs(text)
-          title = extract_title(text)
-          agenda_items = extract_agenda_items(text)
-          symbol_refs = find_symbol_references(text)
+          # Filter out empty strings
+          pdf_files = [f for f in changed_files if f.strip()]
 
-          # Create extracted data structure
-          extracted = {
-              'symbol': pdf_path.stem.replace('_', '/'),
-              'filename': pdf_path.name,
-              'title': title,
-              'text': text,
-              'paragraphs': paragraphs,
-              'agenda_items': agenda_items,
-              'symbol_references': symbol_refs
-          }
+          print(f'Found {len(pdf_files)} PDFs to process')
 
-          # Save to extracted data file
-          output_file = Path('data/extracted') / f'{pdf_path.stem}.json'
-          output_file.parent.mkdir(parents=True, exist_ok=True)
+          if not pdf_files:
+              print('No PDFs to process')
+              exit(0)
 
-          with open(output_file, 'w') as f:
-              json.dump(extracted, f, indent=2)
+          # Process each PDF
+          processed_count = 0
+          for pdf_path_str in pdf_files:
+              pdf_path = Path(pdf_path_str)
+              if not pdf_path.exists():
+                  print(f'PDF not found: {pdf_path}')
+                  continue
 
-          print(f'Extracted to: {output_file}')
+              try:
+                  print(f'Extracting: {pdf_path.name}')
+
+                  # Extract content
+                  text = extract_text(pdf_path)
+                  paragraphs = extract_operative_paragraphs(text)
+                  title = extract_title(text)
+                  agenda_items = extract_agenda_items(text)
+                  symbol_refs = find_symbol_references(text)
+
+                  # Create extracted data structure
+                  extracted = {
+                      'symbol': pdf_path.stem.replace('_', '/'),
+                      'filename': pdf_path.name,
+                      'title': title,
+                      'text': text,
+                      'paragraphs': paragraphs,
+                      'agenda_items': agenda_items,
+                      'symbol_references': symbol_refs
+                  }
+
+                  # Save to extracted data file
+                  output_file = Path('data/extracted') / f'{pdf_path.stem}.json'
+                  output_file.parent.mkdir(parents=True, exist_ok=True)
+
+                  with open(output_file, 'w') as f:
+                      json.dump(extracted, f, indent=2)
+
+                  print(f'Extracted to: {output_file}')
+                  processed_count += 1
+
+              except Exception as e:
+                  print(f'Error processing {pdf_path}: {e}')
+                  continue
+
+          print(f'Successfully processed {processed_count} PDFs')
           "
 
       - name: Commit extraction results
@@ -124,7 +119,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No extraction changes to commit"
           else
-            git commit -m "chore: extract ${{ matrix.pdf }}"
+            git commit -m "chore: extract document content"
             git pull --rebase origin main || true
             git push
           fi
