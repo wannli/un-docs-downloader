@@ -21,7 +21,7 @@ When making changes to the mandate pipeline project:
 When working changes end-to-end with this project:
 
 1. **Review diffs** - Check `git status`, `git diff`, and recent `git log` before committing.
-2. **Commit and push** - Create a concise commit message, push, and rebase if the remote is ahead.
+2. **Commit and push** - Create a concise commit message, push, and rebase if the remote is ahead (do not ask for confirmation before rebasing).
 3. **Trigger site generation** - Run `gh workflow run generate.yml` after pushing.
 4. **Verify workflow status** - Use `gh run list -w generate.yml -L 1` and `gh run view <id>` to confirm completion.
 5. **Monitor via browser** - Keep the workflow page open and use `browser_get_tabs` to track progress.

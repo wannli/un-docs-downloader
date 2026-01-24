@@ -136,7 +136,7 @@
                 </div>
 
                 <!-- Expandable Content -->
-                <div class="border-t border-gray-200 hidden" id="content-{{ loop.index }}">
+                <div class="border-t border-gray-200 hidden expandable-content" id="content-{{ loop.index }}">
                     <div class="px-4 py-3 space-y-3">
                         {% if doc.signal_paragraphs %}
                         <!-- Detailed paragraph view (for current session) -->
@@ -569,7 +569,7 @@ function renderCombinedDocuments(allDocuments) {
                 </div>
 
                 <!-- Expandable Content -->
-                <div class="border-t border-gray-200 hidden">
+                <div class="border-t border-gray-200 hidden expandable-content">
                     <div class="px-4 py-3 space-y-3">
                         ${paragraphsHtml}
                     </div>
@@ -648,11 +648,14 @@ function initializeDocumentCards() {
     documentCards.forEach(card => {
         card.addEventListener('click', function() {
             // Toggle expanded content
-            const content = this.querySelector('div:last-child');
+            const content = this.querySelector('.expandable-content');
+            if (!content) {
+                return;
+            }
             const isExpanded = !content.classList.contains('hidden');
 
             // Hide all expanded content first
-            document.querySelectorAll('.document-card div:last-child').forEach(div => {
+            document.querySelectorAll('.document-card .expandable-content').forEach(div => {
                 div.classList.add('hidden');
             });
 
