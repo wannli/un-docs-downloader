@@ -8,7 +8,7 @@
 
 {% block content %}
 <!-- Header -->
-<div class="mb-6">
+<div class="mb-4 hidden sm:block">
     <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Signal Browser</h1>
 </div>
 
@@ -25,13 +25,13 @@
     <div class="rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
         <div class="grid gap-2 md:grid-cols-2">
             <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500 hidden sm:inline-flex">Adoption Session</label>
                 <div id="session-selector" class="mt-1.5 flex flex-wrap gap-1.5">
                     <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
                 </div>
             </div>
             <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</label>
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500 hidden sm:inline-flex">Signal</label>
                 <div id="signal-filter" class="mt-1.5 flex flex-wrap gap-1.5">
                     {% for check in checks %}
                     <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
