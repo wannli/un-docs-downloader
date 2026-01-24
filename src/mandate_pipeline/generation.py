@@ -1066,28 +1066,53 @@ def generate_unified_explorer_page(
         checks: All check definitions
         output_dir: Root output directory
     """
+    import time
+    import logging
+
+    # Set up logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger(__name__)
+
+    start_time = time.time()
+    logger.info(f"Starting unified explorer generation for {len(documents)} documents")
+
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Filter to documents with signals
+    filter_start = time.time()
     docs_with_signals = [doc for doc in documents if doc.get("signal_paragraphs")]
+    filter_time = time.time() - filter_start
+    logger.info(f"Filtered to {len(docs_with_signals)} documents with signals in {filter_time:.2f}s")
 
     # Sort documents using unified sorting logic
+    sort_start = time.time()
     docs_with_signals.sort(key=unified_sort_key)
+    sort_time = time.time() - sort_start
+    logger.info(f"Sorted {len(docs_with_signals)} documents in {sort_time:.2f}s")
 
     # Count signal types
+    count_start = time.time()
     resolution_count = len([d for d in docs_with_signals if d.get("doc_type") == "resolution"])
     proposal_count = len([d for d in docs_with_signals if d.get("doc_type") == "proposal"])
 
     # Count total paragraphs with signals
     total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
+    count_time = time.time() - count_start
+    logger.info(f"Counted statistics in {count_time:.2f}s: {resolution_count} resolutions, {proposal_count} proposals, {total_paragraphs} paragraphs")
 
     # Get origin order for filtering
     origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6"]
 
+    # Template preparation
+    template_start = time.time()
     env = get_templates_env(checks)
     template = env.get_template("signals_unified_explorer.html")
+    template_prep_time = time.time() - template_start
+    logger.info(f"Template preparation in {template_prep_time:.2f}s")
 
+    # Template rendering
+    render_start = time.time()
     html = template.render(
         documents=docs_with_signals,
         checks=checks,
@@ -1099,9 +1124,18 @@ def generate_unified_explorer_page(
         proposal_count=proposal_count,
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
     )
+    render_time = time.time() - render_start
+    logger.info(f"Template rendering in {render_time:.2f}s, HTML size: {len(html)} characters")
 
+    # File writing
+    write_start = time.time()
     with open(output_dir / "signals-unified.html", "w") as f:
         f.write(html)
+    write_time = time.time() - write_start
+    logger.info(f"File writing in {write_time:.2f}s")
+
+    total_time = time.time() - start_time
+    logger.info(f"Unified explorer generation completed in {total_time:.2f}s")
 
 
 def generate_session_unified_signals_page(
