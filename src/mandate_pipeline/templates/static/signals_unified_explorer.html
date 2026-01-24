@@ -197,6 +197,84 @@ let sessionDataCache = {};
 let selectedSessions = ['current', '79', '78'];
 let originalDocumentsHTML = '';
 
+// Filter elements (initialized later)
+let sourceFilter, signalFilter, doctypeFilter, clearFiltersBtn;
+
+// Filter functionality
+function applyFilters() {
+    const selectedSources = Array.from(sourceFilter.selectedOptions).map(opt => opt.value);
+    const selectedSignals = Array.from(signalFilter.selectedOptions).map(opt => opt.value);
+    const selectedDoctypes = Array.from(doctypeFilter.selectedOptions).map(opt => opt.value);
+    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+
+    const documentCards = document.querySelectorAll('.document-card');
+    const emptyState = document.getElementById('empty-state');
+    const statsText = document.getElementById('stats-text');
+
+    let resolutionCount = 0;
+    let proposalCount = 0;
+    let paragraphCount = 0;
+
+    documentCards.forEach(card => {
+        const cardSource = card.dataset.source;
+        const cardDoctype = card.dataset.doctype;
+        const cardSignals = card.dataset.signals.split(',').filter(s => s);
+        const cardSymbol = card.dataset.symbol.toLowerCase();
+        const cardTitle = (card.dataset.title || '').toLowerCase();
+
+        // Check filters
+        const sourceMatch = selectedSources.length === 0 || selectedSources.includes(cardSource);
+        const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
+        const doctypeMatch = selectedDoctypes.length === 0 || selectedDoctypes.includes(cardDoctype);
+        const searchMatch = searchQuery === '' ||
+            cardSymbol.includes(searchQuery) ||
+            cardTitle.includes(searchQuery);
+
+        if (sourceMatch && signalMatch && doctypeMatch && searchMatch) {
+            card.classList.remove('hidden');
+            if (cardDoctype === 'resolution') {
+                resolutionCount++;
+            } else {
+                proposalCount++;
+            }
+
+            // Count visible paragraphs
+            const paragraphs = card.querySelectorAll('.para-item');
+            paragraphs.forEach(para => {
+                const paraSignals = para.dataset.signals.split(',').filter(s => s);
+                if (selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s))) {
+                    para.classList.remove('hidden');
+                    paragraphCount++;
+                } else {
+                    para.classList.add('hidden');
+                }
+            });
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+
+    // Show/hide empty state
+    const visibleCount = resolutionCount + proposalCount;
+    if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+        document.getElementById('documents-container').classList.add('hidden');
+    } else {
+        emptyState.classList.add('hidden');
+        document.getElementById('documents-container').classList.remove('hidden');
+    }
+
+    // Update stats
+    const parts = [];
+    if (resolutionCount > 0) {
+        parts.push(`${resolutionCount} resolution${resolutionCount !== 1 ? 's' : ''}`);
+    }
+    if (proposalCount > 0) {
+        parts.push(`${proposalCount} non-adopted proposal${proposalCount !== 1 ? 's' : ''}`);
+    }
+    statsText.textContent = parts.length > 0 ? `${paragraphCount} paragraphs across ${parts.join(' and ')}` : '0 documents';
+}
+
 // Initialize the explorer
 document.addEventListener('DOMContentLoaded', function() {
     // Store original document HTML for current session
@@ -239,7 +317,7 @@ async function loadSelectedSessions() {
             } else {
                 // Load session data via AJAX
                 if (!sessionDataCache[session]) {
-                    const response = await fetch(`/sessions/${session}/data.json`);
+                    const response = await fetch(`/mandate-pipeline/sessions/${session}/data.json`);
                     if (!response.ok) throw new Error(`Failed to load session ${session} data`);
                     sessionDataCache[session] = await response.json();
                 }
@@ -366,84 +444,12 @@ function initializeSearch() {
 
 // Filter functionality (similar to original but with search)
 function initializeFilters() {
-    const sourceFilter = document.getElementById('source-filter');
-    const signalFilter = document.getElementById('signal-filter');
-    const doctypeFilter = document.getElementById('doctype-filter');
-    const clearFiltersBtn = document.getElementById('clear-filters');
+    sourceFilter = document.getElementById('source-filter');
+    signalFilter = document.getElementById('signal-filter');
+    doctypeFilter = document.getElementById('doctype-filter');
+    clearFiltersBtn = document.getElementById('clear-filters');
 
-    function applyFilters() {
-        const selectedSources = Array.from(sourceFilter.selectedOptions).map(opt => opt.value);
-        const selectedSignals = Array.from(signalFilter.selectedOptions).map(opt => opt.value);
-        const selectedDoctypes = Array.from(doctypeFilter.selectedOptions).map(opt => opt.value);
-        const searchQuery = document.getElementById('search-input').value.toLowerCase();
 
-        const documentCards = document.querySelectorAll('.document-card');
-        const emptyState = document.getElementById('empty-state');
-        const statsText = document.getElementById('stats-text');
-
-        let resolutionCount = 0;
-        let proposalCount = 0;
-        let paragraphCount = 0;
-
-        documentCards.forEach(card => {
-            const cardSource = card.dataset.source;
-            const cardDoctype = card.dataset.doctype;
-            const cardSignals = card.dataset.signals.split(',').filter(s => s);
-            const cardSymbol = card.dataset.symbol.toLowerCase();
-            const cardTitle = (card.dataset.title || '').toLowerCase();
-
-            // Check filters
-            const sourceMatch = selectedSources.length === 0 || selectedSources.includes(cardSource);
-            const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
-            const doctypeMatch = selectedDoctypes.length === 0 || selectedDoctypes.includes(cardDoctype);
-            const searchMatch = searchQuery === '' ||
-                cardSymbol.includes(searchQuery) ||
-                cardTitle.includes(searchQuery);
-
-            if (sourceMatch && signalMatch && doctypeMatch && searchMatch) {
-                card.classList.remove('hidden');
-                if (cardDoctype === 'resolution') {
-                    resolutionCount++;
-                } else {
-                    proposalCount++;
-                }
-
-                // Count visible paragraphs
-                const paragraphs = card.querySelectorAll('.para-item');
-                paragraphs.forEach(para => {
-                    const paraSignals = para.dataset.signals.split(',').filter(s => s);
-                    if (selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s))) {
-                        para.classList.remove('hidden');
-                        paragraphCount++;
-                    } else {
-                        para.classList.add('hidden');
-                    }
-                });
-            } else {
-                card.classList.add('hidden');
-            }
-        });
-
-        // Show/hide empty state
-        const visibleCount = resolutionCount + proposalCount;
-        if (visibleCount === 0) {
-            emptyState.classList.remove('hidden');
-            document.getElementById('documents-container').classList.add('hidden');
-        } else {
-            emptyState.classList.add('hidden');
-            document.getElementById('documents-container').classList.remove('hidden');
-        }
-
-        // Update stats
-        const parts = [];
-        if (resolutionCount > 0) {
-            parts.push(`${resolutionCount} resolution${resolutionCount !== 1 ? 's' : ''}`);
-        }
-        if (proposalCount > 0) {
-            parts.push(`${proposalCount} non-adopted proposal${proposalCount !== 1 ? 's' : ''}`);
-        }
-        statsText.textContent = parts.length > 0 ? `${paragraphCount} paragraphs across ${parts.join(' and ')}` : '0 documents';
-    }
 
     // Event listeners
     sourceFilter.addEventListener('change', applyFilters);
