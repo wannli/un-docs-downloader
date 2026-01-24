@@ -22,12 +22,54 @@
     </div>
 
     <!-- Filters -->
-    <div class="grid gap-3 rounded-xl border border-gray-200 bg-white p-3 shadow-sm md:grid-cols-[repeat(4,minmax(140px,1fr))_auto]">
+    <div class="grid gap-3 rounded-xl border border-gray-200 bg-white p-3 shadow-sm md:grid-cols-3">
         <div class="min-h-[84px]">
-            <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Session</label>
+            <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
             <div id="session-selector" class="mt-2 flex flex-wrap gap-2">
                 <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
             </div>
+        </div>
+        <div class="min-h-[84px]">
+            <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Implementation Session</label>
+            <div id="implementation-filter" class="mt-2 flex flex-wrap gap-2">
+                {% for session in [85, 84, 83, 82, 81, 80] %}
+                <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="{{ session }}">{{ session }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="min-h-[84px]">
+            <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Source</label>
+            <div id="source-filter" class="mt-2 flex flex-wrap gap-2">
+                {% for origin_code in origin_order %}
+                {% set origin_label = 'Pl' if origin_code == 'Plenary' else origin_code %}
+                <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ origin_code }}">{{ origin_label }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="min-h-[84px]">
+            <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Signal</label>
+            <div id="signal-filter" class="mt-2 flex flex-wrap gap-2">
+                {% for check in checks %}
+                <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="min-h-[84px]">
+            <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Status</label>
+            <div id="status-filter" class="mt-2 flex flex-wrap gap-2">
+                <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
+                <button type="button" class="filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
+            </div>
+        </div>
+        <div class="flex items-end gap-2">
+            <button id="group-implementation" class="flex h-10 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-4 text-sm font-medium text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors" type="button">
+                Group by Implementation
+            </button>
+            <button id="clear-filters" class="flex h-10 items-center justify-center rounded-lg border border-gray-200 px-4 text-sm font-medium text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
+                Clear filters
+            </button>
+        </div>
+    </div>
         </div>
         <div class="min-h-[84px]">
             <label class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Source</label>
@@ -183,19 +225,35 @@
 // Session data cache
 let sessionDataCache = {};
 let selectedSessions = [];
+let allDocumentsCache = [];
 
 const signalPhraseMap = Object.fromEntries(({{ checks | tojson }} || []).map(check => [check.signal, check.phrases || []]));
+const implementationSessionMap = {
+    '85': ['eighty-fifth', 'eighty fifth'],
+    '84': ['eighty-fourth', 'eighty fourth'],
+    '83': ['eighty-third', 'eighty third'],
+    '82': ['eighty-second', 'eighty second'],
+    '81': ['eighty-first', 'eighty first'],
+    '80': ['eightieth']
+};
 
 // Filter elements (initialized later)
-let sessionSelector, sourceFilter, signalFilter, statusFilter, clearFiltersBtn;
+let sessionSelector, implementationFilter, sourceFilter, signalFilter, statusFilter, clearFiltersBtn, groupImplementationBtn;
+let groupByImplementation = false;
 
 const activePillClasses = ['bg-un-blue', 'text-white', 'border-un-blue'];
 const inactivePillClasses = ['border-gray-200', 'text-gray-600'];
+const activeImplementationClasses = ['bg-indigo-600', 'text-white', 'border-indigo-600'];
+const inactiveImplementationClasses = ['border-indigo-200', 'text-indigo-700', 'bg-indigo-50'];
 
 function setPillActive(pill, isActive) {
+    const isImplementation = pill.dataset.pill === 'implementation';
+    const activeClasses = isImplementation ? activeImplementationClasses : activePillClasses;
+    const inactiveClasses = isImplementation ? inactiveImplementationClasses : inactivePillClasses;
+
     pill.classList.toggle('is-active', isActive);
-    activePillClasses.forEach(cls => pill.classList.toggle(cls, isActive));
-    inactivePillClasses.forEach(cls => pill.classList.toggle(cls, !isActive));
+    activeClasses.forEach(cls => pill.classList.toggle(cls, isActive));
+    inactiveClasses.forEach(cls => pill.classList.toggle(cls, !isActive));
 }
 
 function getActiveValues(container) {
@@ -230,12 +288,16 @@ function updateUrlState() {
 
     const sessions = getActiveValues(sessionSelector);
     selectedSessions = sessions;
+    const implementations = getActiveValues(implementationFilter);
     const sources = getActiveValues(sourceFilter);
     const signals = getActiveValues(signalFilter);
     const statuses = getActiveValues(statusFilter);
 
     if (sessions.length > 0) {
         params.set('sessions', sessions.join(','));
+    }
+    if (implementations.length > 0) {
+        params.set('implementation', implementations.join(','));
     }
     if (sources.length > 0) {
         params.set('sources', sources.join(','));
@@ -245,6 +307,9 @@ function updateUrlState() {
     }
     if (statuses.length > 0) {
         params.set('status', statuses.join(','));
+    }
+    if (groupByImplementation) {
+        params.set('group', 'implementation');
     }
 
     const newUrl = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
@@ -260,9 +325,14 @@ function applyFiltersFromUrl() {
     const sources = params.get('sources');
     const signals = params.get('signals');
     const statuses = params.get('status');
+    const implementations = params.get('implementation');
+    const group = params.get('group');
 
     if (sessions) {
         setActiveValues(sessionSelector, sessions.split(','));
+    }
+    if (implementations) {
+        setActiveValues(implementationFilter, implementations.split(','));
     }
     if (sources) {
         setActiveValues(sourceFilter, sources.split(','));
@@ -274,6 +344,16 @@ function applyFiltersFromUrl() {
         setActiveValues(statusFilter, statuses.split(','));
     }
 
+    groupByImplementation = group === 'implementation';
+    if (groupImplementationBtn) {
+        groupImplementationBtn.classList.toggle('bg-indigo-600', groupByImplementation);
+        groupImplementationBtn.classList.toggle('text-white', groupByImplementation);
+        groupImplementationBtn.classList.toggle('border-indigo-600', groupByImplementation);
+        groupImplementationBtn.classList.toggle('bg-indigo-50', !groupByImplementation);
+        groupImplementationBtn.classList.toggle('text-indigo-700', !groupByImplementation);
+        groupImplementationBtn.classList.toggle('border-indigo-200', !groupByImplementation);
+    }
+
     selectedSessions = getActiveValues(sessionSelector);
 }
 
@@ -282,6 +362,7 @@ function applyFilters() {
     const selectedSources = getActiveValues(sourceFilter);
     const selectedSignals = getActiveValues(signalFilter);
     const selectedStatuses = getActiveValues(statusFilter);
+    const selectedImplementations = getActiveValues(implementationFilter);
     selectedSessions = getActiveValues(sessionSelector);
     const searchQuery = document.getElementById('search-input').value.toLowerCase();
 
@@ -310,8 +391,12 @@ function applyFilters() {
 
             const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s));
             const searchMatch = searchQuery === '' || paraText.includes(searchQuery);
+            const implementationMatch = selectedImplementations.length === 0 || selectedImplementations.some(session => {
+                const phrases = implementationSessionMap[session] || [];
+                return phrases.some(phrase => paraText.includes(phrase));
+            });
 
-            if (signalMatch && searchMatch) {
+            if (signalMatch && searchMatch && implementationMatch) {
                 para.classList.remove('hidden');
                 visibleParagraphs += 1;
             } else {
@@ -337,9 +422,52 @@ function applyFilters() {
         document.getElementById('documents-container').classList.remove('hidden');
     }
 
+    if (groupByImplementation) {
+        document.querySelectorAll('.implementation-group').forEach(group => {
+            const visibleCards = group.querySelectorAll('.document-card:not(.hidden)');
+            group.classList.toggle('hidden', visibleCards.length === 0);
+        });
+    }
+
     applySignalHighlights();
+    applyImplementationHighlights();
     applySearchHighlights(searchQuery);
     updateUrlState();
+}
+
+function getImplementationSessionForText(text) {
+    const lowered = text.toLowerCase();
+    const orderedSessions = Object.keys(implementationSessionMap).sort((a, b) => Number(b) - Number(a));
+    for (const session of orderedSessions) {
+        const phrases = implementationSessionMap[session] || [];
+        if (phrases.some(phrase => lowered.includes(phrase))) {
+            return session;
+        }
+    }
+    return null;
+}
+
+function getImplementationSessionForDoc(doc) {
+    const paragraphTexts = [];
+
+    if (Array.isArray(doc.signal_paragraphs)) {
+        doc.signal_paragraphs.forEach(para => {
+            if (para.text) {
+                paragraphTexts.push(para.text);
+            }
+        });
+    }
+
+    if (paragraphTexts.length === 0 && doc.paragraphs) {
+        Object.values(doc.paragraphs).forEach(text => {
+            if (text) {
+                paragraphTexts.push(text);
+            }
+        });
+    }
+
+    const combinedText = paragraphTexts.join(' ');
+    return combinedText ? getImplementationSessionForText(combinedText) : null;
 }
 
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
@@ -362,26 +490,19 @@ function applySearchHighlights(query) {
     const trimmedQuery = query.trim();
 
     highlightTargets.forEach(target => {
-        if (!target.dataset.originalText) {
-            target.dataset.originalText = target.textContent || '';
-        }
-
         target.querySelectorAll('mark.search-highlight').forEach(mark => {
             mark.replaceWith(mark.textContent);
         });
 
         if (!trimmedQuery) {
-            if (target.dataset.hasSignalHighlight !== 'true') {
-                target.textContent = target.dataset.originalText;
-            }
             return;
         }
 
-        highlightQueryInElement(target, trimmedQuery);
+        highlightQueryInElement(target, trimmedQuery, 'search-highlight bg-red-100 text-red-900 rounded px-0.5');
     });
 }
 
-function highlightQueryInElement(element, query) {
+function highlightQueryInElement(element, query, className) {
     const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(escapedQuery, 'gi');
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null);
@@ -401,7 +522,7 @@ function highlightQueryInElement(element, query) {
         text.replace(regex, (match, index) => {
             fragment.appendChild(document.createTextNode(text.slice(lastIndex, index)));
             const mark = document.createElement('mark');
-            mark.className = 'search-highlight bg-rose-100 text-rose-900 rounded px-0.5';
+            mark.className = className;
             mark.textContent = match;
             fragment.appendChild(mark);
             lastIndex = index + match.length;
@@ -416,34 +537,35 @@ function applySignalHighlights() {
     const paragraphTargets = document.querySelectorAll('[data-paragraph]');
 
     paragraphTargets.forEach(target => {
-        if (!target.dataset.originalText) {
-            target.dataset.originalText = target.textContent || '';
-        }
+        target.querySelectorAll('mark.signal-highlight').forEach(mark => {
+            mark.replaceWith(mark.textContent);
+        });
 
-        const originalText = target.dataset.originalText;
         const paraItem = target.closest('.para-item');
         const signals = paraItem ? paraItem.dataset.signals.split(',').filter(Boolean) : [];
 
-        if (signals.length === 0) {
-            target.textContent = originalText;
-            target.dataset.hasSignalHighlight = 'false';
-            return;
-        }
-
-        let highlightedText = escapeHtml(originalText);
         signals.forEach(signal => {
             const phrases = signalPhraseMap[signal] || [];
             phrases.sort((a, b) => b.length - a.length).forEach(phrase => {
-                const escapedPhrase = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                const regex = new RegExp(escapedPhrase, 'gi');
-                highlightedText = highlightedText.replace(regex, match =>
-                    `<mark class="signal-highlight ${getSignalHighlightClass(signal)} rounded px-0.5">${match}</mark>`
-                );
+                highlightQueryInElement(target, phrase, `signal-highlight ${getSignalHighlightClass(signal)} rounded px-0.5`);
             });
         });
+    });
+}
 
-        target.innerHTML = highlightedText;
-        target.dataset.hasSignalHighlight = 'true';
+function applyImplementationHighlights() {
+    const paragraphTargets = document.querySelectorAll('[data-paragraph]');
+
+    paragraphTargets.forEach(target => {
+        target.querySelectorAll('mark.implementation-highlight').forEach(mark => {
+            mark.replaceWith(mark.textContent);
+        });
+
+        Object.values(implementationSessionMap).forEach(phrases => {
+            phrases.forEach(phrase => {
+                highlightQueryInElement(target, phrase, 'implementation-highlight bg-indigo-100 text-indigo-900 rounded px-0.5');
+            });
+        });
     });
 }
 
@@ -678,9 +800,11 @@ function renderCombinedDocuments(allDocuments) {
         return keyA.symbol.localeCompare(keyB.symbol);
     });
 
+    allDocumentsCache = [...allDocuments];
+
     const container = document.getElementById('documents-container');
 
-    const html = allDocuments.map(doc => {
+    const renderDocumentCard = doc => {
         const signalParagraphs = doc.signal_paragraphs || [];
         const title = escapeHtml(getDisplayTitle(doc));
         const symbol = escapeHtml(doc.symbol || '');
@@ -735,9 +859,44 @@ function renderCombinedDocuments(allDocuments) {
                 </div>
             </div>
         `;
-    }).join('');
+    };
 
-    container.innerHTML = html;
+    if (!groupByImplementation) {
+        container.innerHTML = allDocuments.map(renderDocumentCard).join('');
+        initializeDocumentCards();
+        applyFilters();
+        return;
+    }
+
+    const groupOrder = Object.keys(implementationSessionMap)
+        .sort((a, b) => Number(b) - Number(a))
+        .concat('Unspecified');
+    const groupedDocs = new Map(groupOrder.map(key => [key, []]));
+
+    allDocuments.forEach(doc => {
+        const groupKey = getImplementationSessionForDoc(doc) || 'Unspecified';
+        if (!groupedDocs.has(groupKey)) {
+            groupedDocs.set(groupKey, []);
+        }
+        groupedDocs.get(groupKey).push(doc);
+    });
+
+    const groupedHtml = Array.from(groupedDocs.entries())
+        .filter(([, docs]) => docs.length > 0)
+        .map(([groupKey, docs]) => {
+            const label = groupKey === 'Unspecified'
+                ? 'Implementation Session: Unspecified'
+                : `Implementation Session ${groupKey}`;
+            return `
+                <div class="implementation-group space-y-4" data-group="${groupKey}">
+                    <div class="text-xs font-semibold uppercase tracking-wide text-indigo-700">${label}</div>
+                    ${docs.map(renderDocumentCard).join('')}
+                </div>
+            `;
+        })
+        .join('');
+
+    container.innerHTML = groupedHtml;
     initializeDocumentCards();
     applyFilters();
 }
@@ -792,21 +951,44 @@ function initializeSearch() {
 // Filter functionality (similar to original but with search)
 function initializeFilters() {
     sessionSelector = document.getElementById('session-selector');
+    implementationFilter = document.getElementById('implementation-filter');
     sourceFilter = document.getElementById('source-filter');
     signalFilter = document.getElementById('signal-filter');
     statusFilter = document.getElementById('status-filter');
     clearFiltersBtn = document.getElementById('clear-filters');
+    groupImplementationBtn = document.getElementById('group-implementation');
 
+    wirePillGroup(implementationFilter, applyFilters);
     wirePillGroup(sourceFilter, applyFilters);
     wirePillGroup(signalFilter, applyFilters);
     wirePillGroup(statusFilter, applyFilters);
 
+    groupImplementationBtn.addEventListener('click', function() {
+        groupByImplementation = !groupByImplementation;
+        groupImplementationBtn.classList.toggle('bg-indigo-600', groupByImplementation);
+        groupImplementationBtn.classList.toggle('text-white', groupByImplementation);
+        groupImplementationBtn.classList.toggle('border-indigo-600', groupByImplementation);
+        groupImplementationBtn.classList.toggle('bg-indigo-50', !groupByImplementation);
+        groupImplementationBtn.classList.toggle('text-indigo-700', !groupByImplementation);
+        groupImplementationBtn.classList.toggle('border-indigo-200', !groupByImplementation);
+
+        if (allDocumentsCache.length > 0) {
+            renderCombinedDocuments(allDocumentsCache);
+        } else {
+            applyFilters();
+        }
+    });
+
     clearFiltersBtn.addEventListener('click', function() {
         setActiveValues(sessionSelector, []);
+        setActiveValues(implementationFilter, []);
         setActiveValues(sourceFilter, []);
         setActiveValues(signalFilter, []);
         setActiveValues(statusFilter, []);
         selectedSessions = [];
+        groupByImplementation = false;
+        groupImplementationBtn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+        groupImplementationBtn.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
         document.getElementById('search-input').value = '';
         loadSelectedSessions();
     });

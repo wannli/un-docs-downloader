@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .discovery import sync_all_patterns_verbose, load_sync_state, sync_session_resolutions
-from .generation import generate_site_verbose, generate_session_unified_signals_page, generate_sessions_index_page
+from .generation import generate_site_verbose, generate_session_unified_signals_page
 from .detection import load_checks, run_checks
 from .extractor import (
     extract_text,
@@ -913,9 +913,6 @@ def cmd_generate_session(args):
 
     # Generate data export
     generate_session_data_json(documents, checks, args.session, args.output)
-
-    # Regenerate sessions index page
-    generate_sessions_index_page(args.output)
 
     # Summary
     gh_group_start("Generation Summary")
