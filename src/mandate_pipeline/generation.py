@@ -1043,15 +1043,11 @@ def generate_session_unified_signals_page(
 
         # Find all paragraphs that have any signal
         signal_paras = []
-        paragraphs = doc.get("paragraphs", [])
+        paragraphs = doc.get("paragraphs", {})
         for para_num, para_signals in doc.get("signals", {}).items():
             if para_signals:  # Has at least one signal
-                # para_num is a string key, convert to int for list indexing
-                para_idx = int(para_num) - 1  # Paragraphs are 1-indexed in the dict, 0-indexed in the list
-                if 0 <= para_idx < len(paragraphs):
-                    para_text = paragraphs[para_idx]
-                else:
-                    para_text = ""
+                # para_num is already a string key that matches the paragraphs dict
+                para_text = paragraphs.get(para_num, "")
                 signal_paras.append({
                     "number": para_num,
                     "text": para_text,
