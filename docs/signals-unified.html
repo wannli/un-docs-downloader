@@ -69,12 +69,13 @@
 <!-- Session Selector and Search -->
 <div class="mb-8 flex flex-wrap gap-4 items-end">
     <div class="flex-1 min-w-[200px]">
-        <label for="session-selector" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Session</label>
-        <select id="session-selector" class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-            <option value="current">Current Session</option>
-            <option value="79">Session 79</option>
-            <option value="78">Session 78</option>
+        <label for="session-selector" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Sessions</label>
+        <select id="session-selector" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
+            <option value="current" selected>Current Session</option>
+            <option value="79" selected>Session 79</option>
+            <option value="78" selected>Session 78</option>
         </select>
+        <p class="mt-1 text-xs text-gray-500">Hold Ctrl/Cmd to select multiple</p>
     </div>
     <div class="flex-1 min-w-[300px]">
         <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search Documents</label>
@@ -181,10 +182,14 @@
 <script>
 // Session data cache
 let sessionDataCache = {};
-let currentSession = 'current';
+let selectedSessions = ['current', '79', '78'];
+let originalDocumentsHTML = '';
 
 // Initialize the explorer
 document.addEventListener('DOMContentLoaded', function() {
+    // Store original document HTML for current session
+    originalDocumentsHTML = document.getElementById('documents-container').innerHTML;
+
     initializeFilters();
     initializeSearch();
     initializeSessionSelector();
@@ -199,8 +204,9 @@ function initializeSessionSelector() {
     const sessionSelector = document.getElementById('session-selector');
 
     sessionSelector.addEventListener('change', function() {
-        const selectedSession = this.value;
-        loadSessionData(selectedSession);
+        const selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
+        selectedSessions = selectedOptions;
+        loadSelectedSessions();
     });
 }
 
@@ -213,13 +219,16 @@ async function loadSessionData(session) {
 
     try {
         if (session === 'current') {
-            // Current session data is already loaded in the template
+            // Restore original document cards from template
+            document.getElementById('documents-container').innerHTML = originalDocumentsHTML;
             currentSession = 'current';
+            // Re-initialize event listeners for restored cards
+            initializeDocumentCards();
             applyFilters();
         } else {
             // Load session data via AJAX
             if (!sessionDataCache[session]) {
-                const response = await fetch(`./sessions/${session}/data.json`);
+                const response = await fetch(`/sessions/${session}/data.json`);
                 if (!response.ok) throw new Error('Failed to load session data');
                 sessionDataCache[session] = await response.json();
             }
@@ -532,7 +541,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-01-24 03:57 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-01-24 03:59 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
