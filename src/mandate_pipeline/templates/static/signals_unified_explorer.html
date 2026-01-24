@@ -8,40 +8,30 @@
 
 {% block content %}
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-6">
     <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Unified Signals Explorer</h1>
-    <p class="mt-2 text-muted" id="stats-text">
-        {{ total_paragraphs }} paragraphs across {{ resolution_count }} resolution{% if resolution_count != 1 %}s{% endif %}{% if proposal_count > 0 %} and {{ proposal_count }} non-adopted proposal{% if proposal_count != 1 %}s{% endif %}{% endif %}
-    </p>
 </div>
 
-<!-- Session Selector and Search -->
-<div class="mb-8 grid gap-4 rounded-xl border border-gray-200 bg-gray-50/80 p-4 shadow-sm md:grid-cols-[minmax(220px,1fr)_minmax(280px,1fr)_minmax(220px,0.6fr)]">
+
+<!-- Search -->
+<div class="mb-6 rounded-xl border border-gray-200 bg-gray-50/80 p-4 shadow-sm">
+    <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search</label>
+    <input type="text" id="search-input" placeholder="Search by symbol, title, or content..."
+           class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+</div>
+
+<!-- Filters -->
+<div class="mb-8 grid gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:grid-cols-[repeat(4,minmax(200px,1fr))_auto]">
     <div>
-        <label for="session-selector" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Sessions</label>
+        <label for="session-selector" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Session</label>
         <select id="session-selector" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
-            <option value="current" selected>Current Session</option>
-            <option value="79" selected>Session 79</option>
-            <option value="78" selected>Session 78</option>
+            <option value="current">80</option>
+            <option value="79">79</option>
+            <option value="78">78</option>
         </select>
-        <p class="mt-1 text-xs text-gray-500">Hold Ctrl/Cmd to select multiple</p>
+        <p class="mt-1 text-xs text-gray-500">Select sessions or leave empty for all.</p>
     </div>
     <div>
-        <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search Documents</label>
-        <input type="text" id="search-input" placeholder="Search by symbol, title, or content..."
-               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-    </div>
-    <div>
-        <label for="session-filter-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Session Filter</label>
-        <input type="text" id="session-filter-input" inputmode="numeric" placeholder="79"
-               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-        <p class="mt-1 text-xs text-gray-500">Type a session number to filter.</p>
-    </div>
-</div>
-
-<!-- Filter Controls -->
-<div class="mb-8 grid gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:grid-cols-[repeat(3,minmax(200px,1fr))_auto]">
-    <div class="flex-1 min-w-[200px]">
         <label for="source-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Source</label>
         <select id="source-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
             {% for origin_code in origin_order %}
@@ -49,8 +39,8 @@
             {% endfor %}
         </select>
     </div>
-    <div class="flex-1 min-w-[200px]">
-        <label for="signal-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Signal Type</label>
+    <div>
+        <label for="signal-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Signal</label>
         <select id="signal-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
             {% for check in checks %}
             <option value="{{ check.signal }}"
@@ -61,14 +51,14 @@
             {% endfor %}
         </select>
     </div>
-    <div class="flex-1 min-w-[200px]">
-        <label for="doctype-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Document Type</label>
-        <select id="doctype-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
-            <option value="resolution">Resolutions</option>
-            <option value="proposal">Non-adopted Proposals</option>
+    <div>
+        <label for="status-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Status</label>
+        <select id="status-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
+            <option value="adopted">Adopted</option>
+            <option value="draft">Draft</option>
         </select>
     </div>
-    <button id="clear-filters" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+    <button id="clear-filters" class="self-end px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
         Clear filters
     </button>
 </div>
@@ -82,7 +72,7 @@
             <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors{% if doc.doc_type == 'proposal' %} border-l-4 border-l-amber-400{% endif %}"
                  data-symbol="{{ doc.symbol }}"
                  data-source="{{ doc.origin }}"
-                 data-doctype="{{ doc.doc_type }}"
+                 data-status="{{ 'adopted' if doc.doc_type == 'resolution' else 'draft' }}"
                  data-signals="{{ doc.signal_summary.keys()|list|join(',') }}"
                  data-un-url="{{ doc.un_url }}"
                  data-title="{{ doc.title or '' }}"
@@ -92,30 +82,22 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-3 mb-1">
-                                <span class="font-semibold text-gray-900">
+                                <span class="font-semibold text-gray-900" data-highlight>
                                     {{ doc.symbol }}
                                 </span>
+                                {% if doc.origin and doc.origin != 'Unknown' %}
+                                <span class="text-xs text-gray-500">· {{ doc.origin }}</span>
+                                {% endif %}
                                 {% if doc.doc_type == 'proposal' %}
                                 <span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
-                                    Proposal
+                                    Draft
                                 </span>
                                 {% endif %}
-                                <span class="inline-flex items-center justify-center w-6 h-6 rounded text-xs font-bold flex-shrink-0
-                                    {% if doc.origin == 'Plenary' %}bg-amber-50 text-amber-700
-                                    {% elif doc.origin == 'C1' %}bg-red-50 text-red-700
-                                    {% elif doc.origin == 'C2' %}bg-green-50 text-green-700
-                                    {% elif doc.origin == 'C3' %}bg-blue-50 text-blue-700
-                                    {% elif doc.origin == 'C4' %}bg-purple-50 text-purple-700
-                                    {% elif doc.origin == 'C5' %}bg-orange-50 text-orange-700
-                                    {% elif doc.origin == 'C6' %}bg-teal-50 text-teal-700
-                                    {% else %}bg-gray-100 text-gray-700{% endif %}">
-                                    {{ doc.origin[:2] }}
-                                </span>
                             </div>
                             {% if doc.title %}
                             {% set title_number = doc.symbol.split('/')[-2:]|join('/') %}
                             {% set display_title = doc.title[title_number|length + 2:] if doc.title.startswith(title_number ~ '. ') else doc.title %}
-                            <p class="text-sm text-gray-600 truncate" title="{{ doc.title }}">{{ display_title }}</p>
+                            <p class="text-sm text-gray-600 truncate" title="{{ doc.title }}" data-highlight>{{ display_title }}</p>
                             {% endif %}
                         </div>
                         <div class="flex items-center gap-2 flex-shrink-0">
@@ -127,56 +109,40 @@
                     </div>
                 </div>
 
-                <!-- Signal Summary -->
-                <div class="px-4 py-3">
-                    <div class="flex flex-wrap gap-2">
-                        {% for signal, count in doc.signal_summary.items() %}
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
-                            {% if signal == 'agenda' %}bg-blue-100 text-blue-800
-                            {% elif signal == 'PGA' %}bg-purple-100 text-purple-800
-                            {% elif signal == 'process' %}bg-amber-100 text-amber-800
-                            {% elif signal == 'report' %}bg-green-100 text-green-800
-                            {% else %}bg-gray-100 text-gray-800{% endif %}">
-                            {{ signal }} ({{ count }})
-                        </span>
-                        {% endfor %}
-                    </div>
-                </div>
-
                 <!-- Paragraphs -->
                 <div class="border-t border-gray-200 expandable-content" id="content-{{ loop.index }}">
                     <div class="px-4 py-3 space-y-3">
                         {% if doc.signal_paragraphs %}
                         {% for para in doc.signal_paragraphs %}
                         <div class="para-item text-sm text-gray-900" data-signals="{{ para.signals|join(',') }}">
-                            <span class="inline-flex flex-wrap gap-2">
+                            <span class="inline-flex flex-wrap items-center gap-1">
                                 {% for signal in para.signals %}
-                                <span class="px-2 py-0.5 rounded-full text-xs font-medium
+                                <span class="px-1.5 py-0.5 rounded-full text-xs font-medium
                                     {% if signal == 'agenda' %}bg-blue-100 text-blue-800
                                     {% elif signal == 'PGA' %}bg-purple-100 text-purple-800
                                     {% elif signal == 'process' %}bg-amber-100 text-amber-800
                                     {% elif signal == 'report' %}bg-green-100 text-green-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">[{{ signal }}]</span>
+                                    {% else %}bg-gray-100 text-gray-800{% endif %}">{{ signal }}</span>
                                 {% endfor %}
                             </span>
-                            <span class="ml-2 font-semibold text-gray-700">{{ para.number }}.</span>
-                            <span class="text-gray-800">{{ para.text }}</span>
+                            <span class="ml-1 font-semibold text-gray-700">{{ para.number }}.</span>
+                            <span class="text-gray-800" data-highlight>{{ para.text }}</span>
                         </div>
                         {% endfor %}
                         {% elif doc.signals %}
                         {% for para_num, signals in doc.signals.items() %}
                         <div class="para-item text-sm text-gray-900" data-signals="{{ signals|join(',') }}">
-                            <span class="inline-flex flex-wrap gap-2">
+                            <span class="inline-flex flex-wrap items-center gap-1">
                                 {% for signal in signals %}
-                                <span class="px-2 py-0.5 rounded-full text-xs font-medium
+                                <span class="px-1.5 py-0.5 rounded-full text-xs font-medium
                                     {% if signal == 'agenda' %}bg-blue-100 text-blue-800
                                     {% elif signal == 'PGA' %}bg-purple-100 text-purple-800
                                     {% elif signal == 'process' %}bg-amber-100 text-amber-800
                                     {% elif signal == 'report' %}bg-green-100 text-green-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">[{{ signal }}]</span>
+                                    {% else %}bg-gray-100 text-gray-800{% endif %}">{{ signal }}</span>
                                 {% endfor %}
                             </span>
-                            <span class="ml-2 font-semibold text-gray-700">{{ para_num }}.</span>
+                            <span class="ml-1 font-semibold text-gray-700">{{ para_num }}.</span>
                             <span class="text-gray-500 italic">Paragraph text not available for historical sessions.</span>
                         </div>
                         {% endfor %}
@@ -214,57 +180,51 @@
 <script>
 // Session data cache
 let sessionDataCache = {};
-let selectedSessions = ['current'];
+let selectedSessions = [];
 let originalDocumentsHTML = '';
 
 // Filter elements (initialized later)
-let sourceFilter, signalFilter, doctypeFilter, clearFiltersBtn;
+let sourceFilter, signalFilter, statusFilter, clearFiltersBtn;
 
 // Filter functionality
 function applyFilters() {
     const selectedSources = Array.from(sourceFilter.selectedOptions).map(opt => opt.value);
     const selectedSignals = Array.from(signalFilter.selectedOptions).map(opt => opt.value);
-    const selectedDoctypes = Array.from(doctypeFilter.selectedOptions).map(opt => opt.value);
+    const selectedStatuses = Array.from(statusFilter.selectedOptions).map(opt => opt.value);
     const searchQuery = document.getElementById('search-input').value.toLowerCase();
 
     const documentCards = document.querySelectorAll('.document-card');
     const emptyState = document.getElementById('empty-state');
-    const statsText = document.getElementById('stats-text');
 
-    let resolutionCount = 0;
-    let proposalCount = 0;
-    let paragraphCount = 0;
+    let visibleCount = 0;
 
     documentCards.forEach(card => {
         const cardSource = card.dataset.source;
-        const cardDoctype = card.dataset.doctype;
+        const cardStatus = card.dataset.status;
         const cardSignals = card.dataset.signals.split(',').filter(s => s);
         const cardSymbol = card.dataset.symbol.toLowerCase();
         const cardTitle = (card.dataset.title || '').toLowerCase();
+        const paragraphMatch = searchQuery === '' || Array.from(card.querySelectorAll('.para-item [data-highlight]'))
+            .some(node => node.textContent.toLowerCase().includes(searchQuery));
 
         // Check filters
         const sourceMatch = selectedSources.length === 0 || selectedSources.includes(cardSource);
         const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
-        const doctypeMatch = selectedDoctypes.length === 0 || selectedDoctypes.includes(cardDoctype);
+        const statusMatch = selectedStatuses.length === 0 || selectedStatuses.includes(cardStatus);
         const searchMatch = searchQuery === '' ||
             cardSymbol.includes(searchQuery) ||
-            cardTitle.includes(searchQuery);
+            cardTitle.includes(searchQuery) ||
+            paragraphMatch;
 
-        if (sourceMatch && signalMatch && doctypeMatch && searchMatch) {
+        if (sourceMatch && signalMatch && statusMatch && searchMatch) {
             card.classList.remove('hidden');
-            if (cardDoctype === 'resolution') {
-                resolutionCount++;
-            } else {
-                proposalCount++;
-            }
+            visibleCount += 1;
 
-            // Count visible paragraphs
             const paragraphs = card.querySelectorAll('.para-item');
             paragraphs.forEach(para => {
                 const paraSignals = para.dataset.signals.split(',').filter(s => s);
                 if (selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s))) {
                     para.classList.remove('hidden');
-                    paragraphCount++;
                 } else {
                     para.classList.add('hidden');
                 }
@@ -275,7 +235,6 @@ function applyFilters() {
     });
 
     // Show/hide empty state
-    const visibleCount = resolutionCount + proposalCount;
     if (visibleCount === 0) {
         emptyState.classList.remove('hidden');
         document.getElementById('documents-container').classList.add('hidden');
@@ -284,15 +243,7 @@ function applyFilters() {
         document.getElementById('documents-container').classList.remove('hidden');
     }
 
-    // Update stats
-    const parts = [];
-    if (resolutionCount > 0) {
-        parts.push(`${resolutionCount} resolution${resolutionCount !== 1 ? 's' : ''}`);
-    }
-    if (proposalCount > 0) {
-        parts.push(`${proposalCount} non-adopted proposal${proposalCount !== 1 ? 's' : ''}`);
-    }
-    statsText.textContent = parts.length > 0 ? `${paragraphCount} paragraphs across ${parts.join(' and ')}` : '0 documents';
+    applySearchHighlights(searchQuery);
 }
 
 const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
@@ -308,6 +259,31 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text || '';
     return div.innerHTML;
+}
+
+function applySearchHighlights(query) {
+    const highlightTargets = document.querySelectorAll('[data-highlight]');
+    const trimmedQuery = query.trim();
+
+    highlightTargets.forEach(target => {
+        if (!target.dataset.originalText) {
+            target.dataset.originalText = target.textContent || '';
+        }
+
+        const originalText = target.dataset.originalText;
+
+        if (!trimmedQuery) {
+            target.textContent = originalText;
+            return;
+        }
+
+        const safeOriginal = escapeHtml(originalText);
+        const escapedQuery = trimmedQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(escapedQuery, 'gi');
+        target.innerHTML = safeOriginal.replace(regex, match =>
+            `<mark class="bg-yellow-100 text-yellow-900 rounded px-0.5">${match}</mark>`
+        );
+    });
 }
 
 function buildSignalParagraphs(doc) {
@@ -428,28 +404,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeSessionSelector() {
     const sessionSelector = document.getElementById('session-selector');
 
-    const sessionFilterInput = document.getElementById('session-filter-input');
-
     // Populate session options dynamically
     populateSessionOptions(sessionSelector).then(() => {
-        loadSelectedSessions();
-    });
-
-    sessionFilterInput.addEventListener('input', function() {
-        const value = this.value.trim();
-        const options = Array.from(sessionSelector.options);
-
-        if (!value) {
-            options.forEach(option => {
-                option.selected = true;
-            });
-        } else {
-            options.forEach(option => {
-                option.selected = option.value === value;
-            });
-        }
-
-        selectedSessions = Array.from(sessionSelector.selectedOptions).map(option => option.value);
         loadSelectedSessions();
     });
 
@@ -462,20 +418,12 @@ function initializeSessionSelector() {
 
 // Populate session selector with available sessions
 async function populateSessionOptions(selector) {
-    // Clear existing options except the current session option
-    const currentOption = selector.querySelector('option[value="current"]');
     selector.innerHTML = '';
 
-    // Re-add current session option
-    if (currentOption) {
-        selector.appendChild(currentOption);
-    } else {
-        const newCurrentOption = document.createElement('option');
-        newCurrentOption.value = 'current';
-        newCurrentOption.textContent = 'Current Session';
-        newCurrentOption.selected = true;
-        selector.appendChild(newCurrentOption);
-    }
+    const currentOption = document.createElement('option');
+    currentOption.value = 'current';
+    currentOption.textContent = '80';
+    selector.appendChild(currentOption);
 
     // Check which session directories exist (in reverse chronological order)
     const availableSessions = [79, 78, 77, 76, 75];
@@ -487,8 +435,7 @@ async function populateSessionOptions(selector) {
             if (response.ok) {
                 const option = document.createElement('option');
                 option.value = session.toString();
-                option.textContent = `Session ${session}`;
-                option.selected = true;
+                option.textContent = session.toString();
                 selector.appendChild(option);
             }
         } catch (error) {
@@ -497,8 +444,12 @@ async function populateSessionOptions(selector) {
         }
     }
 
-    // Select all available sessions by default
-    selectedSessions = Array.from(selector.options).map(option => option.value);
+    // Start with no sessions selected (empty means all)
+    Array.from(selector.options).forEach(option => {
+        option.selected = false;
+    });
+    selector.selectedIndex = -1;
+    selectedSessions = [];
 }
 
 // Load all selected sessions and combine their documents
@@ -508,8 +459,11 @@ async function loadSelectedSessions() {
 
     try {
         const allDocuments = [];
+        const sessionsToLoad = selectedSessions.length
+            ? selectedSessions
+            : Array.from(document.getElementById('session-selector').options).map(option => option.value);
 
-        for (const session of selectedSessions) {
+        for (const session of sessionsToLoad) {
             const sessionKey = session.toString();
 
             // Load session data via AJAX
@@ -534,7 +488,7 @@ async function loadSelectedSessions() {
         }
 
         // If only current session is selected, restore original HTML
-        if (selectedSessions.length === 1 && selectedSessions[0] === 'current') {
+        if (sessionsToLoad.length === 1 && sessionsToLoad[0] === 'current') {
             document.getElementById('documents-container').innerHTML = originalDocumentsHTML;
             initializeDocumentCards();
             applyFilters();
@@ -580,22 +534,16 @@ function renderCombinedDocuments(allDocuments) {
         const title = escapeHtml(getDisplayTitle(doc));
         const symbol = escapeHtml(doc.symbol || '');
 
-        const summaryHtml = Object.entries(doc.signal_summary || {}).map(([signal, count]) =>
-            `<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getSignalColor(signal)}">
-                ${signal} (${count})
-            </span>`
-        ).join('');
-
         const paragraphsHtml = signalParagraphs.length
             ? signalParagraphs.map(para => `
                 <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
-                    <span class="inline-flex flex-wrap gap-2">
+                    <span class="inline-flex flex-wrap items-center gap-1">
                         ${(para.signals || []).map(signal => `
-                            <span class="px-2 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">[${signal}]</span>
+                            <span class="px-1.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">${signal}</span>
                         `).join('')}
                     </span>
-                    <span class="ml-2 font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
-                    <span class="text-gray-800">${escapeHtml(para.text)}</span>
+                    <span class="ml-1 font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
+                    <span class="text-gray-800" data-highlight>${escapeHtml(para.text)}</span>
                 </div>
             `).join('')
             : '<div class="text-sm text-gray-500 italic">No signal data available for this document.</div>';
@@ -604,33 +552,27 @@ function renderCombinedDocuments(allDocuments) {
             <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors${doc.doc_type === 'proposal' ? ' border-l-4 border-l-amber-400' : ''}"
                  data-symbol="${doc.symbol}"
                  data-source="${doc.origin || doc.source || ''}"
-                 data-doctype="${doc.doc_type}"
+                 data-status="${doc.doc_type === 'resolution' ? 'adopted' : 'draft'}"
                  data-signals="${Object.keys(doc.signal_summary || {}).join(',')}"
                  data-session="${doc.session}"
                  data-un-url="${doc.un_url || ''}"
-                 data-title="${doc.title || ''}">
+                 data-title="${title}">
                 <!-- Document Header -->
                 <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-3 mb-1">
-                                <span class="font-semibold text-gray-900">
+                                <span class="font-semibold text-gray-900" data-highlight>
                                     ${symbol}
                                 </span>
-                                ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Proposal</span>' : ''}
+                                ${doc.origin && doc.origin !== 'Unknown' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
+                                ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
                             </div>
-                            ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}">${title}</p>` : ''}
+                            ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}" data-highlight>${title}</p>` : ''}
                         </div>
                         <div class="flex items-center gap-2 flex-shrink-0">
                             ${doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors">View PDF</a>` : ''}
                         </div>
-                    </div>
-                </div>
-
-                <!-- Signal Summary -->
-                <div class="px-4 py-3">
-                    <div class="flex flex-wrap gap-2">
-                        ${summaryHtml || '<span class="text-xs text-gray-500 italic">No signals</span>'}
                     </div>
                 </div>
 
@@ -688,20 +630,18 @@ function initializeSearch() {
 function initializeFilters() {
     sourceFilter = document.getElementById('source-filter');
     signalFilter = document.getElementById('signal-filter');
-    doctypeFilter = document.getElementById('doctype-filter');
+    statusFilter = document.getElementById('status-filter');
     clearFiltersBtn = document.getElementById('clear-filters');
-
-
 
     // Event listeners
     sourceFilter.addEventListener('change', applyFilters);
     signalFilter.addEventListener('change', applyFilters);
-    doctypeFilter.addEventListener('change', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
 
     clearFiltersBtn.addEventListener('click', function() {
         Array.from(sourceFilter.options).forEach(opt => opt.selected = false);
         Array.from(signalFilter.options).forEach(opt => opt.selected = false);
-        Array.from(doctypeFilter.options).forEach(opt => opt.selected = false);
+        Array.from(statusFilter.options).forEach(opt => opt.selected = false);
         document.getElementById('search-input').value = '';
         applyFilters();
     });

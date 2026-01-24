@@ -26,6 +26,7 @@ When working changes end-to-end with this project:
 4. **Verify workflow status** - Use `gh run list -w generate.yml -L 1` and `gh run view <id>` to confirm completion.
 5. **Monitor via browser** - Keep the workflow page open and use `browser_get_tabs` to track progress.
 6. **Poll for completion** - Check `gh run view <id>` every 30s until it finishes.
+7. **Refresh the site tab** - Once the run completes, refresh the site browser tab to load the latest output.
 
 ## Workflow Architecture
 
