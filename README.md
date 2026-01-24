@@ -395,10 +395,6 @@ PASS 2: Fuzzy Title Matching
 - `pytest` - Testing framework
 - `pytest-mock` - Mocking support
 
-**Optional (web interface):**
-- `fastapi` - Web API framework
-- `uvicorn` - ASGI server
-
 ## Testing
 
 ```bash
