@@ -1182,9 +1182,9 @@ def generate_igov_signals_page(
     template = env.get_template("signals_igov.html")
 
     html = template.render(
-        documents=docs_with_signals,
+        documents=decision_docs,
         checks=checks,
-        total_docs=len(docs_with_signals),
+        total_docs=len(decision_docs),
         total_paragraphs=total_paragraphs,
         session=session,
         session_label=session_label,
