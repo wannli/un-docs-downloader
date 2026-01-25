@@ -8,6 +8,7 @@ on:
         description: 'Which stages to run'
         options:
           - all
+          - core
           - discover
           - extract
           - detect
@@ -16,16 +17,36 @@ on:
           - discover+extract+detect+link
           - extract+detect+link+generate
           - extract+detect+generate
+          - igov
+          - igov-sync
+          - igov-signals
+          - build-session
       session_number:
         type: string
-        description: 'UN GA session number (for discover stage only, optional)'
+        description: 'UN GA session number (for discover, igov-sync, igov-signals, build-session)'
         required: false
+      session_label:
+        type: string
+        description: 'Override IGov session label (for igov-sync)'
+        required: false
+      max_misses:
+        type: string
+        description: 'Max 404s for build-session (default: 5)'
+        required: false
+        default: '5'
+  schedule:
+    - cron: '0 * * * *'
+    - cron: '30 * * * *'
+    - cron: '15 2 * * *'
   push:
     paths:
       - 'data/pdfs/**'
       - 'data/extracted/**'
       - 'data/detected/**'
       - 'data/linked/**'
+      - 'data/igov/**'
+      - 'docs/igov/**'
+      - 'docs/sessions/**'
       - 'src/**'
       - 'config/**'
 
@@ -47,7 +68,7 @@ jobs:
     name: Discover
     runs-on: ubuntu-latest
     container: python:3.12-slim
-    if: inputs.stages == 'all' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/pdfs/'))
+    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/pdfs/'))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -101,7 +122,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: discover
-    if: inputs.stages == 'all' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
+    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -199,7 +220,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: extract
-    if: inputs.stages == 'all' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'data/extracted/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
+    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'data/extracted/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -313,7 +334,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: detect
-    if: inputs.stages == 'all' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/detected/'))
+    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/detected/'))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -405,7 +426,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: link
-    if: inputs.stages == 'all' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/linked/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
+    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/linked/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -493,3 +514,151 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  igov-sync:
+    name: IGov Sync
+    runs-on: ubuntu-latest
+    container: python:3.12-slim
+    if: inputs.stages == 'all' || inputs.stages == 'igov' || inputs.stages == 'igov-sync' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+
+      - name: Sync IGov decisions
+        run: |
+          if [ -n "${{ inputs.session_number }}" ] && [ -n "${{ inputs.session_label }}" ]; then
+            python -m mandate_pipeline.cli igov-sync \
+              --session ${{ inputs.session_number }} \
+              --session-label "${{ inputs.session_label }}" \
+              --config ./config \
+              --data ./data \
+              --verbose
+          elif [ -n "${{ inputs.session_number }}" ]; then
+            python -m mandate_pipeline.cli igov-sync \
+              --session ${{ inputs.session_number }} \
+              --config ./config \
+              --data ./data \
+              --verbose
+          else
+            python -m mandate_pipeline.cli igov-sync --config ./config --data ./data --verbose
+          fi
+
+      - name: Record IGov sync metadata
+        run: |
+          SESSION_TAG="${{ inputs.session_number || 'current' }}"
+          cat > data/igov/last_sync_run_${SESSION_TAG}.json << 'EOF'
+          {
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "event_name": "${{ github.event_name }}",
+            "ref": "${{ github.ref }}",
+            "ref_name": "${{ github.ref_name }}",
+            "sha": "${{ github.sha }}",
+            "actor": "${{ github.actor }}",
+            "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "session_number": "${{ inputs.session_number || '' }}",
+            "session_label": "${{ inputs.session_label || '' }}"
+          }
+          EOF
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/igov
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            if [ -n "${{ inputs.session_number }}" ]; then
+              git commit -m "chore: sync IGov decisions for session ${{ inputs.session_number }}"
+            else
+              git commit -m "chore: sync IGov decisions ($(date -I))"
+            fi
+            git pull --rebase origin main || true
+            git push
+          fi
+
+  igov-signals:
+    name: IGov Signals
+    runs-on: ubuntu-latest
+    container: python:3.12-slim
+    needs: igov-sync
+    if: inputs.stages == 'all' || inputs.stages == 'igov' || inputs.stages == 'igov-signals' || github.event_name == 'schedule'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+
+      - name: Generate IGov signal browser
+        run: |
+          if [ -n "${{ inputs.session_number }}" ]; then
+            python -m mandate_pipeline.cli igov-signals \
+              --session ${{ inputs.session_number }} \
+              --config ./config \
+              --data ./data \
+              --output "docs/igov" \
+              --verbose
+          else
+            python -m mandate_pipeline.cli igov-signals \
+              --config ./config \
+              --data ./data \
+              --output "docs/igov" \
+              --verbose
+          fi
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/igov
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            if [ -n "${{ inputs.session_number }}" ]; then
+              git commit -m "chore: update IGov signal browser for session ${{ inputs.session_number }}"
+            else
+              git commit -m "chore: update IGov signal browser ($(date -I))"
+            fi
+            git pull --rebase origin main || true
+            git push
+          fi
+
+  build-session:
+    name: Build Session
+    runs-on: ubuntu-latest
+    container: python:3.12-slim
+    if: inputs.stages == 'all' || inputs.stages == 'build-session'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+
+      - name: Build session
+        run: |
+          python -m mandate_pipeline.cli build-session \
+            --session ${{ inputs.session_number }} \
+            --config ./config \
+            --data ./data \
+            --output ./docs \
+            --max-misses ${{ inputs.max_misses || '5' }} \
+            --verbose
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/sessions/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: build session ${{ inputs.session_number }} signal browser ($(date -I))"
+            git pull --rebase origin main || true
+            git push
+          fi
