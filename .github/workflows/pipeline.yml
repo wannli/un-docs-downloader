@@ -15,6 +15,7 @@ on:
           - generate
           - discover+extract+detect+link
           - extract+detect+link+generate
+          - extract+detect+generate
       session_number:
         type: string
         description: 'UN GA session number (for discover stage only, optional)'
@@ -25,6 +26,8 @@ on:
       - 'data/extracted/**'
       - 'data/detected/**'
       - 'data/linked/**'
+      - 'src/**'
+      - 'config/**'
 
 permissions:
   contents: write
@@ -35,23 +38,22 @@ concurrency:
   group: pipeline-${{ github.ref }}
   cancel-in-progress: false
 
+env:
+  PYTHON_VERSION: '3.12'
+  PIP_CACHE_DIR: ~/.cache/pip
+
 jobs:
   discover:
     name: Discover
     runs-on: ubuntu-latest
+    container: python:3.12-slim
     if: inputs.stages == 'all' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Discover new documents
         if: inputs.session_number == ''
@@ -97,20 +99,15 @@ jobs:
   extract:
     name: Extract
     runs-on: ubuntu-latest
+    container: python:3.12-slim
     needs: discover
-    if: inputs.stages == 'all' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Extract document content
         run: |
@@ -200,20 +197,15 @@ jobs:
   detect:
     name: Detect
     runs-on: ubuntu-latest
+    container: python:3.12-slim
     needs: extract
-    if: inputs.stages == 'all' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Run signal detection
         run: |
@@ -319,20 +311,15 @@ jobs:
   link:
     name: Link
     runs-on: ubuntu-latest
+    container: python:3.12-slim
     needs: detect
     if: inputs.stages == 'all' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Run document linking
         run: |
@@ -416,8 +403,9 @@ jobs:
   generate:
     name: Generate
     runs-on: ubuntu-latest
+    container: python:3.12-slim
     needs: link
-    if: inputs.stages == 'all' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -425,14 +413,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Generate unified signals explorer
         env:
