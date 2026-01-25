@@ -47,7 +47,7 @@ jobs:
     name: Discover
     runs-on: ubuntu-latest
     container: python:3.12-slim
-    if: inputs.stages == 'all' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link'
+    if: inputs.stages == 'all' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/pdfs/'))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: discover
-    if: inputs.stages == 'all' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -199,7 +199,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: extract
-    if: inputs.stages == 'all' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'data/extracted/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -313,7 +313,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: detect
-    if: inputs.stages == 'all' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/detected/'))
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -405,7 +405,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: link
-    if: inputs.stages == 'all' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate'
+    if: inputs.stages == 'all' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/linked/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
