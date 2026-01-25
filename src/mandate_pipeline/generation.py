@@ -1122,26 +1122,64 @@ def generate_igov_signals_page(
     session=None,
 ) -> dict:
     """Generate a standalone IGov decision signal browser page."""
-    def format_decision_text_lines(text: str) -> list[str]:
+    def format_decision_text_lines(text: str) -> dict:
         if not text:
-            return []
+            return {"main": [], "footnotes": [], "annex": None}
 
         normalized = " ".join(text.split())
-        normalized = re.sub(r"\s*(\([a-z]{1,2}\))", r"\n\1", normalized, flags=re.IGNORECASE)
 
-        preambular_terms = (
-            "Recalling|Noting|Recognizing|Reaffirming|Bearing in mind|Considering|"
-            "Taking note|Acknowledging|Emphasizing|Reiterating|Guided by|Mindful|"
-            "Welcoming|Aware|Affirming|Appreciating|Convinced|Concerned|Having considered"
-        )
-        normalized = re.sub(
-            rf"(?<!^)\s+({preambular_terms})",
-            r"\n\1",
-            normalized,
-            flags=re.IGNORECASE,
-        )
+        annex_text = None
+        annex_match = re.search(r"(?i)(\(?[Aa]nnex\s+\w+\)?.+)$", normalized)
+        if annex_match:
+            annex_text = annex_match.group(1).strip()
+            normalized = normalized[:annex_match.start()].strip()
 
-        return [line.strip() for line in normalized.split("\n") if line.strip()]
+        footnote_pattern = r"([^*]+)((\s*[*]{1,4}\s*))$"
+        main_text = normalized
+        footnotes = []
+
+        footnote_match = re.search(footnote_pattern, normalized)
+        if footnote_match:
+            main_text = footnote_match.group(1).strip()
+            footnote_content = footnote_match.group(2).strip()
+            footnotes.append(footnote_content)
+
+        lines = []
+        current_line = ""
+
+        parts = re.split(r"(?<=[\.\?\!])\s+(?=[A-Z])", main_text)
+        for part in parts:
+            sentences = re.split(r"(?<=[.\?\!])\s+", part)
+            for sentence in sentences:
+                sentence = sentence.strip()
+                if not sentence:
+                    continue
+
+                sentence = re.sub(r"\s+", " ", sentence)
+
+                if sentence.startswith("(") and re.match(r"^\([a-z]{1,2}\)(\s|$)", sentence, re.IGNORECASE):
+                    if current_line:
+                        lines.append(current_line)
+                    current_line = sentence
+                elif re.search(r"(?i)\b(item|rules?|resolution)\s+\d+\s*\([a-z]+\)", sentence):
+                    current_line += " " + sentence
+                elif current_line and not current_line.endswith(".") and not current_line.endswith("?") and not current_line.endswith("!"):
+                    current_line += " " + sentence
+                else:
+                    if current_line:
+                        lines.append(current_line)
+                    current_line = sentence
+
+        if current_line:
+            lines.append(current_line)
+
+        lines = [re.sub(r"\s+", " ", line).strip() for line in lines if line.strip()]
+
+        return {
+            "main": lines,
+            "footnotes": footnotes,
+            "annex": annex_text
+        }
     if session is None:
         decisions = load_igov_decisions_all(data_dir)
     else:
