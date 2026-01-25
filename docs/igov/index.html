@@ -67,11 +67,12 @@
                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
     </div>
 
-    <div class="rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
-        <div class="flex flex-wrap items-center gap-1.5 md:grid md:grid-cols-2">
-            <div class="flex flex-wrap items-center gap-1.5 md:block">
-                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Session</label>
-                <div id="session-filter" class="flex flex-wrap gap-1.5 md:mt-1.5">
+    <div class="rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div class="flex flex-col gap-2 md:flex-row md:flex-wrap md:items-center">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Session</span>
+                    <div id="session-filter" class="flex flex-wrap gap-1.5">
                     
                     <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="71">71</button>
                     
@@ -1955,34 +1956,30 @@
                     
                     <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
                     
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</span>
+                    <div id="signal-filter" class="flex flex-wrap gap-1.5">
+                        
+                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="agenda">agenda</button>
+                        
+                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="PGA">PGA</button>
+                        
+                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="process">process</button>
+                        
+                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="report">report</button>
+                        
+                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="observer">observer</button>
+                        
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-wrap items-center gap-1.5 md:block">
-                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</label>
-                <div id="signal-filter" class="flex flex-wrap gap-1.5 md:mt-1.5">
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="agenda">agenda</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="PGA">PGA</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="process">process</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="report">report</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="observer">observer</button>
-                    
-                </div>
+            <div class="flex items-center justify-start md:justify-end">
+                <button id="clear-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button">
+                    Clear filters
+                </button>
             </div>
-        </div>
-        <div class="mt-2 flex items-center justify-between md:hidden">
-            <button id="clear-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button">
-                Clear filters
-            </button>
-        </div>
-        <div class="mt-2 hidden md:flex md:items-center md:justify-end">
-            <button id="clear-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button">
-                Clear filters
-            </button>
         </div>
     </div>
 </div>
@@ -12113,7 +12110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-01-25 16:28 UTC · IGov decisions explorer
+Generated 2026-01-25 16:31 UTC · IGov decisions explorer
 
             </p>
         </div>
