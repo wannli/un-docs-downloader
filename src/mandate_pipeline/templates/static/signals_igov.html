@@ -112,40 +112,14 @@
                                         {% else %}bg-gray-100 text-gray-800{% endif %}">{{ signal }}</span>
                                     {% endfor %}
                                 </span>
-                                {% set para_lines = para.lines.main if para.lines and para.lines.main else [] %}
-                                {% if para_lines %}
-                                    {% for line in para_lines %}
-                                    <p class="text-gray-800 leading-relaxed" data-paragraph data-search>{{ line }}</p>
-                                    {% endfor %}
-                                {% elif para.lines and para.lines.main is not defined %}
-                                    <p class="text-gray-800 leading-relaxed" data-paragraph data-search>{{ para.text }}</p>
-                                {% endif %}
-                                {% if para.lines and para.lines.footnotes %}
-                                    <div class="mt-2 text-xs text-gray-500 border-t border-gray-100 pt-1">
-                                        {% for fn in para.lines.footnotes %}
-                                        <span class="mr-2">{{ fn }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
+                                <p class="text-gray-800 leading-relaxed" data-paragraph data-search>{{ para.text }}</p>
                             </div>
                             {% endfor %}
                         {% else %}
                             <div class="para-item text-sm text-gray-900" data-signals="">
                                 <div class="text-xs font-semibold uppercase tracking-wide text-gray-400">No signals detected</div>
-                                {% set doc_main = doc.formatted_lines.main if doc.formatted_lines and doc.formatted_lines.main else [] %}
-                                {% if doc_main %}
-                                    {% for line in doc_main %}
-                                    <p class="text-gray-700 leading-relaxed mt-2" data-paragraph data-search>{{ line }}</p>
-                                    {% endfor %}
-                                    {% if doc.formatted_lines and doc.formatted_lines.footnotes %}
-                                        <div class="mt-2 text-xs text-gray-500 border-t border-gray-100 pt-1">
-                                            {% for fn in doc.formatted_lines.footnotes %}
-                                            <span class="mr-2">{{ fn }}</span>
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                {% elif doc.decision_text %}
-                                    <p class="text-gray-700 leading-relaxed mt-2" data-paragraph data-search>{{ doc.decision_text }}</p>
+                                {% if doc.decision_text %}
+                                <p class="text-gray-700 leading-relaxed mt-2" data-paragraph data-search>{{ doc.decision_text }}</p>
                                 {% endif %}
                             </div>
                         {% endif %}
