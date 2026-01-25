@@ -111,6 +111,9 @@ def _load_igov_decision_dir(decisions_dir: Path, session: int) -> list[dict[str,
         meeting_info = payload.get("ED_Meeting", []) or []
         meeting = meeting_info[0] if meeting_info else {}
 
+        decision_text = payload.get("ED_DecisionText", "") or ""
+        decision_text = " ".join(decision_text.split())
+
         decisions.append({
             "session": session,
             "decision_number": decision_number,
@@ -122,7 +125,7 @@ def _load_igov_decision_dir(decisions_dir: Path, session: int) -> list[dict[str,
             "session_label": payload.get("ED_Session", ""),
             "meeting_number": meeting.get("ED_Number", ""),
             "meeting_date": meeting.get("ED_Date", ""),
-            "decision_text": payload.get("ED_DecisionText", ""),
+            "decision_text": decision_text,
             "igov_url": build_igov_url(session, decision_number),
         })
 
