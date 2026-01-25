@@ -92,7 +92,7 @@ def decision_hash(decision: dict[str, Any]) -> str:
 def load_state(state_path: Path) -> dict[str, Any]:
     """Load the IGov sync state file."""
     if not state_path.exists():
-        return {"sessions": {}}
+        return {"decisions": {}}
     with open(state_path) as f:
         return json.load(f)
 
@@ -130,10 +130,9 @@ def sync_igov_decisions(
     decisions_dir = igov_dir / "decisions" / str(session)
     decisions_dir.mkdir(parents=True, exist_ok=True)
 
-    state_path = igov_dir / "state.json"
+    state_path = igov_dir / "state" / f"{session}.json"
     state = load_state(state_path)
-    session_key = str(session)
-    prior_session_state = state.get("sessions", {}).get(session_key, {})
+    prior_session_state = state.get("decisions", {})
 
     new_decisions: list[str] = []
     updated_decisions: list[str] = []
@@ -165,8 +164,9 @@ def sync_igov_decisions(
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
 
-    state.setdefault("sessions", {})[session_key] = next_session_state
-    state.setdefault("session_labels", {})[session_key] = session_label
+    state["session"] = session
+    state["session_label"] = session_label
+    state["decisions"] = next_session_state
     state["last_sync"] = datetime.now(timezone.utc).isoformat()
     save_state(state_path, state)
 

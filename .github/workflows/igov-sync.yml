@@ -59,7 +59,8 @@ jobs:
 
       - name: Record IGov sync metadata
         run: |
-          cat > data/igov/last_sync_run.json << 'EOF'
+          SESSION_TAG="${{ github.event.inputs.session_number || 'current' }}"
+          cat > data/igov/last_sync_run_${SESSION_TAG}.json << 'EOF'
           {
             "run_id": "${{ github.run_id }}",
             "run_attempt": "${{ github.run_attempt }}",
