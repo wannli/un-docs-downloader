@@ -1160,12 +1160,20 @@ def generate_igov_signals_page(
     total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
     session_label = decisions[0].get("session_label") if decisions else ""
     session_list = []
+    seen_sessions = set()
     for doc in decisions:
         session_value = doc.get("session")
         if session_value is None:
             continue
-        session_list.append(int(session_value))
-    session_list = sorted(session_list)
+        try:
+            session_int = int(session_value)
+        except (TypeError, ValueError):
+            continue
+        if session_int in seen_sessions:
+            continue
+        seen_sessions.add(session_int)
+        session_list.append(session_int)
+    session_list.sort(reverse=True)
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
