@@ -1,0 +1,77 @@
+name: IGov Signal Browser
+
+on:
+  schedule:
+    # Run daily at 02:15 UTC
+    - cron: '15 2 * * *'
+  workflow_dispatch:
+    inputs:
+      session_number:
+        description: 'UN General Assembly session number (e.g., 80, 79)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "igov-signals-${{ github.event.inputs.session_number || 'current' }}"
+  cancel-in-progress: false
+
+jobs:
+  igov-signals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Generate IGov signal browser
+        run: |
+          SESSION_TAG="${{ github.event.inputs.session_number || 'current' }}"
+          OUTPUT_DIR="docs/igov/${SESSION_TAG}"
+          if [ -n "${{ github.event.inputs.session_number }}" ]; then
+            python -m mandate_pipeline.cli igov-signals \
+              --session ${{ github.event.inputs.session_number }} \
+              --config ./config \
+              --data ./data \
+              --output "$OUTPUT_DIR" \
+              --verbose
+          else
+            python -m mandate_pipeline.cli igov-signals \
+              --config ./config \
+              --data ./data \
+              --output "$OUTPUT_DIR" \
+              --verbose
+          fi
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add docs/igov
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "${{ github.event.inputs.session_number }}" ]; then
+            git commit -m "chore: update IGov signal browser for session ${{ github.event.inputs.session_number }}"
+          else
+            git commit -m "chore: update IGov signal browser ($(date -I))"
+          fi
+          git pull --rebase origin main || true
+          git push
