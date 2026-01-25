@@ -73,7 +73,7 @@
                             {% endif %}
                             <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
                                 {% if doc.meeting_date %}
-                                <span>Adopted {{ doc.meeting_date }}</span>
+                                <span>Date {{ doc.meeting_date }}</span>
                                 {% endif %}
                                 {% if doc.meeting_number %}
                                 <span>Meeting {{ doc.meeting_number }}</span>
@@ -112,12 +112,26 @@
                                         {% else %}bg-gray-100 text-gray-800{% endif %}">{{ signal }}</span>
                                     {% endfor %}
                                 </span>
-                                <span class="ml-1 font-semibold text-gray-700">{{ para.number }}.</span>
-                                <span class="text-gray-800" data-paragraph data-search>{{ para.text }}</span>
+                                {% if para.lines %}
+                                    {% for line in para.lines %}
+                                    <p class="text-gray-800 leading-relaxed" data-paragraph data-search>{{ line }}</p>
+                                    {% endfor %}
+                                {% else %}
+                                    <p class="text-gray-800 leading-relaxed" data-paragraph data-search>{{ para.text }}</p>
+                                {% endif %}
                             </div>
                             {% endfor %}
                         {% else %}
-                            <div class="text-sm text-gray-500 italic">No signals detected for this decision.</div>
+                            <div class="para-item text-sm text-gray-900" data-signals="">
+                                <div class="text-xs font-semibold uppercase tracking-wide text-gray-400">No signals detected</div>
+                                {% if doc.formatted_lines %}
+                                    {% for line in doc.formatted_lines %}
+                                    <p class="text-gray-700 leading-relaxed mt-2" data-paragraph data-search>{{ line }}</p>
+                                    {% endfor %}
+                                {% elif doc.decision_text %}
+                                    <p class="text-gray-700 leading-relaxed mt-2" data-paragraph data-search>{{ doc.decision_text }}</p>
+                                {% endif %}
+                            </div>
                         {% endif %}
                     </div>
                 </div>

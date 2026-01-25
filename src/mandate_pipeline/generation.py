@@ -1122,6 +1122,26 @@ def generate_igov_signals_page(
     session=None,
 ) -> dict:
     """Generate a standalone IGov decision signal browser page."""
+    def format_decision_text_lines(text: str) -> list[str]:
+        if not text:
+            return []
+
+        normalized = " ".join(text.split())
+        normalized = re.sub(r"\s*(\([a-z]{1,2}\))", r"\n\1", normalized, flags=re.IGNORECASE)
+
+        preambular_terms = (
+            "Recalling|Noting|Recognizing|Reaffirming|Bearing in mind|Considering|"
+            "Taking note|Acknowledging|Emphasizing|Reiterating|Guided by|Mindful|"
+            "Welcoming|Aware|Affirming|Appreciating|Convinced|Concerned|Having considered"
+        )
+        normalized = re.sub(
+            rf"(?<!^)\s+({preambular_terms})",
+            r"\n\1",
+            normalized,
+            flags=re.IGNORECASE,
+        )
+
+        return [line.strip() for line in normalized.split("\n") if line.strip()]
     if session is None:
         decisions = load_igov_decisions_all(data_dir)
     else:
@@ -1134,6 +1154,7 @@ def generate_igov_signals_page(
             continue
 
         paragraphs = {1: decision_text}
+        formatted_lines = format_decision_text_lines(decision_text)
         signals = run_checks(paragraphs, checks) if checks else {}
 
         signal_summary = {}
@@ -1143,6 +1164,7 @@ def generate_igov_signals_page(
                 signal_paragraphs.append({
                     "number": para_num,
                     "text": paragraphs.get(para_num, ""),
+                    "lines": format_decision_text_lines(paragraphs.get(para_num, "")),
                     "signals": para_signals,
                 })
                 for sig in para_signals:
@@ -1154,6 +1176,7 @@ def generate_igov_signals_page(
             "signals": signals,
             "signal_summary": signal_summary,
             "signal_paragraphs": signal_paragraphs,
+            "formatted_lines": formatted_lines,
         })
 
     docs_with_signals = [doc for doc in decision_docs if doc.get("signal_paragraphs")]
