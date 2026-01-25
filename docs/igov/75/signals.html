@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGov Decision Signals - Mandate Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'un-blue': '#009edb',
+                        'un-blue-dark': '#0077a8',
+                        'muted': '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background: rgba(0, 158, 219, 0.2); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="./index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                </a>
+                <nav class="flex items-center gap-6">
+                    <a href="../signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Signals</a>
+                    <a href="../data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">IGov Decision Signal Browser</h1>
+    <p class="mt-2 text-muted" id="stats-text">
+        18 decision texts across 18 decisions · 75th session of the General Assembly
+    </p>
+</div>
+
+<div class="mb-8 flex flex-wrap gap-4 items-end">
+    <div class="flex-1 min-w-[240px]">
+        <label for="signal-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Signal Type</label>
+        <select id="signal-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
+            
+            <option value="agenda"
+                class="text-blue-700"
+                >agenda</option>
+            
+            <option value="PGA"
+                class="text-purple-700"
+                >PGA</option>
+            
+            <option value="process"
+                class="text-amber-700"
+                >process</option>
+            
+            <option value="report"
+                class="text-green-700">report</option>
+            
+            <option value="observer"
+                >observer</option>
+            
+        </select>
+    </div>
+    <button id="clear-filters" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+        Clear filters
+    </button>
+</div>
+
+<div class="flex gap-6" id="main-content">
+    <div class="flex-1 min-w-0" id="document-list">
+        <div class="space-y-4" id="documents-container">
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/417"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/417</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Elections and Appointments
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Election of the President of the General Assembly at its seventy-sixth session</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-06-07T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 72 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 4</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/417" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 72nd plenary meeting, on 7 June 2021, the General Assembly, in accordance with Article 21 of the Charter of the United Nations, rule 30 of the rules of procedure of the Assembly and paragraph 1 of the annex to resolution 33/138 of 19 December 1978, elected Abdulla Shahid of Maldives as <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> at its seventy-sixth session.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/422"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/422</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Elections and Appointments
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Election of the Chairs of the Main Committees of the General Assembly at its seventy-sixth session </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-06-11T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 78th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 5</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/422" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">On 7 June 2021, the First, Special Political and Decolonization (Fourth), Second, Third, Fifth and Sixth Committees of the General Assembly held meetings in accordance with rules 99 (a) and 103 of the rules of procedure of the Assembly for the purpose of electing their Chairs.
+At its 78th  plenary meeting, on 11 June 2021, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> announced that the following persons had been elected as Chairs of the First, Special Political and Decolonization (Fourth), Second, Third, Fifth and Sixth Committees of the Assembly at its seventy-sixth session:
+
+First Committee: Omar HILALE (Morocco)
+Special Political and
+Decolonization Committee 
+(Fourth Committee):  Egrisela Aracely González LÓPEZ (El Salvador)
+Second Committee: Vanessa FRAZIER (Malta)
+Third Committee:	 Mohamed Siad DOUALEH (Djibouti)
+Fifth Committee:	 Mher MARGARYAN (Armenia)
+Sixth Committee:	 Alya Ahmed bin Saif AL-THANI (Qatar)
+
+In accordance with rule 38 of the rules of procedure of the General Assembly, the General Committee consists of the President of the Assembly, the 21 Vice-Presidents and the Chairs of the six Main Committees.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/503"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/503</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">High-level meeting   to commemorate the seventy-fifth anniversary of the United Nations</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-09-18T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 2nd plenary meeting</span>
+                                
+                                
+                                <span>Agenda 7</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/503" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 2nd plenary meeting, on 18 September 2020, the General Assembly, on the recommendation of the General Committee as set forth in its first report (A/75/250, para. 44), decided, without setting a precedent, that, where physical presence was not practicable, a pre-recorded statement might be submitted by those who were invited to make opening statements at the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> to commemorate the seventy-fifth anniversary of the United Nations, to be held pursuant to resolution 73/299.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/505"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/505</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">High-level meeting of the General Assembly to commemorate the seventy-fifth anniversary of the United Nations</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-09-29T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 15th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 128 (a)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/505" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 15th plenary meeting, on 29 September 2020, the General Assembly, on the proposal of its President (A/75/L.2), noting with concern the situation regarding the coronavirus disease (COVID 19) pandemic and the limitations recommended on meetings within the United Nations premises as precautionary measures aimed at containing the spread of COVID-19; recalling its resolution 73/299 of 14 June 2019 and its decision 74/562 of 22 July 2020,
+
+	(a)	Decided, without setting a precedent for future mandated <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>s planned for future high-level weeks, that entities and organizations having received a standing invitation to participate as observers in the sessions and the work of the General Assembly, other than the European Union, could each submit a pre recorded statement of their high officials, which would be played in the General Assembly Hall during the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the Assembly to commemorate the seventy-fifth anniversary of the United Nations, after introduction by their representative who is physically present in the Assembly Hall;
+
+	(b)	Also decided that, in addition to the verbatim records of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> would circulate as a document of the Assembly a compilation document of the statements delivered by observers of the General Assembly referred to in paragraph (a) above by means of pre-recorded statements during the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> and submitted to the President no later than the day on which the pre-recorded statement was played in the Assembly Hall.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/506"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/506</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Introduction of certain reports in the plenary meetings at the seventy-fifth session of the General Assembly</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-10-13T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 16th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 7</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/506" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 16th plenary meeting, on 13 October 2020, the General Assembly, on the proposal of its President (A/75/L.3), noting with concern the situation regarding the coronavirus disease (COVID-19) pandemic, and noting that there were certain limitations in place on access to the United Nations premises as precautionary measures aimed at containing the spread of COVID-19, including quarantine requirements:
+
+	(a)	Decided, without setting a precedent for future plenary meetings of the General Assembly, that, during the seventy-fifth session, where quarantine requirements were in place, those who were invited to introduce reports under the agenda items entitled “Report of the Human Rights Council”, “Report of the International Court of Justice”, “Report of the International Criminal Court”, “Report of the International Atomic Energy Agency”, “Cooperation between the United Nations and regional and other organizations” and “International Residual Mechanism for Criminal Tribunals” might each submit a pre-recorded statement, which would be played in the General Assembly Hall after the introduction by the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> at the plenary meetings concerned;
+
+	(b)	Also decided that, in addition to the verbatim records of the plenary meetings, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> would circulate, as a document of the Assembly, each statement delivered by those who were invited to introduce reports under the agenda items referred to in paragraph (a) above by means of pre-recorded statement, which would be attached to the verbatim records of the meeting.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/510"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/510</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Procedure for decision-making in the General Assembly when an in-person meeting is not possible</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-11-13T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 26th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 126</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/510" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 26th plenary meeting, on 13 November 2020, the General Assembly, on the proposal of Andorra, Austria, Barbados, Belgium, Canada, Colombia, Costa Rica, Croatia, Cyprus, Denmark, the Dominican Republic, Ecuador, Estonia, Finland, the Gambia, Georgia, Ghana, Honduras, Hungary, Iceland, Ireland, Jamaica, Latvia, Lebanon, Liechtenstein, Lithuania, Luxembourg, Malta, Mexico, Monaco, the Netherlands, New Zealand, Nigeria, Norway, Oman, Panama, Peru, the Philippines, Qatar, the Republic of Korea, San Marino, Sierra Leone, Sweden, Switzerland and Ukraine (A/75/L.7/Rev.1 and A/75/L.7/Rev.1/Add.1), by a recorded vote of 123 to 19 with 29 abstentions, reaffirming that the procedure for adopting proposals in the General Assembly was governed by the provisions of the Charter of the United Nations, the rules of procedure of the General Assembly and other applicable resolutions and decisions of the General Assembly, and stressing that the present decision was without prejudice to any future discussion on the rules of procedure; recalling the unprecedented limitations caused by the coronavirus disease (COVID-19) pandemic, when in-person meetings of the General Assembly were not possible owing to precautionary measures aimed at containing the spread of COVID-19; determined to ensure the full functionality of the General Assembly at all times; reaffirming that the General Assembly shall, as a rule and in accordance with established practice, always meet in person, and recognizing that exception to that practice shall be made only in the most extraordinary circumstances and for as limited a time period as possible; acknowledging that such circumstances called for increased coordination by the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> with Member States, and reaffirming that the procedure set out in the present decision shall be applied in as limited a manner as possible and with a particular focus on the continuity of essential functions of the General Assembly; stressing the importance of orderly, transparent and inclusive consultations, in particular in the absence of in-person meetings, with a view to establishing the broadest possible agreement on proposals put before the General Assembly for action:
+
+	(a)	Decided that the procedure set out in the present decision shall strictly apply without discrimination and only in the most exceptional circumstances, when an in-person meeting of the General Assembly was not possible for a prolonged period of time owing to concrete and ongoing risks to the safety and well-being of representatives of Member States and United Nations personnel;
+	(b)	Also decided that the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> shall determine that the circumstances described in paragraph (a) above apply, after consultation with the Chairs of the Main Committees and guided by the recommendation of the Secretary-General, in consultation with the Medical Director, the head of the Department of Safety and Security of the Secretariat and the host State authorities, as relevant and applicable to the situation; and further decided that such determination shall immediately be communicated to Member States, reviewed constantly and considered revoked upon convening the first in-person meeting following the application of the procedure prescribed in the present decision;
+	(c)	Authorized the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, where an in-person meeting of the General Assembly was not possible, to circulate, upon request by the main sponsor, a proposal that had been issued as a document of the General Assembly in all official languages to all Member States, with a view to taking action thereon;
+	(d)	Decided that the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> shall put the proposal in question under a silence procedure of 72 hours, and decided that, if the silence was not broken, the resolution or decision shall be considered adopted;
+	(e)	Also decided that the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> shall put a proposal to the vote without holding an in-person meeting only in the event that a vote was requested by a Member State in writing during the silence procedure under paragraph (d) above or if the silence was broken by means other than a request for a vote;
+	(f)	Further decided that the General Assembly shall take note of proposals adopted by means of silence procedure at its first plenary meeting held when in-person meetings were possible;
+	(g)	Decided that the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> shall put a proposal to the vote in accordance with the arrangements set out below:
+	(i)	The President shall circulate a letter to all Member States announcing that a vote had been requested on a specific proposal and indicating the date and time at which the vote would commence; such a date and time shall be fixed in a manner that would allow at least 72 hours between the circulation of the letter by the President and the commencement of the vote, except for procedural motions, which shall be put to the vote within 24 hours of the time of circulation of the President’s letter; the letter shall be accompanied by the proposal in question, which shall be in the six official languages of the General Assembly;
+	(ii)	No other action might be proposed in relation to the proposal after a vote on the proposal had commenced at the date and time announced by the President, except a point of order in connection with the actual conduct of the voting; this did not prevent the General Assembly from taking decisions on other proposals in parallel;
+	(iii)	Member States might vote “in favour” or “against” or indicate “abstain” through an electronic means provided by the Secretariat within existing resources and specified by the President before the voting period, which shall be one hour; the votes cast by Member States shall become visible to other Member States five minutes before the closure of the voting period;
+	(iv)	The voting process shall be considered valid if a majority of the members of the General Assembly were present during the voting process, which shall be determined by counting those Member States that had affirmed their presence during the voting period before accessing the electronic voting page for the proposal concerned;
+	(v)	If the votes in favour reached the required majority, the proposal shall be considered adopted and the General Assembly would be informed of the decision at its first plenary meeting held after the cessation of the precautionary measures as soon as the circumstances allow;
+	(h)	Authorized the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, in the event that an amendment or a procedural motion was proposed at least 24 hours in advance of the original date and time of the vote on a proposal announced in the letter of the President pursuant to paragraph (g) (i) above, to immediately suspend the scheduled vote and immediately circulate the amendment or the procedural motion in question, and take one of the following steps:
+	(i)	If an amendment was proposed, the President shall circulate the amendment to all Member States; the amendment might be placed under a silence procedure or, if a vote was requested, shall be put to the vote in accordance with paragraph (g) above;
+	(ii)	The President shall put the procedural motion in question to the vote in accordance with the relevant rules of procedure of the General Assembly and paragraph (g) above;
+	(i)	Decided that if a point of order was raised during the voting period referred to in paragraph (g) (iii) above in connection with the actual conduct of the voting in accordance with rule 88 of the rules of procedure of the General Assembly, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> shall suspend the vote and apply the following procedure:
+	(i)	The point of order shall be decided by the President in accordance with rule 71 of the rules of procedure; the President’s ruling would be communicated by the President to all Member States, indicating the time by which Member States might appeal against the ruling of the President, which shall be one hour from the time at which the communication was sent out;
+	(ii)	If there was no appeal against the ruling during the specified time frame, the President’s ruling shall stand;
+	(iii)	In the event of an appeal, the President would immediately notify all Member States that an appeal had been made to the President’s ruling and indicate the date and time of the voting on the appeal, which shall take place within one hour of the time when the President had notified that an appeal had been made to the ruling; the voting <mark class="bg-yellow-200 px-0.5 rounded">shall be held</mark> in accordance with paragraphs (g) (ii) to (v) above;
+	(iv)	The President would communicate a new date and time at which the voting process on the underlying proposal would resume;
+	(j)	Also decided that the Secretariat shall, as part of its intergovernmental services and within existing resources, provide technical support and assistance upon request by Member States to ensure the full and equal access by all States to the procedure outlined in the present decision.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/519 A and B"
+                 data-signals="report">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/519 A and B</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Disarmament Commission </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-12-07T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 37th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 105 (b)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/519" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="report">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-green-100 text-green-700
+                                    ">
+                                    report
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">A 
+(Decision 73/519, in section B.1 of the Official Records of the General Assembly, Seventy-fifth Session, Supplement No. 49 (A/75/49), vol. II, becomes decision 73/519 A).
+
+At its 37th plenary meeting, on 7 December 2020, the General Assembly, on the recommendation of the First Committee (A/75/401, para.17.), recalling its decisions 74/511 of 12 December 2019 and 74/546 of 2 April 2020, and noting with concern the situation concerning the coronavirus disease (COVID-19), decided:
+
+	(a)	That the Disarmament Commission shall  hold a substantive session for a period not exceeding three weeks during 2021, namely from 5 to 23 April, and submit a substantive <mark class="bg-yellow-200 px-0.5 rounded">report to the General Assembly</mark> at its seventy-sixth session;
+	(b)	That the Disarmament Commission shall hold its organizational session at the beginning of 2021, before the substantive session, to elect its Bureau and address other outstanding organizational matters;
+	(c)	To include in the provisional agenda of its seventy-sixth session, under the item entitled “Review of the implementation of the recommendations and decisions adopted by the General Assembly at its tenth special session”, the sub-item entitled “Report of the Disarmament Commission”.
+
+B  
+
+	At its 58th plenary meeting, on 25 March 2021, the General Assembly, on the proposal of its President (A/75/L.71) , recalling its decision 75/519 A of 7 December 2020, decided to postpone the 2021 substantive session of the Disarmament Commission to a later period to be decided by the General Assembly.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/542"
+                 data-signals="PGA,report">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/542</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Investigation  into the conditions and circumstances resulting in the tragic death of Dag Hammarskjöld and of the members of the party accompanying him</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-12-21T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 47th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 133</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/542" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA,report">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-green-100 text-green-700
+                                    ">
+                                    report
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 47th plenary meeting, on 21 December 2020, the General Assembly, on the proposal of Sweden (A/75/L49),   recalling its resolution 74/248 of 27 December 2019, in which it had requested the Secretary-General to reappoint the Eminent Person appointed pursuant to General Assembly resolution 72/252 of 24 December 2017 to continue to review the information received and possible new information made available by Member States, including by individuals and private entities, to assess its probative value and to draw conclusions from the investigations already conducted, and to <mark class="bg-yellow-200 px-0.5 rounded">report to the Assembly</mark> before the end of its seventy-fifth session on progress made; noting with concern the situation concerning the coronavirus disease (COVID 19) pandemic and the challenges that it posed for Member States, individuals and private entities, and taking note of the letter dated 5 November 2020 from the Secretary-General addressed to the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, 
+
+	(a)	Requested the Secretary-General to <mark class="bg-yellow-200 px-0.5 rounded">report to the General Assembly</mark> before the end of the seventy-sixth session on progress made; 
+
+	(b)	Decided to include in the provisional agenda of its seventy-seventh session the item entitled “Investigation into the conditions and circumstances resulting in the tragic death of Dag Hammarskjöld and of the members of the party accompanying him”.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/552"
+                 data-signals="report">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/552</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Problems  arising from the accumulation of conventional ammunition stockpiles in surplus</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2020-12-31T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 48th (resumed) plenary meeting</span>
+                                
+                                
+                                <span>Agenda 103 (z)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/552" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="report">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-green-100 text-green-700
+                                    ">
+                                    report
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 48th (resumed) plenary meeting, on 31 December 2020, the General Assembly, on the recommendation of the First Committee (A/75/399, para. 97),  recalling its decision 59/515 of 3 December 2004 and its resolutions 60/74 of 8 December 2005 and 61/72 of 6 December 2006, its resolution 63/61 of 2 December 2008, by which it had welcomed the report of the Group of Governmental Experts established pursuant to resolution 61/72 to consider further steps to enhance cooperation with regard to the issue of conventional ammunition stockpiles in surplus, and its resolutions 64/51 of 2 December 2009, 66/42 of 2 December 2011, 68/52 of 5 December 2013, 70/35 of 7 December 2015, 72/55 of 4 December 2017 and 74/65 of 12 December 2019, acknowledging the impact of the coronavirus disease (COVID-19) on the convening of meetings within United Nations premises, taking note of the impact of COVID-19 on the ability of the Group of Governmental Experts on problems arising from the accumulation of conventional ammunition stockpiles in surplus, established pursuant to resolution 72/55, to convene for 10 of its working days, as scheduled, and recalling the request to the Secretary-General contained in resolution 74/65 to <mark class="bg-yellow-200 px-0.5 rounded">report to the General Assembly</mark> on the work of the Group upon its completion, decided to request the Secretary-General to convene the Group of Governmental Experts for up to 10 working days in 2021 to enable the Group to complete its work, and also decided to include in the provisional agenda of its seventy-sixth session, under the item entitled “General and complete disarmament”, the sub-item entitled “Problems arising from the accumulation of conventional ammunition stockpiles in surplus”.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/558"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/558</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Participation in formal plenary meetings of the General Assembly at its seventy-fifth session</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-03-19T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 57th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 7</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/558" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 57th plenary meeting, on 19 March 2021, the General Assembly, on the proposal of its President (A/75/L.67),  noting with concern the situation regarding the coronavirus disease (COVID-19) pandemic, and noting that there were certain limitations in place on access to the United Nations premises as precautionary measures aimed at containing the spread of COVID-19, including quarantine requirements: 
+	(a)	Decided, without setting a precedent for future plenary meetings of the General Assembly, that, during the remaining part of the seventy-fifth session, where quarantine requirements or travel restrictions were in place, those who were invited by the Assembly either to make a statement at a plenary meeting or to present a report, and were not a representative of a Member State or an observer delegation, might each submit a pre-recorded statement, which would be played in the General Assembly Hall after the introduction by the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> at the plenary meetings concerned;
+	(b)	Also decided that, in addition to the verbatim records of the plenary meetings, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> would circulate, as a document of the Assembly, a compilation document of the statements delivered by means of pre-recorded statements at each of the formal plenary meetings, which would be attached to the verbatim records of the meeting.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/561"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/561</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Informal  interactive hearing with indigenous peoples  </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-04-16T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 59th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 69</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/561" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 59th plenary meeting, on 16 April 2021, the General Assembly, on the proposal of its President (A/75/L.77),  recalling its resolution 71/321 of 8 September 2017, in which it had requested the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to organize and preside over an informal interactive hearing and to prepare a summary of the hearing, during its seventy-fourth session, on the margins of the session of the Permanent Forum on Indigenous Issues, with indigenous peoples, ensuring, to the extent possible, balanced regional representation, recalling also its decision 74/565 of 12 August 2020, by which it had postponed to its seventy-fifth session the organization of an informal interactive hearing with indigenous peoples, and noting with concern the ongoing situation arising out of the coronavirus disease (COVID-19),
+Decided to postpone to its seventy-sixth session the request to the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to organize and preside over an informal interactive hearing with indigenous peoples and to prepare a summary of the hearing.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/562"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/562</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Special  session of the General Assembly against corruption  </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-04-16T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 59th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 111</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/562" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 59th plenary meeting, on 16 April 2021, the General Assembly, on the proposal of its President (A/75/L.75),  recalling its resolutions 73/191 of 17 December 2018 and 74/276 of 1 June 2020 and its decision 74/568 of 31 August 2020 on the special session of the General Assembly on challenges and measures to prevent and combat corruption and strengthen international cooperation, noting with concern the situation regarding the coronavirus disease (COVID-19) pandemic, and noting that there were certain limitations in place on access to the United Nations premises as precautionary measures aimed at containing the spread of COVID-19, including quarantine requirements: 
+	(a)	Decided, without setting a precedent for future special sessions of the General Assembly, that those who were invited to participate in the opening of the special session in line with paragraphs 2 (b) and 17 of its resolution 74/276, and those who were invited to participate in line with paragraphs 2 (d) and (e) of its resolution 74/276, might submit a pre-recorded statement, which would be played in the General Assembly Hall after introduction by the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> at the special session; 
+	(b)	Also decided that Member States, States and regional economic integration organizations parties to the United Nations Convention against Corruption (United Nations, Treaty Series, vol. 2349, No. 42146.)  and observers to the General Assembly, in line with paragraph 2 (c) of its resolution 74/276, might submit a pre-recorded statement by their Head of State or Government, head of delegation or other dignitary, which would be played in the General Assembly Hall during the special session, after introduction by their representative who was physically present in the Assembly Hall;
+	(c)	Further decided that, in addition to the verbatim records of the special session, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> would circulate as a document of the Assembly a compilation document of the statements delivered by means of pre recorded statements during the special session and submitted to the President no later than the day on which the pre-recorded statement was played in the Assembly Hall, and that such pre-recorded statements would be attached to the verbatim records of the special session.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/563"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/563</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Participation  in the 2021 high-level meeting on HIV/AIDS  </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-04-16T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 59th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 10</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/563" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 59th plenary meeting, on 16 April 2021, the General Assembly, on the proposal of its President (A/75/L.74), , recalling its resolution 75/260 of 23 February 2021 on the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> on HIV/AIDS, noting with concern the situation regarding the coronavirus disease (COVID-19) pandemic, and noting that there were certain limitations in place on access to the United Nations premises as precautionary measures aimed at containing the spread of COVID-19, including quarantine requirements: 
+	(a)	Decided that Member States and observers of the General Assembly, in line with paragraph 2 (a) (ii) of its resolution 75/260, might submit a pre-recorded statement by their Head of State or Government, head of delegation or other dignitary, which would be played in the General Assembly Hall during the general debate of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>, after introduction by their representative who was physically present in the Assembly Hall;
+	(b)	Also decided that, in addition to the verbatim records of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark>, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> would circulate as a document of the Assembly a compilation document of the statements delivered by means of pre recorded statements during the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> and submitted to the President no later than the day on which the pre-recorded statement was played in the Assembly Hall, and that such pre-recorded statements would be attached to the verbatim records of the meeting.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/566"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/566</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Participation of non-governmental organizations, civil society organizations, academic institutions and the private sector in the high-level meeting on HIV/AIDS</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-05-24T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 69h plenary meeting</span>
+                                
+                                
+                                <span>Agenda 10</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/566" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 69th plenary meeting, on 24 May 2021, the General Assembly, on the proposal of its President (A/75/L.86), as amended (A/75/L.89 and A/75/L.89/Add.1), recalling paragraph 11 of its resolution 75/260 of 23 February 2021, decided to approve the participation of the non-governmental organizations, civil society organizations, academic institutions and the private sector as listed in the annex to the present decision in the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> on HIV/AIDS to be held pursuant to resolution 75/260, including its panel discussions. 
+
+Annex
+
+ACNO New Century
+ACS
+Action for Health Initiatives, Inc. (ACHIEVE)
+Action on African women foundation Ghana
+Affirmative Action
+African Council on Narcotics (ACON)
+African Girl Child Development and Support Initiative
+African Palliative Care Association
+AID FOR AIDS PERÚ
+AIDS Action Europe
+AIDS and Rights Alliance for Southern Africa (ARASA)
+Aids Healthcare Foundation Europe
+Aids Healthcare Foundation LAC
+AIDS Prevention Society
+AIDS-Fondet
+Aidsfonds
+Albanian Red Cross
+All-Ukrainian Network of People Living with HIV/AIDS 
+Alliance for Sustainable Development Organization (ASDO)
+Ambivium
+ANPUD
+Antigua &amp; Barbuda HIV/AIDS Network Inc.
+Apoyo Positivo
+Asia Pacific Alliance for Sexual and Reproductive Health and Rights
+Asociación Alfil Redlactrans Ecuador
+Asociación Ciclo Positivo
+Asociación Civil Angel Azul
+Asociación Civil de Mujeres Trans Amigas por Siempre
+Asociación Civil Mujeres Unidas por la Salud (MUSAS)
+Asociación de Investigación, Desarrollo y Educación Integral
+Asociación Foro Nacional de VIH/Sida
+Asociación Para Una Vida Mejor de Personas Infectadas/Afectadas por el VIH-Sida en Honduras (APUVIMEH)
+Asociación TransVida
+Aspire Youth Network Guyana
+Association de Lutte Contre le Sida (ALCS), Maroc
+ASSOCIATION EVA
+Association for the Promotion of Youth Leadership, Advocacy and Volunteerism Cameroon (APYLAV)
+Association of Nurses in AIDS Care
+Association pour le Bien-Être Familial et Naissances Désirables
+ASSOCIATION RAMA “APPUI AUX VICTIMES DU SIDA”
+ATHENA Network
+Australian Federation of AIDS Organisations (AFAO)
+Australian Injecting &amp; Illicit Drug Users League (AIVL)
+Avenir Mère-Enfant
+Barbados Family Planning Association
+BD
+Belize Youth Empowerment for Change
+BlueCity Holdings, Ltd.
+Bolivian Network of People Living with HIV/AIDS (REDBOL)
+Cairo 52 Legal Research Institute
+Canadian Aboriginal AIDS Network
+CARE PERU
+Casa A+
+CELDAR
+Center for Development and Peace (CDP)
+Centre for Healthworks, Development and Research Initiative (CHEDRES)
+Centre for Peace across Borders (CePAB)
+Centre Stage Media Arts Foundation
+Centro de Atención Profesional a Personas con SIDA
+Centro de Atención Vive Aguascalientes Asociación Civil
+CEVVIH
+CO FREE ZONE
+COALITION PLUS
+Committee for Accessible AIDS Treatment
+Community Education Group
+Comunidad Lgbti+ Portoviejo
+Connecting Dreams Foundation
+Convent Ave. Baptist Church
+Coordinadora Nacional Multisectorial en Salud (CONAMUSA)
+Corporación red somos
+CREA
+Development Agenda for Girls and Women in Africa Network (DAWA)
+Development Aid from People to People
+Diálogo Diverso
+EANNASO
+Ecology Africa Foundation
+EMPOWER CAMEROON
+enREDando Salud
+Equal Asia Foundation (Stichting EqualA Foundation)
+Eurasian Key Populations Health Network
+Eurasian Network of People who use Drugs
+Eurasian Union of adolescents and youth Teenergizer
+Falgbt Federación Argentina LGBT
+Fondation des œuvres pour la solidarité et le bien-être social
+Foundation for Social Education
+Fundación Chile Positivo
+Fundación de atención inclusiva Social y Humana FUVADIS
+Fundación Grupo Efecto Positivo
+Fundación Hábitat Verde
+Fundación Huésped
+Fundación Luchando Vencerás
+Fundamental Human Rights &amp; Rural Development Association FHRRDA
+GATE
+Gender DynamiX
+General Welfare Pratisthan
+GHA – German Health Alliance
+Global Alliance for Behavioral Health and Social Justice
+Global Black Gay Men Connect
+Global Fund Advocates Network Asia-Pacific
+Global Network of Black People working in HIV
+Global Network of Young People Living with HIV
+Gongshak Initiative for Human and Environmental Development (GIFTHED)
+Grupo de diversidad sexual Peni Grupo de diversidad sexual Peñitas
+Grupo de Vigilancia del Abastecimiento de Antirretrovirales – GIVAR
+Health GAP
+Hepatitis Australia
+HIV Justice Network
+HIV Medicine Association
+HIV Survivors and Partners Network
+Hiv Vereniging Nederland
+Hivos Bolivia
+Hope For The Addicts Initiative
+Human Touch Foundation
+Humraz Male Health Society (HMHS)
+Identidad Asociación Civil
+Ihata Shelter for Abused Women and Children
+INDIA CARES
+Indian Drug Users Forum
+Indigenous Peoples of Africa Co-ordinating Committee
+Indonesia AIDS Coalition
+Inerela+gh
+Infectious Diseases Society of America
+INITIATIVES COMMUNAUTAIRES (INCOM)
+INPUD
+Inspira Cambio A.C.
+Institute of Analysis and Advocacy
+Institute of HIV Education &amp; Research
+Instituto para el Desarrollo Humano, Bolivia
+Interfaith Health Platform
+International AIDS Vaccine Initiative
+International Association of Providers of AIDS Care
+International Children’s Palliative Care Network (ICPCN)
+International Drug Policy Consortium
+International Federation of Medical Students’ Associations of Brazil (IFMSA Brazil)
+International Foundation for African Children (IFAC)
+International Treatment Preparedness Coalition Latin America and Caribbean
+IRGT
+ITPC-MENA
+Jamaican Network of Seropositives (JN+)
+Jamii Asilia Centre
+Japan Foundation for AIDS Prevention (JFAP)
+Jaringan Equals Indonesia
+Jhpiego
+JIP (Jaringan Indonesia Positif)
+Johnson &amp; Johnson
+Jointed Hands Welfare Organisation
+JSI Research and Training Institute (JSI)
+Kawempe Youth Development Association (KYDA)
+KHANA
+Kuza Livelihood Improvement Projects
+L’Associació de Drets Sexuals i Reproductius
+La Casa de la Sal AC
+LAC Key Correspondent Team
+LANPUD
+Latin American and the Caribbean Network of Trans People (RedLacTrans)
+LHL International
+Liberi Health Foundation
+Living Positive Victoria
+LVCT HEALTH
+Medical IMPACT
+MENA Rosa
+Metzineres
+MIT World Peace University
+mothers2mothers
+Movimiento de PVVS del Perú
+Mutapola Voices The Gambia
+MY World Mexico
+NADAM FOUNDATION
+Narconon Nigeria initiative
+National Association of People with HIV Australia
+National Minority AIDS Council (NMAC)
+NCD Alliance
+New York NGO Committee on Drugs
+Nigerian Women Agro Allied Farmers Association
+ONE
+ONG “Plus de Sida dans les Familles”
+ONG VIHDA
+Out-Right Namibia
+Pan-African Treatment Access Movement
+Paradise Healthcare Community Development Initiative
+Parent-Child Intervention Centre
+Parkers Mobile Clinic
+Partners In Health
+Patient Advocacy Alliance C.I.C.
+PeerNUPS
+Penabulu Foundation
+People’s Action For Social Service
+Positive vision Cameroon
+Positive Women Together in Action
+Presse Jeune Développement
+Preto Positivo
+Progrès Santé Sans Prix “PSSP”
+Public Association “Support for people living with HIV Kuat”
+RAP+30 Córdoba
+Red Centroamericana de Personas con VIH
+Red Comunitaria Trans del Ecuador Vivir Libre
+Red Latinoamericana y del Caribe de Mujeres Trans Migrantes “Red FemiTransLac”
+Regional Expert Group on Migration and Health
+Regional Inter Agency Task Team on Children and AIDS in Eastern &amp; Southern Africa
+Réseau camerounais des adolescents et jeunes vivants avec le VIH
+Réseau National des ONG pour le Développement de la Femme (RENADEF)
+RIHEB
+Rural Health Service Providers Network
+Rural Watch Ghana
+SAfAIDS
+SAVE THE DREAM INVITATION
+Scarlet Alliance, Australian Sex Workers Association
+SEISIDA
+Sexual Reproductive Health Rights Sexual Reproductive Health and Rights Africa Trust
+Show Me Your Number HIV Prevention Project NPC
+Si, Da Vida
+Sindicato de trabajadoras sexuales trans y travestis Amanda Jofré
+SISTERLOVE, Inc.
+SOMOSGAY
+Southern Africa Embrace Foundation
+StarTimes
+Step up Campaign – Victory against HIV Discrimination
+STEPS Tanzania
+Taimako Community Development Initiative
+Taller Venezolano de VIH
+The Coalition for Children Affected by AIDS
+The Elizabeth Taylor AIDS Foundation
+The Foundation for a Drugs Free World Nigeria
+The Jamaican Network of Seropositives
+The Nigeria Network of People Who Use Drugs NNPUD
+The Nigerian Business Coalition Against AIDS
+The PACT
+Tianjin AIDS Care Home
+Tiaty Youth Development Association Community-Based Organization
+TLF Sexuality Health and Rights Educators Collective Inc.
+TRIPLA DIFESA ONLUS GUARDIE SOCIALI ED ECOZOOFILE
+Ukrainian Network of People who Use Drugs (VOLNA)
+Ukrainian network of women who use drugs (UNWUD)
+Unemployed and vulnerable foundation trust
+Union Congolaise des Organisations des Personnes vivant avec le VIH (UCOP+)
+Union des Amis Socio Culturels d’Action en Développement (UNASCAD)
+UNITE Global Parliamentarians Network to End Infectious Diseases
+United Church of Christ HIV &amp; AIDS Network
+United for Global Mental Health
+Universidad San Francisco de Quito
+Universidade Federal de Minas Gerais
+Universo positivo
+Updating Medicina del Lavoro
+US People living with HIV Caucus
+Willi Johnson Foundation
+WoMandla Foundation
+Women and Harm Reduction International Network (WHRIN)
+World Council of Churches
+World Harmony Foundation
+Wote Youth Development Projects
+Young Leaders Organization
+Youth Alive Uganda
+Youth Initiative for the Promotion of Good Leadership in Nigeria
+Youth RISE
+Youth training and empowerment network
+Yu Zixi Red Ribbon Charity Bank Volunteer Service Team</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/569"
+                 data-signals="PGA,process">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/569</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Question  of equitable representation on and increase in the membership of the Security Council and other matters related to the Security Council</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-06-22T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 84th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 127</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/569" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA,process">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-amber-100 text-amber-700
+                                    ">
+                                    process
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 84th plenary meeting, on 22 June 2021, the General Assembly, on the proposal of its President:  
+1. Decided to reaffirm the central role of the General Assembly concerning the question of equitable representation on and increase in the membership of the Security Council and other matters related to the Security Council and the commitment of Heads of State and Government representing the peoples of the world to “instill new life in the discussions on the reform of the Security Council”; 
+2. 	Decided to immediately continue intergovernmental negotiations on Security Council reform in informal plenary of the General Assembly at its seventy-sixth session, as mandated by Assembly decisions 62/557 of 15 September 2008, 63/565 B of 14 September 2009, 64/568 of 13 September 2010, 65/554 of 12 September 2011, 66/566 of 13 September 2012, 67/561 of 29 August 2013, 68/557 of 8 September 2014, 69/560 of 14 September 2015, 70/559 of 27 July 2016, 71/553 of 19 July 2017, 72/557 of 29 June 2018, 73/554 of 25 June 2019 and 74/569 of 31 August 2020, building on the informal meetings held during its seventy-fifth session, as reflected in the letter dated 12 May 2021 from the <mark class="bg-yellow-200 px-0.5 rounded">Co-Chairs</mark>, and on the document entitled “<mark class="bg-yellow-200 px-0.5 rounded">Co-Chairs</mark>&#39; Elements Paper on Convergences and Divergences on the question of equitable representation on and increase in the membership of the Security Council and related matters”, circulated on 29 April 2021, as well as the positions of and proposals made by Member States, reflected in the text and its annex circulated on 31 July 2015, to help to inform its future work; 
+3. 	Welcomed the active engagement, initiatives and intensive efforts of the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, and noted with appreciation the active role and concrete efforts of the <mark class="bg-yellow-200 px-0.5 rounded">Co-Chairs</mark> had undertaken in a consultative manner with a view to an early comprehensive reform of the Security Council; 
+4. 	Decided to convene the Open-ended Working Group on the Question of Equitable Representation on and Increase in the Membership of the Security Council and Other Matters related to the Security Council during the seventy-sixth session of the General Assembly, if Member States so decide; 
+5. 	Also decided to include in the agenda of the seventy-sixth session of the General Assembly the item entitled “Question of equitable representation on and increase in the membership of the Security Council and other matters related to the Security Council”.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/573"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/573</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">General debate of the seventy-sixth session</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-07-14T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 91st plenary meeting</span>
+                                
+                                
+                                <span>Agenda 7</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/573" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 91st plenary meeting, on 14 July 2021, the General Assembly, on the proposal of its President  (A/75/L.110), noting with concern the ongoing situation regarding the coronavirus disease (COVID-19) pandemic: 
+	
+(a)	Decided, without setting a precedent for future general debates, that each Member State, observer State and the European Union (footnote: In the case of the European Union, the pre-recorded statements shall be made by the President of the European Council, the President of the European Commission or the High Representative of the Union for Foreign Affairs and Security Policy)  might submit a pre-recorded statement of its Head of State, Vice-President, Crown Prince or Princess, Head of Government, Minister or Vice-Minister, which would be played in the General Assembly Hall during the general debate of the Assembly at its seventy-sixth session, after introduction by their representative who was physically present in the Assembly Hall; 
+	
+(b)	Also decided that, in addition to the verbatim records of the general debate, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> would circulate as a document of the Assembly a compilation document of the statements delivered by means of pre-recorded statements submitted to the President no later than the day on which the pre-recorded statement was played in the Assembly Hall, and that such pre-recorded statements would be attached to the verbatim records of the meetings.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/576"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/576</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">High-level meeting to commemorate and promote the International Day against Nuclear Tests</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-09-08T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 101st plenary meeting</span>
+                                
+                                
+                                <span>Agenda 103</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/576" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 101st plenary meeting, on 8 September 2021, the General Assembly, on the proposal of its President, decided, without setting a precedent, to invite Mr. Robert Floyd, Executive Secretary of the Comprehensive Nuclear-Test-Ban Treaty Organization; Ms. Vivian Okeke, Director of the International Atomic Energy Agency Liaison Office in New York; Ms. Sue Coleman-Haseldine, a Kokatha nuclear test survivor, International Campaign to Abolish Nuclear Weapons, Australia; and Ms. Danity Laukon, former member of the Marshall Islands Student Association, to make statements at the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> to commemorate and promote the International Day against Nuclear Tests.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="75/578"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">75/578</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">2022 United Nations Conference to Support the Implementation of Sustainable Development Goal 14: Conserve and sustainably use the oceans, seas and marine resources for sustainable development</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2021-09-09T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 102nd plenary meeting</span>
+                                
+                                
+                                <span>Agenda 19 and 76 (a)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/75/578" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 102nd plenary meeting, on 9 September 2021,	the General Assembly, on the proposal of its President  (A/75/L.130), recalling its resolution 73/292 of 9 May 2019 in its entirety, and its decision to convene the 2020 United Nations Conference to Support the Implementation of Sustainable Development Goal 14: Conserve and sustainably use the oceans, seas and marine resources for sustainable development in Lisbon, from 2 to 6 June 2020, to support the implementation of Sustainable Development Goal 14, and recalling also its decision 74/548 of 13 April 2020, in which it had decided to postpone the Conference to a later date to be decided and to set, at a later stage, the new deadlines for its preparatory process:
+	(a)	Decided that the high-level 2022 United Nations Conference to Support the Implementation of Sustainable Development Goal 14: Conserve and sustainably use the oceans, seas and marine resources for sustainable development shall be convened in Lisbon, from 27 June to 1 July 2022; 
+	(b)	Also decided that the Governments of Kenya and Portugal shall retain co-hosting responsibilities and assume the costs of the Conference and its preparation; 
+	(c)	Further decided that the plenary meetings of the Conference would be held as follows: 
+	Monday, 27 June: from 10 a.m. to 1 p.m.
+	Tuesday, 28 June: from 10 a.m. to 1 p.m. and from 3 to 6 p.m.
+	Wednesday, 29 June: from 10 a.m. to 1 p.m. and from 3 to 6 p.m.
+	Thursday, 30 June: from 10 a.m. to 1 p.m. and from 3 to 6 p.m.
+	Friday, 1 July: from 10 a.m. to 1 p.m. and from 3 to 6 p.m.; 
+	(d)	Decided that the <mark class="bg-yellow-200 px-0.5 rounded">interactive dialogue</mark>s would be held in parallel with the plenary meetings, as follows: 
+	Monday, 27 June: from 3 to 6 p.m.
+	Tuesday, 28 June: from 10 a.m. to 1 p.m. and from 3 to 6 p.m.
+	Wednesday, 29 June: from 10 a.m. to 1 p.m. and from 3 to 6 p.m.
+	Thursday, 30 June: from 10 a.m. to 1 p.m. and from 3 to 6 p.m. 
+	Friday, 1 July: from 10 a.m. to 1 p.m.; 
+	(e)	Also decided that at the opening of the Conference, to take place during the first plenary meeting, to be held on the morning of Monday, 27 June, consideration would be given to all procedural and organizational matters, including the adoption of the rules of procedure and the agenda, the election of the two Presidents of the Conference, the election of officers, the establishment of subsidiary organs, as appropriate, the appointment of the members of the Credentials Committee, arrangements for the preparation of the report of the Conference and other matters; and at the first plenary meeting, statements would be made by the Presidents of the Conference, the Secretary-General of the United Nations, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, the President of the Economic and Social Council and the Secretary-General of the Conference; 
+	(f)	Requested the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to appoint two co- facilitators, one from a developing country and one from a developed country, to conclude the intergovernmental consultations on the declaration of the Conference by May 2022; 
+	(g)	Also requested the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to finalize the organizational arrangements for the Conference no later than May 2022.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="empty-state" class="hidden text-center py-16">
+            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <p class="text-muted">No decisions match the selected filters.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const signalFilter = document.getElementById('signal-filter');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    const documentsContainer = document.getElementById('documents-container');
+    const documentCards = document.querySelectorAll('.document-card');
+    const emptyState = document.getElementById('empty-state');
+    const statsText = document.getElementById('stats-text');
+
+    function getSelectedValues(selectElement) {
+        return Array.from(selectElement.selectedOptions).map(opt => opt.value);
+    }
+
+    function applyFilters() {
+        const selectedSignals = getSelectedValues(signalFilter);
+        let decisionCount = 0;
+        let paragraphCount = 0;
+
+        documentCards.forEach(card => {
+            const cardSignals = card.dataset.signals.split(',').filter(s => s);
+            const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
+
+            if (signalMatch) {
+                card.classList.remove('hidden');
+                decisionCount++;
+
+                const paragraphs = card.querySelectorAll('.paragraph-item');
+                paragraphs.forEach(para => {
+                    const paraSignals = para.dataset.signals.split(',').filter(s => s);
+                    if (selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s))) {
+                        para.classList.remove('hidden');
+                        paragraphCount++;
+                    } else {
+                        para.classList.add('hidden');
+                    }
+                });
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        if (decisionCount === 0) {
+            emptyState.classList.remove('hidden');
+            documentsContainer.classList.add('hidden');
+        } else {
+            emptyState.classList.add('hidden');
+            documentsContainer.classList.remove('hidden');
+        }
+
+        const statsParts = [`${paragraphCount} decision texts across ${decisionCount} decisions`];
+        statsText.textContent = statsParts.join('');
+    }
+
+    signalFilter.addEventListener('change', applyFilters);
+
+    clearFiltersBtn.addEventListener('click', function() {
+        Array.from(signalFilter.options).forEach(opt => opt.selected = false);
+        applyFilters();
+    });
+
+    applyFilters();
+});
+</script>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <p class="text-sm text-muted">
+                
+Generated 2026-01-25 16:17 UTC · IGov session 75
+
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGov Decision Signals - Mandate Pipeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'un-blue': '#009edb',
+                        'un-blue-dark': '#0077a8',
+                        'muted': '#64748b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background: rgba(0, 158, 219, 0.2); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="./index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                </a>
+                <nav class="flex items-center gap-6">
+                    <a href="../signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Signals</a>
+                    <a href="../data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">IGov Decision Signal Browser</h1>
+    <p class="mt-2 text-muted" id="stats-text">
+        14 decision texts across 14 decisions · 79th session of the General Assembly
+    </p>
+</div>
+
+<div class="mb-8 flex flex-wrap gap-4 items-end">
+    <div class="flex-1 min-w-[240px]">
+        <label for="signal-filter" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Signal Type</label>
+        <select id="signal-filter" multiple class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="4">
+            
+            <option value="agenda"
+                class="text-blue-700"
+                >agenda</option>
+            
+            <option value="PGA"
+                class="text-purple-700"
+                >PGA</option>
+            
+            <option value="process"
+                class="text-amber-700"
+                >process</option>
+            
+            <option value="report"
+                class="text-green-700">report</option>
+            
+            <option value="observer"
+                >observer</option>
+            
+        </select>
+    </div>
+    <button id="clear-filters" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+        Clear filters
+    </button>
+</div>
+
+<div class="flex gap-6" id="main-content">
+    <div class="flex-1 min-w-0" id="document-list">
+        <div class="space-y-4" id="documents-container">
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/417"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/417</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Elections and Appointments
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Election of the President of the General Assembly at its eightieth session</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-06-02T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 72nd plenary meeting</span>
+                                
+                                
+                                <span>Agenda 4</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/417" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 72nd plenary meeting, on 2 June 2025, the General Assembly, in accordance with Article 21 of the Charter of the United Nations, rule 30 of the rules of procedure of the Assembly and paragraph 1 of the annex to resolution 33/138 of 19 December 1978, elected Annalena Baerbock of Germany as <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> at its eightieth session.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/420"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/420</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Elections and Appointments
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Election of the Chairs of the Main Committees of the General Assembly at its eightieth session</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-06-03T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 73rd plenary meeting</span>
+                                
+                                
+                                <span>Agenda 5</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/420" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">On 2 June 2025, the First, Special Political and Decolonization (Fourth), Second, Third, Fifth and Sixth Committees of the General Assembly held meetings in accordance with rules 99 (a) and 103 of the rules of procedure of the Assembly for the purpose of electing their Chairs. At its 73rd plenary meeting, on 3 June 2025, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> announced that the following persons had been elected as Chairs of the First, Special Political and Decolonization (Fourth), Second, Third, Fifth and Sixth Committees of the Assembly at its eightieth session and are accordingly members of the General Committee for that session:
+
+First Committee: Maurizio Massari (Italy)
+Special Political and Decolonization Committee (Fourth Committee): José Alberto Briz Gutiérrez (Guatemala)
+Second Committee: Lamin Dibba (Gambia)
+Third Committee: Cherdchai Chaivaivid (Thailand)
+Fifth Committee: Zsuzsanna Horváth (Hungary)
+Sixth Committee: Leila Castillon Lora-Santos (Philippines)</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/512"
+                 data-signals="report">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/512</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Open-ended working  group on the prevention of an arms race in outer space in all its aspects</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2024-12-02T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 43 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 96 (a)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/512" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="report">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-green-100 text-green-700
+                                    ">
+                                    report
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 43rd plenary meeting, on 2 December 2024, the General Assembly, by a recorded vote of 174 to 2, with 9 abstentions (Footnote: See A/79/PV.43.), on the recommendation of the First Committee, (Footnote: A/79/406, para.21.)  
+Recalling its resolution 78/20 of 4 December 2023, in which it had decided, under item 97 (d), to convene, beginning in 2025, an open-ended working group, 
+Recalling also its resolution 78/238 of 22 December 2023, in which it had decided, under item 97 (c), to convene, beginning in 2024, an open-ended working group,
+Welcoming the consensual adoption by the Group of Governmental Experts on Further Practical Measures for the Prevention of an Arms Race in Outer Space, established pursuant to General Assembly resolution 77/250 of 30 December 2022 of its report (Footnote: A/79/364.)  on 16 August 2024, and noting the conclusions and recommendations contained therein, including, inter alia, that that report could contribute to future work on the prevention of an arms race in outer space, 
+	1.	Decided to convene a new open-ended working group for the period 2024–‍2028, which would replace the two open-ended working groups established by resolutions 78/20 and 78/238;
+	2.	Also decided to task the open-ended working group convened pursuant to paragraph 1 of the present decision to submit recommendations on the prevention of an arms race in outer space in all its aspects, and that its discussions and recommendations would be informed by all the relevant General Assembly resolutions on the prevention of an arms race in outer space, including:
+	(a)	Resolution 78/20;
+	(b)	Resolution 78/238;
+3. Further decided:
+	(a)	That the new open-ended working group shall work on the basis of consensus, shall hold a two-day organizational session in Geneva in 2025, and shall meet in Geneva for two substantive sessions of five days each in 2025, two substantive sessions of five days each in 2026, two substantive sessions of five days each in 2027 and two substantive sessions of five days each in 2028, with the contribution of relevant international and non-governmental organizations, and further decided that the Chair might also hold intersessional consultative meetings to exchange views on the issues within the mandate of the open-ended working group;
+	(b)	To reaffirm that intergovernmental organizations and other entities having received a standing invitation to participate as observers in the work of the General Assembly and representatives of non-governmental organizations that were in consultative status with the Economic and Social Council, in accordance with Council resolution 1996/31 of 25 July 1996, might participate, including by speaking and submitting documents, in the formal and informal meetings of the open-ended working group as observers; 
+	(c)	That other interested non-governmental organizations relevant and competent to the scope and purpose of the open-ended working group should also inform the secretariat of their interest in participating by submitting information on the organization’s purpose, programmes and activities in areas relevant to the scope of the working group; the Chair of the open-ended working group should submit the proposed list to Member States for their consideration on a non-objection basis and bring the list to the attention of the working group for a final decision on participation; and these organizations would accordingly be invited to participate as observers in the formal sessions of the working group, including by speaking and submitting documents, taking into account the principles of transparency and equitable geographical representation;
+	4.	Requested the Chair of the open-ended working to provide an annual update to the General Assembly through its First Committee;
+5.	Requests the Secretary-General to provide all necessary assistance to the open-ended working group and its Chair and to transmit its <mark class="bg-yellow-200 px-0.5 rounded">report to the General Assembly</mark> at its eighty-third session, the Conference on Disarmament and the Disarmament Commission.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/515"
+                 data-signals="agenda">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/515</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Compliance with non -proliferation, arms limitation and disarmament agreements and commitments</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2024-12-02T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 44 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 98 (ee)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/515" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="agenda">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-blue-100 text-blue-700
+                                    ">
+                                    agenda
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 44th plenary meeting, on 2 December 2024, the General Assembly, by a recorded vote of 175 to 3, with 7 abstentions   (Footnote: See A/79/PV.43.), on the recommendation of the First Committee,  (Footnote: A/79/408, para.115, Draft decision III.) recalling its resolutions 76/33 of 6 December 2021, 72/32 of 4 December 2017, 69/59 of 2 December 2014, 66/49 of 2 December 2011, 63/59 of 2 December 2008 and 60/55 of 8 December 2005, <mark class="bg-yellow-200 px-0.5 rounded">decides to include</mark> in the provisional agenda of its eightieth session, under the item entitled “General and complete disarmament”, the sub-item entitled “Compliance with non-proliferation, arms limitation and disarmament agreements and commitments”.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/537 A, B and C"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/537 A, B and C</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Further modalities of the Third United Nations Conference on Landlocked Developing Countries     </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2024-12-06T05:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 48 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 13</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/537" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">A
+
+At its 48th plenary meeting, on 6 December 2024, the General Assembly, on the proposal of Bhutan, Bolivia (Plurinational State of), Botswana, Burkina Faso, Central African Republic, Congo, Eswatini, Kazakhstan, Kyrgyzstan, Lao People&#39;s Democratic Republic, Lesotho, Malawi, Mali, Mongolia, Morocco, Nepal, Niger, Paraguay, Republic of Moldova, Rwanda, Serbia, Tajikistan, Turkmenistan, Uganda, United Republic of Tanzania and Zimbabwe, (Footnote: A/79/L.20.) recalling its resolutions 76/217 of 17 December 2021, 77/246 of 30 December 2022 and 77/329 of 25 August 2023 in which the Assembly had decided to convene the Third United Nations Conference on Landlocked Developing Countries at the highest possible level, including Heads of State and Government, recalling also its decision 78/550 of 7 May 2024 and its resolution 78/315 of 10 July 2024, by which it had decided to hold the Conference in Gaborone from 10 to 13 December 2024, and noting that the Conference would not be held, as planned, from 10 to 13 December 2024, decided: 
+(a)           That the Third United Nations Conference on Landlocked Developing Countries shall be postponed to a later date and <mark class="bg-yellow-200 px-0.5 rounded">shall be held</mark> at a venue to be decided;  
+(b)           On an exceptional basis, to convene a meeting of the General Assembly in December 2024 to consider the draft new Programme of Action for Landlocked Developing Countries for the Decade 2024–2034 (Footnote: A/79/L.21.) and that the meeting would hear statements by the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, the Chair of the Group of Landlocked Developing Countries and the Secretary-General of the Third United Nations Conference on Landlocked Developing Countries, to be followed by the adoption of the draft Programme of Action;  
+(c)           To request the Secretary-General of the Third United Nations Conference on Landlocked Developing Countries to conduct further consultations on the next steps, including identifying the dates and venue of the Conference. 
+
+B
+
+At its 55th (resumed) plenary meeting, on 24 December 2024, the General Assembly, under rule 81 of its rules of procedure, decided to reconsider the provision contained in paragraph (b) of decision 79/537 A of 6 December 2024.
+
+C
+
+At its 55th (resumed) plenary meeting, on 24 December 2024, the General Assembly decided to proceed to take action on draft resolution A/79/L.21 while hearing in January 2025 the statements mandated in its decision 79/537 A and any statements in explanation of vote on the draft resolution.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/555"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/555</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">United Nations Pledging Conference for Development Activities </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-03-21T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 61 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 23</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/555" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 61st plenary meeting, on 21 March 2025, the General Assembly, on the proposal of its President45 (Footnote: A/79/L.61.) recalling its decision 75/511 B of 9 September 2021, by which it had decided to adjust the scope of the United Nations Pledging Conference for Development Activities and to hold the Conference on an annual basis shortly after the operational activities for development segment of the Economic and Social Council session, and taking into account the letter dated 10 February 2025 from the Under-Secretary-General for Economic and Social Affairs addressed to the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, decided to convene the next Pledging Conference for Development Activities in 2026.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/561"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/561</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Opening statements at the Third United Nations Conference on Landlocked Developing Countries </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-05-07T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 69 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 13</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/561" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At the 69th plenary meeting, on 7 May 2025, the General Assembly, on the proposal of Bolivia (Plurinational State of), Botswana, Kazakhstan, Kyrgyzstan, Lao People&#39;s Democratic Republic, Lesotho, Turkmenistan, Uzbekistan (Footnote: A/79/L.82.), recalling its resolution 79/279 of 11 April 2025, by which it had decided to hold the Third United Nations Conference on Landlocked Developing Countries in Awaza, Turkmenistan, from 5 to 8 August 2025, and the decision of the Preparatory Committee for the Conference set out in paragraph 4 of annex II to its resolution 1,21 (footnote: A/CONF.225/2024/PC/L.1.) regarding statements at the opening of the Conference, decided that statements at the opening would be made by the President of the Conference, the Secretary-General of the United Nations, the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, the President of the Economic and Social Council, the Chair of the Group of Landlocked Developing Countries, a representative of the host country of the Second United Nations Conference on Landlocked Developing Countries and the Secretary-General of the Conference.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/563"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/563</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Themes of the interactive dialogues of the 2026 United Nations Water Conference to Accelerate the Implementation of Sustainable Development Goal 6: Ensure availability and sustainable management of water and sanitation for all</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-07-09T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 84 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 18</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/563" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 84th plenary meeting, on 9 July 2025,the General Assembly, on the proposal of Senegal and United Arab Emirates (Footnote A/79/L.101.), recalling its resolution 78/327 of 6 September 2024, decided that the themes, in no particular order of priority, of the six <mark class="bg-yellow-200 px-0.5 rounded">interactive dialogue</mark>s of the 2026 United Nations Water Conference to Accelerate the Implementation of Sustainable Development Goal 6: Ensure availability and sustainable management of water and sanitation for all, mandated in paragraph 6 of the resolution, would be:
+ 
+(a) Water for people: the human rights to water and sanitation, including for those in vulnerable situations, for healthy societies and economies;
+(b) Water for prosperity: valuing water, water-energy-food nexus, advancing integrated and sustainable water resource management, wastewater and water-use efficiency across sectors, and economic and social development;
+(c) Water for planet: climate, biodiversity, desertification, environment, source to sea, resilience and disaster risk reduction;
+(d) Water for cooperation: transboundary and international water cooperation, including scientific cooperation, and inclusive governance;
+(e) Water in multilateral processes: Sustainable Development Goal 6, the 2030 Agenda for Sustainable Development and beyond, and global water initiatives;
+(f) Investments for water: financing, technology and innovation, and capacity-building.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/566"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/566</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Participation of non-governmental organizations, civil society organizations, academic institutions and the private sector in the high-level meeting of the General Assembly on the thirtieth anniversary of the Fourth World Conference on Women</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-07-25T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 86th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 27</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/566" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 86th plenary meeting, on 25 July 2025, the General Assembly, on the proposal of its President,  (Footnote: A/79/L.106.), as amended,  (Footnote: A/79/L.112.), recalling paragraph 6 of its resolution 79/288 of 7 May 2025 on the scope, modalities, format and organization of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the thirtieth anniversary of the Fourth World Conference on Women, decided to approve the participation of the non-governmental organizations, civil society organizations, academic institutions and the private sector as listed in the annex to the present decision in the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the thirtieth anniversary of the Fourth World Conference on Women, to be held pursuant to resolutions 78/182 of 19 December 2023 and 79/288. 
+
+Annex
+
+Africa2World Foundation
+Angel Wisdom Investment Co., Ltd
+ANIJIE GLOBAL FOUNDATION
+Ashake Foundation
+ASOCIACION GWL VOICES FOR CHANGE AND INCLUSION
+Association au Secours des Filles Mères (ASFM)
+Association of Uganda Professional Women in Agriculture and Environment (AUPWAE)
+Beijing Xinjiepin Trading Co., Ltd
+Binti Makini Foundation
+BINTI SALHA FOUNDATION
+Bridging Development Gap
+Centre de Recherche et d’Appui à la Sécurité Alimentaire
+Centre for Nonviolence and Gender Advocacy in Nigeria (CENGAIN)
+Centre for Peace and Development Initiatives (CPDI)
+China Chengdu Shengyuan Real Estate Development Co., Ltd
+China Lhasa Chengguan District Hada (Group) Co., LTD
+City University of New York Graduate School of Public Health
+Common Threads Project
+Community Initiative for Peace and Childrens Foundation
+CONGOLESE AMERICAN WOMEN EMPOWERMENT AND LEADERSHIP
+CONTACT BASE
+Creats International
+Danish Family Planning Association (DFPA)
+Disciples Overseas Ministries
+ECB Sustainable Youth Foundation
+ECUARUNARI
+Endam Home of Hope
+Enlaces territoriales para la equidad de género
+Environment and Rural Women’s Development Organization (ERD)
+Eukalypton Charity Foundation
+Every Woman
+Fidel Birhan Charitable Organization
+Folasade Mujidat Tinubu Foundation
+Footage Foundation
+Foreign Investment Network
+Global Energy Alliance for People and Planet (GEAPP) INC
+Global Helper’s Foundation
+Global Thinking Foundation
+I Love You Love for Earth Cultural Foundation
+Impact Compact
+IMPROVED SEXUAL HEALTH &amp; RIGHTS ADVOCACY INITIATIVE (ISHRAI)
+Initiative Congolaise pour l’Autonomisation de Femmes
+International Commission of Culture and Diplomatic Relations
+JCI Hong Kong Jayceettes
+Kakenya Center for Excellence, DBA Kakenya’s Dream
+Kenya National Alliance of Street Vendors and Informal Traders (KENASVIT)
+Kisumu Medical and Education Trust
+Last Mile4D
+Lift Africa Foundation
+Lions club Antananarivo Miranandro
+NAKURU DROP-IN CENTER
+National Council of Jewish Women
+Naza Agape Foundation
+Ontario Native Women’s Association (ONWA)
+Plateforme de la société civile Démocratie, Paix, Elections et Développement durable en Guinée
+Preschool Readers, LLC
+Qingdao Haizete Biotechnology Co., Ltd
+Rescue Mission International (ReMI)
+Rural Nurture Initiative
+Save The Slum Initiative
+Shandong Yonghao New Material Technology Co., Ltd
+Shanghai Pinyu Enterprise Development Group Co., Ltd
+Shanghai Sangkon Environment Technology Co., Ltd
+Shenzhen GLAT Fund Investment Management CO., Ltd
+Social Changemakers and Innovators (SOCHAI)
+Society of Gender Professionals
+SOS FAMILY
+Starlight Foundation
+Student Platform for Engineering Education Development (SPEED)
+Success Capital Organisation
+SVRI NPC (Sexual Violence Research Initiative)
+The African Youth Cafe
+The Ladies Foundation
+The Light Millennium, Charitable Global Human Advancement Organization
+The NO MORE Foundation
+THE REACH PROGRAMME
+UKAIGWE HEALTH EMPOWERMENT AND LEARNING (UHEAL) CHARITIES
+United Nations Association of Nigeria
+United Unity Environmental Rescue Organization (UNERO)
+United Youth Initiative for Africa
+Universal Maidens Association Cameroon(UNIMAC)
+Village Farmers Initiative (VFI)
+VIVA Art e.V.
+VIVA Human Inc.
+VOW Center
+Vyaelea Organization (Vyaelea)
+Waohlife Media International Limited
+Wasel Tasel Humanitarian Foundation “WTHF”
+WERUCHE INSPIRES INTERNATIONAL, INC.
+Wetech
+Widows Development Organization (WiDO)
+Women and Youth Advancement Inc.
+Women Empowered
+Women Empowerment Focus Foundation
+Women in Agriculture for Sustainable Development
+World Humanitarian Forum
+Youth Parli of Pakistan (YPP)
+Zango Foundation
+Zhongtai Jiye Investment Group Co., Ltd
+Ziinesaif’s Foundations Uganda</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/568"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/568</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Participation of non‑governmental organizations, civil society organizations, relevant medical organizations, academic institutions, the scientific community and the private sector in the fourth high-level meeting of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-07-25T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 86th plenary meeting</span>
+                                
+                                
+                                <span>Agenda 127</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/568" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 86th plenary meeting, on 25 July 2025, the General Assembly, on the proposal of its President,  (Footnote: A/79/L.102.), as amended,  (Footnote: A/79/L.110.), recalling paragraph 9 of its resolution 79/273 of 6 March 2025, entitled “Scope, modalities, format and organization of the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being”, decided to approve the participation of the non‑governmental organizations, civil society organizations, relevant medical organizations, academic institutions, the scientific community and the private sector as listed in the annex to the present decision in the fourth <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the prevention and control of noncommunicable diseases and the promotion of mental health and well-being, to be held pursuant to resolutions 73/2 of 10 October 2018 and 79/273.
+
+Annex
+
+ACTION 4 CHANGE
+AFRICA DISASTER MANAGEMENT FOUNDATION (ADREF)
+Alzheimer’s Disease International
+American Medical Women’s Association
+American Society of Clinical Oncology (ASCO)
+Angel Wisdom Investment Co., Ltd
+Asociación Nacional de Fabricantes de Alcoholes y Licores -ANFAL-
+Associacao de Diabetes Juvenil (ADJ Diabetes Brasil)
+ASSOCIATION DES JEUNES COURAGEUX DU CONGO
+Association Santé Diabète
+Avenir de l’Environnement (ADE)
+Call off Cancer Initiative, Nigeria
+Campaigns in Global Health
+Cancer Education and Research Institute
+Cancer Research UK
+Cancerfonden
+Centre for Citizens with Disabilities (CCD)
+China Chengdu Shengyuan Real Estate Development Co., Ltd
+China Zhongguancun Precision Medicine Science and Technology Foundation
+CMMB (Catholic Medical Mission Board, Inc.)
+Corporación Colombiana de Madres y Padres – Red PaPaz
+Creats International
+Culture Centre for the Deaf, Mongolia
+Deutsche Allianz Nichtübertragbare Krankheiten (DANK)
+Diabetes Palestine
+DMUN Foundation
+DMUN Foundation Inc.
+Eastern Caribbean-Southeast Asia Chamber
+ECB Sustainable Youth Foundation
+Elemental Advisors
+EnvMed – European Network for Environmental Medicine
+Eucharia Help Foundation (The Foundation)
+F. Hoffmann-La Roche Ltd
+Fundación Killkay
+Gasol Foundation
+Gavi, the Vaccine Alliance
+Girls Outloud Luweero-Uganda
+Global Alliance for Behavioral Health and Social Justice
+Global Alliance for Rheumatic and Congenital Hearts (Global ARCH)
+Global Liver Institute
+Grupar-BR Rheumatic Patient Support Group Brazil
+Hazras Charity Foundation
+Health and Global Policy Institute
+Health Diplomacy Alliance
+I Love You Love for Earth Cultural Foundation
+Institut Global pour les Innovations, Le Réseau et le Développement en Santé Mentale
+International Association for Dental Research
+International Sport and Culture Association ISCA
+International Union for Health Promotion and Education
+Jeunes Volontaires pour l’Environnement (JVE) Niger
+Kuwait Society for Smoking and Cancer Prevention
+Latin-American Alliance of Food and Beverage Industry Associations (ALAIAB)
+Maldives NCD Alliance
+McCabe Centre for Law and Cancer at Cancer Council Victoria
+Medtronic
+NAKURU DROP-IN CENTER
+NCD Alliance
+Nepal Non Communicable Disease Alliance
+Partners in Health
+Poverty Eradication and Sustainable Action Aid (PESAID)
+Qingdao Haizete Biotechnology Co., Ltd
+Resolve to Save Lives, Inc.
+Royal College of Psychiatrists
+ROYAL PHILIPS
+Shanghai Pinyu Enterprise Development Group Co., Ltd
+St. Jude Children’s Research Hospital
+StrongMinds
+SVATOL AYURVEDA HEALTHCARE AND RESEARCH FOUNDATION
+Swedish Heart Lung Foundation
+T1International
+T2S C.A.R.E.S.
+TANZANIA NCD ALLIANCE
+The Congenital Heart Disease Foundation of Nigeria
+The Kota Alliance
+The World Federation of the Sporting Goods Industry
+Tongzhou Club (Beijing) Information Technology Co.,LTD
+United China Education Foundation
+Universal Maidens Association Cameroon (UNIMAC)
+University of Bath
+Vyaelea Organization (Vyaelea)
+World Cancer Research Fund International
+World Diabetes Foundation
+World Spirits Alliance
+Wuhan Hongxin Real Estate Development Co.
+Zhejiang Yunduan Piaoxue DDW Technology Co., Ltd
+Zhongtai Jiye Investment Group Co., Ltd
+Ziinesaif’s Foundations Uganda</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/570"
+                 data-signals="PGA,process">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/570</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Question of equitable representation on and increase in the membership of the Security Council and other matters related to the Security Council</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-08-25T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 88 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 122</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/570" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA,process">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-amber-100 text-amber-700
+                                    ">
+                                    process
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 88th plenary meeting, on 25 August 2025, the General Assembly, on the proposal of its President:
+a.	Decided to immediately continue intergovernmental negotiations on Security Council reform in informal plenary of the General Assembly at its eightieth session, as mandated by Assembly decisions 62/557 of 15 September 2008, 63/565 B of 14 September 2009, 64/568 of 13 September 2010, 65/554 of 12 September 2011, 66/566 of 13 September 2012, 67/561 of 29 August 2013, 68/557 of 8 September 2014, 69/560 of 14 September 2015, 70/559 of 27 July 2016, 71/553 of 19 July 2017, 72/557 of 29 June 2018, 73/554 of 25 June 2019, 74/569 of 31 August 2020, 75/569 of 22 June 2021, 76/572 of 12 July 2022, 77/559 of 29 June 2023, and 78/561 of 27 August 2024, building on the informal meetings held during its seventy-ninth session, as reflected in the letter dated 2 July 2025 from the Chair, and on the document entitled “Revised <mark class="bg-yellow-200 px-0.5 rounded">Co-Chairs</mark>&#39; Elements Paper on Convergences and Divergences on the question of equitable representation on and increase in the membership of the Security Council and related matters”, circulated on 3 July 2025, actions 39 and 40 of resolution 79/1 of 22 September 2024, and the positions of and proposals made by Member States, reflected in the text and its annex circulated on 31 July 2015, to help to inform its future work; 
+b.	Welcomed the active engagement, initiatives and intensive efforts of the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark>, and noted with appreciation the active role and concrete efforts of the <mark class="bg-yellow-200 px-0.5 rounded">Co-Chairs</mark> undertaken in a consultative manner with a view to an early comprehensive reform of the Security Council; 
+c.	Welcomed the submission and the presentation of models, and the revision of already presented models during the seventy-ninth session; 
+d.	Encouraged the submission of further models and the revision of already presented models by States and Groups of States for the structured dialogues with a view to developing a consolidated model in the future based on convergences on the five clusters, and the models presented by Member States; 
+e.	Decided to convene the Open-ended Working Group on the Question of Equitable Representation on and Increase in the Membership of the Security Council and Other Matters related to the Security Council during the eightieth session of the General Assembly, if Member States so decide;
+f.	Also decided to include in the agenda of the eightieth session of the General Assembly the item entitled “Question of equitable representation on and increase in the membership of the Security Council and other matters related to the Security Council”.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/571"
+                 data-signals="PGA,process">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/571</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">UN80 Initiative: establishment of the informal ad hoc working group</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-09-02T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 90 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 123 (a)</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/571" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA,process">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-amber-100 text-amber-700
+                                    ">
+                                    process
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 90th plenary meeting, on 2 September 2025, on the proposal of its President  (Footnote: A/79/L.119/Rev.1.) the General Assembly:
+	(a)	Recalled its resolution 79/318 of 18 July 2025, in which it had recognized the central role of Member States in the reform process; 
+	(b)	Welcomed with appreciation the issuance of the report of the Secretary-General of the mandate implementation review; (Footnote: A/80/318.) 
+	(c)	Decided to establish an informal ad hoc working group of the General Assembly, open to all Member States and observers, to consider in its scope the proposals contained in the report of the Secretary-General and to identify principles and follow-up actions in order to improve the creation, delivery and review of mandates;
+	(d)	Requested the <mark class="bg-yellow-200 px-0.5 rounded">President of the General Assembly</mark> to appoint two <mark class="bg-yellow-200 px-0.5 rounded">Co-Chairs</mark> of the informal ad hoc working group;
+	(e)	Requested the informal ad hoc working group to begin its work at the eightieth session of the General Assembly, no later than 19 September 2025, and conclude its work by the end of March 2026;
+	(f)	Also requested the informal ad hoc working group to provide the General Assembly with an update on progress by 15 December 2025;
+	(g)	Looked forward to the forthcoming proposals of the Secretary-General on structural changes and programme realignments, which would further inform efforts to enhance the overall effectiveness, efficiency, responsiveness, resilience and overall impact of the United Nations system across all three pillars of its work;
+	(h)	Encouraged Member States to strive for consensus in the deliberations of the informal ad hoc working group;
+	(i)	Requested the Secretary-General to provide substantive support to the informal ad hoc working group as needed for the effective discharge of its mandate.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/572"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/572</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">High-level meeting to commemorate and promote the International Day against Nuclear Tests (item 98)</p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-09-03T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 91 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 98</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/572" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 91st plenary meeting, on 3 September 2025, the General Assembly, on the proposal of its President, decided, without setting a precedent, to invite the Executive Secretary of the Preparatory Commission for the Comprehensive Nuclear-Test-Ban Treaty Organization, Robert Floyd, the Director of the International Atomic Energy Agency Liaison Office in New York, Vivian Okeke, on behalf of the Director General of the Agency, Rafael Mariano Grossi, and a youth representative from Kiribati, Ms. Oemwa Johnson, to make statements at the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> to commemorate and promote the International Day against Nuclear Tests.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors"
+                 data-symbol="79/574"
+                 data-signals="PGA">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-3 mb-1">
+                                <span class="font-semibold text-gray-900">79/574</span>
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                    Other Decisions
+                                </span>
+                                
+                            </div>
+                            
+                            <p class="text-sm text-gray-600">Participation  of non-governmental organizations, civil society organizations, academic institutions and the private sector in the high-level meeting of the General Assembly on the appraisal of the United Nations Global Plan of Action to Combat Trafficking in Persons </p>
+                            
+                            <div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                                
+                                <span>Adopted 2025-09-05T04:00:00.000Z</span>
+                                
+                                
+                                <span>Meeting 94 plenary meeting</span>
+                                
+                                
+                                <span>Agenda 107</span>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="https://igov.un.org/a/dec/79/574" target="_blank"
+                               class="text-xs text-muted hover:text-un-blue transition-colors">
+                                View IGov
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="divide-y divide-gray-100">
+                    
+                    <div class="px-4 py-3 paragraph-item" data-signals="PGA">
+                        <div class="flex flex-wrap items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                            <div class="inline-flex flex-wrap gap-1.5 items-center">
+                                
+                                <span class="px-2 py-0.5 rounded text-xs font-medium signal-tag inline-flex items-center justify-center
+                                    bg-purple-100 text-purple-700
+                                    ">
+                                    PGA
+                                </span>
+                                
+                            </div>
+                            <span class="font-medium text-gray-700">1.</span>
+                            <span class="flex-1 min-w-0">At its 94th plenary meeting, on 5 September 2025, the General Assembly, on the proposal of its President,  (Footnote: A/79/L.122.), as amended,  (Footnote: A/79/L.128.), recalling paragraph 9 of its resolution 79/286 of 29 April 2025 on the modalities, format and organization of the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the appraisal of the United Nations Global Plan of Action to Combat Trafficking in Persons, decided to approve the participation of the non governmental organizations, civil society organizations, academic institutions and the private sector as listed in the annex to the present decision in the <mark class="bg-yellow-200 px-0.5 rounded">high-level meeting</mark> of the General Assembly on the appraisal of the United Nations Global Plan of Action to Combat Trafficking in Persons, to be held pursuant to resolution 79/286. 
+Annex
+
+
+Afghans for Progressive Thinking APT
+African Law Students’ Association
+ALOR PATHSHALA KULAURA
+Alternative Espaces Citoyens
+Anti Pollution Drive (APD) Foundation
+Apostolic Ministerial International Network
+Association des humanistes pour l’encadrement des filles mères et des personnes des œuvres
+Association des jeunes agriculteurs du Mali – AJAM
+Awareness Against Human Trafficking (HAART)
+Bangladesh Jatiyo Mohila Ainjibi Shamity
+Biruh Adis Charitable Organization
+CARITAS UKRAINE INTERNATIONAL CHARITY FOUNDATION
+CAYO-Concerned African Youth Organization
+Centre de Recherche et d’Appui à la Sécurité Alimentaire
+Centre for Peace and Development Initiatives (CPDI)
+CENTRE FOR YOUTH AND LITERACY DEVELOPMENT
+CFAID SARL
+CHILD RIGHT AND DEVELOPMENT IMPLEMENTATION FOUNDATION INC
+China Zhongguancun Precision Medicine Science and Technology Foundation
+Contra la Trata de Personas, AGAPE AC
+Creatives Against Drugs And Crime
+Dedalus Cooperativa sociale
+Démocratie, Paix, Elections et Développement durable en Guinée
+Destiny Foundation
+ECB Sustainable Youth Foundation
+El Pozo de Vida, A.C
+Empowerment Collective
+End Child Prostitution Child Pornography and Trafficking of Children for Sexual Purposes
+English Training Live GmbH (International Forum for Understanding)
+Federation of Community Forestry Users Nepal (FECOFUN)
+Fidel Birhan Charitable Organization
+FINOT Charitable Association
+Folasade Mujidat Tinubu Foundation
+Freehands Organization – Tanzania
+Frontida Zois Initiative (FZI)
+Fundación La Palabra Hecha Vida
+Future Hopes Integrated Development Organization
+Gambia cyber security Alliance
+Gateway Alliance against Human Trafficking (GAHT)
+Generations Without Qat
+Girls Empowerment for Leadership association
+GLOBAL CENTRE FOR CLIMATE AND SECURITY GOVERNANCE (GCSG)
+Global Emergency Response and Assistance (GERA)
+Grassroot Development Support and Rural Enlightenment Initiative
+Grassroots Advocacy Centre for Economic Development Ltd. Gte
+HEALTH AID MEDICARE ORGANISATION
+Hope for Justice
+Hope Pyx Global
+HopeNow
+Human Development Research Initiative
+Humanity For The World
+Initiative Congolaise pour l’Autonomisation de Femmes
+Innovations for Poverty Action
+Integrity South Sudan
+INTERDISCIPLINARY CENTRE FOR LAW, ALTERNATIVE AND INNOVATIVE METHODS (ICLAIM)
+International Commission of Culture and Diplomatic Relations
+International Network of Hearts
+International Protection Alliance
+INTERNATIONAL RETURNS &amp; REINTEGRATION ASSISTANCE (IRARA)
+Iranian Women Organization of Ontario (IWOO)
+Jeunesse Nigérienne au Service du développement Durable (JNSDD AIKIN KASA)
+Kanethara Educational Trust doing business as All India Sustainable Development Council
+Kasma Charity Organization
+KEY ABIDJAN
+Korean Association for Ethical Organ Transplants(KAEOT)
+Kuchlak Welfare Society
+La Vie Mot Global Mission aka Living Word Mission
+Manav Seva Sansthan SEVA
+Marginalized Communities Advocacy Network
+Migrant Help
+Missing Child Kenya Foundation
+National Senior citizens Organization of Liberia
+Network for climate action
+Nicole Ilunga Foundation
+OBSERVATOIRE INDEPENDANT DE L’EDUCATION “OIE-RDC”
+ONG CAVOEQUIVA
+Payoke
+Power House Youth Club
+Public Union “Clean World” Aid to Women
+RED BINACIONAL DE CORAZONES
+Rescue Mission International (ReMI)
+Ruhama
+SENEVE EL-ELYON “SEEL/ASBL”
+SET FREE TO THRIVE
+Shenzhen GLAT Fund Investment Management CO., Ltd
+Shobana Powell Consulting
+Sinoe Youth Development Association
+Society For Family Health
+STAY IN AFRICA
+Stichting Misbruikt! Landelijke Belangen Organisatie Seksueel misbruik
+Sustainable Social Development Organization (SSDO)
+Tadamun Social Society (TASS)
+The Freedom Fund
+The Knoble
+The MEA Institute for Strategic Studies
+The S-HE Identity, Inc.
+The Vision for Teenagers Adolescents and Youths Wellbeing Initiative
+Tongzhou Club (Beijing) Information Technology Co., LTD
+U.S Africa Institute
+UNITED CREATIVE SOCIETY NEPAL
+United Voices For Global Impact
+Valientes colombia ONG
+Vision of Hope Zambia
+women For Liberty in Haïti
+Youth International Leadership Institute (YIL-Network), Inc.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="empty-state" class="hidden text-center py-16">
+            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <p class="text-muted">No decisions match the selected filters.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const signalFilter = document.getElementById('signal-filter');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    const documentsContainer = document.getElementById('documents-container');
+    const documentCards = document.querySelectorAll('.document-card');
+    const emptyState = document.getElementById('empty-state');
+    const statsText = document.getElementById('stats-text');
+
+    function getSelectedValues(selectElement) {
+        return Array.from(selectElement.selectedOptions).map(opt => opt.value);
+    }
+
+    function applyFilters() {
+        const selectedSignals = getSelectedValues(signalFilter);
+        let decisionCount = 0;
+        let paragraphCount = 0;
+
+        documentCards.forEach(card => {
+            const cardSignals = card.dataset.signals.split(',').filter(s => s);
+            const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
+
+            if (signalMatch) {
+                card.classList.remove('hidden');
+                decisionCount++;
+
+                const paragraphs = card.querySelectorAll('.paragraph-item');
+                paragraphs.forEach(para => {
+                    const paraSignals = para.dataset.signals.split(',').filter(s => s);
+                    if (selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s))) {
+                        para.classList.remove('hidden');
+                        paragraphCount++;
+                    } else {
+                        para.classList.add('hidden');
+                    }
+                });
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        if (decisionCount === 0) {
+            emptyState.classList.remove('hidden');
+            documentsContainer.classList.add('hidden');
+        } else {
+            emptyState.classList.add('hidden');
+            documentsContainer.classList.remove('hidden');
+        }
+
+        const statsParts = [`${paragraphCount} decision texts across ${decisionCount} decisions`];
+        statsText.textContent = statsParts.join('');
+    }
+
+    signalFilter.addEventListener('change', applyFilters);
+
+    clearFiltersBtn.addEventListener('click', function() {
+        Array.from(signalFilter.options).forEach(opt => opt.selected = false);
+        applyFilters();
+    });
+
+    applyFilters();
+});
+</script>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <p class="text-sm text-muted">
+                
+Generated 2026-01-25 16:17 UTC · IGov session 79
+
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
