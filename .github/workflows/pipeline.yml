@@ -38,17 +38,6 @@ on:
     - cron: '0 * * * *'
     - cron: '30 * * * *'
     - cron: '15 2 * * *'
-  push:
-    paths:
-      - 'data/pdfs/**'
-      - 'data/extracted/**'
-      - 'data/detected/**'
-      - 'data/linked/**'
-      - 'data/igov/**'
-      - 'docs/igov/**'
-      - 'docs/sessions/**'
-      - 'src/**'
-      - 'config/**'
 
 permissions:
   contents: write
@@ -56,19 +45,20 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pipeline-${{ github.ref }}
-  cancel-in-progress: false
+  group: pipeline-${{ github.ref_name }}
+  cancel-in-progress: true
 
 env:
   PYTHON_VERSION: '3.12'
   PIP_CACHE_DIR: ~/.cache/pip
+  STAGES: ${{ inputs.stages || 'core' }}
 
 jobs:
   discover:
     name: Discover
     runs-on: ubuntu-latest
     container: python:3.12-slim
-    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/pdfs/'))
+    if: env.STAGES == 'all' || env.STAGES == 'core' || env.STAGES == 'discover' || env.STAGES == 'discover+extract+detect+link'
     steps:
       - name: Install git
         run: |
@@ -124,7 +114,7 @@ jobs:
             else
               git commit -m "chore: discover new documents ($(date -I))"
             fi
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 
@@ -133,7 +123,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: discover
-    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
+    if: env.STAGES == 'all' || env.STAGES == 'core' || env.STAGES == 'extract' || env.STAGES == 'discover+extract+detect+link' || env.STAGES == 'extract+detect+link+generate' || env.STAGES == 'extract+detect+generate'
     steps:
       - name: Install git
         run: |
@@ -233,7 +223,7 @@ jobs:
             echo "No extraction changes to commit"
           else
             git commit -m "chore: extract document content"
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 
@@ -242,7 +232,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: extract
-    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'data/extracted/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
+    if: env.STAGES == 'all' || env.STAGES == 'core' || env.STAGES == 'detect' || env.STAGES == 'discover+extract+detect+link' || env.STAGES == 'extract+detect+link+generate' || env.STAGES == 'extract+detect+generate'
     steps:
       - name: Install git
         run: |
@@ -358,7 +348,7 @@ jobs:
             echo "No detection changes to commit"
           else
             git commit -m "chore: detect signals in documents"
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 
@@ -367,7 +357,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: detect
-    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/detected/'))
+    if: env.STAGES == 'all' || env.STAGES == 'core' || env.STAGES == 'link' || env.STAGES == 'discover+extract+detect+link' || env.STAGES == 'extract+detect+link+generate'
     steps:
       - name: Install git
         run: |
@@ -461,7 +451,7 @@ jobs:
             echo "No linking changes to commit"
           else
             git commit -m "chore: link related documents"
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 
@@ -470,7 +460,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: link
-    if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'generate' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/linked/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
+    if: env.STAGES == 'all' || env.STAGES == 'core' || env.STAGES == 'generate' || env.STAGES == 'extract+detect+link+generate' || env.STAGES == 'extract+detect+generate'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -553,9 +543,9 @@ jobs:
             echo "No site changes to commit"
           else
             git commit -m "chore: generate static site"
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
-            echo "Site updated and committed to main branch"
+            echo "Site updated and committed to default branch"
           fi
 
       - name: Setup Pages
@@ -574,7 +564,7 @@ jobs:
     name: IGov Sync
     runs-on: ubuntu-latest
     container: python:3.12-slim
-    if: inputs.stages == 'all' || inputs.stages == 'igov' || inputs.stages == 'igov-sync' || github.event_name == 'schedule'
+    if: env.STAGES == 'all' || env.STAGES == 'igov' || env.STAGES == 'igov-sync' || github.event_name == 'schedule'
     steps:
       - name: Install git
         run: |
@@ -638,7 +628,7 @@ jobs:
             else
               git commit -m "chore: sync IGov decisions ($(date -I))"
             fi
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 
@@ -647,7 +637,7 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.12-slim
     needs: igov-sync
-    if: inputs.stages == 'all' || inputs.stages == 'igov' || inputs.stages == 'igov-signals' || github.event_name == 'schedule'
+    if: env.STAGES == 'all' || env.STAGES == 'igov' || env.STAGES == 'igov-signals' || github.event_name == 'schedule'
     steps:
       - name: Install git
         run: |
@@ -691,7 +681,7 @@ jobs:
             else
               git commit -m "chore: update IGov signal browser ($(date -I))"
             fi
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 
@@ -699,7 +689,7 @@ jobs:
     name: Build Session
     runs-on: ubuntu-latest
     container: python:3.12-slim
-    if: (inputs.stages == 'all' || inputs.stages == 'build-session') && inputs.session_number != ''
+    if: (env.STAGES == 'all' || env.STAGES == 'build-session') && inputs.session_number != ''
     steps:
       - name: Install git
         run: |
@@ -732,6 +722,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: build session ${{ inputs.session_number }} signal browser ($(date -I))"
-            git pull --rebase origin main || true
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
