@@ -74,7 +74,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Discover new documents
         if: inputs.session_number == ''
@@ -128,7 +130,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Extract document content
         run: |
@@ -226,7 +230,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Run signal detection
         run: |
@@ -340,7 +346,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Run document linking
         run: |
@@ -435,7 +443,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Generate unified signals explorer
         env:
@@ -525,7 +535,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Sync IGov decisions
         run: |
@@ -592,7 +604,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Generate IGov signal browser
         run: |
@@ -638,7 +652,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+          pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
       - name: Build session
         run: |
