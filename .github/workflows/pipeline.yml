@@ -70,6 +70,10 @@ jobs:
     container: python:3.12-slim
     if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'discover' || inputs.stages == 'discover+extract+detect+link' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/pdfs/'))
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -77,7 +81,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -132,6 +135,10 @@ jobs:
     needs: discover
     if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'extract' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -139,7 +146,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -238,6 +244,10 @@ jobs:
     needs: extract
     if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'detect' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || inputs.stages == 'extract+detect+generate' || (github.event_name == 'push' && (contains(github.event.head_commit.modified, 'data/pdfs/') || contains(github.event.head_commit.modified, 'data/extracted/') || contains(github.event.head_commit.modified, 'src/') || contains(github.event.head_commit.modified, 'config/')))
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -245,7 +255,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -360,6 +369,10 @@ jobs:
     needs: detect
     if: inputs.stages == 'all' || inputs.stages == 'core' || inputs.stages == 'link' || inputs.stages == 'discover+extract+detect+link' || inputs.stages == 'extract+detect+link+generate' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'data/detected/'))
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -367,7 +380,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -463,6 +475,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -470,7 +486,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -561,12 +576,15 @@ jobs:
     container: python:3.12-slim
     if: inputs.stages == 'all' || inputs.stages == 'igov' || inputs.stages == 'igov-sync' || github.event_name == 'schedule'
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -631,12 +649,15 @@ jobs:
     needs: igov-sync
     if: inputs.stages == 'all' || inputs.stages == 'igov' || inputs.stages == 'igov-signals' || github.event_name == 'schedule'
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
@@ -680,12 +701,15 @@ jobs:
     container: python:3.12-slim
     if: (inputs.stages == 'all' || inputs.stages == 'build-session') && inputs.session_number != ''
     steps:
+      - name: Install git
+        run: |
+          apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y --no-install-recommends git
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install --cache-dir ${{ env.PIP_CACHE_DIR }} -e .
 
