@@ -1,0 +1,122 @@
+name: Extract
+
+on:
+  push:
+    paths:
+      - 'data/pdfs/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: extract-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  extract:
+    name: Extract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          pip install -e .
+
+      - name: Ensure branch checkout
+        run: git checkout -B "${GITHUB_REF_NAME}"
+
+      - name: Extract document content
+        run: |
+          python -c "
+          import sys
+          import os
+          from pathlib import Path
+          sys.path.insert(0, 'src')
+          from mandate_pipeline.extractor import extract_text, extract_operative_paragraphs, extract_title, extract_agenda_items, find_symbol_references
+          import json
+          import subprocess
+
+          print('Finding PDFs to process...')
+
+          if os.environ.get('GITHUB_EVENT_NAME') == 'push':
+              try:
+                  result = subprocess.run(['git', 'diff', '--name-only', 'HEAD~1', 'HEAD', '--', 'data/pdfs/*.pdf'],
+                                        capture_output=True, text=True, cwd='.')
+                  changed_files = result.stdout.strip().split('\\n') if result.stdout.strip() else []
+              except:
+                  changed_files = []
+          else:
+              pdf_dir = Path('data/pdfs')
+              changed_files = [str(f) for f in pdf_dir.rglob('*.pdf')] if pdf_dir.exists() else []
+
+          pdf_files = [f for f in changed_files if f.strip()]
+          print(f'Found {len(pdf_files)} PDFs to process')
+
+          if not pdf_files:
+              print('No PDFs to process')
+              exit(0)
+
+          processed_count = 0
+          for pdf_path_str in pdf_files:
+              pdf_path = Path(pdf_path_str)
+              if not pdf_path.exists():
+                  print(f'PDF not found: {pdf_path}')
+                  continue
+
+              try:
+                  print(f'Extracting: {pdf_path.name}')
+                  text = extract_text(pdf_path)
+                  paragraphs = extract_operative_paragraphs(text)
+                  title = extract_title(text)
+                  agenda_items = extract_agenda_items(text)
+                  symbol_refs = find_symbol_references(text)
+
+                  extracted = {
+                      'symbol': pdf_path.stem.replace('_', '/'),
+                      'filename': pdf_path.name,
+                      'title': title,
+                      'text': text,
+                      'paragraphs': paragraphs,
+                      'agenda_items': agenda_items,
+                      'symbol_references': symbol_refs
+                  }
+
+                  output_file = Path('data/extracted') / f'{pdf_path.stem}.json'
+                  output_file.parent.mkdir(parents=True, exist_ok=True)
+
+                  with open(output_file, 'w') as f:
+                      json.dump(extracted, f, indent=2)
+
+                  print(f'Extracted to: {output_file}')
+                  processed_count += 1
+
+              except Exception as e:
+                  print(f'Error processing {pdf_path}: {e}')
+                  continue
+
+          print(f'Successfully processed {processed_count} PDFs')
+          "
+
+      - name: Commit extraction results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/extracted/
+          if git diff --staged --quiet; then
+            echo "No extraction changes to commit"
+          else
+            git commit -m "chore: extract document content"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi

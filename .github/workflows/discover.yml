@@ -1,0 +1,97 @@
+name: Discover + IGov
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+    - cron: '30 * * * *'
+    - cron: '15 2 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: discover-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    name: Discover + IGov
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          pip install -e .
+
+      - name: Ensure branch checkout
+        run: git checkout -B "${GITHUB_REF_NAME}"
+
+      - name: Discover new documents
+        run: python -m mandate_pipeline.cli discover --config ./config --data ./data --verbose
+
+      - name: Record discovery run metadata
+        run: |
+          cat > data/last_discover_run.json << 'EOF'
+          {
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "event_name": "${{ github.event_name }}",
+            "ref": "${{ github.ref }}",
+            "ref_name": "${{ github.ref_name }}",
+            "sha": "${{ github.sha }}",
+            "actor": "${{ github.actor }}",
+            "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+
+      - name: Sync IGov decisions
+        run: python -m mandate_pipeline.cli igov-sync --config ./config --data ./data --verbose
+
+      - name: Record IGov sync metadata
+        run: |
+          cat > data/igov/last_sync_run_current.json << 'EOF'
+          {
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "event_name": "${{ github.event_name }}",
+            "ref": "${{ github.ref }}",
+            "ref_name": "${{ github.ref_name }}",
+            "sha": "${{ github.sha }}",
+            "actor": "${{ github.actor }}",
+            "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "session_number": "",
+            "session_label": ""
+          }
+          EOF
+
+      - name: Generate IGov signal browser
+        run: |
+          python -m mandate_pipeline.cli igov-signals \
+            --config ./config \
+            --data ./data \
+            --output "docs/igov" \
+            --verbose
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ docs/igov
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: discover documents and sync IGov ($(date -I))"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
