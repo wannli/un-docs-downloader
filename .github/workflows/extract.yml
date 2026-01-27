@@ -106,6 +106,7 @@ jobs:
           processed_count = 0
           error_count = 0
           total_paragraphs = 0
+          extracted_docs = []  # Track what we extracted
 
           for pdf_path_str in pdf_files:
               pdf_path = Path(pdf_path_str)
@@ -121,8 +122,9 @@ jobs:
                   agenda_items = extract_agenda_items(text)
                   symbol_refs = find_symbol_references(text)
 
+                  symbol = pdf_path.stem.replace('_', '/')
                   extracted = {
-                      'symbol': pdf_path.stem.replace('_', '/'),
+                      'symbol': symbol,
                       'filename': pdf_path.name,
                       'title': title,
                       'text': text,
@@ -138,8 +140,10 @@ jobs:
                       json.dump(extracted, f, indent=2)
 
                   pdf_duration = time.time() - pdf_start
-                  total_paragraphs += len(paragraphs)
-                  print(f'Extracted {pdf_path.name}: {len(paragraphs)} paragraphs in {pdf_duration:.2f}s')
+                  para_count = len(paragraphs)
+                  total_paragraphs += para_count
+                  extracted_docs.append({'symbol': symbol, 'paragraphs': para_count, 'refs': len(symbol_refs)})
+                  print(f'Extracted {pdf_path.name}: {para_count} paragraphs in {pdf_duration:.2f}s')
                   processed_count += 1
 
               except Exception as e:
@@ -159,6 +163,11 @@ jobs:
               for key, value in metrics.items():
                   f.write(f'{key}={value}\n')
 
+          # Write extracted documents list
+          with open('/tmp/extracted_docs.txt', 'w') as f:
+              for doc in extracted_docs:
+                  f.write(f\"{doc['symbol']}|{doc['paragraphs']}|{doc['refs']}\n\")
+
           print('::group::Extraction Metrics')
           for key, value in metrics.items():
               print(f'{key}={value}')
@@ -172,9 +181,20 @@ jobs:
             done < /tmp/extract_metrics.txt
           fi
 
+          # Build extracted docs summary for display
+          EXTRACTED_LIST=""
+          if [ -f /tmp/extracted_docs.txt ]; then
+            while IFS='|' read -r symbol paras refs; do
+              EXTRACTED_LIST="${EXTRACTED_LIST}| ${symbol} | ${paras} | ${refs} |\n"
+            done < /tmp/extracted_docs.txt
+          fi
+          echo "EXTRACTED_LIST<<EOF" >> $GITHUB_ENV
+          echo -e "$EXTRACTED_LIST" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
           DURATION=$(($(date +%s) - $STEP_START))
           echo "EXTRACT_STEP_DURATION=$DURATION" >> $GITHUB_ENV
-          echo "::notice::step=extract duration_seconds=$DURATION"
+          echo "::notice::step=extract pdfs=${EXTRACT_PDFS_PROCESSED:-0} paragraphs=${EXTRACT_TOTAL_PARAGRAPHS:-0} duration=${DURATION}s"
 
       - name: Commit extraction results
         run: |
@@ -208,34 +228,63 @@ jobs:
         run: |
           TOTAL_DURATION=$(($(date +%s) - $WORKFLOW_START))
 
-          cat >> $GITHUB_STEP_SUMMARY << EOF
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
           ## 📝 Extract Workflow Summary
 
-          **Run:** #${{ github.run_number }} | **Trigger:** \`${{ github.event_name }}\` | **Duration:** ${TOTAL_DURATION}s
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
 
-          ### 📄 PDF Extraction
-          | Metric | Value |
-          |--------|-------|
-          | PDFs to Process | ${EXTRACT_PDFS_TO_PROCESS:-0} |
-          | **PDFs Extracted** | **${EXTRACT_PDFS_PROCESSED:-0}** |
-          | Extraction Errors | ${EXTRACT_PDFS_ERRORS:-0} |
-          | Total Paragraphs | ${EXTRACT_TOTAL_PARAGRAPHS:-0} |
-          | Extraction Duration | ${EXTRACT_STEP_DURATION:-N/A}s |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
 
-          ### 📦 Output
-          | Metric | Value |
-          |--------|-------|
-          | Total Extracted Files | ${EXTRACTED_COUNT:-N/A} |
-          | Extracted Data Size | ${EXTRACTED_SIZE:-N/A} |
+          ### ✨ What Was Extracted
 
-          ### 📤 Commit Status
-          | Metric | Value |
+          | Documents Extracted | **${EXTRACT_PDFS_PROCESSED:-0}** |
+          |---------------------|----------------------------------|
+          | Paragraphs Found    | **${EXTRACT_TOTAL_PARAGRAPHS:-0}** |
+          | Errors              | ${EXTRACT_PDFS_ERRORS:-0} |
+          EOF
+
+          # Show extracted documents table if any
+          if [ "${EXTRACT_PDFS_PROCESSED:-0}" -gt 0 ] && [ -n "${EXTRACTED_LIST}" ]; then
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          **Extracted Documents:**
+
+          | Document | Paragraphs | References |
+          |----------|------------|------------|
+          ${EXTRACTED_LIST}
+          EOF
+          fi
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### 📊 Current Totals
+
+          | Metric | Count |
           |--------|-------|
-          | Result | ${COMMIT_RESULT:-N/A} |
+          | Total Extracted Files | ${EXTRACTED_COUNT:-0} |
+          | Data Size | ${EXTRACTED_SIZE:-N/A} |
+
+          ### 📤 Result
+
+          | Outcome | Status |
+          |---------|--------|
+          | Commit | ${COMMIT_RESULT:-N/A} |
           | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Extraction | ${EXTRACT_STEP_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
+          | **Total** | **${TOTAL_DURATION}s** |
+
+          </details>
 
           ---
           *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
           EOF
 
-          echo "::notice::workflow=extract total_duration=$TOTAL_DURATION pdfs_processed=${EXTRACT_PDFS_PROCESSED:-0} paragraphs=${EXTRACT_TOTAL_PARAGRAPHS:-0}"
+          echo "::notice::workflow=extract pdfs=${EXTRACT_PDFS_PROCESSED:-0} paragraphs=${EXTRACT_TOTAL_PARAGRAPHS:-0} duration=${TOTAL_DURATION}s"

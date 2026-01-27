@@ -256,43 +256,57 @@ jobs:
 
           # Format bytes to human readable
           INDEX_SIZE_KB=$((${INDEX_SIZE:-0} / 1024))
+          DATA_JSON_KB=$((${GEN_DATA_JSON_BYTES:-0} / 1024))
 
-          cat >> $GITHUB_STEP_SUMMARY << EOF
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
           ## 🚀 Generate Workflow Summary
 
-          **Run:** #${{ github.run_number }} | **Trigger:** \`${{ github.event_name }}\` | **Duration:** ${TOTAL_DURATION}s
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
 
-          ### 📄 Site Generation
-          | Metric | Value |
-          |--------|-------|
-          | **Documents Loaded** | **${GEN_DOCUMENTS_LOADED:-0}** |
-          | Documents with Signals | ${GEN_DOCUMENTS_WITH_SIGNALS:-0} |
-          | Signal Checks | ${GEN_CHECKS_LOADED:-0} |
-          | Generation Duration | ${GEN_STEP_DURATION:-N/A}s |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
 
-          ### 📦 Output Files
-          | Metric | Value |
-          |--------|-------|
-          | Total Site Size | ${DOCS_SIZE:-N/A} |
-          | Total Files | ${DOCS_FILE_COUNT:-N/A} |
-          | index.html Size | ${INDEX_SIZE_KB:-N/A} KB |
+          ### ✨ What Was Generated
 
-          ### 🌐 Deployment
-          | Metric | Value |
-          |--------|-------|
+          | Site Built With          | Count |
+          |--------------------------|-------|
+          | 📄 Documents             | **${GEN_DOCUMENTS_LOADED:-0}** |
+          | 🔔 Documents w/ Signals  | **${GEN_DOCUMENTS_WITH_SIGNALS:-0}** |
+          | 🔍 Signal Types          | ${GEN_CHECKS_LOADED:-0} |
+
+          ### 📦 Output
+
+          | File | Size |
+          |------|------|
+          | 🌐 Total Site | **${DOCS_SIZE:-N/A}** |
+          | 📄 index.html | ${INDEX_SIZE_KB:-0} KB |
+          | 📊 data.json | ${DATA_JSON_KB:-0} KB |
+          | 📁 Total Files | ${DOCS_FILE_COUNT:-0} |
+
+          ### 🚀 Deployment
+
+          | Status | |
+          |--------|---|
+          | **Live URL** | ${{ steps.deploy-pages.outputs.page_url }} |
+          | Commit | ${COMMIT_RESULT:-N/A} |
+          | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Generation | ${GEN_STEP_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
           | Pages Setup | ${PAGES_SETUP_DURATION:-N/A}s |
           | Upload | ${UPLOAD_DURATION:-N/A}s |
           | Deploy | ${DEPLOY_DURATION:-N/A}s |
-          | **Pages URL** | ${{ steps.deploy-pages.outputs.page_url }} |
+          | **Total** | **${TOTAL_DURATION}s** |
 
-          ### 📤 Commit Status
-          | Metric | Value |
-          |--------|-------|
-          | Result | ${COMMIT_RESULT:-N/A} |
-          | Files Changed | ${FILES_CHANGED:-0} |
+          </details>
 
           ---
           *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
           EOF
 
-          echo "::notice::workflow=generate total_duration=$TOTAL_DURATION docs_loaded=${GEN_DOCUMENTS_LOADED:-0} site_size=${DOCS_SIZE:-N/A}"
+          echo "::notice::workflow=generate docs=${GEN_DOCUMENTS_LOADED:-0} with_signals=${GEN_DOCUMENTS_WITH_SIGNALS:-0} site_size=${DOCS_SIZE:-N/A} duration=${TOTAL_DURATION}s"

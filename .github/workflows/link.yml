@@ -216,39 +216,54 @@ jobs:
         run: |
           TOTAL_DURATION=$(($(date +%s) - $WORKFLOW_START))
 
-          cat >> $GITHUB_STEP_SUMMARY << EOF
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
           ## 🔗 Link Workflow Summary
 
-          **Run:** #${{ github.run_number }} | **Trigger:** \`${{ github.event_name }}\` | **Duration:** ${TOTAL_DURATION}s
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
 
-          ### 📊 Document Linking
-          | Metric | Value |
-          |--------|-------|
-          | Documents Loaded | ${LINK_DOCUMENTS_LOADED:-0} |
-          | **Documents Linked** | **${LINK_DOCUMENTS_LINKED:-0}** |
-          | Linking Duration | ${LINK_STEP_DURATION:-N/A}s |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
 
-          ### 📁 Document Types
+          ### ✨ What Was Linked
+
+          | Documents Processed | **${LINK_DOCUMENTS_LINKED:-0}** |
+          |---------------------|--------------------------------|
+
+          ### 📁 Document Types Found
+
           | Type | Count |
           |------|-------|
-          | Resolutions | ${LINK_RESOLUTIONS:-0} |
-          | Proposals | ${LINK_PROPOSALS:-0} |
-          | Other | ${LINK_OTHER:-0} |
+          | 📜 Resolutions | **${LINK_RESOLUTIONS:-0}** |
+          | 📝 Proposals   | **${LINK_PROPOSALS:-0}** |
+          | 📄 Other       | ${LINK_OTHER:-0} |
 
-          ### 📦 Output
-          | Metric | Value |
-          |--------|-------|
-          | Total Linked Files | ${LINKED_COUNT:-N/A} |
-          | Linked Data Size | ${LINKED_SIZE:-N/A} |
+          ### 📊 Current Totals
 
-          ### 📤 Commit Status
-          | Metric | Value |
+          | Metric | Count |
           |--------|-------|
-          | Result | ${COMMIT_RESULT:-N/A} |
+          | Total Linked Files | ${LINKED_COUNT:-0} |
+          | Data Size | ${LINKED_SIZE:-N/A} |
+
+          ### 📤 Result
+
+          | Outcome | Status |
+          |---------|--------|
+          | Commit | ${COMMIT_RESULT:-N/A} |
           | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Linking | ${LINK_STEP_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
+          | **Total** | **${TOTAL_DURATION}s** |
+
+          </details>
 
           ---
           *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
           EOF
 
-          echo "::notice::workflow=link total_duration=$TOTAL_DURATION docs_linked=${LINK_DOCUMENTS_LINKED:-0} resolutions=${LINK_RESOLUTIONS:-0} proposals=${LINK_PROPOSALS:-0}"
+          echo "::notice::workflow=link docs=${LINK_DOCUMENTS_LINKED:-0} resolutions=${LINK_RESOLUTIONS:-0} proposals=${LINK_PROPOSALS:-0} duration=${TOTAL_DURATION}s"
