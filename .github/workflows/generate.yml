@@ -1,11 +1,17 @@
 name: Generate
 
 on:
+  schedule:
+    # Run at :45 every hour, but only between 7am-9pm NY time
+    # NY is UTC-5 (EST) or UTC-4 (EDT), so 7am-9pm NY = ~11:00-02:00 UTC
+    - cron: '45 11-23 * * *'  # 7am-7pm NY (covers both EST/EDT)
+    - cron: '45 0-1 * * *'    # 7pm-9pm NY (covers both EST/EDT)
   push:
     paths:
       - 'data/linked/**'
       - 'src/**'
       - 'src/mandate_pipeline/templates/**'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,21 +30,53 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Log workflow start
+        run: |
+          echo "::group::Workflow Metadata"
+          echo "workflow_name=generate"
+          echo "run_id=${{ github.run_id }}"
+          echo "run_number=${{ github.run_number }}"
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref_name }}"
+          echo "sha=${{ github.sha }}"
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "::endgroup::"
+          echo "WORKFLOW_START=$(date +%s)" >> $GITHUB_ENV
+
       - name: Checkout
-        uses: actions/checkout@v4
+        id: checkout
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Log checkout duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=checkout duration_seconds=$DURATION"
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        id: setup-python
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
 
+      - name: Log Python setup duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=setup_python duration_seconds=$DURATION"
+
       - name: Install dependencies
         run: |
+          echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install -e .
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=install_dependencies duration_seconds=$DURATION"
 
       - name: Ensure branch checkout
         run: git checkout -B "${GITHUB_REF_NAME}"
@@ -49,22 +87,26 @@ jobs:
           SKIP_DETAILED_PAGES: ${{ vars.SKIP_DETAILED_PAGES || 'true' }}
           MAX_DOCUMENTS: ${{ vars.MAX_DOCUMENTS || '' }}
         run: |
+          STEP_START=$(date +%s)
           python -c "
           import sys
           import os
           import json
+          import time
           from pathlib import Path
           sys.path.insert(0, 'src')
           from mandate_pipeline.generation import generate_unified_explorer_page
           from mandate_pipeline.detection import load_checks
 
-          print('Starting unified signals explorer generation...')
+          metrics = {'step': 'generate_site'}
+          total_start = time.time()
 
+          print('::group::Load Documents')
+          load_start = time.time()
           linked_dir = Path('data/linked')
           documents = []
 
           if linked_dir.exists():
-              print('Loading linked documents...')
               for linked_file in linked_dir.glob('*.json'):
                   if linked_file.name == 'index.json':
                       continue
@@ -75,48 +117,196 @@ jobs:
                   except Exception as e:
                       print(f'Error loading {linked_file}: {e}')
 
-          print(f'Loaded {len(documents)} linked documents')
+          load_duration = time.time() - load_start
+          metrics['documents_loaded'] = len(documents)
+          metrics['load_duration_seconds'] = round(load_duration, 2)
+          print(f'Loaded {len(documents)} documents in {load_duration:.2f}s')
+          print('::endgroup::')
 
           max_docs = os.getenv('MAX_DOCUMENTS')
           if max_docs and max_docs.isdigit():
               max_docs = int(max_docs)
-              print(f'Limiting to {max_docs} documents for faster processing')
+              print(f'Limiting to {max_docs} documents')
               documents = documents[:max_docs]
 
           if documents:
+              print('::group::Load Checks')
+              checks_start = time.time()
               checks = load_checks(Path('config/checks.yaml'))
-              print(f'Loaded {len(checks)} checks')
+              checks_duration = time.time() - checks_start
+              metrics['checks_loaded'] = len(checks)
+              metrics['checks_duration_seconds'] = round(checks_duration, 2)
+              print(f'Loaded {len(checks)} checks in {checks_duration:.2f}s')
+              print('::endgroup::')
 
-              print('Generating unified signals explorer...')
+              print('::group::Generate Explorer')
+              gen_start = time.time()
               generate_unified_explorer_page(documents, checks, Path('docs'))
+              gen_duration = time.time() - gen_start
+              metrics['generation_duration_seconds'] = round(gen_duration, 2)
+              print(f'Generated explorer in {gen_duration:.2f}s')
+              print('::endgroup::')
 
-              print('Unified signals explorer generation completed!')
-          else:
-              print('No documents to generate unified explorer for')
+              # Calculate output sizes
+              output_dir = Path('docs')
+              if (output_dir / 'index.html').exists():
+                  metrics['index_html_bytes'] = (output_dir / 'index.html').stat().st_size
+              if (output_dir / 'data.json').exists():
+                  metrics['data_json_bytes'] = (output_dir / 'data.json').stat().st_size
+
+          # Count documents with signals
+          docs_with_signals = len([d for d in documents if d.get('signal_summary')])
+          metrics['documents_with_signals'] = docs_with_signals
+          metrics['total_duration_seconds'] = round(time.time() - total_start, 2)
+
+          # Write metrics to file for shell to read
+          with open('/tmp/generate_metrics.txt', 'w') as f:
+              for key, value in metrics.items():
+                  f.write(f'{key}={value}\n')
+
+          # Output metrics as structured log
+          print('::group::Build Metrics')
+          for key, value in metrics.items():
+              print(f'{key}={value}')
+          print('::endgroup::')
+
+          # Write metrics to file for later analysis
+          with open('docs/build-metrics.json', 'w') as f:
+              json.dump(metrics, f, indent=2)
           "
+
+          # Read metrics into env vars
+          if [ -f /tmp/generate_metrics.txt ]; then
+            while IFS='=' read -r key value; do
+              echo "GEN_${key^^}=$value" >> $GITHUB_ENV
+            done < /tmp/generate_metrics.txt
+          fi
+
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "GEN_STEP_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "::notice::step=generate_site duration_seconds=$DURATION"
 
       - name: Commit site changes
         run: |
+          STEP_START=$(date +%s)
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
+
+          DOCS_SIZE=$(du -sh docs/ 2>/dev/null | cut -f1 || echo "0")
+          DOCS_FILE_COUNT=$(find docs/ -type f | wc -l)
+          INDEX_SIZE=$(stat -c%s docs/index.html 2>/dev/null || echo 0)
+          echo "DOCS_SIZE=$DOCS_SIZE" >> $GITHUB_ENV
+          echo "DOCS_FILE_COUNT=$DOCS_FILE_COUNT" >> $GITHUB_ENV
+          echo "INDEX_SIZE=$INDEX_SIZE" >> $GITHUB_ENV
+
           if git diff --staged --quiet; then
-            echo "No site changes to commit"
+            echo "COMMIT_RESULT=no_changes" >> $GITHUB_ENV
+            echo "::notice::step=commit result=no_changes"
           else
+            FILES_CHANGED=$(git diff --staged --numstat | wc -l)
+            echo "COMMIT_RESULT=pushed" >> $GITHUB_ENV
+            echo "FILES_CHANGED=$FILES_CHANGED" >> $GITHUB_ENV
             git commit -m "chore: generate static site"
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
-            echo "Site updated and committed to default branch"
+            echo "::notice::step=commit result=pushed files_changed=$FILES_CHANGED"
           fi
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "COMMIT_DURATION=$DURATION" >> $GITHUB_ENV
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        id: setup-pages
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/configure-pages@v4
+
+      - name: Log Pages setup duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "PAGES_SETUP_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "::notice::step=setup_pages duration_seconds=$DURATION"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        id: upload-artifact
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: ./docs
 
+      - name: Log upload duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "UPLOAD_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "::notice::step=upload_artifact duration_seconds=$DURATION docs_size=$DOCS_SIZE"
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/deploy-pages@v4
+        id: deploy-pages
+
+      - name: Write workflow summary
+        if: always()
+        run: |
+          DEPLOY_DURATION=$(($(date +%s) - $STEP_START))
+          TOTAL_DURATION=$(($(date +%s) - $WORKFLOW_START))
+
+          # Format bytes to human readable
+          INDEX_SIZE_KB=$((${INDEX_SIZE:-0} / 1024))
+          DATA_JSON_KB=$((${GEN_DATA_JSON_BYTES:-0} / 1024))
+
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
+          ## 🚀 Generate Workflow Summary
+
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### ✨ What Was Generated
+
+          | Site Built With          | Count |
+          |--------------------------|-------|
+          | 📄 Documents             | **${GEN_DOCUMENTS_LOADED:-0}** |
+          | 🔔 Documents w/ Signals  | **${GEN_DOCUMENTS_WITH_SIGNALS:-0}** |
+          | 🔍 Signal Types          | ${GEN_CHECKS_LOADED:-0} |
+
+          ### 📦 Output
+
+          | File | Size |
+          |------|------|
+          | 🌐 Total Site | **${DOCS_SIZE:-N/A}** |
+          | 📄 index.html | ${INDEX_SIZE_KB:-0} KB |
+          | 📊 data.json | ${DATA_JSON_KB:-0} KB |
+          | 📁 Total Files | ${DOCS_FILE_COUNT:-0} |
+
+          ### 🚀 Deployment
+
+          | Status | |
+          |--------|---|
+          | **Live URL** | ${{ steps.deploy-pages.outputs.page_url }} |
+          | Commit | ${COMMIT_RESULT:-N/A} |
+          | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Generation | ${GEN_STEP_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
+          | Pages Setup | ${PAGES_SETUP_DURATION:-N/A}s |
+          | Upload | ${UPLOAD_DURATION:-N/A}s |
+          | Deploy | ${DEPLOY_DURATION:-N/A}s |
+          | **Total** | **${TOTAL_DURATION}s** |
+
+          </details>
+
+          ---
+          *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
+          EOF
+
+          echo "::notice::workflow=generate docs=${GEN_DOCUMENTS_LOADED:-0} with_signals=${GEN_DOCUMENTS_WITH_SIGNALS:-0} site_size=${DOCS_SIZE:-N/A} duration=${TOTAL_DURATION}s"

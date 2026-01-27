@@ -18,38 +18,71 @@ jobs:
     name: Detect
     runs-on: ubuntu-latest
     steps:
+      - name: Log workflow start
+        run: |
+          echo "::group::Workflow Metadata"
+          echo "workflow_name=detect"
+          echo "run_id=${{ github.run_id }}"
+          echo "run_number=${{ github.run_number }}"
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref_name }}"
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "::endgroup::"
+          echo "WORKFLOW_START=$(date +%s)" >> $GITHUB_ENV
+
       - name: Checkout
-        uses: actions/checkout@v4
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Log checkout duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=checkout duration_seconds=$DURATION"
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
 
+      - name: Log Python setup duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=setup_python duration_seconds=$DURATION"
+
       - name: Install dependencies
         run: |
+          STEP_START=$(date +%s)
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install -e .
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=install_dependencies duration_seconds=$DURATION"
 
       - name: Ensure branch checkout
         run: git checkout -B "${GITHUB_REF_NAME}"
 
       - name: Run signal detection
         run: |
+          STEP_START=$(date +%s)
           python -c "
           import sys
           import os
+          import time
           from pathlib import Path
           sys.path.insert(0, 'src')
           from mandate_pipeline.detection import load_checks, run_checks
           import json
           import subprocess
 
-          print('Finding extracted documents to process...')
+          total_start = time.time()
+          metrics = {'step': 'detect'}
 
+          print('::group::Find Documents')
           config_changed = False
           if os.environ.get('GITHUB_EVENT_NAME') == 'push':
               try:
@@ -73,16 +106,31 @@ jobs:
               extracted_files = [str(f) for f in extracted_dir.glob('*.json')] if extracted_dir.exists() else []
 
           extracted_files = [f for f in extracted_files if f.strip()]
+          metrics['documents_to_process'] = len(extracted_files)
+          metrics['config_changed'] = config_changed
           print(f'Found {len(extracted_files)} extracted documents to process')
+          print('::endgroup::')
 
           if not extracted_files:
               print('No extracted documents to process')
               exit(0)
 
+          print('::group::Load Checks')
+          checks_start = time.time()
           checks = load_checks(Path('config/checks.yaml'))
-          print(f'Loaded {len(checks)} signal definitions')
+          checks_duration = time.time() - checks_start
+          metrics['checks_count'] = len(checks)
+          metrics['checks_load_seconds'] = round(checks_duration, 2)
+          print(f'Loaded {len(checks)} signal definitions in {checks_duration:.2f}s')
+          print('::endgroup::')
 
+          print('::group::Detect Signals')
           processed_count = 0
+          error_count = 0
+          total_signals_found = 0
+          signal_type_counts = {}
+          docs_with_signal_info = []  # Track which docs have signals
+
           for extracted_file_str in extracted_files:
               extracted_file = Path(extracted_file_str)
               if not extracted_file.exists():
@@ -90,8 +138,7 @@ jobs:
                   continue
 
               try:
-                  print(f'Detecting signals in: {extracted_file.name}')
-
+                  doc_start = time.time()
                   with open(extracted_file) as f:
                       doc_data = json.load(f)
 
@@ -103,10 +150,16 @@ jobs:
                       'signal_summary': {}
                   }
 
+                  doc_signal_count = 0
+                  doc_signals = set()
                   if signals:
                       for para_signals in signals.values():
                           for signal in para_signals:
                               detection_result['signal_summary'][signal] = detection_result['signal_summary'].get(signal, 0) + 1
+                              signal_type_counts[signal] = signal_type_counts.get(signal, 0) + 1
+                              total_signals_found += 1
+                              doc_signal_count += 1
+                              doc_signals.add(signal)
 
                   output_file = Path('data/detected') / f'{extracted_file.stem}.json'
                   output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -114,26 +167,175 @@ jobs:
                   with open(output_file, 'w') as f:
                       json.dump(detection_result, f, indent=2)
 
-                  print(f'Detection results saved to: {output_file}')
-                  print(f'Found signals: {list(detection_result[\"signal_summary\"].keys())}')
+                  docs_with_signal_info.append({
+                      'symbol': doc_data['symbol'],
+                      'signal_count': doc_signal_count,
+                      'signals': list(doc_signals)
+                  })
+
+                  doc_duration = time.time() - doc_start
+                  signal_list = list(detection_result['signal_summary'].keys())
+                  print(f'{extracted_file.name}: {len(signal_list)} signal types in {doc_duration:.2f}s')
                   processed_count += 1
 
               except Exception as e:
                   print(f'Error processing {extracted_file}: {e}')
+                  error_count += 1
                   continue
 
-          print(f'Successfully processed {processed_count} documents')
+          print('::endgroup::')
+
+          # Count documents that have at least one signal
+          docs_with_signals = len([d for d in docs_with_signal_info if d['signal_count'] > 0])
+
+          metrics['documents_processed'] = processed_count
+          metrics['documents_with_signals'] = docs_with_signals
+          metrics['documents_errors'] = error_count
+          metrics['total_signals_found'] = total_signals_found
+          metrics['signal_type_counts'] = signal_type_counts
+          metrics['total_duration_seconds'] = round(time.time() - total_start, 2)
+
+          # Write metrics to file for shell to read
+          with open('/tmp/detect_metrics.txt', 'w') as f:
+              f.write(f'documents_to_process={metrics[\"documents_to_process\"]}\n')
+              f.write(f'documents_processed={processed_count}\n')
+              f.write(f'documents_with_signals={docs_with_signals}\n')
+              f.write(f'documents_errors={error_count}\n')
+              f.write(f'total_signals_found={total_signals_found}\n')
+              f.write(f'checks_count={metrics[\"checks_count\"]}\n')
+              f.write(f'config_changed={config_changed}\n')
+              # Write signal breakdown
+              for sig, count in signal_type_counts.items():
+                  f.write(f'signal_{sig}={count}\n')
+
+          # Write docs with signals for summary display
+          with open('/tmp/docs_with_signals.txt', 'w') as f:
+              for doc in docs_with_signal_info:
+                  if doc['signal_count'] > 0:
+                      f.write(f\"{doc['symbol']}|{','.join(doc['signals'])}\n\")
+
+          print('::group::Detection Metrics')
+          for key, value in metrics.items():
+              print(f'{key}={value}')
+          print('::endgroup::')
           "
+
+          # Read metrics into env vars
+          if [ -f /tmp/detect_metrics.txt ]; then
+            while IFS='=' read -r key value; do
+              echo "DETECT_${key^^}=$value" >> $GITHUB_ENV
+            done < /tmp/detect_metrics.txt
+          fi
+
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "DETECT_STEP_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "::notice::step=detect duration_seconds=$DURATION"
 
       - name: Commit detection results
         run: |
+          STEP_START=$(date +%s)
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/detected/
+
+          DETECTED_SIZE=$(du -sh data/detected 2>/dev/null | cut -f1 || echo "0")
+          DETECTED_COUNT=$(ls -1 data/detected/*.json 2>/dev/null | wc -l || echo 0)
+          echo "DETECTED_SIZE=$DETECTED_SIZE" >> $GITHUB_ENV
+          echo "DETECTED_COUNT=$DETECTED_COUNT" >> $GITHUB_ENV
+
           if git diff --staged --quiet; then
-            echo "No detection changes to commit"
+            echo "COMMIT_RESULT=no_changes" >> $GITHUB_ENV
+            echo "::notice::step=commit result=no_changes"
           else
+            FILES_CHANGED=$(git diff --staged --numstat | wc -l)
+            echo "COMMIT_RESULT=pushed" >> $GITHUB_ENV
+            echo "FILES_CHANGED=$FILES_CHANGED" >> $GITHUB_ENV
             git commit -m "chore: detect signals in documents"
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
+            echo "::notice::step=commit result=pushed files_changed=$FILES_CHANGED"
           fi
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "COMMIT_DURATION=$DURATION" >> $GITHUB_ENV
+
+      - name: Write workflow summary
+        if: always()
+        run: |
+          TOTAL_DURATION=$(($(date +%s) - $WORKFLOW_START))
+
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
+          ## 🔍 Detect Workflow Summary
+
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### ✨ What Was Detected
+
+          | Documents Scanned        | **${DETECT_DOCUMENTS_PROCESSED:-0}** |
+          |--------------------------|--------------------------------------|
+          | Documents with Signals   | **${DETECT_DOCUMENTS_WITH_SIGNALS:-0}** |
+          | Total Signal Matches     | **${DETECT_TOTAL_SIGNALS_FOUND:-0}** |
+
+          ### 📊 Signal Breakdown
+
+          | Signal Type | Matches Found |
+          |-------------|---------------|
+          | 📋 Agenda   | ${DETECT_SIGNAL_AGENDA:-0} |
+          | 👤 PGA      | ${DETECT_SIGNAL_PGA:-0} |
+          | ⚙️ Process  | ${DETECT_SIGNAL_PROCESS:-0} |
+          | 📄 Report   | ${DETECT_SIGNAL_REPORT:-0} |
+          EOF
+
+          # List documents with signals (limit to 10)
+          if [ -f /tmp/docs_with_signals.txt ] && [ -s /tmp/docs_with_signals.txt ]; then
+            DOC_COUNT=$(wc -l < /tmp/docs_with_signals.txt)
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          **Documents with Signals** (${DOC_COUNT} total):
+
+          | Document | Signals |
+          |----------|---------|
+          EOF
+            head -10 /tmp/docs_with_signals.txt | while IFS='|' read -r symbol signals; do
+              echo "| ${symbol} | ${signals} |" >> $GITHUB_STEP_SUMMARY
+            done
+            if [ "$DOC_COUNT" -gt 10 ]; then
+              echo "| ... | *(${DOC_COUNT} total)* |" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### 📊 Current Totals
+
+          | Metric | Count |
+          |--------|-------|
+          | Total Detected Files | ${DETECTED_COUNT:-0} |
+          | Data Size | ${DETECTED_SIZE:-N/A} |
+
+          ### 📤 Result
+
+          | Outcome | Status |
+          |---------|--------|
+          | Config Changed | ${DETECT_CONFIG_CHANGED:-false} |
+          | Commit | ${COMMIT_RESULT:-N/A} |
+          | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Detection | ${DETECT_STEP_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
+          | **Total** | **${TOTAL_DURATION}s** |
+
+          </details>
+
+          ---
+          *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
+          EOF
+
+          echo "::notice::workflow=detect docs=${DETECT_DOCUMENTS_PROCESSED:-0} with_signals=${DETECT_DOCUMENTS_WITH_SIGNALS:-0} signals=${DETECT_TOTAL_SIGNALS_FOUND:-0} duration=${TOTAL_DURATION}s"

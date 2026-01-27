@@ -17,38 +17,71 @@ jobs:
     name: Extract
     runs-on: ubuntu-latest
     steps:
+      - name: Log workflow start
+        run: |
+          echo "::group::Workflow Metadata"
+          echo "workflow_name=extract"
+          echo "run_id=${{ github.run_id }}"
+          echo "run_number=${{ github.run_number }}"
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref_name }}"
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "::endgroup::"
+          echo "WORKFLOW_START=$(date +%s)" >> $GITHUB_ENV
+
       - name: Checkout
-        uses: actions/checkout@v4
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Log checkout duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=checkout duration_seconds=$DURATION"
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
 
+      - name: Log Python setup duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=setup_python duration_seconds=$DURATION"
+
       - name: Install dependencies
         run: |
+          STEP_START=$(date +%s)
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install -e .
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=install_dependencies duration_seconds=$DURATION"
 
       - name: Ensure branch checkout
         run: git checkout -B "${GITHUB_REF_NAME}"
 
       - name: Extract document content
         run: |
+          STEP_START=$(date +%s)
           python -c "
           import sys
           import os
+          import time
           from pathlib import Path
           sys.path.insert(0, 'src')
           from mandate_pipeline.extractor import extract_text, extract_operative_paragraphs, extract_title, extract_agenda_items, find_symbol_references
           import json
           import subprocess
 
-          print('Finding PDFs to process...')
+          total_start = time.time()
+          metrics = {'step': 'extract'}
 
+          print('::group::Find PDFs')
           if os.environ.get('GITHUB_EVENT_NAME') == 'push':
               try:
                   result = subprocess.run(['git', 'diff', '--name-only', 'HEAD~1', 'HEAD', '--', 'data/pdfs/*.pdf'],
@@ -61,13 +94,20 @@ jobs:
               changed_files = [str(f) for f in pdf_dir.rglob('*.pdf')] if pdf_dir.exists() else []
 
           pdf_files = [f for f in changed_files if f.strip()]
+          metrics['pdfs_to_process'] = len(pdf_files)
           print(f'Found {len(pdf_files)} PDFs to process')
+          print('::endgroup::')
 
           if not pdf_files:
               print('No PDFs to process')
               exit(0)
 
+          print('::group::Extract PDFs')
           processed_count = 0
+          error_count = 0
+          total_paragraphs = 0
+          extracted_docs = []  # Track what we extracted
+
           for pdf_path_str in pdf_files:
               pdf_path = Path(pdf_path_str)
               if not pdf_path.exists():
@@ -75,15 +115,16 @@ jobs:
                   continue
 
               try:
-                  print(f'Extracting: {pdf_path.name}')
+                  pdf_start = time.time()
                   text = extract_text(pdf_path)
                   paragraphs = extract_operative_paragraphs(text)
                   title = extract_title(text)
                   agenda_items = extract_agenda_items(text)
                   symbol_refs = find_symbol_references(text)
 
+                  symbol = pdf_path.stem.replace('_', '/')
                   extracted = {
-                      'symbol': pdf_path.stem.replace('_', '/'),
+                      'symbol': symbol,
                       'filename': pdf_path.name,
                       'title': title,
                       'text': text,
@@ -98,25 +139,152 @@ jobs:
                   with open(output_file, 'w') as f:
                       json.dump(extracted, f, indent=2)
 
-                  print(f'Extracted to: {output_file}')
+                  pdf_duration = time.time() - pdf_start
+                  para_count = len(paragraphs)
+                  total_paragraphs += para_count
+                  extracted_docs.append({'symbol': symbol, 'paragraphs': para_count, 'refs': len(symbol_refs)})
+                  print(f'Extracted {pdf_path.name}: {para_count} paragraphs in {pdf_duration:.2f}s')
                   processed_count += 1
 
               except Exception as e:
                   print(f'Error processing {pdf_path}: {e}')
+                  error_count += 1
                   continue
 
-          print(f'Successfully processed {processed_count} PDFs')
+          print('::endgroup::')
+
+          metrics['pdfs_processed'] = processed_count
+          metrics['pdfs_errors'] = error_count
+          metrics['total_paragraphs'] = total_paragraphs
+          metrics['total_duration_seconds'] = round(time.time() - total_start, 2)
+
+          # Write metrics to file for shell to read
+          with open('/tmp/extract_metrics.txt', 'w') as f:
+              for key, value in metrics.items():
+                  f.write(f'{key}={value}\n')
+
+          # Write extracted documents list
+          with open('/tmp/extracted_docs.txt', 'w') as f:
+              for doc in extracted_docs:
+                  f.write(f\"{doc['symbol']}|{doc['paragraphs']}|{doc['refs']}\n\")
+
+          print('::group::Extraction Metrics')
+          for key, value in metrics.items():
+              print(f'{key}={value}')
+          print('::endgroup::')
           "
+
+          # Read metrics into env vars
+          if [ -f /tmp/extract_metrics.txt ]; then
+            while IFS='=' read -r key value; do
+              echo "EXTRACT_${key^^}=$value" >> $GITHUB_ENV
+            done < /tmp/extract_metrics.txt
+          fi
+
+          # Build extracted docs summary for display
+          EXTRACTED_LIST=""
+          if [ -f /tmp/extracted_docs.txt ]; then
+            while IFS='|' read -r symbol paras refs; do
+              EXTRACTED_LIST="${EXTRACTED_LIST}| ${symbol} | ${paras} | ${refs} |\n"
+            done < /tmp/extracted_docs.txt
+          fi
+          echo "EXTRACTED_LIST<<EOF" >> $GITHUB_ENV
+          echo -e "$EXTRACTED_LIST" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "EXTRACT_STEP_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "::notice::step=extract pdfs=${EXTRACT_PDFS_PROCESSED:-0} paragraphs=${EXTRACT_TOTAL_PARAGRAPHS:-0} duration=${DURATION}s"
 
       - name: Commit extraction results
         run: |
+          STEP_START=$(date +%s)
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/extracted/
+
+          EXTRACTED_SIZE=$(du -sh data/extracted 2>/dev/null | cut -f1 || echo "0")
+          EXTRACTED_COUNT=$(ls -1 data/extracted/*.json 2>/dev/null | wc -l || echo 0)
+          echo "EXTRACTED_SIZE=$EXTRACTED_SIZE" >> $GITHUB_ENV
+          echo "EXTRACTED_COUNT=$EXTRACTED_COUNT" >> $GITHUB_ENV
+
           if git diff --staged --quiet; then
-            echo "No extraction changes to commit"
+            echo "COMMIT_RESULT=no_changes" >> $GITHUB_ENV
+            echo "::notice::step=commit result=no_changes"
           else
+            FILES_CHANGED=$(git diff --staged --numstat | wc -l)
+            echo "COMMIT_RESULT=pushed" >> $GITHUB_ENV
+            echo "FILES_CHANGED=$FILES_CHANGED" >> $GITHUB_ENV
             git commit -m "chore: extract document content"
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
+            echo "::notice::step=commit result=pushed files_changed=$FILES_CHANGED"
           fi
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "COMMIT_DURATION=$DURATION" >> $GITHUB_ENV
+
+      - name: Write workflow summary
+        if: always()
+        run: |
+          TOTAL_DURATION=$(($(date +%s) - $WORKFLOW_START))
+
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
+          ## 📝 Extract Workflow Summary
+
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### ✨ What Was Extracted
+
+          | Documents Extracted | **${EXTRACT_PDFS_PROCESSED:-0}** |
+          |---------------------|----------------------------------|
+          | Paragraphs Found    | **${EXTRACT_TOTAL_PARAGRAPHS:-0}** |
+          | Errors              | ${EXTRACT_PDFS_ERRORS:-0} |
+          EOF
+
+          # Show extracted documents table if any
+          if [ "${EXTRACT_PDFS_PROCESSED:-0}" -gt 0 ] && [ -n "${EXTRACTED_LIST}" ]; then
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          **Extracted Documents:**
+
+          | Document | Paragraphs | References |
+          |----------|------------|------------|
+          ${EXTRACTED_LIST}
+          EOF
+          fi
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### 📊 Current Totals
+
+          | Metric | Count |
+          |--------|-------|
+          | Total Extracted Files | ${EXTRACTED_COUNT:-0} |
+          | Data Size | ${EXTRACTED_SIZE:-N/A} |
+
+          ### 📤 Result
+
+          | Outcome | Status |
+          |---------|--------|
+          | Commit | ${COMMIT_RESULT:-N/A} |
+          | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Extraction | ${EXTRACT_STEP_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
+          | **Total** | **${TOTAL_DURATION}s** |
+
+          </details>
+
+          ---
+          *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
+          EOF
+
+          echo "::notice::workflow=extract pdfs=${EXTRACT_PDFS_PROCESSED:-0} paragraphs=${EXTRACT_TOTAL_PARAGRAPHS:-0} duration=${TOTAL_DURATION}s"

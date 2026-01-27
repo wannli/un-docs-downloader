@@ -2,9 +2,11 @@ name: Discover + IGov
 
 on:
   schedule:
-    - cron: '0 * * * *'
-    - cron: '30 * * * *'
-  workflow_dispatch: 
+    # Run at :00 and :30, but only between 7am-9pm NY time
+    # NY is UTC-5 (EST) or UTC-4 (EDT), so 7am-9pm NY = ~11:00-02:00 UTC
+    - cron: '0,30 11-23 * * *'
+    - cron: '0,30 0-1 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,27 +20,99 @@ jobs:
     name: Discover + IGov
     runs-on: ubuntu-latest
     steps:
+      - name: Log workflow start
+        run: |
+          echo "::group::Workflow Metadata"
+          echo "workflow_name=discover"
+          echo "run_id=${{ github.run_id }}"
+          echo "run_number=${{ github.run_number }}"
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref_name }}"
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "::endgroup::"
+          echo "WORKFLOW_START=$(date +%s)" >> $GITHUB_ENV
+
       - name: Checkout
-        uses: actions/checkout@v4
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: Log checkout duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=checkout duration_seconds=$DURATION"
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        run: echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
 
+      - name: Log Python setup duration
+        run: |
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=setup_python duration_seconds=$DURATION"
+
       - name: Install dependencies
         run: |
+          STEP_START=$(date +%s)
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           pip install -e .
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "::notice::step=install_dependencies duration_seconds=$DURATION"
 
       - name: Ensure branch checkout
         run: git checkout -B "${GITHUB_REF_NAME}"
 
       - name: Discover new documents
-        run: python -m mandate_pipeline.cli discover --config ./config --data ./data --verbose
+        run: |
+          STEP_START=$(date +%s)
+
+          # Capture list of PDFs before discovery
+          ls -1 data/pdfs/*.pdf 2>/dev/null | sort > /tmp/pdfs_before.txt || touch /tmp/pdfs_before.txt
+          PDF_COUNT_BEFORE=$(wc -l < /tmp/pdfs_before.txt)
+          PDF_SIZE_BEFORE=$(du -sh data/pdfs 2>/dev/null | cut -f1 || echo "0")
+
+          python -m mandate_pipeline.cli discover --config ./config --data ./data --verbose
+
+          # Capture list of PDFs after discovery and find new ones
+          ls -1 data/pdfs/*.pdf 2>/dev/null | sort > /tmp/pdfs_after.txt || touch /tmp/pdfs_after.txt
+          PDF_COUNT_AFTER=$(wc -l < /tmp/pdfs_after.txt)
+          PDF_SIZE_AFTER=$(du -sh data/pdfs 2>/dev/null | cut -f1 || echo "0")
+
+          # Find new PDFs and convert filenames to symbols
+          comm -13 /tmp/pdfs_before.txt /tmp/pdfs_after.txt > /tmp/new_pdfs.txt
+          NEW_PDFS=$(wc -l < /tmp/new_pdfs.txt)
+
+          # Convert filenames to document symbols for display
+          NEW_SYMBOLS=""
+          while IFS= read -r pdf; do
+            if [ -n "$pdf" ]; then
+              # Extract filename, remove .pdf, replace _ with /
+              symbol=$(basename "$pdf" .pdf | sed 's/_/\//g')
+              NEW_SYMBOLS="${NEW_SYMBOLS}- ${symbol}\n"
+            fi
+          done < /tmp/new_pdfs.txt
+
+          DURATION=$(($(date +%s) - $STEP_START))
+
+          # Save metrics for summary
+          echo "DISCOVER_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "PDF_COUNT_BEFORE=$PDF_COUNT_BEFORE" >> $GITHUB_ENV
+          echo "PDF_COUNT_AFTER=$PDF_COUNT_AFTER" >> $GITHUB_ENV
+          echo "PDF_SIZE_AFTER=$PDF_SIZE_AFTER" >> $GITHUB_ENV
+          echo "NEW_PDFS=$NEW_PDFS" >> $GITHUB_ENV
+
+          # Save new symbols list (escape for multiline)
+          echo "NEW_SYMBOLS<<EOF" >> $GITHUB_ENV
+          echo -e "$NEW_SYMBOLS" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+          echo "::notice::step=discover new_pdfs=$NEW_PDFS duration_seconds=$DURATION"
 
       - name: Record discovery run metadata
         run: |
@@ -56,7 +130,19 @@ jobs:
           EOF
 
       - name: Sync IGov decisions
-        run: python -m mandate_pipeline.cli igov-sync --config ./config --data ./data --verbose
+        run: |
+          STEP_START=$(date +%s)
+          IGOV_COUNT_BEFORE=$(ls -1 data/igov/state/*.json 2>/dev/null | wc -l || echo 0)
+
+          python -m mandate_pipeline.cli igov-sync --config ./config --data ./data --verbose
+
+          IGOV_COUNT_AFTER=$(ls -1 data/igov/state/*.json 2>/dev/null | wc -l || echo 0)
+          DURATION=$(($(date +%s) - $STEP_START))
+
+          echo "IGOV_SYNC_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "IGOV_COUNT=$IGOV_COUNT_AFTER" >> $GITHUB_ENV
+
+          echo "::notice::step=igov_sync duration_seconds=$DURATION igov_sessions=$IGOV_COUNT_AFTER"
 
       - name: Record IGov sync metadata
         run: |
@@ -77,21 +163,105 @@ jobs:
 
       - name: Generate IGov signal browser
         run: |
+          STEP_START=$(date +%s)
           python -m mandate_pipeline.cli igov-signals \
             --config ./config \
             --data ./data \
             --output "docs/igov" \
             --verbose
+          DURATION=$(($(date +%s) - $STEP_START))
+
+          IGOV_HTML_SIZE=$(du -sh docs/igov 2>/dev/null | cut -f1 || echo "0")
+          echo "IGOV_GENERATE_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "IGOV_HTML_SIZE=$IGOV_HTML_SIZE" >> $GITHUB_ENV
+
+          echo "::notice::step=igov_signals duration_seconds=$DURATION output_size=$IGOV_HTML_SIZE"
 
       - name: Commit changes
         run: |
+          STEP_START=$(date +%s)
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ docs/igov
+
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "COMMIT_RESULT=no_changes" >> $GITHUB_ENV
+            echo "::notice::step=commit result=no_changes"
           else
+            FILES_CHANGED=$(git diff --staged --numstat | wc -l)
+            echo "COMMIT_RESULT=pushed" >> $GITHUB_ENV
+            echo "FILES_CHANGED=$FILES_CHANGED" >> $GITHUB_ENV
             git commit -m "chore: discover documents and sync IGov ($(date -I))"
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
+            echo "::notice::step=commit result=pushed files_changed=$FILES_CHANGED"
           fi
+          DURATION=$(($(date +%s) - $STEP_START))
+          echo "COMMIT_DURATION=$DURATION" >> $GITHUB_ENV
+
+      - name: Write workflow summary
+        if: always()
+        run: |
+          TOTAL_DURATION=$(($(date +%s) - $WORKFLOW_START))
+
+          cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY_EOF'
+          ## 📥 Discover + IGov Workflow Summary
+
+          **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
+          SUMMARY_EOF
+
+          # What's New section - the most important info
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### ✨ What's New
+
+          | New Documents Downloaded | **${NEW_PDFS:-0}** |
+          |--------------------------|---------------------|
+          | New IGov Decisions       | ${NEW_IGOV:-0}      |
+          EOF
+
+          # List new document symbols if any
+          if [ "${NEW_PDFS:-0}" -gt 0 ] && [ -n "${NEW_SYMBOLS}" ]; then
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          **New Document Symbols:**
+          ${NEW_SYMBOLS}
+          EOF
+          fi
+
+          # Current totals
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          ### 📊 Current Totals
+
+          | Metric | Count |
+          |--------|-------|
+          | Total PDFs | ${PDF_COUNT_AFTER:-0} |
+          | Total Size | ${PDF_SIZE_AFTER:-N/A} |
+          | IGov Sessions | ${IGOV_COUNT:-0} |
+
+          ### 📤 Result
+
+          | Outcome | Status |
+          |---------|--------|
+          | Commit | ${COMMIT_RESULT:-N/A} |
+          | Files Changed | ${FILES_CHANGED:-0} |
+
+          <details>
+          <summary>⏱️ Performance</summary>
+
+          | Step | Duration |
+          |------|----------|
+          | Discovery | ${DISCOVER_DURATION:-N/A}s |
+          | IGov Sync | ${IGOV_SYNC_DURATION:-N/A}s |
+          | IGov Browser | ${IGOV_GENERATE_DURATION:-N/A}s |
+          | Commit | ${COMMIT_DURATION:-N/A}s |
+          | **Total** | **${TOTAL_DURATION}s** |
+
+          </details>
+
+          ---
+          *Completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)*
+          EOF
+
+          echo "::notice::workflow=discover new_pdfs=${NEW_PDFS:-0} total_pdfs=${PDF_COUNT_AFTER:-0} duration=${TOTAL_DURATION}s"
