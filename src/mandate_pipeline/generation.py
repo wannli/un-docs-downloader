@@ -1,12 +1,36 @@
 """Static site generator for Mandate Pipeline."""
 
 import json
+import logging
 import os
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
+
+# Module-level logger
+logger = logging.getLogger(__name__)
+
+
+def safe_paragraph_number(para: dict, default: int = 0) -> int:
+    """
+    Safely extract and convert paragraph number to int for sorting.
+
+    Args:
+        para: Paragraph dict with 'number' key
+        default: Default value if conversion fails
+
+    Returns:
+        Integer paragraph number, or default if conversion fails
+    """
+    try:
+        num = para.get("number", default)
+        return int(num)
+    except (TypeError, ValueError) as e:
+        logger.warning(f"Invalid paragraph number '{para.get('number')}': {e}")
+        return default
 
 from .detection import load_checks, run_checks
 
@@ -692,7 +716,7 @@ def generate_pattern_page(
                 })
         
         # Sort paragraphs by number
-        signal_paras.sort(key=lambda p: int(p["number"]))
+        signal_paras.sort(key=safe_paragraph_number)
         doc_copy["signal_paragraphs"] = signal_paras
         enriched_docs.append(doc_copy)
     
@@ -781,7 +805,7 @@ def generate_pattern_signal_page(
                 })
         
         # Sort paragraphs by number
-        signal_paras.sort(key=lambda p: int(p["number"]))
+        signal_paras.sort(key=safe_paragraph_number)
         
         # Add to filtered docs with signal_paragraphs
         doc_copy = doc.copy()
@@ -1005,13 +1029,7 @@ def generate_unified_explorer_page(
         checks: All check definitions
         output_dir: Root output directory
     """
-    import time
-    import logging
-
-    # Set up logging
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger(__name__)
-
+    # Use module-level logger and time imports
     start_time = time.time()
     logger.info(f"Starting unified explorer generation for {len(documents)} documents")
 
@@ -1037,7 +1055,7 @@ def generate_unified_explorer_page(
                 })
 
         if signal_paras:
-            signal_paras.sort(key=lambda p: int(p["number"]))
+            signal_paras.sort(key=safe_paragraph_number)
             doc_copy = doc.copy()
             doc_copy["signal_paragraphs"] = signal_paras
             enriched_docs.append(doc_copy)
@@ -1219,12 +1237,17 @@ def generate_session_unified_signals_page(
         checks: All check definitions
         output_dir: Root output directory (will create sessions/{session}/ subdirectory)
     """
+    start_time = time.time()
+    logger.info(f"[Session {session}] Starting unified signals page generation")
+    logger.debug(f"[Session {session}] Input: {len(all_documents)} total documents, {len(checks)} checks")
+
     output_dir = Path(output_dir)
     session_output_dir = output_dir / "sessions" / str(session)
     session_output_dir.mkdir(parents=True, exist_ok=True)
 
     # Filter to session resolutions only
     session_docs = [doc for doc in all_documents if f"/RES/{session}/" in doc["symbol"]]
+    logger.info(f"[Session {session}] Filtered to {len(session_docs)} session documents")
 
     # Transform signals to signal_paragraphs format for template compatibility
     enriched_docs = []
@@ -1245,22 +1268,24 @@ def generate_session_unified_signals_page(
                 })
 
         # Sort paragraphs by number
-        signal_paras.sort(key=lambda p: int(p["number"]))
+        signal_paras.sort(key=safe_paragraph_number)
         doc_copy["signal_paragraphs"] = signal_paras
         enriched_docs.append(doc_copy)
 
     # Filter to documents with signals (use signal_summary for linked documents)
     docs_with_signals = [doc for doc in enriched_docs if doc.get("signal_summary") or doc.get("signal_paragraphs")]
+    logger.info(f"[Session {session}] Enriched {len(enriched_docs)} docs, {len(docs_with_signals)} have signals")
 
     # Ensure all documents have required fields for template compatibility
     for doc in docs_with_signals:
         if "signal_summary" not in doc:
             # Create signal summary from signal_paragraphs if it exists
-            signal_paragraphs = doc.get("signal_paragraphs", {})
+            # NOTE: signal_paragraphs is a LIST of dicts with keys: number, text, signals
+            signal_paragraphs = doc.get("signal_paragraphs", [])
             signal_summary = {}
             if signal_paragraphs:
-                for para_signals in signal_paragraphs.values():
-                    for signal in para_signals:
+                for para in signal_paragraphs:
+                    for signal in para.get("signals", []):
                         signal_summary[signal] = signal_summary.get(signal, 0) + 1
             doc["signal_summary"] = signal_summary
 
@@ -1291,6 +1316,9 @@ def generate_session_unified_signals_page(
 
     with open(session_output_dir / "signals.html", "w") as f:
         f.write(html)
+
+    elapsed = time.time() - start_time
+    logger.info(f"[Session {session}] Completed in {elapsed:.2f}s: {len(docs_with_signals)} docs, {total_paragraphs} signal paragraphs")
 
     return {
         "total_documents": len(enriched_docs),
@@ -1827,11 +1855,7 @@ def generate_consolidated_signals_page(
     Returns:
         Dict with stats about the generation
     """
-    import time
-    import logging
-
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger(__name__)
+    # Use module-level logger and time imports
 
     start_time = time.time()
     logger.info(f"Starting consolidated signals page generation")
@@ -1857,7 +1881,7 @@ def generate_consolidated_signals_page(
                 })
 
         if signal_paras:
-            signal_paras.sort(key=lambda p: int(p["number"]))
+            signal_paras.sort(key=safe_paragraph_number)
             doc_copy = doc.copy()
             doc_copy["signal_paragraphs"] = signal_paras
             enriched_docs.append(doc_copy)

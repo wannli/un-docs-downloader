@@ -1,0 +1,434 @@
+name: Debug Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: 'Pipeline stage to test'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - discovery
+          - extraction
+          - detection
+          - linking
+          - generation
+          - unit-tests
+      verbose:
+        description: 'Enable verbose logging'
+        required: false
+        default: true
+        type: boolean
+      max_documents:
+        description: 'Max documents to process (0 = unlimited)'
+        required: false
+        default: '10'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  debug:
+    name: Debug ${{ inputs.stage }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[dev]"
+          pip install pytest pytest-mock
+
+      - name: Run Unit Tests
+        if: inputs.stage == 'unit-tests' || inputs.stage == 'all'
+        run: |
+          echo "::group::Running Unit Tests"
+          python -m pytest tests/ -v --tb=long 2>&1 | tee test_output.txt
+          echo "::endgroup::"
+
+      - name: Test Generation Module
+        if: inputs.stage == 'generation' || inputs.stage == 'all'
+        run: |
+          echo "::group::Generation Module Tests"
+          python -m pytest tests/test_generation.py -v --tb=long 2>&1 | tee generation_test_output.txt
+          echo "::endgroup::"
+
+      - name: Test Discovery Stage
+        if: inputs.stage == 'discovery' || inputs.stage == 'all'
+        run: |
+          echo "::group::Discovery Stage Debug"
+          python -c "
+          import sys
+          import logging
+          sys.path.insert(0, 'src')
+
+          # Enable verbose logging
+          if '${{ inputs.verbose }}' == 'true':
+              logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+          else:
+              logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+          logger = logging.getLogger(__name__)
+
+          from pathlib import Path
+          from mandate_pipeline.discovery import load_patterns, discover_documents
+
+          logger.info('Loading patterns...')
+          patterns_file = Path('config/patterns.yaml')
+          if patterns_file.exists():
+              patterns = load_patterns(patterns_file)
+              logger.info(f'Loaded {len(patterns)} patterns')
+              for p in patterns[:5]:
+                  logger.debug(f'  Pattern: {p}')
+          else:
+              logger.warning('patterns.yaml not found')
+
+          print('Discovery stage: OK')
+          "
+          echo "::endgroup::"
+
+      - name: Test Extraction Stage
+        if: inputs.stage == 'extraction' || inputs.stage == 'all'
+        run: |
+          echo "::group::Extraction Stage Debug"
+          python -c "
+          import sys
+          import logging
+          sys.path.insert(0, 'src')
+
+          if '${{ inputs.verbose }}' == 'true':
+              logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+          else:
+              logging.basicConfig(level=logging.INFO)
+
+          logger = logging.getLogger(__name__)
+
+          from pathlib import Path
+          from mandate_pipeline.extractor import (
+              extract_text,
+              extract_operative_paragraphs,
+              extract_title,
+          )
+
+          pdfs_dir = Path('data/pdfs')
+          if pdfs_dir.exists():
+              pdf_files = list(pdfs_dir.glob('*.pdf'))[:int('${{ inputs.max_documents }}') or 5]
+              logger.info(f'Found {len(pdf_files)} PDF files to test')
+
+              for pdf_file in pdf_files:
+                  try:
+                      logger.info(f'Processing: {pdf_file.name}')
+                      text = extract_text(pdf_file)
+                      paragraphs = extract_operative_paragraphs(text)
+                      title = extract_title(text)
+                      logger.info(f'  - Text length: {len(text)}')
+                      logger.info(f'  - Paragraphs: {len(paragraphs)}')
+                      logger.info(f'  - Title: {title[:50] if title else \"None\"}...')
+                  except Exception as e:
+                      logger.error(f'  - ERROR: {e}')
+          else:
+              logger.warning('data/pdfs directory not found')
+
+          print('Extraction stage: OK')
+          "
+          echo "::endgroup::"
+
+      - name: Test Detection Stage
+        if: inputs.stage == 'detection' || inputs.stage == 'all'
+        run: |
+          echo "::group::Detection Stage Debug"
+          python -c "
+          import sys
+          import logging
+          sys.path.insert(0, 'src')
+
+          if '${{ inputs.verbose }}' == 'true':
+              logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+          else:
+              logging.basicConfig(level=logging.INFO)
+
+          logger = logging.getLogger(__name__)
+
+          from pathlib import Path
+          from mandate_pipeline.detection import load_checks, run_checks
+
+          checks_file = Path('config/checks.yaml')
+          if checks_file.exists():
+              checks = load_checks(checks_file)
+              logger.info(f'Loaded {len(checks)} checks')
+              for check in checks:
+                  logger.debug(f'  Check: {check.get(\"name\", \"unnamed\")} - {len(check.get(\"phrases\", []))} phrases')
+
+              # Test with sample paragraph
+              test_paragraphs = {
+                  1: 'Requests the Secretary-General to submit a report on the implementation.',
+                  2: 'Decides to include in the provisional agenda of its seventy-ninth session.',
+                  3: 'Requests the President of the General Assembly to convene a meeting.',
+              }
+
+              signals = run_checks(test_paragraphs, checks)
+              logger.info(f'Test detection results:')
+              for para_num, para_signals in signals.items():
+                  if para_signals:
+                      logger.info(f'  Para {para_num}: {para_signals}')
+
+          else:
+              logger.warning('checks.yaml not found')
+
+          print('Detection stage: OK')
+          "
+          echo "::endgroup::"
+
+      - name: Test Linking Stage
+        if: inputs.stage == 'linking' || inputs.stage == 'all'
+        run: |
+          echo "::group::Linking Stage Debug"
+          python -c "
+          import sys
+          import logging
+          import json
+          sys.path.insert(0, 'src')
+
+          if '${{ inputs.verbose }}' == 'true':
+              logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+          else:
+              logging.basicConfig(level=logging.INFO)
+
+          logger = logging.getLogger(__name__)
+
+          from pathlib import Path
+
+          linked_dir = Path('data/linked')
+          if linked_dir.exists():
+              linked_files = list(linked_dir.glob('*.json'))
+              logger.info(f'Found {len(linked_files)} linked document files')
+
+              # Sample a few files
+              sample_count = min(5, len(linked_files))
+              for linked_file in linked_files[:sample_count]:
+                  try:
+                      with open(linked_file) as f:
+                          doc = json.load(f)
+                      logger.info(f'{doc.get(\"symbol\", \"unknown\")}:')
+                      logger.info(f'  - doc_type: {doc.get(\"doc_type\")}')
+                      logger.info(f'  - signals: {list(doc.get(\"signals\", {}).keys())[:5]}...')
+                      logger.info(f'  - signal_summary: {doc.get(\"signal_summary\", {})}')
+
+                      # Validate data structure
+                      signals = doc.get('signals', {})
+                      if not isinstance(signals, dict):
+                          logger.error(f'  - ERROR: signals should be dict, got {type(signals)}')
+
+                      signal_summary = doc.get('signal_summary', {})
+                      if not isinstance(signal_summary, dict):
+                          logger.error(f'  - ERROR: signal_summary should be dict, got {type(signal_summary)}')
+
+                  except Exception as e:
+                      logger.error(f'  - ERROR loading {linked_file}: {e}')
+          else:
+              logger.warning('data/linked directory not found')
+
+          print('Linking stage: OK')
+          "
+          echo "::endgroup::"
+
+      - name: Test Generation Stage
+        if: inputs.stage == 'generation' || inputs.stage == 'all'
+        run: |
+          echo "::group::Generation Stage Debug"
+          python -c "
+          import sys
+          import logging
+          import json
+          sys.path.insert(0, 'src')
+
+          if '${{ inputs.verbose }}' == 'true':
+              logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+          else:
+              logging.basicConfig(level=logging.INFO)
+
+          logger = logging.getLogger(__name__)
+
+          from pathlib import Path
+          from mandate_pipeline.generation import safe_paragraph_number
+          from mandate_pipeline.detection import load_checks
+
+          # Test safe_paragraph_number function
+          logger.info('Testing safe_paragraph_number():')
+          test_cases = [
+              {'number': '42'},
+              {'number': 7},
+              {'number': 'invalid'},
+              {'number': None},
+              {},
+          ]
+          for test in test_cases:
+              result = safe_paragraph_number(test)
+              logger.info(f'  {test} -> {result}')
+
+          # Load and validate documents
+          linked_dir = Path('data/linked')
+          if linked_dir.exists():
+              linked_files = list(linked_dir.glob('*.json'))
+              max_docs = int('${{ inputs.max_documents }}') or len(linked_files)
+              logger.info(f'Processing {min(max_docs, len(linked_files))} documents...')
+
+              documents = []
+              errors = []
+              for linked_file in linked_files[:max_docs]:
+                  try:
+                      with open(linked_file) as f:
+                          doc = json.load(f)
+                          documents.append(doc)
+                  except Exception as e:
+                      errors.append(f'{linked_file}: {e}')
+
+              logger.info(f'Loaded {len(documents)} documents, {len(errors)} errors')
+
+              # Test signal_paragraphs enrichment
+              enriched_count = 0
+              for doc in documents:
+                  if doc.get('signal_paragraphs'):
+                      # Already has signal_paragraphs
+                      if not isinstance(doc['signal_paragraphs'], list):
+                          logger.error(f'{doc[\"symbol\"]}: signal_paragraphs should be list, got {type(doc[\"signal_paragraphs\"])}')
+                      continue
+
+                  signal_paras = []
+                  for para_num, para_signals in doc.get('signals', {}).items():
+                      if para_signals:
+                          signal_paras.append({
+                              'number': para_num,
+                              'text': doc.get('paragraphs', {}).get(para_num, ''),
+                              'signals': para_signals,
+                          })
+
+                  if signal_paras:
+                      signal_paras.sort(key=safe_paragraph_number)
+                      enriched_count += 1
+
+              logger.info(f'Enriched {enriched_count} documents with signal_paragraphs')
+
+              # Test signal_summary generation from signal_paragraphs
+              logger.info('Testing signal_summary generation from signal_paragraphs:')
+              for doc in documents[:3]:
+                  signal_paragraphs = doc.get('signal_paragraphs', [])
+                  if isinstance(signal_paragraphs, list) and signal_paragraphs:
+                      computed_summary = {}
+                      for para in signal_paragraphs:
+                          for signal in para.get('signals', []):
+                              computed_summary[signal] = computed_summary.get(signal, 0) + 1
+                      logger.info(f'  {doc[\"symbol\"]}: {computed_summary}')
+
+          print('Generation stage: OK')
+          "
+          echo "::endgroup::"
+
+      - name: Validate Data Structures
+        if: inputs.stage == 'all'
+        run: |
+          echo "::group::Data Structure Validation"
+          python -c "
+          import sys
+          import json
+          import logging
+          sys.path.insert(0, 'src')
+
+          logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
+          logger = logging.getLogger(__name__)
+
+          from pathlib import Path
+
+          errors = []
+          warnings = []
+
+          # Check linked documents
+          linked_dir = Path('data/linked')
+          if linked_dir.exists():
+              for linked_file in linked_dir.glob('*.json'):
+                  try:
+                      with open(linked_file) as f:
+                          doc = json.load(f)
+
+                      symbol = doc.get('symbol', linked_file.name)
+
+                      # Validate signals is dict
+                      signals = doc.get('signals')
+                      if signals is not None and not isinstance(signals, dict):
+                          errors.append(f'{symbol}: signals should be dict, got {type(signals).__name__}')
+
+                      # Validate signal_summary is dict
+                      signal_summary = doc.get('signal_summary')
+                      if signal_summary is not None and not isinstance(signal_summary, dict):
+                          errors.append(f'{symbol}: signal_summary should be dict, got {type(signal_summary).__name__}')
+
+                      # Validate signal_paragraphs is list (if present)
+                      signal_paragraphs = doc.get('signal_paragraphs')
+                      if signal_paragraphs is not None and not isinstance(signal_paragraphs, list):
+                          errors.append(f'{symbol}: signal_paragraphs should be list, got {type(signal_paragraphs).__name__}')
+
+                      # Validate paragraphs is dict
+                      paragraphs = doc.get('paragraphs')
+                      if paragraphs is not None and not isinstance(paragraphs, dict):
+                          errors.append(f'{symbol}: paragraphs should be dict, got {type(paragraphs).__name__}')
+
+                  except json.JSONDecodeError as e:
+                      errors.append(f'{linked_file.name}: Invalid JSON - {e}')
+                  except Exception as e:
+                      errors.append(f'{linked_file.name}: {e}')
+
+          # Report results
+          if errors:
+              logger.error(f'Found {len(errors)} errors:')
+              for err in errors[:20]:  # Show first 20
+                  logger.error(f'  {err}')
+              if len(errors) > 20:
+                  logger.error(f'  ... and {len(errors) - 20} more')
+              sys.exit(1)
+          else:
+              logger.info('All data structures validated successfully!')
+          "
+          echo "::endgroup::"
+
+      - name: Upload Debug Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-output-${{ inputs.stage }}
+          path: |
+            *_output.txt
+            *.log
+          retention-days: 7
+
+      - name: Summary
+        if: always()
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## Debug Run Summary
+
+          **Stage:** \`${{ inputs.stage }}\`
+          **Verbose:** ${{ inputs.verbose }}
+          **Max Documents:** ${{ inputs.max_documents }}
+
+          ### Results
+
+          Check the job logs above for detailed output from each stage.
+
+          If you see errors related to:
+          - \`'list' object has no attribute 'values'\` - This is the signal_paragraphs type mismatch bug
+          - \`ValueError: invalid literal for int()\` - This is the paragraph number conversion bug
+          - \`KeyError\` on document fields - Check if required fields are missing
+
+          EOF

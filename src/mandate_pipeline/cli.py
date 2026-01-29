@@ -1113,7 +1113,8 @@ def cmd_process_session(args):
     # Summary
     gh_group_start("Processing Summary")
     docs_with_signals = [d for d in documents if d.get("signal_paragraphs")]
-    total_signals = sum(len(d.get("signal_paragraphs", {})) for d in documents)
+    # signal_paragraphs is a list of paragraph dicts, not a dict
+    total_signals = sum(len(d.get("signal_paragraphs", [])) for d in documents)
 
     print(f"Processed {len(documents)} documents")
     print(f"Documents with signals: {len(docs_with_signals)}")
@@ -1251,7 +1252,8 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
     # Simple HTML dashboard
     total_resolutions = len(documents)
     with_signals = len([d for d in documents if d.get('signal_paragraphs')])
-    signal_paragraphs = sum(len(d.get('signal_paragraphs', {})) for d in documents)
+    # signal_paragraphs is a list of paragraph dicts, not a dict
+    signal_paragraphs = sum(len(d.get('signal_paragraphs', [])) for d in documents)
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1369,11 +1371,11 @@ def generate_session_data_json(documents: list[dict], checks: list, session: int
     session_dir = output_dir / "sessions" / str(session)
     session_dir.mkdir(parents=True, exist_ok=True)
 
-    # Calculate signal counts
+    # Calculate signal counts from signal_summary (contains {signal_name: count})
     signal_counts = {}
     for doc in documents:
-        for signal in doc.get("signal_paragraphs", {}):
-            signal_counts[signal] = signal_counts.get(signal, 0) + 1
+        for signal, count in doc.get("signal_summary", {}).items():
+            signal_counts[signal] = signal_counts.get(signal, 0) + count
 
     data = {
         "session": session,
