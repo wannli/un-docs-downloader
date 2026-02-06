@@ -1570,6 +1570,16 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     use_undl_metadata = os.getenv("SKIP_UNDL_METADATA", "false").lower() != "true"
     link_documents(documents, use_undl_metadata=use_undl_metadata)
     annotate_linkage(documents)
+
+    # Populate origin for all documents
+    for doc in documents:
+        if doc.get("doc_type") == "resolution":
+            doc["origin"] = derive_resolution_origin(doc)
+        elif doc.get("doc_type") == "proposal":
+            doc["origin"] = derive_origin_from_symbol(doc["symbol"])
+        else:
+            doc["origin"] = "Unknown"
+
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     # Create output directories
@@ -1742,6 +1752,16 @@ def generate_site_verbose(
 
     link_documents(documents)
     annotate_linkage(documents)
+
+    # Populate origin for all documents
+    for doc in documents:
+        if doc.get("doc_type") == "resolution":
+            doc["origin"] = derive_resolution_origin(doc)
+        elif doc.get("doc_type") == "proposal":
+            doc["origin"] = derive_origin_from_symbol(doc["symbol"])
+        else:
+            doc["origin"] = "Unknown"
+
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     load_duration = time.time() - load_start_time
