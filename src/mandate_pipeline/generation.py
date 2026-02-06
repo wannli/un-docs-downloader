@@ -1570,6 +1570,12 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     use_undl_metadata = os.getenv("SKIP_UNDL_METADATA", "false").lower() != "true"
     link_documents(documents, use_undl_metadata=use_undl_metadata)
     annotate_linkage(documents)
+
+    # Derive origin committee for each document
+    for doc in documents:
+        if "origin" not in doc:
+            doc["origin"] = derive_resolution_origin(doc)
+
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     # Create output directories
@@ -1742,6 +1748,12 @@ def generate_site_verbose(
 
     link_documents(documents)
     annotate_linkage(documents)
+
+    # Derive origin committee for each document
+    for doc in documents:
+        if "origin" not in doc:
+            doc["origin"] = derive_resolution_origin(doc)
+
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
 
     load_duration = time.time() - load_start_time

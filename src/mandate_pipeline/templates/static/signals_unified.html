@@ -57,7 +57,7 @@
             {% for doc in documents %}
             <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors{% if doc.doc_type == 'proposal' %} border-l-4 border-l-amber-400{% endif %}"
                  data-symbol="{{ doc.symbol }}"
-                 data-source="{{ doc.origin }}"
+                 data-source="{{ doc.origin|default('Unknown', true) }}"
                  data-doctype="{{ doc.doc_type }}"
                  data-signals="{{ doc.signal_summary.keys()|list|join(',') }}"
                  data-un-url="{{ doc.un_url }}">
@@ -83,7 +83,7 @@
                                     {% elif doc.origin == 'C5' %}bg-orange-50 text-orange-700
                                     {% elif doc.origin == 'C6' %}bg-teal-50 text-teal-700
                                     {% else %}bg-gray-100 text-gray-700{% endif %}">
-                                    {{ doc.origin[:2] }}
+                                    {{ (doc.origin|default('?', true))[:2] }}
                                 </span>
                             </div>
                             {% if doc.title %}
