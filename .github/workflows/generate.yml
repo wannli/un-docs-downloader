@@ -83,11 +83,13 @@ jobs:
 
       - name: Generate unified signals explorer
         env:
-          SKIP_UNDL_METADATA: ${{ vars.SKIP_UNDL_METADATA || 'false' }}
-          SKIP_DETAILED_PAGES: ${{ vars.SKIP_DETAILED_PAGES || 'true' }}
           MAX_DOCUMENTS: ${{ vars.MAX_DOCUMENTS || '' }}
         run: |
           STEP_START=$(date +%s)
+          # NOTE: This workflow uses an optimized path that loads pre-processed
+          # JSON files from data/linked/ instead of re-processing PDFs.
+          # For local development, use: mandate generate --max-documents N
+          # For CI testing, set the MAX_DOCUMENTS repository variable.
           python -c "
           import sys
           import os
@@ -123,11 +125,15 @@ jobs:
           print(f'Loaded {len(documents)} documents in {load_duration:.2f}s')
           print('::endgroup::')
 
-          max_docs = os.getenv('MAX_DOCUMENTS')
-          if max_docs and max_docs.isdigit():
-              max_docs = int(max_docs)
-              print(f'Limiting to {max_docs} documents')
-              documents = documents[:max_docs]
+          # Apply max_documents limit for testing
+          max_docs_str = os.getenv('MAX_DOCUMENTS')
+          if max_docs_str:
+              max_docs_str = max_docs_str.strip()
+              if max_docs_str and max_docs_str.isdigit():
+                  max_docs = int(max_docs_str)
+                  print(f'::notice::Testing mode - limiting to {max_docs} documents')
+                  documents = documents[:max_docs]
+                  metrics['max_documents_applied'] = max_docs
 
           if documents:
               print('::group::Load Checks')
@@ -157,6 +163,7 @@ jobs:
           # Count documents with signals
           docs_with_signals = len([d for d in documents if d.get('signal_summary')])
           metrics['documents_with_signals'] = docs_with_signals
+          metrics['documents_processed'] = len(documents)
           metrics['total_duration_seconds'] = round(time.time() - total_start, 2)
 
           # Write metrics to file for shell to read
@@ -184,7 +191,7 @@ jobs:
 
           DURATION=$(($(date +%s) - $STEP_START))
           echo "GEN_STEP_DURATION=$DURATION" >> $GITHUB_ENV
-          echo "::notice::step=generate_site duration_seconds=$DURATION"
+          echo "::notice::step=generate_site duration_seconds=$DURATION documents_processed=${GEN_DOCUMENTS_PROCESSED:-0}"
 
       - name: Commit site changes
         run: |
@@ -264,13 +271,22 @@ jobs:
           **Run:** #${{ github.run_number }} | **Trigger:** `${{ github.event_name }}`
           SUMMARY_EOF
 
+          # Add testing mode notice if applicable
+          if [ -n "${GEN_MAX_DOCUMENTS_APPLIED}" ]; then
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+
+          > ⚠️ **Testing Mode Active**: Processing limited to ${GEN_MAX_DOCUMENTS_APPLIED} documents
+          EOF
+          fi
+
           cat >> $GITHUB_STEP_SUMMARY << EOF
 
           ### ✨ What Was Generated
 
           | Site Built With          | Count |
           |--------------------------|-------|
-          | 📄 Documents             | **${GEN_DOCUMENTS_LOADED:-0}** |
+          | 📄 Documents Loaded      | ${GEN_DOCUMENTS_LOADED:-0} |
+          | 📄 Documents Processed   | **${GEN_DOCUMENTS_PROCESSED:-0}** |
           | 🔔 Documents w/ Signals  | **${GEN_DOCUMENTS_WITH_SIGNALS:-0}** |
           | 🔍 Signal Types          | ${GEN_CHECKS_LOADED:-0} |
 

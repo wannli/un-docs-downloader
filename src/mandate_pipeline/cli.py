@@ -175,6 +175,11 @@ def main():
         action="store_true",
         help="Skip generating debug pages (faster builds)",
     )
+    generate_parser.add_argument(
+        "--max-documents",
+        type=int,
+        help="Limit number of documents to process (for testing/development)",
+    )
 
     # Download session resolutions command
     download_session_parser = subparsers.add_parser(
@@ -621,6 +626,8 @@ def cmd_generate(args):
     print(f"Output directory: {args.output}")
     print(f"Clean output: {args.clean_output}")
     print(f"Verbose: {verbose}")
+    if hasattr(args, 'max_documents') and args.max_documents:
+        print(f"Max documents: {args.max_documents} (testing mode)")
     gh_group_end()
 
     if args.clean_output and args.output.exists():
@@ -669,6 +676,7 @@ def cmd_generate(args):
         data_dir=args.data,
         output_dir=args.output,
         skip_debug=getattr(args, 'skip_debug', False),
+        max_documents=getattr(args, 'max_documents', None),
         on_load_start=on_load_start if verbose else None,
         on_load_document=on_load_document if verbose else None,
         on_load_error=on_load_error,
