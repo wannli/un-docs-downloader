@@ -161,12 +161,28 @@ jobs:
           }
           EOF
 
+      - name: Generate IGov signal browser
+        run: |
+          STEP_START=$(date +%s)
+          python -m mandate_pipeline.cli igov-signals \
+            --config ./config \
+            --data ./data \
+            --output "docs/igov" \
+            --verbose
+          DURATION=$(($(date +%s) - $STEP_START))
+
+          IGOV_HTML_SIZE=$(du -sh docs/igov 2>/dev/null | cut -f1 || echo "0")
+          echo "IGOV_GENERATE_DURATION=$DURATION" >> $GITHUB_ENV
+          echo "IGOV_HTML_SIZE=$IGOV_HTML_SIZE" >> $GITHUB_ENV
+
+          echo "::notice::step=igov_signals duration_seconds=$DURATION output_size=$IGOV_HTML_SIZE"
+
       - name: Commit changes
         run: |
           STEP_START=$(date +%s)
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ docs/igov
 
           if git diff --staged --quiet; then
             echo "COMMIT_RESULT=no_changes" >> $GITHUB_ENV
@@ -175,7 +191,7 @@ jobs:
             FILES_CHANGED=$(git diff --staged --numstat | wc -l)
             echo "COMMIT_RESULT=pushed" >> $GITHUB_ENV
             echo "FILES_CHANGED=$FILES_CHANGED" >> $GITHUB_ENV
-            git commit -m "chore: discover documents ($(date -I))"
+            git commit -m "chore: discover documents and sync IGov ($(date -I))"
             git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
             echo "::notice::step=commit result=pushed files_changed=$FILES_CHANGED"

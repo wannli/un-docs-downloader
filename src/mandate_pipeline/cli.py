@@ -948,11 +948,36 @@ def cmd_igov_sync(args):
 
 
 def cmd_igov_signals(args):
-    """Generate a standalone IGov decision signal browser (DEPRECATED)."""
-    gh_error("Command 'igov-signals' is deprecated and no longer generates output.")
-    gh_error("IGov decision pages are no longer part of the public interface.")
-    gh_error("IGov decisions are now integrated into the main signal browser at index.html")
-    return {"total_decisions": 0, "decisions_with_signals": 0, "total_signal_paragraphs": 0}
+    """Generate a standalone IGov decision signal browser."""
+    verbose = args.verbose or is_github_actions()
+
+    config = load_igov_config(args.config)
+    session = args.session
+
+    checks = load_checks(args.config / "checks.yaml")
+
+    gh_group_start("IGov Signal Browser")
+    print(f"Session number: {session or 'all'}")
+    print(f"Config directory: {args.config}")
+    print(f"Data directory: {args.data}")
+    print(f"Output directory: {args.output}")
+    print(f"Verbose: {verbose}")
+    gh_group_end()
+
+    result = generate_igov_signals_page(
+        checks=checks,
+        data_dir=args.data,
+        output_dir=args.output,
+        session=session,
+    )
+
+    gh_group_start("IGov Signal Browser Summary")
+    print(f"Decisions processed: {result['total_decisions']}")
+    print(f"Decisions with signals: {result['decisions_with_signals']}")
+    print(f"Signal paragraphs: {result['total_signal_paragraphs']}")
+    gh_group_end()
+
+    return result
 
 
 def cmd_consolidated_signals(args):
