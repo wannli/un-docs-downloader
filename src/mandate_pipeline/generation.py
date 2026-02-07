@@ -1025,7 +1025,13 @@ def build_igov_decision_documents(decisions: list[dict], checks: list) -> list[d
         
         # Format symbol as A/DEC/{session}/{number} to align with A/RES format
         if decision_number and session:
-            symbol = f"A/DEC/{session}/{decision_number.split('/')[-1]}"
+            # Extract the number part after the slash (e.g., "80/518" -> "518")
+            # If there's no slash, use the entire decision_number
+            if '/' in decision_number:
+                number_part = decision_number.split('/', 1)[1]  # Split on first slash only
+            else:
+                number_part = decision_number
+            symbol = f"A/DEC/{session}/{number_part}"
         elif decision_number:
             symbol = decision_number
         else:
