@@ -575,20 +575,41 @@ A comprehensive code review was conducted to identify legacy issues, inconsisten
 
 5. **Unused CDN dependency removed**: `lunr.js` was imported in `base.html` but never used by any template. Client-side search uses manual string matching instead. The unused import was removed to improve page load time.
 
-6. **Stale IGov redirect fixed**: The IGov redirect page pointed to `../signals-unified.html` which is no longer generated. Updated to `../?type=decision`.
+6. **IGov page generation restored**: The IGov page was generating a redirect instead of rendering the actual `signals_igov.html` template. Restored proper page generation to `igov/signals.html`, and updated all nav links to point to `/igov/signals.html`.
 
 7. **README outdated sections updated**: Generated Website Structure table, Data Flow diagram, Stage 5 description, and GitHub Actions section were updated to reflect the current state of the project.
 
-### Known Issues (tracked as GitHub issues)
+8. **Navigation consistency standardized**: All templates now use absolute paths from `base.html` (e.g., `/igov/signals.html`, `/signals-info.html`). Child templates no longer need to override nav blocks, eliminating path calculation errors across directory depths.
 
-The following items were identified during the review but are tracked as separate issues for future work:
+9. **Merge conflicts resolved**: Merged master branch, resolving 18 template conflicts. Adopted master's absolute path navigation and new `nav_resolutions` link while preserving our cleanup and fixes.
 
-- Signal color definitions are hardcoded in multiple locations (templates and `generation.py`)
-- Filter UI patterns differ between the main explorer (pill buttons with JS data loading) and the older `signals_unified.html` template (HTML multiselect with server-rendered documents)
-- The `signals_unified.html` template is only used by `generate_session_unified_signals_page()` for historical sessions, while `signals_unified_explorer.html` is used for the main page — two different rendering approaches for similar content
-- `search-index.json` is generated but not consumed by any client-side code
-- The `generate_site_verbose()` function largely duplicates `generate_site()` with callback additions, presenting a maintenance burden
-- `generation.py` is over 1900 lines long and could benefit from being split into smaller modules
+### Recommended Follow-up Issues
+
+The following improvements were identified during the review. Each is documented below as a standalone actionable issue.
+
+**Issue 1: Centralize signal color definitions into a single source of truth**
+
+Signal colors (e.g., `bg-blue-100 text-blue-800` for "agenda") are hardcoded in `generation.py` (`generate_signals_info_page`), `signals_unified_explorer.html` (`getSignalHighlightClass`), and `signals_igov.html`. Changes to signal types or colors require updates in multiple places. Extract signal colors into `checks.yaml` or a shared Jinja2 macro/partial.
+
+**Issue 2: Unify historical session and current session rendering templates**
+
+`signals_unified.html` is used only by `generate_session_unified_signals_page()` for historical sessions, while `signals_unified_explorer.html` is used for the main page. These two templates solve the same problem (signal browsing) but use completely different architectures: server-rendered HTML with multiselect filters vs. client-side JSON loading with pill-button filters. Migrate historical sessions to use the explorer template for a consistent UX.
+
+**Issue 3: Remove unused `search-index.json` generation**
+
+`generate_search_index()` produces `search-index.json` but no client-side code consumes it. The `lunr.js` library was imported but never wired up, and has now been removed. Either remove `search-index.json` generation entirely or implement client-side search using it.
+
+**Issue 4: Consolidate `generate_site()` and `generate_site_verbose()` into a single function**
+
+These two functions in `generation.py` have ~80% code overlap. `generate_site_verbose()` adds parallel PDF extraction and progress callbacks. Refactor into a single function with optional callback parameters and a `parallel` flag to eliminate the duplication and maintenance burden.
+
+**Issue 5: Split `generation.py` into smaller modules**
+
+At ~1960 lines, `generation.py` is the largest file in the codebase and contains 35 functions spanning page generation, document enrichment, data export, and template rendering. Consider splitting into: `generation/pages.py` (page generators), `generation/data.py` (JSON exports), `generation/enrichment.py` (document processing), `generation/templates.py` (template utilities).
+
+**Issue 6: Fix pre-existing test failures in `test_downloader.py` and `test_linking.py`**
+
+16 tests fail in the current test suite. 5 require network access (sandbox limitation), but 11 are genuine failures: `test_generate_site_creates_all_files` asserts removed pages (`documents/index.html`), linking tests expect a `normalize_title` function that has changed, and `test_decision_in_series` fails with current IGov logic. These tests should be updated to match the current codebase.
 
 ## License
 
