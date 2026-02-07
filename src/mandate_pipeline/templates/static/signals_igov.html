@@ -2,49 +2,51 @@
 
 {% block title %}IGov Decision Signal Explorer - Mandate Pipeline{% endblock %}
 
-{% block nav_index %}../{% endblock %}
-{% block nav_signals_info %}../signals-info.html{% endblock %}
-{% block nav_decisions %}./signals.html{% endblock %}
-{% block nav_api %}../data.json{% endblock %}
+{% block nav_decisions %}/igov/signals.html{% endblock %}
 
 {% block content %}
-<div class="mb-4 hidden sm:block">
+<!-- Header (hidden per UX requirements) -->
+<div class="mb-4 hidden">
     <h1 class="text-3xl font-bold text-gray-900 tracking-tight">IGov Decision Signal Explorer</h1>
 </div>
 
-<div class="sticky top-20 z-10 space-y-3 bg-white/95 pb-3 backdrop-blur">
-    <div class="rounded-xl border border-gray-200 bg-gray-50/80 p-3 shadow-sm">
-        <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search</label>
+<div class="sticky top-20 z-10 space-y-2 bg-white/95 pb-2 backdrop-blur">
+    <!-- Search -->
+    <div class="rounded-lg border border-gray-200 bg-gray-50/80 p-2 shadow-sm">
         <input type="text" id="search-input" placeholder="Search by decision number, title, or content..."
-               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+               class="w-full px-3 py-1.5 border border-gray-300 rounded-md bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
     </div>
 
-    <div class="rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
-        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div class="flex flex-col gap-2 md:flex-row md:flex-wrap md:items-center">
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Session</span>
-                    <div id="session-filter" class="flex flex-wrap gap-1.5">
-                    {% for session_number in sessions %}
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ session_number }}">{{ session_number }}</button>
+    <!-- Filters - Compact Layout -->
+    <div class="rounded-lg border border-gray-200 bg-white p-2 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 items-start">
+            <!-- Session - Multiselect -->
+            <div>
+                <label for="session-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Session</label>
+                <select id="session-filter" multiple size="3" aria-label="Select multiple sessions" aria-multiselectable="true" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
+                {% for session_number in sessions %}
+                <option value="{{ session_number }}">{{ session_number }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Signal - Multiselect -->
+            <div>
+                <label for="signal-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Signal</label>
+                <select id="signal-filter" multiple size="3" aria-label="Select multiple signal types" aria-multiselectable="true" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
+                    {% for check in checks %}
+                    <option value="{{ check.signal }}">{{ check.signal }}</option>
                     {% endfor %}
-                    </div>
-                </div>
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</span>
-                    <div id="signal-filter" class="flex flex-wrap gap-1.5">
-                        {% for check in checks %}
-                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
-                        {% endfor %}
-                        <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-800" data-value="no-signals">No signals</button>
-                    </div>
-                </div>
+                    <option value="no-signals">No signals</option>
+                </select>
             </div>
-            <div class="flex items-center justify-start md:justify-end">
-                <button id="clear-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button">
-                    Clear filters
-                </button>
-            </div>
+        </div>
+        
+        <!-- Clear filters button (compact) -->
+        <div class="mt-2 flex justify-end">
+            <button id="clear-filters" class="px-3 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                Clear filters
+            </button>
         </div>
     </div>
 </div>
@@ -150,7 +152,21 @@ function setPillActive(pill, isActive) {
     inactivePillClasses.forEach(cls => pill.classList.toggle(cls, !isActive));
 }
 
+// Helper functions for multiselect dropdowns and pills
+function getSelectedValues(selectElement) {
+    if (!selectElement) return [];
+    if (selectElement.multiple) {
+        return Array.from(selectElement.selectedOptions).map(opt => opt.value);
+    } else {
+        return selectElement.value ? [selectElement.value] : [];
+    }
+}
+
 function getActiveValues(container) {
+    // Support both select elements and legacy pill containers
+    if (container.tagName === 'SELECT') {
+        return getSelectedValues(container);
+    }
     return Array.from(container.querySelectorAll('.filter-pill.is-active')).map(pill => pill.dataset.value);
 }
 
@@ -311,8 +327,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearFiltersBtn = document.getElementById('clear-filters');
     const searchInput = document.getElementById('search-input');
 
-    wirePillGroup(sessionFilter, applyFilters);
-    wirePillGroup(signalFilter, applyFilters);
+    // Wire up select elements (or legacy pills) with change listeners
+    if (sessionFilter) {
+        if (sessionFilter.tagName === 'SELECT') {
+            sessionFilter.addEventListener('change', applyFilters);
+        } else {
+            wirePillGroup(sessionFilter, applyFilters);
+        }
+    }
+    if (signalFilter) {
+        if (signalFilter.tagName === 'SELECT') {
+            signalFilter.addEventListener('change', applyFilters);
+        } else {
+            wirePillGroup(signalFilter, applyFilters);
+        }
+    }
     searchInput.addEventListener('input', applyFilters);
 
     clearFiltersBtn.addEventListener('click', function() {
