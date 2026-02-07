@@ -53466,6 +53466,20 @@
             
         </div>
 
+        <!-- Scroll Sentinel for IntersectionObserver (invisible) -->
+        <div id="scroll-sentinel" class="h-4"></div>
+
+        <!-- Loading Spinner for infinite scroll -->
+        <div id="scroll-loading" class="hidden py-6 text-center">
+            <div class="inline-flex items-center gap-2 text-sm text-gray-500">
+                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-un-blue"></div>
+                <span>Loading more documents...</span>
+            </div>
+        </div>
+
+        <!-- Documents Count -->
+        <div id="documents-count" class="py-4 text-center text-xs text-gray-500 hidden"></div>
+
         <!-- Empty State -->
         <div class="hidden text-center py-12" id="empty-state">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53487,10 +53501,27 @@
 </div>
 
 <script>
+// ============================================
+// PERFORMANCE OPTIMIZATIONS
+// ============================================
+
+// Pagination configuration
+const PAGE_SIZE = 50;
+let currentPage = 0;
+let filteredDocumentsCache = [];
+let isLoadingMore = false;
+
 // Session data cache
 let sessionDataCache = {};
 let selectedSessions = [];
 let allDocumentsCache = [];
+
+// DOM element caches (populated once on init)
+let cachedDocumentsContainer = null;
+let cachedEmptyState = null;
+let cachedLoadMoreBtn = null;
+let cachedLoadMoreContainer = null;
+let cachedSearchInput = null;
 
 const signalPhraseMap = Object.fromEntries(([{"phrases": ["decides to include", "decides to place on the provisional agenda", "requests the inclusion", "invites the Secretary-General to brief", "requests the President of the General Assembly to hold a meeting", "decides to convene a meeting", "decides to review", "decides to consider"], "signal": "agenda"}, {"phrases": ["President of the General Assembly", "decides to hold", "decides to convene", "high-level meeting", "shall be held", "interactive dialogue", "multistakeholder", "high-level panel", "high-level segment"], "signal": "PGA"}, {"phrases": ["co-facilitators", "co-chairs", "co-conveners", "informal consultations"], "signal": "process"}, {"phrases": ["report to the General Assembly", "submit a report", "report thereon", "shall report", "apprise the General Assembly", "inform the General Assembly", "include in his report", "include in the report", "Secretary-General to submit", "Secretary-General to report", "Secretary-General to provide a report", "submit to the General Assembly", "report to the Assembly"], "signal": "report"}, {"phrases": ["capacity of observer"], "signal": "observer"}] || []).map(check => [check.signal, check.phrases || []]));
 const implementationSessionMap = {
@@ -53505,6 +53536,26 @@ const implementationSessionMap = {
 // Filter elements (initialized later)
 let sessionSelector, implementationFilter, sourceFilter, signalFilter, statusFilter, clearFiltersBtn, groupImplementationBtn;
 let groupByImplementation = false;
+
+// ============================================
+// DEBOUNCE UTILITY
+// ============================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Debounced filter application (300ms delay for search)
+const debouncedApplyFilters = debounce(() => {
+    requestAnimationFrame(() => applyFilters());
+}, 300);
 
 const activePillClasses = ['bg-un-blue', 'text-white', 'border-un-blue'];
 const inactivePillClasses = ['border-gray-200', 'text-gray-600'];
@@ -53622,81 +53673,98 @@ function applyFiltersFromUrl() {
     selectedSessions = getActiveValues(sessionSelector);
 }
 
-// Filter functionality
+// ============================================
+// OPTIMIZED FILTERING (works with pagination)
+// ============================================
+
+// Check if a document matches current filters (operates on data, not DOM)
+function documentMatchesFilters(doc, filters) {
+    const { selectedSources, selectedSignals, selectedStatuses, selectedImplementations, searchQuery } = filters;
+
+    // Source filter
+    const docSource = doc.origin || doc.source || '';
+    const sourceMatch = selectedSources.length === 0 || selectedSources.includes(docSource);
+    if (!sourceMatch) return false;
+
+    // Status filter
+    const docStatus = doc.doc_type === 'resolution' ? 'adopted' : 'draft';
+    const statusMatch = selectedStatuses.length === 0 || selectedStatuses.includes(docStatus);
+    if (!statusMatch) return false;
+
+    // Check paragraphs for signal, search, and implementation matches
+    const paragraphs = doc.signal_paragraphs || [];
+    let hasMatchingParagraph = paragraphs.length === 0; // If no paragraphs, consider it a match for signal filter
+
+    for (const para of paragraphs) {
+        const paraSignals = para.signals || [];
+        const paraText = (para.text || '').toLowerCase();
+
+        const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s));
+        const searchMatch = searchQuery === '' || paraText.includes(searchQuery) ||
+                           (doc.symbol || '').toLowerCase().includes(searchQuery) ||
+                           (doc.title || '').toLowerCase().includes(searchQuery);
+        const implementationMatch = selectedImplementations.length === 0 || selectedImplementations.some(session => {
+            const phrases = implementationSessionMap[session] || [];
+            return phrases.some(phrase => paraText.includes(phrase));
+        });
+
+        if (signalMatch && searchMatch && implementationMatch) {
+            hasMatchingParagraph = true;
+            break;
+        }
+    }
+
+    return hasMatchingParagraph;
+}
+
+// Filter functionality (optimized for pagination)
 function applyFilters() {
     const selectedSources = getActiveValues(sourceFilter);
     const selectedSignals = getActiveValues(signalFilter);
     const selectedStatuses = getActiveValues(statusFilter);
     const selectedImplementations = getActiveValues(implementationFilter);
     selectedSessions = getActiveValues(sessionSelector);
-    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+    const searchQuery = (cachedSearchInput || document.getElementById('search-input')).value.toLowerCase();
 
-    const documentCards = document.querySelectorAll('.document-card');
-    const emptyState = document.getElementById('empty-state');
+    const filters = { selectedSources, selectedSignals, selectedStatuses, selectedImplementations, searchQuery };
 
-    let visibleCount = 0;
+    // Filter documents from cache (not DOM)
+    filteredDocumentsCache = allDocumentsCache.filter(doc => documentMatchesFilters(doc, filters));
 
-    documentCards.forEach(card => {
-        const cardSource = card.dataset.source;
-        const cardStatus = card.dataset.status;
-        const cardSession = card.dataset.session;
+    // Reset pagination
+    currentPage = 0;
 
-        const sourceMatch = selectedSources.length === 0 || selectedSources.includes(cardSource);
-        const statusMatch = selectedStatuses.length === 0 || selectedStatuses.includes(cardStatus);
-        const sessionMatch = selectedSessions.length === 0 || selectedSessions.includes(cardSession);
+    // Re-render first page of filtered documents
+    const container = cachedDocumentsContainer || document.getElementById('documents-container');
+    const emptyState = cachedEmptyState || document.getElementById('empty-state');
 
-        let visibleParagraphs = 0;
-        const paragraphs = card.querySelectorAll('.para-item');
-        paragraphs.forEach(para => {
-            const paraSignals = para.dataset.signals.split(',').filter(s => s);
-            const paraText = Array.from(para.querySelectorAll('[data-search]'))
-                .map(node => node.textContent || '')
-                .join(' ')
-                .toLowerCase();
+    if (filteredDocumentsCache.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        container.classList.add('hidden');
+        updateDocumentsCount();
+        updateUrlState();
+        return;
+    }
 
-            const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s));
-            const searchMatch = searchQuery === '' || paraText.includes(searchQuery);
-            const implementationMatch = selectedImplementations.length === 0 || selectedImplementations.some(session => {
-                const phrases = implementationSessionMap[session] || [];
-                return phrases.some(phrase => paraText.includes(phrase));
-            });
+    emptyState.classList.add('hidden');
+    container.classList.remove('hidden');
 
-            if (signalMatch && searchMatch && implementationMatch) {
-                para.classList.remove('hidden');
-                visibleParagraphs += 1;
-            } else {
-                para.classList.add('hidden');
-            }
-        });
+    // Render first page
+    const firstPageDocs = filteredDocumentsCache.slice(0, PAGE_SIZE);
 
-        const cardMatch = sourceMatch && statusMatch && sessionMatch && visibleParagraphs > 0;
+    requestAnimationFrame(() => {
+        container.innerHTML = firstPageDocs.map(doc => renderDocumentCard(doc, true)).join('');
+        initializeDocumentCards();
+        initializeInfiniteScroll();
+        updateDocumentsCount();
 
-        if (cardMatch) {
-            card.classList.remove('hidden');
-            visibleCount += 1;
-        } else {
-            card.classList.add('hidden');
-        }
+        // Apply highlights to visible content
+        applySignalHighlights();
+        applyImplementationHighlights();
+        applySearchHighlights(searchQuery);
     });
 
-    if (visibleCount === 0) {
-        emptyState.classList.remove('hidden');
-        document.getElementById('documents-container').classList.add('hidden');
-    } else {
-        emptyState.classList.add('hidden');
-        document.getElementById('documents-container').classList.remove('hidden');
-    }
-
-    if (groupByImplementation) {
-        document.querySelectorAll('.implementation-group').forEach(group => {
-            const visibleCards = group.querySelectorAll('.document-card:not(.hidden)');
-            group.classList.toggle('hidden', visibleCards.length === 0);
-        });
-    }
-
-    applySignalHighlights();
-    applyImplementationHighlights();
-    applySearchHighlights(searchQuery);
     updateUrlState();
 }
 
@@ -54063,7 +54131,172 @@ async function loadSelectedSessions() {
     }
 }
 
-// Render documents from multiple sessions
+// ============================================
+// DOCUMENT CARD RENDERING
+// ============================================
+function renderDocumentCard(doc, isCollapsed = true) {
+    const signalParagraphs = doc.signal_paragraphs || [];
+    const title = escapeHtml(getDisplayTitle(doc));
+    const symbol = escapeHtml(doc.symbol || '');
+    const paraCount = signalParagraphs.length;
+
+    const paragraphsHtml = signalParagraphs.length
+        ? signalParagraphs.map(para => `
+            <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
+                <span class="inline-flex flex-wrap items-center gap-1">
+                    ${(para.signals || []).map(signal => `
+                        <span class="px-1.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">${signal}</span>
+                    `).join('')}
+                </span>
+                <span class="ml-1 font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
+                <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
+            </div>
+        `).join('')
+        : '<div class="text-sm text-gray-500 italic">No signal data available for this document.</div>';
+
+    return `
+        <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors${doc.doc_type === 'proposal' ? ' border-l-4 border-l-amber-400' : ''}"
+             data-symbol="${doc.symbol}"
+             data-source="${doc.origin || doc.source || ''}"
+             data-status="${doc.doc_type === 'resolution' ? 'adopted' : 'draft'}"
+             data-signals="${Object.keys(doc.signal_summary || {}).join(',')}"
+             data-session="${doc.session}"
+             data-un-url="${doc.un_url || ''}"
+             data-title="${title}">
+            <!-- Document Header (clickable to expand/collapse) -->
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 cursor-pointer doc-header" role="button" aria-expanded="${!isCollapsed}">
+                <div class="flex items-start justify-between gap-4">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-3 mb-1">
+                            <span class="font-semibold text-gray-900" data-search>
+                                ${symbol}
+                            </span>
+                            ${doc.origin && doc.origin !== 'Unknown' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
+                            ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
+                            <span class="text-xs text-gray-400">${paraCount} signal${paraCount !== 1 ? 's' : ''}</span>
+                        </div>
+                        ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}" data-search>${title}</p>` : ''}
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        ${doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">View PDF</a>` : ''}
+                        <svg class="expand-icon w-4 h-4 text-gray-400 transition-transform ${isCollapsed ? '' : 'rotate-180'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paragraphs (collapsible) -->
+            <div class="border-t border-gray-200 expandable-content ${isCollapsed ? 'hidden' : ''}">
+                <div class="px-4 py-3 space-y-3">
+                    ${paragraphsHtml}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ============================================
+// INFINITE SCROLL WITH INTERSECTION OBSERVER
+// ============================================
+
+let scrollObserver = null;
+let cachedScrollSentinel = null;
+let cachedScrollLoading = null;
+let cachedDocsCount = null;
+
+// Update the documents count display
+function updateDocumentsCount() {
+    if (!cachedDocsCount) return;
+
+    const totalFiltered = filteredDocumentsCache.length;
+    const rendered = Math.min((currentPage + 1) * PAGE_SIZE, totalFiltered);
+
+    if (totalFiltered > 0) {
+        cachedDocsCount.classList.remove('hidden');
+        cachedDocsCount.textContent = `Showing ${rendered} of ${totalFiltered} documents`;
+    } else {
+        cachedDocsCount.classList.add('hidden');
+    }
+}
+
+// Check if more documents can be loaded
+function hasMoreDocuments() {
+    const rendered = (currentPage + 1) * PAGE_SIZE;
+    return rendered < filteredDocumentsCache.length;
+}
+
+// Load more documents (append to existing) - triggered by IntersectionObserver
+function loadMoreDocuments() {
+    if (isLoadingMore || !hasMoreDocuments()) return;
+
+    isLoadingMore = true;
+    if (cachedScrollLoading) cachedScrollLoading.classList.remove('hidden');
+
+    requestAnimationFrame(() => {
+        const container = cachedDocumentsContainer;
+        const startIdx = (currentPage + 1) * PAGE_SIZE;
+        const endIdx = Math.min(startIdx + PAGE_SIZE, filteredDocumentsCache.length);
+        const docsToRender = filteredDocumentsCache.slice(startIdx, endIdx);
+
+        if (docsToRender.length === 0) {
+            isLoadingMore = false;
+            if (cachedScrollLoading) cachedScrollLoading.classList.add('hidden');
+            updateDocumentsCount();
+            return;
+        }
+
+        // Create document fragment for batch insertion
+        const fragment = document.createDocumentFragment();
+        const tempDiv = document.createElement('div');
+
+        docsToRender.forEach(doc => {
+            tempDiv.innerHTML = renderDocumentCard(doc, true);
+            const card = tempDiv.firstElementChild;
+            if (card) fragment.appendChild(card);
+        });
+
+        container.appendChild(fragment);
+        currentPage++;
+        isLoadingMore = false;
+
+        if (cachedScrollLoading) cachedScrollLoading.classList.add('hidden');
+
+        // Initialize newly added cards
+        initializeDocumentCards();
+        updateDocumentsCount();
+    });
+}
+
+// Initialize IntersectionObserver for infinite scroll
+function initializeInfiniteScroll() {
+    cachedScrollSentinel = document.getElementById('scroll-sentinel');
+    cachedScrollLoading = document.getElementById('scroll-loading');
+    cachedDocsCount = document.getElementById('documents-count');
+
+    if (!cachedScrollSentinel) return;
+
+    // Disconnect existing observer if any
+    if (scrollObserver) {
+        scrollObserver.disconnect();
+    }
+
+    scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !isLoadingMore && hasMoreDocuments()) {
+                loadMoreDocuments();
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '200px', // Start loading 200px before reaching the sentinel
+        threshold: 0
+    });
+
+    scrollObserver.observe(cachedScrollSentinel);
+}
+
+// Render documents from multiple sessions (with pagination)
 function renderCombinedDocuments(allDocuments) {
     // Sort documents by our unified sorting logic
     allDocuments.sort((a, b) => {
@@ -54086,73 +54319,29 @@ function renderCombinedDocuments(allDocuments) {
     });
 
     allDocumentsCache = [...allDocuments];
+    filteredDocumentsCache = [...allDocuments];
+    currentPage = 0;
 
-    const container = document.getElementById('documents-container');
+    // Cache DOM elements if not already cached
+    if (!cachedDocumentsContainer) {
+        cachedDocumentsContainer = document.getElementById('documents-container');
+        cachedEmptyState = document.getElementById('empty-state');
+    }
 
-    const renderDocumentCard = doc => {
-        const signalParagraphs = doc.signal_paragraphs || [];
-        const title = escapeHtml(getDisplayTitle(doc));
-        const symbol = escapeHtml(doc.symbol || '');
-
-        const paragraphsHtml = signalParagraphs.length
-            ? signalParagraphs.map(para => `
-                <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
-                    <span class="inline-flex flex-wrap items-center gap-1">
-                        ${(para.signals || []).map(signal => `
-                            <span class="px-1.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">${signal}</span>
-                        `).join('')}
-                    </span>
-                    <span class="ml-1 font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
-                    <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
-                </div>
-            `).join('')
-            : '<div class="text-sm text-gray-500 italic">No signal data available for this document.</div>';
-
-        return `
-            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors${doc.doc_type === 'proposal' ? ' border-l-4 border-l-amber-400' : ''}"
-                 data-symbol="${doc.symbol}"
-                 data-source="${doc.origin || doc.source || ''}"
-                 data-status="${doc.doc_type === 'resolution' ? 'adopted' : 'draft'}"
-                 data-signals="${Object.keys(doc.signal_summary || {}).join(',')}"
-                 data-session="${doc.session}"
-                 data-un-url="${doc.un_url || ''}"
-                 data-title="${title}">
-                <!-- Document Header -->
-                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                    <div class="flex items-start justify-between gap-4">
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-3 mb-1">
-                                <span class="font-semibold text-gray-900" data-search>
-                                    ${symbol}
-                                </span>
-                                ${doc.origin && doc.origin !== 'Unknown' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
-                                ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
-                            </div>
-                            ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}" data-search>${title}</p>` : ''}
-                        </div>
-                        <div class="flex items-center gap-2 flex-shrink-0">
-                            ${doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors">View PDF</a>` : ''}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Paragraphs -->
-                <div class="border-t border-gray-200 expandable-content">
-                    <div class="px-4 py-3 space-y-3">
-                        ${paragraphsHtml}
-                    </div>
-                </div>
-            </div>
-        `;
-    };
+    const container = cachedDocumentsContainer;
 
     if (!groupByImplementation) {
-        container.innerHTML = allDocuments.map(renderDocumentCard).join('');
+        // Render first page only (infinite scroll will load more)
+        const firstPageDocs = allDocuments.slice(0, PAGE_SIZE);
+        container.innerHTML = firstPageDocs.map(doc => renderDocumentCard(doc, true)).join('');
         initializeDocumentCards();
+        initializeInfiniteScroll();
+        updateDocumentsCount();
         applyFilters();
         return;
     }
 
+    // Group by implementation (render all for now, pagination is complex with groups)
     const groupOrder = Object.keys(implementationSessionMap)
         .sort((a, b) => Number(b) - Number(a))
         .concat('Unspecified');
@@ -54175,7 +54364,7 @@ function renderCombinedDocuments(allDocuments) {
             return `
                 <div class="implementation-group space-y-4" data-group="${groupKey}">
                     <div class="text-xs font-semibold uppercase tracking-wide text-indigo-700">${label}</div>
-                    ${docs.map(renderDocumentCard).join('')}
+                    ${docs.map(doc => renderDocumentCard(doc, true)).join('')}
                 </div>
             `;
         })
@@ -54183,6 +54372,7 @@ function renderCombinedDocuments(allDocuments) {
 
     container.innerHTML = groupedHtml;
     initializeDocumentCards();
+    updateDocumentsCount();
     applyFilters();
 }
 
@@ -54224,12 +54414,21 @@ function getSignalHighlightClass(signal) {
     return colors[signal] || 'text-gray-800';
 }
 
-// Search functionality
+// Search functionality (with debouncing for performance)
 function initializeSearch() {
-    const searchInput = document.getElementById('search-input');
+    cachedSearchInput = document.getElementById('search-input');
 
-    searchInput.addEventListener('input', function() {
-        applyFilters();
+    // Use debounced filter for search input (300ms delay)
+    cachedSearchInput.addEventListener('input', function() {
+        debouncedApplyFilters();
+    });
+
+    // Immediate filter on Enter key
+    cachedSearchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            applyFilters();
+        }
     });
 }
 
@@ -54290,9 +54489,32 @@ function initializeFilters() {
     });
 }
 
-// Document card interactions
+// Document card interactions (expand/collapse)
 function initializeDocumentCards() {
-    // No click interactions needed; paragraphs are expanded by default.
+    // Add click handlers for expand/collapse on document headers
+    const headers = document.querySelectorAll('.doc-header:not([data-initialized])');
+
+    headers.forEach(header => {
+        header.setAttribute('data-initialized', 'true');
+        header.addEventListener('click', function(e) {
+            // Don't toggle if clicking on a link
+            if (e.target.closest('a')) return;
+
+            const card = header.closest('.document-card');
+            const content = card.querySelector('.expandable-content');
+            const icon = header.querySelector('.expand-icon');
+
+            if (content) {
+                const isHidden = content.classList.contains('hidden');
+                content.classList.toggle('hidden');
+                header.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+
+                if (icon) {
+                    icon.classList.toggle('rotate-180', isHidden);
+                }
+            }
+        });
+    });
 }
 
 // Initialize document cards on page load
@@ -54306,7 +54528,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-01-25 17:23 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-07 13:30 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
