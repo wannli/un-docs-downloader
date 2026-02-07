@@ -1107,7 +1107,7 @@ def generate_unified_explorer_page(
     # Template rendering
     render_start = time.time()
     html = template.render(
-        documents=docs_with_signals,
+        documents=[],  # Load documents dynamically via JavaScript for better performance
         checks=checks,
         origin_order=origin_order,
         origin_names=COMMITTEE_NAMES,

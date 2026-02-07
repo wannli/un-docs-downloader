@@ -2,7 +2,7 @@
 
 {% block title %}Signal Browser - Mandate Pipeline{% endblock %}
 
-{% block nav_index %}./index.html{% endblock %}
+{% block nav_index %}./?{% endblock %}
 {% block nav_signals %}./signals-unified.html{% endblock %}
 {% block nav_signals_info %}./signals-info.html{% endblock %}
 
@@ -86,97 +86,7 @@
     <!-- Document List -->
     <div id="document-list">
         <div class="space-y-4" id="documents-container">
-            {% for doc in documents %}
-            <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors{% if doc.doc_type == 'proposal' %} border-l-4 border-l-amber-400{% endif %}"
-                 data-symbol="{{ doc.symbol }}"
-                 data-source="{{ doc.origin }}"
-                 data-status="{{ 'adopted' if doc.doc_type == 'resolution' else 'draft' }}"
-                 data-signals="{{ doc.signal_summary.keys()|list|join(',') }}"
-                 data-un-url="{{ doc.un_url }}"
-                 data-title="{{ doc.title or '' }}"
-                 data-session="80">
-                <!-- Document Header -->
-                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                    <div class="flex items-start justify-between gap-4">
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-3 mb-1">
-                                <span class="font-semibold text-gray-900" data-search>
-                                    {{ doc.symbol }}
-                                </span>
-                                {% if doc.origin and doc.origin != 'Unknown' %}
-                                <span class="text-xs text-gray-500">· {{ doc.origin }}</span>
-                                {% endif %}
-                                {% if doc.doc_type == 'proposal' %}
-                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
-                                    Draft
-                                </span>
-                                {% endif %}
-                            </div>
-                            {% if doc.title %}
-                            {% set title_number = doc.symbol.split('/')[-2:]|join('/') %}
-                            {% set display_title = doc.title[title_number|length + 2:] if doc.title.startswith(title_number ~ '. ') else doc.title %}
-                            <p class="text-sm text-gray-600 truncate" title="{{ doc.title }}" data-search>{{ display_title }}</p>
-                            {% endif %}
-                        </div>
-                        <div class="flex items-center gap-2 flex-shrink-0">
-                            <a href="{{ doc.un_url }}" target="_blank"
-                               class="text-xs text-muted hover:text-un-blue transition-colors">
-                                View PDF
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Paragraphs -->
-                <div class="border-t border-gray-200 expandable-content" id="content-{{ loop.index }}">
-                    <div class="px-4 py-3 space-y-3">
-                        {% if doc.signal_paragraphs %}
-                        {% for para in doc.signal_paragraphs %}
-                        {% set primary_signal = para.signals[0] if para.signals else '' %}
-                        <div class="para-item text-sm text-gray-900" data-signals="{{ para.signals|join(',') }}">
-                            <span class="inline-flex flex-wrap items-center gap-1">
-                                {% for signal in para.signals %}
-                                <span class="px-1.5 py-0.5 rounded-full text-xs font-medium
-                                    {% if signal == 'agenda' %}bg-blue-100 text-blue-800
-                                    {% elif signal == 'PGA' %}bg-purple-100 text-purple-800
-                                    {% elif signal == 'process' %}bg-amber-100 text-amber-800
-                                    {% elif signal == 'report' %}bg-green-100 text-green-800
-                                    {% elif signal == 'observer' %}bg-slate-100 text-slate-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">{{ signal }}</span>
-                                {% endfor %}
-                            </span>
-                            <span class="ml-1 font-semibold text-gray-700">{{ para.number }}.</span>
-                            <span class="text-gray-800" data-paragraph data-search>{{ para.text }}</span>
-                        </div>
-                        {% endfor %}
-                        {% elif doc.signals %}
-                        {% for para_num, signals in doc.signals.items() %}
-                        {% set primary_signal = signals[0] if signals else '' %}
-                        <div class="para-item text-sm text-gray-900" data-signals="{{ signals|join(',') }}">
-                            <span class="inline-flex flex-wrap items-center gap-1">
-                                {% for signal in signals %}
-                                <span class="px-1.5 py-0.5 rounded-full text-xs font-medium
-                                    {% if signal == 'agenda' %}bg-blue-100 text-blue-800
-                                    {% elif signal == 'PGA' %}bg-purple-100 text-purple-800
-                                    {% elif signal == 'process' %}bg-amber-100 text-amber-800
-                                    {% elif signal == 'report' %}bg-green-100 text-green-800
-                                    {% elif signal == 'observer' %}bg-slate-100 text-slate-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">{{ signal }}</span>
-                                {% endfor %}
-                            </span>
-                            <span class="ml-1 font-semibold text-gray-700">{{ para_num }}.</span>
-                            <span class="text-gray-500 italic" data-paragraph data-search>Paragraph text not available for historical sessions.</span>
-                        </div>
-                        {% endfor %}
-                        {% else %}
-                        <div class="text-sm text-gray-500 italic">
-                            No signal data available for this document.
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+            <!-- Documents will be loaded dynamically via JavaScript -->
         </div>
 
         <!-- Scroll Sentinel for IntersectionObserver (invisible) -->
@@ -214,6 +124,18 @@
 </div>
 
 <script>
+// ============================================
+// URL CLEANUP - Redirect /index.html to /
+// ============================================
+(function() {
+    const path = window.location.pathname;
+    if (path.endsWith('/index.html')) {
+        const newPath = path.replace(/\/index\.html$/, '/');
+        const newUrl = newPath + window.location.search + window.location.hash;
+        window.history.replaceState(null, '', newUrl);
+    }
+})();
+
 // ============================================
 // PERFORMANCE OPTIMIZATIONS
 // ============================================
