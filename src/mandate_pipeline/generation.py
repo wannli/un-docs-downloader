@@ -1660,6 +1660,7 @@ def generate_site_verbose(
     data_dir: Path,
     output_dir: Path,
     skip_debug: bool = False,
+    max_documents: int = None,
     on_load_start=None,
     on_load_document=None,
     on_load_error=None,
@@ -1676,6 +1677,7 @@ def generate_site_verbose(
         data_dir: Directory containing pdfs/ subdirectory
         output_dir: Output directory for static site
         skip_debug: If True, skip generating debug pages (faster builds)
+        max_documents: If set, limit processing to this many documents (for testing)
         on_load_start: Callback() when starting to load documents
         on_load_document: Callback(symbol, num_paragraphs, signals, duration) for each doc
         on_load_error: Callback(path, error) for load errors
@@ -1759,6 +1761,9 @@ def generate_site_verbose(
 
     if pdfs_dir.exists():
         pdf_files = list(pdfs_dir.glob("*.pdf"))
+        # Limit documents if max_documents is set (for testing/development)
+        if max_documents and max_documents > 0:
+            pdf_files = pdf_files[:max_documents]
         # Use ThreadPoolExecutor for parallel PDF extraction
         with ThreadPoolExecutor(max_workers=8) as executor:
             futures = {executor.submit(process_pdf, pdf_file): pdf_file for pdf_file in pdf_files}

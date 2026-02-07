@@ -247,6 +247,22 @@ mandate generate \
 | `--output` | Output directory for static site |
 | `--clean-output` | Delete existing output directory contents before generation |
 | `--verbose` | Log each document processed |
+| `--max-documents` | Limit number of documents to process (for testing/development) |
+
+**Testing with limited documents:**
+
+When developing or testing changes to the pipeline, you can speed up generation by processing only a subset of documents:
+
+```bash
+mandate generate \
+  --config ./config \
+  --data ./data \
+  --output ./docs \
+  --max-documents 10 \
+  --verbose
+```
+
+This processes only the first 10 documents, making iteration much faster during development.
 
 ### mandate igov-sync
 
@@ -349,10 +365,10 @@ Two workflows automate the pipeline:
 - **Action**: Run `mandate discover`, commit new PDFs
 - **Result**: `data/pdfs/` and `data/state.json` updated
 
-### build-site.yml
+### generate.yml
 
-- **Trigger**: Changes to data/pdfs/, config/, or src/
-- **Action**: Run `mandate generate`, deploy to GitHub Pages
+- **Trigger**: Changes to data/linked/, config/, or src/
+- **Action**: Generate static site, deploy to GitHub Pages
 - **Result**: Static website updated
 
 **Workflow Chain:**
@@ -363,8 +379,24 @@ discover.yml
     ↓ (on success)
 linkage-analysis.yml
     ↓ (triggers)
-build-site.yml
+generate.yml
 ```
+
+### Testing Mode for Faster Iteration
+
+For development and testing, you can speed up the generate workflow by setting the `MAX_DOCUMENTS` repository variable:
+
+1. Go to repository Settings → Secrets and variables → Actions → Variables
+2. Create a new variable named `MAX_DOCUMENTS`
+3. Set the value to a small number (e.g., `10`, `50`, `100`)
+4. The workflow will now process only that many documents
+
+**Example:**
+- `MAX_DOCUMENTS=10` - Process only 10 documents (very fast for testing)
+- `MAX_DOCUMENTS=100` - Process 100 documents (good for development)
+- Empty or unset - Process all documents (production mode)
+
+To return to production mode, simply delete the variable or leave it empty.
 
 ## Key Algorithms
 
