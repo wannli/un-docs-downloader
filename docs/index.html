@@ -46,7 +46,7 @@
                 </a>
                 <nav class="flex items-center gap-6">
                     <a href="/" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Resolutions</a>
-                    <a href="/igov/signals.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Decisions</a>
+                    <a href="/?type=decision&include=all" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Decisions</a>
                     <a href="/signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Signals</a>
                     <a href="/data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
                 </nav>
@@ -1016,7 +1016,7 @@ function renderDocumentCard(doc, isCollapsed = true) {
                             <span class="font-semibold text-gray-900" data-search>
                                 ${symbol}
                             </span>
-                            ${isDecision ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">Decision</span>' : ''}
+                            ${isDecision ? `<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">${escapeHtml(doc.decision_type || 'Decision')}</span>` : ''}
                             ${!isDecision && doc.origin && doc.origin !== 'Unknown' && doc.origin !== 'IGov' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
                             ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
                             <span class="text-xs text-gray-400">${paraCount} signal${paraCount !== 1 ? 's' : ''}</span>
@@ -1389,7 +1389,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-02-07 15:51 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-07 15:58 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
