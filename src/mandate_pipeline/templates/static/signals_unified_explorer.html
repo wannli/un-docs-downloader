@@ -817,6 +817,13 @@ async function loadSelectedSessions() {
             ? selectedSessions
             : Array.from(sessionSelector.querySelectorAll('.filter-pill')).map(pill => pill.dataset.value);
 
+        // Always load main data.json to get decisions (they're only in the main file)
+        if (!sessionDataCache['main']) {
+            const response = await fetch(`${basePath}/data.json`);
+            if (!response.ok) throw new Error('Failed to load main data');
+            sessionDataCache['main'] = await response.json();
+        }
+
         for (const session of sessionsToLoad) {
             const sessionKey = session.toString();
 
@@ -843,6 +850,19 @@ async function loadSelectedSessions() {
                 });
 
             allDocuments.push(...sessionDocs);
+
+            // Add decisions from main data.json for this session
+            const mainData = sessionDataCache['main'];
+            if (mainData.documents && Array.isArray(mainData.documents)) {
+                const decisionsForSession = mainData.documents
+                    .filter(doc => doc.doc_type === 'decision' && doc.session === parseInt(sessionKey, 10))
+                    .map(doc => normalizeDocument(doc, sessionKey))
+                    .filter(doc => {
+                        const hasSignals = doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
+                        return allowNoSignals || hasSignals;
+                    });
+                allDocuments.push(...decisionsForSession);
+            }
         }
 
         const dedupedDocuments = [];
