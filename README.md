@@ -509,28 +509,12 @@ The static website is generated using Jinja2 templates located in `src/mandate_p
 |---------------|---------------|----------------------|-------------|
 | `signals_unified_explorer.html` | `index.html` | `generate_unified_explorer_page()` | Main interactive signal browser (root page) |
 | `signals_info.html` | `signals-info.html` | `generate_signals_info_page()` | Signal documentation and detection methodology |
-| `signals_igov.html` | `igov/signals.html` | `generate_igov_signals_page()` | IGov decision browser page |
-| `signals_unified.html` | `sessions/{session}/signals.html` | `generate_session_unified_signals_page()` | Historical session signal browser |
-| `signals_consolidated.html` | `signals-consolidated.html` | `generate_consolidated_signals_page()` | Consolidated signal view (optional) |
-| `signal.html` | `signals/{signal}.html` | `generate_signal_page()` | Per-signal detail page (optional) |
-| `pattern.html` | `patterns/{pattern_slug}.html` | `generate_pattern_page()` | Per-pattern filtered view (optional) |
-| `pattern_signal.html` | `matrix/{pattern}_{signal}.html` | `generate_pattern_signal_page()` | Pattern × signal matrix view (optional) |
-| `provenance.html` | `provenance/index.html` | `generate_provenance_page()` | Resolution origin analysis (optional) |
-| `origin_matrix.html` | `origin_matrix.html` | `generate_origin_matrix_page()` | Committee origin matrix (optional) |
-| `document_detail.html` | `{symbol}.html` | `generate_document_page()` | Per-document detail page (optional) |
-| `documents.html` | `documents/index.html` | `generate_documents_list_page()` | Document list page (optional) |
-| `debug/index.html` | `debug/index.html` | `generate_debug_pages()` | Debug landing page |
-| `debug/linking.html` | `debug/linking.html` | `generate_debug_pages()` | Document linking analysis |
-| `debug/orphans.html` | `debug/orphans.html` | `generate_debug_pages()` | Orphaned documents view |
-| `debug/fuzzy.html` | `debug/fuzzy.html` | `generate_debug_pages()` | Fuzzy matching diagnostics |
-| `debug/extraction.html` | `debug/extraction.html` | `generate_debug_pages()` | Text extraction diagnostics |
 | `base.html` | *(inherited)* | *(base template)* | Base template providing header, nav, footer for all pages |
 
 **Notes:**
 - All templates extend `base.html` which provides consistent header, navigation, and footer.
-- Optional pages (marked with "optional") are only generated when `SKIP_DETAILED_PAGES` environment variable is not set.
-- The `{symbol}`, `{signal}`, `{pattern}`, and `{session}` placeholders represent dynamic values.
 - Templates use Tailwind CSS for styling with UN branding colors.
+- Only index.html and signals-info.html are generated; all detailed pages have been removed.
 
 ## Dependencies
 
@@ -636,27 +620,19 @@ The following improvements were identified during the review. Each is documented
 
 **Issue 1: Centralize signal color definitions into a single source of truth**
 
-Signal colors (e.g., `bg-blue-100 text-blue-800` for "agenda") are hardcoded in `generation.py` (`generate_signals_info_page`), `signals_unified_explorer.html` (`getSignalHighlightClass`), and `signals_igov.html`. Changes to signal types or colors require updates in multiple places. Extract signal colors into `checks.yaml` or a shared Jinja2 macro/partial.
+Signal colors (e.g., `bg-blue-100 text-blue-800` for "agenda") are hardcoded in `generation.py` (`generate_signals_info_page`) and `signals_unified_explorer.html` (`getSignalHighlightClass`). Changes to signal types or colors require updates in multiple places. Extract signal colors into `checks.yaml` or a shared Jinja2 macro/partial.
 
-**Issue 2: Unify historical session and current session rendering templates**
-
-`signals_unified.html` is used only by `generate_session_unified_signals_page()` for historical sessions, while `signals_unified_explorer.html` is used for the main page. These two templates solve the same problem (signal browsing) but use completely different architectures: server-rendered HTML with multiselect filters vs. client-side JSON loading with pill-button filters. Migrate historical sessions to use the explorer template for a consistent UX.
-
-**Issue 3: Remove unused `search-index.json` generation**
+**Issue 2: Remove unused `search-index.json` generation**
 
 `generate_search_index()` produces `search-index.json` but no client-side code consumes it. The `lunr.js` library was imported but never wired up, and has now been removed. Either remove `search-index.json` generation entirely or implement client-side search using it.
 
-**Issue 4: Consolidate `generate_site()` and `generate_site_verbose()` into a single function**
+**Issue 3: Consolidate `generate_site()` and `generate_site_verbose()` into a single function**
 
-These two functions in `generation.py` have ~80% code overlap. `generate_site_verbose()` adds parallel PDF extraction and progress callbacks. Refactor into a single function with optional callback parameters and a `parallel` flag to eliminate the duplication and maintenance burden.
+These two functions in `generation.py` have significant code overlap. `generate_site_verbose()` adds parallel PDF extraction and progress callbacks. Refactor into a single function with optional callback parameters and a `parallel` flag to eliminate the duplication and maintenance burden.
 
-**Issue 5: Split `generation.py` into smaller modules**
+**Issue 4: Split `generation.py` into smaller modules**
 
-At ~1960 lines, `generation.py` is the largest file in the codebase and contains 35 functions spanning page generation, document enrichment, data export, and template rendering. Consider splitting into: `generation/pages.py` (page generators), `generation/data.py` (JSON exports), `generation/enrichment.py` (document processing), `generation/templates.py` (template utilities).
-
-**Issue 6: Fix pre-existing test failures in `test_downloader.py` and `test_linking.py`**
-
-16 tests fail in the current test suite. 5 require network access (sandbox limitation), but 11 are genuine failures: `test_generate_site_creates_all_files` asserts removed pages (`documents/index.html`), linking tests expect a `normalize_title` function that has changed, and `test_decision_in_series` fails with current IGov logic. These tests should be updated to match the current codebase.
+`generation.py` contains multiple functions spanning page generation, document enrichment, data export, and template rendering. Consider splitting into: `generation/pages.py` (page generators), `generation/data.py` (JSON exports), `generation/enrichment.py` (document processing), `generation/templates.py` (template utilities).
 
 ## License
 
