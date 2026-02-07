@@ -1136,14 +1136,14 @@ def generate_unified_explorer_page(
     # Collect unique session numbers for the session filter
     # Convert all sessions to int for proper sorting, filtering out any that can't be converted
     session_values = {doc.get("session") for doc in documents if doc.get("session")}
-    sessions = []
+    session_ints = set()
     for s in session_values:
         try:
-            sessions.append(int(s))
+            session_ints.add(int(s))
         except (ValueError, TypeError):
             # Skip non-numeric sessions
             pass
-    sessions = sorted(sessions, reverse=True)
+    sessions = sorted(session_ints, reverse=True)
 
     # Template preparation
     template_start = time.time()
