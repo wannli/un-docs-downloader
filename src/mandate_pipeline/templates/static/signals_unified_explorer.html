@@ -23,7 +23,9 @@
             <div class="flex flex-wrap items-center gap-1.5 md:block">
                 <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
                 <div id="session-selector" class="flex flex-wrap gap-1.5 md:mt-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
+                    {% for session in sessions %}
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ session }}">{{ session }}</button>
+                    {% endfor %}
                 </div>
             </div>
             <div class="flex flex-wrap items-center gap-1.5 md:block">

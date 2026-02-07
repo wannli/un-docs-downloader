@@ -1120,6 +1120,12 @@ def generate_unified_explorer_page(
     # Get origin order for filtering
     origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6"]
 
+    # Collect unique session numbers for the session filter
+    sessions = sorted(
+        {doc.get("session") for doc in documents if doc.get("session")},
+        reverse=True,
+    )
+
     # Template preparation
     template_start = time.time()
     env = get_templates_env(checks)
@@ -1134,6 +1140,7 @@ def generate_unified_explorer_page(
         checks=checks,
         origin_order=origin_order,
         origin_names=COMMITTEE_NAMES,
+        sessions=sessions,
         total_docs=len(docs_with_signals),
         total_paragraphs=total_paragraphs,
         resolution_count=resolution_count,
