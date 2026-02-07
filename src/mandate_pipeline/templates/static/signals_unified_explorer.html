@@ -69,6 +69,21 @@
                     <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
                 </div>
             </div>
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Type</label>
+                <div id="type-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
+                </div>
+            </div>
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Visibility</label>
+                <div class="mt-2 flex items-center gap-2">
+                    <input id="include-no-signals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-un-blue focus:ring-un-blue">
+                    <label for="include-no-signals" class="text-xs text-gray-600">Include items without signals</label>
+                </div>
+            </div>
             <div class="flex flex-wrap items-end gap-2">
                 <button id="group-implementation" class="flex h-8 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors" type="button">
                     Group by Implementation
@@ -169,7 +184,8 @@ const implementationSessionMap = {
 };
 
 // Filter elements (initialized later)
-let sessionSelector, implementationFilter, sourceFilter, signalFilter, statusFilter, clearFiltersBtn, groupImplementationBtn;
+let sessionSelector, implementationFilter, sourceFilter, signalFilter, statusFilter, typeFilter;
+let clearFiltersBtn, groupImplementationBtn, includeNoSignalsToggle;
 let groupByImplementation = false;
 
 // ============================================
@@ -243,6 +259,8 @@ function updateUrlState() {
     const sources = getActiveValues(sourceFilter);
     const signals = getActiveValues(signalFilter);
     const statuses = getActiveValues(statusFilter);
+    const types = getActiveValues(typeFilter);
+    const includeNoSignals = includeNoSignalsToggle && includeNoSignalsToggle.checked;
 
     if (sessions.length > 0) {
         params.set('sessions', sessions.join(','));
@@ -258,6 +276,12 @@ function updateUrlState() {
     }
     if (statuses.length > 0) {
         params.set('status', statuses.join(','));
+    }
+    if (types.length > 0) {
+        params.set('type', types.join(','));
+    }
+    if (includeNoSignals) {
+        params.set('include', 'all');
     }
     if (groupByImplementation) {
         params.set('group', 'implementation');
@@ -278,6 +302,8 @@ function applyFiltersFromUrl() {
     const statuses = params.get('status');
     const implementations = params.get('implementation');
     const group = params.get('group');
+    const types = params.get('type');
+    const include = params.get('include');
 
     if (sessions) {
         setActiveValues(sessionSelector, sessions.split(','));
@@ -293,6 +319,13 @@ function applyFiltersFromUrl() {
     }
     if (statuses) {
         setActiveValues(statusFilter, statuses.split(','));
+    }
+    if (types) {
+        setActiveValues(typeFilter, types.split(','));
+    }
+
+    if (includeNoSignalsToggle) {
+        includeNoSignalsToggle.checked = include === 'all';
     }
 
     groupByImplementation = group === 'implementation';
@@ -314,21 +347,57 @@ function applyFiltersFromUrl() {
 
 // Check if a document matches current filters (operates on data, not DOM)
 function documentMatchesFilters(doc, filters) {
-    const { selectedSources, selectedSignals, selectedStatuses, selectedImplementations, searchQuery } = filters;
+    const {
+        selectedSources,
+        selectedSignals,
+        selectedStatuses,
+        selectedImplementations,
+        selectedSessions,
+        selectedTypes,
+        includeNoSignals,
+        searchQuery,
+    } = filters;
 
     // Source filter
     const docSource = doc.origin || doc.source || '';
-    const sourceMatch = selectedSources.length === 0 || selectedSources.includes(docSource);
-    if (!sourceMatch) return false;
+    if (selectedSources.length > 0 && !selectedSources.includes(docSource)) {
+        return false;
+    }
 
     // Status filter
-    const docStatus = doc.doc_type === 'resolution' ? 'adopted' : 'draft';
-    const statusMatch = selectedStatuses.length === 0 || selectedStatuses.includes(docStatus);
-    if (!statusMatch) return false;
+    const docStatus = doc.doc_type === 'resolution'
+        ? 'adopted'
+        : (doc.doc_type === 'proposal' ? 'draft' : 'decision');
+    if (selectedStatuses.length > 0 && !selectedStatuses.includes(docStatus)) {
+        return false;
+    }
 
-    // Check paragraphs for signal, search, and implementation matches
+    // Session filter
+    const docSession = doc.session ? doc.session.toString() : '';
+    if (selectedSessions.length > 0 && !selectedSessions.includes(docSession)) {
+        return false;
+    }
+
+    // Type filter
+    const docType = doc.doc_type || '';
+    if (selectedTypes.length > 0 && !selectedTypes.includes(docType)) {
+        return false;
+    }
+
+    const hasSignals = (doc.signal_paragraphs && doc.signal_paragraphs.length > 0)
+        || (doc.signal_summary && Object.keys(doc.signal_summary).length > 0);
+    if (!hasSignals && (!includeNoSignals || selectedSignals.length > 0)) {
+        return false;
+    }
+
     const paragraphs = doc.signal_paragraphs || [];
-    let hasMatchingParagraph = paragraphs.length === 0; // If no paragraphs, consider it a match for signal filter
+    if (paragraphs.length === 0) {
+        const baseText = `${doc.symbol || ''} ${doc.title || ''} ${doc.decision_text || ''}`.toLowerCase();
+        const searchMatch = searchQuery === '' || baseText.includes(searchQuery);
+        const implementationMatch = selectedImplementations.length === 0;
+        const signalMatch = selectedSignals.length === 0;
+        return searchMatch && implementationMatch && signalMatch;
+    }
 
     for (const para of paragraphs) {
         const paraSignals = para.signals || [];
@@ -344,12 +413,11 @@ function documentMatchesFilters(doc, filters) {
         });
 
         if (signalMatch && searchMatch && implementationMatch) {
-            hasMatchingParagraph = true;
-            break;
+            return true;
         }
     }
 
-    return hasMatchingParagraph;
+    return false;
 }
 
 // Filter functionality (optimized for pagination)
@@ -358,10 +426,21 @@ function applyFilters() {
     const selectedSignals = getActiveValues(signalFilter);
     const selectedStatuses = getActiveValues(statusFilter);
     const selectedImplementations = getActiveValues(implementationFilter);
+    const selectedTypes = getActiveValues(typeFilter);
+    const includeNoSignals = includeNoSignalsToggle && includeNoSignalsToggle.checked;
     selectedSessions = getActiveValues(sessionSelector);
     const searchQuery = (cachedSearchInput || document.getElementById('search-input')).value.toLowerCase();
 
-    const filters = { selectedSources, selectedSignals, selectedStatuses, selectedImplementations, searchQuery };
+    const filters = {
+        selectedSources,
+        selectedSignals,
+        selectedStatuses,
+        selectedImplementations,
+        selectedSessions,
+        selectedTypes,
+        includeNoSignals,
+        searchQuery,
+    };
 
     // Filter documents from cache (not DOM)
     filteredDocumentsCache = allDocumentsCache.filter(doc => documentMatchesFilters(doc, filters));
@@ -572,11 +651,13 @@ function normalizeDocument(doc, session) {
     const signalSummary = doc.signal_summary && Object.keys(doc.signal_summary).length > 0
         ? doc.signal_summary
         : buildSignalSummary(signalParagraphs);
-    const derivedSession = getSessionFromSymbol(doc.symbol);
+    const derivedSession = doc.session || getSessionFromSymbol(doc.symbol);
+    const docType = doc.doc_type || (doc.symbol && doc.symbol.includes('/RES/') ? 'resolution' : (doc.symbol && doc.symbol.includes('/L.') ? 'proposal' : ''));
 
     return {
         ...doc,
         session: derivedSession || session,
+        doc_type: docType,
         signal_paragraphs: signalParagraphs,
         signal_summary: signalSummary,
     };
@@ -626,6 +707,7 @@ function getDocumentSortKey(doc) {
     const symbol = doc.symbol || '';
     const isProposal = doc.doc_type === 'proposal' || symbol.includes('/L.');
     const isResolution = doc.doc_type === 'resolution' || symbol.includes('/RES/');
+    const isDecision = doc.doc_type === 'decision';
 
     let categoryRank = 3;
     let committeeRank = 99;
@@ -649,6 +731,12 @@ function getDocumentSortKey(doc) {
         if (resolutionMatch) {
             categoryRank = 2;
             docNumber = Number.parseInt(resolutionMatch[2], 10);
+        }
+    } else if (isDecision) {
+        const decisionMatch = symbol.match(/(\d+)(?!.*\d)/);
+        if (decisionMatch) {
+            categoryRank = 3;
+            docNumber = Number.parseInt(decisionMatch[1], 10);
         }
     }
 
@@ -748,15 +836,30 @@ async function loadSelectedSessions() {
                 continue;
             }
 
+            const allowNoSignals = includeNoSignalsToggle && includeNoSignalsToggle.checked;
             const sessionDocs = sessionData.documents
                 .map(doc => normalizeDocument(doc, sessionKey))
-                .filter(doc => doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0);
+                .filter(doc => {
+                    const hasSignals = doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
+                    return allowNoSignals || hasSignals;
+                });
 
             allDocuments.push(...sessionDocs);
         }
 
+        const dedupedDocuments = [];
+        const seenDocuments = new Set();
+        allDocuments.forEach(doc => {
+            const key = `${doc.session || ''}::${doc.doc_type || ''}::${doc.symbol || ''}`;
+            if (seenDocuments.has(key)) {
+                return;
+            }
+            seenDocuments.add(key);
+            dedupedDocuments.push(doc);
+        });
+
         // Render combined documents from selected sessions
-        renderCombinedDocuments(allDocuments);
+        renderCombinedDocuments(dedupedDocuments);
 
     } catch (error) {
         console.error('Error loading selected sessions:', error);
@@ -773,7 +876,18 @@ function renderDocumentCard(doc, isCollapsed = true) {
     const signalParagraphs = doc.signal_paragraphs || [];
     const title = escapeHtml(getDisplayTitle(doc));
     const symbol = escapeHtml(doc.symbol || '');
+    const hasSignals = signalParagraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
     const paraCount = signalParagraphs.length;
+    const isDecision = doc.doc_type === 'decision';
+    const decisionText = escapeHtml(doc.decision_text || '');
+    const metaItems = [];
+
+    if (isDecision) {
+        if (doc.meeting_date) metaItems.push(`Date ${escapeHtml(doc.meeting_date)}`);
+        if (doc.meeting_number) metaItems.push(`Meeting ${escapeHtml(doc.meeting_number)}`);
+        if (doc.agenda_item) metaItems.push(`Agenda ${escapeHtml(doc.agenda_item)}`);
+        if (doc.session) metaItems.push(`Session ${escapeHtml(doc.session)}`);
+    }
 
     const paragraphsHtml = signalParagraphs.length
         ? signalParagraphs.map(para => `
@@ -787,16 +901,26 @@ function renderDocumentCard(doc, isCollapsed = true) {
                 <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
             </div>
         `).join('')
-        : '<div class="text-sm text-gray-500 italic">No signal data available for this document.</div>';
+        : `
+            <div class="para-item text-sm text-gray-900" data-signals="">
+                <div class="text-xs font-semibold uppercase tracking-wide text-gray-400">No signals detected</div>
+                ${decisionText
+                    ? `<p class="text-gray-700 leading-relaxed mt-2" data-paragraph data-search>${decisionText}</p>`
+                    : '<p class="text-gray-500 italic mt-2" data-paragraph data-search>No signal data available for this document.</p>'}
+            </div>
+        `;
 
     return `
-        <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors${doc.doc_type === 'proposal' ? ' border-l-4 border-l-amber-400' : ''}"
+        <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors${doc.doc_type === 'proposal' ? ' border-l-4 border-l-amber-400' : ''}${doc.doc_type === 'decision' ? ' border-l-4 border-l-slate-400' : ''}"
              data-symbol="${doc.symbol}"
              data-source="${doc.origin || doc.source || ''}"
-             data-status="${doc.doc_type === 'resolution' ? 'adopted' : 'draft'}"
+             data-status="${doc.doc_type === 'resolution' ? 'adopted' : (doc.doc_type === 'proposal' ? 'draft' : 'decision')}"
+             data-type="${doc.doc_type || ''}"
+             data-has-signals="${hasSignals ? 'true' : 'false'}"
              data-signals="${Object.keys(doc.signal_summary || {}).join(',')}"
-             data-session="${doc.session}"
+             data-session="${doc.session || ''}"
              data-un-url="${doc.un_url || ''}"
+             data-igov-url="${doc.igov_url || ''}"
              data-title="${title}">
             <!-- Document Header (clickable to expand/collapse) -->
             <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 cursor-pointer doc-header" role="button" aria-expanded="${!isCollapsed}">
@@ -806,14 +930,17 @@ function renderDocumentCard(doc, isCollapsed = true) {
                             <span class="font-semibold text-gray-900" data-search>
                                 ${symbol}
                             </span>
-                            ${doc.origin && doc.origin !== 'Unknown' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
+                            ${isDecision ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">Decision</span>' : ''}
+                            ${!isDecision && doc.origin && doc.origin !== 'Unknown' && doc.origin !== 'IGov' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
                             ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
                             <span class="text-xs text-gray-400">${paraCount} signal${paraCount !== 1 ? 's' : ''}</span>
                         </div>
                         ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}" data-search>${title}</p>` : ''}
+                        ${metaItems.length ? `<div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">${metaItems.map(item => `<span>${item}</span>`).join('')}</div>` : ''}
                     </div>
                     <div class="flex items-center gap-2 flex-shrink-0">
-                        ${doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">View PDF</a>` : ''}
+                        ${isDecision && doc.igov_url ? `<a href="${doc.igov_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">View IGov</a>` : ''}
+                        ${!isDecision && doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">View PDF</a>` : ''}
                         <svg class="expand-icon w-4 h-4 text-gray-400 transition-transform ${isCollapsed ? '' : 'rotate-180'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -1074,15 +1201,24 @@ function initializeFilters() {
     sourceFilter = document.getElementById('source-filter');
     signalFilter = document.getElementById('signal-filter');
     statusFilter = document.getElementById('status-filter');
+    typeFilter = document.getElementById('type-filter');
     clearFiltersBtn = document.getElementById('clear-filters');
     groupImplementationBtn = document.getElementById('group-implementation');
     const toggleFiltersBtn = document.getElementById('toggle-filters');
     const extraFilters = document.getElementById('extra-filters');
+    includeNoSignalsToggle = document.getElementById('include-no-signals');
 
     wirePillGroup(implementationFilter, applyFilters);
     wirePillGroup(sourceFilter, applyFilters);
     wirePillGroup(signalFilter, applyFilters);
     wirePillGroup(statusFilter, applyFilters);
+    wirePillGroup(typeFilter, applyFilters);
+
+    if (includeNoSignalsToggle) {
+        includeNoSignalsToggle.addEventListener('change', function() {
+            loadSelectedSessions();
+        });
+    }
 
     if (toggleFiltersBtn && extraFilters) {
         toggleFiltersBtn.addEventListener('click', function() {
@@ -1115,10 +1251,14 @@ function initializeFilters() {
         setActiveValues(sourceFilter, []);
         setActiveValues(signalFilter, []);
         setActiveValues(statusFilter, []);
+        setActiveValues(typeFilter, []);
         selectedSessions = [];
         groupByImplementation = false;
         groupImplementationBtn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
         groupImplementationBtn.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
+        if (includeNoSignalsToggle) {
+            includeNoSignalsToggle.checked = false;
+        }
         document.getElementById('search-input').value = '';
         loadSelectedSessions();
     });

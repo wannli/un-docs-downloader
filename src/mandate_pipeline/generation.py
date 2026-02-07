@@ -98,6 +98,36 @@ def filename_to_symbol(filename: str) -> str:
     return symbol
 
 
+def derive_session_from_symbol(symbol: str) -> str | None:
+    """Derive the UN General Assembly session from a document symbol."""
+    if not symbol:
+        return None
+
+    res_match = re.match(r"^A/RES/(\d+)", symbol)
+    if res_match:
+        return res_match.group(1)
+
+    committee_match = re.match(r"^A/C\.\d+/(\d+)/L\.", symbol)
+    if committee_match:
+        return committee_match.group(1)
+
+    plenary_match = re.match(r"^A/(\d+)/L\.", symbol)
+    if plenary_match:
+        return plenary_match.group(1)
+
+    return None
+
+
+def ensure_document_sessions(documents: list[dict]) -> None:
+    """Ensure documents include a session derived from their symbols."""
+    for doc in documents:
+        if doc.get("session"):
+            continue
+        derived_session = derive_session_from_symbol(doc.get("symbol", ""))
+        if derived_session:
+            doc["session"] = derived_session
+
+
 def classify_doc_type(symbol: str, text: str) -> str:
     """Classify document type for linking metadata."""
     if is_resolution(symbol):
@@ -190,7 +220,12 @@ def load_all_documents(data_dir: Path, checks: list) -> list[dict]:
     return documents
 
 
-def generate_data_json(documents: list, checks: list, output_dir: Path) -> None:
+def generate_data_json(
+    documents: list,
+    checks: list,
+    output_dir: Path,
+    filename: str = "data.json",
+) -> None:
     """
     Generate data.json with all document metadata.
 
@@ -219,7 +254,7 @@ def generate_data_json(documents: list, checks: list, output_dir: Path) -> None:
         },
     }
 
-    with open(output_dir / "data.json", "w") as f:
+    with open(output_dir / filename, "w") as f:
         json.dump(data, f, indent=2)
 
 
@@ -968,6 +1003,46 @@ def generate_origin_matrix_page(
         f.write(html)
 
 
+def build_igov_decision_documents(decisions: list[dict], checks: list) -> list[dict]:
+    """Normalize IGov decision data into the unified document shape."""
+    decision_docs = []
+    for decision in decisions:
+        decision_text = (decision.get("decision_text") or "").strip()
+        paragraphs = {1: decision_text} if decision_text else {}
+        signals = run_checks(paragraphs, checks) if checks and paragraphs else {}
+
+        signal_summary = {}
+        signal_paragraphs = []
+        for para_num, para_signals in signals.items():
+            if not para_signals:
+                continue
+            signal_paragraphs.append({
+                "number": para_num,
+                "text": paragraphs.get(para_num, ""),
+                "signals": para_signals,
+            })
+            for sig in para_signals:
+                signal_summary[sig] = signal_summary.get(sig, 0) + 1
+
+        symbol = str(decision.get("decision_number") or "").strip()
+        if not symbol:
+            symbol = str(decision.get("title") or "").strip() or "Decision"
+
+        decision_docs.append({
+            **decision,
+            "symbol": symbol,
+            "doc_type": "decision",
+            "source": "igov",
+            "origin": "IGov",
+            "paragraphs": paragraphs,
+            "signals": signals,
+            "signal_summary": signal_summary,
+            "signal_paragraphs": signal_paragraphs,
+        })
+
+    return decision_docs
+
+
 def generate_unified_signals_page(
     documents: list[dict],
     checks: list,
@@ -1145,70 +1220,29 @@ def generate_igov_signals_page(
     else:
         decisions = load_igov_decisions(data_dir, session)
 
-    decision_docs = []
-    for decision in decisions:
-        decision_text = (decision.get("decision_text") or "").strip()
-        if not decision_text:
-            continue
-
-        paragraphs = {1: decision_text}
-        signals = run_checks(paragraphs, checks) if checks else {}
-
-        signal_summary = {}
-        signal_paragraphs = []
-        for para_num, para_signals in signals.items():
-            if para_signals:
-                signal_paragraphs.append({
-                    "number": para_num,
-                    "text": paragraphs.get(para_num, ""),
-                    "signals": para_signals,
-                })
-                for sig in para_signals:
-                    signal_summary[sig] = signal_summary.get(sig, 0) + 1
-
-        decision_docs.append({
-            **decision,
-            "paragraphs": paragraphs,
-            "signals": signals,
-            "signal_summary": signal_summary,
-            "signal_paragraphs": signal_paragraphs,
-        })
+    decision_docs = build_igov_decision_documents(decisions, checks)
 
     docs_with_signals = [doc for doc in decision_docs if doc.get("signal_paragraphs")]
     total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
-    session_label = decisions[0].get("session_label") if decisions else ""
-    session_list = []
-    seen_sessions = set()
-    for doc in decisions:
-        session_value = doc.get("session")
-        if session_value is None:
-            continue
-        try:
-            session_int = int(session_value)
-        except (TypeError, ValueError):
-            continue
-        if session_int in seen_sessions:
-            continue
-        seen_sessions.add(session_int)
-        session_list.append(session_int)
-    session_list.sort(reverse=True)
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    env = get_templates_env(checks)
-    template = env.get_template("signals_igov.html")
-
-    html = template.render(
-        documents=decision_docs,
-        checks=checks,
-        total_docs=len(decision_docs),
-        total_paragraphs=total_paragraphs,
-        session=session,
-        session_label=session_label,
-        sessions=session_list,
-        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-    )
+    redirect_target = "../signals-unified.html?type=decision"
+    html = f"""<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>IGov Decisions - Redirecting</title>
+    <meta http-equiv=\"refresh\" content=\"0; url={redirect_target}\">
+    <script>window.location.href = "{redirect_target}";</script>
+</head>
+<body>
+    <p>Redirecting to the unified signal browser...</p>
+    <p><a href=\"{redirect_target}\">Continue</a></p>
+</body>
+</html>"""
 
     with open(output_dir / "signals-unified.html", "w") as f:
         f.write(html)
@@ -1571,6 +1605,9 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
     link_documents(documents, use_undl_metadata=use_undl_metadata)
     annotate_linkage(documents)
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
+    igov_decisions = build_igov_decision_documents(load_igov_decisions_all(data_dir), checks)
+    browser_documents = visible_documents + igov_decisions
+    ensure_document_sessions(browser_documents)
 
     # Create output directories
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1608,14 +1645,14 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
 
     # Always generate unified pages (core functionality)
     print("Generating unified signals pages...")
-    generate_unified_signals_page(documents, checks, output_dir)
-    generate_unified_explorer_page(documents, checks, output_dir)
+    generate_unified_signals_page(browser_documents, checks, output_dir)
+    generate_unified_explorer_page(browser_documents, checks, output_dir)
 
     # Generate data exports
-    generate_data_json(visible_documents, checks, output_dir)
-    generate_search_index(visible_documents, output_dir)
+    generate_data_json(browser_documents, checks, output_dir)
+    generate_search_index(browser_documents, output_dir)
 
-    print(f"Generated static site with {len(visible_documents)} documents in {output_dir}")
+    print(f"Generated static site with {len(browser_documents)} documents in {output_dir}")
 
 
 def generate_site_verbose(
@@ -1743,6 +1780,9 @@ def generate_site_verbose(
     link_documents(documents)
     annotate_linkage(documents)
     visible_documents = [doc for doc in documents if not doc.get("is_adopted_draft")]
+    igov_decisions = build_igov_decision_documents(load_igov_decisions_all(data_dir), checks)
+    browser_documents = visible_documents + igov_decisions
+    ensure_document_sessions(browser_documents)
 
     load_duration = time.time() - load_start_time
     if on_load_end:
@@ -1796,20 +1836,20 @@ def generate_site_verbose(
     if on_generate_page:
         on_generate_page("origin_matrix", "origin_matrix.html")
 
-    generate_unified_signals_page(documents, checks, output_dir)
+    generate_unified_signals_page(browser_documents, checks, output_dir)
     if on_generate_page:
         on_generate_page("signals_unified", "signals.html")
 
-    generate_unified_explorer_page(documents, checks, output_dir)
+    generate_unified_explorer_page(browser_documents, checks, output_dir)
     if on_generate_page:
         on_generate_page("signals_unified_explorer", "signals-unified.html")
 
     # Generate data exports
-    generate_data_json(visible_documents, checks, output_dir)
+    generate_data_json(browser_documents, checks, output_dir)
     if on_generate_page:
         on_generate_page("data", "data.json")
 
-    generate_search_index(visible_documents, output_dir)
+    generate_search_index(browser_documents, output_dir)
     if on_generate_page:
         on_generate_page("search", "search-index.json")
 
@@ -1824,8 +1864,8 @@ def generate_site_verbose(
             total_signal_counts[sig] = total_signal_counts.get(sig, 0) + count
 
     return {
-        "total_documents": len(visible_documents),
-        "documents_with_signals": len([d for d in visible_documents if d.get("signals")]),
+        "total_documents": len(browser_documents),
+        "documents_with_signals": len([d for d in browser_documents if d.get("signals")]),
         "document_pages": len(documents),
         "signal_pages": len(checks),
         "signal_counts": total_signal_counts,
