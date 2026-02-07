@@ -2,10 +2,20 @@
 
 The `docs/` directory contains generated static site output used by the pipeline. It **must remain tracked** in git because the pipeline expects it to exist in the repository.
 
-When making code changes:
-- Do **not** edit files under `docs/` unless the user explicitly asks for a regeneration.
+## Handling Generated Files (docs/ and data/)
+
+**During normal development:**
+- Do **not** manually edit files under `docs/` unless the user explicitly asks for a regeneration.
 - Avoid staging or committing `docs/` changes that are incidental to code edits (e.g., from running the generator locally).
+- State files in `data/` (like `data/state.json`) are now in `.gitignore` and won't be committed in PR branches.
 - Keep changes focused on the source code and templates that *produce* the static site output.
+
+**During merges:**
+- When merging branches, `docs/` files may have conflicts because both branches regenerated the site.
+- State files in `data/` should not conflict anymore (they're in `.gitignore` for PR branches).
+- **If docs/ conflicts occur, resolve by taking "ours"** (keep your branch's version): `git checkout --ours docs/`
+- The generate.yml workflow will regenerate the site after merge, so conflicts in docs/ don't matter.
+- Only merge changes to source code (src/, templates/, config/, workflows/).
 
 ## Testing Workflow
 
