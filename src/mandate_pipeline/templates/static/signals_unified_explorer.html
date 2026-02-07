@@ -40,7 +40,7 @@
             <!-- Implementation Session - Multiselect -->
             <div>
                 <label for="implementation-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Implementation</label>
-                <select id="implementation-filter" multiple size="1" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
+                <select id="implementation-filter" multiple size="3" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
                     {% for session in [85, 84, 83, 82, 81, 80] %}
                     <option value="{{ session }}">{{ session }}th</option>
                     {% endfor %}
@@ -50,7 +50,7 @@
             <!-- Signal - Multiselect -->
             <div>
                 <label for="signal-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Signal</label>
-                <select id="signal-filter" multiple size="1" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
+                <select id="signal-filter" multiple size="3" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
                     {% for check in checks %}
                     <option value="{{ check.signal }}">{{ check.signal }}</option>
                     {% endfor %}
@@ -60,7 +60,7 @@
             <!-- Source - Multiselect -->
             <div>
                 <label for="source-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Source</label>
-                <select id="source-filter" multiple size="1" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
+                <select id="source-filter" multiple size="3" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
                     {% for origin_code in origin_order %}
                     {% set origin_label = 'Pl' if origin_code == 'Plenary' else origin_code %}
                     <option value="{{ origin_code }}">{{ origin_label }}</option>
@@ -1202,12 +1202,7 @@ function initializeFilters() {
     includeNoSignalsToggle = document.getElementById('include-no-signals');
 
     // Wire up select elements with change listeners
-    if (sessionSelector) {
-        sessionSelector.addEventListener('change', () => {
-            selectedSessions = getActiveValues(sessionSelector);
-            loadSelectedSessions();
-        });
-    }
+    // Note: sessionSelector is wired up in initializeSessionSelector()
     if (implementationFilter) {
         implementationFilter.addEventListener('change', applyFilters);
     }
@@ -1217,12 +1212,7 @@ function initializeFilters() {
     if (signalFilter) {
         signalFilter.addEventListener('change', applyFilters);
     }
-    if (statusFilter) {
-        statusFilter.addEventListener('change', applyFilters);
-    }
-    if (typeFilter) {
-        typeFilter.addEventListener('change', applyFilters);
-    }
+    // statusFilter and typeFilter are hidden, no need to wire them up
 
     if (includeNoSignalsToggle) {
         includeNoSignalsToggle.addEventListener('change', function() {
