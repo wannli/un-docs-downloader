@@ -870,11 +870,6 @@ def generate_pattern_signal_page(
         f.write(html)
 
 
-def generate_index_page(documents: list, checks: list, patterns: list, output_dir: Path) -> None:
-    """Deprecated: the signal browser is now the index page."""
-    return
-
-
 def generate_provenance_page(
     documents: list,
     checks: list,
@@ -1044,54 +1039,6 @@ def build_igov_decision_documents(decisions: list[dict], checks: list) -> list[d
     return decision_docs
 
 
-def generate_unified_signals_page(
-    documents: list[dict],
-    checks: list,
-    output_dir: Path
-) -> None:
-    """
-    Generate the unified signals page showing all documents with signals.
-
-    Args:
-        documents: All processed documents
-        checks: All check definitions
-        output_dir: Root output directory
-    """
-    output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Filter to documents with signals (use signal_summary for linked documents)
-    docs_with_signals = [doc for doc in documents if doc.get("signal_summary") or doc.get("signal_paragraphs")]
-
-    # Count signal types
-    resolution_count = len([d for d in docs_with_signals if d.get("doc_type") == "resolution"])
-    proposal_count = len([d for d in docs_with_signals if d.get("doc_type") == "proposal"])
-
-    # Count total paragraphs with signals
-    total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
-
-    # Get origin order for filtering
-    origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6"]
-
-    env = get_templates_env(checks)
-    template = env.get_template("signals_unified.html")
-
-    html = template.render(
-        documents=docs_with_signals,
-        checks=checks,
-        origin_order=origin_order,
-        origin_names=COMMITTEE_NAMES,
-        total_docs=len(docs_with_signals),
-        total_paragraphs=total_paragraphs,
-        resolution_count=resolution_count,
-        proposal_count=proposal_count,
-        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-    )
-
-    with open(output_dir / "signals.html", "w") as f:
-        f.write(html)
-
-
 def generate_unified_explorer_page(
     documents: list[dict],
     checks: list,
@@ -1198,8 +1145,6 @@ def generate_unified_explorer_page(
 
     # File writing
     write_start = time.time()
-    with open(output_dir / "signals-unified.html", "w") as f:
-        f.write(html)
     with open(output_dir / "index.html", "w") as f:
         f.write(html)
     write_time = time.time() - write_start
@@ -1229,25 +1174,23 @@ def generate_igov_signals_page(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    redirect_target = "../signals-unified.html?type=decision"
-    html = f"""<!DOCTYPE html>
-<html lang=\"en\">
-<head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    <title>IGov Decisions - Redirecting</title>
-    <meta http-equiv=\"refresh\" content=\"0; url={redirect_target}\">
-    <script>window.location.href = "{redirect_target}";</script>
-</head>
-<body>
-    <p>Redirecting to the unified signal browser...</p>
-    <p><a href=\"{redirect_target}\">Continue</a></p>
-</body>
-</html>"""
+    # Collect unique session numbers for the session filter
+    sessions = sorted(
+        {doc.get("session") for doc in decision_docs if doc.get("session")},
+        reverse=True,
+    )
 
-    with open(output_dir / "signals-unified.html", "w") as f:
-        f.write(html)
-    with open(output_dir / "index.html", "w") as f:
+    env = get_templates_env(checks)
+    template = env.get_template("signals_igov.html")
+
+    html = template.render(
+        documents=decision_docs,
+        checks=checks,
+        sessions=sessions,
+        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+    )
+
+    with open(output_dir / "signals.html", "w") as f:
         f.write(html)
 
     return {
@@ -1624,7 +1567,6 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
         (output_dir / "provenance").mkdir(exist_ok=True)
 
     # Generate essential pages
-    generate_index_page(visible_documents, checks, patterns, output_dir)
     generate_signals_info_page(checks, output_dir)
 
     # Generate detailed pages (can be skipped for performance)
@@ -1806,10 +1748,6 @@ def generate_site_verbose(
     (output_dir / "provenance").mkdir(exist_ok=True)
 
     # Generate pages
-    generate_index_page(visible_documents, checks, patterns, output_dir)
-    if on_generate_page:
-        on_generate_page("index", "index.html")
-
     generate_signals_info_page(checks, output_dir)
     if on_generate_page:
         on_generate_page("signals_info", "signals-info.html")
@@ -1838,7 +1776,7 @@ def generate_site_verbose(
 
     generate_unified_explorer_page(browser_documents, checks, output_dir)
     if on_generate_page:
-        on_generate_page("signals_unified_explorer", "signals-unified.html")
+        on_generate_page("signals_unified_explorer", "index.html")
 
     # Generate data exports
     generate_data_json(browser_documents, checks, output_dir)
@@ -1866,11 +1804,6 @@ def generate_site_verbose(
         "signal_pages": len(checks),
         "signal_counts": total_signal_counts,
     }
-
-
-def generate_sessions_index_page(output_dir: Path):
-    """Deprecated: historical sessions index page removed."""
-    return
 
 
 def generate_consolidated_signals_page(

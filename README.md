@@ -31,7 +31,8 @@ mandate generate --config ./config --data ./data --output ./docs   # Stages 2-5:
 mandate-pipeline/
 ├── config/                    # Configuration files
 │   ├── checks.yaml           # Signal detection rules
-│   └── patterns.yaml         # Document patterns to discover
+│   ├── patterns.yaml         # Document patterns to discover
+│   └── igov.yaml             # IGov decision configuration
 ├── data/                      # Persistent data
 │   ├── pdfs/                 # Downloaded PDF documents
 │   └── state.json            # Discovery sync state
@@ -44,7 +45,9 @@ mandate-pipeline/
 │   ├── detection.py          # Stage 3: Signal detection
 │   ├── linking.py            # Stage 4: Document linkage
 │   ├── generation.py         # Stage 5: Site generation
+│   ├── igov.py               # IGov decision synchronization
 │   └── templates/            # Jinja2 HTML templates
+│       └── static/           # Static site templates (Tailwind CSS)
 └── tests/                     # Test suite
 ```
 
@@ -105,9 +108,13 @@ Creates the static website and data exports.
 
 **Process:**
 1. Load all processed documents
-2. Generate HTML pages (index, documents, signals, patterns, matrix)
-3. Create machine-readable exports (data.json, search-index.json)
-4. Apply Jinja2 templates for consistent styling
+2. Enrich documents with signal paragraphs and metadata
+3. Generate the interactive signal browser (`index.html`)
+4. Generate signal documentation (`signals-info.html`)
+5. Generate IGov decision pages (`igov/`)
+6. Optionally generate detailed pages (per-signal, per-pattern, matrix, provenance)
+7. Create machine-readable exports (`data.json`, `search-index.json`)
+8. Apply Jinja2 templates with Tailwind CSS for consistent styling
 
 ## Data Flow
 
@@ -128,14 +135,16 @@ data/pdfs/*.pdf
     ↓
 [Stage 5: Generation]
     ↓
-docs/                 (static website)
-├── index.html       (dashboard)
-├── documents/       (individual pages)
-├── signals/         (filter by signal)
-├── patterns/        (filter by pattern)
-├── matrix/          (pattern × signal)
-├── data.json        (machine-readable export)
-└── search-index.json
+docs/                      (static website)
+├── index.html             (interactive signal browser)
+├── signals-info.html      (signal documentation)
+├── igov/                  (IGov decision pages)
+├── signals/               (per-signal detail pages)
+├── patterns/              (per-pattern filtered pages)
+├── matrix/                (pattern × signal combinations)
+├── provenance/            (resolution origin analysis)
+├── data.json              (machine-readable export)
+└── search-index.json      (client-side search index)
 ```
 
 ## Configuration
@@ -357,29 +366,31 @@ Complete metadata export for external tools:
 
 ## GitHub Actions Automation
 
-Two workflows automate the pipeline:
+The pipeline uses a granular, event-driven workflow architecture with multiple independent workflows:
 
 ### discover.yml
 
-- **Trigger**: Daily at 6 AM UTC or manual
-- **Action**: Run `mandate discover`, commit new PDFs
-- **Result**: `data/pdfs/` and `data/state.json` updated
+- **Trigger**: Hourly schedule + manual dispatch
+- **Action**: Run `mandate discover`, download new PDFs, commit to `data/pdfs/`
+- **Result**: New documents discovered and downloaded
 
 ### generate.yml
 
 - **Trigger**: Changes to data/linked/, config/, or src/
-- **Action**: Generate static site, deploy to GitHub Pages
+- **Action**: Generate static site and commit to `docs/`
 - **Result**: Static website updated
+
+### build-session.yml
+
+- **Trigger**: Manual dispatch for complete historical UN sessions
+- **Action**: Process entire past sessions (download → extract → detect → link → generate)
+- **Result**: Session-specific pages in `docs/sessions/`
 
 **Workflow Chain:**
 ```
-Schedule (6 AM UTC)
+Schedule (hourly)
     ↓
-discover.yml
-    ↓ (on success)
-linkage-analysis.yml
-    ↓ (triggers)
-generate.yml
+discover.yml → extract.yml → detect.yml → link.yml → generate.yml
 ```
 
 ### Testing Mode for Faster Iteration
@@ -455,15 +466,23 @@ PASS 2: Fuzzy Title Matching
 
 ## Generated Website Structure
 
+### Public Pages
+
 | Page | Purpose |
 |------|---------|
-| `index.html` | Dashboard with pattern × signal matrix |
-| `documents/index.html` | All documents grouped by pattern |
-| `documents/{symbol}.html` | Individual document detail |
-| `signals/{signal}.html` | Documents with specific signal |
-| `patterns/{pattern}.html` | Documents matching pattern |
-| `matrix/{pattern}_{signal}.html` | Pattern × signal intersection |
-| `data.json` | Machine-readable metadata |
+| `index.html` | Interactive signal browser with search, filtering, and document expansion |
+| `signals-info.html` | Documentation of signal types, trigger phrases, and detection methodology |
+| `igov/` | IGov decision pages (redirects to main browser with decision type filter) |
+| `data.json` | Machine-readable JSON export of all documents and signals |
+
+### Internal/Detailed Pages (optional, skippable via `SKIP_DETAILED_PAGES`)
+
+| Page | Purpose |
+|------|---------|
+| `signals/{signal}.html` | Documents filtered by specific signal type |
+| `patterns/{pattern}.html` | Documents matching a specific discovery pattern |
+| `matrix/{pattern}_{signal}.html` | Pattern × signal intersection view |
+| `provenance/index.html` | Resolution origin analysis by committee |
 | `search-index.json` | Client-side search index |
 
 ## Dependencies
@@ -536,6 +555,61 @@ Extend `src/mandate_pipeline/linking.py` (Stage 4) to implement additional docum
 ### Custom Reports
 
 Extend `src/mandate_pipeline/generation.py` (Stage 5) to generate additional HTML pages or exports.
+
+## Code Review Findings
+
+A comprehensive code review was conducted to identify legacy issues, inconsistencies, and improvement opportunities across the codebase and static page generation. Below is a summary of findings and actions taken.
+
+### Issues Resolved
+
+1. **Dead template blocks removed**: 17 child templates defined a `{% block nav_signals %}` block that was never used by `base.html`. Additionally, documents and debug templates defined 6 orphan blocks (`nav_documents`, `nav_debug`, `nav_linking`, `nav_orphans`, `nav_fuzzy`, `nav_extraction`) that had no corresponding use in the base template header. All have been removed.
+
+2. **Redundant nav overrides cleaned up**: Root-level templates (`signals_unified_explorer.html`, `signals_info.html`, etc.) were overriding nav blocks with values identical to `base.html` defaults. These redundant overrides were removed.
+
+3. **Deprecated functions removed**: Three deprecated/dead functions were removed from `generation.py`:
+   - `generate_index_page()` — empty stub (returned immediately)
+   - `generate_sessions_index_page()` — empty stub
+   - `generate_unified_signals_page()` — generated `signals.html` but was never called from `generate_site()`
+
+4. **Duplicate output eliminated**: `index.html` and `signals-unified.html` were identical copies. The duplicate `signals-unified.html` is no longer generated; `index.html` is the canonical entry point.
+
+5. **Unused CDN dependency removed**: `lunr.js` was imported in `base.html` but never used by any template. Client-side search uses manual string matching instead. The unused import was removed to improve page load time.
+
+6. **IGov page generation restored**: The IGov page was generating a redirect instead of rendering the actual `signals_igov.html` template. Restored proper page generation to `igov/signals.html`, and updated all nav links to point to `/igov/signals.html`.
+
+7. **README outdated sections updated**: Generated Website Structure table, Data Flow diagram, Stage 5 description, and GitHub Actions section were updated to reflect the current state of the project.
+
+8. **Navigation consistency standardized**: All templates now use absolute paths from `base.html` (e.g., `/igov/signals.html`, `/signals-info.html`). Child templates no longer need to override nav blocks, eliminating path calculation errors across directory depths.
+
+9. **Merge conflicts resolved**: Merged master branch, resolving 18 template conflicts. Adopted master's absolute path navigation and new `nav_resolutions` link while preserving our cleanup and fixes.
+
+### Recommended Follow-up Issues
+
+The following improvements were identified during the review. Each is documented below as a standalone actionable issue.
+
+**Issue 1: Centralize signal color definitions into a single source of truth**
+
+Signal colors (e.g., `bg-blue-100 text-blue-800` for "agenda") are hardcoded in `generation.py` (`generate_signals_info_page`), `signals_unified_explorer.html` (`getSignalHighlightClass`), and `signals_igov.html`. Changes to signal types or colors require updates in multiple places. Extract signal colors into `checks.yaml` or a shared Jinja2 macro/partial.
+
+**Issue 2: Unify historical session and current session rendering templates**
+
+`signals_unified.html` is used only by `generate_session_unified_signals_page()` for historical sessions, while `signals_unified_explorer.html` is used for the main page. These two templates solve the same problem (signal browsing) but use completely different architectures: server-rendered HTML with multiselect filters vs. client-side JSON loading with pill-button filters. Migrate historical sessions to use the explorer template for a consistent UX.
+
+**Issue 3: Remove unused `search-index.json` generation**
+
+`generate_search_index()` produces `search-index.json` but no client-side code consumes it. The `lunr.js` library was imported but never wired up, and has now been removed. Either remove `search-index.json` generation entirely or implement client-side search using it.
+
+**Issue 4: Consolidate `generate_site()` and `generate_site_verbose()` into a single function**
+
+These two functions in `generation.py` have ~80% code overlap. `generate_site_verbose()` adds parallel PDF extraction and progress callbacks. Refactor into a single function with optional callback parameters and a `parallel` flag to eliminate the duplication and maintenance burden.
+
+**Issue 5: Split `generation.py` into smaller modules**
+
+At ~1960 lines, `generation.py` is the largest file in the codebase and contains 35 functions spanning page generation, document enrichment, data export, and template rendering. Consider splitting into: `generation/pages.py` (page generators), `generation/data.py` (JSON exports), `generation/enrichment.py` (document processing), `generation/templates.py` (template utilities).
+
+**Issue 6: Fix pre-existing test failures in `test_downloader.py` and `test_linking.py`**
+
+16 tests fail in the current test suite. 5 require network access (sandbox limitation), but 11 are genuine failures: `test_generate_site_creates_all_files` asserts removed pages (`documents/index.html`), linking tests expect a `normalize_title` function that has changed, and `test_decision_in_series` fails with current IGov logic. These tests should be updated to match the current codebase.
 
 ## License
 
