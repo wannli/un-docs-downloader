@@ -9,80 +9,91 @@
 {% block nav_resolutions %}/{% endblock %}
 
 {% block content %}
-<!-- Header (hidden per UX requirements) -->
-<div class="mb-4 hidden">
+<!-- Header -->
+<div class="mb-4 hidden sm:block">
     <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Signal Browser</h1>
 </div>
 
 
-<div class="sticky top-20 z-10 space-y-2 bg-white/95 pb-2 backdrop-blur">
+<div class="sticky top-20 z-10 space-y-3 bg-white/95 pb-3 backdrop-blur">
     <!-- Search -->
-    <div class="rounded-lg border border-gray-200 bg-gray-50/80 p-2 shadow-sm">
+    <div class="rounded-xl border border-gray-200 bg-gray-50/80 p-3 shadow-sm">
+        <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search</label>
         <input type="text" id="search-input" placeholder="Search by symbol, title, or content..."
-               class="w-full px-3 py-1.5 border border-gray-300 rounded-md bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
     </div>
 
-    <!-- Filters - Compact Layout -->
-    <div class="rounded-lg border border-gray-200 bg-white p-2 shadow-sm">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-2 items-start">
-            <!-- Adoption Session (default: 80th) -->
-            <div>
-                <label for="session-selector" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Session</label>
-                <select id="session-selector" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
-                    <option value="80" selected>80th</option>
-                    <option value="79">79th</option>
-                    <option value="78">78th</option>
-                    <option value="77">77th</option>
-                    <option value="76">76th</option>
-                    <option value="75">75th</option>
-                </select>
+    <!-- Filters -->
+    <div class="rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
+        <div class="flex flex-wrap items-center gap-1.5 md:grid md:grid-cols-2">
+            <div class="flex flex-wrap items-center gap-1.5 md:block">
+                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
+                <div id="session-selector" class="flex flex-wrap gap-1.5 md:mt-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
+                </div>
             </div>
-            
-            <!-- Implementation Session - Multiselect -->
-            <div>
-                <label for="implementation-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Implementation</label>
-                <select id="implementation-filter" multiple size="3" aria-label="Select multiple implementation sessions" aria-multiselectable="true" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
-                    {% for session in [85, 84, 83, 82, 81, 80] %}
-                    <option value="{{ session }}">{{ session }}th</option>
-                    {% endfor %}
-                </select>
-            </div>
-            
-            <!-- Signal - Multiselect -->
-            <div>
-                <label for="signal-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Signal</label>
-                <select id="signal-filter" multiple size="3" aria-label="Select multiple signal types" aria-multiselectable="true" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
+            <div class="flex flex-wrap items-center gap-1.5 md:block">
+                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</label>
+                <div id="signal-filter" class="flex flex-wrap gap-1.5 md:mt-1.5">
                     {% for check in checks %}
-                    <option value="{{ check.signal }}">{{ check.signal }}</option>
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
                     {% endfor %}
-                </select>
-            </div>
-            
-            <!-- Source - Multiselect -->
-            <div>
-                <label for="source-filter" class="block text-[10px] font-semibold uppercase tracking-wide text-gray-500 mb-1">Source</label>
-                <select id="source-filter" multiple size="3" aria-label="Select multiple sources" aria-multiselectable="true" class="w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-un-blue">
-                    {% for origin_code in origin_order %}
-                    {% set origin_label = 'Pl' if origin_code == 'Plenary' else origin_code %}
-                    <option value="{{ origin_code }}">{{ origin_label }}</option>
-                    {% endfor %}
-                </select>
+                </div>
             </div>
         </div>
-        
-        <!-- Clear filters button (compact) -->
-        <div class="mt-2 flex justify-end">
-            <button id="clear-filters" class="px-3 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Clear filters
+        <div class="mt-2 flex items-center justify-between md:hidden">
+            <button id="toggle-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
+                More filters
             </button>
         </div>
-        
-        <!-- Hidden filters (Status, Type, Group by Implementation) -->
-        <div class="hidden">
-            <div id="status-filter"></div>
-            <div id="type-filter"></div>
-            <button id="group-implementation"></button>
-            <input id="include-no-signals" type="checkbox">
+        <div id="extra-filters" class="mt-2 hidden md:grid md:grid-cols-2 gap-2">
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Implementation Session</label>
+                <div id="implementation-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+                    {% for session in [85, 84, 83, 82, 81, 80] %}
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="{{ session }}">{{ session }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Source</label>
+                <div id="source-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+                    {% for origin_code in origin_order %}
+                    {% set origin_label = 'Pl' if origin_code == 'Plenary' else origin_code %}
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ origin_code }}">{{ origin_label }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Status</label>
+                <div id="status-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
+                </div>
+            </div>
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Type</label>
+                <div id="type-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
+                </div>
+            </div>
+            <div class="min-h-[60px]">
+                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Visibility</label>
+                <div class="mt-2 flex items-center gap-2">
+                    <input id="include-no-signals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-un-blue focus:ring-un-blue">
+                    <label for="include-no-signals" class="text-xs text-gray-600">Include items without signals</label>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-end gap-2">
+                <button id="group-implementation" class="flex h-8 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors" type="button">
+                    Group by Implementation
+                </button>
+                <button id="clear-filters" class="flex h-8 items-center justify-center rounded-lg border border-gray-200 px-3 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
+                    Clear filters
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -199,49 +210,6 @@ const debouncedApplyFilters = debounce(() => {
     requestAnimationFrame(() => applyFilters());
 }, 300);
 
-// Helper functions for multiselect dropdowns
-function getSelectedValues(selectElement) {
-    if (!selectElement) return [];
-    if (selectElement.multiple) {
-        return Array.from(selectElement.selectedOptions).map(opt => opt.value);
-    } else {
-        return selectElement.value ? [selectElement.value] : [];
-    }
-}
-
-function setSelectedValues(selectElement, values) {
-    if (!selectElement) return;
-    const valueSet = new Set(values);
-    if (selectElement.multiple) {
-        Array.from(selectElement.options).forEach(opt => {
-            opt.selected = valueSet.has(opt.value);
-        });
-    } else {
-        selectElement.value = values.length > 0 ? values[0] : '';
-    }
-}
-
-function getActiveValues(container) {
-    // Support both select elements and legacy pill containers
-    if (container.tagName === 'SELECT') {
-        return getSelectedValues(container);
-    }
-    return Array.from(container.querySelectorAll('.filter-pill.is-active')).map(pill => pill.dataset.value);
-}
-
-function setActiveValues(container, values) {
-    // Support both select elements and legacy pill containers  
-    if (container.tagName === 'SELECT') {
-        setSelectedValues(container, values);
-    } else {
-        const valueSet = new Set(values);
-        container.querySelectorAll('.filter-pill').forEach(pill => {
-            setPillActive(pill, valueSet.has(pill.dataset.value));
-        });
-    }
-}
-
-// Legacy pill functions (kept for backward compatibility if needed)
 const activePillClasses = ['bg-un-blue', 'text-white', 'border-un-blue'];
 const inactivePillClasses = ['border-gray-200', 'text-gray-600'];
 const activeImplementationClasses = ['bg-indigo-600', 'text-white', 'border-indigo-600'];
@@ -255,6 +223,17 @@ function setPillActive(pill, isActive) {
     pill.classList.toggle('is-active', isActive);
     activeClasses.forEach(cls => pill.classList.toggle(cls, isActive));
     inactiveClasses.forEach(cls => pill.classList.toggle(cls, !isActive));
+}
+
+function getActiveValues(container) {
+    return Array.from(container.querySelectorAll('.filter-pill.is-active')).map(pill => pill.dataset.value);
+}
+
+function setActiveValues(container, values) {
+    const valueSet = new Set(values);
+    container.querySelectorAll('.filter-pill').forEach(pill => {
+        setPillActive(pill, valueSet.has(pill.dataset.value));
+    });
 }
 
 function wirePillGroup(container, onChange) {
@@ -783,25 +762,52 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeSessionSelector() {
     sessionSelector = document.getElementById('session-selector');
 
-    // Session selector is now a static select element, no need to populate dynamically
-    // Apply filters from URL
-    applyFiltersFromUrl();
-    
-    // Wire up the select element
-    if (sessionSelector) {
-        sessionSelector.addEventListener('change', () => {
+    // Populate session options dynamically
+    populateSessionOptions(sessionSelector).then(() => {
+        applyFiltersFromUrl();
+        wirePillGroup(sessionSelector, () => {
             selectedSessions = getActiveValues(sessionSelector);
             loadSelectedSessions();
         });
+        selectedSessions = getActiveValues(sessionSelector);
+        loadSelectedSessions();
+    });
+}
+
+// Populate session selector with available sessions
+async function populateSessionOptions(selector) {
+    selector.innerHTML = '';
+
+    const currentButton = document.createElement('button');
+    currentButton.type = 'button';
+    currentButton.className = 'filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900';
+    currentButton.dataset.value = '80';
+    currentButton.textContent = '80';
+    selector.appendChild(currentButton);
+
+    // Check which session directories exist (in reverse chronological order)
+    const availableSessions = [79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50];
+
+    for (const session of availableSessions) {
+        try {
+            // Check if session data exists
+            const response = await fetch(getSessionDataUrl(session.toString()), { method: 'HEAD' });
+            if (response.ok) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900';
+                button.dataset.value = session.toString();
+                button.textContent = session.toString();
+                selector.appendChild(button);
+            }
+        } catch (error) {
+            // Session not available, skip
+            console.log(`Session ${session} not available`);
+        }
     }
-    
-    // Set default selection to 80th session if none is set
-    if (!selectedSessions || selectedSessions.length === 0) {
-        selectedSessions = ['80'];
-        setActiveValues(sessionSelector, ['80']);
-    }
-    
-    loadSelectedSessions();
+
+    setActiveValues(selector, []);
+    selectedSessions = [];
 }
 
 // Load all selected sessions and combine their documents
@@ -813,7 +819,7 @@ async function loadSelectedSessions() {
         const allDocuments = [];
         const sessionsToLoad = selectedSessions.length
             ? selectedSessions
-            : ['80']; // Default to 80th session if none selected
+            : Array.from(sessionSelector.querySelectorAll('.filter-pill')).map(pill => pill.dataset.value);
 
         for (const session of sessionsToLoad) {
             const sessionKey = session.toString();
@@ -1200,20 +1206,15 @@ function initializeFilters() {
     typeFilter = document.getElementById('type-filter');
     clearFiltersBtn = document.getElementById('clear-filters');
     groupImplementationBtn = document.getElementById('group-implementation');
+    const toggleFiltersBtn = document.getElementById('toggle-filters');
+    const extraFilters = document.getElementById('extra-filters');
     includeNoSignalsToggle = document.getElementById('include-no-signals');
 
-    // Wire up select elements with change listeners
-    // Note: sessionSelector is wired up in initializeSessionSelector()
-    if (implementationFilter) {
-        implementationFilter.addEventListener('change', applyFilters);
-    }
-    if (sourceFilter) {
-        sourceFilter.addEventListener('change', applyFilters);
-    }
-    if (signalFilter) {
-        signalFilter.addEventListener('change', applyFilters);
-    }
-    // statusFilter and typeFilter are hidden, no need to wire them up
+    wirePillGroup(implementationFilter, applyFilters);
+    wirePillGroup(sourceFilter, applyFilters);
+    wirePillGroup(signalFilter, applyFilters);
+    wirePillGroup(statusFilter, applyFilters);
+    wirePillGroup(typeFilter, applyFilters);
 
     if (includeNoSignalsToggle) {
         includeNoSignalsToggle.addEventListener('change', function() {
@@ -1221,37 +1222,42 @@ function initializeFilters() {
         });
     }
 
-    if (groupImplementationBtn) {
-        groupImplementationBtn.addEventListener('click', function() {
-            groupByImplementation = !groupByImplementation;
-            groupImplementationBtn.classList.toggle('bg-indigo-600', groupByImplementation);
-            groupImplementationBtn.classList.toggle('text-white', groupByImplementation);
-            groupImplementationBtn.classList.toggle('border-indigo-600', groupByImplementation);
-            groupImplementationBtn.classList.toggle('bg-indigo-50', !groupByImplementation);
-            groupImplementationBtn.classList.toggle('text-indigo-700', !groupByImplementation);
-            groupImplementationBtn.classList.toggle('border-indigo-200', !groupByImplementation);
-
-            if (allDocumentsCache.length > 0) {
-                renderCombinedDocuments(allDocumentsCache);
-            } else {
-                applyFilters();
-            }
+    if (toggleFiltersBtn && extraFilters) {
+        toggleFiltersBtn.addEventListener('click', function() {
+            const isHidden = extraFilters.classList.contains('hidden');
+            extraFilters.classList.toggle('hidden', !isHidden);
+            toggleFiltersBtn.textContent = isHidden ? 'Hide filters' : 'More filters';
+            toggleFiltersBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
         });
     }
 
+    groupImplementationBtn.addEventListener('click', function() {
+        groupByImplementation = !groupByImplementation;
+        groupImplementationBtn.classList.toggle('bg-indigo-600', groupByImplementation);
+        groupImplementationBtn.classList.toggle('text-white', groupByImplementation);
+        groupImplementationBtn.classList.toggle('border-indigo-600', groupByImplementation);
+        groupImplementationBtn.classList.toggle('bg-indigo-50', !groupByImplementation);
+        groupImplementationBtn.classList.toggle('text-indigo-700', !groupByImplementation);
+        groupImplementationBtn.classList.toggle('border-indigo-200', !groupByImplementation);
+
+        if (allDocumentsCache.length > 0) {
+            renderCombinedDocuments(allDocumentsCache);
+        } else {
+            applyFilters();
+        }
+    });
+
     clearFiltersBtn.addEventListener('click', function() {
-        setActiveValues(sessionSelector, ['80']); // Reset to default 80th session
+        setActiveValues(sessionSelector, []);
         setActiveValues(implementationFilter, []);
         setActiveValues(sourceFilter, []);
         setActiveValues(signalFilter, []);
         setActiveValues(statusFilter, []);
         setActiveValues(typeFilter, []);
-        selectedSessions = ['80']; // Reset to default
+        selectedSessions = [];
         groupByImplementation = false;
-        if (groupImplementationBtn) {
-            groupImplementationBtn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
-            groupImplementationBtn.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
-        }
+        groupImplementationBtn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+        groupImplementationBtn.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
         if (includeNoSignalsToggle) {
             includeNoSignalsToggle.checked = false;
         }
