@@ -855,7 +855,7 @@ async function loadSelectedSessions() {
             const mainData = sessionDataCache['main'];
             if (mainData.documents && Array.isArray(mainData.documents)) {
                 const decisionsForSession = mainData.documents
-                    .filter(doc => doc.doc_type === 'decision' && doc.session != null && doc.session === parseInt(sessionKey, 10))
+                    .filter(doc => doc.doc_type === 'decision' && doc.session !== null && doc.session !== undefined && doc.session === parseInt(sessionKey, 10))
                     .map(doc => normalizeDocument(doc, sessionKey))
                     .filter(doc => {
                         const hasSignals = doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
