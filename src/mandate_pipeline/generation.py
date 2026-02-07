@@ -1020,8 +1020,15 @@ def build_igov_decision_documents(decisions: list[dict], checks: list) -> list[d
             for sig in para_signals:
                 signal_summary[sig] = signal_summary.get(sig, 0) + 1
 
-        symbol = str(decision.get("decision_number") or "").strip()
-        if not symbol:
+        decision_number = str(decision.get("decision_number") or "").strip()
+        session = decision.get("session")
+        
+        # Format symbol as A/DEC/{session}/{number} to align with A/RES format
+        if decision_number and session:
+            symbol = f"A/DEC/{session}/{decision_number.split('/')[-1]}"
+        elif decision_number:
+            symbol = decision_number
+        else:
             symbol = str(decision.get("title") or "").strip() or "Decision"
 
         decision_docs.append({
