@@ -1642,11 +1642,9 @@ def generate_site(config_dir: Path, data_dir: Path, output_dir: Path) -> None:
 
         print("Generating additional analysis pages...")
         generate_provenance_page(documents, checks, output_dir / "provenance")
-        generate_origin_matrix_page(documents, checks, output_dir)
 
     # Always generate unified pages (core functionality)
     print("Generating unified signals pages...")
-    generate_unified_signals_page(browser_documents, checks, output_dir)
     generate_unified_explorer_page(browser_documents, checks, output_dir)
 
     # Generate data exports
@@ -1837,14 +1835,6 @@ def generate_site_verbose(
     generate_provenance_page(documents, checks, output_dir / "provenance")
     if on_generate_page:
         on_generate_page("provenance", "provenance/index.html")
-
-    generate_origin_matrix_page(documents, checks, output_dir)
-    if on_generate_page:
-        on_generate_page("origin_matrix", "origin_matrix.html")
-
-    generate_unified_signals_page(browser_documents, checks, output_dir)
-    if on_generate_page:
-        on_generate_page("signals_unified", "signals.html")
 
     generate_unified_explorer_page(browser_documents, checks, output_dir)
     if on_generate_page:

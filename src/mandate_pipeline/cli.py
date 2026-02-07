@@ -948,36 +948,11 @@ def cmd_igov_sync(args):
 
 
 def cmd_igov_signals(args):
-    """Generate a standalone IGov decision signal browser."""
-    verbose = args.verbose or is_github_actions()
-
-    config = load_igov_config(args.config)
-    session = args.session
-
-    checks = load_checks(args.config / "checks.yaml")
-
-    gh_group_start("IGov Signal Browser")
-    print(f"Session number: {session or 'all'}")
-    print(f"Config directory: {args.config}")
-    print(f"Data directory: {args.data}")
-    print(f"Output directory: {args.output}")
-    print(f"Verbose: {verbose}")
-    gh_group_end()
-
-    result = generate_igov_signals_page(
-        checks=checks,
-        data_dir=args.data,
-        output_dir=args.output,
-        session=session,
-    )
-
-    gh_group_start("IGov Signal Browser Summary")
-    print(f"Decisions processed: {result['total_decisions']}")
-    print(f"Decisions with signals: {result['decisions_with_signals']}")
-    print(f"Signal paragraphs: {result['total_signal_paragraphs']}")
-    gh_group_end()
-
-    return result
+    """Generate a standalone IGov decision signal browser (DEPRECATED)."""
+    gh_error("Command 'igov-signals' is deprecated and no longer generates output.")
+    gh_error("IGov decision pages are no longer part of the public interface.")
+    gh_error("IGov decisions are now integrated into the main signal browser at index.html")
+    return {"total_decisions": 0, "decisions_with_signals": 0, "total_signal_paragraphs": 0}
 
 
 def cmd_consolidated_signals(args):
@@ -1137,114 +1112,18 @@ def cmd_process_session(args):
 
 
 def cmd_generate_session(args):
-    """Run the generate session command."""
-    verbose = args.verbose or is_github_actions()
-
-    gh_group_start("Session Generation")
-    print(f"Session number: {args.session}")
-    print(f"Config directory: {args.config}")
-    print(f"Data directory: {args.data}")
-    print(f"Output directory: {args.output}")
-    print(f"Verbose: {verbose}")
-
-    # Load checks
-    checks = load_checks(args.config / "checks.yaml")
-
-    # Process session documents
-    documents, doc_count, process_duration = cmd_process_session(args)
-
-    if doc_count == 0:
-        gh_error(f"No documents found for session {args.session}")
-        return {}, 0
-
-    # Generate session signal browser
-    start_time = time.time()
-    gen_stats = generate_session_unified_signals_page(args.session, documents, checks, args.output)
-    generate_duration = time.time() - start_time
-
-    # Generate session dashboard
-    generate_session_dashboard(args.session, documents, args.output)
-
-    # Generate data export
-    generate_session_data_json(documents, checks, args.session, args.output, args.data)
-
-    # Summary
-    gh_group_start("Generation Summary")
-    print(f"Session {args.session}: {gen_stats['total_documents']} documents processed")
-    print(f"Documents with signals: {gen_stats['documents_with_signals']}")
-    print(f"Total signal paragraphs: {gen_stats['total_signal_paragraphs']}")
-    print(f"Processing duration: {format_duration(process_duration)}")
-    print(f"Generation duration: {format_duration(generate_duration)}")
-    print(f"Total duration: {format_duration(process_duration + generate_duration)}")
-
-    gh_group_end()
-
-    return {
-        "session": args.session,
-        "total_documents": gen_stats['total_documents'],
-        "documents_with_signals": gen_stats['documents_with_signals'],
-        "total_signals": gen_stats['total_signal_paragraphs'],
-    }, process_duration + generate_duration
+    """Run the generate session command (DEPRECATED)."""
+    gh_error("Command 'generate-session' is deprecated and no longer generates output.")
+    gh_error("Historical session pages are no longer part of the public interface.")
+    gh_error("All documents are now accessible through the main signal browser at index.html")
+    return {}, 0
 
 
 def cmd_build_session(args):
-    """Run the build session command (download + process + generate)."""
-    verbose = args.verbose or is_github_actions()
-
-    print("=" * 60)
-    print(f"  SESSION {args.session} BUILD PIPELINE")
-    print("=" * 60)
-    print()
-
-    # Phase 1: Download
-    print(f"PHASE 1: DOWNLOAD SESSION {args.session} RESOLUTIONS")
-    print("-" * 50)
-
-    download_args = argparse.Namespace(
-        session=args.session,
-        config=args.config,
-        data=args.data,
-        max_misses=args.max_misses,
-        verbose=verbose,
-    )
-    download_results, download_count, download_duration = cmd_download_session(download_args)
-
-    print()
-
-    # Check if we have any PDFs for this session to process
-    pdfs_dir = args.data / "pdfs"
-    session_pattern = f"A_RES_{args.session}_*.pdf"
-    session_pdfs = list(pdfs_dir.glob(session_pattern))
-
-    if not session_pdfs:
-        print(f"No PDFs found for session {args.session} after download attempt")
-        return 0
-
-    # Phase 2: Generate
-    print(f"PHASE 2: GENERATE SESSION {args.session} PAGES")
-    print("-" * 50)
-
-    generate_args = argparse.Namespace(
-        session=args.session,
-        config=args.config,
-        data=args.data,
-        output=args.output,
-        verbose=verbose,
-    )
-    gen_stats, generate_duration = cmd_generate_session(generate_args)
-
-    # Final summary
-    print()
-    print("=" * 60)
-    print(f"  SESSION {args.session} BUILD COMPLETE")
-    print("=" * 60)
-    print(f"New resolutions downloaded: {download_count}")
-    print(f"Documents processed: {gen_stats.get('total_documents', 0)}")
-    print(f"Documents with signals: {gen_stats.get('documents_with_signals', 0)}")
-    print(f"Download duration: {format_duration(download_duration)}")
-    print(f"Processing/generation duration: {format_duration(generate_duration)}")
-    print(f"Total duration: {format_duration(download_duration + generate_duration)}")
-
+    """Run the build session command (DEPRECATED)."""
+    gh_error("Command 'build-session' is deprecated and no longer generates output.")
+    gh_error("Historical session pages are no longer part of the public interface.")
+    gh_error("Use 'download-session' to download documents, which will be included in the main site.")
     return 0
 
 
