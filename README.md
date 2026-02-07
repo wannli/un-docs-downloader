@@ -249,7 +249,7 @@ mandate generate \
 | `--verbose` | Log each document processed |
 | `--max-documents` | Limit number of documents to process (for testing/development) |
 
-**Testing with limited documents:**
+#### Testing with limited documents
 
 When developing or testing changes to the pipeline, you can speed up generation by processing only a subset of documents:
 

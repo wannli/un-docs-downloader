@@ -7,6 +7,7 @@ import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -1660,7 +1661,7 @@ def generate_site_verbose(
     data_dir: Path,
     output_dir: Path,
     skip_debug: bool = False,
-    max_documents: int = None,
+    max_documents: Optional[int] = None,
     on_load_start=None,
     on_load_document=None,
     on_load_error=None,
