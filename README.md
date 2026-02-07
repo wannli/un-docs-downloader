@@ -2,6 +2,11 @@
 
 A document discovery and analysis system that automatically downloads UN General Assembly resolutions and proposals, extracts text, identifies mandate-related signals, and generates an interactive static website.
 
+## 🚀 Deployment
+
+- **Production**: [GitHub Pages](https://wannli.github.io/mandate-pipeline/) (auto-deployed from `master`)
+- **PR Previews**: [Vercel](https://vercel.com) (see [VERCEL.md](VERCEL.md) for setup)
+
 ## Overview
 
 The Mandate Pipeline automates the process of:
@@ -378,7 +383,7 @@ The pipeline uses a granular, event-driven workflow architecture with multiple i
 
 - **Trigger**: Changes to data/linked/, config/, or src/
 - **Action**: Generate static site and commit to `docs/`
-- **Result**: Static website updated
+- **Result**: Static website updated and deployed to GitHub Pages
 
 ### build-session.yml
 
@@ -390,8 +395,19 @@ The pipeline uses a granular, event-driven workflow architecture with multiple i
 ```
 Schedule (hourly)
     ↓
-discover.yml → extract.yml → detect.yml → link.yml → generate.yml
+discover.yml → extract.yml → detect.yml → link.yml → generate.yml → GitHub Pages
 ```
+
+## Vercel Deployment (PR Previews)
+
+For PR previews and faster iteration, this repository can be deployed to Vercel:
+
+- **Setup**: See [VERCEL.md](VERCEL.md) for complete instructions
+- **Build Time**: ~30-60 seconds (vs 5-10 minutes for full pipeline)
+- **How It Works**: Vercel reads pre-processed data from `data/linked/` and generates the static site on-demand
+- **PR Previews**: Every PR gets an automatic preview deployment URL
+
+The data pipeline (discover → extract → detect → link) remains in GitHub Actions, while Vercel handles fast static site generation for previews.
 
 ### Testing Mode for Faster Iteration
 
