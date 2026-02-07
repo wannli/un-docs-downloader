@@ -1020,8 +1020,21 @@ def build_igov_decision_documents(decisions: list[dict], checks: list) -> list[d
             for sig in para_signals:
                 signal_summary[sig] = signal_summary.get(sig, 0) + 1
 
-        symbol = str(decision.get("decision_number") or "").strip()
-        if not symbol:
+        decision_number = str(decision.get("decision_number") or "").strip()
+        session = decision.get("session")
+        
+        # Format symbol as A/DEC/{session}/{number} to align with A/RES format
+        if decision_number and session:
+            # Extract the number part: "80/518" -> "518", or use entire string if no slash
+            if '/' in decision_number:
+                number_part = decision_number.split('/', 1)[1]  # Take part after first slash
+            else:
+                # No slash present, use entire decision_number as-is
+                number_part = decision_number
+            symbol = f"A/DEC/{session}/{number_part}"
+        elif decision_number:
+            symbol = decision_number
+        else:
             symbol = str(decision.get("title") or "").strip() or "Decision"
 
         decision_docs.append({
@@ -1120,6 +1133,12 @@ def generate_unified_explorer_page(
     # Get origin order for filtering
     origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6"]
 
+    # Collect unique session numbers for the session filter
+    sessions = sorted(
+        {doc.get("session") for doc in documents if doc.get("session")},
+        reverse=True,
+    )
+
     # Template preparation
     template_start = time.time()
     env = get_templates_env(checks)
@@ -1134,6 +1153,7 @@ def generate_unified_explorer_page(
         checks=checks,
         origin_order=origin_order,
         origin_names=COMMITTEE_NAMES,
+        sessions=sessions,
         total_docs=len(docs_with_signals),
         total_paragraphs=total_paragraphs,
         resolution_count=resolution_count,
