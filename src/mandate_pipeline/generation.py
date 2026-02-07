@@ -1174,23 +1174,23 @@ def generate_igov_signals_page(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    redirect_target = "../?type=decision"
-    html = f"""<!DOCTYPE html>
-<html lang=\"en\">
-<head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    <title>IGov Decisions - Redirecting</title>
-    <meta http-equiv=\"refresh\" content=\"0; url={redirect_target}\">
-    <script>window.location.href = "{redirect_target}";</script>
-</head>
-<body>
-    <p>Redirecting to the unified signal browser...</p>
-    <p><a href=\"{redirect_target}\">Continue</a></p>
-</body>
-</html>"""
+    # Collect unique session numbers for the session filter
+    sessions = sorted(
+        {doc.get("session") for doc in decision_docs if doc.get("session")},
+        reverse=True,
+    )
 
-    with open(output_dir / "index.html", "w") as f:
+    env = get_templates_env(checks)
+    template = env.get_template("signals_igov.html")
+
+    html = template.render(
+        documents=decision_docs,
+        checks=checks,
+        sessions=sessions,
+        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+    )
+
+    with open(output_dir / "signals.html", "w") as f:
         f.write(html)
 
     return {
