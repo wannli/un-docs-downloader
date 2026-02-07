@@ -7,11 +7,15 @@ on:
     - cron: '45 11-23 * * *'  # 7am-7pm NY (covers both EST/EDT)
     - cron: '45 0-1 * * *'    # 7pm-9pm NY (covers both EST/EDT)
   push:
+    branches:
+      - master
     paths:
       - 'data/linked/**'
       - 'src/**'
       - 'src/mandate_pipeline/templates/**'
   workflow_dispatch:
+    branches:
+      - master
 
 permissions:
   contents: write
@@ -26,6 +30,7 @@ jobs:
   generate:
     name: Generate
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
