@@ -35,21 +35,24 @@
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
         <div class="max-w-5xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-4">
                 <a href="/" class="flex items-center gap-3 group">
                     <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <!-- Gavel icon -->
+                            <path d="M5.5 21q-.625 0-1.062-.438Q4 20.125 4 19.5t.438-1.062Q4.875 18 5.5 18h13q.625 0 1.062.438.438.437.438 1.062t-.438 1.062Q19.125 21 18.5 21zM9 16l-4.95-4.95 1.4-1.4 1.4 1.4L11.1 6.8 9.7 5.4l1.4-1.4L15.95 8.85q.575.575.575 1.425 0 .85-.575 1.425L11 16zm5.65-11.3l1.4-1.4 4.95 4.95-1.4 1.4z"/>
                         </svg>
                     </div>
-                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors hidden sm:inline">Mandate Pipeline</span>
                 </a>
-                <nav class="flex items-center gap-6">
-                    <a href="/" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Resolutions</a>
-                    <a href="/?type=decision&include=all" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Decisions</a>
-                    <a href="/signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Signals</a>
-                    <a href="/data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
-                </nav>
+                <div class="flex items-center gap-3 flex-1 max-w-xl">
+                    
+<!-- Search in header -->
+<input type="text" id="search-input" placeholder="Search documents..."
+       class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+
+                    <a href="/signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium whitespace-nowrap">Help</a>
+                </div>
             </div>
         </div>
     </header>
@@ -64,138 +67,139 @@
 
 
 <div class="sticky top-20 z-10 space-y-3 bg-white/95 pb-3 backdrop-blur">
-    <!-- Search -->
-    <div class="rounded-xl border border-gray-200 bg-gray-50/80 p-3 shadow-sm">
-        <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search</label>
-        <input type="text" id="search-input" placeholder="Search by symbol, title, or content..."
-               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-    </div>
-
     <!-- Filters -->
-    <div class="rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
-        <div class="flex flex-wrap items-center gap-1.5 md:grid md:grid-cols-2">
-            <div class="flex flex-wrap items-center gap-1.5 md:block">
-                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
-                <div id="session-selector" class="flex flex-wrap gap-1.5 md:mt-1.5">
+    <div class="rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+        <!-- Compact one-line filter layout -->
+        <div class="flex flex-wrap items-center gap-2">
+            <!-- Session Filter -->
+            <div class="flex items-center gap-2">
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 whitespace-nowrap">Session</label>
+                <div id="session-selector" class="flex flex-wrap gap-1.5">
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="79">79</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="79">79</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="78">78</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="78">78</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="77">77</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="77">77</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="76">76</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="76">76</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="75">75</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="75">75</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="74">74</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="74">74</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="73">73</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="73">73</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="72">72</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="72">72</button>
                     
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="71">71</button>
-                    
-                </div>
-            </div>
-            <div class="flex flex-wrap items-center gap-1.5 md:block">
-                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</label>
-                <div id="signal-filter" class="flex flex-wrap gap-1.5 md:mt-1.5">
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="agenda">agenda</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="PGA">PGA</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="process">process</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="report">report</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="observer">observer</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="71">71</button>
                     
                 </div>
             </div>
-        </div>
-        <div class="mt-2 flex items-center justify-between md:hidden">
-            <button id="toggle-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
-                More filters
+            
+            <!-- Divider -->
+            <div class="hidden sm:block w-px h-6 bg-gray-200"></div>
+            
+            <!-- Signal Filter -->
+            <div class="flex items-center gap-2">
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 whitespace-nowrap">Signal</label>
+                <div id="signal-filter" class="flex flex-wrap gap-1.5">
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="agenda">agenda</button>
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="PGA">PGA</button>
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="process">process</button>
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="report">report</button>
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="observer">observer</button>
+                    
+                </div>
+            </div>
+            
+            <!-- More Filters Button (Mobile) -->
+            <button id="toggle-filters" class="sm:hidden ml-auto rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
+                More
             </button>
         </div>
-        <div id="extra-filters" class="mt-2 hidden md:grid md:grid-cols-2 gap-2">
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Implementation Session</label>
-                <div id="implementation-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+        
+        <!-- Extra Filters (collapsible on mobile, always visible on desktop) -->
+        <div id="extra-filters" class="mt-3 pt-3 border-t border-gray-100 hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Implementation</label>
+                <div id="implementation-filter" class="flex flex-wrap gap-1.5">
                     
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="85">85</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="85">85</button>
                     
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="84">84</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="84">84</button>
                     
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="83">83</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="83">83</button>
                     
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="82">82</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="82">82</button>
                     
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="81">81</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="81">81</button>
                     
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="80">80</button>
-                    
-                </div>
-            </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Source</label>
-                <div id="source-filter" class="mt-1.5 flex flex-wrap gap-1.5">
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="Plenary">Pl</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C1">C1</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C2">C2</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C3">C3</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C4">C4</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C5">C5</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C6">C6</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="80">80</button>
                     
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Status</label>
-                <div id="status-filter" class="mt-1.5 flex flex-wrap gap-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Source</label>
+                <div id="source-filter" class="flex flex-wrap gap-1.5">
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="Plenary">Pl</button>
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C1">C1</button>
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C2">C2</button>
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C3">C3</button>
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C4">C4</button>
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C5">C5</button>
+                    
+                    
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C6">C6</button>
+                    
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Type</label>
-                <div id="type-filter" class="mt-1.5 flex flex-wrap gap-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Status</label>
+                <div id="status-filter" class="flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Visibility</label>
-                <div class="mt-2 flex items-center gap-2">
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Type</label>
+                <div id="type-filter" class="flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
+                </div>
+            </div>
+            <div class="flex items-end">
+                <label class="inline-flex items-center gap-2 text-[11px] text-gray-600 cursor-pointer">
                     <input id="include-no-signals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-un-blue focus:ring-un-blue">
-                    <label for="include-no-signals" class="text-xs text-gray-600">Include items without signals</label>
-                </div>
+                    <span>Include no signals</span>
+                </label>
             </div>
-            <div class="flex flex-wrap items-end gap-2">
-                <button id="group-implementation" class="flex h-8 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors" type="button">
-                    Group by Implementation
+            <div class="flex items-end gap-2">
+                <button id="group-implementation" class="flex h-7 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors whitespace-nowrap" type="button">
+                    Group by Impl.
                 </button>
-                <button id="clear-filters" class="flex h-8 items-center justify-center rounded-lg border border-gray-200 px-3 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
-                    Clear filters
+                <button id="clear-filters" class="flex h-7 items-center justify-center rounded-lg border border-gray-200 px-3 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors" type="button">
+                    Clear
                 </button>
             </div>
         </div>
@@ -1018,13 +1022,15 @@ function renderDocumentCard(doc, isCollapsed = true) {
     const paragraphsHtml = signalParagraphs.length
         ? signalParagraphs.map(para => `
             <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
-                <span class="inline-flex flex-wrap items-center gap-1">
+                <div class="flex flex-wrap items-start gap-1 mb-1">
                     ${(para.signals || []).map(signal => `
                         <span class="px-1.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">${signal}</span>
                     `).join('')}
-                </span>
-                <span class="ml-1 font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
-                <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
+                </div>
+                <div class="leading-relaxed">
+                    <span class="font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
+                    <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
+                </div>
             </div>
         `).join('')
         : `
@@ -1429,7 +1435,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-02-07 19:09 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-07 19:27 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>

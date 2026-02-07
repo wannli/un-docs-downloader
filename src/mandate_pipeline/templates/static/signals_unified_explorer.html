@@ -2,6 +2,12 @@
 
 {% block title %}Signal Browser - Mandate Pipeline{% endblock %}
 
+{% block header_search %}
+<!-- Search in header -->
+<input type="text" id="search-input" placeholder="Search documents..."
+       class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+{% endblock %}
+
 {% block content %}
 <!-- Header -->
 <div class="mb-4 hidden sm:block">
@@ -10,84 +16,85 @@
 
 
 <div class="sticky top-20 z-10 space-y-3 bg-white/95 pb-3 backdrop-blur">
-    <!-- Search -->
-    <div class="rounded-xl border border-gray-200 bg-gray-50/80 p-3 shadow-sm">
-        <label for="search-input" class="inline-flex items-center text-xs font-semibold uppercase tracking-wide text-gray-500">Search</label>
-        <input type="text" id="search-input" placeholder="Search by symbol, title, or content..."
-               class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
-    </div>
-
     <!-- Filters -->
-    <div class="rounded-xl border border-gray-200 bg-white p-2 shadow-sm">
-        <div class="flex flex-wrap items-center gap-1.5 md:grid md:grid-cols-2">
-            <div class="flex flex-wrap items-center gap-1.5 md:block">
-                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Adoption Session</label>
-                <div id="session-selector" class="flex flex-wrap gap-1.5 md:mt-1.5">
+    <div class="rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+        <!-- Compact one-line filter layout -->
+        <div class="flex flex-wrap items-center gap-2">
+            <!-- Session Filter -->
+            <div class="flex items-center gap-2">
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 whitespace-nowrap">Session</label>
+                <div id="session-selector" class="flex flex-wrap gap-1.5">
                     {% for session in sessions %}
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ session }}">{{ session }}</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ session }}">{{ session }}</button>
                     {% endfor %}
                 </div>
             </div>
-            <div class="flex flex-wrap items-center gap-1.5 md:block">
-                <label class="hidden md:inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Signal</label>
-                <div id="signal-filter" class="flex flex-wrap gap-1.5 md:mt-1.5">
+            
+            <!-- Divider -->
+            <div class="hidden sm:block w-px h-6 bg-gray-200"></div>
+            
+            <!-- Signal Filter -->
+            <div class="flex items-center gap-2">
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 whitespace-nowrap">Signal</label>
+                <div id="signal-filter" class="flex flex-wrap gap-1.5">
                     {% for check in checks %}
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ check.signal }}">{{ check.signal }}</button>
                     {% endfor %}
                 </div>
             </div>
-        </div>
-        <div class="mt-2 flex items-center justify-between md:hidden">
-            <button id="toggle-filters" class="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
-                More filters
+            
+            <!-- More Filters Button (Mobile) -->
+            <button id="toggle-filters" class="sm:hidden ml-auto rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
+                More
             </button>
         </div>
-        <div id="extra-filters" class="mt-2 hidden md:grid md:grid-cols-2 gap-2">
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Implementation Session</label>
-                <div id="implementation-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+        
+        <!-- Extra Filters (collapsible on mobile, always visible on desktop) -->
+        <div id="extra-filters" class="mt-3 pt-3 border-t border-gray-100 hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Implementation</label>
+                <div id="implementation-filter" class="flex flex-wrap gap-1.5">
                     {% for session in [85, 84, 83, 82, 81, 80] %}
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-6 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="{{ session }}">{{ session }}</button>
+                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="{{ session }}">{{ session }}</button>
                     {% endfor %}
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Source</label>
-                <div id="source-filter" class="mt-1.5 flex flex-wrap gap-1.5">
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Source</label>
+                <div id="source-filter" class="flex flex-wrap gap-1.5">
                     {% for origin_code in origin_order %}
                     {% set origin_label = 'Pl' if origin_code == 'Plenary' else origin_code %}
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ origin_code }}">{{ origin_label }}</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="{{ origin_code }}">{{ origin_label }}</button>
                     {% endfor %}
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Status</label>
-                <div id="status-filter" class="mt-1.5 flex flex-wrap gap-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Status</label>
+                <div id="status-filter" class="flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Type</label>
-                <div id="type-filter" class="mt-1.5 flex flex-wrap gap-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-6 whitespace-nowrap rounded-full border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
+            <div>
+                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Type</label>
+                <div id="type-filter" class="flex flex-wrap gap-1.5">
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
+                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
                 </div>
             </div>
-            <div class="min-h-[60px]">
-                <label class="inline-flex items-center text-[11px] font-semibold uppercase tracking-wide text-gray-500">Visibility</label>
-                <div class="mt-2 flex items-center gap-2">
+            <div class="flex items-end">
+                <label class="inline-flex items-center gap-2 text-[11px] text-gray-600 cursor-pointer">
                     <input id="include-no-signals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-un-blue focus:ring-un-blue">
-                    <label for="include-no-signals" class="text-xs text-gray-600">Include items without signals</label>
-                </div>
+                    <span>Include no signals</span>
+                </label>
             </div>
-            <div class="flex flex-wrap items-end gap-2">
-                <button id="group-implementation" class="flex h-8 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors" type="button">
-                    Group by Implementation
+            <div class="flex items-end gap-2">
+                <button id="group-implementation" class="flex h-7 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors whitespace-nowrap" type="button">
+                    Group by Impl.
                 </button>
-                <button id="clear-filters" class="flex h-8 items-center justify-center rounded-lg border border-gray-200 px-3 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors">
-                    Clear filters
+                <button id="clear-filters" class="flex h-7 items-center justify-center rounded-lg border border-gray-200 px-3 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors" type="button">
+                    Clear
                 </button>
             </div>
         </div>
@@ -910,13 +917,15 @@ function renderDocumentCard(doc, isCollapsed = true) {
     const paragraphsHtml = signalParagraphs.length
         ? signalParagraphs.map(para => `
             <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
-                <span class="inline-flex flex-wrap items-center gap-1">
+                <div class="flex flex-wrap items-start gap-1 mb-1">
                     ${(para.signals || []).map(signal => `
                         <span class="px-1.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">${signal}</span>
                     `).join('')}
-                </span>
-                <span class="ml-1 font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
-                <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
+                </div>
+                <div class="leading-relaxed">
+                    <span class="font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
+                    <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
+                </div>
             </div>
         `).join('')
         : `
