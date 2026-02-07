@@ -925,6 +925,13 @@ async function loadSelectedSessions() {
             ? selectedSessions
             : Array.from(sessionSelector.querySelectorAll('.filter-pill')).map(pill => pill.dataset.value);
 
+        // Always load main data.json to get decisions (they're only in the main file)
+        if (!sessionDataCache['main']) {
+            const response = await fetch(`${basePath}/data.json`);
+            if (!response.ok) throw new Error('Failed to load main data');
+            sessionDataCache['main'] = await response.json();
+        }
+
         for (const session of sessionsToLoad) {
             const sessionKey = session.toString();
 
@@ -951,6 +958,19 @@ async function loadSelectedSessions() {
                 });
 
             allDocuments.push(...sessionDocs);
+
+            // Add decisions from main data.json for this session
+            const mainData = sessionDataCache['main'];
+            if (mainData.documents && Array.isArray(mainData.documents)) {
+                const decisionsForSession = mainData.documents
+                    .filter(doc => doc.doc_type === 'decision' && doc.session === parseInt(sessionKey, 10))
+                    .map(doc => normalizeDocument(doc, sessionKey))
+                    .filter(doc => {
+                        const hasSignals = doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
+                        return allowNoSignals || hasSignals;
+                    });
+                allDocuments.push(...decisionsForSession);
+            }
         }
 
         const dedupedDocuments = [];
@@ -1409,7 +1429,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-02-07 16:59 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-07 19:09 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
