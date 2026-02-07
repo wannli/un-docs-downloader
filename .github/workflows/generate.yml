@@ -86,6 +86,10 @@ jobs:
           MAX_DOCUMENTS: ${{ vars.MAX_DOCUMENTS || '' }}
         run: |
           STEP_START=$(date +%s)
+          # NOTE: This workflow uses an optimized path that loads pre-processed
+          # JSON files from data/linked/ instead of re-processing PDFs.
+          # For local development, use: mandate generate --max-documents N
+          # For CI testing, set the MAX_DOCUMENTS repository variable.
           python -c "
           import sys
           import os
