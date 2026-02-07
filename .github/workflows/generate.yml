@@ -11,6 +11,7 @@ on:
       - master
     paths:
       - 'data/linked/**'
+      - 'data/igov/**'
       - 'src/**'
       - 'src/mandate_pipeline/templates/**'
   workflow_dispatch:
@@ -102,8 +103,14 @@ jobs:
           import time
           from pathlib import Path
           sys.path.insert(0, 'src')
-          from mandate_pipeline.generation import generate_unified_explorer_page
+          from mandate_pipeline.generation import (
+              generate_unified_explorer_page,
+              generate_data_json,
+              build_igov_decision_documents,
+              ensure_document_sessions,
+          )
           from mandate_pipeline.detection import load_checks
+          from mandate_pipeline.igov import load_igov_decisions_all
 
           metrics = {'step': 'generate_site'}
           total_start = time.time()
@@ -150,16 +157,31 @@ jobs:
               print(f'Loaded {len(checks)} checks in {checks_duration:.2f}s')
               print('::endgroup::')
 
+              # Load IGov decisions and merge into documents
+              print('::group::Load IGov Decisions')
+              igov_start = time.time()
+              data_dir = Path('data')
+              igov_decisions = build_igov_decision_documents(
+                  load_igov_decisions_all(data_dir), checks
+              )
+              documents = documents + igov_decisions
+              ensure_document_sessions(documents)
+              igov_duration = time.time() - igov_start
+              metrics['igov_decisions'] = len(igov_decisions)
+              print(f'Loaded {len(igov_decisions)} IGov decisions in {igov_duration:.2f}s')
+              print('::endgroup::')
+
               print('::group::Generate Explorer')
               gen_start = time.time()
-              generate_unified_explorer_page(documents, checks, Path('docs'))
+              output_dir = Path('docs')
+              generate_unified_explorer_page(documents, checks, output_dir)
+              generate_data_json(documents, checks, output_dir)
               gen_duration = time.time() - gen_start
               metrics['generation_duration_seconds'] = round(gen_duration, 2)
               print(f'Generated explorer in {gen_duration:.2f}s')
               print('::endgroup::')
 
               # Calculate output sizes
-              output_dir = Path('docs')
               if (output_dir / 'index.html').exists():
                   metrics['index_html_bytes'] = (output_dir / 'index.html').stat().st_size
               if (output_dir / 'data.json').exists():
@@ -289,6 +311,7 @@ jobs:
           | 📄 Documents Loaded      | ${GEN_DOCUMENTS_LOADED:-0} |
           | 📄 Documents Processed   | **${GEN_DOCUMENTS_PROCESSED:-0}** |
           | 🔔 Documents w/ Signals  | **${GEN_DOCUMENTS_WITH_SIGNALS:-0}** |
+          | 📋 IGov Decisions        | ${GEN_IGOV_DECISIONS:-0} |
           | 🔍 Signal Types          | ${GEN_CHECKS_LOADED:-0} |
 
           ### 📦 Output
