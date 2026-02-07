@@ -15,6 +15,7 @@ from .generation import (
     generate_igov_signals_page,
     generate_consolidated_signals_page,
     load_all_documents,
+    build_igov_decision_documents,
 )
 from .detection import load_checks, run_checks
 from .extractor import (
@@ -31,6 +32,7 @@ from .igov import (
     sync_igov_decisions,
     default_session_label,
     DEFAULT_SERIES_STARTS,
+    load_igov_decisions,
 )
 
 
@@ -1156,7 +1158,7 @@ def cmd_generate_session(args):
     generate_session_dashboard(args.session, documents, args.output)
 
     # Generate data export
-    generate_session_data_json(documents, checks, args.session, args.output)
+    generate_session_data_json(documents, checks, args.session, args.output, args.data)
 
     # Summary
     gh_group_start("Generation Summary")
@@ -1366,25 +1368,40 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
         f.write(html)
 
 
-def generate_session_data_json(documents: list[dict], checks: list, session: int, output_dir: Path):
+def generate_session_data_json(
+    documents: list[dict],
+    checks: list,
+    session: int,
+    output_dir: Path,
+    data_dir: Path,
+):
     """Generate JSON data export for the session."""
     session_dir = output_dir / "sessions" / str(session)
     session_dir.mkdir(parents=True, exist_ok=True)
 
-    # Calculate signal counts from signal_summary (contains {signal_name: count})
+    igov_decisions = build_igov_decision_documents(load_igov_decisions(data_dir, session), checks)
+    all_documents = documents + igov_decisions
+
+    # Calculate signal counts
     signal_counts = {}
-    for doc in documents:
-        for signal, count in doc.get("signal_summary", {}).items():
-            signal_counts[signal] = signal_counts.get(signal, 0) + count
+    for doc in all_documents:
+        signal_summary = doc.get("signal_summary") or {}
+        if signal_summary:
+            for signal, count in signal_summary.items():
+                signal_counts[signal] = signal_counts.get(signal, 0) + count
+            continue
+        for para in doc.get("signal_paragraphs", []):
+            for signal in para.get("signals", []):
+                signal_counts[signal] = signal_counts.get(signal, 0) + 1
 
     data = {
         "session": session,
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "checks": checks,
-        "documents": documents,
+        "documents": all_documents,
         "stats": {
-            "total_documents": len(documents),
-            "documents_with_signals": len([d for d in documents if d.get("signal_paragraphs")]),
+            "total_documents": len(all_documents),
+            "documents_with_signals": len([d for d in all_documents if d.get("signal_paragraphs")]),
             "signal_counts": signal_counts,
         }
     }
