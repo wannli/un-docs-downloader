@@ -122,11 +122,11 @@ jobs:
           print('::endgroup::')
 
           # Apply max_documents limit for testing
-          max_docs = os.getenv('MAX_DOCUMENTS')
-          if max_docs:
-              max_docs = max_docs.strip()
-              if max_docs and max_docs.isdigit():
-                  max_docs = int(max_docs)
+          max_docs_str = os.getenv('MAX_DOCUMENTS')
+          if max_docs_str:
+              max_docs_str = max_docs_str.strip()
+              if max_docs_str and max_docs_str.isdigit():
+                  max_docs = int(max_docs_str)
                   print(f'::notice::Testing mode - limiting to {max_docs} documents')
                   documents = documents[:max_docs]
                   metrics['max_documents_applied'] = max_docs
