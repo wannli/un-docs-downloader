@@ -21,35 +21,18 @@
 </div>
 
 <!-- Filter Controls -->
-<div class="mb-4 flex flex-wrap gap-2 items-end">
-    <div class="flex-1 min-w-[150px]">
-        <label for="source-filter" class="inline-flex items-center text-xs font-medium text-gray-500">Source</label>
-        <select id="source-filter" multiple class="mt-1 w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="3">
-            {% for origin_code in origin_order %}
-            <option value="{{ origin_code }}">{{ origin_names.get(origin_code, origin_code) }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="flex-1 min-w-[150px]">
-        <label for="signal-filter" class="inline-flex items-center text-xs font-medium text-gray-500">Signal Type</label>
-        <select id="signal-filter" multiple class="mt-1 w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="3">
-            {% for check in checks %}
-            <option value="{{ check.signal }}"
-                {% if check.signal == 'agenda' %}class="text-blue-700"
-                {% elif check.signal == 'PGA' %}class="text-purple-700"
-                {% elif check.signal == 'process' %}class="text-amber-700"
-                {% elif check.signal == 'report' %}class="text-green-700"{% endif %}>{{ check.signal }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="flex-1 min-w-[150px]">
-        <label for="doctype-filter" class="inline-flex items-center text-xs font-medium text-gray-500">Document Type</label>
-        <select id="doctype-filter" multiple class="mt-1 w-full px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
-            <option value="resolution">Resolutions</option>
-            <option value="proposal">Non-adopted Proposals</option>
-        </select>
-    </div>
-    <button id="clear-filters" class="px-3 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors">
+<div class="mb-3 flex items-center gap-3">
+    <label for="signal-filter" class="text-xs font-medium text-gray-500 flex-shrink-0">Filter by signal:</label>
+    <select id="signal-filter" multiple class="flex-1 max-w-md px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
+        {% for check in checks %}
+        <option value="{{ check.signal }}"
+            {% if check.signal == 'agenda' %}class="text-blue-700"
+            {% elif check.signal == 'PGA' %}class="text-purple-700"
+            {% elif check.signal == 'process' %}class="text-amber-700"
+            {% elif check.signal == 'report' %}class="text-green-700"{% endif %}>{{ check.signal }}</option>
+        {% endfor %}
+    </select>
+    <button id="clear-filters" class="px-3 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0">
         Clear
     </button>
 </div>
@@ -150,9 +133,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
-    const sourceFilter = document.getElementById('source-filter');
     const signalFilter = document.getElementById('signal-filter');
-    const doctypeFilter = document.getElementById('doctype-filter');
     const clearFiltersBtn = document.getElementById('clear-filters');
     const documentsContainer = document.getElementById('documents-container');
     const documentCards = document.querySelectorAll('.document-card');
@@ -217,25 +198,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Parse URL params and set initial filter state
     function initFromUrl() {
         const params = new URLSearchParams(window.location.search);
-        const sources = params.getAll('source');
         const signals = params.getAll('signal');
-        const doctypes = params.getAll('type');
         const searchQuery = params.get('q') || '';
 
         // Set search input
         searchInput.value = searchQuery;
 
         // Set multiselect values
-        sources.forEach(source => {
-            const opt = sourceFilter.querySelector(`option[value="${source}"]`);
-            if (opt) opt.selected = true;
-        });
         signals.forEach(signal => {
             const opt = signalFilter.querySelector(`option[value="${signal}"]`);
-            if (opt) opt.selected = true;
-        });
-        doctypes.forEach(doctype => {
-            const opt = doctypeFilter.querySelector(`option[value="${doctype}"]`);
             if (opt) opt.selected = true;
         });
 
@@ -250,9 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchQuery) {
             params.set('q', searchQuery);
         }
-        getSelectedValues(sourceFilter).forEach(v => params.append('source', v));
         getSelectedValues(signalFilter).forEach(v => params.append('signal', v));
-        getSelectedValues(doctypeFilter).forEach(v => params.append('type', v));
 
         const newUrl = params.toString()
             ? `${window.location.pathname}?${params.toString()}`
@@ -261,9 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function applyFilters() {
-        const selectedSources = getSelectedValues(sourceFilter);
         const selectedSignals = getSelectedValues(signalFilter);
-        const selectedDoctypes = getSelectedValues(doctypeFilter);
         const searchQuery = searchInput.value.toLowerCase().trim();
         let resolutionCount = 0;
         let proposalCount = 0;
@@ -273,18 +240,11 @@ document.addEventListener('DOMContentLoaded', function() {
         removeHighlights();
 
         documentCards.forEach(card => {
-            const cardSource = card.dataset.source;
             const cardDoctype = card.dataset.doctype;
             const cardSignals = card.dataset.signals.split(',').filter(s => s);
 
-            // Check source filter (match any selected)
-            const sourceMatch = selectedSources.length === 0 || selectedSources.includes(cardSource);
-
             // Check signal filter (match any selected)
             const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => cardSignals.includes(s));
-
-            // Check document type filter (match any selected)
-            const doctypeMatch = selectedDoctypes.length === 0 || selectedDoctypes.includes(cardDoctype);
 
             // Check search match
             let searchMatch = !searchQuery;
@@ -308,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
 
-            if (sourceMatch && signalMatch && doctypeMatch && searchMatch) {
+            if (signalMatch && searchMatch) {
                 card.classList.remove('hidden');
                 if (cardDoctype === 'resolution') {
                     resolutionCount++;
@@ -380,17 +340,13 @@ document.addEventListener('DOMContentLoaded', function() {
         searchTimeout = setTimeout(applyFilters, 300); // Debounce search
     });
     
-    sourceFilter.addEventListener('change', applyFilters);
     signalFilter.addEventListener('change', applyFilters);
-    doctypeFilter.addEventListener('change', applyFilters);
 
     clearFiltersBtn.addEventListener('click', function() {
         // Clear search
         searchInput.value = '';
-        // Deselect all options in multiselects
-        Array.from(sourceFilter.options).forEach(opt => opt.selected = false);
+        // Deselect all options in multiselect
         Array.from(signalFilter.options).forEach(opt => opt.selected = false);
-        Array.from(doctypeFilter.options).forEach(opt => opt.selected = false);
         applyFilters();
     });
 
