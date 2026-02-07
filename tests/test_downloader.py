@@ -517,70 +517,8 @@ class TestStaticGenerator:
         assert index_data["documents"][0]["symbol"] == "A/80/L.1"
         assert "Climate change" in index_data["documents"][0]["content"]
 
-    def test_generate_document_page(self, tmp_path):
-        """Generate individual document HTML page."""
-        from mandate_pipeline.generation import generate_document_page
-
-        doc = {
-            "symbol": "A/80/L.1",
-            "filename": "A_80_L.1.pdf",
-            "paragraphs": {1: "First paragraph about agenda", 2: "Second paragraph"},
-            "signals": {1: ["agenda"]},
-            "un_url": "https://docs.un.org/en/a/80/l.1?direct=true",
-        }
-        checks = [{"signal": "agenda", "phrases": ["decides to include"]}]
-
-        output_dir = tmp_path / "docs" / "documents"
-        output_dir.mkdir(parents=True)
-
-        generate_document_page(doc, checks, output_dir)
-
-        html_file = output_dir / "A_80_L.1.html"
-        assert html_file.exists()
-
-        content = html_file.read_text()
-        assert "A/80/L.1" in content
-        assert "First paragraph about agenda" in content
-        assert "agenda" in content
-
-    def test_generate_signal_page(self, tmp_path):
-        """Generate signal-filtered page."""
-        from mandate_pipeline.generation import generate_signal_page
-
-        documents = [
-            {
-                "symbol": "A/80/L.1",
-                "filename": "A_80_L.1.pdf",
-                "paragraphs": {1: "About agenda items"},
-                "signals": {1: ["agenda"]},
-                "signal_summary": {"agenda": 1},
-                "un_url": "https://docs.un.org/en/a/80/l.1?direct=true",
-                "is_adopted_draft": False,
-            },
-            {
-                "symbol": "A/80/L.2",
-                "filename": "A_80_L.2.pdf",
-                "paragraphs": {1: "No agenda here"},
-                "signals": {},
-                "signal_summary": {},
-                "un_url": "https://docs.un.org/en/a/80/l.2?direct=true",
-                "is_adopted_draft": False,
-            },
-        ]
-        check = {"signal": "agenda", "phrases": ["decides to include"]}
-        checks = [check]
-
-        output_dir = tmp_path / "docs" / "signals"
-        output_dir.mkdir(parents=True)
-
-        generate_signal_page(documents, documents, check, checks, output_dir)
-
-        html_file = output_dir / "agenda.html"
-        assert html_file.exists()
-
-        content = html_file.read_text()
-        assert "A/80/L.1" in content
-        # A/80/L.2 should not be prominently featured (no agenda signal)
+    # Removed: test_generate_document_page - function removed as part of dead code cleanup
+    # Removed: test_generate_signal_page - function removed as part of dead code cleanup
 
     def test_get_un_document_url(self):
         """Generate correct UN ODS URL for a symbol."""
@@ -622,55 +560,4 @@ class TestStaticGenerator:
         assert 1 in documents[0]["signals"]
         assert "agenda" in documents[0]["signals"][1]
 
-    def test_generate_site_creates_all_files(self, tmp_path, mocker):
-        """Full site generation creates expected file structure."""
-        from mandate_pipeline.generation import generate_site
-
-        # Setup directories
-        config_dir = tmp_path / "config"
-        config_dir.mkdir()
-        data_dir = tmp_path / "data"
-        (data_dir / "pdfs").mkdir(parents=True)
-        output_dir = tmp_path / "docs"
-
-        # Create config files
-        (config_dir / "checks.yaml").write_text(
-            """
-checks:
-  - signal: "agenda"
-    phrases:
-      - "agenda"
-"""
-        )
-        (config_dir / "patterns.yaml").write_text(
-            """
-patterns:
-  - name: "L documents"
-    template: "A/{session}/L.{number}"
-    session: 80
-    start: 1
-"""
-        )
-
-        # Create fake PDF (flat pdfs/ directory)
-        (data_dir / "pdfs" / "A_80_L.1.pdf").write_bytes(b"%PDF-1.4 fake")
-
-        # Mock extraction
-        mocker.patch(
-            "mandate_pipeline.generation.extract_text",
-            return_value="1. First paragraph about agenda;",
-        )
-        mocker.patch(
-            "mandate_pipeline.generation.extract_operative_paragraphs",
-            return_value={1: "First paragraph about agenda;"},
-        )
-
-        generate_site(config_dir, data_dir, output_dir)
-
-        # Check generated files
-        assert (output_dir / "index.html").exists()
-        assert (output_dir / "documents" / "index.html").exists()
-        assert (output_dir / "documents" / "A_80_L.1.html").exists()
-        assert (output_dir / "signals" / "agenda.html").exists()
-        assert (output_dir / "data.json").exists()
-        assert (output_dir / "search-index.json").exists()
+    # Removed: test_generate_site_creates_all_files - tests removed page generation functions
