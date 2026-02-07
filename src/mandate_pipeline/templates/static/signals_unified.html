@@ -11,17 +11,21 @@
 </div>
 
 <!-- Search -->
-<div class="mb-2">
+<div class="mb-3">
     <input type="text" id="search-input" placeholder="Search by symbol, title, or content..."
-           class="w-full px-3 py-1.5 border border-gray-300 rounded-md bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+           class="w-full px-3 py-1.5 border border-gray-300 rounded-lg bg-white text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
 </div>
 
-<!-- Filter Controls - Compact -->
-<div class="mb-2 flex items-center gap-2">
-    <label for="signal-filter" class="text-[10px] font-semibold uppercase tracking-wide text-gray-500 flex-shrink-0">Signal:</label>
-    <select id="signal-filter" multiple size="3" aria-label="Select multiple signal types" aria-multiselectable="true" class="flex-1 max-w-md px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent">
+<!-- Filter Controls -->
+<div class="mb-3 flex items-center gap-3">
+    <label for="signal-filter" class="text-xs font-medium text-gray-500 flex-shrink-0">Filter by signal:</label>
+    <select id="signal-filter" multiple class="flex-1 max-w-md px-2 py-1 border border-gray-300 rounded-md bg-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-un-blue focus:border-transparent" size="2">
         {% for check in checks %}
-        <option value="{{ check.signal }}">{{ check.signal }}</option>
+        <option value="{{ check.signal }}"
+            {% if check.signal == 'agenda' %}class="text-blue-700"
+            {% elif check.signal == 'PGA' %}class="text-purple-700"
+            {% elif check.signal == 'process' %}class="text-amber-700"
+            {% elif check.signal == 'report' %}class="text-green-700"{% endif %}>{{ check.signal }}</option>
         {% endfor %}
     </select>
     <button id="clear-filters" class="px-3 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0">
