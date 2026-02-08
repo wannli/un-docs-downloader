@@ -1035,7 +1035,7 @@ def generate_session_dashboard(session: int, documents: list[dict], output_dir: 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Session {session} - Mandate Pipeline</title>
+    <title>Session {session} - Semaphore</title>
     <link href="../../static/base.css" rel="stylesheet">
 </head>
 <body>
