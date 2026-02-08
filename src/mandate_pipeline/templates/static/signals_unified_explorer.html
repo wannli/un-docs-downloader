@@ -262,59 +262,11 @@
         </div>
 
         <!-- Mobile: single "Filters" button -->
-        <div class="sm:hidden relative" data-dropdown="mobile-filters">
-            <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
+        <div class="sm:hidden relative">
+            <button type="button" id="mobile-filter-trigger" class="inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
                 <span class="dropdown-label">Filters</span>
                 <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
-            <div class="dropdown-panel hidden absolute top-full left-0 mt-1 bg-white rounded-lg border border-gray-200 shadow-lg p-3 min-w-[220px] max-h-[70vh] overflow-y-auto z-20">
-                <div class="space-y-3">
-                    <div>
-                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Session</div>
-                        <div id="mobile-session-options" class="space-y-0.5"></div>
-                    </div>
-                    <hr class="border-gray-100">
-                    <div>
-                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Target</div>
-                        <div id="mobile-target-session-options" class="space-y-0.5"></div>
-                    </div>
-                    <hr class="border-gray-100">
-                    <div>
-                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Signal</div>
-                        <div id="mobile-signal-options" class="space-y-0.5">
-                            {% for check in checks %}
-                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
-                                <input type="checkbox" value="{{ check.signal }}" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
-                                <span>{{ check.signal }}</span>
-                            </label>
-                            {% endfor %}
-                            <hr class="border-gray-100 my-1">
-                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-500 italic">
-                                <input type="checkbox" value="none" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
-                                <span>none</span>
-                            </label>
-                        </div>
-                    </div>
-                    <hr class="border-gray-100">
-                    <div>
-                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Type</div>
-                        <div id="mobile-type-options" class="space-y-0.5">
-                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
-                                <input type="checkbox" value="resolution" class="mobile-filter-checkbox filter-checkbox-type rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
-                                <span>Resolutions</span>
-                            </label>
-                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
-                                <input type="checkbox" value="proposal" class="mobile-filter-checkbox filter-checkbox-type rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
-                                <span>Proposals</span>
-                            </label>
-                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
-                                <input type="checkbox" value="decision" class="mobile-filter-checkbox filter-checkbox-type rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
-                                <span>Decisions</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Spacer -->
@@ -326,6 +278,69 @@
         <!-- Clear button -->
         <button id="clear-filters" class="hidden h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-colors" type="button" title="Clear all filters">
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+    </div>
+</div>
+
+<!-- Mobile Filter Modal -->
+<div id="mobile-filter-modal" class="fixed inset-0 z-[100] bg-white hidden flex-col">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-900">Filters</h2>
+        <button id="mobile-filter-close" class="p-2 -mr-2 text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-6 space-y-8">
+        <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Session</div>
+            <div id="mobile-session-options" class="grid grid-cols-2 gap-2"></div>
+        </div>
+        <hr class="border-gray-100">
+        <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Target Session</div>
+            <div id="mobile-target-session-options" class="grid grid-cols-2 gap-2"></div>
+        </div>
+        <hr class="border-gray-100">
+        <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Signal Type</div>
+            <div id="mobile-signal-options" class="space-y-1">
+                {% for check in checks %}
+                <label class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-100 bg-gray-50/50 cursor-pointer">
+                    <input type="checkbox" value="{{ check.signal }}" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-5 w-5">
+                    <span class="text-sm font-medium text-gray-700">{{ check.signal }}</span>
+                </label>
+                {% endfor %}
+                <label class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-100 bg-gray-50/50 cursor-pointer italic text-gray-500">
+                    <input type="checkbox" value="none" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-5 w-5">
+                    <span class="text-sm">none (no signals)</span>
+                </label>
+            </div>
+        </div>
+        <hr class="border-gray-100">
+        <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Document Type</div>
+            <div id="mobile-type-options" class="space-y-1">
+                <label class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-100 bg-gray-50/50 cursor-pointer">
+                    <input type="checkbox" value="resolution" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-5 w-5">
+                    <span class="text-sm font-medium text-gray-700">Resolutions</span>
+                </label>
+                <label class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-100 bg-gray-50/50 cursor-pointer">
+                    <input type="checkbox" value="proposal" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-5 w-5">
+                    <span class="text-sm font-medium text-gray-700">Proposals (Drafts)</span>
+                </label>
+                <label class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-100 bg-gray-50/50 cursor-pointer">
+                    <input type="checkbox" value="decision" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-5 w-5">
+                    <span class="text-sm font-medium text-gray-700">Decisions</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="p-6 border-t border-gray-100 bg-gray-50 flex items-center gap-3">
+        <button id="mobile-filter-apply" class="flex-1 bg-un-blue text-white font-semibold py-3 px-6 rounded-xl shadow-sm hover:bg-un-blue-dark transition-colors">
+            Apply Filters
+        </button>
+        <button id="mobile-filter-reset" class="px-6 py-3 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">
+            Reset
         </button>
     </div>
 </div>
@@ -503,7 +518,7 @@ function updateDropdownLabels() {
     updateLabel('[data-dropdown="type"] .dropdown-label', 'Type', state.types);
     // Mobile
     const totalActive = state.sessions.length + state.targetSessions.length + state.signals.length + state.types.length;
-    const mobileLabel = document.querySelector('[data-dropdown="mobile-filters"] .dropdown-label');
+    const mobileLabel = document.querySelector('#mobile-filter-trigger .dropdown-label');
     if (mobileLabel) {
         mobileLabel.textContent = totalActive > 0 ? `Filters (${totalActive})` : 'Filters';
     }
@@ -525,13 +540,20 @@ function updateDropdownLabels() {
         else if (name === 'target-session') isActive = state.targetSessions.length > 0;
         else if (name === 'signal') isActive = state.signals.length > 0;
         else if (name === 'type') isActive = state.types.length > 0;
-        else if (name === 'mobile-filters') isActive = totalActive > 0;
 
         trigger.classList.toggle('border-un-blue', isActive);
         trigger.classList.toggle('text-un-blue', isActive);
         trigger.classList.toggle('border-gray-200', !isActive);
         trigger.classList.toggle('text-gray-700', !isActive);
     });
+
+    const mobileTrigger = document.getElementById('mobile-filter-trigger');
+    if (mobileTrigger) {
+        mobileTrigger.classList.toggle('border-un-blue', totalActive > 0);
+        mobileTrigger.classList.toggle('text-un-blue', totalActive > 0);
+        mobileTrigger.classList.toggle('border-gray-200', totalActive === 0);
+        mobileTrigger.classList.toggle('text-gray-700', totalActive === 0);
+    }
 }
 
 function updateLabel(selector, defaultText, values) {
@@ -772,9 +794,10 @@ async function loadData() {
 function populateSessionCheckboxes(containerId, sessions) {
     const container = document.getElementById(containerId);
     if (!container) return;
+    const isMobile = containerId.startsWith('mobile-');
     container.innerHTML = sessions.map(s => `
-        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
-            <input type="checkbox" value="${s}" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+        <label class="flex items-center gap-2 ${isMobile ? 'py-2 px-3 bg-gray-50/50 rounded-lg border border-gray-100' : 'px-2 py-1.5 rounded hover:bg-gray-50'} cursor-pointer text-xs text-gray-700">
+            <input type="checkbox" value="${s}" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue ${isMobile ? 'h-4 w-4' : 'h-3.5 w-3.5'}">
             <span>${s}</span>
         </label>
     `).join('');
@@ -1103,6 +1126,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initDropdowns();
 
+    // Mobile Filter Modal
+    const mobileModal = document.getElementById('mobile-filter-modal');
+    const mobileTrigger = document.getElementById('mobile-filter-trigger');
+    const mobileClose = document.getElementById('mobile-filter-close');
+    const mobileApply = document.getElementById('mobile-filter-apply');
+    const mobileReset = document.getElementById('mobile-filter-reset');
+
+    if (mobileTrigger && mobileModal) {
+        mobileTrigger.addEventListener('click', () => {
+            mobileModal.classList.remove('hidden');
+            mobileModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            syncMobileDesktopFilters('desktop');
+        });
+
+        const closeModal = () => {
+            mobileModal.classList.add('hidden');
+            mobileModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        };
+
+        mobileClose.addEventListener('click', closeModal);
+
+        mobileApply.addEventListener('click', () => {
+            syncMobileDesktopFilters('mobile');
+            applyFilters();
+            closeModal();
+        });
+
+        mobileReset.addEventListener('click', () => {
+            document.querySelectorAll('#mobile-filter-modal .filter-checkbox').forEach(cb => cb.checked = false);
+            syncMobileDesktopFilters('mobile');
+            applyFilters();
+            closeModal();
+        });
+    }
+
     // Wire up filter checkboxes (desktop)
     ['session-options', 'target-session-options', 'signal-options', 'type-options'].forEach(id => {
         document.getElementById(id)?.addEventListener('change', (e) => {
@@ -1133,6 +1193,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('clear-filters').addEventListener('click', () => {
         document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
         cachedSearchInput.value = '';
+        syncMobileDesktopFilters('desktop');
         applyFilters();
     });
 

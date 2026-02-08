@@ -76,14 +76,15 @@ _PLENARY_SUFFIX_RE = re.compile(
 # The doc-id (e.g. 25-20110) and optional page/total (e.g. 3/3) are the
 # reliable end markers of the injected block.
 _FOOTNOTE_PAGE_RE = re.compile(
-    r"\s*_{3,}.+?\d{2}-\d{4,5}(?:\s+\d+/\d+)?"
+    r"\s*_{3,}.+?\d{2}-\d{4,5}(?:\s+\d+/\d+)?",
+    re.DOTALL
 )
 
 # Matches bare page-header blocks (no footnotes) injected at page boundaries.
-# Anchored on the document symbol followed by running-title words, page/total,
-# and/or the UN document ID (XX-XXXXX).
+# Can start with symbol OR title words, but always ends with the UN document ID (XX-XXXXX).
 _PAGE_HEADER_RE = re.compile(
-    r"\s*A/(?:RES|C\.\d+|DEC)/\d+/\S+\s+.+?\s*\d{2}-\d{4,5}(?:\s+\d+/\d+)?"
+    r"\s*(?:A/(?:RES|C\.\d+|DEC)/\d+/\S+|[A-Z][a-z]+).+?\d{2}-\d{4,5}(?:\s+\d+/\d+)?",
+    re.DOTALL
 )
 
 # Matches footnote blocks at end of text (no continuation after)
@@ -137,6 +138,7 @@ def extract_lettered_paragraphs(text: str) -> dict[str, str]:
     for letter, content in matches:
         # Clean up the content: normalize whitespace
         cleaned = " ".join(content.split())
+        cleaned = _clean_paragraph_text(cleaned)
         paragraphs[letter] = cleaned
 
     return paragraphs
@@ -453,6 +455,7 @@ def extract_amendment_text(text: str) -> dict[int, str]:
     # Join and clean the body text
     body_text = " ".join(body_lines)
     body_text = " ".join(body_text.split())  # Normalize whitespace
+    body_text = _clean_paragraph_text(body_text)
 
     if len(body_text) < 20:  # Too short to be meaningful
         return {}
