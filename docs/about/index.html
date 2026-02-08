@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Signals - Mandate Pipeline</title>
+    <title>About — Semaphore</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='14.5' y='6' width='3' height='22' rx='1.5' fill='%23009edb'/%3E%3Ccircle cx='16' cy='5' r='3.5' fill='%23009edb'/%3E%3Cpath d='M17.5 11 L26 8.5 L26 12 L17.5 14.5 Z' fill='%2322c55e'/%3E%3Cpath d='M14.5 18 L6 15.5 L6 19 L14.5 21.5 Z' fill='%23f59e0b'/%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        sans: ['Roboto', 'system-ui', 'sans-serif'],
                     },
                     colors: {
                         'un-blue': '#009edb',
@@ -30,27 +30,155 @@
         ::selection { background: rgba(0, 158, 219, 0.2); }
         .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+        /* Splash screen */
+        #splash {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #009edb;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow: hidden;
+        }
+        #splash.done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Wrapper keeps title + scene vertically centered */
+        .splash-center {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex; flex-direction: column; align-items: center;
+            width: 100%;
+        }
+
+        /* Scene: track + semaphore + train */
+        .splash-scene {
+            position: relative;
+            width: 100%; height: 110px;
+            opacity: 0;
+            animation: fade-in 0.8s ease forwards;
+        }
+        @media (max-width: 480px) {
+            .splash-scene { height: 80px; }
+        }
+
+        /* Track — full width */
+        .splash-track {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 3px;
+            z-index: 1;
+        }
+        .splash-track-line {
+            width: 100%; height: 100%;
+            background: rgba(255,255,255,0.3);
+        }
+        .splash-track-ties {
+            position: absolute; top: -4px; left: 0; width: 100%; height: 11px;
+            background: repeating-linear-gradient(90deg,
+                transparent 0px, transparent 16px,
+                rgba(255,255,255,0.15) 16px, rgba(255,255,255,0.15) 20px);
+        }
+
+        /* Semaphore — right end of track */
+        .semaphore-signal {
+            position: absolute;
+            bottom: 3px; right: 8%;
+            z-index: 3;
+        }
+        @media (max-width: 480px) {
+            .semaphore-signal { right: 4%; }
+            .semaphore-signal svg { width: 24px; height: 60px; }
+        }
+
+        /* Lamp — turns red when train arrives */
+        .signal-lamp {
+            fill: rgba(255,255,255,0.25);
+            transition: fill 0.6s ease, filter 0.6s ease;
+        }
+        .signal-lamp.red {
+            fill: #ef4444;
+            filter: drop-shadow(0 0 8px rgba(239,68,68,0.9));
+        }
+
+        /* Arm — starts angled (clear), swings horizontal (stop) */
+        .arm-stop {
+            transform-origin: 16px 17.5px;
+            transform: rotate(-45deg);
+            transition: transform 0.7s ease-in-out;
+        }
+        .arm-stop.stopped { transform: rotate(0deg); }
+
+        /* Train container */
+        .splash-train-wrap {
+            position: absolute;
+            bottom: 3px; left: 0; width: 100%;
+            z-index: 2; overflow: hidden;
+            height: 60px;
+        }
+        .splash-train {
+            transform: translateX(-260px);
+            transition: transform 4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .splash-train.running {
+            transform: translateX(calc(92vw - 300px));
+        }
+        @media (max-width: 480px) {
+            .splash-train-wrap { height: 44px; }
+            .splash-train { transform: translateX(-260px) scale(0.72); transform-origin: left bottom;
+                            transition: transform 4s cubic-bezier(0.22, 0.61, 0.36, 1); }
+            .splash-train.running { transform: translateX(calc(96vw - 230px)) scale(0.72); }
+        }
+
+        /* Title — below the track, centered, hidden until signal */
+        .splash-text {
+            margin-top: 12px;
+            text-align: center; padding: 0 1rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .splash-text.visible { opacity: 1; }
+        .splash-title {
+            font-family: 'Roboto', system-ui, sans-serif;
+            font-size: clamp(1.1rem, 4.5vw, 3rem);
+            font-weight: 700;
+            color: white; letter-spacing: -0.02em;
+        }
+        .splash-sub {
+            font-family: 'Roboto', system-ui, sans-serif;
+            font-size: clamp(1.1rem, 4.5vw, 3rem);
+            font-weight: 300;
+            color: rgba(255,255,255,0.75); letter-spacing: -0.02em;
+        }
+        @media (max-width: 480px) {
+            .splash-text { margin-top: 8px; }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
         <div class="max-w-5xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="./index.html" class="flex items-center gap-3 group">
+            <div class="flex items-center justify-between gap-4">
+                <a href="../" class="flex items-center gap-3 group">
                     <div class="w-9 h-9 rounded-lg bg-un-blue flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <!-- Railway semaphore: post with two signal arms and lamp -->
+                            <rect x="11" y="4" width="2" height="18" rx="1"/>
+                            <circle cx="12" cy="4" r="2.5"/>
+                            <path d="M13 8 L20 6 L20 8.5 L13 10.5 Z"/>
+                            <path d="M11 14 L4 12 L4 14.5 L11 16.5 Z"/>
                         </svg>
                     </div>
-                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors">Mandate Pipeline</span>
+                    <span class="text-lg font-semibold text-gray-900 group-hover:text-un-blue transition-colors hidden sm:inline">Semaphore</span>
                 </a>
-                <nav class="flex items-center gap-6">
-                    <a href="./signals.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Browser</a>
-                    <a href="./signals-info.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">About Signals</a>
-                    <a href="./sessions/index.html" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">Historical Sessions</a>
-                    <a href="./data.json" class="text-muted hover:text-un-blue transition-colors text-sm font-medium">API</a>
-                </nav>
+                <div class="flex-1 max-w-xl">
+                    
+                </div>
+                <a href="./" class="text-muted hover:text-un-blue transition-colors text-sm font-medium whitespace-nowrap">About</a>
             </div>
         </div>
     </header>
@@ -59,26 +187,42 @@
     <main class="max-w-5xl mx-auto px-6 py-10">
         
 <!-- Header -->
-<div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">About Signals</h1>
-    <p class="mt-2 text-muted">
-        Understanding how the Mandate Pipeline detects and categorizes signals in UN documents.
+<div class="mb-10">
+    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">About Semaphore</h1>
+    <p class="mt-3 text-lg text-muted leading-relaxed max-w-2xl">
+        Spotting mandate signals in resolutions of the UN General Assembly.
     </p>
 </div>
 
-<!-- Overview -->
-<div class="mb-10">
+<!-- Why "Semaphore"? -->
+<div class="mb-12">
+    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50/50">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Why "Semaphore"?</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            In the age of steam, railway semaphore signals stood alongside the tracks — mechanical arms raised or lowered to tell approaching trains whether the line ahead was clear, cautioned, or blocked. A driver reading the semaphore at speed had to interpret a small set of well-defined positions to make a critical decision: proceed, slow down, or stop.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+            That is surprisingly close to what this tool does. Every session, the General Assembly adopts hundreds of resolutions — long, formal texts that bury actionable mandates deep inside operative paragraphs. Semaphore reads those paragraphs and raises a flag when it spots language that signals a concrete follow-up: a report requested, a meeting convened, a process launched.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+            Like its railway namesake, Semaphore doesn't decide what to do with the signal — it just makes sure you see it.
+        </p>
+    </div>
+</div>
+
+<!-- What are Signals? -->
+<div class="mb-12">
     <h2 class="text-xl font-semibold text-gray-900 mb-4">What are Signals?</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
-        Signals are specific phrases or patterns in UN General Assembly documents that indicate particular types of mandates, requests, or procedural actions. The Mandate Pipeline automatically scans operative paragraphs of resolutions and proposals to identify these signals.
+        Signals are specific phrases in UN General Assembly documents that indicate a mandate, request, or procedural action. Semaphore scans the operative paragraphs of resolutions, draft proposals, and decisions, and flags every paragraph that contains one or more trigger phrases.
     </p>
     <p class="text-gray-700 leading-relaxed">
-        Each signal corresponds to a category of action that the General Assembly may take, such as requesting reports, scheduling meetings, or establishing processes.
+        Each signal corresponds to a category of action — requesting a report, scheduling a high-level event, establishing a consultative process, or placing something on a future agenda.
     </p>
 </div>
 
 <!-- Signal Types -->
-<div class="mb-10">
+<div class="mb-12">
     <h2 class="text-xl font-semibold text-gray-900 mb-6">Signal Types</h2>
     <div class="grid gap-6 md:grid-cols-2">
         
@@ -94,7 +238,7 @@
             </div>
             <p class="text-sm text-gray-600 mb-3">
                 
-                Indicates decisions about agenda items, scheduling of future consideration, or requests for inclusion in upcoming sessions.
+                Decisions about agenda items, scheduling of future consideration, or requests for inclusion in upcoming sessions.
                 
             </p>
             <div class="mt-4">
@@ -242,7 +386,7 @@
             </div>
             <p class="text-sm text-gray-600 mb-3">
                 
-                Indicates procedural arrangements such as the appointment of co-facilitators, co-chairs, or informal consultations.
+                Procedural arrangements: co-facilitators, co-chairs, or informal consultations.
                 
             </p>
             <div class="mt-4">
@@ -289,7 +433,7 @@
             </div>
             <p class="text-sm text-gray-600 mb-3">
                 
-                Requests for reports from the Secretary-General or other bodies to inform the General Assembly.
+                Requests for reports from the Secretary-General or other bodies to the General Assembly.
                 
             </p>
             <div class="mt-4">
@@ -379,16 +523,18 @@
         </div>
         
         <div class="border rounded-lg p-5
-            border-gray-200 bg-gray-50/30">
+            border-slate-200 bg-slate-50/30
+            ">
             <div class="flex items-center gap-2 mb-3">
                 <span class="px-2.5 py-1 rounded text-sm font-semibold
-                    bg-gray-100 text-gray-800">
+                    bg-slate-100 text-slate-800
+                    ">
                     observer
                 </span>
             </div>
             <p class="text-sm text-gray-600 mb-3">
                 
-                Miscellaneous signal type.
+                Granting of observer status to an entity.
                 
             </p>
             <div class="mt-4">
@@ -396,7 +542,8 @@
                 <div class="flex flex-wrap gap-1.5">
                     
                     <span class="px-2 py-0.5 rounded text-xs
-                        bg-gray-100 text-gray-700">
+                        bg-slate-100 text-slate-700
+                        ">
                         capacity of observer
                     </span>
                     
@@ -407,32 +554,58 @@
     </div>
 </div>
 
-<!-- How Detection Works -->
-<div class="mb-10">
-    <h2 class="text-xl font-semibold text-gray-900 mb-4">How Detection Works</h2>
-    <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
-        <ol class="list-decimal list-inside space-y-3 text-gray-700">
-            <li><span class="font-medium">Document Processing:</span> PDF documents are parsed to extract text content.</li>
-            <li><span class="font-medium">Paragraph Extraction:</span> Operative paragraphs (numbered paragraphs in the resolution body) are identified and extracted.</li>
-            <li><span class="font-medium">Phrase Matching:</span> Each paragraph is scanned for the trigger phrases defined for each signal type.</li>
-            <li><span class="font-medium">Signal Assignment:</span> When a phrase is found, the corresponding signal is assigned to that paragraph.</li>
-            <li><span class="font-medium">Aggregation:</span> Signals are aggregated at the document level for filtering and analysis.</li>
-        </ol>
+<!-- How it works -->
+<div class="mb-12">
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">How it Works</h2>
+    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+        <div class="space-y-4">
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-un-blue text-white flex items-center justify-center text-sm font-semibold">1</div>
+                <div>
+                    <p class="font-medium text-gray-900">Discover</p>
+                    <p class="text-sm text-gray-600">New resolutions and draft proposals are discovered automatically from the UN Official Document System.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-un-blue text-white flex items-center justify-center text-sm font-semibold">2</div>
+                <div>
+                    <p class="font-medium text-gray-900">Extract</p>
+                    <p class="text-sm text-gray-600">PDF documents are parsed and operative paragraphs — the numbered action items in the resolution body — are extracted.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-un-blue text-white flex items-center justify-center text-sm font-semibold">3</div>
+                <div>
+                    <p class="font-medium text-gray-900">Detect</p>
+                    <p class="text-sm text-gray-600">Each paragraph is scanned for trigger phrases. When a phrase matches, the corresponding signal is raised.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-un-blue text-white flex items-center justify-center text-sm font-semibold">4</div>
+                <div>
+                    <p class="font-medium text-gray-900">Link</p>
+                    <p class="text-sm text-gray-600">Resolutions are linked back to their source draft proposals, connecting adopted text to its committee of origin.</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-un-blue text-white flex items-center justify-center text-sm font-semibold">5</div>
+                <div>
+                    <p class="font-medium text-gray-900">Publish</p>
+                    <p class="text-sm text-gray-600">Results are published here — filterable by session, signal type, and document type — updated automatically after each pipeline run.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Configuration -->
-<div class="mb-10">
+<div class="mb-12">
     <h2 class="text-xl font-semibold text-gray-900 mb-4">Configuration</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
-        Signals are configured in the <code class="px-1.5 py-0.5 bg-gray-100 rounded text-sm font-mono">config/checks.yaml</code> file. Each signal definition includes:
+        Signals are defined in <code class="px-1.5 py-0.5 bg-gray-100 rounded text-sm font-mono">config/checks.yaml</code>. Each entry has a <strong>signal</strong> name and a list of <strong>phrases</strong> to match. Matching is case-insensitive. A single paragraph can trigger multiple signals if it contains phrases from different categories.
     </p>
-    <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4">
-        <li><span class="font-medium">signal:</span> The name/identifier for the signal type</li>
-        <li><span class="font-medium">phrases:</span> A list of text patterns that trigger this signal when found in a paragraph</li>
-    </ul>
     <p class="text-gray-700 leading-relaxed">
-        Phrase matching is case-insensitive. A paragraph can have multiple signals if it contains phrases from different signal types.
+        The pipeline runs on GitHub Actions — hourly for new documents, and on-demand for historical sessions.
     </p>
 </div>
 
@@ -444,7 +617,7 @@
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-01-24 02:24 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-08 05:34 UTC · <a href="../data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>

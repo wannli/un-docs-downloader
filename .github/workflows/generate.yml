@@ -105,6 +105,7 @@ jobs:
           sys.path.insert(0, 'src')
           from mandate_pipeline.generation import (
               generate_unified_explorer_page,
+              generate_signals_info_page,
               generate_data_json,
               build_igov_decision_documents,
               ensure_document_sessions,
@@ -224,6 +225,7 @@ jobs:
                       signal_paras.sort(key=lambda p: int(p['number']) if str(p['number']).isdigit() else 0)
                       doc['signal_paragraphs'] = signal_paras
 
+              generate_signals_info_page(checks, output_dir)
               generate_unified_explorer_page(documents, checks, output_dir)
               generate_data_json(documents, checks, output_dir)
               gen_duration = time.time() - gen_start
