@@ -704,7 +704,7 @@ function renderDocumentCard(doc, isCollapsed = true, forceExpand = false) {
         ? signalParagraphs.map(para => `
             <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
                 <div class="leading-relaxed">
-                    <span class="font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
+                    ${!isDecision ? `<span class="font-semibold text-gray-700">${escapeHtml(para.number)}.</span>` : ''}
                     <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
                 </div>
             </div>
