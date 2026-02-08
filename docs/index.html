@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal Browser - Mandate Pipeline</title>
+    <title>Mandate Pipeline</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,154 +60,166 @@
     <!-- Main content -->
     <main class="max-w-5xl mx-auto px-6 py-10">
         
-<!-- Header -->
-<div class="mb-4 hidden sm:block">
-    <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Signal Browser</h1>
-</div>
-
-
-<div class="sticky top-20 z-10 space-y-3 bg-white/95 pb-3 backdrop-blur">
-    <!-- Filters -->
-    <div class="rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
-        <!-- Compact one-line filter layout -->
-        <div class="flex flex-wrap items-center gap-2">
-            <!-- Session Filter -->
-            <div class="flex items-center gap-2">
-                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 whitespace-nowrap">Session</label>
-                <div id="session-selector" class="flex flex-wrap gap-1.5">
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="80">80</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="79">79</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="78">78</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="77">77</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="76">76</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="75">75</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="74">74</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="73">73</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="72">72</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="71">71</button>
-                    
+<!-- Compact filter bar -->
+<div class="sticky top-[73px] z-10 bg-white/95 backdrop-blur border-b border-gray-100 -mx-6 px-6 py-2">
+    <div class="flex items-center gap-2">
+        <!-- Desktop: individual dropdowns -->
+        <div class="hidden sm:contents">
+            <!-- Session dropdown -->
+            <div class="relative" data-dropdown="session">
+                <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
+                    <span class="dropdown-label">Session</span>
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="dropdown-panel hidden absolute top-full left-0 mt-1 bg-white rounded-lg border border-gray-200 shadow-lg p-2 min-w-[160px] max-h-[280px] overflow-y-auto z-20">
+                    <div id="session-options" class="space-y-0.5"></div>
                 </div>
             </div>
-            
-            <!-- Divider -->
-            <div class="hidden sm:block w-px h-6 bg-gray-200"></div>
-            
-            <!-- Signal Filter -->
-            <div class="flex items-center gap-2">
-                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 whitespace-nowrap">Signal</label>
-                <div id="signal-filter" class="flex flex-wrap gap-1.5">
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="agenda">agenda</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="PGA">PGA</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="process">process</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="report">report</button>
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="observer">observer</button>
-                    
+
+            <!-- Signal dropdown -->
+            <div class="relative" data-dropdown="signal">
+                <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
+                    <span class="dropdown-label">Signal</span>
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="dropdown-panel hidden absolute top-full left-0 mt-1 bg-white rounded-lg border border-gray-200 shadow-lg p-2 min-w-[160px] z-20">
+                    <div id="signal-options" class="space-y-0.5">
+                        
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="agenda" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>agenda</span>
+                        </label>
+                        
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="PGA" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>PGA</span>
+                        </label>
+                        
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="process" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>process</span>
+                        </label>
+                        
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="report" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>report</span>
+                        </label>
+                        
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="observer" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>observer</span>
+                        </label>
+                        
+                    </div>
                 </div>
             </div>
-            
-            <!-- More Filters Button (Mobile) -->
-            <button id="toggle-filters" class="sm:hidden ml-auto rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900" type="button" aria-expanded="false">
-                More
+
+            <!-- Type dropdown -->
+            <div class="relative" data-dropdown="type">
+                <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
+                    <span class="dropdown-label">Type</span>
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="dropdown-panel hidden absolute top-full left-0 mt-1 bg-white rounded-lg border border-gray-200 shadow-lg p-2 min-w-[160px] z-20">
+                    <div id="type-options" class="space-y-0.5">
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="resolution" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>Resolutions</span>
+                        </label>
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="proposal" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>Proposals</span>
+                        </label>
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                            <input type="checkbox" value="decision" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>Decisions</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile: single "Filters" button -->
+        <div class="sm:hidden relative" data-dropdown="mobile-filters">
+            <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
+                <span class="dropdown-label">Filters</span>
+                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
-        </div>
-        
-        <!-- Extra Filters (collapsible on mobile, always visible on desktop) -->
-        <div id="extra-filters" class="mt-3 pt-3 border-t border-gray-100 hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <div>
-                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Implementation</label>
-                <div id="implementation-filter" class="flex flex-wrap gap-1.5">
-                    
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="85">85</button>
-                    
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="84">84</button>
-                    
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="83">83</button>
-                    
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="82">82</button>
-                    
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="81">81</button>
-                    
-                    <button type="button" class="filter-pill filter-pill-implementation inline-flex items-center h-7 whitespace-nowrap rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700 transition-colors hover:border-indigo-300 hover:text-indigo-800" data-pill="implementation" data-value="80">80</button>
-                    
+            <div class="dropdown-panel hidden absolute top-full left-0 mt-1 bg-white rounded-lg border border-gray-200 shadow-lg p-3 min-w-[220px] max-h-[70vh] overflow-y-auto z-20">
+                <div class="space-y-3">
+                    <div>
+                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Session</div>
+                        <div id="mobile-session-options" class="space-y-0.5"></div>
+                    </div>
+                    <hr class="border-gray-100">
+                    <div>
+                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Signal</div>
+                        <div id="mobile-signal-options" class="space-y-0.5">
+                            
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="agenda" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>agenda</span>
+                            </label>
+                            
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="PGA" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>PGA</span>
+                            </label>
+                            
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="process" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>process</span>
+                            </label>
+                            
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="report" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>report</span>
+                            </label>
+                            
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="observer" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>observer</span>
+                            </label>
+                            
+                        </div>
+                    </div>
+                    <hr class="border-gray-100">
+                    <div>
+                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Type</div>
+                        <div id="mobile-type-options" class="space-y-0.5">
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="resolution" class="mobile-filter-checkbox filter-checkbox-type rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>Resolutions</span>
+                            </label>
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="proposal" class="mobile-filter-checkbox filter-checkbox-type rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>Proposals</span>
+                            </label>
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+                                <input type="checkbox" value="decision" class="mobile-filter-checkbox filter-checkbox-type rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>Decisions</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Source</label>
-                <div id="source-filter" class="flex flex-wrap gap-1.5">
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="Plenary">Pl</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C1">C1</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C2">C2</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C3">C3</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C4">C4</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C5">C5</button>
-                    
-                    
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="C6">C6</button>
-                    
-                </div>
-            </div>
-            <div>
-                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Status</label>
-                <div id="status-filter" class="flex flex-wrap gap-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="adopted">Adopted</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="draft">Draft</button>
-                </div>
-            </div>
-            <div>
-                <label class="text-[11px] font-semibold uppercase tracking-wide text-gray-500 mb-1.5 block">Type</label>
-                <div id="type-filter" class="flex flex-wrap gap-1.5">
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="proposal">Proposals</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="resolution">Resolutions</button>
-                    <button type="button" class="filter-pill inline-flex items-center h-7 whitespace-nowrap rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900" data-value="decision">Decisions</button>
-                </div>
-            </div>
-            <div class="flex items-end">
-                <label class="inline-flex items-center gap-2 text-[11px] text-gray-600 cursor-pointer">
-                    <input id="include-no-signals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-un-blue focus:ring-un-blue">
-                    <span>Include no signals</span>
-                </label>
-            </div>
-            <div class="flex items-end gap-2">
-                <button id="group-implementation" class="flex h-7 items-center justify-center rounded-lg border border-indigo-200 bg-indigo-50 px-3 text-[11px] font-semibold text-indigo-700 hover:border-indigo-300 hover:text-indigo-800 transition-colors whitespace-nowrap" type="button">
-                    Group by Impl.
-                </button>
-                <button id="clear-filters" class="flex h-7 items-center justify-center rounded-lg border border-gray-200 px-3 text-[11px] font-semibold text-gray-600 hover:border-gray-300 hover:text-gray-900 transition-colors" type="button">
-                    Clear
-                </button>
             </div>
         </div>
+
+        <!-- Spacer -->
+        <div class="flex-1"></div>
+
+        <!-- Document count (inline) -->
+        <span id="documents-count" class="text-[11px] text-gray-400 whitespace-nowrap hidden"></span>
+
+        <!-- Clear button -->
+        <button id="clear-filters" class="hidden h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-colors" type="button" title="Clear all filters">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
     </div>
 </div>
 
 <!-- Main Content Area -->
-<div id="main-content">
+<div id="main-content" class="mt-4">
     <!-- Document List -->
     <div id="document-list">
         <div class="space-y-4" id="documents-container">
@@ -225,9 +237,6 @@
             </div>
         </div>
 
-        <!-- Documents Count -->
-        <div id="documents-count" class="py-4 text-center text-xs text-gray-500 hidden"></div>
-
         <!-- Empty State -->
         <div class="hidden text-center py-12" id="empty-state">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -237,403 +246,58 @@
             <p class="mt-1 text-sm text-gray-500">Try adjusting your filters or search terms.</p>
         </div>
     </div>
-
 </div>
 
 <!-- Loading Indicator -->
 <div class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" id="loading-overlay">
     <div class="bg-white rounded-lg p-6 flex items-center gap-3">
         <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-un-blue"></div>
-        <span class="text-sm text-gray-700">Loading session data...</span>
+        <span class="text-sm text-gray-700">Loading documents...</span>
     </div>
 </div>
 
 <script>
 // ============================================
-// URL CLEANUP - Redirect /index.html to /
+// URL CLEANUP
 // ============================================
 (function() {
     const path = window.location.pathname;
     if (path.endsWith('/index.html')) {
         const newPath = path.replace(/\/index\.html$/, '/');
-        const newUrl = newPath + window.location.search + window.location.hash;
-        window.history.replaceState(null, '', newUrl);
+        window.history.replaceState(null, '', newPath + window.location.search + window.location.hash);
     }
 })();
 
 // ============================================
-// PERFORMANCE OPTIMIZATIONS
+// STATE
 // ============================================
-
-// Pagination configuration
 const PAGE_SIZE = 50;
 let currentPage = 0;
 let filteredDocumentsCache = [];
 let isLoadingMore = false;
-
-// Session data cache
-let sessionDataCache = {};
-let selectedSessions = [];
 let allDocumentsCache = [];
 
-// DOM element caches (populated once on init)
+const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
+const signalPhraseMap = Object.fromEntries(([{"phrases": ["decides to include", "decides to place on the provisional agenda", "requests the inclusion", "invites the Secretary-General to brief", "requests the President of the General Assembly to hold a meeting", "decides to convene a meeting", "decides to review", "decides to consider"], "signal": "agenda"}, {"phrases": ["President of the General Assembly", "decides to hold", "decides to convene", "high-level meeting", "shall be held", "interactive dialogue", "multistakeholder", "high-level panel", "high-level segment"], "signal": "PGA"}, {"phrases": ["co-facilitators", "co-chairs", "co-conveners", "informal consultations"], "signal": "process"}, {"phrases": ["report to the General Assembly", "submit a report", "report thereon", "shall report", "apprise the General Assembly", "inform the General Assembly", "include in his report", "include in the report", "Secretary-General to submit", "Secretary-General to report", "Secretary-General to provide a report", "submit to the General Assembly", "report to the Assembly"], "signal": "report"}, {"phrases": ["capacity of observer"], "signal": "observer"}] || []).map(c => [c.signal, c.phrases || []]));
+
+// DOM caches
 let cachedDocumentsContainer = null;
 let cachedEmptyState = null;
-let cachedLoadMoreBtn = null;
-let cachedLoadMoreContainer = null;
 let cachedSearchInput = null;
-
-const signalPhraseMap = Object.fromEntries(([{"phrases": ["decides to include", "decides to place on the provisional agenda", "requests the inclusion", "invites the Secretary-General to brief", "requests the President of the General Assembly to hold a meeting", "decides to convene a meeting", "decides to review", "decides to consider"], "signal": "agenda"}, {"phrases": ["President of the General Assembly", "decides to hold", "decides to convene", "high-level meeting", "shall be held", "interactive dialogue", "multistakeholder", "high-level panel", "high-level segment"], "signal": "PGA"}, {"phrases": ["co-facilitators", "co-chairs", "co-conveners", "informal consultations"], "signal": "process"}, {"phrases": ["report to the General Assembly", "submit a report", "report thereon", "shall report", "apprise the General Assembly", "inform the General Assembly", "include in his report", "include in the report", "Secretary-General to submit", "Secretary-General to report", "Secretary-General to provide a report", "submit to the General Assembly", "report to the Assembly"], "signal": "report"}, {"phrases": ["capacity of observer"], "signal": "observer"}] || []).map(check => [check.signal, check.phrases || []]));
-const implementationSessionMap = {
-    '85': ['eighty-fifth', 'eighty fifth'],
-    '84': ['eighty-fourth', 'eighty fourth'],
-    '83': ['eighty-third', 'eighty third'],
-    '82': ['eighty-second', 'eighty second'],
-    '81': ['eighty-first', 'eighty first'],
-    '80': ['eightieth']
-};
-
-// Filter elements (initialized later)
-let sessionSelector, implementationFilter, sourceFilter, signalFilter, statusFilter, typeFilter;
-let clearFiltersBtn, groupImplementationBtn, includeNoSignalsToggle;
-let groupByImplementation = false;
+let cachedDocsCount = null;
+let cachedScrollSentinel = null;
+let cachedScrollLoading = null;
+let scrollObserver = null;
 
 // ============================================
-// DEBOUNCE UTILITY
+// UTILITIES
 // ============================================
 function debounce(func, wait) {
     let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
+    return function(...args) {
         clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+        timeout = setTimeout(() => func(...args), wait);
     };
-}
-
-// Debounced filter application (300ms delay for search)
-const debouncedApplyFilters = debounce(() => {
-    requestAnimationFrame(() => applyFilters());
-}, 300);
-
-const activePillClasses = ['bg-un-blue', 'text-white', 'border-un-blue'];
-const inactivePillClasses = ['border-gray-200', 'text-gray-600'];
-const activeImplementationClasses = ['bg-indigo-600', 'text-white', 'border-indigo-600'];
-const inactiveImplementationClasses = ['border-indigo-200', 'text-indigo-700', 'bg-indigo-50'];
-
-function setPillActive(pill, isActive) {
-    const isImplementation = pill.dataset.pill === 'implementation';
-    const activeClasses = isImplementation ? activeImplementationClasses : activePillClasses;
-    const inactiveClasses = isImplementation ? inactiveImplementationClasses : inactivePillClasses;
-
-    pill.classList.toggle('is-active', isActive);
-    activeClasses.forEach(cls => pill.classList.toggle(cls, isActive));
-    inactiveClasses.forEach(cls => pill.classList.toggle(cls, !isActive));
-}
-
-function getActiveValues(container) {
-    return Array.from(container.querySelectorAll('.filter-pill.is-active')).map(pill => pill.dataset.value);
-}
-
-function setActiveValues(container, values) {
-    const valueSet = new Set(values);
-    container.querySelectorAll('.filter-pill').forEach(pill => {
-        setPillActive(pill, valueSet.has(pill.dataset.value));
-    });
-}
-
-function wirePillGroup(container, onChange) {
-    container.addEventListener('click', event => {
-        const target = event.target.closest('.filter-pill');
-        if (!target) {
-            return;
-        }
-        setPillActive(target, !target.classList.contains('is-active'));
-        onChange();
-    });
-}
-
-function updateUrlState() {
-    const params = new URLSearchParams();
-    const searchQuery = document.getElementById('search-input').value.trim();
-
-    if (searchQuery) {
-        params.set('q', searchQuery);
-    }
-
-    const sessions = getActiveValues(sessionSelector);
-    selectedSessions = sessions;
-    const implementations = getActiveValues(implementationFilter);
-    const sources = getActiveValues(sourceFilter);
-    const signals = getActiveValues(signalFilter);
-    const statuses = getActiveValues(statusFilter);
-    const types = getActiveValues(typeFilter);
-    const includeNoSignals = includeNoSignalsToggle && includeNoSignalsToggle.checked;
-
-    if (sessions.length > 0) {
-        params.set('sessions', sessions.join(','));
-    }
-    if (implementations.length > 0) {
-        params.set('implementation', implementations.join(','));
-    }
-    if (sources.length > 0) {
-        params.set('sources', sources.join(','));
-    }
-    if (signals.length > 0) {
-        params.set('signals', signals.join(','));
-    }
-    if (statuses.length > 0) {
-        params.set('status', statuses.join(','));
-    }
-    if (types.length > 0) {
-        params.set('type', types.join(','));
-    }
-    if (includeNoSignals) {
-        params.set('include', 'all');
-    }
-    if (groupByImplementation) {
-        params.set('group', 'implementation');
-    }
-
-    const newUrl = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
-    window.history.replaceState({}, '', newUrl);
-}
-
-function applyFiltersFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const searchQuery = params.get('q') || '';
-    document.getElementById('search-input').value = searchQuery;
-
-    const sessions = params.get('sessions');
-    const sources = params.get('sources');
-    const signals = params.get('signals');
-    const statuses = params.get('status');
-    const implementations = params.get('implementation');
-    const group = params.get('group');
-    const types = params.get('type');
-    const include = params.get('include');
-
-    if (sessions) {
-        setActiveValues(sessionSelector, sessions.split(','));
-    }
-    if (implementations) {
-        setActiveValues(implementationFilter, implementations.split(','));
-    }
-    if (sources) {
-        setActiveValues(sourceFilter, sources.split(','));
-    }
-    if (signals) {
-        setActiveValues(signalFilter, signals.split(','));
-    }
-    if (statuses) {
-        setActiveValues(statusFilter, statuses.split(','));
-    }
-    if (types) {
-        setActiveValues(typeFilter, types.split(','));
-    }
-
-    if (includeNoSignalsToggle) {
-        includeNoSignalsToggle.checked = include === 'all';
-    }
-
-    groupByImplementation = group === 'implementation';
-    if (groupImplementationBtn) {
-        groupImplementationBtn.classList.toggle('bg-indigo-600', groupByImplementation);
-        groupImplementationBtn.classList.toggle('text-white', groupByImplementation);
-        groupImplementationBtn.classList.toggle('border-indigo-600', groupByImplementation);
-        groupImplementationBtn.classList.toggle('bg-indigo-50', !groupByImplementation);
-        groupImplementationBtn.classList.toggle('text-indigo-700', !groupByImplementation);
-        groupImplementationBtn.classList.toggle('border-indigo-200', !groupByImplementation);
-    }
-
-    selectedSessions = getActiveValues(sessionSelector);
-}
-
-// ============================================
-// OPTIMIZED FILTERING (works with pagination)
-// ============================================
-
-// Check if a document matches current filters (operates on data, not DOM)
-function documentMatchesFilters(doc, filters) {
-    const {
-        selectedSources,
-        selectedSignals,
-        selectedStatuses,
-        selectedImplementations,
-        selectedSessions,
-        selectedTypes,
-        includeNoSignals,
-        searchQuery,
-    } = filters;
-
-    // Source filter
-    const docSource = doc.origin || doc.source || '';
-    if (selectedSources.length > 0 && !selectedSources.includes(docSource)) {
-        return false;
-    }
-
-    // Status filter
-    const docStatus = doc.doc_type === 'resolution'
-        ? 'adopted'
-        : (doc.doc_type === 'proposal' ? 'draft' : 'decision');
-    if (selectedStatuses.length > 0 && !selectedStatuses.includes(docStatus)) {
-        return false;
-    }
-
-    // Session filter
-    const docSession = doc.session ? doc.session.toString() : '';
-    if (selectedSessions.length > 0 && !selectedSessions.includes(docSession)) {
-        return false;
-    }
-
-    // Type filter
-    const docType = doc.doc_type || '';
-    if (selectedTypes.length > 0 && !selectedTypes.includes(docType)) {
-        return false;
-    }
-
-    const hasSignals = (doc.signal_paragraphs && doc.signal_paragraphs.length > 0)
-        || (doc.signal_summary && Object.keys(doc.signal_summary).length > 0);
-    if (!hasSignals && (!includeNoSignals || selectedSignals.length > 0)) {
-        return false;
-    }
-
-    const paragraphs = doc.signal_paragraphs || [];
-    if (paragraphs.length === 0) {
-        const baseText = `${doc.symbol || ''} ${doc.title || ''} ${doc.decision_text || ''}`.toLowerCase();
-        const searchMatch = searchQuery === '' || baseText.includes(searchQuery);
-        const implementationMatch = selectedImplementations.length === 0;
-        const signalMatch = selectedSignals.length === 0;
-        return searchMatch && implementationMatch && signalMatch;
-    }
-
-    for (const para of paragraphs) {
-        const paraSignals = para.signals || [];
-        const paraText = (para.text || '').toLowerCase();
-
-        const signalMatch = selectedSignals.length === 0 || selectedSignals.some(s => paraSignals.includes(s));
-        const searchMatch = searchQuery === '' || paraText.includes(searchQuery) ||
-                           (doc.symbol || '').toLowerCase().includes(searchQuery) ||
-                           (doc.title || '').toLowerCase().includes(searchQuery);
-        const implementationMatch = selectedImplementations.length === 0 || selectedImplementations.some(session => {
-            const phrases = implementationSessionMap[session] || [];
-            return phrases.some(phrase => paraText.includes(phrase));
-        });
-
-        if (signalMatch && searchMatch && implementationMatch) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-// Filter functionality (optimized for pagination)
-function applyFilters() {
-    const selectedSources = getActiveValues(sourceFilter);
-    const selectedSignals = getActiveValues(signalFilter);
-    const selectedStatuses = getActiveValues(statusFilter);
-    const selectedImplementations = getActiveValues(implementationFilter);
-    const selectedTypes = getActiveValues(typeFilter);
-    const includeNoSignals = includeNoSignalsToggle && includeNoSignalsToggle.checked;
-    selectedSessions = getActiveValues(sessionSelector);
-    const searchQuery = (cachedSearchInput || document.getElementById('search-input')).value.toLowerCase();
-
-    const filters = {
-        selectedSources,
-        selectedSignals,
-        selectedStatuses,
-        selectedImplementations,
-        selectedSessions,
-        selectedTypes,
-        includeNoSignals,
-        searchQuery,
-    };
-
-    // Filter documents from cache (not DOM)
-    filteredDocumentsCache = allDocumentsCache.filter(doc => documentMatchesFilters(doc, filters));
-
-    // Reset pagination
-    currentPage = 0;
-
-    // Re-render first page of filtered documents
-    const container = cachedDocumentsContainer || document.getElementById('documents-container');
-    const emptyState = cachedEmptyState || document.getElementById('empty-state');
-
-    if (filteredDocumentsCache.length === 0) {
-        container.innerHTML = '';
-        emptyState.classList.remove('hidden');
-        container.classList.add('hidden');
-        updateDocumentsCount();
-        updateUrlState();
-        return;
-    }
-
-    emptyState.classList.add('hidden');
-    container.classList.remove('hidden');
-
-    // Render first page
-    const firstPageDocs = filteredDocumentsCache.slice(0, PAGE_SIZE);
-
-    requestAnimationFrame(() => {
-        container.innerHTML = firstPageDocs.map(doc => renderDocumentCard(doc, true)).join('');
-        initializeDocumentCards();
-        initializeInfiniteScroll();
-        updateDocumentsCount();
-
-        // Apply highlights to visible content
-        applySignalHighlights();
-        applyImplementationHighlights();
-        applySearchHighlights(searchQuery);
-    });
-
-    updateUrlState();
-}
-
-function getImplementationSessionForText(text) {
-    const lowered = text.toLowerCase();
-    const orderedSessions = Object.keys(implementationSessionMap).sort((a, b) => Number(b) - Number(a));
-    for (const session of orderedSessions) {
-        const phrases = implementationSessionMap[session] || [];
-        if (phrases.some(phrase => lowered.includes(phrase))) {
-            return session;
-        }
-    }
-    return null;
-}
-
-function getImplementationSessionForDoc(doc) {
-    const paragraphTexts = [];
-
-    if (Array.isArray(doc.signal_paragraphs)) {
-        doc.signal_paragraphs.forEach(para => {
-            if (para.text) {
-                paragraphTexts.push(para.text);
-            }
-        });
-    }
-
-    if (paragraphTexts.length === 0 && doc.paragraphs) {
-        Object.values(doc.paragraphs).forEach(text => {
-            if (text) {
-                paragraphTexts.push(text);
-            }
-        });
-    }
-
-    const combinedText = paragraphTexts.join(' ');
-    return combinedText ? getImplementationSessionForText(combinedText) : null;
-}
-
-const basePath = window.location.pathname.replace(/\/[^/]*$/, '');
-
-function getSessionDataUrl(session) {
-    if (session === 'current' || session === '80') {
-        return `${basePath}/data.json`;
-    }
-    return `${basePath}/sessions/${session}/data.json`;
 }
 
 function escapeHtml(text) {
@@ -642,371 +306,364 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-function applySearchHighlights(query) {
-    const highlightTargets = document.querySelectorAll('[data-search]');
-    const trimmedQuery = query.trim();
+// ============================================
+// DROPDOWN MANAGEMENT
+// ============================================
+function initDropdowns() {
+    // Toggle dropdown on button click
+    document.querySelectorAll('[data-dropdown]').forEach(wrapper => {
+        const trigger = wrapper.querySelector('.dropdown-trigger');
+        const panel = wrapper.querySelector('.dropdown-panel');
 
-    highlightTargets.forEach(target => {
-        target.querySelectorAll('mark.search-highlight').forEach(mark => {
-            mark.replaceWith(mark.textContent);
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = !panel.classList.contains('hidden');
+            closeAllDropdowns();
+            if (!isOpen) {
+                panel.classList.remove('hidden');
+            }
         });
+    });
 
-        if (!trimmedQuery) {
-            return;
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('[data-dropdown]')) {
+            closeAllDropdowns();
         }
-
-        highlightQueryInElement(target, trimmedQuery, 'search-highlight bg-red-100 text-red-900 rounded px-0.5');
     });
 }
 
-function highlightQueryInElement(element, query, className) {
-    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(escapedQuery, 'gi');
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null);
-    const textNodes = [];
+function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown-panel').forEach(p => p.classList.add('hidden'));
+}
 
-    while (walker.nextNode()) {
-        textNodes.push(walker.currentNode);
+// ============================================
+// FILTER STATE
+// ============================================
+function getSelectedValues(containerId) {
+    return Array.from(document.querySelectorAll(`#${containerId} .filter-checkbox:checked`)).map(cb => cb.value);
+}
+
+function setSelectedValues(containerId, values) {
+    const valueSet = new Set(values);
+    document.querySelectorAll(`#${containerId} .filter-checkbox`).forEach(cb => {
+        cb.checked = valueSet.has(cb.value);
+    });
+}
+
+function getFilterState() {
+    const isMobile = window.innerWidth < 640;
+    return {
+        sessions: getSelectedValues(isMobile ? 'mobile-session-options' : 'session-options'),
+        signals: getSelectedValues(isMobile ? 'mobile-signal-options' : 'signal-options'),
+        types: getSelectedValues(isMobile ? 'mobile-type-options' : 'type-options'),
+        searchQuery: (cachedSearchInput || document.getElementById('search-input')).value.toLowerCase().trim(),
+    };
+}
+
+function syncMobileDesktopFilters(source) {
+    // Sync checkboxes between mobile and desktop
+    const pairs = [
+        ['session-options', 'mobile-session-options'],
+        ['signal-options', 'mobile-signal-options'],
+        ['type-options', 'mobile-type-options'],
+    ];
+    for (const [desktopId, mobileId] of pairs) {
+        const sourceId = source === 'mobile' ? mobileId : desktopId;
+        const targetId = source === 'mobile' ? desktopId : mobileId;
+        const values = getSelectedValues(sourceId);
+        setSelectedValues(targetId, values);
+    }
+}
+
+function updateDropdownLabels() {
+    const state = getFilterState();
+
+    // Session
+    updateLabel('[data-dropdown="session"] .dropdown-label', 'Session', state.sessions);
+    // Signal
+    updateLabel('[data-dropdown="signal"] .dropdown-label', 'Signal', state.signals);
+    // Type
+    updateLabel('[data-dropdown="type"] .dropdown-label', 'Type', state.types);
+    // Mobile
+    const totalActive = state.sessions.length + state.signals.length + state.types.length;
+    const mobileLabel = document.querySelector('[data-dropdown="mobile-filters"] .dropdown-label');
+    if (mobileLabel) {
+        mobileLabel.textContent = totalActive > 0 ? `Filters (${totalActive})` : 'Filters';
     }
 
-    textNodes.forEach(node => {
-        const text = node.nodeValue;
-        if (!text || !regex.test(text)) {
-            return;
-        }
-        const fragment = document.createDocumentFragment();
-        let lastIndex = 0;
-        text.replace(regex, (match, index) => {
-            fragment.appendChild(document.createTextNode(text.slice(lastIndex, index)));
-            const mark = document.createElement('mark');
-            mark.className = className;
-            mark.textContent = match;
-            fragment.appendChild(mark);
-            lastIndex = index + match.length;
-            return match;
-        });
-        fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
-        node.parentNode.replaceChild(fragment, node);
+    // Show/hide clear button
+    const clearBtn = document.getElementById('clear-filters');
+    const hasActive = totalActive > 0 || state.searchQuery.length > 0;
+    if (clearBtn) {
+        clearBtn.classList.toggle('hidden', !hasActive);
+        clearBtn.classList.toggle('inline-flex', hasActive);
+    }
+
+    // Highlight active dropdown triggers
+    document.querySelectorAll('[data-dropdown]').forEach(wrapper => {
+        const name = wrapper.dataset.dropdown;
+        const trigger = wrapper.querySelector('.dropdown-trigger');
+        let isActive = false;
+        if (name === 'session') isActive = state.sessions.length > 0;
+        else if (name === 'signal') isActive = state.signals.length > 0;
+        else if (name === 'type') isActive = state.types.length > 0;
+        else if (name === 'mobile-filters') isActive = totalActive > 0;
+
+        trigger.classList.toggle('border-un-blue', isActive);
+        trigger.classList.toggle('text-un-blue', isActive);
+        trigger.classList.toggle('border-gray-200', !isActive);
+        trigger.classList.toggle('text-gray-700', !isActive);
     });
 }
 
-function applySignalHighlights() {
-    const paragraphTargets = document.querySelectorAll('[data-paragraph]');
-
-    paragraphTargets.forEach(target => {
-        target.querySelectorAll('mark.signal-highlight').forEach(mark => {
-            mark.replaceWith(mark.textContent);
-        });
-
-        const paraItem = target.closest('.para-item');
-        const signals = paraItem ? paraItem.dataset.signals.split(',').filter(Boolean) : [];
-
-        signals.forEach(signal => {
-            const phrases = signalPhraseMap[signal] || [];
-            phrases.sort((a, b) => b.length - a.length).forEach(phrase => {
-                highlightQueryInElement(target, phrase, `signal-highlight ${getSignalHighlightClass(signal)} rounded px-0.5`);
-            });
-        });
-    });
+function updateLabel(selector, defaultText, values) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    if (values.length === 0) {
+        el.textContent = defaultText;
+    } else if (values.length <= 2) {
+        el.textContent = values.join(', ');
+    } else {
+        el.textContent = `${values.length} selected`;
+    }
 }
 
-function applyImplementationHighlights() {
-    const paragraphTargets = document.querySelectorAll('[data-paragraph]');
-
-    paragraphTargets.forEach(target => {
-        target.querySelectorAll('mark.implementation-highlight').forEach(mark => {
-            mark.replaceWith(mark.textContent);
-        });
-
-        Object.values(implementationSessionMap).forEach(phrases => {
-            phrases.forEach(phrase => {
-                highlightQueryInElement(target, phrase, 'implementation-highlight bg-indigo-100 text-indigo-900 rounded px-0.5');
-            });
-        });
-    });
+// ============================================
+// URL STATE
+// ============================================
+function updateUrlState() {
+    const state = getFilterState();
+    const params = new URLSearchParams();
+    if (state.searchQuery) params.set('q', state.searchQuery);
+    if (state.sessions.length) params.set('sessions', state.sessions.join(','));
+    if (state.signals.length) params.set('signals', state.signals.join(','));
+    if (state.types.length) params.set('type', state.types.join(','));
+    const newUrl = params.toString() ? `${window.location.pathname}?${params}` : window.location.pathname;
+    window.history.replaceState({}, '', newUrl);
 }
 
+function applyFiltersFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q') || '';
+    document.getElementById('search-input').value = q;
+
+    const sessions = params.get('sessions');
+    const signals = params.get('signals');
+    const types = params.get('type');
+
+    if (sessions) {
+        setSelectedValues('session-options', sessions.split(','));
+        setSelectedValues('mobile-session-options', sessions.split(','));
+    }
+    if (signals) {
+        setSelectedValues('signal-options', signals.split(','));
+        setSelectedValues('mobile-signal-options', signals.split(','));
+    }
+    if (types) {
+        setSelectedValues('type-options', types.split(','));
+        setSelectedValues('mobile-type-options', types.split(','));
+    }
+}
+
+// ============================================
+// DOCUMENT FILTERING
+// ============================================
+function documentMatchesFilters(doc, state) {
+    // Session
+    const docSession = doc.session ? doc.session.toString() : '';
+    if (state.sessions.length > 0 && !state.sessions.includes(docSession)) return false;
+
+    // Type
+    if (state.types.length > 0 && !state.types.includes(doc.doc_type || '')) return false;
+
+    // Signal filter
+    const hasSignals = (doc.signal_paragraphs && doc.signal_paragraphs.length > 0)
+        || (doc.signal_summary && Object.keys(doc.signal_summary).length > 0);
+
+    if (state.signals.length > 0) {
+        // Must have at least one of the selected signals
+        const docSignals = Object.keys(doc.signal_summary || {});
+        if (!state.signals.some(s => docSignals.includes(s))) return false;
+    }
+
+    // Default: only show docs with signals (unless signal filter narrows it)
+    if (!hasSignals) return false;
+
+    // Search
+    if (state.searchQuery) {
+        const searchText = `${doc.symbol || ''} ${doc.title || ''} ${doc.decision_text || ''}`.toLowerCase();
+        const paraText = (doc.signal_paragraphs || []).map(p => (p.text || '').toLowerCase()).join(' ');
+        if (!searchText.includes(state.searchQuery) && !paraText.includes(state.searchQuery)) return false;
+    }
+
+    return true;
+}
+
+function applyFilters() {
+    const state = getFilterState();
+    filteredDocumentsCache = allDocumentsCache.filter(doc => documentMatchesFilters(doc, state));
+    currentPage = 0;
+
+    const container = cachedDocumentsContainer || document.getElementById('documents-container');
+    const emptyState = cachedEmptyState || document.getElementById('empty-state');
+
+    if (filteredDocumentsCache.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        container.classList.add('hidden');
+    } else {
+        emptyState.classList.add('hidden');
+        container.classList.remove('hidden');
+        const firstPage = filteredDocumentsCache.slice(0, PAGE_SIZE);
+        requestAnimationFrame(() => {
+            container.innerHTML = firstPage.map(doc => renderDocumentCard(doc, true)).join('');
+            initializeDocumentCards();
+            initializeInfiniteScroll();
+            applySignalHighlights();
+            if (state.searchQuery) applySearchHighlights(state.searchQuery);
+        });
+    }
+
+    updateDocumentsCount();
+    updateDropdownLabels();
+    updateUrlState();
+}
+
+const debouncedApplyFilters = debounce(() => applyFilters(), 300);
+
+// ============================================
+// DATA LOADING
+// ============================================
 function buildSignalParagraphs(doc) {
     const paragraphs = doc.paragraphs || {};
     const signals = doc.signals || {};
-    const signalParagraphs = [];
-
-    Object.entries(signals).forEach(([paraNum, paraSignals]) => {
-        if (!paraSignals || paraSignals.length === 0) {
-            return;
-        }
-        signalParagraphs.push({
-            number: paraNum,
-            text: paragraphs[paraNum] || '',
-            signals: paraSignals,
-        });
+    const result = [];
+    Object.entries(signals).forEach(([num, sigs]) => {
+        if (sigs && sigs.length) result.push({ number: num, text: paragraphs[num] || '', signals: sigs });
     });
-
-    signalParagraphs.sort((a, b) => Number(a.number) - Number(b.number));
-    return signalParagraphs;
+    result.sort((a, b) => Number(a.number) - Number(b.number));
+    return result;
 }
 
-function buildSignalSummary(signalParagraphs) {
-    const summary = {};
-    signalParagraphs.forEach(para => {
-        (para.signals || []).forEach(signal => {
-            summary[signal] = (summary[signal] || 0) + 1;
-        });
-    });
-    return summary;
-}
-
-function normalizeDocument(doc, session) {
-    const signalParagraphs = doc.signal_paragraphs || buildSignalParagraphs(doc);
-    const signalSummary = doc.signal_summary && Object.keys(doc.signal_summary).length > 0
+function normalizeDocument(doc) {
+    const sp = doc.signal_paragraphs || buildSignalParagraphs(doc);
+    const ss = doc.signal_summary && Object.keys(doc.signal_summary).length > 0
         ? doc.signal_summary
-        : buildSignalSummary(signalParagraphs);
-    const derivedSession = doc.session || getSessionFromSymbol(doc.symbol);
-    const docType = doc.doc_type || (doc.symbol && doc.symbol.includes('/RES/') ? 'resolution' : (doc.symbol && doc.symbol.includes('/L.') ? 'proposal' : ''));
-
-    return {
-        ...doc,
-        session: derivedSession || session,
-        doc_type: docType,
-        signal_paragraphs: signalParagraphs,
-        signal_summary: signalSummary,
-    };
+        : (() => { const s = {}; sp.forEach(p => (p.signals || []).forEach(sig => s[sig] = (s[sig] || 0) + 1)); return s; })();
+    const session = doc.session || getSessionFromSymbol(doc.symbol);
+    const docType = doc.doc_type || (doc.symbol?.includes('/RES/') ? 'resolution' : doc.symbol?.includes('/L.') ? 'proposal' : '');
+    return { ...doc, session, doc_type: docType, signal_paragraphs: sp, signal_summary: ss };
 }
 
 function getSessionFromSymbol(symbol) {
-    if (!symbol) {
-        return null;
-    }
-    const resMatch = symbol.match(/^A\/RES\/(\d+)/);
-    if (resMatch) {
-        return resMatch[1];
-    }
-    const committeeMatch = symbol.match(/^A\/C\.\d+\/(\d+)\/L\./);
-    if (committeeMatch) {
-        return committeeMatch[1];
-    }
-    const plenaryMatch = symbol.match(/^A\/(\d+)\/L\./);
-    if (plenaryMatch) {
-        return plenaryMatch[1];
-    }
+    if (!symbol) return null;
+    let m = symbol.match(/^A\/RES\/(\d+)/); if (m) return m[1];
+    m = symbol.match(/^A\/C\.\d+\/(\d+)\/L\./); if (m) return m[1];
+    m = symbol.match(/^A\/(\d+)\/L\./); if (m) return m[1];
     return null;
 }
 
-function getDisplayTitle(doc) {
-    if (!doc.title) {
-        return '';
-    }
-    const parts = (doc.symbol || '').split('/');
-    const numberPart = parts.length >= 2 ? `${parts[parts.length - 2]}/${parts[parts.length - 1]}` : '';
-    if (numberPart && doc.title.startsWith(`${numberPart}. `)) {
-        return doc.title.slice(numberPart.length + 2);
-    }
-    return doc.title;
-}
+async function loadData() {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.classList.remove('hidden');
 
-function getSessionSortValue(session) {
-    if (session === 'current') {
-        return 80;
-    }
-    const parsed = Number.parseInt(session, 10);
-    return Number.isNaN(parsed) ? -1 : parsed;
-}
+    try {
+        const response = await fetch(`${basePath}/data.json`);
+        if (!response.ok) throw new Error('Failed to load data');
+        const data = await response.json();
 
-function getDocumentSortKey(doc) {
-    const sessionValue = getSessionSortValue(doc.session);
-    const symbol = doc.symbol || '';
-    const isProposal = doc.doc_type === 'proposal' || symbol.includes('/L.');
-    const isResolution = doc.doc_type === 'resolution' || symbol.includes('/RES/');
-    const isDecision = doc.doc_type === 'decision';
+        const documents = (data.documents || []).map(doc => normalizeDocument(doc));
 
-    let categoryRank = 3;
-    let committeeRank = 99;
-    let docNumber = Number.MAX_SAFE_INTEGER;
+        // Populate session checkboxes from data
+        const sessions = [...new Set(documents.map(d => d.session).filter(Boolean).map(String))];
+        sessions.sort((a, b) => Number(b) - Number(a));
+        populateSessionCheckboxes('session-options', sessions);
+        populateSessionCheckboxes('mobile-session-options', sessions);
 
-    if (isProposal) {
-        const plenaryMatch = symbol.match(/^A\/(\d+)\/L\.(\d+)/);
-        if (plenaryMatch) {
-            categoryRank = 0;
-            docNumber = Number.parseInt(plenaryMatch[2], 10);
-        } else {
-            const committeeMatch = symbol.match(/^A\/C\.(\d+)\/(\d+)\/L\.(\d+)/);
-            if (committeeMatch) {
-                categoryRank = 1;
-                committeeRank = Number.parseInt(committeeMatch[1], 10);
-                docNumber = Number.parseInt(committeeMatch[3], 10);
-            }
-        }
-    } else if (isResolution) {
-        const resolutionMatch = symbol.match(/^A\/RES\/(\d+)\/(\d+)/);
-        if (resolutionMatch) {
-            categoryRank = 2;
-            docNumber = Number.parseInt(resolutionMatch[2], 10);
-        }
-    } else if (isDecision) {
-        const decisionMatch = symbol.match(/(\d+)(?!.*\d)/);
-        if (decisionMatch) {
-            categoryRank = 3;
-            docNumber = Number.parseInt(decisionMatch[1], 10);
-        }
-    }
-
-    return {
-        sessionValue,
-        categoryRank,
-        committeeRank,
-        docNumber,
-        symbol,
-    };
-}
-
-// Initialize the explorer
-document.addEventListener('DOMContentLoaded', function() {
-    initializeFilters();
-    initializeSearch();
-    initializeSessionSelector();
-});
-
-// Session selector
-function initializeSessionSelector() {
-    sessionSelector = document.getElementById('session-selector');
-
-    // Populate session options dynamically
-    populateSessionOptions(sessionSelector).then(() => {
+        // Apply URL state
         applyFiltersFromUrl();
-        wirePillGroup(sessionSelector, () => {
-            selectedSessions = getActiveValues(sessionSelector);
-            loadSelectedSessions();
-        });
-        selectedSessions = getActiveValues(sessionSelector);
-        loadSelectedSessions();
+
+        // Store and render
+        allDocumentsCache = documents;
+        sortDocuments(allDocumentsCache);
+        applyFilters();
+    } catch (error) {
+        console.error('Error loading data:', error);
+    } finally {
+        overlay.classList.add('hidden');
+    }
+}
+
+function populateSessionCheckboxes(containerId, sessions) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = sessions.map(s => `
+        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-700">
+            <input type="checkbox" value="${s}" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+            <span>${s}</span>
+        </label>
+    `).join('');
+}
+
+// ============================================
+// SORTING
+// ============================================
+function sortDocuments(docs) {
+    docs.sort((a, b) => {
+        const sA = Number(a.session) || 0, sB = Number(b.session) || 0;
+        if (sA !== sB) return sB - sA; // newest session first
+
+        const rankA = docTypeRank(a), rankB = docTypeRank(b);
+        if (rankA !== rankB) return rankA - rankB;
+
+        return (a.symbol || '').localeCompare(b.symbol || '');
     });
 }
 
-// Populate session selector with available sessions
-async function populateSessionOptions(selector) {
-    selector.innerHTML = '';
-
-    const currentButton = document.createElement('button');
-    currentButton.type = 'button';
-    currentButton.className = 'filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900';
-    currentButton.dataset.value = '80';
-    currentButton.textContent = '80';
-    selector.appendChild(currentButton);
-
-    // Check which session directories exist (in reverse chronological order)
-    const availableSessions = [79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50];
-
-    for (const session of availableSessions) {
-        try {
-            // Check if session data exists
-            const response = await fetch(getSessionDataUrl(session.toString()), { method: 'HEAD' });
-            if (response.ok) {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'filter-pill inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:border-gray-300 hover:text-gray-900';
-                button.dataset.value = session.toString();
-                button.textContent = session.toString();
-                selector.appendChild(button);
-            }
-        } catch (error) {
-            // Session not available, skip
-            console.log(`Session ${session} not available`);
-        }
-    }
-
-    setActiveValues(selector, []);
-    selectedSessions = [];
-}
-
-// Load all selected sessions and combine their documents
-async function loadSelectedSessions() {
-    const loadingOverlay = document.getElementById('loading-overlay');
-    loadingOverlay.classList.remove('hidden');
-
-    try {
-        const allDocuments = [];
-        const sessionsToLoad = selectedSessions.length
-            ? selectedSessions
-            : Array.from(sessionSelector.querySelectorAll('.filter-pill')).map(pill => pill.dataset.value);
-
-        // Always load main data.json to get decisions (they're only in the main file)
-        if (!sessionDataCache['main']) {
-            const response = await fetch(`${basePath}/data.json`);
-            if (!response.ok) throw new Error('Failed to load main data');
-            sessionDataCache['main'] = await response.json();
-        }
-
-        for (const session of sessionsToLoad) {
-            const sessionKey = session.toString();
-
-            // Load session data via AJAX
-            if (!sessionDataCache[sessionKey]) {
-                const response = await fetch(getSessionDataUrl(sessionKey));
-                if (!response.ok) throw new Error(`Failed to load session ${sessionKey} data`);
-                sessionDataCache[sessionKey] = await response.json();
-            }
-
-            // Add session documents with session identifier
-            const sessionData = sessionDataCache[sessionKey];
-            if (!sessionData.documents || !Array.isArray(sessionData.documents)) {
-                console.error(`Invalid session data format for ${sessionKey}: missing documents array`);
-                continue;
-            }
-
-            const allowNoSignals = includeNoSignalsToggle && includeNoSignalsToggle.checked;
-            const sessionDocs = sessionData.documents
-                .map(doc => normalizeDocument(doc, sessionKey))
-                .filter(doc => {
-                    const hasSignals = doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
-                    return allowNoSignals || hasSignals;
-                });
-
-            allDocuments.push(...sessionDocs);
-
-            // Add decisions from main data.json for this session
-            const mainData = sessionDataCache['main'];
-            if (mainData.documents && Array.isArray(mainData.documents)) {
-                const decisionsForSession = mainData.documents
-                    .filter(doc => doc.doc_type === 'decision' && doc.session === parseInt(sessionKey, 10))
-                    .map(doc => normalizeDocument(doc, sessionKey))
-                    .filter(doc => {
-                        const hasSignals = doc.signal_paragraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
-                        return allowNoSignals || hasSignals;
-                    });
-                allDocuments.push(...decisionsForSession);
-            }
-        }
-
-        const dedupedDocuments = [];
-        const seenDocuments = new Set();
-        allDocuments.forEach(doc => {
-            const key = `${doc.session || ''}::${doc.doc_type || ''}::${doc.symbol || ''}`;
-            if (seenDocuments.has(key)) {
-                return;
-            }
-            seenDocuments.add(key);
-            dedupedDocuments.push(doc);
-        });
-
-        // Render combined documents from selected sessions
-        renderCombinedDocuments(dedupedDocuments);
-
-    } catch (error) {
-        console.error('Error loading selected sessions:', error);
-        alert('Failed to load session data. Please try again.');
-    } finally {
-        loadingOverlay.classList.add('hidden');
-    }
+function docTypeRank(doc) {
+    if (doc.doc_type === 'resolution') return 0;
+    if (doc.doc_type === 'proposal') return 1;
+    return 2;
 }
 
 // ============================================
 // DOCUMENT CARD RENDERING
 // ============================================
+function getDisplayTitle(doc) {
+    if (!doc.title) return '';
+    const parts = (doc.symbol || '').split('/');
+    const numPart = parts.length >= 2 ? `${parts[parts.length - 2]}/${parts[parts.length - 1]}` : '';
+    if (numPart && doc.title.startsWith(`${numPart}. `)) return doc.title.slice(numPart.length + 2);
+    return doc.title;
+}
+
+function getSignalColor(signal) {
+    const colors = {
+        'agenda': 'bg-blue-100 text-blue-800',
+        'PGA': 'bg-purple-100 text-purple-800',
+        'process': 'bg-amber-100 text-amber-800',
+        'report': 'bg-green-100 text-green-800',
+        'observer': 'bg-slate-100 text-slate-800'
+    };
+    return colors[signal] || 'bg-gray-100 text-gray-800';
+}
+
+function getSignalHighlightClass(signal) {
+    const colors = {
+        'agenda': 'bg-blue-50 text-blue-900',
+        'PGA': 'bg-purple-50 text-purple-900',
+        'process': 'bg-amber-50 text-amber-900',
+        'report': 'bg-green-50 text-green-900',
+        'observer': 'bg-slate-50 text-slate-900'
+    };
+    return colors[signal] || 'text-gray-800';
+}
+
 function renderDocumentCard(doc, isCollapsed = true) {
     const signalParagraphs = doc.signal_paragraphs || [];
     const title = escapeHtml(getDisplayTitle(doc));
     const symbol = escapeHtml(doc.symbol || '');
-    const hasSignals = signalParagraphs.length > 0 || Object.keys(doc.signal_summary || {}).length > 0;
     const paraCount = signalParagraphs.length;
     const isDecision = doc.doc_type === 'decision';
     const decisionText = escapeHtml(doc.decision_text || '');
@@ -1045,23 +702,13 @@ function renderDocumentCard(doc, isCollapsed = true) {
     return `
         <div class="border border-gray-200 rounded-lg overflow-hidden document-card hover:border-gray-300 transition-colors${doc.doc_type === 'proposal' ? ' border-l-4 border-l-amber-400' : ''}${doc.doc_type === 'decision' ? ' border-l-4 border-l-slate-400' : ''}"
              data-symbol="${doc.symbol}"
-             data-source="${doc.origin || doc.source || ''}"
-             data-status="${doc.doc_type === 'resolution' ? 'adopted' : (doc.doc_type === 'proposal' ? 'draft' : 'decision')}"
              data-type="${doc.doc_type || ''}"
-             data-has-signals="${hasSignals ? 'true' : 'false'}"
-             data-signals="${Object.keys(doc.signal_summary || {}).join(',')}"
-             data-session="${doc.session || ''}"
-             data-un-url="${doc.un_url || ''}"
-             data-igov-url="${doc.igov_url || ''}"
-             data-title="${title}">
-            <!-- Document Header (clickable to expand/collapse) -->
+             data-session="${doc.session || ''}">
             <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 cursor-pointer doc-header" role="button" aria-expanded="${!isCollapsed}">
                 <div class="flex items-start justify-between gap-4">
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-3 mb-1">
-                            <span class="font-semibold text-gray-900" data-search>
-                                ${symbol}
-                            </span>
+                            <span class="font-semibold text-gray-900" data-search>${symbol}</span>
                             ${isDecision ? `<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">${escapeHtml(doc.decision_type || 'Decision')}</span>` : ''}
                             ${!isDecision && doc.origin && doc.origin !== 'Unknown' && doc.origin !== 'IGov' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
                             ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
@@ -1071,16 +718,14 @@ function renderDocumentCard(doc, isCollapsed = true) {
                         ${metaItems.length ? `<div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">${metaItems.map(item => `<span>${item}</span>`).join('')}</div>` : ''}
                     </div>
                     <div class="flex items-center gap-2 flex-shrink-0">
-                        ${isDecision && doc.igov_url ? `<a href="${doc.igov_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">View IGov</a>` : ''}
-                        ${!isDecision && doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">View PDF</a>` : ''}
+                        ${isDecision && doc.igov_url ? `<a href="${doc.igov_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">IGov</a>` : ''}
+                        ${!isDecision && doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">PDF</a>` : ''}
                         <svg class="expand-icon w-4 h-4 text-gray-400 transition-transform ${isCollapsed ? '' : 'rotate-180'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </div>
                 </div>
             </div>
-
-            <!-- Paragraphs (collapsible) -->
             <div class="border-t border-gray-200 expandable-content ${isCollapsed ? 'hidden' : ''}">
                 <div class="px-4 py-3 space-y-3">
                     ${paragraphsHtml}
@@ -1091,341 +736,190 @@ function renderDocumentCard(doc, isCollapsed = true) {
 }
 
 // ============================================
-// INFINITE SCROLL WITH INTERSECTION OBSERVER
+// HIGHLIGHTS
 // ============================================
+function highlightQueryInElement(element, query, className) {
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escaped, 'gi');
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+        const text = node.nodeValue;
+        if (!text || !regex.test(text)) return;
+        regex.lastIndex = 0;
+        const fragment = document.createDocumentFragment();
+        let last = 0;
+        text.replace(regex, (match, idx) => {
+            fragment.appendChild(document.createTextNode(text.slice(last, idx)));
+            const mark = document.createElement('mark');
+            mark.className = className;
+            mark.textContent = match;
+            fragment.appendChild(mark);
+            last = idx + match.length;
+            return match;
+        });
+        fragment.appendChild(document.createTextNode(text.slice(last)));
+        node.parentNode.replaceChild(fragment, node);
+    });
+}
 
-let scrollObserver = null;
-let cachedScrollSentinel = null;
-let cachedScrollLoading = null;
-let cachedDocsCount = null;
+function applySignalHighlights() {
+    document.querySelectorAll('[data-paragraph]').forEach(target => {
+        target.querySelectorAll('mark.signal-highlight').forEach(m => m.replaceWith(m.textContent));
+        const paraItem = target.closest('.para-item');
+        const signals = paraItem ? paraItem.dataset.signals.split(',').filter(Boolean) : [];
+        signals.forEach(signal => {
+            const phrases = signalPhraseMap[signal] || [];
+            phrases.sort((a, b) => b.length - a.length).forEach(phrase => {
+                highlightQueryInElement(target, phrase, `signal-highlight ${getSignalHighlightClass(signal)} rounded px-0.5`);
+            });
+        });
+    });
+}
 
-// Update the documents count display
+function applySearchHighlights(query) {
+    if (!query) return;
+    document.querySelectorAll('[data-search]').forEach(target => {
+        target.querySelectorAll('mark.search-highlight').forEach(m => m.replaceWith(m.textContent));
+        highlightQueryInElement(target, query, 'search-highlight bg-red-100 text-red-900 rounded px-0.5');
+    });
+}
+
+// ============================================
+// INFINITE SCROLL
+// ============================================
 function updateDocumentsCount() {
+    if (!cachedDocsCount) cachedDocsCount = document.getElementById('documents-count');
     if (!cachedDocsCount) return;
-
-    const totalFiltered = filteredDocumentsCache.length;
-    const rendered = Math.min((currentPage + 1) * PAGE_SIZE, totalFiltered);
-
-    if (totalFiltered > 0) {
+    const total = filteredDocumentsCache.length;
+    const rendered = Math.min((currentPage + 1) * PAGE_SIZE, total);
+    if (total > 0) {
         cachedDocsCount.classList.remove('hidden');
-        cachedDocsCount.textContent = `Showing ${rendered} of ${totalFiltered} documents`;
+        cachedDocsCount.textContent = `${rendered} / ${total}`;
     } else {
         cachedDocsCount.classList.add('hidden');
     }
 }
 
-// Check if more documents can be loaded
 function hasMoreDocuments() {
-    const rendered = (currentPage + 1) * PAGE_SIZE;
-    return rendered < filteredDocumentsCache.length;
+    return (currentPage + 1) * PAGE_SIZE < filteredDocumentsCache.length;
 }
 
-// Load more documents (append to existing) - triggered by IntersectionObserver
 function loadMoreDocuments() {
     if (isLoadingMore || !hasMoreDocuments()) return;
-
     isLoadingMore = true;
     if (cachedScrollLoading) cachedScrollLoading.classList.remove('hidden');
 
     requestAnimationFrame(() => {
-        const container = cachedDocumentsContainer;
-        const startIdx = (currentPage + 1) * PAGE_SIZE;
-        const endIdx = Math.min(startIdx + PAGE_SIZE, filteredDocumentsCache.length);
-        const docsToRender = filteredDocumentsCache.slice(startIdx, endIdx);
+        const start = (currentPage + 1) * PAGE_SIZE;
+        const end = Math.min(start + PAGE_SIZE, filteredDocumentsCache.length);
+        const docs = filteredDocumentsCache.slice(start, end);
 
-        if (docsToRender.length === 0) {
+        if (docs.length === 0) {
             isLoadingMore = false;
             if (cachedScrollLoading) cachedScrollLoading.classList.add('hidden');
             updateDocumentsCount();
             return;
         }
 
-        // Create document fragment for batch insertion
         const fragment = document.createDocumentFragment();
-        const tempDiv = document.createElement('div');
-
-        docsToRender.forEach(doc => {
-            tempDiv.innerHTML = renderDocumentCard(doc, true);
-            const card = tempDiv.firstElementChild;
-            if (card) fragment.appendChild(card);
+        const tmp = document.createElement('div');
+        docs.forEach(doc => {
+            tmp.innerHTML = renderDocumentCard(doc, true);
+            if (tmp.firstElementChild) fragment.appendChild(tmp.firstElementChild);
         });
 
-        container.appendChild(fragment);
+        cachedDocumentsContainer.appendChild(fragment);
         currentPage++;
         isLoadingMore = false;
-
         if (cachedScrollLoading) cachedScrollLoading.classList.add('hidden');
-
-        // Initialize newly added cards
         initializeDocumentCards();
         updateDocumentsCount();
     });
 }
 
-// Initialize IntersectionObserver for infinite scroll
 function initializeInfiniteScroll() {
     cachedScrollSentinel = document.getElementById('scroll-sentinel');
     cachedScrollLoading = document.getElementById('scroll-loading');
     cachedDocsCount = document.getElementById('documents-count');
-
     if (!cachedScrollSentinel) return;
-
-    // Disconnect existing observer if any
-    if (scrollObserver) {
-        scrollObserver.disconnect();
-    }
-
+    if (scrollObserver) scrollObserver.disconnect();
     scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !isLoadingMore && hasMoreDocuments()) {
-                loadMoreDocuments();
-            }
+            if (entry.isIntersecting && !isLoadingMore && hasMoreDocuments()) loadMoreDocuments();
         });
-    }, {
-        root: null,
-        rootMargin: '200px', // Start loading 200px before reaching the sentinel
-        threshold: 0
-    });
-
+    }, { root: null, rootMargin: '200px', threshold: 0 });
     scrollObserver.observe(cachedScrollSentinel);
 }
 
-// Render documents from multiple sessions (with pagination)
-function renderCombinedDocuments(allDocuments) {
-    // Sort documents by our unified sorting logic
-    allDocuments.sort((a, b) => {
-        const keyA = getDocumentSortKey(a);
-        const keyB = getDocumentSortKey(b);
-
-        if (keyA.sessionValue !== keyB.sessionValue) {
-            return keyA.sessionValue - keyB.sessionValue;
-        }
-        if (keyA.categoryRank !== keyB.categoryRank) {
-            return keyA.categoryRank - keyB.categoryRank;
-        }
-        if (keyA.committeeRank !== keyB.committeeRank) {
-            return keyA.committeeRank - keyB.committeeRank;
-        }
-        if (keyA.docNumber !== keyB.docNumber) {
-            return keyA.docNumber - keyB.docNumber;
-        }
-        return keyA.symbol.localeCompare(keyB.symbol);
-    });
-
-    allDocumentsCache = [...allDocuments];
-    filteredDocumentsCache = [...allDocuments];
-    currentPage = 0;
-
-    // Cache DOM elements if not already cached
-    if (!cachedDocumentsContainer) {
-        cachedDocumentsContainer = document.getElementById('documents-container');
-        cachedEmptyState = document.getElementById('empty-state');
-    }
-
-    const container = cachedDocumentsContainer;
-
-    if (!groupByImplementation) {
-        // Render first page only (infinite scroll will load more)
-        const firstPageDocs = allDocuments.slice(0, PAGE_SIZE);
-        container.innerHTML = firstPageDocs.map(doc => renderDocumentCard(doc, true)).join('');
-        initializeDocumentCards();
-        initializeInfiniteScroll();
-        updateDocumentsCount();
-        applyFilters();
-        return;
-    }
-
-    // Group by implementation (render all for now, pagination is complex with groups)
-    const groupOrder = Object.keys(implementationSessionMap)
-        .sort((a, b) => Number(b) - Number(a))
-        .concat('Unspecified');
-    const groupedDocs = new Map(groupOrder.map(key => [key, []]));
-
-    allDocuments.forEach(doc => {
-        const groupKey = getImplementationSessionForDoc(doc) || 'Unspecified';
-        if (!groupedDocs.has(groupKey)) {
-            groupedDocs.set(groupKey, []);
-        }
-        groupedDocs.get(groupKey).push(doc);
-    });
-
-    const groupedHtml = Array.from(groupedDocs.entries())
-        .filter(([, docs]) => docs.length > 0)
-        .map(([groupKey, docs]) => {
-            const label = groupKey === 'Unspecified'
-                ? 'Implementation Session: Unspecified'
-                : `Implementation Session ${groupKey}`;
-            return `
-                <div class="implementation-group space-y-4" data-group="${groupKey}">
-                    <div class="text-xs font-semibold uppercase tracking-wide text-indigo-700">${label}</div>
-                    ${docs.map(doc => renderDocumentCard(doc, true)).join('')}
-                </div>
-            `;
-        })
-        .join('');
-
-    container.innerHTML = groupedHtml;
-    initializeDocumentCards();
-    updateDocumentsCount();
-    applyFilters();
-}
-
-
-
-// Helper functions
-function getOriginColor(origin) {
-    const colors = {
-        'Plenary': 'bg-amber-50 text-amber-700',
-        'C1': 'bg-red-50 text-red-700',
-        'C2': 'bg-green-50 text-green-700',
-        'C3': 'bg-blue-50 text-blue-700',
-        'C4': 'bg-purple-50 text-purple-700',
-        'C5': 'bg-orange-50 text-orange-700',
-        'C6': 'bg-teal-50 text-teal-700'
-    };
-    return colors[origin] || 'bg-gray-100 text-gray-700';
-}
-
-function getSignalColor(signal) {
-    const colors = {
-        'agenda': 'bg-blue-100 text-blue-800',
-        'PGA': 'bg-purple-100 text-purple-800',
-        'process': 'bg-amber-100 text-amber-800',
-        'report': 'bg-green-100 text-green-800',
-        'observer': 'bg-slate-100 text-slate-800'
-    };
-    return colors[signal] || 'bg-gray-100 text-gray-800';
-}
-
-function getSignalHighlightClass(signal) {
-    const colors = {
-        'agenda': 'bg-blue-50 text-blue-900',
-        'PGA': 'bg-purple-50 text-purple-900',
-        'process': 'bg-amber-50 text-amber-900',
-        'report': 'bg-green-50 text-green-900',
-        'observer': 'bg-slate-50 text-slate-900'
-    };
-    return colors[signal] || 'text-gray-800';
-}
-
-// Search functionality (with debouncing for performance)
-function initializeSearch() {
-    cachedSearchInput = document.getElementById('search-input');
-
-    // Use debounced filter for search input (300ms delay)
-    cachedSearchInput.addEventListener('input', function() {
-        debouncedApplyFilters();
-    });
-
-    // Immediate filter on Enter key
-    cachedSearchInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            applyFilters();
-        }
-    });
-}
-
-// Filter functionality (similar to original but with search)
-function initializeFilters() {
-    sessionSelector = document.getElementById('session-selector');
-    implementationFilter = document.getElementById('implementation-filter');
-    sourceFilter = document.getElementById('source-filter');
-    signalFilter = document.getElementById('signal-filter');
-    statusFilter = document.getElementById('status-filter');
-    typeFilter = document.getElementById('type-filter');
-    clearFiltersBtn = document.getElementById('clear-filters');
-    groupImplementationBtn = document.getElementById('group-implementation');
-    const toggleFiltersBtn = document.getElementById('toggle-filters');
-    const extraFilters = document.getElementById('extra-filters');
-    includeNoSignalsToggle = document.getElementById('include-no-signals');
-
-    wirePillGroup(implementationFilter, applyFilters);
-    wirePillGroup(sourceFilter, applyFilters);
-    wirePillGroup(signalFilter, applyFilters);
-    wirePillGroup(statusFilter, applyFilters);
-    wirePillGroup(typeFilter, applyFilters);
-
-    if (includeNoSignalsToggle) {
-        includeNoSignalsToggle.addEventListener('change', function() {
-            loadSelectedSessions();
-        });
-    }
-
-    if (toggleFiltersBtn && extraFilters) {
-        toggleFiltersBtn.addEventListener('click', function() {
-            const isHidden = extraFilters.classList.contains('hidden');
-            extraFilters.classList.toggle('hidden', !isHidden);
-            toggleFiltersBtn.textContent = isHidden ? 'Hide filters' : 'More filters';
-            toggleFiltersBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-        });
-    }
-
-    groupImplementationBtn.addEventListener('click', function() {
-        groupByImplementation = !groupByImplementation;
-        groupImplementationBtn.classList.toggle('bg-indigo-600', groupByImplementation);
-        groupImplementationBtn.classList.toggle('text-white', groupByImplementation);
-        groupImplementationBtn.classList.toggle('border-indigo-600', groupByImplementation);
-        groupImplementationBtn.classList.toggle('bg-indigo-50', !groupByImplementation);
-        groupImplementationBtn.classList.toggle('text-indigo-700', !groupByImplementation);
-        groupImplementationBtn.classList.toggle('border-indigo-200', !groupByImplementation);
-
-        if (allDocumentsCache.length > 0) {
-            renderCombinedDocuments(allDocumentsCache);
-        } else {
-            applyFilters();
-        }
-    });
-
-    clearFiltersBtn.addEventListener('click', function() {
-        setActiveValues(sessionSelector, []);
-        setActiveValues(implementationFilter, []);
-        setActiveValues(sourceFilter, []);
-        setActiveValues(signalFilter, []);
-        setActiveValues(statusFilter, []);
-        setActiveValues(typeFilter, []);
-        selectedSessions = [];
-        groupByImplementation = false;
-        groupImplementationBtn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
-        groupImplementationBtn.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
-        if (includeNoSignalsToggle) {
-            includeNoSignalsToggle.checked = false;
-        }
-        document.getElementById('search-input').value = '';
-        loadSelectedSessions();
-    });
-}
-
-// Document card interactions (expand/collapse)
+// ============================================
+// DOCUMENT CARD INTERACTIONS
+// ============================================
 function initializeDocumentCards() {
-    // Add click handlers for expand/collapse on document headers
-    const headers = document.querySelectorAll('.doc-header:not([data-initialized])');
-
-    headers.forEach(header => {
+    document.querySelectorAll('.doc-header:not([data-initialized])').forEach(header => {
         header.setAttribute('data-initialized', 'true');
         header.addEventListener('click', function(e) {
-            // Don't toggle if clicking on a link
             if (e.target.closest('a')) return;
-
             const card = header.closest('.document-card');
             const content = card.querySelector('.expandable-content');
             const icon = header.querySelector('.expand-icon');
-
             if (content) {
                 const isHidden = content.classList.contains('hidden');
                 content.classList.toggle('hidden');
                 header.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-
-                if (icon) {
-                    icon.classList.toggle('rotate-180', isHidden);
-                }
+                if (icon) icon.classList.toggle('rotate-180', isHidden);
             }
         });
     });
 }
 
-// Initialize document cards on page load
-initializeDocumentCards();
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    cachedDocumentsContainer = document.getElementById('documents-container');
+    cachedEmptyState = document.getElementById('empty-state');
+    cachedSearchInput = document.getElementById('search-input');
+
+    initDropdowns();
+
+    // Wire up filter checkboxes (desktop)
+    ['session-options', 'signal-options', 'type-options'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', (e) => {
+            if (e.target.classList.contains('filter-checkbox')) {
+                syncMobileDesktopFilters('desktop');
+                applyFilters();
+            }
+        });
+    });
+
+    // Wire up filter checkboxes (mobile)
+    ['mobile-session-options', 'mobile-signal-options', 'mobile-type-options'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', (e) => {
+            if (e.target.classList.contains('filter-checkbox')) {
+                syncMobileDesktopFilters('mobile');
+                applyFilters();
+            }
+        });
+    });
+
+    // Search
+    cachedSearchInput.addEventListener('input', debouncedApplyFilters);
+    cachedSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); applyFilters(); }
+    });
+
+    // Clear
+    document.getElementById('clear-filters').addEventListener('click', () => {
+        document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+        cachedSearchInput.value = '';
+        applyFilters();
+    });
+
+    // Load data
+    loadData();
+});
 </script>
 
     </main>
@@ -1435,7 +929,7 @@ initializeDocumentCards();
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-02-08 02:49 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-08 03:03 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
