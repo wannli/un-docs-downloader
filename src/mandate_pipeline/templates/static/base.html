@@ -35,65 +35,35 @@
         #splash {
             position: fixed; inset: 0; z-index: 9999;
             background: #009edb;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
             transition: opacity 0.5s ease, visibility 0.5s ease;
             overflow: hidden;
         }
         #splash.done { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* Scene: semaphore + track + train, positioned above the title */
+        /* Wrapper keeps title + scene vertically centered */
+        .splash-center {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex; flex-direction: column; align-items: center;
+            width: 100%;
+        }
+
+        /* Scene: track + semaphore + train */
         .splash-scene {
-            position: fixed;
-            top: 50%; left: 0; width: 100%;
-            transform: translateY(calc(-100% - 8px));
-            height: 140px;
-        }
-        @media (max-width: 480px) {
-            .splash-scene { height: 100px; transform: translateY(calc(-100% - 4px)); }
-        }
-
-        /* Semaphore signal post — sits above the track, aligned with 'h' in title */
-        .semaphore-signal {
-            position: absolute;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(var(--signal-offset, 30px));
-            z-index: 3;
+            position: relative;
+            width: 100%; height: 110px;
             opacity: 0;
-            animation: fade-in 0.4s ease 0.2s forwards;
+            animation: fade-in 0.5s ease forwards;
         }
         @media (max-width: 480px) {
-            .semaphore-signal svg { width: 28px; height: 70px; }
+            .splash-scene { height: 80px; }
         }
 
-        /* Signal lamp glow — starts dark, turns red when train stops */
-        .signal-lamp {
-            fill: rgba(255,255,255,0.3);
-            animation: lamp-red 0.4s ease 1.6s forwards;
-        }
-        @keyframes lamp-red {
-            to { fill: #ef4444; filter: drop-shadow(0 0 6px rgba(239,68,68,0.8)); }
-        }
-
-        /* Signal arm — swings to horizontal (stop position) */
-        .arm-stop {
-            transform-origin: 22px 19.5px;
-            animation: arm-to-stop 0.6s ease-in-out 1.4s forwards;
-        }
-        @keyframes arm-to-stop {
-            0%   { transform: rotate(-45deg); }
-            70%  { transform: rotate(5deg); }
-            100% { transform: rotate(0deg); }
-        }
-
-        /* Track — full width horizontal line */
+        /* Track — full width */
         .splash-track {
             position: absolute;
-            bottom: 28px; left: 0; width: 100%; height: 3px;
+            bottom: 0; left: 0; width: 100%; height: 3px;
             z-index: 1;
-            opacity: 0;
-            animation: fade-in 0.3s ease 0.1s forwards;
         }
         .splash-track-line {
             width: 100%; height: 100%;
@@ -101,71 +71,84 @@
         }
         .splash-track-ties {
             position: absolute; top: -4px; left: 0; width: 100%; height: 11px;
-            background: repeating-linear-gradient(
-                90deg,
+            background: repeating-linear-gradient(90deg,
                 transparent 0px, transparent 16px,
-                rgba(255,255,255,0.15) 16px, rgba(255,255,255,0.15) 20px
-            );
+                rgba(255,255,255,0.15) 16px, rgba(255,255,255,0.15) 20px);
         }
 
-        /* Train — enters from right, decelerates, stops past semaphore */
-        .splash-train-container {
+        /* Semaphore — right end of track */
+        .semaphore-signal {
             position: absolute;
-            bottom: 31px; left: 0; width: 100%;
-            z-index: 2;
-            overflow: hidden;
-            height: 50px;
-        }
-        .splash-train {
-            animation: train-stop 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s both;
-        }
-        @keyframes train-stop {
-            0%   { transform: translateX(100vw); opacity: 0; }
-            10%  { opacity: 1; }
-            100% { transform: translateX(calc(50vw - 20px)); opacity: 1; }
+            bottom: 3px; right: 8%;
+            z-index: 3;
         }
         @media (max-width: 480px) {
-            .splash-train-container { height: 36px; bottom: 31px; }
-            .splash-train { transform-origin: center center; }
-            @keyframes train-stop {
-                0%   { transform: translateX(100vw) scale(0.7); opacity: 0; }
-                10%  { opacity: 1; }
-                100% { transform: translateX(calc(50vw - 10px)) scale(0.7); opacity: 1; }
-            }
+            .semaphore-signal { right: 4%; }
+            .semaphore-signal svg { width: 24px; height: 60px; }
         }
 
-        /* Title — just below the track */
+        /* Lamp — turns red when train arrives */
+        .signal-lamp {
+            fill: rgba(255,255,255,0.25);
+            transition: fill 0.4s ease, filter 0.4s ease;
+        }
+        .signal-lamp.red {
+            fill: #ef4444;
+            filter: drop-shadow(0 0 8px rgba(239,68,68,0.9));
+        }
+
+        /* Arm — starts angled (clear), swings horizontal (stop) */
+        .arm-stop {
+            transform-origin: 16px 17.5px;
+            transform: rotate(-45deg);
+            transition: transform 0.5s ease-in-out;
+        }
+        .arm-stop.stopped { transform: rotate(0deg); }
+
+        /* Train container */
+        .splash-train-wrap {
+            position: absolute;
+            bottom: 3px; left: 0; width: 100%;
+            z-index: 2; overflow: hidden;
+            height: 60px;
+        }
+        .splash-train {
+            transform: translateX(-260px);
+            transition: transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .splash-train.running {
+            transform: translateX(calc(92vw - 260px));
+        }
+        @media (max-width: 480px) {
+            .splash-train-wrap { height: 44px; }
+            .splash-train { transform: translateX(-200px) scale(0.72); transform-origin: left bottom; }
+            .splash-train.running { transform: translateX(calc(96vw - 200px)) scale(0.72); }
+        }
+
+        /* Title — below the track, centered */
         .splash-text {
-            position: fixed;
-            top: 50%; left: 0; width: 100%;
-            transform: translateY(4px);
-            text-align: center;
-            padding: 0 1rem;
+            margin-top: 12px;
+            text-align: center; padding: 0 1rem;
             opacity: 0;
-            animation: fade-in-text 0.6s ease-out 1.8s forwards;
+            animation: fade-in 0.5s ease forwards;
         }
         .splash-title {
             font-family: 'Roboto', system-ui, sans-serif;
-            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-size: clamp(1.6rem, 5vw, 3rem);
             font-weight: 700;
             color: white; letter-spacing: -0.02em;
         }
         .splash-sub {
             font-family: 'Roboto', system-ui, sans-serif;
-            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-size: clamp(1.6rem, 5vw, 3rem);
             font-weight: 300;
             color: rgba(255,255,255,0.75); letter-spacing: -0.02em;
         }
+        @media (max-width: 480px) {
+            .splash-text { margin-top: 8px; }
+        }
 
-        @keyframes fade-up {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
         @keyframes fade-in {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-        @keyframes fade-in-text {
             from { opacity: 0; }
             to   { opacity: 1; }
         }
