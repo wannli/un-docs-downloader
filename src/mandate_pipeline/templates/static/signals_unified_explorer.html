@@ -626,7 +626,12 @@ function documentMatchesFilters(doc, state) {
     }
 
     // Type
-    if (state.types.length > 0 && !state.types.includes(doc.doc_type || '')) return false;
+    if (state.types.length > 0) {
+        let type = doc.doc_type || '';
+        // Group amendment with proposal for filtering
+        if (type === 'amendment') type = 'proposal';
+        if (!state.types.includes(type)) return false;
+    }
 
     // Signal filter
     const hasSignals = (doc.signal_paragraphs && doc.signal_paragraphs.length > 0)
