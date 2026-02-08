@@ -648,7 +648,10 @@ def generate_signals_info_page(
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
     )
 
-    with open(output_dir / "signals-info.html", "w") as f:
+    about_dir = output_dir / "about"
+    about_dir.mkdir(parents=True, exist_ok=True)
+
+    with open(about_dir / "index.html", "w") as f:
         f.write(html)
 
 
@@ -852,7 +855,7 @@ def generate_site_verbose(
     # Generate pages
     generate_signals_info_page(checks, output_dir)
     if on_generate_page:
-        on_generate_page("signals_info", "signals-info.html")
+        on_generate_page("signals_info", "about/index.html")
 
     generate_unified_explorer_page(browser_documents, checks, output_dir)
     if on_generate_page:
