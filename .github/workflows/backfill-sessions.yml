@@ -77,9 +77,17 @@ jobs:
             echo "Session $SESSION: $NEW_PDFS new PDFs ($PDF_AFTER total)"
             echo "::endgroup::"
 
-            if [ "$NEW_PDFS" -eq 0 ]; then
-              echo "No new PDFs for session $SESSION, skipping pipeline"
-              SUMMARY="${SUMMARY}| ${SESSION} | 0 | skipped |\n"
+            # Check if pipeline already completed for this session
+            LINKED_COUNT=$(ls -1 data/linked/A_RES_${SESSION}_*.json 2>/dev/null | wc -l || echo 0)
+            if [ "$NEW_PDFS" -eq 0 ] && [ "$LINKED_COUNT" -ge "$PDF_AFTER" ] && [ "$PDF_AFTER" -gt 0 ]; then
+              echo "Session $SESSION already fully processed ($LINKED_COUNT linked files)"
+              SUMMARY="${SUMMARY}| ${SESSION} | 0 | already done |\n"
+              continue
+            fi
+
+            if [ "$PDF_AFTER" -eq 0 ]; then
+              echo "No PDFs for session $SESSION, skipping"
+              SUMMARY="${SUMMARY}| ${SESSION} | 0 | no PDFs |\n"
               continue
             fi
 
