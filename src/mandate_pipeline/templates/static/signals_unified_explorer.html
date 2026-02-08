@@ -526,8 +526,24 @@ function sortDocuments(docs) {
         const rankA = docTypeRank(a), rankB = docTypeRank(b);
         if (rankA !== rankB) return rankA - rankB;
 
-        return (a.symbol || '').localeCompare(b.symbol || '');
+        return compareSymbols(a.symbol || '', b.symbol || '');
     });
+}
+
+function compareSymbols(a, b) {
+    // Numeric-aware comparison: split on / and compare segments
+    const partsA = a.split('/'), partsB = b.split('/');
+    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+        const pA = partsA[i] || '', pB = partsB[i] || '';
+        const nA = Number(pA), nB = Number(pB);
+        if (!isNaN(nA) && !isNaN(nB)) {
+            if (nA !== nB) return nA - nB;
+        } else {
+            const cmp = pA.localeCompare(pB);
+            if (cmp !== 0) return cmp;
+        }
+    }
+    return 0;
 }
 
 function docTypeRank(doc) {

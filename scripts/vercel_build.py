@@ -56,6 +56,55 @@ def main():
         print("   This is expected for PR previews before data pipeline runs.")
         print("   Creating minimal site...")
     
+    # Enrich documents with paragraph text from extracted data
+    print("\n📝 Enriching with paragraph text...")
+    extracted_dir = Path('data/extracted')
+    enriched_count = 0
+    if extracted_dir.exists():
+        extracted_by_stem = {}
+        for ef in extracted_dir.glob('*.json'):
+            extracted_by_stem[ef.stem] = ef
+
+        for doc in documents:
+            stem = doc.get('symbol', '').replace('/', '_')
+            extracted_file = extracted_by_stem.get(stem)
+            if extracted_file:
+                try:
+                    with open(extracted_file) as f:
+                        extracted = json.load(f)
+                    if extracted.get('paragraphs'):
+                        doc['paragraphs'] = extracted['paragraphs']
+                        if not doc.get('title'):
+                            doc['title'] = extracted.get('title', '')
+                        enriched_count += 1
+                except Exception as e:
+                    print(f"⚠️  Error enriching {doc.get('symbol')}: {e}")
+
+    print(f"✅ Enriched {enriched_count}/{len(documents)} documents with paragraph text")
+
+    # Build signal_paragraphs for documents that have paragraphs and signals
+    print("\n🔗 Building signal paragraphs...")
+    sp_count = 0
+    for doc in documents:
+        if doc.get('signal_paragraphs'):
+            sp_count += 1
+            continue
+        signal_paras = []
+        for para_num, para_signals in doc.get('signals', {}).items():
+            if para_signals:
+                para_text = doc.get('paragraphs', {}).get(str(para_num), '')
+                signal_paras.append({
+                    'number': para_num,
+                    'text': para_text,
+                    'signals': para_signals,
+                })
+        if signal_paras:
+            signal_paras.sort(key=lambda p: int(p['number']) if str(p['number']).isdigit() else 0)
+            doc['signal_paragraphs'] = signal_paras
+            sp_count += 1
+
+    print(f"✅ {sp_count} documents have signal paragraphs")
+    
     # Load signal detection rules
     print("\n🔍 Loading signal detection rules...")
     checks_file = Path('config/checks.yaml')
