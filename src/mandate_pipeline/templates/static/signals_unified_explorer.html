@@ -605,11 +605,6 @@ function renderDocumentCard(doc, isCollapsed = true, forceExpand = false) {
     const paragraphsHtml = signalParagraphs.length
         ? signalParagraphs.map(para => `
             <div class="para-item text-sm text-gray-900" data-signals="${(para.signals || []).join(',')}">
-                <div class="flex flex-wrap items-start gap-1 mb-1">
-                    ${(para.signals || []).map(signal => `
-                        <span class="px-1.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(signal)}">${signal}</span>
-                    `).join('')}
-                </div>
                 <div class="leading-relaxed">
                     <span class="font-semibold text-gray-700">${escapeHtml(para.number)}.</span>
                     <span class="text-gray-800" data-paragraph data-search>${escapeHtml(para.text)}</span>
