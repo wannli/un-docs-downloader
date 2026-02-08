@@ -21,6 +21,7 @@ from mandate_pipeline.generation import (
     generate_data_json,
     build_igov_decision_documents,
     ensure_document_sessions,
+    get_un_document_url,
 )
 from mandate_pipeline.detection import load_checks
 from mandate_pipeline.extractor import _clean_paragraph_text
@@ -52,6 +53,11 @@ def main():
                 print(f"⚠️  Error loading {linked_file}: {e}")
     
     print(f"✅ Loaded {len(documents)} documents")
+
+    # Add UN document URLs
+    for doc in documents:
+        if not doc.get('un_url') and doc.get('symbol'):
+            doc['un_url'] = get_un_document_url(doc['symbol'])
     
     if not documents:
         print("⚠️  No documents found in data/linked/")
