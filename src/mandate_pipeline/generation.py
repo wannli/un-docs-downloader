@@ -586,79 +586,6 @@ def generate_unified_explorer_page(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Ensure signal_paragraphs are populated for current-session docs
-    enrichment_start = time.time()
-    enriched_docs = []
-    for doc in documents:
-        if doc.get("signal_paragraphs"):
-            enriched_docs.append(doc)
-            continue
-
-        signal_paras = []
-        for para_num, para_signals in doc.get("signals", {}).items():
-            if para_signals:
-                para_text = doc.get("paragraphs", {}).get(para_num, "")
-                signal_paras.append({
-                    "number": para_num,
-                    "text": para_text,
-                    "signals": para_signals,
-                })
-
-        if signal_paras:
-            signal_paras.sort(key=safe_paragraph_number)
-            doc_copy = doc.copy()
-            doc_copy["signal_paragraphs"] = signal_paras
-            enriched_docs.append(doc_copy)
-        else:
-            enriched_docs.append(doc)
-
-    documents = enriched_docs
-    enrichment_time = time.time() - enrichment_start
-    logger.info(f"Enriched documents with signal_paragraphs in {enrichment_time:.2f}s")
-
-    # Filter to documents with signals
-    filter_start = time.time()
-    docs_with_signals = [doc for doc in documents if doc.get("signal_paragraphs")]
-    filter_time = time.time() - filter_start
-    logger.info(f"Filtered to {len(docs_with_signals)} documents with signals in {filter_time:.2f}s")
-
-    # Sort documents using unified sorting logic
-    sort_start = time.time()
-    docs_with_signals.sort(key=unified_sort_key)
-    sort_time = time.time() - sort_start
-    logger.info(f"Sorted {len(docs_with_signals)} documents in {sort_time:.2f}s")
-
-    # Count signal types
-    count_start = time.time()
-    resolution_count = len([d for d in docs_with_signals if d.get("doc_type") == "resolution"])
-    proposal_count = len([d for d in docs_with_signals if d.get("doc_type") == "proposal"])
-
-    # Count total paragraphs/signals (use available data)
-    if docs_with_signals and docs_with_signals[0].get("signal_paragraphs"):
-        # Original format with paragraph details
-        total_paragraphs = sum(len(doc.get("signal_paragraphs", [])) for doc in docs_with_signals)
-    else:
-        # Linked format with summary only - count total signal instances
-        total_paragraphs = sum(sum(counts.values()) for doc in docs_with_signals
-                              for counts in [doc.get("signal_summary", {})])
-    count_time = time.time() - count_start
-    logger.info(f"Counted statistics in {count_time:.2f}s: {resolution_count} resolutions, {proposal_count} proposals, {total_paragraphs} paragraphs")
-
-    # Get origin order for filtering
-    origin_order = ["Plenary", "C1", "C2", "C3", "C4", "C5", "C6"]
-
-    # Collect unique session numbers for the session filter
-    # Convert all sessions to int for proper sorting, filtering out any that can't be converted
-    session_values = {doc.get("session") for doc in documents if doc.get("session")}
-    session_ints = set()
-    for s in session_values:
-        try:
-            session_ints.add(int(s))
-        except (ValueError, TypeError):
-            # Skip non-numeric sessions
-            pass
-    sessions = sorted(session_ints, reverse=True)
-
     # Template preparation
     template_start = time.time()
     env = get_templates_env(checks)
@@ -669,15 +596,7 @@ def generate_unified_explorer_page(
     # Template rendering
     render_start = time.time()
     html = template.render(
-        documents=[],  # Load documents dynamically via JavaScript for better performance
         checks=checks,
-        origin_order=origin_order,
-        origin_names=COMMITTEE_NAMES,
-        sessions=sessions,
-        total_docs=len(docs_with_signals),
-        total_paragraphs=total_paragraphs,
-        resolution_count=resolution_count,
-        proposal_count=proposal_count,
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
     )
     render_time = time.time() - render_start
