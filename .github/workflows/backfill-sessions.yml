@@ -21,18 +21,10 @@ concurrency:
 
 jobs:
   backfill:
-    name: Download session ${{ matrix.session }}
+    name: Backfill sessions
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        session: ${{ fromJSON(format('[{0}]', github.event.inputs.sessions)) }}
-      max-parallel: 1  # Sequential to avoid conflicts on commit
+    timeout-minutes: 360
     steps:
-      - name: Log start
-        run: |
-          echo "::notice::Backfilling session ${{ matrix.session }}"
-          echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
-
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -53,51 +45,203 @@ jobs:
       - name: Pull latest
         run: git pull --rebase origin "${{ github.ref_name }}" || true
 
-      - name: Download session ${{ matrix.session }}
+      - name: Download, extract, detect, link all sessions
         run: |
-          PDF_BEFORE=$(ls -1 data/pdfs/A_RES_${{ matrix.session }}_*.pdf 2>/dev/null | wc -l || echo 0)
-
-          python -m mandate_pipeline.cli download-session \
-            --session ${{ matrix.session }} \
-            --config ./config \
-            --data ./data \
-            --max-misses ${{ github.event.inputs.max_misses }} \
-            --verbose
-
-          PDF_AFTER=$(ls -1 data/pdfs/A_RES_${{ matrix.session }}_*.pdf 2>/dev/null | wc -l || echo 0)
-          NEW=$((PDF_AFTER - PDF_BEFORE))
-
-          echo "SESSION=${{ matrix.session }}" >> $GITHUB_ENV
-          echo "PDF_BEFORE=$PDF_BEFORE" >> $GITHUB_ENV
-          echo "PDF_AFTER=$PDF_AFTER" >> $GITHUB_ENV
-          echo "NEW_PDFS=$NEW" >> $GITHUB_ENV
-
-          echo "::notice::Session ${{ matrix.session }}: $NEW new resolutions ($PDF_AFTER total)"
-
-      - name: Commit and push
-        run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/pdfs/
 
-          if git diff --staged --quiet; then
-            echo "No new PDFs for session ${{ matrix.session }}"
-          else
-            git commit -m "chore: download A/RES/${{ matrix.session }} resolutions ($(date -I))"
-            git pull --rebase origin "${{ github.ref_name }}" || true
-            git push
-            echo "Pushed session ${{ matrix.session }} resolutions"
-          fi
+          IFS=',' read -ra SESSIONS <<< "${{ github.event.inputs.sessions }}"
+          MAX_MISSES="${{ github.event.inputs.max_misses }}"
+          SUMMARY=""
+
+          for SESSION in "${SESSIONS[@]}"; do
+            SESSION=$(echo "$SESSION" | tr -d ' ')
+            echo "============================================"
+            echo "📥 Session $SESSION"
+            echo "============================================"
+
+            # 1. Download
+            echo "::group::Download session $SESSION"
+            PDF_BEFORE=$(ls -1 data/pdfs/A_RES_${SESSION}_*.pdf 2>/dev/null | wc -l || echo 0)
+
+            python -m mandate_pipeline.cli download-session \
+              --session "$SESSION" \
+              --config ./config \
+              --data ./data \
+              --max-misses "$MAX_MISSES" \
+              --verbose || true
+
+            PDF_AFTER=$(ls -1 data/pdfs/A_RES_${SESSION}_*.pdf 2>/dev/null | wc -l || echo 0)
+            NEW_PDFS=$((PDF_AFTER - PDF_BEFORE))
+            echo "Session $SESSION: $NEW_PDFS new PDFs ($PDF_AFTER total)"
+            echo "::endgroup::"
+
+            if [ "$NEW_PDFS" -eq 0 ]; then
+              echo "No new PDFs for session $SESSION, skipping pipeline"
+              SUMMARY="${SUMMARY}| ${SESSION} | 0 | skipped |\n"
+              continue
+            fi
+
+            # 2. Extract
+            echo "::group::Extract session $SESSION"
+            python -c "
+          import json, time
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, 'src')
+          from mandate_pipeline.extractor import extract_text, extract_operative_paragraphs, extract_title, extract_agenda_items, find_symbol_references
+
+          session = '${SESSION}'
+          pdfs = sorted(Path('data/pdfs').glob(f'A_RES_{session}_*.pdf'))
+          extracted_dir = Path('data/extracted')
+          extracted_dir.mkdir(parents=True, exist_ok=True)
+
+          processed = 0
+          for pdf_path in pdfs:
+              out = extracted_dir / f'{pdf_path.stem}.json'
+              if out.exists():
+                  continue  # Already extracted
+              try:
+                  text = extract_text(pdf_path)
+                  paragraphs = extract_operative_paragraphs(text)
+                  title = extract_title(text)
+                  agenda_items = extract_agenda_items(text)
+                  symbol_refs = find_symbol_references(text)
+                  extracted = {
+                      'symbol': pdf_path.stem.replace('_', '/'),
+                      'filename': pdf_path.name,
+                      'title': title,
+                      'text': text,
+                      'paragraphs': paragraphs,
+                      'agenda_items': agenda_items,
+                      'symbol_references': symbol_refs,
+                  }
+                  with open(out, 'w') as f:
+                      json.dump(extracted, f, indent=2)
+                  processed += 1
+              except Exception as e:
+                  print(f'Error: {pdf_path.name}: {e}')
+
+          print(f'Extracted {processed} new documents for session {session}')
+          "
+            echo "::endgroup::"
+
+            # 3. Detect
+            echo "::group::Detect session $SESSION"
+            python -c "
+          import json
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, 'src')
+          from mandate_pipeline.detection import load_checks, run_checks
+
+          session = '${SESSION}'
+          checks = load_checks(Path('config/checks.yaml'))
+          extracted_dir = Path('data/extracted')
+          detected_dir = Path('data/detected')
+          detected_dir.mkdir(parents=True, exist_ok=True)
+
+          processed = 0
+          for ef in sorted(extracted_dir.glob(f'A_RES_{session}_*.json')):
+              out = detected_dir / ef.name
+              if out.exists():
+                  continue
+              try:
+                  with open(ef) as f:
+                      doc = json.load(f)
+                  paragraphs = doc.get('paragraphs', {})
+                  signals = run_checks(paragraphs, checks)
+                  signal_summary = {}
+                  for para_signals in signals.values():
+                      for sig in para_signals:
+                          signal_summary[sig] = signal_summary.get(sig, 0) + 1
+                  detected = {
+                      'symbol': doc['symbol'],
+                      'doc_type': 'resolution',
+                      'signals': signals,
+                      'signal_summary': signal_summary,
+                  }
+                  with open(out, 'w') as f:
+                      json.dump(detected, f, indent=2)
+                  processed += 1
+              except Exception as e:
+                  print(f'Error: {ef.name}: {e}')
+
+          print(f'Detected signals in {processed} documents for session {session}')
+          "
+            echo "::endgroup::"
+
+            # 4. Link
+            echo "::group::Link session $SESSION"
+            python -c "
+          import json
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, 'src')
+
+          session = '${SESSION}'
+          detected_dir = Path('data/detected')
+          linked_dir = Path('data/linked')
+          linked_dir.mkdir(parents=True, exist_ok=True)
+
+          processed = 0
+          for df in sorted(detected_dir.glob(f'A_RES_{session}_*.json')):
+              out = linked_dir / df.name
+              if out.exists():
+                  continue
+              try:
+                  with open(df) as f:
+                      doc = json.load(f)
+                  linked = {
+                      'symbol': doc['symbol'],
+                      'doc_type': doc.get('doc_type', 'resolution'),
+                      'origin': 'Unknown',
+                      'linked_proposals': [],
+                      'linked_resolutions': [],
+                      'signal_summary': doc.get('signal_summary', {}),
+                      'signals': doc.get('signals', {}),
+                  }
+                  with open(out, 'w') as f:
+                      json.dump(linked, f, indent=2)
+                  processed += 1
+              except Exception as e:
+                  print(f'Error: {df.name}: {e}')
+
+          print(f'Linked {processed} documents for session {session}')
+          "
+            echo "::endgroup::"
+
+            SUMMARY="${SUMMARY}| ${SESSION} | ${NEW_PDFS} | ✅ |\n"
+
+            # Commit after each session
+            git add data/
+            if ! git diff --staged --quiet; then
+              git commit -m "chore: backfill session $SESSION — download, extract, detect, link"
+              git pull --rebase origin "${{ github.ref_name }}" || true
+              git push
+              echo "✅ Session $SESSION committed and pushed"
+            fi
+          done
+
+          echo "SUMMARY<<EOF" >> $GITHUB_ENV
+          echo -e "$SUMMARY" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Trigger generate
+        run: |
+          echo "Triggering generate workflow..."
+          gh workflow run generate.yml --ref "${{ github.ref_name }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Summary
         if: always()
         run: |
           cat >> $GITHUB_STEP_SUMMARY << EOF
-          ## Session ${{ matrix.session }}
+          ## Backfill Results
 
-          | Metric | Value |
-          |--------|-------|
-          | Before | ${PDF_BEFORE:-0} PDFs |
-          | After | ${PDF_AFTER:-0} PDFs |
-          | New | **${NEW_PDFS:-0}** |
+          | Session | New PDFs | Status |
+          |---------|----------|--------|
+          ${SUMMARY}
           EOF
