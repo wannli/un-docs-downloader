@@ -137,6 +137,38 @@ jobs:
           print(f'Loaded {len(documents)} documents in {load_duration:.2f}s')
           print('::endgroup::')
 
+          # Enrich documents with paragraph text from extracted data
+          print('::group::Enrich with Paragraph Text')
+          enrich_start = time.time()
+          extracted_dir = Path('data/extracted')
+          enriched_count = 0
+          if extracted_dir.exists():
+              # Build lookup from symbol to extracted file
+              extracted_by_stem = {}
+              for ef in extracted_dir.glob('*.json'):
+                  extracted_by_stem[ef.stem] = ef
+
+              for doc in documents:
+                  # Convert symbol to filename stem (A/RES/80/1 -> A_RES_80_1)
+                  stem = doc['symbol'].replace('/', '_')
+                  extracted_file = extracted_by_stem.get(stem)
+                  if extracted_file:
+                      try:
+                          with open(extracted_file) as f:
+                              extracted = json.load(f)
+                          if 'paragraphs' in extracted and extracted['paragraphs']:
+                              doc['paragraphs'] = extracted['paragraphs']
+                              doc['title'] = extracted.get('title', '')
+                              enriched_count += 1
+                      except Exception as e:
+                          print(f'Error enriching {doc[\"symbol\"]}: {e}')
+
+          enrich_duration = time.time() - enrich_start
+          metrics['paragraphs_enriched'] = enriched_count
+          metrics['enrich_duration_seconds'] = round(enrich_duration, 2)
+          print(f'Enriched {enriched_count}/{len(documents)} documents with paragraph text in {enrich_duration:.2f}s')
+          print('::endgroup::')
+
           # Apply max_documents limit for testing
           max_docs_str = os.getenv('MAX_DOCUMENTS')
           if max_docs_str:
@@ -174,6 +206,24 @@ jobs:
               print('::group::Generate Explorer')
               gen_start = time.time()
               output_dir = Path('docs')
+
+              # Build signal_paragraphs for documents that have paragraphs and signals
+              for doc in documents:
+                  if doc.get('signal_paragraphs'):
+                      continue
+                  signal_paras = []
+                  for para_num, para_signals in doc.get('signals', {}).items():
+                      if para_signals:
+                          para_text = doc.get('paragraphs', {}).get(str(para_num), '')
+                          signal_paras.append({
+                              'number': para_num,
+                              'text': para_text,
+                              'signals': para_signals,
+                          })
+                  if signal_paras:
+                      signal_paras.sort(key=lambda p: int(p['number']) if str(p['number']).isdigit() else 0)
+                      doc['signal_paragraphs'] = signal_paras
+
               generate_unified_explorer_page(documents, checks, output_dir)
               generate_data_json(documents, checks, output_dir)
               gen_duration = time.time() - gen_start
@@ -312,6 +362,7 @@ jobs:
           | 📄 Documents Processed   | **${GEN_DOCUMENTS_PROCESSED:-0}** |
           | 🔔 Documents w/ Signals  | **${GEN_DOCUMENTS_WITH_SIGNALS:-0}** |
           | 📋 IGov Decisions        | ${GEN_IGOV_DECISIONS:-0} |
+          | 📝 Paragraphs Enriched  | ${GEN_PARAGRAPHS_ENRICHED:-0} |
           | 🔍 Signal Types          | ${GEN_CHECKS_LOADED:-0} |
 
           ### 📦 Output
