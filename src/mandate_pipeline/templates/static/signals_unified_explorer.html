@@ -2,66 +2,83 @@
 
 {% block title %}Semaphore{% endblock %}
 
+
 {% block splash %}
 <!-- Splash screen -->
 <div id="splash">
-    <div class="splash-content">
-        <!-- Semaphore signal -->
-        <svg class="w-12 h-12" viewBox="0 0 24 24" fill="white">
-            <rect x="11" y="4" width="2" height="18" rx="1"/>
-            <circle cx="12" cy="3.5" r="2.5"/>
-            <path class="arm-top" d="M13 8 L20 6 L20 8.5 L13 10.5 Z"/>
-            <path class="arm-bot" d="M11 14 L4 12 L4 14.5 L11 16.5 Z"/>
-        </svg>
-        <div>
-            <span class="splash-title">Semaphore:</span>
-            <span class="splash-sub"> Spotting mandate signals</span>
+    <div class="splash-scene">
+        <!-- Semaphore signal post (above track) -->
+        <div class="semaphore-signal">
+            <svg width="40" height="100" viewBox="0 0 40 100" fill="none">
+                <!-- Post -->
+                <rect x="18" y="10" width="4" height="90" rx="2" fill="rgba(255,255,255,0.9)"/>
+                <!-- Lamp housing -->
+                <circle class="signal-lamp" cx="20" cy="10" r="7"/>
+                <circle cx="20" cy="10" r="4" fill="rgba(255,255,255,0.15)"/>
+                <!-- Arm (starts at -45deg / clear, animates to 0deg / stop) -->
+                <rect class="arm-stop" x="22" y="17" width="18" height="5" rx="2" fill="rgba(255,255,255,0.9)" style="transform: rotate(-45deg);"/>
+            </svg>
         </div>
-    </div>
 
-    <!-- Track -->
-    <div class="track"><div class="track-line"></div><div class="track-ties"></div></div>
+        <!-- Track -->
+        <div class="splash-track">
+            <div class="splash-track-line"></div>
+            <div class="splash-track-ties"></div>
+        </div>
 
-    <!-- Train -->
-    <div class="train-container">
-        <svg class="train" width="120" height="36" viewBox="0 0 120 36" fill="none">
-            <!-- Locomotive body -->
-            <rect x="2" y="8" width="50" height="20" rx="3" fill="rgba(255,255,255,0.9)"/>
-            <!-- Cabin -->
-            <rect x="6" y="2" width="20" height="12" rx="2" fill="rgba(255,255,255,0.9)"/>
-            <!-- Windows -->
-            <rect x="9" y="5" width="6" height="5" rx="1" fill="#009edb"/>
-            <rect x="17" y="5" width="6" height="5" rx="1" fill="#009edb"/>
-            <!-- Smokestack -->
-            <rect x="38" y="4" width="5" height="8" rx="1.5" fill="rgba(255,255,255,0.9)"/>
-            <rect x="36" y="2" width="9" height="3" rx="1.5" fill="rgba(255,255,255,0.7)"/>
-            <!-- Carriage 1 -->
-            <rect x="56" y="10" width="28" height="18" rx="3" fill="rgba(255,255,255,0.75)"/>
-            <rect x="60" y="13" width="5" height="5" rx="1" fill="#009edb"/>
-            <rect x="67" y="13" width="5" height="5" rx="1" fill="#009edb"/>
-            <rect x="74" y="13" width="5" height="5" rx="1" fill="#009edb"/>
-            <!-- Carriage 2 -->
-            <rect x="88" y="10" width="28" height="18" rx="3" fill="rgba(255,255,255,0.6)"/>
-            <rect x="92" y="13" width="5" height="5" rx="1" fill="#009edb"/>
-            <rect x="99" y="13" width="5" height="5" rx="1" fill="#009edb"/>
-            <rect x="106" y="13" width="5" height="5" rx="1" fill="#009edb"/>
-            <!-- Wheels -->
-            <circle cx="14" cy="30" r="4" fill="rgba(255,255,255,0.5)" stroke="white" stroke-width="1.5"/>
-            <circle cx="30" cy="30" r="4" fill="rgba(255,255,255,0.5)" stroke="white" stroke-width="1.5"/>
-            <circle cx="44" cy="30" r="4" fill="rgba(255,255,255,0.5)" stroke="white" stroke-width="1.5"/>
-            <circle cx="64" cy="30" r="3" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1"/>
-            <circle cx="78" cy="30" r="3" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1"/>
-            <circle cx="96" cy="30" r="3" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1"/>
-            <circle cx="110" cy="30" r="3" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1"/>
-        </svg>
+        <!-- Train -->
+        <div class="splash-train-container">
+            <svg class="splash-train" width="160" height="44" viewBox="0 0 160 44" fill="none">
+                <!-- Locomotive body -->
+                <rect x="2" y="10" width="55" height="24" rx="3" fill="rgba(255,255,255,0.9)"/>
+                <!-- Cabin -->
+                <rect x="4" y="2" width="22" height="14" rx="2" fill="rgba(255,255,255,0.9)"/>
+                <!-- Windows -->
+                <rect x="7" y="5" width="7" height="6" rx="1" fill="#009edb"/>
+                <rect x="16" y="5" width="7" height="6" rx="1" fill="#009edb"/>
+                <!-- Smokestack -->
+                <rect x="42" y="4" width="6" height="10" rx="2" fill="rgba(255,255,255,0.9)"/>
+                <rect x="40" y="1" width="10" height="4" rx="2" fill="rgba(255,255,255,0.7)"/>
+                <!-- Cow catcher -->
+                <path d="M55 34 L62 28 L62 34 Z" fill="rgba(255,255,255,0.7)"/>
+                <!-- Carriage 1 -->
+                <rect x="66" y="12" width="32" height="22" rx="3" fill="rgba(255,255,255,0.75)"/>
+                <rect x="70" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <rect x="78" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <rect x="86" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <!-- Carriage 2 -->
+                <rect x="102" y="12" width="32" height="22" rx="3" fill="rgba(255,255,255,0.6)"/>
+                <rect x="106" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <rect x="114" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <rect x="122" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <!-- Carriage 3 -->
+                <rect x="138" y="12" width="20" height="22" rx="3" fill="rgba(255,255,255,0.45)"/>
+                <rect x="142" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <rect x="150" y="16" width="6" height="6" rx="1" fill="#009edb"/>
+                <!-- Wheels -->
+                <circle cx="14" cy="36" r="4.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+                <circle cx="32" cy="36" r="4.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+                <circle cx="50" cy="36" r="4.5" fill="rgba(255,255,255,0.4)" stroke="white" stroke-width="1.5"/>
+                <circle cx="74" cy="36" r="3.5" fill="rgba(255,255,255,0.35)" stroke="white" stroke-width="1"/>
+                <circle cx="90" cy="36" r="3.5" fill="rgba(255,255,255,0.35)" stroke="white" stroke-width="1"/>
+                <circle cx="110" cy="36" r="3.5" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1"/>
+                <circle cx="126" cy="36" r="3.5" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1"/>
+                <circle cx="146" cy="36" r="3" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="1"/>
+                <circle cx="156" cy="36" r="3" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <!-- Title below tracks -->
+        <div class="splash-text">
+            <span class="splash-title">Semaphore: </span><span class="splash-sub">Spotting mandate signals</span>
+        </div>
     </div>
 </div>
 <script>
-    // Dismiss splash after animation completes
     const splash = document.getElementById('splash');
     if (splash) {
-        setTimeout(() => splash.classList.add('done'), 2800);
-        setTimeout(() => splash.remove(), 3400);
+        setTimeout(() => splash.classList.add('done'), 3600);
+        setTimeout(() => splash.remove(), 4200);
         splash.addEventListener('click', () => {
             splash.classList.add('done');
             setTimeout(() => splash.remove(), 600);
