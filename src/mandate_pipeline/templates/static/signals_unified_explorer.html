@@ -10,7 +10,7 @@
 
 {% block content %}
 <!-- Compact filter bar -->
-<div class="sticky top-[73px] z-10 bg-white/95 backdrop-blur border-b border-gray-100 -mx-6 px-6 py-2">
+<div class="sticky top-[73px] z-10 bg-white/95 backdrop-blur border-b border-gray-100 -mx-6 px-6 py-2 -mt-10">
     <div class="flex items-center gap-2">
         <!-- Desktop: individual dropdowns -->
         <div class="hidden sm:contents">
@@ -425,8 +425,9 @@ function applyFilters() {
         emptyState.classList.add('hidden');
         container.classList.remove('hidden');
         const firstPage = filteredDocumentsCache.slice(0, PAGE_SIZE);
+        const expandForSearch = !!state.searchQuery;
         requestAnimationFrame(() => {
-            container.innerHTML = firstPage.map(doc => renderDocumentCard(doc, true)).join('');
+            container.innerHTML = firstPage.map(doc => renderDocumentCard(doc, true, expandForSearch)).join('');
             initializeDocumentCards();
             initializeInfiniteScroll();
             applySignalHighlights();
@@ -526,8 +527,24 @@ function sortDocuments(docs) {
         const rankA = docTypeRank(a), rankB = docTypeRank(b);
         if (rankA !== rankB) return rankA - rankB;
 
-        return (a.symbol || '').localeCompare(b.symbol || '');
+        return compareSymbols(a.symbol || '', b.symbol || '');
     });
+}
+
+function compareSymbols(a, b) {
+    // Numeric-aware comparison: split on / and compare segments
+    const partsA = a.split('/'), partsB = b.split('/');
+    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+        const pA = partsA[i] || '', pB = partsB[i] || '';
+        const nA = Number(pA), nB = Number(pB);
+        if (!isNaN(nA) && !isNaN(nB)) {
+            if (nA !== nB) return nA - nB;
+        } else {
+            const cmp = pA.localeCompare(pB);
+            if (cmp !== 0) return cmp;
+        }
+    }
+    return 0;
 }
 
 function docTypeRank(doc) {
@@ -569,11 +586,11 @@ function getSignalHighlightClass(signal) {
     return colors[signal] || 'text-gray-800';
 }
 
-function renderDocumentCard(doc, isCollapsed = true) {
+function renderDocumentCard(doc, isCollapsed = true, forceExpand = false) {
     const signalParagraphs = doc.signal_paragraphs || [];
     const title = escapeHtml(getDisplayTitle(doc));
+    const collapsed = forceExpand ? false : isCollapsed;
     const symbol = escapeHtml(doc.symbol || '');
-    const paraCount = signalParagraphs.length;
     const isDecision = doc.doc_type === 'decision';
     const decisionText = escapeHtml(doc.decision_text || '');
     const metaItems = [];
@@ -613,7 +630,7 @@ function renderDocumentCard(doc, isCollapsed = true) {
              data-symbol="${doc.symbol}"
              data-type="${doc.doc_type || ''}"
              data-session="${doc.session || ''}">
-            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 cursor-pointer doc-header" role="button" aria-expanded="${!isCollapsed}">
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 cursor-pointer doc-header" role="button" aria-expanded="${!collapsed}">
                 <div class="flex items-start justify-between gap-4">
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-3 mb-1">
@@ -621,7 +638,7 @@ function renderDocumentCard(doc, isCollapsed = true) {
                             ${isDecision ? `<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">${escapeHtml(doc.decision_type || 'Decision')}</span>` : ''}
                             ${!isDecision && doc.origin && doc.origin !== 'Unknown' && doc.origin !== 'IGov' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
                             ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
-                            <span class="text-xs text-gray-400">${paraCount} signal${paraCount !== 1 ? 's' : ''}</span>
+                            ${Object.entries(doc.signal_summary || {}).map(([sig, count]) => `<span class="px-1.5 py-0.5 rounded-full text-[10px] font-medium ${getSignalColor(sig)}">${sig}${count > 1 ? ' ×' + count : ''}</span>`).join('')}
                         </div>
                         ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}" data-search>${title}</p>` : ''}
                         ${metaItems.length ? `<div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">${metaItems.map(item => `<span>${item}</span>`).join('')}</div>` : ''}
@@ -629,13 +646,13 @@ function renderDocumentCard(doc, isCollapsed = true) {
                     <div class="flex items-center gap-2 flex-shrink-0">
                         ${isDecision && doc.igov_url ? `<a href="${doc.igov_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">IGov</a>` : ''}
                         ${!isDecision && doc.un_url ? `<a href="${doc.un_url}" target="_blank" class="text-xs text-muted hover:text-un-blue transition-colors" onclick="event.stopPropagation()">PDF</a>` : ''}
-                        <svg class="expand-icon w-4 h-4 text-gray-400 transition-transform ${isCollapsed ? '' : 'rotate-180'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="expand-icon w-4 h-4 text-gray-400 transition-transform ${collapsed ? '' : 'rotate-180'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-200 expandable-content ${isCollapsed ? 'hidden' : ''}">
+            <div class="border-t border-gray-200 expandable-content ${collapsed ? 'hidden' : ''}">
                 <div class="px-4 py-3 space-y-3">
                     ${paragraphsHtml}
                 </div>
@@ -734,8 +751,9 @@ function loadMoreDocuments() {
 
         const fragment = document.createDocumentFragment();
         const tmp = document.createElement('div');
+        const expandForSearch = !!(cachedSearchInput && cachedSearchInput.value.trim());
         docs.forEach(doc => {
-            tmp.innerHTML = renderDocumentCard(doc, true);
+            tmp.innerHTML = renderDocumentCard(doc, true, expandForSearch);
             if (tmp.firstElementChild) fragment.appendChild(tmp.firstElementChild);
         });
 

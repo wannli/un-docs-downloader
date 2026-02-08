@@ -1,0 +1,103 @@
+name: Backfill Historical Sessions
+
+on:
+  workflow_dispatch:
+    inputs:
+      sessions:
+        description: 'Comma-separated session numbers (e.g., 71,72,73)'
+        required: true
+        default: '71,72,73,74,75,76,77'
+      max_misses:
+        description: 'Stop after N consecutive 404s per session'
+        required: false
+        default: '10'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    name: Download session ${{ matrix.session }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        session: ${{ fromJSON(format('[{0}]', github.event.inputs.sessions)) }}
+      max-parallel: 1  # Sequential to avoid conflicts on commit
+    steps:
+      - name: Log start
+        run: |
+          echo "::notice::Backfilling session ${{ matrix.session }}"
+          echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          pip install -e .
+
+      - name: Ensure branch checkout
+        run: git checkout -B "${{ github.ref_name }}"
+
+      - name: Pull latest
+        run: git pull --rebase origin "${{ github.ref_name }}" || true
+
+      - name: Download session ${{ matrix.session }}
+        run: |
+          PDF_BEFORE=$(ls -1 data/pdfs/A_RES_${{ matrix.session }}_*.pdf 2>/dev/null | wc -l || echo 0)
+
+          python -m mandate_pipeline.cli download-session \
+            --session ${{ matrix.session }} \
+            --config ./config \
+            --data ./data \
+            --max-misses ${{ github.event.inputs.max_misses }} \
+            --verbose
+
+          PDF_AFTER=$(ls -1 data/pdfs/A_RES_${{ matrix.session }}_*.pdf 2>/dev/null | wc -l || echo 0)
+          NEW=$((PDF_AFTER - PDF_BEFORE))
+
+          echo "SESSION=${{ matrix.session }}" >> $GITHUB_ENV
+          echo "PDF_BEFORE=$PDF_BEFORE" >> $GITHUB_ENV
+          echo "PDF_AFTER=$PDF_AFTER" >> $GITHUB_ENV
+          echo "NEW_PDFS=$NEW" >> $GITHUB_ENV
+
+          echo "::notice::Session ${{ matrix.session }}: $NEW new resolutions ($PDF_AFTER total)"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/pdfs/
+
+          if git diff --staged --quiet; then
+            echo "No new PDFs for session ${{ matrix.session }}"
+          else
+            git commit -m "chore: download A/RES/${{ matrix.session }} resolutions ($(date -I))"
+            git pull --rebase origin "${{ github.ref_name }}" || true
+            git push
+            echo "Pushed session ${{ matrix.session }} resolutions"
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ## Session ${{ matrix.session }}
+
+          | Metric | Value |
+          |--------|-------|
+          | Before | ${PDF_BEFORE:-0} PDFs |
+          | After | ${PDF_AFTER:-0} PDFs |
+          | New | **${NEW_PDFS:-0}** |
+          EOF
