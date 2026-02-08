@@ -117,30 +117,32 @@
             transition: transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .splash-train.running {
-            transform: translateX(calc(92vw - 260px));
+            transform: translateX(calc(92vw - 300px));
         }
         @media (max-width: 480px) {
             .splash-train-wrap { height: 44px; }
-            .splash-train { transform: translateX(-200px) scale(0.72); transform-origin: left bottom; }
-            .splash-train.running { transform: translateX(calc(96vw - 200px)) scale(0.72); }
+            .splash-train { transform: translateX(-260px) scale(0.72); transform-origin: left bottom; }
+            .splash-train.running { transform: translateX(calc(96vw - 230px)) scale(0.72); }
         }
 
-        /* Title — below the track, centered */
+        /* Title — below the track, centered, hidden until signal */
         .splash-text {
             margin-top: 12px;
             text-align: center; padding: 0 1rem;
+            white-space: nowrap;
             opacity: 0;
-            animation: fade-in 0.5s ease forwards;
+            transition: opacity 0.5s ease;
         }
+        .splash-text.visible { opacity: 1; }
         .splash-title {
             font-family: 'Roboto', system-ui, sans-serif;
-            font-size: clamp(1.6rem, 5vw, 3rem);
+            font-size: clamp(1.1rem, 4.5vw, 3rem);
             font-weight: 700;
             color: white; letter-spacing: -0.02em;
         }
         .splash-sub {
             font-family: 'Roboto', system-ui, sans-serif;
-            font-size: clamp(1.6rem, 5vw, 3rem);
+            font-size: clamp(1.1rem, 4.5vw, 3rem);
             font-weight: 300;
             color: rgba(255,255,255,0.75); letter-spacing: -0.02em;
         }
