@@ -56,17 +56,12 @@
     // Dismiss splash after animation completes
     const splash = document.getElementById('splash');
     if (splash) {
-        if (sessionStorage.getItem('splash-shown')) {
-            splash.remove();
-        } else {
-            sessionStorage.setItem('splash-shown', '1');
-            setTimeout(() => splash.classList.add('done'), 2800);
-            setTimeout(() => splash.remove(), 3400);
-            splash.addEventListener('click', () => {
-                splash.classList.add('done');
-                setTimeout(() => splash.remove(), 600);
-            });
-        }
+        setTimeout(() => splash.classList.add('done'), 2800);
+        setTimeout(() => splash.remove(), 3400);
+        splash.addEventListener('click', () => {
+            splash.classList.add('done');
+            setTimeout(() => splash.remove(), 600);
+        });
     }
 </script>
 {% endblock %}
