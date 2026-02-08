@@ -23,6 +23,7 @@ from mandate_pipeline.generation import (
     ensure_document_sessions,
 )
 from mandate_pipeline.detection import load_checks
+from mandate_pipeline.extractor import _clean_paragraph_text
 from mandate_pipeline.igov import load_igov_decisions_all
 
 
@@ -74,7 +75,10 @@ def main():
                     with open(extracted_file) as f:
                         extracted = json.load(f)
                     if extracted.get('paragraphs'):
-                        doc['paragraphs'] = extracted['paragraphs']
+                        doc['paragraphs'] = {
+                            k: _clean_paragraph_text(v)
+                            for k, v in extracted['paragraphs'].items()
+                        }
                         if not doc.get('title'):
                             doc['title'] = extracted.get('title', '')
                         enriched_count += 1
@@ -88,6 +92,10 @@ def main():
     sp_count = 0
     for doc in documents:
         if doc.get('signal_paragraphs'):
+            # Clean pre-existing signal paragraph text
+            for sp in doc['signal_paragraphs']:
+                if sp.get('text'):
+                    sp['text'] = _clean_paragraph_text(sp['text'])
             sp_count += 1
             continue
         signal_paras = []

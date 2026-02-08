@@ -56,9 +56,61 @@ def extract_operative_paragraphs(text: str) -> dict[int, str]:
         num = int(num_str)
         # Clean up the content: normalize whitespace
         cleaned = " ".join(content.split())
+        cleaned = _clean_paragraph_text(cleaned)
         paragraphs[num] = cleaned
 
     return paragraphs
+
+
+# Matches trailing plenary meeting info, e.g.:
+#   "54th plenary meeting 2 December 2025"
+#   "55th (resumed) plenary meeting 24 December 2024"
+_PLENARY_SUFFIX_RE = re.compile(
+    r"\s*\d+(?:st|nd|rd|th)\s+(?:\(resumed\)\s+)?plenary\s+meeting\s+"
+    r"\d{1,2}\s+(?:January|February|March|April|May|June|July|August|"
+    r"September|October|November|December)\s+\d{4}\s*$"
+)
+
+# Matches footnote + page-header blocks injected at PDF page boundaries.
+# Pattern: _{3,} <footnote refs> ... <doc title> <symbol> <page/total> <doc-id>
+# The doc-id (e.g. 25-20110) and optional page/total (e.g. 3/3) are the
+# reliable end markers of the injected block.
+_FOOTNOTE_PAGE_RE = re.compile(
+    r"\s*_{3,}.+?\d{2}-\d{4,5}(?:\s+\d+/\d+)?"
+)
+
+# Matches bare page-header blocks (no footnotes) injected at page boundaries.
+# Anchored on the document symbol followed by running-title words, page/total,
+# and/or the UN document ID (XX-XXXXX).
+_PAGE_HEADER_RE = re.compile(
+    r"\s*A/(?:RES|C\.\d+|DEC)/\d+/\S+\s+.+?\s*\d{2}-\d{4,5}(?:\s+\d+/\d+)?"
+)
+
+# Matches footnote blocks at end of text (no continuation after)
+_FOOTNOTE_TAIL_RE = re.compile(r"\s*_{3,}\s*.+$")
+
+
+def _clean_paragraph_text(text: str) -> str:
+    """Remove PDF extraction artifacts from paragraph text.
+
+    Strips:
+    - Mid-text footnote + page header blocks (footnotes at page bottom
+      followed by next page's header, injected between real content)
+    - Bare page header blocks (symbol + title + page/total + doc-id)
+    - Trailing footnote blocks at end of paragraph
+    - Trailing plenary meeting info (e.g. "54th plenary meeting 2 December 2025")
+    """
+    # First remove mid-text footnote+header blocks (have doc-id end marker)
+    text = _FOOTNOTE_PAGE_RE.sub(" ", text)
+    # Remove bare page header blocks (symbol anchored, no footnotes)
+    text = _PAGE_HEADER_RE.sub(" ", text)
+    # Then remove any remaining trailing footnote block
+    text = _FOOTNOTE_TAIL_RE.sub("", text)
+    # Remove plenary meeting suffix
+    text = _PLENARY_SUFFIX_RE.sub("", text)
+    # Collapse any double spaces from removals
+    text = re.sub(r"  +", " ", text)
+    return text.rstrip()
 
 
 def extract_lettered_paragraphs(text: str) -> dict[str, str]:
