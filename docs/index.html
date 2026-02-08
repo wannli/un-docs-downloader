@@ -1149,7 +1149,6 @@ function renderDocumentCard(doc, isCollapsed = true, forceExpand = false) {
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-3 mb-1">
                             <span class="font-semibold text-gray-900" data-search>${symbol}</span>
-                            ${isDecision ? `<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">Decision</span>` : ''}
                             ${!isDecision && doc.origin && doc.origin !== 'Unknown' && doc.origin !== 'IGov' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
                             ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
                             ${Object.entries(doc.signal_summary || {}).map(([sig, count]) => `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium ${getSignalColor(sig)}"><span class="w-1.5 h-1.5 rounded-full ${getSignalDotColor(sig)}"></span>${sig}${count > 1 ? ' ×' + count : ''}</span>`).join('')}
@@ -1430,7 +1429,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-02-08 05:50 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-08 05:52 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
