@@ -575,6 +575,17 @@ function getSignalColor(signal) {
     return colors[signal] || 'bg-gray-100 text-gray-800';
 }
 
+function getSignalDotColor(signal) {
+    const colors = {
+        'agenda': 'bg-blue-500',
+        'PGA': 'bg-purple-500',
+        'process': 'bg-amber-500',
+        'report': 'bg-green-500',
+        'observer': 'bg-slate-500'
+    };
+    return colors[signal] || 'bg-gray-500';
+}
+
 function getSignalHighlightClass(signal) {
     const colors = {
         'agenda': 'bg-blue-50 text-blue-900',
@@ -633,7 +644,7 @@ function renderDocumentCard(doc, isCollapsed = true, forceExpand = false) {
                             ${isDecision ? `<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">${escapeHtml(doc.decision_type || 'Decision')}</span>` : ''}
                             ${!isDecision && doc.origin && doc.origin !== 'Unknown' && doc.origin !== 'IGov' ? `<span class="text-xs text-gray-500">· ${escapeHtml(doc.origin)}</span>` : ''}
                             ${doc.doc_type === 'proposal' ? '<span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">Draft</span>' : ''}
-                            ${Object.entries(doc.signal_summary || {}).map(([sig, count]) => `<span class="px-1.5 py-0.5 rounded-full text-[10px] font-medium ${getSignalColor(sig)}">${sig}${count > 1 ? ' ×' + count : ''}</span>`).join('')}
+                            ${Object.entries(doc.signal_summary || {}).map(([sig, count]) => `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium ${getSignalColor(sig)}"><span class="w-1.5 h-1.5 rounded-full ${getSignalDotColor(sig)}"></span>${sig}${count > 1 ? ' ×' + count : ''}</span>`).join('')}
                         </div>
                         ${title ? `<p class="text-sm text-gray-600 truncate" title="${title}" data-search>${title}</p>` : ''}
                         ${metaItems.length ? `<div class="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">${metaItems.map(item => `<span>${item}</span>`).join('')}</div>` : ''}
