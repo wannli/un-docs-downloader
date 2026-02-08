@@ -757,6 +757,8 @@ function loadMoreDocuments() {
         isLoadingMore = false;
         if (cachedScrollLoading) cachedScrollLoading.classList.add('hidden');
         initializeDocumentCards();
+        applySignalHighlights();
+        if (state.searchQuery) applySearchHighlights(state.searchQuery);
         updateDocumentsCount();
     });
 }
