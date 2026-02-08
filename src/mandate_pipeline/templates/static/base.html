@@ -53,7 +53,7 @@
             position: relative;
             width: 100%; height: 110px;
             opacity: 0;
-            animation: fade-in 0.5s ease forwards;
+            animation: fade-in 0.8s ease forwards;
         }
         @media (max-width: 480px) {
             .splash-scene { height: 80px; }
@@ -90,7 +90,7 @@
         /* Lamp — turns red when train arrives */
         .signal-lamp {
             fill: rgba(255,255,255,0.25);
-            transition: fill 0.4s ease, filter 0.4s ease;
+            transition: fill 0.6s ease, filter 0.6s ease;
         }
         .signal-lamp.red {
             fill: #ef4444;
@@ -101,7 +101,7 @@
         .arm-stop {
             transform-origin: 16px 17.5px;
             transform: rotate(-45deg);
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.7s ease-in-out;
         }
         .arm-stop.stopped { transform: rotate(0deg); }
 
@@ -114,14 +114,15 @@
         }
         .splash-train {
             transform: translateX(-260px);
-            transition: transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+            transition: transform 4s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .splash-train.running {
             transform: translateX(calc(92vw - 300px));
         }
         @media (max-width: 480px) {
             .splash-train-wrap { height: 44px; }
-            .splash-train { transform: translateX(-260px) scale(0.72); transform-origin: left bottom; }
+            .splash-train { transform: translateX(-260px) scale(0.72); transform-origin: left bottom;
+                            transition: transform 4s cubic-bezier(0.22, 0.61, 0.36, 1); }
             .splash-train.running { transform: translateX(calc(96vw - 230px)) scale(0.72); }
         }
 
