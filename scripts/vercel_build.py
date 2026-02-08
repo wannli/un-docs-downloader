@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
 from mandate_pipeline.generation import (
     generate_unified_explorer_page,
+    generate_signals_info_page,
     generate_data_json,
     build_igov_decision_documents,
     ensure_document_sessions,
@@ -134,6 +135,7 @@ def main():
     
     try:
         generate_unified_explorer_page(documents, checks, output_dir)
+        generate_signals_info_page(checks, output_dir)
         generate_data_json(documents, checks, output_dir)
         print(f"✅ Generated site to {output_dir}/")
     except Exception as e:
