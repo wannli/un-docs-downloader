@@ -291,6 +291,12 @@
     const splash = document.getElementById('splash');
     if (!splash) return;
 
+    // Play splash only once
+    if (localStorage.getItem('semaphore_splash_played')) {
+        splash.remove();
+        return;
+    }
+
     const train = document.getElementById('splash-train');
     const lamp = document.getElementById('signal-lamp');
     const arms = document.querySelectorAll('.arm-stop');
@@ -310,12 +316,16 @@
     setTimeout(() => text.classList.add('visible'), 3000);
 
     // Phase 5 (6s): dismiss splash
-    setTimeout(() => splash.classList.add('done'), 6000);
+    setTimeout(() => {
+        splash.classList.add('done');
+        localStorage.setItem('semaphore_splash_played', 'true');
+    }, 6000);
     setTimeout(() => splash.remove(), 6600);
 
     // Click to skip
     splash.addEventListener('click', () => {
         splash.classList.add('done');
+        localStorage.setItem('semaphore_splash_played', 'true');
         setTimeout(() => splash.remove(), 600);
     });
 })();
@@ -1354,7 +1364,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="max-w-5xl mx-auto px-6 py-8">
             <p class="text-sm text-muted">
                 
-Generated 2026-02-08 05:38 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
+Generated 2026-02-08 05:43 UTC · <a href="./data.json" class="text-un-blue hover:underline">JSON API</a>
 
             </p>
         </div>
