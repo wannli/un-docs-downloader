@@ -76,15 +76,20 @@ The `discover` command finds and downloads new UN documents.
 - **Incremental**: Only checks documents newer than last sync
 - **Adaptive**: Resets miss counter on successful finds (handles numbering gaps)
 - **Stateful**: Progress persisted between runs
+- **Manual Control**: All workflows support `workflow_dispatch` for manual triggering of specific stages.
 
 ### Stage 2: Extraction (`extractor.py`)
 
-Extracts structured content from PDF documents.
+Extracts structured content from PDF documents and performs deep cleaning to remove extraction noise.
 
 **Process:**
 - Extract full text using PyMUPDF
-- Parse operative paragraphs (numbered sections)
-- Extract document title
+- Parse operative paragraphs (numbered sections) and lettered paragraphs (a, b, c)
+- **Advanced Text Cleaning**: Uses targeted regex to strip PDF extraction artifacts mid-paragraph:
+  - Footnote blocks followed by next-page headers
+  - Bare page headers (symbol, title, UN doc ID)
+  - Trailing plenary meeting meta-information
+- Extract document title (multi-line aware)
 - Find agenda item references
 - Identify UN symbol references
 
@@ -374,14 +379,17 @@ Complete metadata export for external tools:
 The pipeline uses a granular, event-driven workflow architecture with multiple independent workflows:
 
 ### discover.yml
-
-- **Trigger**: Hourly schedule + manual dispatch
+- **Trigger**: Hourly schedule + manual dispatch (`workflow_dispatch`)
 - **Action**: Run `mandate discover`, download new PDFs, commit to `data/pdfs/`
 - **Result**: New documents discovered and downloaded
 
-### generate.yml
+### extract.yml, detect.yml, link.yml
+- **Trigger**: New files in relevant `data/` subdirectories + manual dispatch (`workflow_dispatch`)
+- **Action**: Process documents through extraction, signal detection, and linkage
+- **Result**: Structured JSON data committed to the repository
 
-- **Trigger**: Changes to data/linked/, config/, or src/
+### generate.yml
+- **Trigger**: Changes to data/linked/, config/, or src/ + manual dispatch (`workflow_dispatch`)
 - **Action**: Generate static site and commit to `docs/`
 - **Result**: Static website updated and deployed to GitHub Pages
 
@@ -613,6 +621,16 @@ A comprehensive code review was conducted to identify legacy issues, inconsisten
 8. **Navigation consistency standardized**: All templates now use absolute paths from `base.html` (e.g., `/igov/signals.html`, `/signals-info.html`). Child templates no longer need to override nav blocks, eliminating path calculation errors across directory depths.
 
 9. **Merge conflicts resolved**: Merged master branch, resolving 18 template conflicts. Adopted master's absolute path navigation and new `nav_resolutions` link while preserving our cleanup and fixes.
+
+10. **Enhanced Mobile Filter UX**: Replaced the previous nested mobile filter dropdown with a full-screen modal. This provides larger touch targets, natural vertical scrolling, and a clearer grouping of filter options (Session, Target, Signal, Type).
+
+11. **Optimized Splash Screen**: The opening animation now plays only once per user session (using `localStorage`). Subsequent visits or page refreshes automatically skip the splash screen for a faster experience.
+
+12. **Improved Type Filtering**: The "Type" filter now correctly groups `amendment` documents under the `proposal` category, reflecting their role as draft document variations.
+
+13. **UI Cleanup**: Removed the redundant "Decision" label from document cards for IGov decisions, showing only the canonical symbol (e.g., `A/DEC/78/556`) to reduce visual noise.
+
+14. **Global Data Re-cleaning**: Performed a global pass over all 2,694+ documents to apply the latest `_clean_paragraph_text` improvements, successfully stripping thousands of PDF extraction artifacts (page headers and footnotes) that were previously leaking into the operative content.
 
 ### Recommended Follow-up Issues
 
