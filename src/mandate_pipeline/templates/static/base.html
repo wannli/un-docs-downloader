@@ -30,9 +30,91 @@
         ::selection { background: rgba(0, 158, 219, 0.2); }
         .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+        /* Splash screen */
+        #splash {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #009edb;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #splash.done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Semaphore signal arms */
+        .arm-top { transform-origin: 13px 9px; animation: arm-signal-top 1.2s ease-in-out forwards; }
+        .arm-bot { transform-origin: 11px 15px; animation: arm-signal-bot 1.2s ease-in-out 0.15s forwards; }
+        @keyframes arm-signal-top {
+            0%   { transform: rotate(0deg); }
+            40%  { transform: rotate(-45deg); }
+            60%  { transform: rotate(-35deg); }
+            100% { transform: rotate(-45deg); }
+        }
+        @keyframes arm-signal-bot {
+            0%   { transform: rotate(0deg); }
+            40%  { transform: rotate(45deg); }
+            60%  { transform: rotate(35deg); }
+            100% { transform: rotate(45deg); }
+        }
+
+        /* Splash text */
+        .splash-title {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 2.5rem; font-weight: 700;
+            color: white; letter-spacing: -0.02em;
+            opacity: 0; animation: fade-up 0.6s ease-out 0.3s forwards;
+        }
+        .splash-sub {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 0.875rem; font-weight: 400;
+            color: rgba(255,255,255,0.7); margin-top: 0.5rem;
+            opacity: 0; animation: fade-up 0.6s ease-out 0.5s forwards;
+        }
+
+        /* Train */
+        .train-container {
+            position: absolute; bottom: 15%; left: 0; width: 100%;
+            overflow: hidden; height: 40px;
+        }
+        .train {
+            animation: train-pass 2s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+        }
+        @keyframes train-pass {
+            0%   { transform: translateX(-200px); opacity: 0; }
+            15%  { opacity: 1; }
+            85%  { opacity: 1; }
+            100% { transform: translateX(calc(100vw + 200px)); opacity: 0; }
+        }
+
+        /* Track */
+        .track {
+            position: absolute; bottom: 14.5%; left: 0; width: 100%; height: 2px;
+            opacity: 0; animation: fade-in 0.3s ease 0.7s forwards;
+        }
+        .track-line {
+            width: 100%; height: 100%; background: rgba(255,255,255,0.25);
+        }
+        .track-ties {
+            position: absolute; top: -3px; left: 0; width: 100%; height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px, transparent 14px,
+                rgba(255,255,255,0.15) 14px, rgba(255,255,255,0.15) 18px
+            );
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-white text-gray-900 font-sans antialiased">
+    {% block splash %}{% endblock %}
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
         <div class="max-w-5xl mx-auto px-6 py-4">
