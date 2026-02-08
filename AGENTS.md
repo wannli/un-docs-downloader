@@ -9,7 +9,7 @@ The `docs/` directory contains generated static site output used by the pipeline
 - Avoid staging or committing `docs/` changes that are incidental to code edits (e.g., from running the generator locally).
 - State files in `data/` (like `data/state.json`) are now in `.gitignore` and won't be committed in PR branches.
 - Keep changes focused on the source code and templates that *produce* the static site output.
-- Do not delete files under `docs/` in feature branches; disable generation in source and let the pipeline regenerate on main to avoid modify/delete conflicts.
+- Do not delete files under `docs/` in feature branches; disable generation in source and let the pipeline regenerate on master to avoid modify/delete conflicts.
 
 **During merges:**
 - When merging branches, `docs/` files may have conflicts because both branches regenerated the site.
@@ -71,7 +71,7 @@ The pipeline uses a **granular, event-driven workflow architecture** with 6 inde
 5. **`generate.yml`** - Stage 5: Site Generation
    - Triggers: New files in `data/linked/`
    - Generates static website and commits to `docs/` folder
-   - Site served directly from main branch
+   - Site served directly from master branch
 
 ### Special Purpose Workflow
 6. **`build-session.yml`** - Historical Session Builder
@@ -83,5 +83,5 @@ The pipeline uses a **granular, event-driven workflow architecture** with 6 inde
 - **Event-driven**: Each stage triggers the next automatically
 - **Parallel processing**: Multiple jobs can run simultaneously where safe
 - **Incremental updates**: Only processes changed documents
-- **Direct commits**: All workflows commit results directly to main branch
+- **Direct commits**: All workflows commit results directly to master branch
 - **Performance focused**: Minimizes redundant work through smart triggering
