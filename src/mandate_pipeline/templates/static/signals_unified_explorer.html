@@ -25,6 +25,17 @@
                 </div>
             </div>
 
+            <!-- Target session dropdown -->
+            <div class="relative" data-dropdown="target-session">
+                <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
+                    <span class="dropdown-label">Target</span>
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="dropdown-panel hidden absolute top-full left-0 mt-1 bg-white rounded-lg border border-gray-200 shadow-lg p-2 min-w-[160px] max-h-[280px] overflow-y-auto z-20">
+                    <div id="target-session-options" class="space-y-0.5"></div>
+                </div>
+            </div>
+
             <!-- Signal dropdown -->
             <div class="relative" data-dropdown="signal">
                 <button type="button" class="dropdown-trigger inline-flex items-center gap-1 h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-xs font-medium text-gray-700 hover:border-gray-300 transition-colors">
@@ -39,6 +50,11 @@
                             <span>{{ check.signal }}</span>
                         </label>
                         {% endfor %}
+                        <hr class="border-gray-100 my-1">
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-500 italic">
+                            <input type="checkbox" value="none" class="filter-checkbox rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                            <span>none</span>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -82,6 +98,11 @@
                     </div>
                     <hr class="border-gray-100">
                     <div>
+                        <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Target</div>
+                        <div id="mobile-target-session-options" class="space-y-0.5"></div>
+                    </div>
+                    <hr class="border-gray-100">
+                    <div>
                         <div class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 mb-1.5">Signal</div>
                         <div id="mobile-signal-options" class="space-y-0.5">
                             {% for check in checks %}
@@ -90,6 +111,11 @@
                                 <span>{{ check.signal }}</span>
                             </label>
                             {% endfor %}
+                            <hr class="border-gray-100 my-1">
+                            <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer text-xs text-gray-500 italic">
+                                <input type="checkbox" value="none" class="mobile-filter-checkbox filter-checkbox-signal rounded border-gray-300 text-un-blue focus:ring-un-blue h-3.5 w-3.5">
+                                <span>none</span>
+                            </label>
                         </div>
                     </div>
                     <hr class="border-gray-100">
@@ -264,6 +290,7 @@ function getFilterState() {
     const isMobile = window.innerWidth < 640;
     return {
         sessions: getSelectedValues(isMobile ? 'mobile-session-options' : 'session-options'),
+        targetSessions: getSelectedValues(isMobile ? 'mobile-target-session-options' : 'target-session-options'),
         signals: getSelectedValues(isMobile ? 'mobile-signal-options' : 'signal-options'),
         types: getSelectedValues(isMobile ? 'mobile-type-options' : 'type-options'),
         searchQuery: (cachedSearchInput || document.getElementById('search-input')).value.toLowerCase().trim(),
@@ -274,6 +301,7 @@ function syncMobileDesktopFilters(source) {
     // Sync checkboxes between mobile and desktop
     const pairs = [
         ['session-options', 'mobile-session-options'],
+        ['target-session-options', 'mobile-target-session-options'],
         ['signal-options', 'mobile-signal-options'],
         ['type-options', 'mobile-type-options'],
     ];
@@ -290,12 +318,14 @@ function updateDropdownLabels() {
 
     // Session
     updateLabel('[data-dropdown="session"] .dropdown-label', 'Session', state.sessions);
+    // Target session
+    updateLabel('[data-dropdown="target-session"] .dropdown-label', 'Target', state.targetSessions);
     // Signal
     updateLabel('[data-dropdown="signal"] .dropdown-label', 'Signal', state.signals);
     // Type
     updateLabel('[data-dropdown="type"] .dropdown-label', 'Type', state.types);
     // Mobile
-    const totalActive = state.sessions.length + state.signals.length + state.types.length;
+    const totalActive = state.sessions.length + state.targetSessions.length + state.signals.length + state.types.length;
     const mobileLabel = document.querySelector('[data-dropdown="mobile-filters"] .dropdown-label');
     if (mobileLabel) {
         mobileLabel.textContent = totalActive > 0 ? `Filters (${totalActive})` : 'Filters';
@@ -315,6 +345,7 @@ function updateDropdownLabels() {
         const trigger = wrapper.querySelector('.dropdown-trigger');
         let isActive = false;
         if (name === 'session') isActive = state.sessions.length > 0;
+        else if (name === 'target-session') isActive = state.targetSessions.length > 0;
         else if (name === 'signal') isActive = state.signals.length > 0;
         else if (name === 'type') isActive = state.types.length > 0;
         else if (name === 'mobile-filters') isActive = totalActive > 0;
@@ -346,6 +377,7 @@ function updateUrlState() {
     const params = new URLSearchParams();
     if (state.searchQuery) params.set('q', state.searchQuery);
     if (state.sessions.length) params.set('sessions', state.sessions.join(','));
+    if (state.targetSessions.length) params.set('target', state.targetSessions.join(','));
     if (state.signals.length) params.set('signals', state.signals.join(','));
     if (state.types.length) params.set('type', state.types.join(','));
     const newUrl = params.toString() ? `${window.location.pathname}?${params}` : window.location.pathname;
@@ -358,12 +390,17 @@ function applyFiltersFromUrl() {
     document.getElementById('search-input').value = q;
 
     const sessions = params.get('sessions');
+    const targetSessions = params.get('target');
     const signals = params.get('signals');
     const types = params.get('type');
 
     if (sessions) {
         setSelectedValues('session-options', sessions.split(','));
         setSelectedValues('mobile-session-options', sessions.split(','));
+    }
+    if (targetSessions) {
+        setSelectedValues('target-session-options', targetSessions.split(','));
+        setSelectedValues('mobile-target-session-options', targetSessions.split(','));
     }
     if (signals) {
         setSelectedValues('signal-options', signals.split(','));
@@ -383,6 +420,12 @@ function documentMatchesFilters(doc, state) {
     const docSession = doc.session ? doc.session.toString() : '';
     if (state.sessions.length > 0 && !state.sessions.includes(docSession)) return false;
 
+    // Target session
+    if (state.targetSessions.length > 0) {
+        const docTargets = doc.target_sessions || [];
+        if (!state.targetSessions.some(t => docTargets.includes(t))) return false;
+    }
+
     // Type
     if (state.types.length > 0 && !state.types.includes(doc.doc_type || '')) return false;
 
@@ -390,14 +433,24 @@ function documentMatchesFilters(doc, state) {
     const hasSignals = (doc.signal_paragraphs && doc.signal_paragraphs.length > 0)
         || (doc.signal_summary && Object.keys(doc.signal_summary).length > 0);
 
-    if (state.signals.length > 0) {
-        // Must have at least one of the selected signals
-        const docSignals = Object.keys(doc.signal_summary || {});
-        if (!state.signals.some(s => docSignals.includes(s))) return false;
-    }
+    const selectedSignals = state.signals.filter(s => s !== 'none');
+    const noneSelected = state.signals.includes('none');
 
-    // Default: only show docs with signals (unless signal filter narrows it)
-    if (!hasSignals) return false;
+    if (selectedSignals.length > 0 && noneSelected) {
+        // "none" + specific signals: show docs matching those signals OR docs with no signals
+        const docSignals = Object.keys(doc.signal_summary || {});
+        if (!selectedSignals.some(s => docSignals.includes(s)) && hasSignals) return false;
+    } else if (selectedSignals.length > 0) {
+        // Specific signals only: must have at least one
+        const docSignals = Object.keys(doc.signal_summary || {});
+        if (!selectedSignals.some(s => docSignals.includes(s))) return false;
+    } else if (noneSelected) {
+        // "none" only: show documents with no signals
+        if (hasSignals) return false;
+    } else {
+        // No signal filter: default to showing only docs with signals
+        if (!hasSignals) return false;
+    }
 
     // Search
     if (state.searchQuery) {
@@ -463,7 +516,37 @@ function normalizeDocument(doc) {
         : (() => { const s = {}; sp.forEach(p => (p.signals || []).forEach(sig => s[sig] = (s[sig] || 0) + 1)); return s; })();
     const session = doc.session || getSessionFromSymbol(doc.symbol);
     const docType = doc.doc_type || (doc.symbol?.includes('/RES/') ? 'resolution' : doc.symbol?.includes('/L.') ? 'proposal' : '');
-    return { ...doc, session, doc_type: docType, signal_paragraphs: sp, signal_summary: ss };
+    const targetSessions = extractTargetSessions(sp, session);
+    return { ...doc, session, doc_type: docType, signal_paragraphs: sp, signal_summary: ss, target_sessions: targetSessions };
+}
+
+const ORDINAL_TO_NUMBER = {
+    'first':1,'second':2,'third':3,'fourth':4,'fifth':5,'sixth':6,'seventh':7,'eighth':8,'ninth':9,'tenth':10,
+    'eleventh':11,'twelfth':12,'thirteenth':13,'fourteenth':14,'fifteenth':15,'sixteenth':16,'seventeenth':17,'eighteenth':18,'nineteenth':19,'twentieth':20,
+    'twenty-first':21,'twenty-second':22,'twenty-third':23,'twenty-fourth':24,'twenty-fifth':25,'twenty-sixth':26,'twenty-seventh':27,'twenty-eighth':28,'twenty-ninth':29,'thirtieth':30,
+    'thirty-first':31,'thirty-second':32,'thirty-third':33,'thirty-fourth':34,'thirty-fifth':35,'thirty-sixth':36,'thirty-seventh':37,'thirty-eighth':38,'thirty-ninth':39,'fortieth':40,
+    'forty-first':41,'forty-second':42,'forty-third':43,'forty-fourth':44,'forty-fifth':45,'forty-sixth':46,'forty-seventh':47,'forty-eighth':48,'forty-ninth':49,'fiftieth':50,
+    'fifty-first':51,'fifty-second':52,'fifty-third':53,'fifty-fourth':54,'fifty-fifth':55,'fifty-sixth':56,'fifty-seventh':57,'fifty-eighth':58,'fifty-ninth':59,'sixtieth':60,
+    'sixty-first':61,'sixty-second':62,'sixty-third':63,'sixty-fourth':64,'sixty-fifth':65,'sixty-sixth':66,'sixty-seventh':67,'sixty-eighth':68,'sixty-ninth':69,'seventieth':70,
+    'seventy-first':71,'seventy-second':72,'seventy-third':73,'seventy-fourth':74,'seventy-fifth':75,'seventy-sixth':76,'seventy-seventh':77,'seventy-eighth':78,'seventy-ninth':79,'eightieth':80,
+    'eighty-first':81,'eighty-second':82,'eighty-third':83,'eighty-fourth':84,'eighty-fifth':85,'eighty-sixth':86,'eighty-seventh':87,'eighty-eighth':88,'eighty-ninth':89,'ninetieth':90,
+};
+
+function extractTargetSessions(signalParagraphs, docSession) {
+    const targets = new Set();
+    const sessionPattern = /(\w+(?:-\w+)?)\s+session/gi;
+    for (const para of signalParagraphs) {
+        const text = (para.text || '').toLowerCase();
+        let match;
+        while ((match = sessionPattern.exec(text)) !== null) {
+            const ordinal = match[1].toLowerCase();
+            const num = ORDINAL_TO_NUMBER[ordinal];
+            if (num && (!docSession || num.toString() !== docSession.toString())) {
+                targets.add(num.toString());
+            }
+        }
+    }
+    return [...targets].sort((a, b) => Number(a) - Number(b));
 }
 
 function getSessionFromSymbol(symbol) {
@@ -490,6 +573,12 @@ async function loadData() {
         sessions.sort((a, b) => Number(b) - Number(a));
         populateSessionCheckboxes('session-options', sessions);
         populateSessionCheckboxes('mobile-session-options', sessions);
+
+        // Populate target session checkboxes from extracted data
+        const targetSessions = [...new Set(documents.flatMap(d => d.target_sessions || []))];
+        targetSessions.sort((a, b) => Number(b) - Number(a));
+        populateSessionCheckboxes('target-session-options', targetSessions);
+        populateSessionCheckboxes('mobile-target-session-options', targetSessions);
 
         // Apply URL state
         applyFiltersFromUrl();
@@ -725,10 +814,9 @@ function updateDocumentsCount() {
     if (!cachedDocsCount) cachedDocsCount = document.getElementById('documents-count');
     if (!cachedDocsCount) return;
     const total = filteredDocumentsCache.length;
-    const rendered = Math.min((currentPage + 1) * PAGE_SIZE, total);
     if (total > 0) {
         cachedDocsCount.classList.remove('hidden');
-        cachedDocsCount.textContent = `${rendered} / ${total}`;
+        cachedDocsCount.textContent = `${total} documents`;
     } else {
         cachedDocsCount.classList.add('hidden');
     }
@@ -820,7 +908,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initDropdowns();
 
     // Wire up filter checkboxes (desktop)
-    ['session-options', 'signal-options', 'type-options'].forEach(id => {
+    ['session-options', 'target-session-options', 'signal-options', 'type-options'].forEach(id => {
         document.getElementById(id)?.addEventListener('change', (e) => {
             if (e.target.classList.contains('filter-checkbox')) {
                 syncMobileDesktopFilters('desktop');
@@ -830,7 +918,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Wire up filter checkboxes (mobile)
-    ['mobile-session-options', 'mobile-signal-options', 'mobile-type-options'].forEach(id => {
+    ['mobile-session-options', 'mobile-target-session-options', 'mobile-signal-options', 'mobile-type-options'].forEach(id => {
         document.getElementById(id)?.addEventListener('change', (e) => {
             if (e.target.classList.contains('filter-checkbox')) {
                 syncMobileDesktopFilters('mobile');
